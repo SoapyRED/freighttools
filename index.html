@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Metres Calculator — Free LDM Tool for UK Freight | FreightTools</title>
+  <meta name="description" content="Calculate loading metres (LDM) instantly for UK road freight. Free tool with Euro pallet presets, UK vehicle types, and weight warnings.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://freighttools.co.uk/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Loading Metres Calculator — Free LDM Tool for UK Freight">
+  <meta property="og:description" content="Calculate loading metres (LDM) instantly for UK road freight. Free tool with Euro pallet presets, UK vehicle types, and weight warnings.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://freighttools.co.uk/">
+  <meta property="og:site_name" content="FreightTools">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Loading Metres Calculator — Free LDM Tool">
+  <meta name="twitter:description" content="Calculate loading metres (LDM) instantly for UK road freight.">
+
+  <!-- Schema: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Loading Metres Calculator",
+    "url": "https://freighttools.co.uk/",
+    "description": "Free loading metres (LDM) calculator for UK road freight. Calculate LDM for Euro pallets, UK standard pallets, and custom dimensions.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "GBP"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "FreightTools",
+      "url": "https://freighttools.co.uk/"
+    }
+  }
+  </script>
+
+  <!-- Schema: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate loading metres?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Loading metres (LDM) are calculated using the formula: LDM = (Length × Width × Quantity) ÷ 2.4, where Length and Width are in metres, and 2.4m is the standard trailer width. For stackable goods, divide by the stacking factor: LDM = (Length × Width × Quantity) ÷ 2.4 ÷ Stack Factor."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is 1 LDM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One loading metre (1 LDM) is the floor space occupied by a load that is 1 metre long and 2.4 metres wide (the full width of a standard European trailer). It represents a standardised unit used to price and plan road freight shipments across the UK and Europe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many euro pallets fit in a 13.6m trailer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard 13.6m articulated trailer can fit 33 Euro pallets (1200×800mm) in a single floor layer, or up to 66 if double-stacked. Loaded in a block (landscape) configuration, it fits 26 pallets floor only. The exact number depends on pallet orientation, weight, and height restrictions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between LDM and CBM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "LDM (Loading Metres) measures the floor space a consignment occupies in a trailer, used primarily for European road freight. CBM (Cubic Metres) measures the total volume of a shipment and is used more widely in air and sea freight. For road freight in the UK and EU, LDM is the standard unit for quoting and comparing pallet space."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #1a2332;
+      --navy-light: #243044;
+      --navy-border: #2e3d55;
+      --orange: #e87722;
+      --orange-dark: #cf6a1a;
+      --orange-light: #f9913a;
+      --white: #ffffff;
+      --grey-50: #f7f8fa;
+      --grey-100: #eef0f4;
+      --grey-200: #d8dce6;
+      --grey-400: #8f9ab0;
+      --grey-600: #5a6478;
+      --grey-800: #2d3444;
+      --text: #1e2535;
+      --text-muted: #5a6478;
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+      --shadow-lg: 0 4px 6px rgba(0,0,0,0.07), 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--grey-50);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--navy);
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--orange);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--orange);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-text span {
+      color: var(--orange);
+    }
+
+    nav {
+      display: flex;
+      gap: 4px;
+    }
+
+    nav a {
+      color: var(--grey-400);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    nav a:hover {
+      color: var(--white);
+      background: var(--navy-light);
+    }
+
+    nav a.active {
+      color: var(--orange);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      padding: 40px 20px 48px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 span {
+      color: var(--orange);
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--grey-400);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: var(--navy);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .card-header .badge {
+      background: var(--orange);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    /* ── FORM GRID ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 560px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--grey-600);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    label .optional {
+      font-weight: 400;
+      text-transform: none;
+      color: var(--grey-400);
+      letter-spacing: 0;
+    }
+
+    select,
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--white);
+      border: 1.5px solid var(--grey-200);
+      border-radius: var(--radius);
+      transition: border-color 0.15s, box-shadow 0.15s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6478' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    select:focus,
+    input:focus {
+      outline: none;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(232, 119, 34, 0.12);
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      opacity: 0.5;
+    }
+
+    /* ── DIMENSION ROW ── */
+    .dim-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .dim-row .form-group {
+      flex: 1;
+    }
+
+    .dim-sep {
+      padding-bottom: 11px;
+      color: var(--grey-400);
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── TOGGLE ── */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--grey-50);
+      border: 1.5px solid var(--grey-200);
+      border-radius: var(--radius);
+    }
+
+    .toggle-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .toggle-sub {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: var(--grey-200);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 3px;
+      top: 3px;
+      background: var(--white);
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+      background: var(--orange);
+    }
+
+    .toggle-switch input:checked + .toggle-slider::before {
+      transform: translateX(20px);
+    }
+
+    .toggle-switch input:focus + .toggle-slider {
+      box-shadow: 0 0 0 3px rgba(232, 119, 34, 0.2);
+    }
+
+    /* ── DIVIDER ── */
+    .form-divider {
+      grid-column: 1 / -1;
+      border: none;
+      border-top: 1px solid var(--grey-100);
+      margin: 4px 0;
+    }
+
+    /* ── RESULTS CARD ── */
+    .results-card {
+      margin-top: 20px;
+    }
+
+    .results-card .card-header {
+      background: var(--navy-light);
+    }
+
+    /* Main metric */
+    .ldm-display {
+      text-align: center;
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid var(--grey-100);
+    }
+
+    .ldm-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .ldm-number {
+      font-size: clamp(52px, 12vw, 72px);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .ldm-number .ldm-unit {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--grey-400);
+      letter-spacing: 0;
+    }
+
+    /* Progress bar */
+    .utilisation-section {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--grey-100);
+    }
+
+    .util-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .util-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .util-pct {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .util-vehicle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 20px;
+      background: var(--grey-100);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-light));
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.35s;
+      min-width: 0;
+      position: relative;
+    }
+
+    .progress-fill.full {
+      background: linear-gradient(90deg, var(--danger), #ef4444);
+    }
+
+    .progress-fill.high {
+      background: linear-gradient(90deg, #d97706, #f59e0b);
+    }
+
+    /* Truck segments overlay */
+    .progress-track .segment-marks {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--grey-100);
+      border-top: 1px solid var(--grey-100);
+    }
+
+    .stat-cell {
+      background: var(--white);
+      padding: 16px 20px;
+    }
+
+    .stat-cell:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    .stat-cell-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .stat-cell-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .stat-cell-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Warnings */
+    .warnings-section {
+      padding: 16px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .warning-badge {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .warning-badge.danger {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+
+    .warning-badge.warn {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+    }
+
+    .warning-badge.info {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+    }
+
+    .warning-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+
+    /* ── CONTENT SECTIONS ── */
+    .content-sections {
+      margin-top: 48px;
+    }
+
+    .content-sections h2 {
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .content-sections h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 20px 0 8px;
+    }
+
+    .content-sections p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    .content-sections p strong {
+      color: var(--text);
+    }
+
+    .content-block {
+      margin-bottom: 48px;
+    }
+
+    /* Formula box */
+    .formula-box {
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .formula-box code {
+      display: block;
+      font-family: 'Courier New', monospace;
+      font-size: 15px;
+      color: var(--orange-light);
+      line-height: 1.8;
+    }
+
+    .formula-box code .comment {
+      color: var(--grey-400);
+    }
+
+    /* Reference tables */
+    .ref-table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--grey-200);
+    }
+
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .ref-table thead {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .ref-table thead th {
+      padding: 11px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .ref-table tbody tr {
+      border-bottom: 1px solid var(--grey-100);
+      transition: background 0.1s;
+    }
+
+    .ref-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .ref-table tbody tr:hover {
+      background: var(--grey-50);
+    }
+
+    .ref-table td {
+      padding: 11px 16px;
+      color: var(--text);
+      vertical-align: middle;
+    }
+
+    .ref-table td:first-child {
+      font-weight: 600;
+    }
+
+    .ref-table .highlight {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    details.faq-item {
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    details.faq-item summary {
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    details.faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.faq-item summary::after {
+      content: '+';
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--orange);
+      flex-shrink: 0;
+      margin-left: 12px;
+      transition: transform 0.2s;
+    }
+
+    details.faq-item[open] summary::after {
+      content: '−';
+    }
+
+    details.faq-item .faq-answer {
+      padding: 0 20px 18px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      border-top: 1px solid var(--grey-100);
+      padding-top: 14px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: var(--grey-400);
+      padding: 32px 20px;
+      margin-top: 60px;
+      border-top: 2px solid var(--navy-border);
+    }
+
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-brand span {
+      color: var(--orange);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--grey-400);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover {
+      color: var(--orange);
+    }
+
+    .footer-bottom {
+      font-size: 12px;
+      color: var(--navy-border);
+      border-top: 1px solid var(--navy-border);
+      padding-top: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── UTILITIES ── */
+    .hidden { display: none !important; }
+
+    @media (max-width: 480px) {
+      .card-body { padding: 16px; }
+      .ldm-display { padding: 20px 16px 16px; }
+      .utilisation-section { padding: 16px; }
+      .stat-cell { padding: 12px 14px; }
+      .warnings-section { padding: 12px 16px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-cell:last-child:nth-child(odd) { grid-column: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="FreightTools home">
+        <div class="logo-icon">FT</div>
+        <span class="logo-text">Freight<span>Tools</span>.co.uk</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="/" class="active" aria-current="page">LDM Calc</a>
+        <a href="#" title="Coming soon" aria-disabled="true" tabindex="-1" style="opacity:0.4;cursor:default">CBM</a>
+        <a href="#" title="Coming soon" aria-disabled="true" tabindex="-1" style="opacity:0.4;cursor:default">ADR</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero" role="banner">
+    <h1>Loading Metres <span>Calculator</span></h1>
+    <p>Calculate LDM for UK road freight — free, instant, no signup</p>
+  </div>
+
+  <!-- ═══ MAIN ═══ -->
+  <main>
+
+    <!-- Calculator Card -->
+    <section class="card" aria-label="LDM calculator inputs">
+      <div class="card-header">
+        <h2>Inputs</h2>
+        <span class="badge">Real-time</span>
+      </div>
+      <div class="card-body">
+        <div class="form-grid">
+
+          <!-- Pallet type -->
+          <div class="form-group full-width">
+            <label for="palletType">Pallet Type</label>
+            <select id="palletType" aria-describedby="palletTypeHint">
+              <option value="euro">Euro Pallet (EUR 1) — 1200 × 800 mm</option>
+              <option value="uk">UK Standard (EUR 2) — 1200 × 1000 mm</option>
+              <option value="half">Half Pallet (EUR 6) — 800 × 600 mm</option>
+              <option value="quarter">Quarter Pallet — 600 × 400 mm</option>
+              <option value="custom">Custom dimensions…</option>
+            </select>
+          </div>
+
+          <!-- Dimensions -->
+          <div class="form-group" id="lengthGroup">
+            <label for="palletLength">Length <span class="optional">(mm)</span></label>
+            <input type="number" id="palletLength" value="1200" min="1" max="9999" step="1" inputmode="numeric">
+          </div>
+          <div class="form-group" id="widthGroup">
+            <label for="palletWidth">Width <span class="optional">(mm)</span></label>
+            <input type="number" id="palletWidth" value="800" min="1" max="9999" step="1" inputmode="numeric">
+          </div>
+
+          <!-- Quantity -->
+          <div class="form-group">
+            <label for="palletQty">Number of Pallets</label>
+            <input type="number" id="palletQty" value="1" min="1" max="999" step="1" inputmode="numeric">
+          </div>
+
+          <!-- Height (optional) -->
+          <div class="form-group">
+            <label for="palletHeight">Height <span class="optional">(mm, optional)</span></label>
+            <input type="number" id="palletHeight" placeholder="e.g. 1200" min="1" max="3000" step="1" inputmode="numeric">
+          </div>
+
+          <hr class="form-divider">
+
+          <!-- Stackable -->
+          <div class="form-group full-width">
+            <label>Stackable?</label>
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">Pallets can be stacked</div>
+                <div class="toggle-sub">Halves the floor space needed when enabled</div>
+              </div>
+              <label class="toggle-switch" aria-label="Toggle stackable">
+                <input type="checkbox" id="stackable">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Stack factor (hidden until stackable enabled) -->
+          <div class="form-group full-width hidden" id="stackFactorGroup">
+            <label for="stackFactor">Max Stack Height</label>
+            <select id="stackFactor">
+              <option value="2">2 high (double stack)</option>
+              <option value="3">3 high (triple stack)</option>
+            </select>
+          </div>
+
+          <hr class="form-divider">
+
+          <!-- Weight (optional) -->
+          <div class="form-group full-width">
+            <label for="weightPerPallet">Weight per Pallet <span class="optional">(kg, optional)</span></label>
+            <input type="number" id="weightPerPallet" placeholder="e.g. 500" min="0" max="99999" step="1" inputmode="numeric">
+          </div>
+
+          <hr class="form-divider">
+
+          <!-- Vehicle type -->
+          <div class="form-group full-width">
+            <label for="vehicleType">Vehicle Type</label>
+            <select id="vehicleType">
+              <option value="artic">13.6m Artic Trailer — 33 euro pallets, 24,000 kg max</option>
+              <option value="rigid10">10m Rigid — 20 euro pallets, 12,000 kg max</option>
+              <option value="rigid75">7.5t Rigid — 10 euro pallets, 3,500 kg max</option>
+              <option value="luton">3.5t Luton Van — 6 euro pallets, 1,200 kg max</option>
+              <option value="custom">Custom vehicle length…</option>
+            </select>
+          </div>
+
+          <!-- Custom vehicle length (hidden until custom selected) -->
+          <div class="form-group full-width hidden" id="customVehicleGroup">
+            <label for="customVehicleLength">Custom Vehicle Length <span class="optional">(metres)</span></label>
+            <input type="number" id="customVehicleLength" placeholder="e.g. 8.0" min="0.5" max="30" step="0.1" inputmode="decimal">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Card -->
+    <section class="card results-card" aria-label="LDM calculation results" aria-live="polite">
+      <div class="card-header">
+        <h2>Results</h2>
+      </div>
+
+      <!-- LDM headline -->
+      <div class="ldm-display">
+        <div class="ldm-label">Loading Metres Required</div>
+        <div class="ldm-number" id="ldmResult">
+          <span id="ldmValue">0.40</span><span class="ldm-unit"> LDM</span>
+        </div>
+      </div>
+
+      <!-- Utilisation bar -->
+      <div class="utilisation-section">
+        <div class="util-header">
+          <span class="util-label">Vehicle Utilisation</span>
+          <span class="util-pct" id="utilPct">2.9%</span>
+        </div>
+        <div class="util-vehicle" id="utilVehicle">13.6m Artic Trailer (13.6m available)</div>
+        <div class="progress-track" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100" id="progressBar" aria-label="Vehicle utilisation">
+          <div class="progress-fill" id="progressFill" style="width: 2.9%"></div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <div class="stat-cell-label">Pallet Spaces</div>
+          <div class="stat-cell-value" id="palletSpaces">1 of 33</div>
+          <div class="stat-cell-sub">floor positions used</div>
+        </div>
+        <div class="stat-cell" id="weightCell">
+          <div class="stat-cell-label">Total Weight</div>
+          <div class="stat-cell-value" id="totalWeight">—</div>
+          <div class="stat-cell-sub" id="weightCapSub">enter weight per pallet</div>
+        </div>
+      </div>
+
+      <!-- Warnings -->
+      <div class="warnings-section" id="warningsSection"></div>
+
+    </section>
+
+    <!-- ═══ SEO CONTENT ═══ -->
+    <div class="content-sections">
+
+      <!-- What are Loading Metres -->
+      <div class="content-block">
+        <h2>What Are Loading Metres?</h2>
+        <p>A <strong>loading metre (LDM)</strong> — also written as loading meter or "laadmeter" — is the standard unit used across the UK and Europe to measure the floor space a consignment occupies in a road freight trailer. One loading metre represents a strip of trailer floor that is <strong>1 metre long and the full width of the trailer</strong> (typically 2.4 metres wide).</p>
+        <p>Unlike CBM (cubic metres), which measures total volume, LDM measures only floor area. This matters because road freight is priced by floor space: a tall, light pallet takes up the same LDM as a short, heavy one. Understanding LDM lets you compare quotes, plan loads, and avoid paying for space you don't use.</p>
+        <p>LDM is used by most European road freight carriers and groupage operators. If you're booking a part-load or groupage service between the UK and Europe, you'll almost certainly be quoted per LDM.</p>
+
+        <h3>The Loading Metres Formula</h3>
+        <div class="formula-box" aria-label="LDM formula">
+          <code>
+            LDM = (Length × Width × Quantity) ÷ 2.4<br>
+            <span class="comment">— Where Length and Width are in metres, 2.4m = standard trailer width</span><br>
+            <br>
+            <span class="comment">If stackable:</span><br>
+            LDM = (Length × Width × Quantity) ÷ 2.4 ÷ Stack Factor<br>
+            <span class="comment">— Stack Factor is 2 (double stack) or 3 (triple stack)</span>
+          </code>
+        </div>
+
+        <h3>Common Pallet LDM Reference</h3>
+        <div class="ref-table-wrap">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Pallet Type</th>
+                <th>Dimensions</th>
+                <th>1 Pallet</th>
+                <th>5 Pallets</th>
+                <th>10 Pallets</th>
+                <th>33 Pallets (full artic)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Euro Pallet (EUR 1)</td>
+                <td>1200 × 800 mm</td>
+                <td class="highlight">0.40 LDM</td>
+                <td>2.00 LDM</td>
+                <td>4.00 LDM</td>
+                <td class="highlight">13.20 LDM</td>
+              </tr>
+              <tr>
+                <td>UK Standard (EUR 2)</td>
+                <td>1200 × 1000 mm</td>
+                <td class="highlight">0.50 LDM</td>
+                <td>2.50 LDM</td>
+                <td>5.00 LDM</td>
+                <td>16.50 LDM</td>
+              </tr>
+              <tr>
+                <td>Half Pallet (EUR 6)</td>
+                <td>800 × 600 mm</td>
+                <td class="highlight">0.20 LDM</td>
+                <td>1.00 LDM</td>
+                <td>2.00 LDM</td>
+                <td>6.60 LDM</td>
+              </tr>
+              <tr>
+                <td>Quarter Pallet</td>
+                <td>600 × 400 mm</td>
+                <td class="highlight">0.10 LDM</td>
+                <td>0.50 LDM</td>
+                <td>1.00 LDM</td>
+                <td>3.30 LDM</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- How many pallets fit -->
+      <div class="content-block">
+        <h2>How Many Pallets Fit in a Truck? (UK Guide)</h2>
+        <p>The number of pallets a vehicle can carry depends on its internal dimensions, the pallet type, and whether loads can be stacked. Below are the standard figures used across the UK road freight industry.</p>
+
+        <div class="ref-table-wrap">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Internal Length</th>
+                <th>Max LDM</th>
+                <th>Euro Pallets (floor)</th>
+                <th>Block Pallets (floor)</th>
+                <th>Max Payload</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>13.6m Artic Trailer</td>
+                <td>13.6 m</td>
+                <td class="highlight">13.6 LDM</td>
+                <td>33</td>
+                <td>26</td>
+                <td>24,000 kg</td>
+              </tr>
+              <tr>
+                <td>10m Rigid</td>
+                <td>10.0 m</td>
+                <td class="highlight">10.0 LDM</td>
+                <td>20</td>
+                <td>16</td>
+                <td>12,000 kg</td>
+              </tr>
+              <tr>
+                <td>7.5t Rigid</td>
+                <td>5.2 m</td>
+                <td class="highlight">5.2 LDM</td>
+                <td>10</td>
+                <td>8</td>
+                <td>3,500 kg</td>
+              </tr>
+              <tr>
+                <td>3.5t Luton Van</td>
+                <td>4.0 m</td>
+                <td class="highlight">4.0 LDM</td>
+                <td>6</td>
+                <td>5</td>
+                <td>1,200 kg</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Note:</strong> These figures are for single-layer floor loading. If goods are double-stacked, you can approximately double the pallet count. Actual capacity may vary by carrier, load security requirements, and vehicle specification.</p>
+        <p>UK Standard pallets (1200 × 1000 mm) take up more floor space than Euro pallets (1200 × 800 mm). A full artic can carry 33 Euro pallets floor-only, but only around 26 UK Standard pallets in the same space.</p>
+      </div>
+
+      <!-- FAQ -->
+      <div class="content-block">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>How do I calculate loading metres?</summary>
+            <div class="faq-answer">
+              Loading metres are calculated using: <strong>LDM = (Length × Width × Quantity) ÷ 2.4</strong>, where Length and Width are in metres, and 2.4m is the standard trailer width. For a single Euro pallet (1.2m × 0.8m): LDM = (1.2 × 0.8 × 1) ÷ 2.4 = <strong>0.4 LDM</strong>. If goods are stackable and double-stacked, divide the result by the stacking factor (2 or 3).
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What is 1 LDM?</summary>
+            <div class="faq-answer">
+              One loading metre (1 LDM) represents a strip of trailer floor that is exactly 1 metre long and 2.4 metres wide — the full internal width of a standard European trailer. It's the standard unit used by road freight carriers across the UK and EU for quoting and comparing part-load (groupage) shipments. To put it in context: 2.5 Euro pallets side-by-side equal approximately 1 LDM.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How many Euro pallets fit in a 13.6m trailer?</summary>
+            <div class="faq-answer">
+              A standard 13.6m articulated trailer can carry <strong>33 Euro pallets</strong> (1200 × 800mm) in a single floor layer. Loaded in a block (landscape) configuration, it fits 26 pallets. If double-stacked, up to 66 Euro pallets can be carried, subject to height restrictions (maximum internal height is typically 2.7m) and weight limits (maximum payload ~24,000 kg).
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What is the difference between LDM and CBM?</summary>
+            <div class="faq-answer">
+              <strong>LDM (Loading Metres)</strong> measures the floor space a consignment occupies in a trailer — used primarily for European road freight and groupage services. <strong>CBM (Cubic Metres)</strong> measures the total volume of a shipment, and is used more widely in air freight and sea freight. For road freight across the UK and EU, LDM is the industry-standard pricing unit. CBM is more relevant when booking container or airfreight shipments.
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+    </div>
+    <!-- /content-sections -->
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">Freight<span>Tools</span>.co.uk</div>
+        <div class="footer-links">
+          <a href="/">LDM Calculator</a>
+          <a href="#" style="opacity:0.5;cursor:default" title="Coming soon">CBM Calculator</a>
+          <a href="#" style="opacity:0.5;cursor:default" title="Coming soon">ADR Lookup</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 FreightTools.co.uk. All figures are indicative. Always confirm vehicle specifications and weight limits with your carrier before booking.
+        Trailer dimensions and pallet capacities are industry-standard estimates and may vary by operator.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─────────────────────────────────────────────
+    //  DATA
+    // ─────────────────────────────────────────────
+    const PALLET_PRESETS = {
+      euro:    { length: 1200, width: 800  },
+      uk:      { length: 1200, width: 1000 },
+      half:    { length: 800,  width: 600  },
+      quarter: { length: 600,  width: 400  },
+    };
+
+    const VEHICLES = {
+      artic:   { name: '13.6m Artic Trailer', length: 13.6, payload: 24000, euroPallets: 33, blockPallets: 26 },
+      rigid10: { name: '10m Rigid',           length: 10.0, payload: 12000, euroPallets: 20, blockPallets: 16 },
+      rigid75: { name: '7.5t Rigid',          length: 5.2,  payload: 3500,  euroPallets: 10, blockPallets: 8  },
+      luton:   { name: '3.5t Luton Van',      length: 4.0,  payload: 1200,  euroPallets: 6,  blockPallets: 5  },
+      custom:  { name: 'Custom Vehicle',      length: null, payload: null,  euroPallets: null, blockPallets: null },
+    };
+
+    const TRAILER_WIDTH = 2.4; // standard LDM divisor (metres)
+
+    // ─────────────────────────────────────────────
+    //  DOM REFS
+    // ─────────────────────────────────────────────
+    const $ = id => document.getElementById(id);
+
+    const elPalletType      = $('palletType');
+    const elLength          = $('palletLength');
+    const elWidth           = $('palletWidth');
+    const elQty             = $('palletQty');
+    const elHeight          = $('palletHeight');
+    const elStackable       = $('stackable');
+    const elStackFactor     = $('stackFactor');
+    const elStackGroup      = $('stackFactorGroup');
+    const elWeight          = $('weightPerPallet');
+    const elVehicleType     = $('vehicleType');
+    const elCustomVehicleGrp= $('customVehicleGroup');
+    const elCustomVehicleLen= $('customVehicleLength');
+
+    const elLdmValue        = $('ldmValue');
+    const elUtilPct         = $('utilPct');
+    const elUtilVehicle     = $('utilVehicle');
+    const elProgressFill    = $('progressFill');
+    const elProgressBar     = $('progressBar');
+    const elPalletSpaces    = $('palletSpaces');
+    const elTotalWeight     = $('totalWeight');
+    const elWeightCapSub    = $('weightCapSub');
+    const elWarnings        = $('warningsSection');
+
+    // ─────────────────────────────────────────────
+    //  PALLET TYPE CHANGE → auto-fill dimensions
+    // ─────────────────────────────────────────────
+    elPalletType.addEventListener('change', () => {
+      const preset = PALLET_PRESETS[elPalletType.value];
+      if (preset) {
+        elLength.value = preset.length;
+        elWidth.value  = preset.width;
+        elLength.readOnly = true;
+        elWidth.readOnly  = true;
+        elLength.style.background = 'var(--grey-50)';
+        elWidth.style.background  = 'var(--grey-50)';
+      } else {
+        // custom
+        elLength.readOnly = false;
+        elWidth.readOnly  = false;
+        elLength.style.background = '';
+        elWidth.style.background  = '';
+        elLength.focus();
+      }
+      calculate();
+    });
+
+    // ─────────────────────────────────────────────
+    //  STACKABLE TOGGLE
+    // ─────────────────────────────────────────────
+    elStackable.addEventListener('change', () => {
+      elStackGroup.classList.toggle('hidden', !elStackable.checked);
+      calculate();
+    });
+
+    // ─────────────────────────────────────────────
+    //  VEHICLE TYPE CHANGE
+    // ─────────────────────────────────────────────
+    elVehicleType.addEventListener('change', () => {
+      const isCustom = elVehicleType.value === 'custom';
+      elCustomVehicleGrp.classList.toggle('hidden', !isCustom);
+      if (isCustom) elCustomVehicleLen.focus();
+      calculate();
+    });
+
+    // ─────────────────────────────────────────────
+    //  CALCULATE (core)
+    // ─────────────────────────────────────────────
+    function calculate() {
+      // Parse inputs
+      const lengthMm  = parseFloat(elLength.value)  || 0;
+      const widthMm   = parseFloat(elWidth.value)   || 0;
+      const qty       = parseInt(elQty.value, 10)   || 0;
+      const stackable = elStackable.checked;
+      const stackFactor = stackable ? parseInt(elStackFactor.value, 10) : 1;
+      const weightPerPallet = parseFloat(elWeight.value) || null;
+
+      // Convert to metres
+      const lengthM = lengthMm / 1000;
+      const widthM  = widthMm  / 1000;
+
+      // LDM formula
+      let ldm = 0;
+      if (lengthM > 0 && widthM > 0 && qty > 0) {
+        ldm = (lengthM * widthM * qty) / TRAILER_WIDTH / stackFactor;
+      }
+
+      // Vehicle
+      const vehicleKey = elVehicleType.value;
+      const vehicle = VEHICLES[vehicleKey];
+      let vehicleLength = vehicle.length;
+      if (vehicleKey === 'custom') {
+        vehicleLength = parseFloat(elCustomVehicleLen.value) || null;
+      }
+
+      // Utilisation
+      let utilPct = 0;
+      if (vehicleLength && vehicleLength > 0) {
+        utilPct = (ldm / vehicleLength) * 100;
+      }
+
+      // Pallet spaces (estimate based on Euro pallet floor)
+      const euroLdmPer = (1.2 * 0.8) / TRAILER_WIDTH; // 0.4 LDM each
+      const palletSpacesUsed = Math.ceil(ldm / euroLdmPer);
+      const palletSpacesAvail = vehicle.euroPallets;
+
+      // Weight
+      const totalWeight = weightPerPallet !== null ? weightPerPallet * qty : null;
+
+      // ─── UPDATE DOM ───
+      elLdmValue.textContent = ldm.toFixed(2);
+
+      // Utilisation
+      const displayPct = Math.min(utilPct, 100);
+      elUtilPct.textContent = utilPct.toFixed(1) + '%';
+      elUtilVehicle.textContent = vehicleKey !== 'custom'
+        ? `${vehicle.name} (${vehicleLength}m available)`
+        : vehicleLength
+          ? `Custom Vehicle (${vehicleLength}m available)`
+          : 'Custom Vehicle (enter length above)';
+
+      elProgressFill.style.width = displayPct + '%';
+      elProgressFill.classList.remove('full', 'high');
+      if (utilPct > 100) elProgressFill.classList.add('full');
+      else if (utilPct > 85) elProgressFill.classList.add('high');
+
+      elProgressBar.setAttribute('aria-valuenow', Math.round(displayPct));
+
+      // Pallet spaces
+      if (palletSpacesAvail) {
+        elPalletSpaces.textContent = `${palletSpacesUsed} of ${palletSpacesAvail}`;
+      } else {
+        elPalletSpaces.textContent = palletSpacesUsed > 0 ? `${palletSpacesUsed}` : '—';
+      }
+
+      // Weight
+      if (totalWeight !== null) {
+        elTotalWeight.textContent = totalWeight.toLocaleString('en-GB') + ' kg';
+        const cap = vehicleKey !== 'custom' ? vehicle.payload : null;
+        if (cap) {
+          elWeightCapSub.textContent = `of ${cap.toLocaleString('en-GB')} kg capacity`;
+        } else {
+          elWeightCapSub.textContent = 'total consignment weight';
+        }
+      } else {
+        elTotalWeight.textContent = '—';
+        elWeightCapSub.textContent = 'enter weight per pallet';
+      }
+
+      // ─── WARNINGS ───
+      renderWarnings({ ldm, utilPct, vehicleLength, vehicleKey, totalWeight, vehicle });
+    }
+
+    // ─────────────────────────────────────────────
+    //  WARNINGS
+    // ─────────────────────────────────────────────
+    function renderWarnings({ ldm, utilPct, vehicleLength, vehicleKey, totalWeight, vehicle }) {
+      const warnings = [];
+
+      // Won't fit
+      if (vehicleLength && ldm > vehicleLength) {
+        warnings.push({
+          type: 'danger',
+          icon: '⚠️',
+          text: `Consignment won't fit: <strong>${ldm.toFixed(2)} LDM required</strong> exceeds ${vehicleLength}m vehicle length. Consider a larger vehicle or splitting the load.`
+        });
+      }
+
+      // Nearly full
+      if (utilPct >= 85 && utilPct <= 100) {
+        warnings.push({
+          type: 'warn',
+          icon: '⚡',
+          text: `Load is <strong>${utilPct.toFixed(0)}% full</strong> — minimal room for load securing or repositioning. Confirm with carrier before booking.`
+        });
+      }
+
+      // Overweight
+      if (totalWeight !== null && vehicleKey !== 'custom' && vehicle.payload) {
+        if (totalWeight > vehicle.payload) {
+          warnings.push({
+            type: 'danger',
+            icon: '⚠️',
+            text: `Overweight: <strong>${totalWeight.toLocaleString('en-GB')} kg</strong> exceeds ${vehicle.payload.toLocaleString('en-GB')} kg payload limit. A larger vehicle or split load is required.`
+          });
+        } else if (totalWeight > vehicle.payload * 0.9) {
+          warnings.push({
+            type: 'warn',
+            icon: '⚡',
+            text: `Near weight limit: <strong>${totalWeight.toLocaleString('en-GB')} kg</strong> is within 10% of the ${vehicle.payload.toLocaleString('en-GB')} kg payload limit.`
+          });
+        }
+      }
+
+      // Build HTML
+      if (warnings.length === 0) {
+        elWarnings.innerHTML = '';
+        return;
+      }
+
+      elWarnings.innerHTML = warnings.map(w => `
+        <div class="warning-badge ${w.type}" role="alert">
+          <span class="warning-icon">${w.icon}</span>
+          <span>${w.text}</span>
+        </div>
+      `).join('');
+    }
+
+    // ─────────────────────────────────────────────
+    //  ATTACH ALL INPUT LISTENERS
+    // ─────────────────────────────────────────────
+    [elLength, elWidth, elQty, elHeight, elStackFactor, elWeight, elCustomVehicleLen]
+      .forEach(el => el.addEventListener('input', calculate));
+
+    // ─────────────────────────────────────────────
+    //  INIT
+    // ─────────────────────────────────────────────
+    // Set Euro pallet as default (read-only dims)
+    elLength.readOnly = true;
+    elWidth.readOnly  = true;
+    elLength.style.background = 'var(--grey-50)';
+    elWidth.style.background  = 'var(--grey-50)';
+    calculate();
+  </script>
+
+</body>
+</html>
