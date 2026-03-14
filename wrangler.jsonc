@@ -1,0 +1,10 @@
+{
+  // Cloudflare Pages — FreightTools
+  // Explicit config to prevent auto-generated WORKER_SELF_REFERENCE binding
+  // which causes first-deploy failures when the worker doesn't exist yet.
+  "name": "freighttools",
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": ".vercel/output/static"
+  // No "services" block = no WORKER_SELF_REFERENCE binding
+}
