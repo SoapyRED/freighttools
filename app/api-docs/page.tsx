@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
-  description: 'FreightTools public API reference. Calculate loading metres, CBM and more programmatically.',
+  description: 'FreightUtils public API reference. Calculate loading metres, ADR lookups, CBM and more programmatically.',
 };
 
 const s = {
@@ -20,7 +20,7 @@ export default function ApiDocsPage() {
       <div style={s.hero}>
         <h1 style={s.h1}>API <span style={{ color: '#e87722' }}>Documentation</span></h1>
         <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 500, margin: '0 auto' }}>
-          All FreightTools calculators are available as free, open REST API endpoints
+          All FreightUtils calculators are available as free, open REST API endpoints
         </p>
       </div>
 
@@ -30,11 +30,11 @@ export default function ApiDocsPage() {
         <div style={{ marginBottom: 40 }}>
           <h2 style={s.sectionTitle}>Overview</h2>
           <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
-            The FreightTools API is a free, stateless REST API. Every calculator on this site has a corresponding API endpoint.
+            The FreightUtils API is a free, stateless REST API. Every calculator on this site has a corresponding API endpoint.
             No authentication is required. Responses are JSON. CORS is enabled for all origins.
           </p>
           <div className="code-block">
-            Base URL: https://freighttools.co.uk/api
+            Base URL: https://freightutils.com/api
           </div>
         </div>
 
@@ -145,7 +145,7 @@ export default function ApiDocsPage() {
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>cURL example:</p>
             <div className="code-block" style={{ marginBottom: 24 }}>
-              {`curl "https://freighttools.co.uk/api/ldm?pallet=euro&qty=12&vehicle=artic"`}
+              {`curl "https://freightutils.com/api/ldm?pallet=euro&qty=12&vehicle=artic"`}
             </div>
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Response</h3>
@@ -181,12 +181,109 @@ export default function ApiDocsPage() {
           </div>
         </div>
 
+        {/* ADR Endpoint */}
+        <div id="adr" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr</span>
+            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>ADR 2025 Dangerous Goods Lookup</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Look up ADR 2025 dangerous goods by UN number, search by substance name, or filter by hazard class.
+              The dataset contains 2,336 entries from the ADR 2025 Dangerous Goods List (Table A).
+              Responses are cached for 1 hour (<code>s-maxage=3600</code>).
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Query Modes</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Max results</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>un</code></td>
+                    <td>string</td>
+                    <td>Exact UN number lookup. Accepts <code>1203</code>, <code>UN1203</code>, or <code>01203</code>.</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><code>search</code></td>
+                    <td>string</td>
+                    <td>Case-insensitive partial match on the proper shipping name. Min 2 characters.</td>
+                    <td>20</td>
+                  </tr>
+                  <tr>
+                    <td><code>class</code></td>
+                    <td>string</td>
+                    <td>Filter by ADR hazard class (e.g. <code>3</code>, <code>6.1</code>, <code>1.1</code>).</td>
+                    <td>50</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 24 }}>
+              Provide exactly one parameter per request. Omitting all parameters returns a 400 with usage hints.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Exact UN number lookup:</p>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://freightutils.com/api/adr?un=1203"`}
+            </div>
+            <div className="code-block" style={{ marginBottom: 20 }}>
+              {`{
+  "count": 1,
+  "results": [
+    {
+      "un_number": "1203",
+      "proper_shipping_name": "MOTOR SPIRIT or GASOLINE or PETROL",
+      "class": "3",
+      "classification_code": "F1",
+      "packing_group": "II",
+      "labels": ["3"],
+      "special_provisions": ["243", "534", "664"],
+      "limited_quantity": "1 L",
+      "excepted_quantity": "E2",
+      "transport_category": 2,
+      "tunnel_restriction_code": "D/E",
+      "transport_prohibited": false,
+      "hazard_identification_number": "33"
+    }
+  ]
+}`}
+            </div>
+
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Search by substance name:</p>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://freightutils.com/api/adr?search=acetone"`}
+            </div>
+            <div className="code-block" style={{ marginBottom: 20 }}>
+              {`{ "count": 3, "results": [ ... ] }`}
+            </div>
+
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Filter by hazard class:</p>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://freightutils.com/api/adr?class=3"`}
+            </div>
+            <div className="code-block">
+              {`{ "count": 50, "results": [ ... ] }`}
+            </div>
+          </div>
+        </div>
+
         {/* Coming soon endpoints */}
         <h2 style={s.sectionTitle}>Coming Soon</h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {[
             { method: 'GET', path: '/api/cbm', desc: 'Cubic Metres Calculator — volume and chargeable weight for air/sea freight' },
-            { method: 'GET', path: '/api/adr', desc: 'ADR Dangerous Goods Lookup — search by UN number for class, labels, and restrictions' },
             { method: 'GET', path: '/api/pallet', desc: 'Pallet Truck Fitting Calculator — calculate how many pallets fit per truck configuration' },
             { method: 'GET', path: '/api/chargeable-weight', desc: 'Chargeable Weight Calculator — actual vs volumetric weight for air freight' },
           ].map(ep => (

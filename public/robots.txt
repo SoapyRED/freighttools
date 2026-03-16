@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://freighttools.co.uk/sitemap.xml
+Sitemap: https://freightutils.com/sitemap.xml

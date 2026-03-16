@@ -6,10 +6,10 @@ import Link from 'next/link';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://freighttools.co.uk'),
+  metadataBase: new URL('https://freightutils.com'),
   title: {
-    default: 'FreightTools — Free UK Freight Calculators',
-    template: '%s | FreightTools.co.uk',
+    default: 'FreightUtils — Free UK Freight Calculators',
+    template: '%s | FreightUtils.com',
   },
   description: 'Free freight tools for UK logistics professionals — LDM calculator, CBM calculator, ADR lookup and more.',
   robots: 'index, follow',
@@ -54,12 +54,15 @@ export default function RootLayout({
                 fontWeight: 800, fontSize: 14, color: '#fff',
               }}>FT</div>
               <span style={{ fontWeight: 700, fontSize: 15 }}>
-                Freight<span style={{ color: '#e87722' }}>Tools</span>.co.uk
+                Freight<span style={{ color: '#e87722' }}>Utils</span>.com
               </span>
             </Link>
             <nav style={{ display: 'flex', gap: 4 }}>
               <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
                 LDM Calc
+              </Link>
+              <Link href="/adr" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
+                ADR Lookup
               </Link>
               <Link href="/api-docs" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
                 API Docs
@@ -74,15 +77,16 @@ export default function RootLayout({
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 16 }}>
               <div style={{ fontWeight: 700, fontSize: 16, color: '#fff' }}>
-                Freight<span style={{ color: '#e87722' }}>Tools</span>.co.uk
+                Freight<span style={{ color: '#e87722' }}>Utils</span>.com
               </div>
               <div style={{ display: 'flex', gap: 20 }}>
                 <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>LDM Calculator</Link>
+                <Link href="/adr" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>ADR Lookup</Link>
                 <Link href="/api-docs" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>API Docs</Link>
               </div>
             </div>
             <div style={{ fontSize: 12, color: '#2e3d55', borderTop: '1px solid #2e3d55', paddingTop: 16, lineHeight: 1.6 }}>
-              © {new Date().getFullYear()} FreightTools.co.uk. All figures are indicative. Always confirm vehicle specifications and weight limits with your carrier before booking.
+              © {new Date().getFullYear()} FreightUtils.com. All figures are indicative. Always confirm vehicle specifications and weight limits with your carrier before booking.
             </div>
           </div>
         </footer>
