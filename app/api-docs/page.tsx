@@ -279,13 +279,115 @@ export default function ApiDocsPage() {
           </div>
         </div>
 
+        {/* Chargeable Weight Endpoint */}
+        <div id="chargeable-weight" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/chargeable-weight</span>
+            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Air Freight Chargeable Weight</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Calculate air freight chargeable weight — whichever is higher between actual gross weight
+              and volumetric (dimensional) weight. Supports custom volumetric factors for all carriers.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                    <th>Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>l</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Length of one piece in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>w</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Width of one piece in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>h</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Height of one piece in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>gw</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Total gross weight of all pieces in kg</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>pcs</code></td>
+                    <td>integer</td>
+                    <td>No</td>
+                    <td>Number of identical pieces</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><code>factor</code></td>
+                    <td>integer</td>
+                    <td>No</td>
+                    <td>Volumetric divisor: <code>6000</code> (IATA standard), <code>5000</code> (express carriers)</td>
+                    <td>6000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>2 pieces, 120×80×100 cm, 500 kg total, IATA factor:</p>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://freightutils.com/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000"`}
+            </div>
+            <div className="code-block">
+              {`{
+  "chargeable_weight_kg": 640,
+  "basis": "volumetric",
+  "gross_weight_kg": 500,
+  "volumetric_weight_kg": 640,
+  "volumetric_weight_per_piece_kg": 320,
+  "cbm": 1.92,
+  "ratio": 3.84,
+  "factor": 6000,
+  "pieces": 2,
+  "meta": {
+    "inputs": {
+      "length_cm": 120,
+      "width_cm": 80,
+      "height_cm": 100,
+      "gross_weight_kg": 500,
+      "pieces": 2,
+      "factor": 6000
+    }
+  }
+}`}
+            </div>
+          </div>
+        </div>
+
         {/* Coming soon endpoints */}
         <h2 style={s.sectionTitle}>Coming Soon</h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {[
             { method: 'GET', path: '/api/cbm', desc: 'Cubic Metres Calculator — volume and chargeable weight for air/sea freight' },
             { method: 'GET', path: '/api/pallet', desc: 'Pallet Truck Fitting Calculator — calculate how many pallets fit per truck configuration' },
-            { method: 'GET', path: '/api/chargeable-weight', desc: 'Chargeable Weight Calculator — actual vs volumetric weight for air freight' },
           ].map(ep => (
             <div key={ep.path} style={{ background: '#fff', border: '1px solid #d8dce6', borderRadius: 8, padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12, opacity: 0.6 }}>
               <span style={{ background: '#d8dce6', color: '#5a6478', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace', flexShrink: 0 }}>{ep.method}</span>

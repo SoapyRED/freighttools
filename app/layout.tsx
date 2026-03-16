@@ -64,6 +64,9 @@ export default function RootLayout({
               <Link href="/adr" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
                 ADR Lookup
               </Link>
+              <Link href="/chargeable-weight" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
+                Chargeable Wt
+              </Link>
               <Link href="/api-docs" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
                 API Docs
               </Link>
@@ -82,6 +85,7 @@ export default function RootLayout({
               <div style={{ display: 'flex', gap: 20 }}>
                 <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>LDM Calculator</Link>
                 <Link href="/adr" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>ADR Lookup</Link>
+                <Link href="/chargeable-weight" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>Chargeable Weight</Link>
                 <Link href="/api-docs" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>API Docs</Link>
               </div>
             </div>
