@@ -1,0 +1,222 @@
+[
+  {
+    "slug": "20ft-standard",
+    "name": "20ft Standard",
+    "category": "sea",
+    "lengthCm": 589,
+    "widthCm": 234,
+    "heightCm": 238,
+    "capacityCbm": 33.2,
+    "notes": "Most common FCL unit",
+    "description": "The workhorse of global container shipping. Ideal for dense cargo — machinery, raw materials, and consumer goods. A full 20ft load is typically heavier than it is voluminous."
+  },
+  {
+    "slug": "40ft-standard",
+    "name": "40ft Standard",
+    "category": "sea",
+    "lengthCm": 1203,
+    "widthCm": 234,
+    "heightCm": 238,
+    "capacityCbm": 67.0,
+    "notes": "Standard long container",
+    "description": "Double the floor length of the 20ft, making it the default choice for light, voluminous cargo or high-piece-count shipments. Cost per CBM is typically lower than two 20ft containers."
+  },
+  {
+    "slug": "40ft-high-cube",
+    "name": "40ft High Cube",
+    "category": "sea",
+    "lengthCm": 1203,
+    "widthCm": 234,
+    "heightCm": 269,
+    "capacityCbm": 76.0,
+    "notes": "Extra height, most used globally",
+    "description": "The most commonly booked FCL container worldwide. An extra 30 cm of height over the standard 40ft gives significantly more cubic capacity — ideal for light goods, furniture, garments, and palletised cargo stacked more than 2 high."
+  },
+  {
+    "slug": "20ft-open-top",
+    "name": "20ft Open Top",
+    "category": "sea",
+    "lengthCm": 589,
+    "widthCm": 234,
+    "heightCm": 228,
+    "capacityCbm": 31.4,
+    "notes": "No fixed roof",
+    "description": "Open top containers have a removable tarpaulin cover instead of a fixed roof, allowing cargo to be loaded from above by crane. Used for tall machinery, coils, and out-of-gauge cargo."
+  },
+  {
+    "slug": "40ft-open-top",
+    "name": "40ft Open Top",
+    "category": "sea",
+    "lengthCm": 1203,
+    "widthCm": 234,
+    "heightCm": 228,
+    "capacityCbm": 64.1,
+    "notes": "No fixed roof",
+    "description": "The long version of the open top container for larger out-of-gauge cargo. Common for steel beams, large machinery components, and timber. Load from the top or through the end doors."
+  },
+  {
+    "slug": "20ft-reefer",
+    "name": "20ft Reefer",
+    "category": "sea",
+    "lengthCm": 538,
+    "widthCm": 228,
+    "heightCm": 224,
+    "capacityCbm": 27.5,
+    "notes": "Temperature controlled",
+    "description": "Refrigerated container with integral cooling unit maintaining temperatures from -30°C to +30°C. Used for perishables, pharmaceuticals, and temperature-sensitive chemicals. Internal volume is smaller than a dry box due to insulated walls."
+  },
+  {
+    "slug": "40ft-reefer",
+    "name": "40ft Reefer",
+    "category": "sea",
+    "lengthCm": 1152,
+    "widthCm": 228,
+    "heightCm": 218,
+    "capacityCbm": 57.3,
+    "notes": "Temperature controlled",
+    "description": "Large refrigerated container for bulk perishable shipments — frozen meat, fresh produce, dairy. The cooling machinery at the front reduces usable floor space compared to a dry 40ft."
+  },
+  {
+    "slug": "45ft-high-cube",
+    "name": "45ft High Cube",
+    "category": "sea",
+    "lengthCm": 1356,
+    "widthCm": 234,
+    "heightCm": 269,
+    "capacityCbm": 85.3,
+    "notes": "Extended length + height",
+    "description": "The largest standard dry container in regular service. Popular for European road-to-sea shipments where the extra length fits a standard 13.6m trailer's load. Offers the lowest cost per CBM of any ISO container."
+  },
+  {
+    "slug": "20ft-flat-rack",
+    "name": "20ft Flat Rack",
+    "category": "sea",
+    "lengthCm": 569,
+    "widthCm": 223,
+    "heightCm": 221,
+    "capacityCbm": 28.1,
+    "notes": "No walls, heavy/oversized cargo",
+    "description": "Flat rack containers have collapsible end walls and no side walls, making them ideal for heavy, wide, or tall out-of-gauge cargo such as vehicles, boats, industrial equipment, and bundled timber."
+  },
+  {
+    "slug": "40ft-flat-rack",
+    "name": "40ft Flat Rack",
+    "category": "sea",
+    "lengthCm": 1192,
+    "widthCm": 240,
+    "heightCm": 196,
+    "capacityCbm": 56.1,
+    "notes": "No walls, heavy/oversized cargo",
+    "description": "The 40ft flat rack can carry oversized cargo up to 40 tonnes. Commonly used for heavy machinery, transformers, construction equipment, and other cargo that cannot be loaded into a standard box."
+  },
+  {
+    "slug": "ld3-ake",
+    "name": "LD3 (AKE)",
+    "category": "air",
+    "lengthCm": 153,
+    "widthCm": 156,
+    "heightCm": 163,
+    "capacityCbm": 3.9,
+    "notes": "Most common lower deck container",
+    "description": "The LD3 (IATA code AKE) is the most widely used lower deck container in commercial aviation. It fits in the lower-deck holds of wide-body aircraft including the 747, 777, A330, and A350. Its angled base matches the curved fuselage floor."
+  },
+  {
+    "slug": "ld7-aap",
+    "name": "LD7 (AAP)",
+    "category": "air",
+    "lengthCm": 317,
+    "widthCm": 223,
+    "heightCm": 163,
+    "capacityCbm": 11.5,
+    "notes": "Large lower deck pallet",
+    "description": "A large lower deck pallet used in wide-body aircraft. The AAP code pallet is typically used for bulk cargo in the lower hold of 747 and 777 freighters, offering much greater capacity than the LD3 container."
+  },
+  {
+    "slug": "ld11-alp",
+    "name": "LD11 (ALP)",
+    "category": "air",
+    "lengthCm": 307,
+    "widthCm": 223,
+    "heightCm": 163,
+    "capacityCbm": 11.2,
+    "notes": "Lower deck container",
+    "description": "The LD11 is a lower deck container for wide-body aircraft, slightly shorter than the LD7 pallet. Used extensively in 747, 777, and A380 lower holds for general cargo and express shipments."
+  },
+  {
+    "slug": "pmc-pallet",
+    "name": "PMC Pallet",
+    "category": "air",
+    "lengthCm": 317,
+    "widthCm": 244,
+    "heightCm": 163,
+    "capacityCbm": 12.6,
+    "notes": "Standard main deck pallet",
+    "description": "The PMC (IATA 96-inch) pallet is the standard main deck unit for 747 freighters. It accepts heavy and bulky cargo and can be built up to varying heights depending on the aircraft type and route restrictions."
+  },
+  {
+    "slug": "p6p-pallet",
+    "name": "P6P Pallet",
+    "category": "air",
+    "lengthCm": 498,
+    "widthCm": 244,
+    "heightCm": 163,
+    "capacityCbm": 19.8,
+    "notes": "20ft main deck pallet",
+    "description": "The P6P is a long main deck pallet used in 747 and 777 freighters. At approximately 20ft in length, it can carry oversized cargo, machinery, and automotive components that would not fit on a standard PMC pallet."
+  },
+  {
+    "slug": "p1p-pallet",
+    "name": "P1P Pallet",
+    "category": "air",
+    "lengthCm": 317,
+    "widthCm": 244,
+    "heightCm": 244,
+    "capacityCbm": 18.9,
+    "notes": "Tall main deck pallet",
+    "description": "A taller variant of the PMC/P6P pallet used on main deck positions with higher headroom clearance. The extra height (244 cm) allows for taller cargo builds, making it suitable for light but voluminous goods."
+  },
+  {
+    "slug": "m1-aaf",
+    "name": "M1 (AAF)",
+    "category": "air",
+    "lengthCm": 317,
+    "widthCm": 244,
+    "heightCm": 244,
+    "capacityCbm": 18.9,
+    "notes": "Main deck container — 747/777",
+    "description": "The AAF main deck container is used on Boeing 747 and 777 freighters. It offers the same dimensions as the P1P pallet but in an enclosed container format, providing better cargo protection during handling and flight."
+  },
+  {
+    "slug": "ld1-akc",
+    "name": "LD1 (AKC)",
+    "category": "air",
+    "lengthCm": 153,
+    "widthCm": 156,
+    "heightCm": 163,
+    "capacityCbm": 3.9,
+    "notes": "Same volume as LD3",
+    "description": "The LD1 (AKC) container has the same external volume as the LD3 but a different configuration suited to specific aircraft belly holds. Used across a range of wide-body aircraft for general cargo and express shipments."
+  },
+  {
+    "slug": "ld2-dpe",
+    "name": "LD2 (DPE)",
+    "category": "air",
+    "lengthCm": 119,
+    "widthCm": 153,
+    "heightCm": 163,
+    "capacityCbm": 2.97,
+    "notes": "Narrow body lower deck",
+    "description": "The LD2 (DPE) is a smaller container designed for narrow-body aircraft lower holds, including the A320 family and 737. It is commonly used by short-haul and regional carriers for belly freight."
+  },
+  {
+    "slug": "ld9-aag",
+    "name": "LD9 (AAG)",
+    "category": "air",
+    "lengthCm": 317,
+    "widthCm": 244,
+    "heightCm": 163,
+    "capacityCbm": 12.6,
+    "notes": "Same as PMC but enclosed",
+    "description": "The LD9 (AAG) container offers the same footprint and capacity as the PMC pallet but in an enclosed unit. The rigid walls provide better protection for fragile or weather-sensitive cargo on main deck positions."
+  }
+]
