@@ -70,6 +70,9 @@ export default function RootLayout({
               <Link href="/chargeable-weight" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
                 Chargeable Wt
               </Link>
+              <Link href="/pallet" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
+                Pallet Fit
+              </Link>
               <Link href="/api-docs" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
                 API Docs
               </Link>
@@ -90,6 +93,7 @@ export default function RootLayout({
                 <Link href="/cbm" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>CBM Calculator</Link>
                 <Link href="/adr" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>ADR Lookup</Link>
                 <Link href="/chargeable-weight" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>Chargeable Weight</Link>
+                <Link href="/pallet" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>Pallet Fitting</Link>
                 <Link href="/api-docs" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>API Docs</Link>
               </div>
             </div>

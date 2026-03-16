@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getAllUnNumbers } from '@/lib/calculations/adr';
 import airlinesData from '@/lib/data/airlines.json';
 import containersData from '@/lib/data/containers.json';
+import palletsData from '@/lib/data/pallets.json';
 
 const BASE = 'https://freightutils.com';
 
@@ -13,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/cbm`,               changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/adr`,               changeFrequency: 'yearly',  priority: 0.8 },
     { url: `${BASE}/chargeable-weight`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/pallet`,            changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/api-docs`,          changeFrequency: 'monthly', priority: 0.7 },
   ];
 
@@ -34,5 +36,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...adrRoutes, ...airlineRoutes, ...containerRoutes];
+  const palletRoutes: MetadataRoute.Sitemap = palletsData.map(p => ({
+    url: `${BASE}/pallet/${p.slug}`,
+    changeFrequency: 'yearly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...adrRoutes, ...airlineRoutes, ...containerRoutes, ...palletRoutes];
 }

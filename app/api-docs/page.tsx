@@ -467,19 +467,139 @@ export default function ApiDocsPage() {
           </div>
         </div>
 
-        {/* Coming soon endpoints */}
-        <h2 style={s.sectionTitle}>Coming Soon</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {[
-            { method: 'GET', path: '/api/pallet', desc: 'Pallet Truck Fitting Calculator — calculate how many pallets fit per truck configuration' },
-          ].map(ep => (
-            <div key={ep.path} style={{ background: '#fff', border: '1px solid #d8dce6', borderRadius: 8, padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12, opacity: 0.6 }}>
-              <span style={{ background: '#d8dce6', color: '#5a6478', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace', flexShrink: 0 }}>{ep.method}</span>
-              <span style={{ fontFamily: 'monospace', fontSize: 14, fontWeight: 600, color: '#1a2332', flexShrink: 0 }}>{ep.path}</span>
-              <span style={{ fontSize: 13, color: '#5a6478' }}>{ep.desc}</span>
-              <span style={{ marginLeft: 'auto', fontSize: 11, background: '#eef0f4', color: '#5a6478', padding: '2px 8px', borderRadius: 20, flexShrink: 0 }}>Coming soon</span>
+        {/* Pallet Fitting Endpoint */}
+        <div id="pallet" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/pallet</span>
+            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Pallet Box Fitting Calculator</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Calculate how many boxes fit on a pallet using a layer-based algorithm. Returns boxes per
+              layer, number of layers, total boxes, orientation used, and volume/weight analysis.
+              Optional weight constraint caps the result at the pallet&apos;s maximum payload.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                    <th>Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>pl</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Pallet length in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>pw</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Pallet width in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>pmh</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Maximum total stack height in centimetres (floor to top of cargo)</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>bl</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Box length in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>bw</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Box width in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>bh</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Box height in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>ph</code></td>
+                    <td>number</td>
+                    <td>No</td>
+                    <td>Pallet board/deck height in cm — deducted from usable height</td>
+                    <td>15</td>
+                  </tr>
+                  <tr>
+                    <td><code>bwt</code></td>
+                    <td>number</td>
+                    <td>No</td>
+                    <td>Weight per box in kg — enables weight constraint calculation</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>mpw</code></td>
+                    <td>number</td>
+                    <td>No</td>
+                    <td>Maximum pallet payload weight in kg — caps result if weight exceeded</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>rotate</code></td>
+                    <td>boolean</td>
+                    <td>No</td>
+                    <td>Allow 90° rotation of boxes for best fit. Pass <code>false</code> to disable.</td>
+                    <td>true</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          ))}
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://freightutils.com/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25&bwt=5&mpw=1500"`}
+            </div>
+            <div className="code-block">
+              {`{
+  "boxes_per_layer": 8,
+  "layers": 8,
+  "total_boxes": 64,
+  "orientation": "original",
+  "boxes_per_row": 3,
+  "boxes_per_col": 2,
+  "usable_height_cm": 205,
+  "utilisation_percent": 62.5,
+  "total_box_volume_cbm": 0.192,
+  "pallet_volume_cbm": 1.968,
+  "wasted_space_cbm": 1.776,
+  "weight_limited": false,
+  "total_weight_kg": 320,
+  "remaining_weight_capacity_kg": 1180,
+  "meta": {
+    "inputs": {
+      "pallet_length_cm": 120, "pallet_width_cm": 80,
+      "pallet_max_height_cm": 220, "pallet_height_cm": 15,
+      "box_length_cm": 40, "box_width_cm": 30, "box_height_cm": 25,
+      "box_weight_kg": 5, "max_payload_weight_kg": 1500,
+      "allow_rotation": true
+    }
+  }
+}`}
+            </div>
+          </div>
         </div>
 
         {/* Response codes */}

@@ -1,0 +1,167 @@
+[
+  {
+    "slug": "euro-pallet",
+    "name": "EUR/EPAL (Euro Pallet)",
+    "lengthCm": 120,
+    "widthCm": 80,
+    "heightCm": 15,
+    "maxHeightCm": 220,
+    "maxWeightKg": 1500,
+    "notes": "ISO standard — most common pallet in Europe",
+    "description": "The EUR/EPAL pallet is the universal standard across European logistics. Its 1200×800mm footprint fits precisely two-wide in a standard 2.4m trailer, making it the default choice for UK and EU road freight. Marked with the EPAL logo and block letters on the bottom boards."
+  },
+  {
+    "slug": "eur2-pallet",
+    "name": "EUR2 / Industrial Pallet",
+    "lengthCm": 120,
+    "widthCm": 100,
+    "heightCm": 15,
+    "maxHeightCm": 220,
+    "maxWeightKg": 1500,
+    "notes": "Common in chemical and industrial sectors",
+    "description": "The EUR2 (1200×1000mm) is wider than the standard Euro pallet and common in chemical, pharmaceutical, and heavy industrial applications. It fits two-wide in a 2.4m trailer when loaded length-first. Often used for bulkier goods that need more footprint stability."
+  },
+  {
+    "slug": "eur3-pallet",
+    "name": "EUR3 / Square Pallet",
+    "lengthCm": 120,
+    "widthCm": 120,
+    "heightCm": 15,
+    "maxHeightCm": 220,
+    "maxWeightKg": 1500,
+    "notes": "Square footprint — suits symmetrical loads",
+    "description": "The EUR3 (1200×1200mm) is a square-format pallet suited to symmetric loads such as large drums, IBCs, and circular containers. Fits only one-wide in a standard trailer. Popular in the beverage and chemical industries where container geometry demands a square base."
+  },
+  {
+    "slug": "gma-north-american",
+    "name": "GMA / North American (48×40)",
+    "lengthCm": 121.9,
+    "widthCm": 101.6,
+    "heightCm": 15,
+    "maxHeightCm": 180,
+    "maxWeightKg": 1588,
+    "notes": "GMA standard — dominant in North America",
+    "description": "The GMA (Grocery Manufacturers Association) 48×40-inch pallet is the most common pallet in North America, accounting for around 35% of all pallet usage. Its dimensions make it compatible with standard North American racking and trucking. Equivalent to approximately 1219×1016mm."
+  },
+  {
+    "slug": "uk-standard",
+    "name": "UK Standard Pallet",
+    "lengthCm": 120,
+    "widthCm": 100,
+    "heightCm": 15,
+    "maxHeightCm": 220,
+    "maxWeightKg": 1000,
+    "notes": "BS EN 13698 standard — widely used in UK retail",
+    "description": "The UK standard pallet (1200×1000mm) is the dominant format in UK retail and grocery supply chains. It differs from EUR2 primarily in weight rating and board construction. Recognised by most UK pallet networks including Palletways, Palletforce, and Pall-Ex."
+  },
+  {
+    "slug": "australian-standard",
+    "name": "Australian Standard Pallet",
+    "lengthCm": 116.5,
+    "widthCm": 116.5,
+    "heightCm": 15,
+    "maxHeightCm": 180,
+    "maxWeightKg": 1500,
+    "notes": "AS/NZS 4068 standard — square format",
+    "description": "The Australian Standard (AS/NZS 4068) pallet at 1165×1165mm is a square-format pallet used throughout Australia and New Zealand. Its near-square shape suits local racking standards and container-stuffing practices. The slightly odd dimensions (vs Euro 1200×800) reflect Australia's independent pallet history."
+  },
+  {
+    "slug": "asia-standard",
+    "name": "Asia Standard Pallet",
+    "lengthCm": 110,
+    "widthCm": 110,
+    "heightCm": 15,
+    "maxHeightCm": 180,
+    "maxWeightKg": 1000,
+    "notes": "JIS Z 0601 — common in Japan, Korea, China",
+    "description": "The 1100×1100mm pallet is the ISO-recommended format for Asia-Pacific markets and the dominant type in Japan (JIS Z 0601), Korea, and much of China. Its square footprint fits four per layer in a standard 20ft shipping container. Lighter weight rating than Western pallets reflects typical Asian cargo density."
+  },
+  {
+    "slug": "half-euro",
+    "name": "Half Euro Pallet (EUR6)",
+    "lengthCm": 80,
+    "widthCm": 60,
+    "heightCm": 15,
+    "maxHeightCm": 180,
+    "maxWeightKg": 500,
+    "notes": "EUR6 — half the footprint of a standard Euro pallet",
+    "description": "The Half Euro (EUR6) at 800×600mm is exactly half the footprint of a standard EUR pallet. Widely used in retail display, parcel logistics, and pharmaceutical distribution where full pallets are impractical. Six half pallets equal three full Euro pallets in trailer space."
+  },
+  {
+    "slug": "quarter-euro",
+    "name": "Quarter Euro Pallet",
+    "lengthCm": 60,
+    "widthCm": 40,
+    "heightCm": 12,
+    "maxHeightCm": 150,
+    "maxWeightKg": 250,
+    "notes": "Display pallet — retail and e-commerce fulfilment",
+    "description": "The Quarter Euro pallet (600×400mm) is a compact display-format pallet used in retail point-of-sale displays, pharmaceutical cold chains, and small-parcel fulfilment. Its footprint is exactly one quarter of the standard EUR pallet. Low max height and weight rating reflect its use with light, display-ready goods."
+  },
+  {
+    "slug": "cp1-chemical",
+    "name": "CP1 Chemical Pallet",
+    "lengthCm": 120,
+    "widthCm": 100,
+    "heightCm": 15,
+    "maxHeightCm": 200,
+    "maxWeightKg": 1500,
+    "notes": "CP pool standard — chemical and process industries",
+    "description": "The CP1 pallet (1200×1000mm) is part of the European Chemical Industry Council (Cefic) CP pallet pool, designed for the safe handling of chemical drums, IBCs, and bulk bags. Constructed to a higher hygiene and structural standard than standard EUR pallets. CP pallets are non-exchangeable pool assets."
+  },
+  {
+    "slug": "cp3-chemical",
+    "name": "CP3 Chemical Pallet",
+    "lengthCm": 114,
+    "widthCm": 114,
+    "heightCm": 15,
+    "maxHeightCm": 200,
+    "maxWeightKg": 1500,
+    "notes": "CP pool — suits 4-drum or IBC configurations",
+    "description": "The CP3 pallet (1140×1140mm) is a square CP pool pallet designed specifically for four 200-litre drums or a single 1000L IBC. Its square footprint and reinforced construction make it the standard for chemical drummed goods in European supply chains."
+  },
+  {
+    "slug": "cp9-chemical",
+    "name": "CP9 Chemical Pallet",
+    "lengthCm": 114,
+    "widthCm": 114,
+    "heightCm": 15,
+    "maxHeightCm": 200,
+    "maxWeightKg": 1200,
+    "notes": "CP pool — lighter duty than CP3",
+    "description": "The CP9 pallet shares the CP3 footprint (1140×1140mm) but is constructed to a lighter-duty specification with a lower maximum payload of 1200kg. Used in chemical and agricultural sectors for medium-weight goods such as 25kg bags and small drums. Part of the Cefic CP pallet pool."
+  },
+  {
+    "slug": "beverage-pallet",
+    "name": "Beverage / Dolly Pallet",
+    "lengthCm": 80,
+    "widthCm": 60,
+    "heightCm": 8,
+    "maxHeightCm": 200,
+    "maxWeightKg": 600,
+    "notes": "Low-profile dolly — beverage and retail distribution",
+    "description": "The beverage dolly pallet (800×600mm) is a low-profile pallet (80mm deck height) used throughout UK and European drinks distribution, supermarket back-of-store, and retail logistics. Its wheeled variant allows manual moving without a pallet truck. Fits precisely into retail bays designed for the 800×600mm module."
+  },
+  {
+    "slug": "air-freight-pmc",
+    "name": "Aircraft PMC Pallet (96×125)",
+    "lengthCm": 317.5,
+    "widthCm": 223.5,
+    "heightCm": 10,
+    "maxHeightCm": 243,
+    "maxWeightKg": 6803,
+    "notes": "IATA ULD — full-width main deck widebody pallet",
+    "description": "The PMC (Pallet — Main Deck, Contoured) is a full-width aircraft pallet used on the main deck of widebody freighters (747F, 777F, MD-11F). Its 317.5×223.5cm base occupies the full fuselage width. Maximum gross weight is 6,803kg (15,000lb). Nets and straps are mandatory for securing cargo to the aluminium base plate."
+  },
+  {
+    "slug": "display-pallet",
+    "name": "Retail Display Pallet",
+    "lengthCm": 80,
+    "widthCm": 60,
+    "heightCm": 12,
+    "maxHeightCm": 175,
+    "maxWeightKg": 400,
+    "notes": "CHEP quarter / retail floor display",
+    "description": "The retail display pallet (800×600mm, 120mm deck) is designed to arrive in-store ready for floor display without repacking. Used in grocery, DIY, and FMCG supply chains. Goods are stacked and shrink-wrapped at the supplier, then placed directly on the shop floor. Max height is kept below 175cm for safe consumer access."
+  }
+]
