@@ -10095,7 +10095,7 @@
   },
   {
     "un_number": "1170",
-    "proper_shipping_name": "ETHANOL SOLUTION (ETHYL ALCOHOL SOLUTION)",
+    "proper_shipping_name": "ETHANOL (ETHYL ALCOHOL) or ETHANOL SOLUTION (ETHYL ALCOHOL SOLUTION)",
     "class": "3",
     "classification_code": "F1",
     "packing_group": "III",
@@ -11485,7 +11485,7 @@
   },
   {
     "un_number": "1263",
-    "proper_shipping_name": "PAINT (including paint, lacquer, enamel, stain, shellac, varnish, polish, liquid filler and liquid lacquer base) or PAINT RELATED MATERIAL (including paint thinning and reducing compound) (having a flash-point below 23 °C and viscous according to 2.2.3.1.4) (vapour pressure at 50 °C not more than 110 kPa)",
+    "proper_shipping_name": "PAINT or PAINT RELATED MATERIAL (including paint thinning or reducing compound), flammable",
     "class": "3",
     "classification_code": "F1",
     "packing_group": "III",
@@ -23004,7 +23004,7 @@
   },
   {
     "un_number": "1993",
-    "proper_shipping_name": "FLAMMABLE LIQUID, N.O.S. (having a flash-point below 23 °C and viscous according to 2.2.3.1.4) (vapour pressure at 50 °C not more than 110 kPa)",
+    "proper_shipping_name": "FLAMMABLE LIQUID, N.O.S.",
     "class": "3",
     "classification_code": "F1",
     "packing_group": "III",
