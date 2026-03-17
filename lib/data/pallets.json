@@ -15,16 +15,16 @@
     "name": "EUR2 / Industrial Pallet",
     "lengthCm": 120,
     "widthCm": 100,
-    "heightCm": 15,
+    "heightCm": 16.2,
     "maxHeightCm": 220,
-    "maxWeightKg": 1500,
+    "maxWeightKg": 1250,
     "notes": "Common in chemical and industrial sectors",
     "description": "The EUR2 (1200×1000mm) is wider than the standard Euro pallet and common in chemical, pharmaceutical, and heavy industrial applications. It fits two-wide in a 2.4m trailer when loaded length-first. Often used for bulkier goods that need more footprint stability."
   },
   {
     "slug": "eur3-pallet",
     "name": "EUR3 / Square Pallet",
-    "lengthCm": 120,
+    "lengthCm": 100,
     "widthCm": 120,
     "heightCm": 15,
     "maxHeightCm": 220,
@@ -39,7 +39,7 @@
     "widthCm": 101.6,
     "heightCm": 15,
     "maxHeightCm": 180,
-    "maxWeightKg": 1588,
+    "maxWeightKg": 1089,
     "notes": "GMA standard — dominant in North America",
     "description": "The GMA (Grocery Manufacturers Association) 48×40-inch pallet is the most common pallet in North America, accounting for around 35% of all pallet usage. Its dimensions make it compatible with standard North American racking and trucking. Equivalent to approximately 1219×1016mm."
   },
@@ -83,7 +83,7 @@
     "widthCm": 60,
     "heightCm": 15,
     "maxHeightCm": 180,
-    "maxWeightKg": 500,
+    "maxWeightKg": 750,
     "notes": "EUR6 — half the footprint of a standard Euro pallet",
     "description": "The Half Euro (EUR6) at 800×600mm is exactly half the footprint of a standard EUR pallet. Widely used in retail display, parcel logistics, and pharmaceutical distribution where full pallets are impractical. Six half pallets equal three full Euro pallets in trailer space."
   },
@@ -105,7 +105,7 @@
     "widthCm": 100,
     "heightCm": 15,
     "maxHeightCm": 200,
-    "maxWeightKg": 1500,
+    "maxWeightKg": 1250,
     "notes": "CP pool standard — chemical and process industries",
     "description": "The CP1 pallet (1200×1000mm) is part of the European Chemical Industry Council (Cefic) CP pallet pool, designed for the safe handling of chemical drums, IBCs, and bulk bags. Constructed to a higher hygiene and structural standard than standard EUR pallets. CP pallets are non-exchangeable pool assets."
   },
@@ -116,7 +116,7 @@
     "widthCm": 114,
     "heightCm": 15,
     "maxHeightCm": 200,
-    "maxWeightKg": 1500,
+    "maxWeightKg": 1250,
     "notes": "CP pool — suits 4-drum or IBC configurations",
     "description": "The CP3 pallet (1140×1140mm) is a square CP pool pallet designed specifically for four 200-litre drums or a single 1000L IBC. Its square footprint and reinforced construction make it the standard for chemical drummed goods in European supply chains."
   },
@@ -139,14 +139,14 @@
     "heightCm": 8,
     "maxHeightCm": 200,
     "maxWeightKg": 600,
-    "notes": "Low-profile dolly — beverage and retail distribution",
+    "notes": "800×600mm is the UK/European convention. Dimensions vary by operator — no single ISO standard governs this format.",
     "description": "The beverage dolly pallet (800×600mm) is a low-profile pallet (80mm deck height) used throughout UK and European drinks distribution, supermarket back-of-store, and retail logistics. Its wheeled variant allows manual moving without a pallet truck. Fits precisely into retail bays designed for the 800×600mm module."
   },
   {
     "slug": "air-freight-pmc",
     "name": "Aircraft PMC Pallet (96×125)",
     "lengthCm": 317.5,
-    "widthCm": 223.5,
+    "widthCm": 243.8,
     "heightCm": 3,
     "maxHeightCm": 163,
     "maxWeightKg": 4626,
@@ -158,10 +158,10 @@
     "name": "Retail Display Pallet",
     "lengthCm": 80,
     "widthCm": 60,
-    "heightCm": 12,
+    "heightCm": 14.4,
     "maxHeightCm": 175,
-    "maxWeightKg": 400,
-    "notes": "CHEP quarter / retail floor display",
+    "maxWeightKg": 750,
+    "notes": "EPAL 6 Half Pallet used in retail display context. 800×600mm, 144mm deck height, 750kg safe working load.",
     "description": "The retail display pallet (800×600mm, 120mm deck) is designed to arrive in-store ready for floor display without repacking. Used in grocery, DIY, and FMCG supply chains. Goods are stacked and shrink-wrapped at the supplier, then placed directly on the shop floor. Max height is kept below 175cm for safe consumer access."
   }
 ]

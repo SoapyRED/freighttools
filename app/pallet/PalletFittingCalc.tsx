@@ -207,7 +207,7 @@ export default function PalletFittingCalc({
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 16, marginBottom: lockedDims ? 12 : 0 }}>
             <Field label="Length"     id="pl-l"  value={palletL}   onChange={setPalletL}  placeholder="e.g. 120" unit="cm" readOnly={lockedDims} />
             <Field label="Width"      id="pl-w"  value={palletW}   onChange={setPalletW}  placeholder="e.g. 80"  unit="cm" readOnly={lockedDims} />
-            <Field label="Max Height" id="pl-mh" value={palletMH}  onChange={setPalletMH} placeholder="e.g. 220" unit="cm" readOnly={lockedDims} />
+            <Field label="Typical max loaded height — road freight" id="pl-mh" value={palletMH}  onChange={setPalletMH} placeholder="e.g. 220" unit="cm" readOnly={lockedDims} />
             <Field label="Board Ht"   id="pl-h"  value={palletH}   onChange={setPalletH}  placeholder="15"       unit="cm" readOnly={lockedDims} />
             <Field label="Max Weight" id="pl-mw" value={maxWeight} onChange={setMaxWeight} placeholder="optional" unit="kg" readOnly={lockedDims} />
           </div>
