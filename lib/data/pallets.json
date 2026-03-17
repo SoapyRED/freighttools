@@ -147,10 +147,10 @@
     "name": "Aircraft PMC Pallet (96×125)",
     "lengthCm": 317.5,
     "widthCm": 223.5,
-    "heightCm": 10,
-    "maxHeightCm": 243,
-    "maxWeightKg": 6803,
-    "notes": "IATA ULD — full-width main deck widebody pallet",
+    "heightCm": 3,
+    "maxHeightCm": 163,
+    "maxWeightKg": 4626,
+    "notes": "PMC aluminium flat pallet — lower deck default (163cm). Main deck allows up to 244cm (standard) or 300cm (freighter). Weight limit varies by aircraft position.",
     "description": "The PMC (Pallet — Main Deck, Contoured) is a full-width aircraft pallet used on the main deck of widebody freighters (747F, 777F, MD-11F). Its 317.5×223.5cm base occupies the full fuselage width. Maximum gross weight is 6,803kg (15,000lb). Nets and straps are mandatory for securing cargo to the aluminium base plate."
   },
   {
