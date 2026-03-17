@@ -1,19 +1,41 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
-
-const inter = Inter({ subsets: ['latin'] });
+import ThemeToggle from './components/ThemeToggle';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://freightutils.com'),
   title: {
-    default: 'FreightUtils — Free UK Freight Calculators',
+    default: 'FreightUtils — Free Freight Calculators & APIs',
     template: '%s | FreightUtils.com',
   },
-  description: 'Free freight tools for UK logistics professionals — LDM calculator, CBM calculator, ADR lookup and more.',
+  description:
+    'Free freight calculators with open REST APIs. Loading metres, CBM, chargeable weight, pallet fitting, and ADR dangerous goods lookup. No signup required.',
   robots: 'index, follow',
 };
+
+const navLinks = [
+  { href: '/ldm', label: 'LDM Calc' },
+  { href: '/cbm', label: 'CBM Calc' },
+  { href: '/adr', label: 'ADR Lookup' },
+  { href: '/chargeable-weight', label: 'Chargeable Wt' },
+  { href: '/pallet', label: 'Pallet Fit' },
+  { href: '/api-docs', label: 'API Docs' },
+  { href: '/about', label: 'About' },
+];
+
+const footerToolLinks = [
+  { href: '/ldm', label: 'LDM Calculator' },
+  { href: '/cbm', label: 'CBM Calculator' },
+  { href: '/adr', label: 'ADR Lookup' },
+  { href: '/chargeable-weight', label: 'Chargeable Weight' },
+  { href: '/pallet', label: 'Pallet Fitting' },
+  { href: '/api-docs', label: 'API Docs' },
+  { href: '/about', label: 'About' },
+];
+
+/* Inline script that runs before first paint to prevent dark mode flash */
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -21,8 +43,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -30,16 +53,18 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body style={{ fontFamily: "'Outfit', sans-serif", background: '#f7f8fa', margin: 0 }}>
+      <body>
+
+        {/* ── HEADER ── */}
         <header style={{
-          background: '#1a2332',
-          borderBottom: '2px solid #e87722',
+          background: 'var(--navy)',
+          borderBottom: '2px solid #EF9F27',
           position: 'sticky',
           top: 0,
           zIndex: 100,
         }}>
           <div style={{
-            maxWidth: 900,
+            maxWidth: 1080,
             margin: '0 auto',
             padding: '0 20px',
             display: 'flex',
@@ -47,58 +72,88 @@ export default function RootLayout({
             justifyContent: 'space-between',
             height: 56,
           }}>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: '#fff' }}>
+            {/* Brand */}
+            <Link href="/" style={{
+              display: 'flex', alignItems: 'center', gap: 10,
+              textDecoration: 'none', color: '#fff', flexShrink: 0,
+            }}>
               <div style={{
-                width: 32, height: 32, background: '#e87722', borderRadius: 6,
+                width: 32, height: 32, background: '#EF9F27', borderRadius: 6,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontWeight: 800, fontSize: 14, color: '#fff',
-              }}>FT</div>
+              }}>
+                FU
+              </div>
               <span style={{ fontWeight: 700, fontSize: 15 }}>
-                Freight<span style={{ color: '#e87722' }}>Utils</span>.com
+                Freight<span style={{ color: '#EF9F27' }}>Utils</span>
+                <span style={{ color: 'var(--text-faint)', fontWeight: 400 }}>.com</span>
               </span>
             </Link>
-            <nav style={{ display: 'flex', gap: 4 }}>
-              <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
-                LDM Calc
-              </Link>
-              <Link href="/cbm" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
-                CBM Calc
-              </Link>
-              <Link href="/adr" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
-                ADR Lookup
-              </Link>
-              <Link href="/chargeable-weight" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
-                Chargeable Wt
-              </Link>
-              <Link href="/pallet" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
-                Pallet Fit
-              </Link>
-              <Link href="/api-docs" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 12px', borderRadius: 6 }}>
-                API Docs
-              </Link>
-            </nav>
+
+            {/* Nav */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, overflow: 'auto' }}>
+              <nav style={{ display: 'flex', gap: 2 }}>
+                {navLinks.map(l => (
+                  <Link key={l.href} href={l.href} style={{
+                    color: 'var(--text-faint)',
+                    textDecoration: 'none',
+                    fontSize: 13,
+                    fontWeight: 500,
+                    padding: '6px 10px',
+                    borderRadius: 6,
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {l.label}
+                  </Link>
+                ))}
+              </nav>
+              <ThemeToggle />
+            </div>
           </div>
         </header>
 
         {children}
 
-        <footer style={{ background: '#1a2332', color: '#8f9ab0', padding: '32px 20px', marginTop: 60, borderTop: '2px solid #2e3d55' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 16 }}>
-              <div style={{ fontWeight: 700, fontSize: 16, color: '#fff' }}>
-                Freight<span style={{ color: '#e87722' }}>Utils</span>.com
+        {/* ── FOOTER ── */}
+        <footer style={{
+          background: 'var(--navy)',
+          color: 'var(--text-faint)',
+          padding: '36px 20px 28px',
+          marginTop: 60,
+          borderTop: '2px solid var(--navy-border)',
+        }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            {/* Top row: brand + nav */}
+            <div style={{
+              display: 'flex', justifyContent: 'space-between',
+              alignItems: 'flex-start', flexWrap: 'wrap', gap: 20, marginBottom: 20,
+            }}>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 17, color: '#fff', marginBottom: 6 }}>
+                  Freight<span style={{ color: '#EF9F27' }}>Utils</span>
+                  <span style={{ color: 'var(--text-faint)', fontWeight: 400 }}>.com</span>
+                </div>
+                <div style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
+                  Built by UK freight industry professionals.
+                </div>
               </div>
-              <div style={{ display: 'flex', gap: 20 }}>
-                <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>LDM Calculator</Link>
-                <Link href="/cbm" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>CBM Calculator</Link>
-                <Link href="/adr" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>ADR Lookup</Link>
-                <Link href="/chargeable-weight" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>Chargeable Weight</Link>
-                <Link href="/pallet" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>Pallet Fitting</Link>
-                <Link href="/api-docs" style={{ color: '#8f9ab0', textDecoration: 'none', fontSize: 13 }}>API Docs</Link>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+                {footerToolLinks.map(l => (
+                  <Link key={l.href} href={l.href} style={{
+                    color: 'var(--text-faint)', textDecoration: 'none', fontSize: 13,
+                  }}>
+                    {l.label}
+                  </Link>
+                ))}
               </div>
             </div>
-            <div style={{ fontSize: 12, color: '#2e3d55', borderTop: '1px solid #2e3d55', paddingTop: 16, lineHeight: 1.6 }}>
-              © {new Date().getFullYear()} FreightUtils.com. All figures are indicative. Always confirm vehicle specifications and weight limits with your carrier before booking.
+
+            {/* Bottom row */}
+            <div style={{
+              fontSize: 12, color: 'var(--navy-border)',
+              borderTop: '1px solid var(--navy-border)', paddingTop: 16, lineHeight: 1.6,
+            }}>
+              © 2026 FreightUtils.com. All figures are indicative. Always confirm specifications with your carrier.
             </div>
           </div>
         </footer>

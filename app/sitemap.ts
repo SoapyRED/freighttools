@@ -11,11 +11,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE}/`,                  changeFrequency: 'monthly', priority: 1.0 },
+    { url: `${BASE}/ldm`,               changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/cbm`,               changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/adr`,               changeFrequency: 'yearly',  priority: 0.8 },
     { url: `${BASE}/chargeable-weight`, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/pallet`,            changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/api-docs`,          changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/about`,             changeFrequency: 'monthly', priority: 0.5 },
   ];
 
   const adrRoutes: MetadataRoute.Sitemap = unNumbers.map(un => ({

@@ -404,7 +404,7 @@ export default function PalletFittingCalc({
           <span style={{ fontSize: 14, fontWeight: 600, color: '#1a2332' }}>Calculate CBM →</span>
           <span style={{ fontSize: 12, color: '#8f9ab0' }}>Cubic metres for sea and air freight</span>
         </Link>
-        <Link href="/" style={{
+        <Link href="/ldm" style={{
           flex: 1, minWidth: 200,
           background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
           padding: '14px 18px', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 4,

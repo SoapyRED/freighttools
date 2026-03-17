@@ -1,412 +1,317 @@
-'use client';
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
-import { useState, useEffect, useCallback } from 'react';
-import { PALLET_PRESETS, PALLET_PRESET_MAP } from '@/lib/data/pallets';
-import { VEHICLES } from '@/lib/data/vehicles';
-import { calculateLdm, type LdmResult } from '@/lib/calculations/ldm';
-
-const defaultResult: LdmResult = {
-  ldm: 0.4,
-  vehicle: { name: '13.6m Artic Trailer', lengthM: 13.6, maxPayloadKg: 24000 },
-  utilisationPercent: 2.94,
-  palletSpaces: { used: 1, available: 33 },
-  totalWeightKg: null,
-  fits: true,
-  warnings: [],
+export const metadata: Metadata = {
+  title: 'FreightUtils — Free Freight Calculators & APIs | LDM, CBM, ADR Lookup',
+  description:
+    'Free freight calculators with open REST APIs. Loading metres, CBM, chargeable weight, pallet fitting, and ADR dangerous goods lookup. No signup required. Built for transport planners, developers, and AI agents.',
+  alternates: { canonical: 'https://freightutils.com' },
 };
 
-export default function LdmCalculatorPage() {
-  const [palletType, setPalletType] = useState('euro');
-  const [lengthMm, setLengthMm] = useState(1200);
-  const [widthMm, setWidthMm] = useState(800);
-  const [qty, setQty] = useState(1);
-  const [stackable, setStackable] = useState(false);
-  const [stackFactor, setStackFactor] = useState(2);
-  const [weightPerPallet, setWeightPerPallet] = useState<string>('');
-  const [vehicleId, setVehicleId] = useState('artic');
-  const [customVehicleLen, setCustomVehicleLen] = useState<string>('');
-  const [result, setResult] = useState<LdmResult>(defaultResult);
+const tools = [
+  {
+    href: '/ldm',
+    label: '/api/ldm',
+    title: 'Loading Metres',
+    desc: 'Floor space for UK/EU road freight trailers',
+    icon: '📐',
+  },
+  {
+    href: '/cbm',
+    label: '/api/cbm',
+    title: 'CBM Calculator',
+    desc: 'Cubic metres for sea and air shipments',
+    icon: '📦',
+  },
+  {
+    href: '/adr',
+    label: '/api/adr',
+    title: 'ADR Lookup',
+    desc: '2,336 dangerous goods entries from ADR 2025',
+    icon: '⚠️',
+  },
+  {
+    href: '/chargeable-weight',
+    label: '/api/chargeable-weight',
+    title: 'Chargeable Weight',
+    desc: 'Air freight volumetric vs actual weight',
+    icon: '✈️',
+  },
+  {
+    href: '/pallet',
+    label: '/api/pallet',
+    title: 'Pallet Fitting',
+    desc: 'Box fitting with visual layer diagram',
+    icon: '🔲',
+  },
+];
 
-  const recalculate = useCallback(() => {
-    const res = calculateLdm({
-      lengthMm,
-      widthMm,
-      qty,
-      stackable,
-      stackFactor,
-      weightPerPalletKg: weightPerPallet !== '' ? parseFloat(weightPerPallet) : null,
-      vehicleId: vehicleId !== 'custom' ? vehicleId : undefined,
-      customVehicleLengthM: vehicleId === 'custom' && customVehicleLen !== ''
-        ? parseFloat(customVehicleLen)
-        : null,
-    });
-    setResult(res);
-  }, [lengthMm, widthMm, qty, stackable, stackFactor, weightPerPallet, vehicleId, customVehicleLen]);
+const dataSources = [
+  { name: 'UNECE', detail: 'ADR 2025' },
+  { name: 'EPAL', detail: 'Pallet specs' },
+  { name: 'ISO 6780', detail: 'Pallet standards' },
+  { name: 'IATA', detail: 'Air freight / ULD' },
+];
 
-  useEffect(() => { recalculate(); }, [recalculate]);
-
-  const handlePalletTypeChange = (val: string) => {
-    setPalletType(val);
-    const preset = PALLET_PRESET_MAP[val];
-    if (preset) {
-      setLengthMm(preset.lengthMm);
-      setWidthMm(preset.widthMm);
-    }
+export default function HomePage() {
+  const jsonLdWebsite = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'FreightUtils',
+    url: 'https://freightutils.com',
+    description: 'Free freight calculators and dangerous goods data with open REST APIs',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://freightutils.com/adr?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
   };
 
-  const isCustomPallet = palletType === 'custom';
-  const isCustomVehicle = vehicleId === 'custom';
-  const utilPct = Math.min(result.utilisationPercent, 100);
-  const progressClass = result.utilisationPercent > 100 ? 'danger' : result.utilisationPercent > 85 ? 'high' : '';
-
-  const s = {
-    main: { maxWidth: 900, margin: '0 auto', padding: '32px 20px 60px' } as React.CSSProperties,
-    hero: { background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' as const },
-    h1: { fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', lineHeight: 1.2, marginBottom: 12 },
-    card: { background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' } as React.CSSProperties,
-    cardHeader: { background: '#1a2332', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 10 } as React.CSSProperties,
-    cardBody: { padding: 24 } as React.CSSProperties,
-    formGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 } as React.CSSProperties,
-    formGroup: { display: 'flex', flexDirection: 'column' as const, gap: 6 },
-    divider: { gridColumn: '1 / -1', border: 'none', borderTop: '1px solid #eef0f4', margin: '4px 0' } as React.CSSProperties,
-    toggleRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: '#f7f8fa', border: '1.5px solid #d8dce6', borderRadius: 8 } as React.CSSProperties,
-    ldmDisplay: { textAlign: 'center' as const, padding: '28px 24px 20px', borderBottom: '1px solid #eef0f4' },
-    ldmNumber: { fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: '#1a2332', lineHeight: 1, letterSpacing: -2 } as React.CSSProperties,
-    utilSection: { padding: '20px 24px', borderBottom: '1px solid #eef0f4' } as React.CSSProperties,
-    statsGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: '#eef0f4' } as React.CSSProperties,
-    statCell: { background: '#fff', padding: '16px 20px' } as React.CSSProperties,
+  const jsonLdOrg = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'FreightUtils',
+    url: 'https://freightutils.com',
+    description: 'Free freight calculation tools and APIs for the logistics industry',
+    knowsAbout: [
+      'freight logistics',
+      'dangerous goods transport',
+      'ADR regulations',
+      'loading metres',
+      'pallet specifications',
+      'air freight',
+      'chargeable weight',
+    ],
   };
 
   return (
     <>
-      {/* Hero */}
-      <div style={s.hero}>
-        <h1 style={s.h1}>
-          Loading Metres <span style={{ color: '#e87722' }}>Calculator</span>
-        </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 500, margin: '0 auto' }}>
-          Calculate LDM for UK road freight — free, instant, no signup
-        </p>
-      </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }}
+      />
 
-      <main style={s.main}>
-        {/* ── INPUT CARD ── */}
-        <section style={s.card} aria-label="LDM calculator inputs">
-          <div style={s.cardHeader}>
-            <h2 style={{ fontSize: 15, fontWeight: 600, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.3px', margin: 0 }}>Inputs</h2>
-            <span style={{ background: '#e87722', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Real-time</span>
+      {/* ── HERO ── */}
+      <section style={{
+        background: 'var(--navy)',
+        padding: '56px 20px 64px',
+        textAlign: 'center',
+      }}>
+        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+          <div style={{
+            fontSize: 11,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            color: 'var(--text-faint)',
+            marginBottom: 16,
+          }}>
+            Freight Calculators
           </div>
-          <div style={s.cardBody}>
-            <div style={s.formGrid}>
-
-              {/* Pallet type */}
-              <div style={{ ...s.formGroup, gridColumn: '1 / -1' }}>
-                <label htmlFor="palletType">Pallet Type</label>
-                <select id="palletType" value={palletType} onChange={e => handlePalletTypeChange(e.target.value)}>
-                  {PALLET_PRESETS.map(p => (
-                    <option key={p.id} value={p.id}>{p.name}</option>
-                  ))}
-                  <option value="custom">Custom dimensions…</option>
-                </select>
-              </div>
-
-              {/* Length */}
-              <div style={s.formGroup}>
-                <label htmlFor="palletLength">Length <span style={{ fontWeight: 400, textTransform: 'none', color: '#8f9ab0', letterSpacing: 0 }}>(mm)</span></label>
-                <input
-                  type="number" id="palletLength"
-                  value={lengthMm}
-                  onChange={e => setLengthMm(Number(e.target.value))}
-                  readOnly={!isCustomPallet}
-                  style={{ background: isCustomPallet ? '#fff' : '#f7f8fa' }}
-                  min={1} max={9999}
-                />
-              </div>
-
-              {/* Width */}
-              <div style={s.formGroup}>
-                <label htmlFor="palletWidth">Width <span style={{ fontWeight: 400, textTransform: 'none', color: '#8f9ab0', letterSpacing: 0 }}>(mm)</span></label>
-                <input
-                  type="number" id="palletWidth"
-                  value={widthMm}
-                  onChange={e => setWidthMm(Number(e.target.value))}
-                  readOnly={!isCustomPallet}
-                  style={{ background: isCustomPallet ? '#fff' : '#f7f8fa' }}
-                  min={1} max={9999}
-                />
-              </div>
-
-              {/* Quantity */}
-              <div style={s.formGroup}>
-                <label htmlFor="palletQty">Number of Pallets</label>
-                <input type="number" id="palletQty" value={qty} onChange={e => setQty(Number(e.target.value))} min={1} max={999} />
-              </div>
-
-              {/* Weight */}
-              <div style={s.formGroup}>
-                <label htmlFor="weightPerPallet">Weight per Pallet <span style={{ fontWeight: 400, textTransform: 'none', color: '#8f9ab0', letterSpacing: 0 }}>(kg, optional)</span></label>
-                <input type="number" id="weightPerPallet" value={weightPerPallet} onChange={e => setWeightPerPallet(e.target.value)} placeholder="e.g. 500" min={0} />
-              </div>
-
-              <hr style={s.divider} />
-
-              {/* Stackable toggle */}
-              <div style={{ ...s.formGroup, gridColumn: '1 / -1' }}>
-                <label>Stackable?</label>
-                <div style={s.toggleRow}>
-                  <div>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: '#1e2535' }}>Pallets can be stacked</div>
-                    <div style={{ fontSize: 12, color: '#5a6478', marginTop: 1 }}>Halves the floor space needed when enabled</div>
-                  </div>
-                  <label style={{ position: 'relative', width: 44, height: 24, flexShrink: 0, cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={stackable}
-                      onChange={e => setStackable(e.target.checked)}
-                      style={{ opacity: 0, width: 0, height: 0, position: 'absolute' }}
-                    />
-                    <span style={{
-                      position: 'absolute', inset: 0,
-                      background: stackable ? '#e87722' : '#d8dce6',
-                      borderRadius: 12,
-                      transition: 'background 0.2s',
-                    }}>
-                      <span style={{
-                        position: 'absolute',
-                        width: 18, height: 18,
-                        left: stackable ? 23 : 3,
-                        top: 3,
-                        background: '#fff',
-                        borderRadius: '50%',
-                        transition: 'left 0.2s',
-                        boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
-                      }} />
-                    </span>
-                  </label>
-                </div>
-              </div>
-
-              {/* Stack factor */}
-              {stackable && (
-                <div style={{ ...s.formGroup, gridColumn: '1 / -1' }}>
-                  <label htmlFor="stackFactor">Max Stack Height</label>
-                  <select id="stackFactor" value={stackFactor} onChange={e => setStackFactor(Number(e.target.value))}>
-                    <option value={2}>2 high (double stack)</option>
-                    <option value={3}>3 high (triple stack)</option>
-                  </select>
-                </div>
-              )}
-
-              <hr style={s.divider} />
-
-              {/* Vehicle */}
-              <div style={{ ...s.formGroup, gridColumn: '1 / -1' }}>
-                <label htmlFor="vehicleType">Vehicle Type</label>
-                <select id="vehicleType" value={vehicleId} onChange={e => setVehicleId(e.target.value)}>
-                  {VEHICLES.map(v => (
-                    <option key={v.id} value={v.id}>{v.name} — {v.euroPalletsFloor} euro pallets, {v.maxPayloadKg.toLocaleString()} kg max</option>
-                  ))}
-                  <option value="custom">Custom vehicle length…</option>
-                </select>
-              </div>
-
-              {/* Custom vehicle length */}
-              {isCustomVehicle && (
-                <div style={{ ...s.formGroup, gridColumn: '1 / -1' }}>
-                  <label htmlFor="customVehicleLength">Custom Vehicle Length <span style={{ fontWeight: 400, textTransform: 'none', color: '#8f9ab0', letterSpacing: 0 }}>(metres)</span></label>
-                  <input type="number" id="customVehicleLength" value={customVehicleLen} onChange={e => setCustomVehicleLen(e.target.value)} placeholder="e.g. 8.0" min={0.5} max={30} step={0.1} />
-                </div>
-              )}
-
-            </div>
+          <h1 style={{
+            fontSize: 'clamp(28px, 5vw, 44px)',
+            fontWeight: 800,
+            color: '#fff',
+            lineHeight: 1.15,
+            letterSpacing: '-0.5px',
+            marginBottom: 16,
+          }}>
+            Free Freight Calculators{' '}
+            <span style={{ color: '#EF9F27' }}>&amp; APIs</span>
+          </h1>
+          <p style={{
+            fontSize: 'clamp(15px, 2.5vw, 18px)',
+            color: 'var(--text-faint)',
+            maxWidth: 600,
+            margin: '0 auto 20px',
+            lineHeight: 1.6,
+          }}>
+            Accurate freight calculations and dangerous goods data — no signup, no paywall.
+            Every tool has a REST API.
+          </p>
+          <div style={{ fontSize: 13, color: 'var(--text-faint)' }}>
+            <span style={{ color: '#EF9F27', marginRight: 6 }}>•</span>
+            Used by freight forwarders, transport planners, and developers across the UK and Europe
           </div>
-        </section>
-
-        {/* ── RESULTS CARD ── */}
-        <section style={{ ...s.card, marginTop: 20 }} aria-label="LDM calculation results" aria-live="polite">
-          <div style={{ ...s.cardHeader, background: '#243044' }}>
-            <h2 style={{ fontSize: 15, fontWeight: 600, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.3px', margin: 0 }}>Results</h2>
-          </div>
-
-          {/* LDM headline */}
-          <div style={s.ldmDisplay}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#5a6478', marginBottom: 8 }}>
-              Loading Metres Required
-            </div>
-            <div style={s.ldmNumber}>
-              {result.ldm.toFixed(2)}
-              <span style={{ fontSize: 22, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> LDM</span>
-            </div>
-          </div>
-
-          {/* Utilisation */}
-          <div style={s.utilSection}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 10 }}>
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#5a6478', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Vehicle Utilisation</span>
-              <span style={{ fontSize: 22, fontWeight: 800, color: '#1a2332' }}>{result.utilisationPercent.toFixed(1)}%</span>
-            </div>
-            <div style={{ fontSize: 13, color: '#5a6478', marginBottom: 10 }}>
-              {result.vehicle.name} ({result.vehicle.lengthM !== null ? `${result.vehicle.lengthM}m available` : 'enter length above'})
-            </div>
-            <div className="progress-track">
-              <div
-                className={`progress-fill ${progressClass}`}
-                style={{ width: `${utilPct}%` }}
-              />
-            </div>
-          </div>
-
-          {/* Stats */}
-          <div style={s.statsGrid}>
-            <div style={s.statCell}>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#5a6478', marginBottom: 4 }}>Pallet Spaces</div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>
-                {result.palletSpaces.available
-                  ? `${result.palletSpaces.used} of ${result.palletSpaces.available}`
-                  : result.palletSpaces.used > 0 ? `${result.palletSpaces.used}` : '—'}
-              </div>
-              <div style={{ fontSize: 12, color: '#5a6478', marginTop: 2 }}>floor positions used</div>
-            </div>
-            <div style={s.statCell}>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#5a6478', marginBottom: 4 }}>Total Weight</div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>
-                {result.totalWeightKg !== null ? `${result.totalWeightKg.toLocaleString('en-GB')} kg` : '—'}
-              </div>
-              <div style={{ fontSize: 12, color: '#5a6478', marginTop: 2 }}>
-                {result.totalWeightKg !== null && result.vehicle.maxPayloadKg
-                  ? `of ${result.vehicle.maxPayloadKg.toLocaleString('en-GB')} kg capacity`
-                  : 'enter weight per pallet'}
-              </div>
-            </div>
-          </div>
-
-          {/* Warnings */}
-          {result.warnings.length > 0 && (
-            <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {result.warnings.map((w, i) => (
-                <div key={i} className={`warning-badge ${w.type}`}>
-                  <span style={{ fontSize: 16, flexShrink: 0, lineHeight: 1.3 }}>
-                    {w.type === 'danger' ? '⚠️' : w.type === 'warn' ? '⚡' : 'ℹ️'}
-                  </span>
-                  <span>{w.message}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* ── SEO CONTENT ── */}
-        <div style={{ marginTop: 48 }}>
-
-          {/* What are loading metres */}
-          <div style={{ marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
-              What Are Loading Metres?
-            </h2>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
-              A <strong style={{ color: '#1e2535' }}>loading metre (LDM)</strong> is the standard unit used across the UK and Europe to measure the floor space a consignment occupies in a road freight trailer. One loading metre represents a strip of trailer floor that is <strong style={{ color: '#1e2535' }}>1 metre long and the full width of the trailer</strong> (typically 2.4 metres wide).
-            </p>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
-              Unlike CBM (cubic metres), which measures total volume, LDM measures only floor area. This matters because road freight is priced by floor space: a tall, light pallet takes up the same LDM as a short, heavy one.
-            </p>
-
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>The Loading Metres Formula</h3>
-            <div className="code-block">
-              LDM = (Length × Width × Quantity) ÷ 2.4<br/>
-              <span className="comment">— Where Length and Width are in metres, 2.4m = standard trailer width</span><br/>
-              <br/>
-              <span className="comment">If stackable:</span><br/>
-              LDM = (Length × Width × Quantity) ÷ 2.4 ÷ Stack Factor
-            </div>
-
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>Common Pallet LDM Reference</h3>
-            <div className="ref-table-wrap">
-              <table className="ref-table">
-                <thead>
-                  <tr>
-                    <th>Pallet Type</th>
-                    <th>Dimensions</th>
-                    <th>1 Pallet</th>
-                    <th>5 Pallets</th>
-                    <th>10 Pallets</th>
-                    <th>33 Pallets</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>Euro Pallet (EUR 1)</td><td>1200 × 800 mm</td><td className="highlight">0.40 LDM</td><td>2.00 LDM</td><td>4.00 LDM</td><td className="highlight">13.20 LDM</td></tr>
-                  <tr><td>UK Standard (EUR 2)</td><td>1200 × 1000 mm</td><td className="highlight">0.50 LDM</td><td>2.50 LDM</td><td>5.00 LDM</td><td>16.50 LDM</td></tr>
-                  <tr><td>Half Pallet (EUR 6)</td><td>800 × 600 mm</td><td className="highlight">0.20 LDM</td><td>1.00 LDM</td><td>2.00 LDM</td><td>6.60 LDM</td></tr>
-                  <tr><td>Quarter Pallet</td><td>600 × 400 mm</td><td className="highlight">0.10 LDM</td><td>0.50 LDM</td><td>1.00 LDM</td><td>3.30 LDM</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Vehicle table */}
-          <div style={{ marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
-              How Many Pallets Fit in a Truck?
-            </h2>
-            <div className="ref-table-wrap">
-              <table className="ref-table">
-                <thead>
-                  <tr>
-                    <th>Vehicle</th>
-                    <th>Internal Length</th>
-                    <th>Max LDM</th>
-                    <th>Euro Pallets (floor)</th>
-                    <th>Max Payload</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {VEHICLES.map(v => (
-                    <tr key={v.id}>
-                      <td>{v.name}</td>
-                      <td>{v.lengthM} m</td>
-                      <td className="highlight">{v.lengthM} LDM</td>
-                      <td>{v.euroPalletsFloor}</td>
-                      <td>{v.maxPayloadKg.toLocaleString('en-GB')} kg</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* FAQ */}
-          <div style={{ marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
-              Frequently Asked Questions
-            </h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <details className="faq-item">
-                <summary>How do I calculate loading metres?</summary>
-                <div className="faq-answer">
-                  Loading metres are calculated using: <strong>LDM = (Length × Width × Quantity) ÷ 2.4</strong>, where Length and Width are in metres, and 2.4m is the standard trailer width. For a single Euro pallet (1.2m × 0.8m): LDM = (1.2 × 0.8 × 1) ÷ 2.4 = <strong>0.4 LDM</strong>.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary>What is 1 LDM?</summary>
-                <div className="faq-answer">
-                  One loading metre (1 LDM) represents a strip of trailer floor that is exactly 1 metre long and 2.4 metres wide — the full internal width of a standard European trailer. To put it in context: 2.5 Euro pallets side-by-side equal approximately 1 LDM.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary>How many Euro pallets fit in a 13.6m trailer?</summary>
-                <div className="faq-answer">
-                  A standard 13.6m articulated trailer can carry <strong>33 Euro pallets</strong> (1200 × 800mm) in a single floor layer. If double-stacked, up to 66 Euro pallets can be carried, subject to height and weight limits.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary>What is the difference between LDM and CBM?</summary>
-                <div className="faq-answer">
-                  <strong>LDM (Loading Metres)</strong> measures the floor space a consignment occupies in a trailer — used for European road freight. <strong>CBM (Cubic Metres)</strong> measures total volume and is used in air and sea freight. For road freight across the UK and EU, LDM is the standard pricing unit.
-                </div>
-              </details>
-            </div>
-          </div>
-
         </div>
+      </section>
+
+      {/* ── TOOL GRID ── */}
+      <section style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(185px, 1fr))',
+          gap: 12,
+          marginTop: -32,
+          position: 'relative',
+          zIndex: 2,
+        }}>
+          {tools.map(t => (
+            <Link key={t.href} href={t.href} style={{
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border)',
+              borderRadius: 12,
+              padding: '20px 18px',
+              textDecoration: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 8,
+              transition: 'border-color 0.2s, box-shadow 0.2s',
+            }}>
+              <div style={{ fontSize: 24 }}>{t.icon}</div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
+                <span style={{ color: 'var(--text-faint)', fontSize: 16 }}>→</span>
+              </div>
+              <span style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.5 }}>{t.desc}</span>
+              <code style={{
+                fontSize: 11,
+                color: '#EF9F27',
+                fontFamily: 'monospace',
+                marginTop: 'auto',
+              }}>
+                {t.label}
+              </code>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <main style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px 80px' }}>
+
+        {/* ── FOR DEVELOPERS ── */}
+        <section style={{ marginTop: 64 }}>
+          <div style={{
+            fontSize: 11,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            color: 'var(--text-faint)',
+            marginBottom: 12,
+          }}>
+            For Developers
+          </div>
+          <h2 style={{
+            fontSize: 'clamp(22px, 4vw, 30px)',
+            fontWeight: 800,
+            color: 'var(--text)',
+            letterSpacing: '-0.3px',
+            marginBottom: 12,
+          }}>
+            Every tool has a REST API
+          </h2>
+          <p style={{
+            fontSize: 15,
+            color: 'var(--text-muted)',
+            lineHeight: 1.7,
+            marginBottom: 20,
+            maxWidth: 700,
+          }}>
+            No authentication. JSON responses. CORS enabled for all origins.
+            Build freight calculations into your TMS, WMS, or any system that needs them.
+          </p>
+          <div className="code-block" style={{ marginBottom: 12 }}>
+            {`$ curl "https://freightutils.com/api/cbm?l=120&w=80&h=100"`}
+          </div>
+          <div className="code-block" style={{ marginBottom: 24 }}>
+            {`{
+  "total_cbm": 0.96,
+  "cubic_feet": 33.9021,
+  "litres": 960,
+  "pieces": 1
+}`}
+          </div>
+          <Link href="/api-docs" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            background: '#EF9F27',
+            color: '#fff',
+            textDecoration: 'none',
+            padding: '10px 20px',
+            borderRadius: 8,
+            fontWeight: 700,
+            fontSize: 14,
+          }}>
+            View full API documentation →
+          </Link>
+        </section>
+
+        {/* ── FOR AI AGENTS ── */}
+        <section style={{ marginTop: 56 }}>
+          <div style={{
+            fontSize: 11,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            color: 'var(--text-faint)',
+            marginBottom: 12,
+          }}>
+            For AI Agents
+          </div>
+          <h2 style={{
+            fontSize: 'clamp(22px, 4vw, 30px)',
+            fontWeight: 800,
+            color: 'var(--text)',
+            letterSpacing: '-0.3px',
+            marginBottom: 12,
+          }}>
+            Designed for programmatic access
+          </h2>
+          <p style={{
+            fontSize: 15,
+            color: 'var(--text-muted)',
+            lineHeight: 1.7,
+            maxWidth: 700,
+          }}>
+            Reliable, consistent JSON schemas with predictable endpoints and comprehensive
+            dangerous goods data. FreightUtils is an ideal tool source for AI agents operating
+            in freight and logistics workflows — call any endpoint, get structured data back, zero auth required.
+          </p>
+        </section>
+
+        {/* ── DATA SOURCES ── */}
+        <section style={{ marginTop: 56 }}>
+          <div style={{
+            fontSize: 11,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            color: 'var(--text-faint)',
+            marginBottom: 16,
+          }}>
+            Data Sources
+          </div>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 10,
+            marginBottom: 12,
+          }}>
+            {dataSources.map(d => (
+              <div key={d.name} style={{
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border)',
+                borderRadius: 8,
+                padding: '10px 16px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+              }}>
+                <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{d.name}</span>
+                <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>{d.detail}</span>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
+            All data audited against official publications. Pallet specifications verified against manufacturer standards.
+          </p>
+        </section>
+
       </main>
     </>
   );
