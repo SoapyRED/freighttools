@@ -29,6 +29,7 @@ export default function AdUnit({ slot, format = 'auto' }: AdUnitProps) {
   return (
     <aside
       aria-label="Advertisement"
+      suppressHydrationWarning
       style={{
         marginTop: 40,
         marginBottom: 16,
@@ -56,6 +57,7 @@ export default function AdUnit({ slot, format = 'auto' }: AdUnitProps) {
         {...(slot ? { 'data-ad-slot': slot } : {})}
         data-ad-format={format === 'auto' ? 'auto' : format === 'horizontal' ? 'horizontal' : 'vertical'}
         data-full-width-responsive="true"
+        suppressHydrationWarning
       />
     </aside>
   );
