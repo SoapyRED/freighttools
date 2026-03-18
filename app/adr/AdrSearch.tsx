@@ -33,7 +33,7 @@ interface Props {
   index: AdrEntrySlim[];
 }
 
-const MAX_SHOWN = 50;
+const MAX_SHOWN = 60;
 
 export default function AdrSearch({ index }: Props) {
   const [query, setQuery] = useState('');
@@ -49,7 +49,7 @@ export default function AdrSearch({ index }: Props) {
         entry.proper_shipping_name.toLowerCase().includes(q)
       ) {
         matched.push(entry);
-        if (matched.length >= MAX_SHOWN + 1) break; // fetch one extra to detect overflow
+        if (matched.length >= MAX_SHOWN + 1) break;
       }
     }
     return matched;
@@ -103,7 +103,7 @@ export default function AdrSearch({ index }: Props) {
       {/* Empty state */}
       {query.trim().length < 2 && (
         <p style={{ color: '#8f9ab0', fontSize: 14, textAlign: 'center', padding: '24px 0' }}>
-          Type at least 2 characters to search 2,336 ADR 2025 dangerous goods entries
+          Type at least 2 characters to search 2,939 ADR 2025 dangerous goods entries
         </p>
       )}
 
@@ -127,9 +127,12 @@ export default function AdrSearch({ index }: Props) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {shown.map(entry => {
             const cs = getClassStyle(entry.class);
+            const variantLabel = entry.variant_count > 1
+              ? ` (variant ${entry.variant_index + 1} of ${entry.variant_count})`
+              : '';
             return (
               <Link
-                key={entry.un_number}
+                key={`${entry.un_number}_${entry.variant_index}`}
                 href={`/adr/un/${entry.un_number}`}
                 style={{ textDecoration: 'none' }}
               >
@@ -180,11 +183,15 @@ export default function AdrSearch({ index }: Props) {
                     }}>
                       {entry.proper_shipping_name}
                     </div>
-                    {entry.packing_group && (
-                      <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>
-                        Packing Group {entry.packing_group}
-                      </div>
-                    )}
+                    <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>
+                      {entry.packing_group ? `PG ${entry.packing_group}` : ''}
+                      {entry.packing_group && variantLabel ? ' · ' : ''}
+                      {variantLabel && (
+                        <span style={{ color: '#e87722', fontWeight: 600 }}>
+                          {variantLabel.trim()}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {/* Class badge */}

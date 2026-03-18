@@ -27,7 +27,7 @@ const tools = [
     href: '/adr',
     label: '/api/adr',
     title: 'ADR Lookup',
-    desc: '2,336 dangerous goods entries from ADR 2025',
+    desc: '2,939 dangerous goods entries from ADR 2025',
     icon: '⚠️',
   },
   {

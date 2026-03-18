@@ -80,12 +80,12 @@ export default function RootLayout({
               <div style={{
                 width: 32, height: 32, background: '#EF9F27', borderRadius: 6,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontWeight: 800, fontSize: 14, color: '#fff',
+                fontFamily: 'monospace', fontWeight: 800, fontSize: 20, color: '#412402',
               }}>
-                FU
+                /
               </div>
               <span style={{ fontWeight: 700, fontSize: 15 }}>
-                Freight<span style={{ color: '#EF9F27' }}>Utils</span>
+                <span style={{ color: '#9CA3AF' }}>Freight</span><span style={{ color: '#EF9F27' }}>Utils</span>
                 <span style={{ color: 'var(--text-faint)', fontWeight: 400 }}>.com</span>
               </span>
             </Link>
@@ -130,7 +130,7 @@ export default function RootLayout({
             }}>
               <div>
                 <div style={{ fontWeight: 700, fontSize: 17, color: '#fff', marginBottom: 6 }}>
-                  Freight<span style={{ color: '#EF9F27' }}>Utils</span>
+                  <span style={{ color: '#9CA3AF' }}>Freight</span><span style={{ color: '#EF9F27' }}>Utils</span>
                   <span style={{ color: 'var(--text-faint)', fontWeight: 400 }}>.com</span>
                 </div>
                 <div style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>

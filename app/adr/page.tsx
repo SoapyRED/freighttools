@@ -37,9 +37,9 @@ export default function AdrPage() {
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
-          Data based on ADR 2023/2025. For operational use, always verify against the current official ADR publication at{' '}
+          Data sourced from the official UNECE ADR 2025 publication (ECE/TRANS/352). For operational use, always verify against the{' '}
           <a href="https://unece.org/transport/dangerous-goods/adr-2025" target="_blank" rel="noopener noreferrer" style={{ color: '#8f9ab0', textDecoration: 'underline' }}>
-            unece.org
+            current ADR in force
           </a>.
         </p>
 

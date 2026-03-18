@@ -16,7 +16,6 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
-// ADR data changes yearly — long cache is appropriate
 const CACHE_HEADERS = {
   'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
 };
@@ -30,13 +29,23 @@ export function OPTIONS() {
 }
 
 // ─────────────────────────────────────────────────────────────────
+//  Strip internal metadata from response entries
+// ─────────────────────────────────────────────────────────────────
+
+function stripMeta(entry: Record<string, unknown>) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { _source, _edition, variant_id, ...rest } = entry as Record<string, unknown>;
+  return rest;
+}
+
+// ─────────────────────────────────────────────────────────────────
 //  GET /api/adr
 // ─────────────────────────────────────────────────────────────────
 
 export function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const unParam     = searchParams.get('un');
-  const searchParam = searchParams.get('search');
+  const searchParam = searchParams.get('search') || searchParams.get('q');
   const classParam  = searchParams.get('class');
 
   const headers = { ...CORS_HEADERS, ...CACHE_HEADERS };
@@ -57,11 +66,10 @@ export function GET(req: NextRequest) {
     );
   }
 
-  // ── ?un= — exact lookup ──
+  // ── ?un= — exact lookup (returns all variants) ──
   if (unParam) {
     const normalised = normaliseUnNumber(unParam);
 
-    // Validate: must be 4 digits after normalisation
     if (!/^\d{4}$/.test(normalised)) {
       return NextResponse.json(
         { error: `Invalid UN number "${unParam}". Must be a 1–4 digit number, e.g. 1203.` },
@@ -69,9 +77,9 @@ export function GET(req: NextRequest) {
       );
     }
 
-    const entry = lookupByUnNumber(normalised);
+    const entries = lookupByUnNumber(normalised);
 
-    if (!entry) {
+    if (entries.length === 0) {
       return NextResponse.json(
         {
           error: `UN number ${normalised} not found in ADR 2025 dataset.`,
@@ -81,13 +89,15 @@ export function GET(req: NextRequest) {
       );
     }
 
+    const results = entries.map(e => stripMeta(e as unknown as Record<string, unknown>));
+
     return NextResponse.json(
-      { count: 1, results: [entry] },
-      { status: 200, headers: { ...headers, 'X-Total-Count': '1' } }
+      { count: results.length, results },
+      { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } }
     );
   }
 
-  // ── ?search= — name search ──
+  // ── ?search= or ?q= — name search ──
   if (searchParam) {
     const q = searchParam.trim();
 
@@ -98,7 +108,7 @@ export function GET(req: NextRequest) {
       );
     }
 
-    const results = searchByName(q, 20);
+    const results = searchByName(q, 50).map(e => stripMeta(e as unknown as Record<string, unknown>));
 
     if (results.length === 0) {
       return NextResponse.json(
@@ -124,7 +134,7 @@ export function GET(req: NextRequest) {
       );
     }
 
-    const results = filterByClass(cls, 50);
+    const results = filterByClass(cls, 100).map(e => stripMeta(e as unknown as Record<string, unknown>));
 
     if (results.length === 0) {
       return NextResponse.json(
