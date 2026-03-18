@@ -4,10 +4,16 @@ import { getSlimIndex, ENTRY_COUNT } from '@/lib/calculations/adr';
 import AdrSearch from './AdrSearch';
 import AdUnit from '@/app/components/AdUnit';
 
+const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+numbers+from+ADR+2025&api=GET+/api/adr';
+
 export const metadata: Metadata = {
   title: 'ADR Dangerous Goods Lookup | FreightUtils',
   description: `Search ${ENTRY_COUNT.toLocaleString()} ADR 2025 dangerous goods entries by UN number or substance name. Free lookup tool for UK and European road freight.`,
   alternates: { canonical: 'https://freightutils.com/adr' },
+  openGraph: {
+    images: [{ url: ogUrl, width: 1200, height: 630, alt: 'ADR Dangerous Goods Lookup — FreightUtils' }],
+  },
+  twitter: { card: 'summary_large_image', images: [ogUrl] },
 };
 
 export default function AdrPage() {

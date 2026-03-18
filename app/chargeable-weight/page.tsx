@@ -3,10 +3,16 @@ import Link from 'next/link';
 import ChargeableWeightCalc from './ChargeableWeightCalc';
 import airlinesData from '@/lib/data/airlines.json';
 
+const ogUrl = '/api/og?title=Chargeable+Weight+Calculator&desc=Air+freight+volumetric+vs+actual+weight&api=GET+/api/chargeable-weight';
+
 export const metadata: Metadata = {
   title: 'Air Freight Chargeable Weight Calculator | FreightUtils',
   description: 'Calculate air freight chargeable weight instantly. Volumetric vs actual weight — free tool for IATA and express carriers. Supports all volumetric factors.',
   alternates: { canonical: 'https://freightutils.com/chargeable-weight' },
+  openGraph: {
+    images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Chargeable Weight Calculator — FreightUtils' }],
+  },
+  twitter: { card: 'summary_large_image', images: [ogUrl] },
 };
 
 // Split airlines by factor for the SEO link section

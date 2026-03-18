@@ -1,11 +1,17 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+const ogUrl = '/api/og?title=About+FreightUtils&desc=Free+freight+calculators+and+open+APIs+for+the+logistics+industry';
+
 export const metadata: Metadata = {
   title: 'About FreightUtils — Free Freight Tools & API Platform',
   description:
     'FreightUtils provides free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. ADR dangerous goods lookup, LDM, CBM, chargeable weight, and pallet fitting tools.',
   alternates: { canonical: 'https://freightutils.com/about' },
+  openGraph: {
+    images: [{ url: ogUrl, width: 1200, height: 630, alt: 'About FreightUtils' }],
+  },
+  twitter: { card: 'summary_large_image', images: [ogUrl] },
 };
 
 function Section({

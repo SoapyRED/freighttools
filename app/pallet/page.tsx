@@ -4,10 +4,16 @@ import PalletFittingCalc from './PalletFittingCalc';
 import palletsData from '@/lib/data/pallets.json';
 import AdUnit from '@/app/components/AdUnit';
 
+const ogUrl = '/api/og?title=Pallet+Fitting+Calculator&desc=How+many+boxes+fit+on+a+pallet%3F+Visual+layer+diagram.&api=GET+/api/pallet';
+
 export const metadata: Metadata = {
   title: 'Pallet Fitting Calculator — How Many Boxes Fit on a Pallet?',
   description: 'Calculate how many boxes or cartons fit on any pallet. Visual top-down layer diagram. Supports 15 standard pallet types. Free tool for warehouse and logistics professionals.',
   alternates: { canonical: 'https://freightutils.com/pallet' },
+  openGraph: {
+    images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Pallet Fitting Calculator — FreightUtils' }],
+  },
+  twitter: { card: 'summary_large_image', images: [ogUrl] },
 };
 
 export default function PalletPage() {

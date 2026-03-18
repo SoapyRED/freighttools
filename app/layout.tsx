@@ -12,6 +12,15 @@ export const metadata: Metadata = {
   description:
     'Free freight calculators with open REST APIs. Loading metres, CBM, chargeable weight, pallet fitting, and ADR dangerous goods lookup. No signup required.',
   robots: 'index, follow',
+  openGraph: {
+    type: 'website',
+    siteName: 'FreightUtils',
+    images: [{ url: '/api/og', width: 1200, height: 630, alt: 'FreightUtils — Free Freight Calculators & APIs' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/api/og'],
+  },
 };
 
 const navLinks = [

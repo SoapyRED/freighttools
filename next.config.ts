@@ -13,6 +13,18 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  // TODO: freighttools.co.uk → freightutils.com 301 redirect
+  // Handled at DNS level (Cloudflare) — not via Next.js redirects.
+  // If domain is connected to Vercel in future, add:
+  // async redirects() {
+  //   return [
+  //     { source: '/:path*', has: [{ type: 'host', value: 'freighttools.co.uk' }],
+  //       destination: 'https://freightutils.com/:path*', permanent: true },
+  //     { source: '/:path*', has: [{ type: 'host', value: 'www.freighttools.co.uk' }],
+  //       destination: 'https://freightutils.com/:path*', permanent: true },
+  //   ];
+  // },
 };
 
 export default nextConfig;
