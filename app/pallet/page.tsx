@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PalletFittingCalc from './PalletFittingCalc';
 import palletsData from '@/lib/data/pallets.json';
+import AdUnit from '@/app/components/AdUnit';
 
 export const metadata: Metadata = {
   title: 'Pallet Fitting Calculator — How Many Boxes Fit on a Pallet?',
@@ -98,6 +99,9 @@ export default function PalletPage() {
             </Link>
           ))}
         </div>
+
+        {/* Ad unit */}
+        <AdUnit format="auto" />
 
       </main>
     </>

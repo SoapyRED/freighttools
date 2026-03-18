@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { calculateCbm } from '@/lib/calculations/cbm';
+import AdUnit from '@/app/components/AdUnit';
 
 // ─── shared micro-styles ──────────────────────────────────────────
 const inputStyle: React.CSSProperties = {
@@ -260,6 +261,10 @@ export default function CbmCalc({
           View API Docs →
         </Link>
       </div>
+
+      {/* Ad unit */}
+      <AdUnit format="auto" />
+
     </div>
   );
 }

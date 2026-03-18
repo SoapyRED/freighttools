@@ -6,6 +6,7 @@ import {
   getAllUnNumbers,
   type AdrEntry,
 } from '@/lib/calculations/adr';
+import AdUnit from '@/app/components/AdUnit';
 
 // ─────────────────────────────────────────────────────────────────
 //  Static generation — one page per unique UN number
@@ -490,6 +491,9 @@ export default async function UnNumberPage(
             View API Docs →
           </Link>
         </div>
+
+        {/* Ad unit */}
+        <AdUnit format="auto" />
 
         {/* Prev / Next navigation */}
         <div style={{

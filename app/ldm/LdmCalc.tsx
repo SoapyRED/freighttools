@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { PALLET_PRESETS, PALLET_PRESET_MAP } from '@/lib/data/pallets';
 import { VEHICLES } from '@/lib/data/vehicles';
+import AdUnit from '@/app/components/AdUnit';
 import { calculateLdm, type LdmResult } from '@/lib/calculations/ldm';
 
 const defaultResult: LdmResult = {
@@ -407,6 +408,10 @@ export default function LdmCalc() {
           </div>
 
         </div>
+
+        {/* Ad unit */}
+        <AdUnit format="auto" />
+
       </main>
     </>
   );

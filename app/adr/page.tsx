@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getSlimIndex, ENTRY_COUNT } from '@/lib/calculations/adr';
 import AdrSearch from './AdrSearch';
+import AdUnit from '@/app/components/AdUnit';
 
 export const metadata: Metadata = {
   title: 'ADR Dangerous Goods Lookup | FreightUtils',
@@ -42,6 +43,9 @@ export default function AdrPage() {
             current ADR in force
           </a>.
         </p>
+
+        {/* Ad unit */}
+        <AdUnit format="auto" />
 
         {/* API callout */}
         <div style={{

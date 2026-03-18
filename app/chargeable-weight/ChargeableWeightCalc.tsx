@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { calculateChargeableWeight, VOLUMETRIC_FACTORS } from '@/lib/calculations/chargeable-weight';
+import AdUnit from '@/app/components/AdUnit';
 
 // ─────────────────────────────────────────────────────────────────
 //  Helpers
@@ -312,6 +313,10 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
           View API Docs →
         </Link>
       </div>
+
+      {/* Ad unit */}
+      <AdUnit format="auto" />
+
     </div>
   );
 }
