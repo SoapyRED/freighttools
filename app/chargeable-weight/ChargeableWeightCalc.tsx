@@ -314,6 +314,165 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
         </Link>
       </div>
 
+      {/* ── AUTHORITY CONTENT ── */}
+      <div style={{ marginTop: 56 }}>
+
+        {/* What Is Chargeable Weight? */}
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          What Is Chargeable Weight?
+        </h2>
+        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          Chargeable weight is the figure airlines use to price your air freight shipment. It is always the greater of two values: the <strong>actual gross weight</strong> (what the shipment weighs on a scale) or the <strong>volumetric weight</strong> (a calculated figure based on the shipment&apos;s dimensions). This principle — known in the industry as &ldquo;weight or measure&rdquo; — ensures carriers are compensated fairly for both the mass and the space a shipment occupies in the aircraft.
+        </p>
+        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          A heavy, compact shipment (like machine parts) will typically be charged on actual weight. A light, bulky shipment (like clothing or plastic goods) will be charged on volumetric weight — often significantly more than the actual weight.
+        </p>
+
+        {/* The Volumetric Weight Formula */}
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          The Volumetric Weight Formula
+        </h2>
+        <div style={{ background: '#f7f8fa', border: '1px solid #d8dce6', borderRadius: 10, padding: '20px 24px', marginBottom: 16 }}>
+          <div style={{ marginBottom: 16 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 6 }}>Metric (cm/kg) — IATA standard</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#1a2332' }}>Volumetric Weight (kg) = (L × W × H in cm) ÷ 6,000</div>
+          </div>
+          <div style={{ marginBottom: 16 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 6 }}>Imperial (in/lb)</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#1a2332' }}>Volumetric Weight (lb) = (L × W × H in inches) ÷ 166</div>
+          </div>
+          <div>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 6 }}>From CBM</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#1a2332' }}>Volumetric Weight (kg) = Total CBM × 167</div>
+          </div>
+        </div>
+        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          The divisor of 6,000 is the IATA standard used by most international air freight carriers. It assumes a density ratio where 1 cubic metre of cargo should weigh at least approximately 167 kg.
+        </p>
+
+        {/* Divisor Variations */}
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          Divisor Variations by Carrier Type
+        </h2>
+        <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 16 }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+            <thead>
+              <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Carrier Type</th>
+                <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Typical Divisor</th>
+                <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Effect</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['International air freight (IATA standard)', '6,000', 'Standard — used by most airlines'],
+                ['Express couriers (DHL, FedEx, UPS)', '5,000', 'Results in higher volumetric weight'],
+                ['Some regional/budget carriers', '4,000', 'Results in even higher volumetric weight'],
+                ['Sea freight (LCL)', 'Different model', 'Uses 1 CBM = 1,000 kg (W/M rule)'],
+              ].map(([carrier, divisor, effect]) => (
+                <tr key={carrier} style={{ borderBottom: '1px solid #eef0f4' }}>
+                  <td style={{ padding: '11px 16px', fontWeight: 600, color: '#1e2535' }}>{carrier}</td>
+                  <td style={{ padding: '11px 16px', color: '#5a6478', fontFamily: 'monospace', fontWeight: 600 }}>{divisor}</td>
+                  <td style={{ padding: '11px 16px', color: '#5a6478', lineHeight: 1.5 }}>{effect}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p style={{ color: '#8f9ab0', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
+          Always confirm the divisor with your carrier before quoting. A shipment quoted at divisor 6,000 will have a different chargeable weight than the same shipment at 5,000. The difference can be significant on bulky cargo.
+        </p>
+
+        {/* Worked Examples */}
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          Worked Examples
+        </h2>
+
+        {/* Example 1 */}
+        <div style={{ background: '#dcfce7', border: '1px solid #86efac', borderRadius: 10, padding: '20px 24px', marginBottom: 16 }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 10 }}>
+            Example 1 — Actual weight wins
+          </div>
+          <p style={{ fontSize: 14, color: '#166534', lineHeight: 1.6, marginBottom: 10 }}>
+            A shipment of automotive parts: 5 boxes, each 50 × 40 × 40 cm, weighing 30 kg each.
+          </p>
+          <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#166534', lineHeight: 1.8 }}>
+            Actual weight: 150 kg<br />
+            Volumetric weight: (50 × 40 × 40) × 5 ÷ 6,000 = <strong>67 kg</strong><br />
+            Chargeable weight: <strong>150 kg</strong> (actual wins)
+          </div>
+        </div>
+
+        {/* Example 2 */}
+        <div style={{ background: '#fee2e2', border: '1px solid #fca5a5', borderRadius: 10, padding: '20px 24px', marginBottom: 16 }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#991b1b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 10 }}>
+            Example 2 — Volumetric weight wins
+          </div>
+          <p style={{ fontSize: 14, color: '#991b1b', lineHeight: 1.6, marginBottom: 10 }}>
+            A shipment of textile goods: 3 boxes, each 80 × 60 × 60 cm, weighing 10 kg each.
+          </p>
+          <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#991b1b', lineHeight: 1.8 }}>
+            Actual weight: 30 kg<br />
+            Volumetric weight: (80 × 60 × 60) × 3 ÷ 6,000 = <strong>144 kg</strong><br />
+            Chargeable weight: <strong>144 kg</strong> (volumetric wins — nearly 5× the actual weight)
+          </div>
+        </div>
+
+        {/* How to Reduce Chargeable Weight */}
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          How to Reduce Chargeable Weight
+        </h2>
+        <ul style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.8, paddingLeft: 20, marginBottom: 14 }}>
+          <li><strong>Use right-sized packaging</strong> — every centimetre of empty space increases volumetric weight at your expense</li>
+          <li>Avoid oversized boxes for small items</li>
+          <li>Consider flat-packing or vacuum compression for textiles and soft goods</li>
+          <li>For multi-piece shipments, measure each piece separately — the sum of individual volumetric weights may be less than measuring the shipment as one block</li>
+          <li>Compare carriers: a carrier using divisor 6,000 will be cheaper for bulky goods than one using 5,000</li>
+        </ul>
+
+        {/* FAQ */}
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          Frequently Asked Questions
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
+          <details className="faq-item">
+            <summary>What divisor do most airlines use?</summary>
+            <div className="faq-answer">
+              The IATA standard divisor is <strong>6,000</strong> (cm/kg). Most international air freight carriers follow this. Express couriers like DHL, FedEx, and UPS typically use <strong>5,000</strong>, which results in a higher volumetric weight for the same dimensions.
+            </div>
+          </details>
+          <details className="faq-item">
+            <summary>Can I negotiate the volumetric divisor?</summary>
+            <div className="faq-answer">
+              Large-volume shippers can sometimes negotiate custom divisors with carriers based on their cargo profile. If you consistently ship high-density goods, a higher divisor (or waived volumetric charges) may be negotiable.
+            </div>
+          </details>
+          <details className="faq-item">
+            <summary>What is the &ldquo;pivot weight&rdquo; or density break-even?</summary>
+            <div className="faq-answer">
+              The break-even density for the IATA 6,000 divisor is approximately <strong>167 kg per cubic metre</strong>. If your cargo density exceeds this, you&apos;ll be charged on actual weight. Below it, volumetric weight applies. Knowing your typical cargo density helps predict which weight will apply.
+            </div>
+          </details>
+          <details className="faq-item">
+            <summary>How does chargeable weight differ for sea freight?</summary>
+            <div className="faq-answer">
+              Sea freight (LCL) uses the <strong>&ldquo;W/M&rdquo; rule</strong>: 1 CBM = 1,000 kg. The carrier charges whichever is greater — the volume in CBM or the weight in tonnes. This is a much more generous ratio than air freight, which is why bulky goods are typically shipped by sea.
+            </div>
+          </details>
+          <details className="faq-item">
+            <summary>Does chargeable weight include pallet weight?</summary>
+            <div className="faq-answer">
+              Yes. Actual gross weight includes all packaging, pallets, crates, and wrapping. Airlines weigh the complete shipment as tendered. For dimensions, measure the outermost points including any protrusions, handles, or irregular shapes.
+            </div>
+          </details>
+        </div>
+
+        {/* Attribution */}
+        <p style={{ fontSize: 12, color: '#8f9ab0', lineHeight: 1.6 }}>
+          Formulas and divisors based on IATA Cargo Tariff standards. Carrier-specific divisors may vary — always confirm with your carrier.
+        </p>
+      </div>
+
       {/* Ad unit */}
       <AdUnit format="auto" />
 
