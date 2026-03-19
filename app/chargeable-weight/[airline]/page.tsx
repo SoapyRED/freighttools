@@ -27,7 +27,7 @@ export async function generateMetadata(
     title: `${data.name} Chargeable Weight Calculator | FreightUtils`,
     description: `Calculate air freight chargeable weight for ${data.name} (${data.iata}). Volumetric factor: ${data.factor.toLocaleString()}. Free calculator at FreightUtils.`,
     alternates: {
-      canonical: `https://freightutils.com/chargeable-weight/${data.slug}`,
+      canonical: `https://www.freightutils.com/chargeable-weight/${data.slug}`,
     },
   };
 }
@@ -51,11 +51,11 @@ export default async function AirlinePage(
     '@type': 'WebApplication',
     name: `${data.name} Chargeable Weight Calculator`,
     description: `Calculate air freight chargeable weight for ${data.name} (${data.iata}). Uses volumetric factor ${data.factor}.`,
-    url: `https://freightutils.com/chargeable-weight/${data.slug}`,
+    url: `https://www.freightutils.com/chargeable-weight/${data.slug}`,
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
-    publisher: { '@type': 'Organization', name: 'FreightUtils', url: 'https://freightutils.com' },
+    publisher: { '@type': 'Organization', name: 'FreightUtils', url: 'https://www.freightutils.com' },
   };
 
   return (

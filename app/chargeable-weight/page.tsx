@@ -8,7 +8,7 @@ const ogUrl = '/api/og?title=Chargeable+Weight+Calculator&desc=Air+freight+volum
 export const metadata: Metadata = {
   title: 'Air Freight Chargeable Weight Calculator | FreightUtils',
   description: 'Free air freight chargeable weight calculator. Compare actual vs volumetric weight using IATA standard divisor 6,000. Includes carrier divisor variations, worked examples, and tips to reduce chargeable weight.',
-  alternates: { canonical: 'https://freightutils.com/chargeable-weight' },
+  alternates: { canonical: 'https://www.freightutils.com/chargeable-weight' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Chargeable Weight Calculator — FreightUtils' }],
   },

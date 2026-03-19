@@ -4,7 +4,7 @@ import Link from 'next/link';
 import ThemeToggle from './components/ThemeToggle';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://freightutils.com'),
+  metadataBase: new URL('https://www.freightutils.com'),
   title: {
     default: 'FreightUtils — Free Freight Calculators & APIs',
     template: '%s | FreightUtils.com',

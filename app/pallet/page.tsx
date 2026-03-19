@@ -9,7 +9,7 @@ const ogUrl = '/api/og?title=Pallet+Fitting+Calculator&desc=How+many+boxes+fit+o
 export const metadata: Metadata = {
   title: 'Pallet Fitting Calculator — How Many Boxes Fit on a Pallet?',
   description: 'Calculate how many boxes or cartons fit on any pallet. Visual top-down layer diagram. Supports 15 standard pallet types. Free tool for warehouse and logistics professionals.',
-  alternates: { canonical: 'https://freightutils.com/pallet' },
+  alternates: { canonical: 'https://www.freightutils.com/pallet' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Pallet Fitting Calculator — FreightUtils' }],
   },

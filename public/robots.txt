@@ -6,4 +6,4 @@ Allow: /api/cbm
 Allow: /api/chargeable-weight
 Allow: /api/pallet
 
-Sitemap: https://freightutils.com/sitemap.xml
+Sitemap: https://www.freightutils.com/sitemap.xml

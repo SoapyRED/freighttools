@@ -8,7 +8,7 @@ const ogUrl = '/api/og?title=CBM+Calculator&desc=Cubic+metres+for+sea+and+air+fr
 export const metadata: Metadata = {
   title: 'CBM Calculator — Cubic Metres Volume Calculator | FreightUtils',
   description: 'Calculate CBM (cubic metres) for freight shipments instantly. Convert to cubic feet, litres, and cubic inches. Free tool for sea and air freight.',
-  alternates: { canonical: 'https://freightutils.com/cbm' },
+  alternates: { canonical: 'https://www.freightutils.com/cbm' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'CBM Calculator — FreightUtils' }],
   },

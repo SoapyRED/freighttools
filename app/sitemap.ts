@@ -4,7 +4,7 @@ import airlinesData from '@/lib/data/airlines.json';
 import containersData from '@/lib/data/containers.json';
 import palletsData from '@/lib/data/pallets.json';
 
-const BASE = 'https://freightutils.com';
+const BASE = 'https://www.freightutils.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const unNumbers = getAllUnNumbers();

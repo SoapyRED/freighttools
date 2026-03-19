@@ -34,7 +34,7 @@ export default function ApiDocsPage() {
             No authentication is required. Responses are JSON. CORS is enabled for all origins.
           </p>
           <div className="code-block">
-            Base URL: https://freightutils.com/api
+            Base URL: https://www.freightutils.com/api
           </div>
         </div>
 
@@ -145,7 +145,7 @@ export default function ApiDocsPage() {
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>cURL example:</p>
             <div className="code-block" style={{ marginBottom: 24 }}>
-              {`curl "https://freightutils.com/api/ldm?pallet=euro&qty=12&vehicle=artic"`}
+              {`curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=12&vehicle=artic"`}
             </div>
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Response</h3>
@@ -242,7 +242,7 @@ export default function ApiDocsPage() {
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>5 boxes, 120×80×100 cm each:</p>
             <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://freightutils.com/api/cbm?l=120&w=80&h=100&pcs=5"`}
+              {`curl "https://www.freightutils.com/api/cbm?l=120&w=80&h=100&pcs=5"`}
             </div>
             <div className="code-block">
               {`{
@@ -321,7 +321,7 @@ export default function ApiDocsPage() {
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Exact UN number lookup:</p>
             <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://freightutils.com/api/adr?un=1203"`}
+              {`curl "https://www.freightutils.com/api/adr?un=1203"`}
             </div>
             <div className="code-block" style={{ marginBottom: 20 }}>
               {`{
@@ -348,7 +348,7 @@ export default function ApiDocsPage() {
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Search by substance name:</p>
             <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://freightutils.com/api/adr?search=acetone"`}
+              {`curl "https://www.freightutils.com/api/adr?search=acetone"`}
             </div>
             <div className="code-block" style={{ marginBottom: 20 }}>
               {`{ "count": 3, "results": [ ... ] }`}
@@ -356,7 +356,7 @@ export default function ApiDocsPage() {
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Filter by hazard class:</p>
             <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://freightutils.com/api/adr?class=3"`}
+              {`curl "https://www.freightutils.com/api/adr?class=3"`}
             </div>
             <div className="code-block">
               {`{ "count": 50, "results": [ ... ] }`}
@@ -439,7 +439,7 @@ export default function ApiDocsPage() {
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>2 pieces, 120×80×100 cm, 500 kg total, IATA factor:</p>
             <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://freightutils.com/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000"`}
+              {`curl "https://www.freightutils.com/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000"`}
             </div>
             <div className="code-block">
               {`{
@@ -570,7 +570,7 @@ export default function ApiDocsPage() {
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
             <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://freightutils.com/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25&bwt=5&mpw=1500"`}
+              {`curl "https://www.freightutils.com/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25&bwt=5&mpw=1500"`}
             </div>
             <div className="code-block">
               {`{

@@ -26,7 +26,7 @@ export async function generateMetadata(
   return {
     title: `${p.name} Fitting Calculator — How Many Boxes Fit? | FreightUtils`,
     description: `Calculate how many boxes fit on a ${p.name}. Dimensions: ${p.lengthCm}×${p.widthCm} cm, max height ${p.maxHeightCm} cm, max weight ${p.maxWeightKg} kg. Free tool with SVG layer diagram.`,
-    alternates: { canonical: `https://freightutils.com/pallet/${p.slug}` },
+    alternates: { canonical: `https://www.freightutils.com/pallet/${p.slug}` },
   };
 }
 
@@ -49,11 +49,11 @@ export default async function PalletTypePage(
     '@type': 'WebApplication',
     name: `${p.name} Pallet Fitting Calculator`,
     description: `Calculate how many boxes fit on a ${p.name}. Dimensions: ${p.lengthCm}×${p.widthCm} cm, max height ${p.maxHeightCm} cm.`,
-    url: `https://freightutils.com/pallet/${p.slug}`,
+    url: `https://www.freightutils.com/pallet/${p.slug}`,
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
-    publisher: { '@type': 'Organization', name: 'FreightUtils', url: 'https://freightutils.com' },
+    publisher: { '@type': 'Organization', name: 'FreightUtils', url: 'https://www.freightutils.com' },
   };
 
   return (

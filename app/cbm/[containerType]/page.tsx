@@ -26,7 +26,7 @@ export async function generateMetadata(
   return {
     title: `${c.name} CBM Calculator — Volume & Dimensions | FreightUtils`,
     description: `Calculate CBM for ${c.name}. Internal dimensions: ${c.lengthCm}×${c.widthCm}×${c.heightCm} cm. Max capacity: ${c.capacityCbm} CBM. Free calculator at FreightUtils.`,
-    alternates: { canonical: `https://freightutils.com/cbm/${c.slug}` },
+    alternates: { canonical: `https://www.freightutils.com/cbm/${c.slug}` },
   };
 }
 
@@ -58,11 +58,11 @@ export default async function ContainerPage(
     '@type': 'WebApplication',
     name: `${c.name} CBM Calculator`,
     description: `Calculate CBM for ${c.name}. Internal dimensions: ${c.lengthCm}×${c.widthCm}×${c.heightCm} cm. Max capacity: ${c.capacityCbm} m³.`,
-    url: `https://freightutils.com/cbm/${c.slug}`,
+    url: `https://www.freightutils.com/cbm/${c.slug}`,
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
-    publisher: { '@type': 'Organization', name: 'FreightUtils', url: 'https://freightutils.com' },
+    publisher: { '@type': 'Organization', name: 'FreightUtils', url: 'https://www.freightutils.com' },
   };
 
   return (

@@ -40,7 +40,7 @@ export async function generateMetadata(
     title: `UN ${entry.un_number} — ${shortName}${variantNote} | ADR 2025 | FreightUtils`,
     description: `ADR 2025 dangerous goods data for UN ${entry.un_number} ${entry.proper_shipping_name}. Class ${entry.class}${pg}. Free lookup at FreightUtils.`,
     alternates: {
-      canonical: `https://freightutils.com/adr/un/${entry.un_number}`,
+      canonical: `https://www.freightutils.com/adr/un/${entry.un_number}`,
     },
     openGraph: {
       images: [{ url: ogUrl, width: 1200, height: 630, alt: `UN ${entry.un_number} — ${shortName}` }],
@@ -330,7 +330,7 @@ export default async function UnNumberPage(
     '@type': 'Dataset',
     name: `UN ${primary.un_number} — ${primary.proper_shipping_name}`,
     description: `ADR 2025 dangerous goods data for UN ${primary.un_number} ${primary.proper_shipping_name}. Hazard class ${primary.class}, packing group ${primary.packing_group ?? 'N/A'}.${hasVariants ? ` ${entries.length} classification variants.` : ''}`,
-    url: `https://freightutils.com/adr/un/${primary.un_number}`,
+    url: `https://www.freightutils.com/adr/un/${primary.un_number}`,
     keywords: [
       `UN${primary.un_number}`,
       `UN number ${primary.un_number}`,
@@ -343,7 +343,7 @@ export default async function UnNumberPage(
     creator: {
       '@type': 'Organization',
       name: 'FreightUtils',
-      url: 'https://freightutils.com',
+      url: 'https://www.freightutils.com',
     },
     license: 'https://creativecommons.org/licenses/by/4.0/',
   };

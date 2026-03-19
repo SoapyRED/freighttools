@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'FreightUtils — Free Freight Calculators & APIs | LDM, CBM, ADR Lookup',
   description:
     'Free freight calculators with open REST APIs. Loading metres, CBM, chargeable weight, pallet fitting, and ADR dangerous goods lookup. No signup required. Built for transport planners, developers, and AI agents.',
-  alternates: { canonical: 'https://freightutils.com' },
+  alternates: { canonical: 'https://www.freightutils.com' },
 };
 
 const tools = [
@@ -58,11 +58,11 @@ export default function HomePage() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'FreightUtils',
-    url: 'https://freightutils.com',
+    url: 'https://www.freightutils.com',
     description: 'Free freight calculators and dangerous goods data with open REST APIs',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://freightutils.com/adr?q={search_term_string}',
+      target: 'https://www.freightutils.com/adr?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   };
@@ -71,7 +71,7 @@ export default function HomePage() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'FreightUtils',
-    url: 'https://freightutils.com',
+    url: 'https://www.freightutils.com',
     description: 'Free freight calculation tools and APIs for the logistics industry',
     knowsAbout: [
       'freight logistics',
@@ -215,7 +215,7 @@ export default function HomePage() {
             Build freight calculations into your TMS, WMS, or any system that needs them.
           </p>
           <div className="code-block" style={{ marginBottom: 12 }}>
-            {`$ curl "https://freightutils.com/api/cbm?l=120&w=80&h=100"`}
+            {`$ curl "https://www.freightutils.com/api/cbm?l=120&w=80&h=100"`}
           </div>
           <div className="code-block" style={{ marginBottom: 24 }}>
             {`{

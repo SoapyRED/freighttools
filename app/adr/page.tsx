@@ -9,7 +9,7 @@ const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+n
 export const metadata: Metadata = {
   title: 'ADR Dangerous Goods Lookup | FreightUtils',
   description: 'Free ADR 2025 dangerous goods lookup — search 2,939 entries by UN number or substance name. Official UNECE data with class, packing group, labels, tunnel codes, and transport category. Free REST API available.',
-  alternates: { canonical: 'https://freightutils.com/adr' },
+  alternates: { canonical: 'https://www.freightutils.com/adr' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'ADR Dangerous Goods Lookup — FreightUtils' }],
   },

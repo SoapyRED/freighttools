@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'About FreightUtils — Free Freight Tools & API Platform',
   description:
     'FreightUtils provides free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. ADR dangerous goods lookup, LDM, CBM, chargeable weight, and pallet fitting tools.',
-  alternates: { canonical: 'https://freightutils.com/about' },
+  alternates: { canonical: 'https://www.freightutils.com/about' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'About FreightUtils' }],
   },
