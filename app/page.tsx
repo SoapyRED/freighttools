@@ -130,7 +130,7 @@ export default function HomePage() {
             margin: '0 auto 20px',
             lineHeight: 1.6,
           }}>
-            Accurate freight calculations and dangerous goods data — no signup, no paywall.
+            Free freight calculation tools and dangerous goods reference data — not a booking platform. No signup, no paywall.
             Every tool has a REST API.
           </p>
           <div style={{ fontSize: 13, color: 'var(--text-faint)' }}>
