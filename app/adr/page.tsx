@@ -131,8 +131,8 @@ export default function AdrPage() {
                   ['Transport Category', 'Used for calculating the 1.1.3.6 exemption threshold — categories 0–4'],
                 ].map(([field, desc]) => (
                   <tr key={field} style={{ borderBottom: '1px solid #eef0f4' }}>
-                    <td style={{ padding: '11px 16px', fontWeight: 600, color: '#1e2535', whiteSpace: 'nowrap' }}>{field}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', lineHeight: 1.5 }}>{desc}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 600, whiteSpace: 'nowrap' }}>{field}</td>
+                    <td style={{ padding: '11px 16px', lineHeight: 1.5 }}>{desc}</td>
                   </tr>
                 ))}
               </tbody>
@@ -169,9 +169,9 @@ export default function AdrPage() {
                   ['9', 'Miscellaneous dangerous goods', 'Lithium batteries, environmentally hazardous substances, vehicles'],
                 ].map(([cls, desc, examples]) => (
                   <tr key={cls} style={{ borderBottom: '1px solid #eef0f4' }}>
-                    <td style={{ padding: '11px 16px', fontWeight: 700, color: '#1e2535', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>{cls}</td>
-                    <td style={{ padding: '11px 16px', fontWeight: 600, color: '#1e2535' }}>{desc}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', lineHeight: 1.5 }}>{examples}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 700, fontFamily: 'monospace', whiteSpace: 'nowrap' }}>{cls}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 600 }}>{desc}</td>
+                    <td style={{ padding: '11px 16px', lineHeight: 1.5 }}>{examples}</td>
                   </tr>
                 ))}
               </tbody>
@@ -200,8 +200,8 @@ export default function AdrPage() {
                   ['— (dash)', 'No tunnel restriction'],
                 ].map(([code, meaning]) => (
                   <tr key={code} style={{ borderBottom: '1px solid #eef0f4' }}>
-                    <td style={{ padding: '11px 16px', fontWeight: 700, color: '#1e2535', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>{code}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', lineHeight: 1.5 }}>{meaning}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 700, fontFamily: 'monospace', whiteSpace: 'nowrap' }}>{code}</td>
+                    <td style={{ padding: '11px 16px', lineHeight: 1.5 }}>{meaning}</td>
                   </tr>
                 ))}
               </tbody>

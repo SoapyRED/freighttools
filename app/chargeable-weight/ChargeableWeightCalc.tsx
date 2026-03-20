@@ -371,9 +371,9 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
                 ['Sea freight (LCL)', 'Different model', 'Uses 1 CBM = 1,000 kg (W/M rule)'],
               ].map(([carrier, divisor, effect]) => (
                 <tr key={carrier} style={{ borderBottom: '1px solid #eef0f4' }}>
-                  <td style={{ padding: '11px 16px', fontWeight: 600, color: '#1e2535' }}>{carrier}</td>
-                  <td style={{ padding: '11px 16px', color: '#5a6478', fontFamily: 'monospace', fontWeight: 600 }}>{divisor}</td>
-                  <td style={{ padding: '11px 16px', color: '#5a6478', lineHeight: 1.5 }}>{effect}</td>
+                  <td style={{ padding: '11px 16px', fontWeight: 600 }}>{carrier}</td>
+                  <td style={{ padding: '11px 16px', fontFamily: 'monospace', fontWeight: 600 }}>{divisor}</td>
+                  <td style={{ padding: '11px 16px', lineHeight: 1.5 }}>{effect}</td>
                 </tr>
               ))}
             </tbody>

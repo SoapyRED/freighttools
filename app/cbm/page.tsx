@@ -91,11 +91,11 @@ export default function CbmPage() {
                   ['40ft High Cube', '12.03 × 2.35 × 2.69 m', '76.3 m³', '60–65 m³', '26,230 kg'],
                 ].map(([type, dims, max, usable, payload]) => (
                   <tr key={type} style={{ borderBottom: '1px solid #eef0f4' }}>
-                    <td style={{ padding: '11px 16px', fontWeight: 600, color: '#1e2535', whiteSpace: 'nowrap' }}>{type}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', fontFamily: 'monospace', fontSize: 13 }}>{dims}</td>
-                    <td style={{ padding: '11px 16px', fontWeight: 700, color: '#1a2332' }}>{max}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478' }}>{usable}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478' }}>{payload}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 600, whiteSpace: 'nowrap' }}>{type}</td>
+                    <td style={{ padding: '11px 16px', fontFamily: 'monospace', fontSize: 13 }}>{dims}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 700 }}>{max}</td>
+                    <td style={{ padding: '11px 16px' }}>{usable}</td>
+                    <td style={{ padding: '11px 16px' }}>{payload}</td>
                   </tr>
                 ))}
               </tbody>
@@ -191,10 +191,10 @@ export default function CbmPage() {
                   ['LDM (Loading Metres)', 'European road freight', 'Linear metres of trailer floor', 'UK and EU groupage/part-load road transport'],
                 ].map(([measure, used, unit, when]) => (
                   <tr key={measure} style={{ borderBottom: '1px solid #eef0f4' }}>
-                    <td style={{ padding: '11px 16px', fontWeight: 600, color: '#1e2535', whiteSpace: 'nowrap' }}>{measure}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478' }}>{used}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', fontFamily: 'monospace', fontSize: 13 }}>{unit}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', lineHeight: 1.5 }}>{when}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 600, whiteSpace: 'nowrap' }}>{measure}</td>
+                    <td style={{ padding: '11px 16px' }}>{used}</td>
+                    <td style={{ padding: '11px 16px', fontFamily: 'monospace', fontSize: 13 }}>{unit}</td>
+                    <td style={{ padding: '11px 16px', lineHeight: 1.5 }}>{when}</td>
                   </tr>
                 ))}
               </tbody>

@@ -244,6 +244,10 @@ details.faq-item .faq-answer {
 
 [data-theme="dark"] .ref-table thead { background: #010409; }
 
+/* ─── Table cell colours ─────────────────────────────────────── */
+main table td { color: #5a6478; }
+main table td:first-child { color: #1e2535; font-weight: 600; }
+
 /* ─── Table links — warm gold for readability ──────────────────── */
 main table a,
 main table a:visited {
@@ -254,13 +258,14 @@ main table a:visited {
 }
 main table a:hover { color: #7a5516; text-decoration-color: rgba(122, 85, 22, 0.5); }
 
-[data-theme="dark"] main table td { color: #E0D0B0; }
+[data-theme="dark"] main table td { color: #c8d0e0; }
+[data-theme="dark"] main table td:first-child { color: #CBA455; }
 [data-theme="dark"] main table a,
 [data-theme="dark"] main table a:visited {
-  color: #F0D68A;
-  text-decoration-color: rgba(240, 214, 138, 0.3);
+  color: #CBA455;
+  text-decoration-color: rgba(203, 164, 85, 0.3);
 }
-[data-theme="dark"] main table a:hover { color: #F8E4A8; text-decoration-color: rgba(248, 228, 168, 0.5); }
+[data-theme="dark"] main table a:hover { color: #DABB6E; text-decoration-color: rgba(218, 187, 110, 0.5); }
 
 /* ─── Table header amber accent ────────────────────────────────── */
 main table thead tr { border-top: 2px solid rgba(239, 159, 39, 0.35); }

@@ -100,11 +100,11 @@ export default function PalletPage() {
                   ['Aircraft PMC', '3175 × 2438 mm', 'Varies', 'IATA', 'Main deck air freight — ULD pallet for wide-body aircraft'],
                 ].map(([pallet, dims, load, std, use]) => (
                   <tr key={pallet} style={{ borderBottom: '1px solid #eef0f4' }}>
-                    <td style={{ padding: '11px 16px', fontWeight: 600, color: '#1e2535', whiteSpace: 'nowrap' }}>{pallet}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', fontFamily: 'monospace', fontSize: 13, whiteSpace: 'nowrap' }}>{dims}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', whiteSpace: 'nowrap' }}>{load}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', whiteSpace: 'nowrap' }}>{std}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', lineHeight: 1.5 }}>{use}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 600, whiteSpace: 'nowrap' }}>{pallet}</td>
+                    <td style={{ padding: '11px 16px', fontFamily: 'monospace', fontSize: 13, whiteSpace: 'nowrap' }}>{dims}</td>
+                    <td style={{ padding: '11px 16px', whiteSpace: 'nowrap' }}>{load}</td>
+                    <td style={{ padding: '11px 16px', whiteSpace: 'nowrap' }}>{std}</td>
+                    <td style={{ padding: '11px 16px', lineHeight: 1.5 }}>{use}</td>
                   </tr>
                 ))}
               </tbody>
@@ -169,11 +169,11 @@ export default function PalletPage() {
                   ['40ft High Cube', '2,350 mm', '2,690 mm', '2 widthwise', '2 widthwise'],
                 ].map(([vehicle, width, height, eur1, eur2]) => (
                   <tr key={vehicle} style={{ borderBottom: '1px solid #eef0f4' }}>
-                    <td style={{ padding: '11px 16px', fontWeight: 600, color: '#1e2535', whiteSpace: 'nowrap' }}>{vehicle}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', fontFamily: 'monospace', fontSize: 13 }}>{width}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478', fontFamily: 'monospace', fontSize: 13 }}>{height}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478' }}>{eur1}</td>
-                    <td style={{ padding: '11px 16px', color: '#5a6478' }}>{eur2}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 600, whiteSpace: 'nowrap' }}>{vehicle}</td>
+                    <td style={{ padding: '11px 16px', fontFamily: 'monospace', fontSize: 13 }}>{width}</td>
+                    <td style={{ padding: '11px 16px', fontFamily: 'monospace', fontSize: 13 }}>{height}</td>
+                    <td style={{ padding: '11px 16px' }}>{eur1}</td>
+                    <td style={{ padding: '11px 16px' }}>{eur2}</td>
                   </tr>
                 ))}
               </tbody>
