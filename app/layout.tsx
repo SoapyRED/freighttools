@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Link from 'next/link';
 import ThemeToggle from './components/ThemeToggle';
+import NavLinks from './components/NavLinks';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.freightutils.com'),
@@ -22,16 +23,6 @@ export const metadata: Metadata = {
     images: ['/api/og'],
   },
 };
-
-const navLinks = [
-  { href: '/ldm', label: 'LDM Calc' },
-  { href: '/cbm', label: 'CBM Calc' },
-  { href: '/adr', label: 'ADR Lookup' },
-  { href: '/chargeable-weight', label: 'Chargeable Wt' },
-  { href: '/pallet', label: 'Pallet Fit' },
-  { href: '/api-docs', label: 'API Docs' },
-  { href: '/about', label: 'About' },
-];
 
 const footerToolLinks = [
   { href: '/ldm', label: 'LDM Calculator' },
@@ -106,21 +97,7 @@ export default function RootLayout({
 
             {/* Nav */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, overflow: 'auto' }}>
-              <nav style={{ display: 'flex', gap: 2 }}>
-                {navLinks.map(l => (
-                  <Link key={l.href} href={l.href} style={{
-                    color: 'var(--text-faint)',
-                    textDecoration: 'none',
-                    fontSize: 13,
-                    fontWeight: 500,
-                    padding: '6px 10px',
-                    borderRadius: 6,
-                    whiteSpace: 'nowrap',
-                  }}>
-                    {l.label}
-                  </Link>
-                ))}
-              </nav>
+              <NavLinks />
               <ThemeToggle />
             </div>
           </div>

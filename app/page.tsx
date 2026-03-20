@@ -130,12 +130,11 @@ export default function HomePage() {
             margin: '0 auto 20px',
             lineHeight: 1.6,
           }}>
-            Free freight calculation tools and dangerous goods reference data — not a booking platform. No signup, no paywall.
-            Every tool has a REST API.
+            Free freight calculation tools and dangerous goods reference data. Open access — just use it. Every tool has a REST API.
           </p>
           <div style={{ fontSize: 13, color: 'var(--text-faint)' }}>
             <span style={{ color: '#EF9F27', marginRight: 6 }}>•</span>
-            Used by freight forwarders, transport planners, and developers across the UK and Europe
+            Used by freight forwarders, transport planners, and developers worldwide
           </div>
         </div>
       </section>
