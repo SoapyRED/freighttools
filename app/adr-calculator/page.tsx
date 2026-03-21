@@ -64,22 +64,25 @@ export default function AdrCalculatorPage() {
           <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
             Each substance in ADR Table A is assigned a <strong>transport category</strong> (0&ndash;4). To calculate whether the exemption applies, multiply each substance&apos;s quantity by its category multiplier. If the sum across all substances is &le; 1,000, the 1.1.3.6 exemption applies.
           </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
+            <strong>Important:</strong> ADR 1.1.3.6.3 also imposes <strong>per-substance quantity limits</strong>. Even if the total points are under 1,000, the exemption does not apply if any single substance exceeds its category&apos;s maximum quantity. For example, a Category 1 substance is limited to 20&nbsp;kg or litres &mdash; carrying 21&nbsp;litres of a Cat&nbsp;1 substance invalidates the exemption regardless of the points total.
+          </p>
           <div className="ref-table-wrap" style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 16 }}>
             <table className="ref-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Transport Category</th>
-                  <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Maximum Quantity</th>
+                  <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Per-Substance Limit</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Multiplier</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Points Formula</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  ['0', 'Not permitted', '—', 'Exemption cannot apply'],
-                  ['1', '20 kg/L', '50', 'quantity × 50'],
-                  ['2', '333 kg/L', '3', 'quantity × 3'],
-                  ['3', '1,000 kg/L', '1', 'quantity × 1'],
+                  ['0', '0 (not permitted)', '—', 'Exemption cannot apply'],
+                  ['1', '20 kg or litres', '50', 'quantity × 50'],
+                  ['2', '333 kg or litres', '3', 'quantity × 3'],
+                  ['3', '1,000 kg or litres', '1', 'quantity × 1'],
                   ['4', 'Unlimited', '0', 'Always 0 points'],
                 ].map(([cat, maxQty, multiplier, formula]) => (
                   <tr key={cat} style={{ borderBottom: '1px solid #eef0f4' }}>

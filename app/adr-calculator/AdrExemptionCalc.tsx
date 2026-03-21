@@ -43,6 +43,18 @@ function getMultiplier(cat: string | null): number | null {
   }
 }
 
+// Per-substance maximum quantities per ADR 1.1.3.6.3
+function getMaxQuantity(cat: string | null): number | null {
+  switch (cat) {
+    case '0': return 0;
+    case '1': return 20;
+    case '2': return 333;
+    case '3': return 1000;
+    case '4': return Infinity;
+    default: return null;
+  }
+}
+
 function getCategoryLabel(cat: string | null): string {
   switch (cat) {
     case '0': return 'Cat 0 — No exemption';
@@ -97,9 +109,25 @@ export default function AdrExemptionCalc({ index }: Props) {
     return loadItems.some(item => item.transport_category === '0');
   }, [loadItems]);
 
+  // Per-substance quantity limit exceedances
+  const quantityWarnings = useMemo(() => {
+    const warnings: string[] = [];
+    for (const item of loadItems) {
+      const maxQty = getMaxQuantity(item.transport_category);
+      if (maxQty !== null && item.quantity > maxQty) {
+        warnings.push(
+          `UN${item.un_number} (Category ${item.transport_category}): ${item.quantity} exceeds the ${maxQty} kg/L maximum for Transport Category ${item.transport_category}`
+        );
+      }
+    }
+    return warnings;
+  }, [loadItems]);
+
+  const hasQuantityExceedance = quantityWarnings.length > 0;
+
   // Progress bar
   const progressPct = Math.min((totalPoints / 1000) * 100, 100);
-  const progressColour = totalPoints >= 1000 ? '#dc2626' : totalPoints > 750 ? '#f59e0b' : '#22c55e';
+  const progressColour = (hasQuantityExceedance || totalPoints >= 1000) ? '#dc2626' : totalPoints > 750 ? '#f59e0b' : '#22c55e';
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -593,14 +621,14 @@ export default function AdrExemptionCalc({ index }: Props) {
           <span style={{
             ...badgeStyle,
             background: loadItems.length === 0 ? 'rgba(143,154,176,0.2)' :
-                         hasCatZero || totalPoints > 1000 ? 'rgba(220,38,38,0.15)' :
+                         hasCatZero || hasQuantityExceedance || totalPoints > 1000 ? 'rgba(220,38,38,0.15)' :
                          'rgba(34,197,94,0.15)',
             color: loadItems.length === 0 ? '#8f9ab0' :
-                   hasCatZero || totalPoints > 1000 ? '#dc2626' :
+                   hasCatZero || hasQuantityExceedance || totalPoints > 1000 ? '#dc2626' :
                    '#16a34a',
           }}>
             {loadItems.length === 0 ? 'Awaiting data' :
-             hasCatZero || totalPoints > 1000 ? 'Full ADR' :
+             hasCatZero || hasQuantityExceedance || totalPoints > 1000 ? 'Full ADR' :
              'Exempt'}
           </span>
         </div>
@@ -617,7 +645,7 @@ export default function AdrExemptionCalc({ index }: Props) {
                 <div style={{
                   fontSize: 'clamp(32px, 6vw, 48px)',
                   fontWeight: 800,
-                  color: hasCatZero || totalPoints > 1000 ? '#dc2626' :
+                  color: hasCatZero || hasQuantityExceedance || totalPoints > 1000 ? '#dc2626' :
                          totalPoints > 750 ? '#f59e0b' : '#22c55e',
                   lineHeight: 1,
                   letterSpacing: '-1px',
@@ -647,6 +675,27 @@ export default function AdrExemptionCalc({ index }: Props) {
                 }} />
               </div>
 
+              {/* Quantity exceedance warnings */}
+              {hasQuantityExceedance && (
+                <div style={{
+                  background: '#fef2f2',
+                  border: '1.5px solid #fecaca',
+                  borderRadius: 10,
+                  padding: '14px 18px',
+                  marginBottom: 16,
+                  textAlign: 'left',
+                }}>
+                  <div style={{ fontWeight: 700, fontSize: 13, color: '#dc2626', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.3px' }}>
+                    Per-substance quantity limit exceeded
+                  </div>
+                  {quantityWarnings.map((w, i) => (
+                    <div key={i} style={{ fontSize: 13, color: '#991b1b', lineHeight: 1.5, marginBottom: 2 }}>
+                      &bull; {w}
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {/* Verdict */}
               {hasCatZero ? (
                 <div style={{
@@ -660,6 +709,20 @@ export default function AdrExemptionCalc({ index }: Props) {
                   </div>
                   <div style={{ fontSize: 13, color: '#991b1b', lineHeight: 1.5 }}>
                     Full ADR compliance required regardless of points total. Category 0 substances cannot use the 1.1.3.6 exemption.
+                  </div>
+                </div>
+              ) : hasQuantityExceedance ? (
+                <div style={{
+                  background: '#fef2f2',
+                  border: '1.5px solid #fecaca',
+                  borderRadius: 10,
+                  padding: '16px 20px',
+                }}>
+                  <div style={{ fontWeight: 800, fontSize: 16, color: '#dc2626', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.3px' }}>
+                    Full ADR Compliance Required
+                  </div>
+                  <div style={{ fontSize: 13, color: '#991b1b', lineHeight: 1.5 }}>
+                    One or more substances exceed the per-substance quantity limit under ADR 1.1.3.6.3. The exemption cannot apply.
                   </div>
                 </div>
               ) : totalPoints <= 1000 ? (

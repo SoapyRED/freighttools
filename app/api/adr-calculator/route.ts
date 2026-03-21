@@ -44,6 +44,18 @@ function getMultiplier(transportCategory: string | null): number | null {
   }
 }
 
+// Per-substance maximum quantities per ADR 1.1.3.6.3
+function getMaxQuantity(transportCategory: string | null): number | null {
+  switch (transportCategory) {
+    case '0':  return 0;
+    case '1':  return 20;
+    case '2':  return 333;
+    case '3':  return 1000;
+    case '4':  return Infinity;
+    default:   return null;
+  }
+}
+
 // -----------------------------------------------------------------
 //  Shared calculation logic
 // -----------------------------------------------------------------
@@ -67,6 +79,8 @@ function calculate(items: RequestItem[], headers: Record<string, string>) {
   const resultItems: ResultItem[] = [];
   let totalPoints = 0;
   let hasCategoryZero = false;
+  const warnings: string[] = [];
+  let hasQuantityExceedance = false;
 
   for (const item of items) {
     const normalised = normaliseUnNumber(String(item.un_number));
@@ -90,6 +104,7 @@ function calculate(items: RequestItem[], headers: Record<string, string>) {
     const variant = entries[0];
     const tc = variant.transport_category;
     const multiplier = getMultiplier(tc);
+    const maxQty = getMaxQuantity(tc);
 
     if (tc === '0') {
       hasCategoryZero = true;
@@ -97,6 +112,14 @@ function calculate(items: RequestItem[], headers: Record<string, string>) {
 
     const qty = Number(item.quantity) || 0;
     const points = multiplier !== null ? multiplier * qty : null;
+
+    // Per-substance quantity limit check (ADR 1.1.3.6.3)
+    if (maxQty !== null && qty > maxQty) {
+      hasQuantityExceedance = true;
+      warnings.push(
+        `UN${normalised} (Category ${tc}): ${qty}${qty === 1 ? ' unit' : ''} exceeds the ${maxQty} kg/L maximum for Transport Category ${tc}`
+      );
+    }
 
     if (points !== null) {
       totalPoints += points;
@@ -120,6 +143,9 @@ function calculate(items: RequestItem[], headers: Record<string, string>) {
   if (hasCategoryZero) {
     exempt = false;
     message = 'Category 0 substance in load \u2014 full ADR compliance required';
+  } else if (hasQuantityExceedance) {
+    exempt = false;
+    message = 'Per-substance quantity limit exceeded \u2014 full ADR compliance required';
   } else if (totalPoints > threshold) {
     exempt = false;
     message = 'Total points exceed 1,000 threshold \u2014 full ADR compliance required';
@@ -135,6 +161,8 @@ function calculate(items: RequestItem[], headers: Record<string, string>) {
       threshold,
       exempt,
       has_category_zero: hasCategoryZero,
+      has_quantity_exceedance: hasQuantityExceedance,
+      warnings,
       message,
     },
     { status: 200, headers },
