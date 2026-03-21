@@ -7,6 +7,7 @@ const navLinks = [
   { href: '/ldm', label: 'LDM Calc' },
   { href: '/cbm', label: 'CBM Calc' },
   { href: '/adr', label: 'ADR Lookup' },
+  { href: '/adr-calculator', label: 'ADR Calc' },
   { href: '/chargeable-weight', label: 'Chargeable Wt' },
   { href: '/pallet', label: 'Pallet Fit' },
   { href: '/api-docs', label: 'API Docs' },

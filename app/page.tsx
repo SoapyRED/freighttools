@@ -31,6 +31,13 @@ const tools = [
     icon: '⚠️',
   },
   {
+    href: '/adr-calculator',
+    label: '/api/adr-calculator',
+    title: 'ADR Exemption Calculator',
+    desc: 'Calculate 1.1.3.6 exemption points for mixed DG loads',
+    icon: '🧮',
+  },
+  {
     href: '/chargeable-weight',
     label: '/api/chargeable-weight',
     title: 'Chargeable Weight',

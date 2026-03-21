@@ -28,6 +28,7 @@ const footerToolLinks = [
   { href: '/ldm', label: 'LDM Calculator' },
   { href: '/cbm', label: 'CBM Calculator' },
   { href: '/adr', label: 'ADR Lookup' },
+  { href: '/adr-calculator', label: 'ADR Exemption Calc' },
   { href: '/chargeable-weight', label: 'Chargeable Weight' },
   { href: '/pallet', label: 'Pallet Fitting' },
   { href: '/api-docs', label: 'API Docs' },

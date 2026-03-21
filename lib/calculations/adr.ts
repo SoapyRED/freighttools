@@ -30,6 +30,13 @@ export interface AdrEntrySlim {
   variant_count: number;
 }
 
+export interface AdrCalcEntry {
+  un_number: string;
+  proper_shipping_name: string;
+  class: string;
+  transport_category: string | null;
+}
+
 // ─────────────────────────────────────────────────────────────────
 //  Module-level singleton — loaded once, reused across all calls
 // ─────────────────────────────────────────────────────────────────
@@ -146,6 +153,19 @@ export function getSlimIndex(): AdrEntrySlim[] {
     packing_group,
     variant_index,
     variant_count,
+  }));
+}
+
+/**
+ * Calc index for the ADR calculator page.
+ * Returns transport_category for exemption threshold lookups.
+ */
+export function getCalcIndex(): AdrCalcEntry[] {
+  return ALL_ENTRIES.map(({ un_number, proper_shipping_name, class: cls, transport_category }) => ({
+    un_number,
+    proper_shipping_name,
+    class: cls,
+    transport_category,
   }));
 }
 
