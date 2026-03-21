@@ -51,6 +51,13 @@ const tools = [
     desc: 'Box fitting with visual layer diagram',
     icon: '🔲',
   },
+  {
+    href: '/airlines',
+    label: '/api/airlines',
+    title: 'Airline Codes & AWB Prefixes',
+    desc: 'Search airlines by name, IATA/ICAO code, or AWB prefix',
+    icon: '✈️',
+  },
 ];
 
 const dataSources = [

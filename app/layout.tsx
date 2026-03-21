@@ -31,6 +31,7 @@ const footerToolLinks = [
   { href: '/adr-calculator', label: 'ADR Exemption Calc' },
   { href: '/chargeable-weight', label: 'Chargeable Weight' },
   { href: '/pallet', label: 'Pallet Fitting' },
+  { href: '/airlines', label: 'Airline Codes' },
   { href: '/api-docs', label: 'API Docs' },
   { href: '/about', label: 'About' },
 ];
