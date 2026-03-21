@@ -30,22 +30,37 @@ export default function AirlineSearch({ index }: Props) {
   }, [index]);
 
   const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = query.trim();
+    const ql = q.toLowerCase();
     const source = cargoOnly ? cargoAirlines : index;
 
     if (q.length < 1) {
       return { items: cargoAirlines.slice(0, 50), total: cargoAirlines.length, isFeatured: true };
     }
 
+    const isShortNumeric = /^\d{2,3}$/.test(q);
+    const isShortAlpha = /^[A-Za-z]{2,3}$/.test(q);
+    const qu = q.toUpperCase();
+
     const matched: AirlineSlim[] = [];
     for (const a of source) {
-      if (
-        a.airline_name.toLowerCase().includes(q) ||
-        (a.iata_code && a.iata_code.toLowerCase() === q) ||
-        (a.icao_code && a.icao_code.toLowerCase() === q) ||
-        (a.awb_prefix && a.awb_prefix.some(p => p.includes(q))) ||
-        (a.country && a.country.toLowerCase().includes(q))
-      ) {
+      let match = false;
+
+      if (isShortNumeric) {
+        match = (a.awb_prefix !== null && a.awb_prefix.includes(q)) ||
+                (a.iata_code !== null && a.iata_code === q);
+      } else if (isShortAlpha) {
+        match = (a.iata_code !== null && a.iata_code === qu) ||
+                (a.icao_code !== null && a.icao_code === qu);
+      } else {
+        match = a.airline_name.toLowerCase().includes(ql) ||
+                (a.iata_code !== null && a.iata_code.toLowerCase() === ql) ||
+                (a.icao_code !== null && a.icao_code.toLowerCase() === ql) ||
+                (a.awb_prefix !== null && a.awb_prefix.includes(q)) ||
+                (a.country !== null && a.country.toLowerCase().includes(ql));
+      }
+
+      if (match) {
         matched.push(a);
         if (matched.length >= MAX_SHOWN + 1) break;
       }

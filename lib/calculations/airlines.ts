@@ -48,18 +48,36 @@ export function lookupBySlug(slug: string): Airline | null {
 }
 
 export function searchAirlines(query: string, limit = 50): Airline[] {
-  const q = query.trim().toLowerCase();
+  const q = query.trim();
   if (!q) return [];
+
+  const ql = q.toLowerCase();
+  const isShortNumeric = /^\d{2,3}$/.test(q);          // 2-3 digits → prefix/code only
+  const isShortAlpha = /^[A-Za-z]{2,3}$/.test(q);      // 2-3 letters → code only
 
   const results: Airline[] = [];
   for (const a of ALL_AIRLINES) {
-    if (
-      a.airline_name.toLowerCase().includes(q) ||
-      (a.iata_code && a.iata_code.toLowerCase() === q) ||
-      (a.icao_code && a.icao_code.toLowerCase() === q) ||
-      (a.awb_prefix && a.awb_prefix.some(p => p.includes(q))) ||
-      (a.country && a.country.toLowerCase().includes(q))
-    ) {
+    let match = false;
+
+    if (isShortNumeric) {
+      // Numeric 2-3 chars: match AWB prefix (exact) or IATA code only
+      match = (a.awb_prefix !== null && a.awb_prefix.includes(q)) ||
+              (a.iata_code !== null && a.iata_code === q);
+    } else if (isShortAlpha) {
+      // Alpha 2-3 chars: match IATA or ICAO code only (case-insensitive)
+      const qu = q.toUpperCase();
+      match = (a.iata_code !== null && a.iata_code === qu) ||
+              (a.icao_code !== null && a.icao_code === qu);
+    } else {
+      // 4+ chars or mixed: search all fields
+      match = a.airline_name.toLowerCase().includes(ql) ||
+              (a.iata_code !== null && a.iata_code.toLowerCase() === ql) ||
+              (a.icao_code !== null && a.icao_code.toLowerCase() === ql) ||
+              (a.awb_prefix !== null && a.awb_prefix.includes(q)) ||
+              (a.country !== null && a.country.toLowerCase().includes(ql));
+    }
+
+    if (match) {
       results.push(a);
       if (results.length >= limit) break;
     }
