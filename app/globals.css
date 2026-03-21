@@ -272,6 +272,12 @@ main table thead tr { border-top: 2px solid rgba(239, 159, 39, 0.35); }
 [data-theme="dark"] main table thead tr { border-top: 2px solid rgba(239, 159, 39, 0.25); }
 [data-theme="dark"] main table thead { background: rgba(239, 159, 39, 0.06) !important; }
 
+/* ─── Airline name links ────────────────────────────────────────── */
+.airline-name-link { color: #1e2535; transition: color 0.15s; }
+.airline-name-link:hover { color: #EF9F27; }
+[data-theme="dark"] .airline-name-link { color: #c8d0e0; }
+[data-theme="dark"] .airline-name-link:hover { color: #EF9F27; }
+
 /* ─── Responsive ────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .mobile-stack { flex-direction: column !important; }

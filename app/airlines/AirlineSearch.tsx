@@ -193,9 +193,8 @@ export default function AirlineSearch({ index }: Props) {
                     {airline.has_cargo ? (
                       <Link
                         href={`/airlines/${airline.slug}`}
-                        style={{ color: '#1e2535', textDecoration: 'none' }}
-                        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#e87722'; }}
-                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#1e2535'; }}
+                        className="airline-name-link"
+                        style={{ textDecoration: 'none' }}
                       >
                         {airline.airline_name}
                       </Link>
