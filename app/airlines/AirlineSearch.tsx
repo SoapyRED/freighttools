@@ -12,6 +12,7 @@ interface AirlineSlim {
   country: string | null;
   has_cargo: boolean;
   aliases?: string[];
+  verified?: boolean;
 }
 
 interface Props {
@@ -275,7 +276,7 @@ export default function AirlineSearch({ index }: Props) {
                   </td>
                   <td style={{ padding: '11px 16px' }}>
                     {airline.awb_prefix && airline.awb_prefix.length > 0 ? (
-                      <span style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                      <span style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
                         {airline.awb_prefix.map(p => (
                           <span key={p} style={{
                             background: '#fef3c7',
@@ -289,6 +290,9 @@ export default function AirlineSearch({ index }: Props) {
                             {p}
                           </span>
                         ))}
+                        {airline.verified === false && (
+                          <span style={{ fontSize: 10, color: '#8f9ab0', fontStyle: 'italic' }}>(unverified)</span>
+                        )}
                       </span>
                     ) : (
                       <span style={{ color: '#c4c9d4' }}>&mdash;</span>

@@ -17,6 +17,7 @@ export interface Airline {
   country: string | null;
   has_cargo: boolean;
   aliases?: string[];
+  verified?: boolean;
 }
 
 export interface AirlineSlim {
@@ -28,6 +29,7 @@ export interface AirlineSlim {
   country: string | null;
   has_cargo: boolean;
   aliases?: string[];
+  verified?: boolean;
 }
 
 // ── Data singleton ─────────────────────────────────────────────────
@@ -118,7 +120,7 @@ export function getAllCargoSlugs(): string[] {
 
 // Slim index for client-side search
 export function getSlimIndex(): AirlineSlim[] {
-  return ALL_AIRLINES.map(({ slug, airline_name, iata_code, icao_code, awb_prefix, country, has_cargo, aliases }) => ({
+  return ALL_AIRLINES.map(({ slug, airline_name, iata_code, icao_code, awb_prefix, country, has_cargo, aliases, verified }) => ({
     slug,
     airline_name,
     iata_code,
@@ -127,5 +129,6 @@ export function getSlimIndex(): AirlineSlim[] {
     country,
     has_cargo,
     ...(aliases ? { aliases } : {}),
+    ...(verified !== undefined ? { verified } : {}),
   }));
 }
