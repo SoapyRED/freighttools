@@ -8,16 +8,16 @@ import type { AdrEntrySlim } from '@/lib/calculations/adr';
 //  Hazard class colour coding
 // ─────────────────────────────────────────────────────────────────
 
-const CLASS_COLOURS: Record<string, { bg: string; text: string; label: string }> = {
-  '1':   { bg: '#fef9c3', text: '#854d0e', label: 'Explosives' },
-  '2':   { bg: '#dbeafe', text: '#1e40af', label: 'Gases' },
-  '3':   { bg: '#fee2e2', text: '#991b1b', label: 'Flammable liquids' },
-  '4':   { bg: '#ffedd5', text: '#9a3412', label: 'Flammable solids' },
-  '5':   { bg: '#ede9fe', text: '#5b21b6', label: 'Oxidising' },
-  '6':   { bg: '#f0fdf4', text: '#166534', label: 'Toxic' },
-  '7':   { bg: '#fef3c7', text: '#92400e', label: 'Radioactive' },
-  '8':   { bg: '#f1f5f9', text: '#334155', label: 'Corrosive' },
-  '9':   { bg: '#f8fafc', text: '#475569', label: 'Misc. dangerous' },
+const CLASS_COLOURS: Record<string, { bg: string; text: string; label: string; tint: string }> = {
+  '1':   { bg: '#fef9c3', text: '#854d0e', label: 'Explosives',        tint: 'rgba(239,159,39,0.15)' },
+  '2':   { bg: '#dbeafe', text: '#1e40af', label: 'Gases',             tint: 'rgba(34,197,94,0.15)' },
+  '3':   { bg: '#fee2e2', text: '#991b1b', label: 'Flammable liquids', tint: 'rgba(239,68,68,0.15)' },
+  '4':   { bg: '#ffedd5', text: '#9a3412', label: 'Flammable solids',  tint: 'rgba(239,68,68,0.12)' },
+  '5':   { bg: '#ede9fe', text: '#5b21b6', label: 'Oxidising',         tint: 'rgba(234,179,8,0.15)' },
+  '6':   { bg: '#f0fdf4', text: '#166534', label: 'Toxic',             tint: 'rgba(156,163,175,0.15)' },
+  '7':   { bg: '#fef3c7', text: '#92400e', label: 'Radioactive',       tint: 'rgba(234,179,8,0.12)' },
+  '8':   { bg: '#f1f5f9', text: '#334155', label: 'Corrosive',         tint: 'rgba(100,116,139,0.2)' },
+  '9':   { bg: '#f8fafc', text: '#475569', label: 'Misc. dangerous',   tint: 'rgba(148,163,184,0.12)' },
 };
 
 const ALL_CLASSES = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -192,9 +192,9 @@ export default function AdrSearch({ index }: Props) {
   const toggleBtnStyle = (active: boolean): React.CSSProperties => ({
     padding: '8px 18px', borderRadius: 20, fontSize: 13, fontWeight: 600,
     fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
-    border: active ? '1.5px solid #e87722' : '1.5px solid var(--grey-100, #d8dce6)',
-    background: active ? 'rgba(232,119,34,0.1)' : 'var(--bg, #fff)',
-    color: active ? '#e87722' : 'var(--text-secondary, #5a6478)',
+    border: active ? '1.5px solid #EF9F27' : '1.5px solid var(--grey-100, #d8dce6)',
+    background: active ? '#EF9F27' : 'var(--bg, #fff)',
+    color: active ? '#1a1a1a' : 'var(--text-secondary, #5a6478)',
     transition: 'all 0.15s',
   });
 
@@ -289,11 +289,12 @@ export default function AdrSearch({ index }: Props) {
             <button
               onClick={() => handleClassChange(null)}
               style={{
-                padding: '5px 12px', borderRadius: 6, fontSize: 12, fontWeight: 600,
+                padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600,
                 fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
-                border: classFilter === null ? '1.5px solid #1a2332' : '1.5px solid var(--grey-100, #d8dce6)',
-                background: classFilter === null ? '#1a2332' : 'var(--bg, #fff)',
-                color: classFilter === null ? '#fff' : 'var(--text-secondary, #5a6478)',
+                border: classFilter === null ? '1.5px solid #EF9F27' : '1.5px solid var(--grey-100, #d8dce6)',
+                background: classFilter === null ? '#EF9F27' : 'var(--bg, #fff)',
+                color: classFilter === null ? '#1a1a1a' : 'var(--text-secondary, #5a6478)',
+                transition: 'all 0.15s',
               }}
             >
               All classes
@@ -306,11 +307,12 @@ export default function AdrSearch({ index }: Props) {
                   key={cls}
                   onClick={() => handleClassChange(cls)}
                   style={{
-                    padding: '5px 12px', borderRadius: 6, fontSize: 12, fontWeight: 600,
+                    padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600,
                     fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
                     border: active ? `1.5px solid ${cs.text}` : '1.5px solid var(--grey-100, #d8dce6)',
-                    background: active ? cs.bg : 'var(--bg, #fff)',
+                    background: active ? cs.bg : cs.tint,
                     color: active ? cs.text : 'var(--text-secondary, #5a6478)',
+                    transition: 'all 0.15s',
                   }}
                 >
                   {cls}

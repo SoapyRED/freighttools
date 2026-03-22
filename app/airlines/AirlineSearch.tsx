@@ -149,44 +149,39 @@ export default function AirlineSearch({ index }: Props) {
       </div>
 
       {/* Toggle: All airlines / Cargo only */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-        <button
-          onClick={() => setCargoOnly(false)}
-          style={{
-            padding: '7px 16px',
-            fontSize: 13,
-            fontWeight: 700,
-            fontFamily: "'Outfit', sans-serif",
-            border: '2px solid',
-            borderColor: !cargoOnly ? '#1a2332' : '#d8dce6',
-            background: !cargoOnly ? '#1a2332' : '#fff',
-            color: !cargoOnly ? '#fff' : '#5a6478',
-            borderRadius: 8,
-            cursor: 'pointer',
-            transition: 'all 0.15s',
-          }}
-        >
-          All airlines
-        </button>
-        <button
-          onClick={() => setCargoOnly(true)}
-          style={{
-            padding: '7px 16px',
-            fontSize: 13,
-            fontWeight: 700,
-            fontFamily: "'Outfit', sans-serif",
-            border: '2px solid',
-            borderColor: cargoOnly ? '#e87722' : '#d8dce6',
-            background: cargoOnly ? '#e87722' : '#fff',
-            color: cargoOnly ? '#fff' : '#5a6478',
-            borderRadius: 8,
-            cursor: 'pointer',
-            transition: 'all 0.15s',
-          }}
-        >
-          Cargo only
-        </button>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
+        {[
+          { label: 'All airlines', val: false },
+          { label: 'Cargo only', val: true },
+        ].map(opt => {
+          const active = cargoOnly === opt.val;
+          return (
+            <button
+              key={opt.label}
+              onClick={() => { setCargoOnly(opt.val); setPage(p => 0); }}
+              style={{
+                padding: '8px 18px', borderRadius: 20, fontSize: 13, fontWeight: 600,
+                fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
+                border: active ? '1.5px solid #EF9F27' : '1.5px solid var(--grey-100, #d8dce6)',
+                background: active ? '#EF9F27' : 'var(--bg, #fff)',
+                color: active ? '#1a1a1a' : 'var(--text-secondary, #5a6478)',
+                transition: 'all 0.15s',
+              }}
+            >
+              {opt.label}
+            </button>
+          );
+        })}
       </div>
+
+      {/* Missing airline prompt */}
+      <p style={{ fontSize: 12, color: '#8f9ab0', marginBottom: 16, textAlign: 'center' }}>
+        Can&apos;t find an airline?{' '}
+        <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
+          Email contact@freightutils.com
+        </a>{' '}
+        and we&apos;ll add it.
+      </p>
 
       {/* Heading / result count */}
       {!filtered.isSearch && (
