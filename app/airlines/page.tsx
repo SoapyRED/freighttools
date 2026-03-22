@@ -4,11 +4,11 @@ import { getSlimIndex, AIRLINE_COUNT, CARGO_AIRLINE_COUNT } from '@/lib/calculat
 import AirlineSearch from './AirlineSearch';
 import AdUnit from '@/app/components/AdUnit';
 
-const ogUrl = '/api/og?title=Airline+Codes+%26+AWB+Prefix+Lookup&desc=Search+' + '6,334' + '+airlines+by+name,+code,+or+AWB+prefix&api=GET+/api/airlines';
+const ogUrl = '/api/og?title=Airline+Codes+%26+AWB+Prefix+Lookup&desc=Search+6,350%2B+airlines+by+name,+code,+or+AWB+prefix&api=GET+/api/airlines';
 
 export const metadata: Metadata = {
   title: 'Airline Codes & AWB Prefix Lookup | FreightUtils',
-  description: 'Free airline code and AWB prefix lookup. Search 6,334 airlines by name, IATA code, ICAO code, or three-digit AWB prefix. Includes 267 cargo airlines with AWB prefixes. Free REST API.',
+  description: 'Free airline code and AWB prefix lookup. Search 6,350+ airlines by name, IATA code, ICAO code, or three-digit AWB prefix. Includes 390+ cargo airlines with AWB prefixes. Free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/airlines' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Airline Codes & AWB Prefix Lookup — FreightUtils' }],
