@@ -20,6 +20,31 @@ interface Props {
 
 const PAGE_SIZE = 50;
 
+function PaginationBar({ currentPage, totalPages, setPage }: {
+  currentPage: number; totalPages: number; setPage: (fn: (p: number) => number) => void;
+}) {
+  const btnStyle = (disabled: boolean): React.CSSProperties => ({
+    padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 600,
+    fontFamily: "'Outfit', sans-serif", cursor: disabled ? 'not-allowed' : 'pointer',
+    border: '1.5px solid var(--grey-100, #d8dce6)',
+    background: disabled ? 'var(--grey-50, #f8f9fb)' : 'var(--bg, #fff)',
+    color: disabled ? '#8f9ab0' : 'var(--text, #1e2535)',
+  });
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '12px 0' }}>
+      <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={currentPage === 0} style={btnStyle(currentPage === 0)}>
+        &larr; Previous
+      </button>
+      <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary, #5a6478)' }}>
+        Page {currentPage + 1} of {totalPages}
+      </span>
+      <button onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))} disabled={currentPage >= totalPages - 1} style={btnStyle(currentPage >= totalPages - 1)}>
+        Next &rarr;
+      </button>
+    </div>
+  );
+}
+
 export default function AirlineSearch({ index }: Props) {
   const [query, setQuery] = useState('');
   const [cargoOnly, setCargoOnly] = useState(false);
@@ -199,6 +224,9 @@ export default function AirlineSearch({ index }: Props) {
         </div>
       )}
 
+      {/* Pagination — top */}
+      {totalPages > 1 && pageItems.length > 0 && <PaginationBar currentPage={currentPage} totalPages={totalPages} setPage={setPage} />}
+
       {/* Results table */}
       {pageItems.length > 0 && (
         <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6' }}>
@@ -299,43 +327,8 @@ export default function AirlineSearch({ index }: Props) {
         </div>
       )}
 
-      {/* Pagination controls */}
-      {totalPages > 1 && (
-        <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          gap: 12, padding: '16px 0',
-        }}>
-          <button
-            onClick={() => setPage(p => Math.max(0, p - 1))}
-            disabled={currentPage === 0}
-            style={{
-              padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-              fontFamily: "'Outfit', sans-serif", cursor: currentPage === 0 ? 'not-allowed' : 'pointer',
-              border: '1.5px solid var(--grey-100, #d8dce6)',
-              background: currentPage === 0 ? 'var(--grey-50, #f8f9fb)' : 'var(--bg, #fff)',
-              color: currentPage === 0 ? '#8f9ab0' : 'var(--text, #1e2535)',
-            }}
-          >
-            ← Previous
-          </button>
-          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary, #5a6478)' }}>
-            Page {currentPage + 1} of {totalPages}
-          </span>
-          <button
-            onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
-            disabled={currentPage >= totalPages - 1}
-            style={{
-              padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-              fontFamily: "'Outfit', sans-serif", cursor: currentPage >= totalPages - 1 ? 'not-allowed' : 'pointer',
-              border: '1.5px solid var(--grey-100, #d8dce6)',
-              background: currentPage >= totalPages - 1 ? 'var(--grey-50, #f8f9fb)' : 'var(--bg, #fff)',
-              color: currentPage >= totalPages - 1 ? '#8f9ab0' : 'var(--text, #1e2535)',
-            }}
-          >
-            Next →
-          </button>
-        </div>
-      )}
+      {/* Pagination — bottom */}
+      {totalPages > 1 && pageItems.length > 0 && <PaginationBar currentPage={currentPage} totalPages={totalPages} setPage={setPage} />}
     </div>
   );
 }
