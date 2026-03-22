@@ -11,17 +11,19 @@ interface AirlineSlim {
   awb_prefix: string[] | null;
   country: string | null;
   has_cargo: boolean;
+  aliases?: string[];
 }
 
 interface Props {
   index: AirlineSlim[];
 }
 
-const MAX_SHOWN = 100;
+const PAGE_SIZE = 50;
 
 export default function AirlineSearch({ index }: Props) {
   const [query, setQuery] = useState('');
   const [cargoOnly, setCargoOnly] = useState(false);
+  const [page, setPage] = useState(0);
 
   const cargoAirlines = useMemo(() => {
     return index
@@ -29,13 +31,21 @@ export default function AirlineSearch({ index }: Props) {
       .sort((a, b) => a.airline_name.localeCompare(b.airline_name));
   }, [index]);
 
-  const results = useMemo(() => {
+  const allSorted = useMemo(() => {
+    return [...index].sort((a, b) => a.airline_name.localeCompare(b.airline_name));
+  }, [index]);
+
+  // Reset page when query or filter changes
+  const handleQueryChange = (val: string) => { setQuery(val); setPage(0); };
+  const handleCargoToggle = (val: boolean) => { setCargoOnly(val); setPage(0); };
+
+  const filtered = useMemo(() => {
     const q = query.trim();
     const ql = q.toLowerCase();
-    const source = cargoOnly ? cargoAirlines : index;
+    const source = cargoOnly ? cargoAirlines : allSorted;
 
     if (q.length < 1) {
-      return { items: cargoAirlines.slice(0, 50), total: cargoAirlines.length, isFeatured: true };
+      return { items: source, isSearch: false };
     }
 
     const isShortNumeric = /^\d{2,3}$/.test(q);
@@ -54,22 +64,23 @@ export default function AirlineSearch({ index }: Props) {
                 (a.icao_code !== null && a.icao_code === qu);
       } else {
         match = a.airline_name.toLowerCase().includes(ql) ||
+                (a.aliases && a.aliases.some(al => al.toLowerCase().includes(ql))) ||
                 (a.iata_code !== null && a.iata_code.toLowerCase() === ql) ||
                 (a.icao_code !== null && a.icao_code.toLowerCase() === ql) ||
                 (a.awb_prefix !== null && a.awb_prefix.includes(q)) ||
                 (a.country !== null && a.country.toLowerCase().includes(ql));
       }
 
-      if (match) {
-        matched.push(a);
-        if (matched.length >= MAX_SHOWN + 1) break;
-      }
+      if (match) matched.push(a);
     }
-    return { items: matched.slice(0, MAX_SHOWN), total: matched.length, isFeatured: false };
-  }, [query, cargoOnly, index, cargoAirlines]);
+    return { items: matched, isSearch: true };
+  }, [query, cargoOnly, allSorted, cargoAirlines]);
 
-  const hasMore = results.total > MAX_SHOWN;
-  const isEmpty = query.trim().length >= 1 && results.items.length === 0;
+  const totalItems = filtered.items.length;
+  const totalPages = Math.ceil(totalItems / PAGE_SIZE);
+  const currentPage = Math.min(page, Math.max(0, totalPages - 1));
+  const pageItems = filtered.items.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
+  const isEmpty = query.trim().length >= 1 && totalItems === 0;
 
   return (
     <div>
@@ -152,22 +163,23 @@ export default function AirlineSearch({ index }: Props) {
         </button>
       </div>
 
-      {/* Featured heading or result count */}
-      {results.isFeatured && (
+      {/* Heading / result count */}
+      {!filtered.isSearch && (
         <div style={{ marginBottom: 16 }}>
           <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1a2332', marginBottom: 4 }}>
-            Featured Cargo Airlines
+            {cargoOnly ? 'Cargo Airlines' : 'All Airlines'}
           </h2>
           <p style={{ fontSize: 13, color: '#8f9ab0' }}>
-            Showing 50 of {cargoAirlines.length} cargo airlines — search to find any of {index.length.toLocaleString()} airlines
+            {totalItems.toLocaleString()} {cargoOnly ? 'cargo ' : ''}airlines — page {currentPage + 1} of {totalPages}
           </p>
         </div>
       )}
 
-      {!results.isFeatured && results.items.length > 0 && (
+      {filtered.isSearch && totalItems > 0 && (
         <p style={{ fontSize: 13, color: '#8f9ab0', marginBottom: 12 }}>
-          Showing {results.items.length}{hasMore ? '+' : ''} of {results.total > MAX_SHOWN ? `${MAX_SHOWN}+` : results.total} results
+          {totalItems.toLocaleString()} result{totalItems !== 1 ? 's' : ''}
           {cargoOnly ? ' (cargo airlines only)' : ''}
+          {totalPages > 1 ? ` — page ${currentPage + 1} of ${totalPages}` : ''}
         </p>
       )}
 
@@ -188,7 +200,7 @@ export default function AirlineSearch({ index }: Props) {
       )}
 
       {/* Results table */}
-      {results.items.length > 0 && (
+      {pageItems.length > 0 && (
         <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
             <thead>
@@ -202,7 +214,7 @@ export default function AirlineSearch({ index }: Props) {
               </tr>
             </thead>
             <tbody>
-              {results.items.map(airline => (
+              {pageItems.map(airline => (
                 <tr key={airline.slug} style={{ borderBottom: '1px solid #eef0f4' }}>
                   <td style={{ padding: '11px 16px', fontWeight: 600 }}>
                     {airline.has_cargo ? (
@@ -287,10 +299,42 @@ export default function AirlineSearch({ index }: Props) {
         </div>
       )}
 
-      {hasMore && (
-        <p style={{ color: '#8f9ab0', fontSize: 13, textAlign: 'center', padding: '12px 0' }}>
-          Showing first {MAX_SHOWN} results — refine your search to see more
-        </p>
+      {/* Pagination controls */}
+      {totalPages > 1 && (
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          gap: 12, padding: '16px 0',
+        }}>
+          <button
+            onClick={() => setPage(p => Math.max(0, p - 1))}
+            disabled={currentPage === 0}
+            style={{
+              padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 600,
+              fontFamily: "'Outfit', sans-serif", cursor: currentPage === 0 ? 'not-allowed' : 'pointer',
+              border: '1.5px solid var(--grey-100, #d8dce6)',
+              background: currentPage === 0 ? 'var(--grey-50, #f8f9fb)' : 'var(--bg, #fff)',
+              color: currentPage === 0 ? '#8f9ab0' : 'var(--text, #1e2535)',
+            }}
+          >
+            ← Previous
+          </button>
+          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary, #5a6478)' }}>
+            Page {currentPage + 1} of {totalPages}
+          </span>
+          <button
+            onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+            disabled={currentPage >= totalPages - 1}
+            style={{
+              padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 600,
+              fontFamily: "'Outfit', sans-serif", cursor: currentPage >= totalPages - 1 ? 'not-allowed' : 'pointer',
+              border: '1.5px solid var(--grey-100, #d8dce6)',
+              background: currentPage >= totalPages - 1 ? 'var(--grey-50, #f8f9fb)' : 'var(--bg, #fff)',
+              color: currentPage >= totalPages - 1 ? '#8f9ab0' : 'var(--text, #1e2535)',
+            }}
+          >
+            Next →
+          </button>
+        </div>
       )}
     </div>
   );

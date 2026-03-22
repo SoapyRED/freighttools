@@ -16,6 +16,7 @@ export interface Airline {
   callsign: string | null;
   country: string | null;
   has_cargo: boolean;
+  aliases?: string[];
 }
 
 export interface AirlineSlim {
@@ -26,6 +27,7 @@ export interface AirlineSlim {
   awb_prefix: string[] | null;
   country: string | null;
   has_cargo: boolean;
+  aliases?: string[];
 }
 
 // ── Data singleton ─────────────────────────────────────────────────
@@ -69,8 +71,9 @@ export function searchAirlines(query: string, limit = 50): Airline[] {
       match = (a.iata_code !== null && a.iata_code === qu) ||
               (a.icao_code !== null && a.icao_code === qu);
     } else {
-      // 4+ chars or mixed: search all fields
+      // 4+ chars or mixed: search all fields including aliases
       match = a.airline_name.toLowerCase().includes(ql) ||
+              (a.aliases && a.aliases.some(al => al.toLowerCase().includes(ql))) ||
               (a.iata_code !== null && a.iata_code.toLowerCase() === ql) ||
               (a.icao_code !== null && a.icao_code.toLowerCase() === ql) ||
               (a.awb_prefix !== null && a.awb_prefix.includes(q)) ||
@@ -113,9 +116,9 @@ export function getAllCargoSlugs(): string[] {
   return ALL_AIRLINES.filter(a => a.has_cargo).map(a => a.slug);
 }
 
-// Slim index for client-side search (~400KB gzipped)
+// Slim index for client-side search
 export function getSlimIndex(): AirlineSlim[] {
-  return ALL_AIRLINES.map(({ slug, airline_name, iata_code, icao_code, awb_prefix, country, has_cargo }) => ({
+  return ALL_AIRLINES.map(({ slug, airline_name, iata_code, icao_code, awb_prefix, country, has_cargo, aliases }) => ({
     slug,
     airline_name,
     iata_code,
@@ -123,5 +126,6 @@ export function getSlimIndex(): AirlineSlim[] {
     awb_prefix,
     country,
     has_cargo,
+    ...(aliases ? { aliases } : {}),
   }));
 }
