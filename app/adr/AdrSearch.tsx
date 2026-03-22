@@ -34,24 +34,43 @@ function getClassStyle(cls: string) {
 function PaginationBar({ currentPage, totalPages, setPage }: {
   currentPage: number; totalPages: number; setPage: (fn: (p: number) => number) => void;
 }) {
-  const btnStyle = (disabled: boolean): React.CSSProperties => ({
-    padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-    fontFamily: "'Outfit', sans-serif", cursor: disabled ? 'not-allowed' : 'pointer',
-    border: '1.5px solid var(--grey-100, #d8dce6)',
-    background: disabled ? 'var(--grey-50, #f8f9fb)' : 'var(--bg, #fff)',
-    color: disabled ? '#8f9ab0' : 'var(--text, #1e2535)',
-  });
+  const base: React.CSSProperties = {
+    padding: '6px 10px', borderRadius: 6, fontSize: 13, fontWeight: 600,
+    fontFamily: "'Outfit', sans-serif", cursor: 'pointer', minWidth: 34, textAlign: 'center',
+    border: '1.5px solid var(--grey-100, #d8dce6)', background: 'var(--bg, #fff)',
+    color: 'var(--text, #1e2535)', transition: 'all 0.1s',
+  };
+  const active: React.CSSProperties = { ...base, background: '#EF9F27', color: '#1a1a1a', border: '1.5px solid #EF9F27', cursor: 'default' };
+  const disabled: React.CSSProperties = { ...base, color: '#8f9ab0', cursor: 'not-allowed', background: 'var(--grey-50, #f8f9fb)' };
+  const ellipsis = <span key="ell" style={{ fontSize: 13, color: '#8f9ab0', padding: '0 2px' }}>&hellip;</span>;
+
+  // Build page numbers: first, last, and 2 around current
+  const pages: (number | 'ellipsis')[] = [];
+  const add = (n: number) => { if (n >= 0 && n < totalPages && !pages.includes(n)) pages.push(n); };
+  add(0);
+  for (let i = currentPage - 2; i <= currentPage + 2; i++) add(i);
+  add(totalPages - 1);
+  pages.sort((a, b) => (a as number) - (b as number));
+
+  // Insert ellipses
+  const withGaps: (number | 'ellipsis')[] = [];
+  for (let i = 0; i < pages.length; i++) {
+    if (i > 0 && (pages[i] as number) - (pages[i - 1] as number) > 1) withGaps.push('ellipsis');
+    withGaps.push(pages[i]);
+  }
+
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '12px 0' }}>
-      <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={currentPage === 0} style={btnStyle(currentPage === 0)}>
-        &larr; Previous
-      </button>
-      <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary, #5a6478)' }}>
-        Page {currentPage + 1} of {totalPages}
-      </span>
-      <button onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))} disabled={currentPage >= totalPages - 1} style={btnStyle(currentPage >= totalPages - 1)}>
-        Next &rarr;
-      </button>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, padding: '12px 0', flexWrap: 'wrap' }}>
+      <button onClick={() => setPage(() => Math.max(0, currentPage - 1))} disabled={currentPage === 0}
+        style={currentPage === 0 ? disabled : base}>&laquo;</button>
+      {withGaps.map((item, i) =>
+        item === 'ellipsis'
+          ? <span key={`e${i}`} style={{ fontSize: 13, color: '#8f9ab0', padding: '0 2px' }}>&hellip;</span>
+          : <button key={item} onClick={() => setPage(() => item as number)}
+              style={item === currentPage ? active : base}>{(item as number) + 1}</button>
+      )}
+      <button onClick={() => setPage(() => Math.min(totalPages - 1, currentPage + 1))} disabled={currentPage >= totalPages - 1}
+        style={currentPage >= totalPages - 1 ? disabled : base}>&raquo;</button>
     </div>
   );
 }
@@ -330,7 +349,7 @@ export default function AdrSearch({ index }: Props) {
           {/* Pagination top */}
           {browseTotalPages > 1 && <PaginationBar currentPage={browseCurrentPage} totalPages={browseTotalPages} setPage={setPage} />}
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 600 }}>
             {browsePageItems.map(entry => (
               <EntryCard key={`${entry.un_number}_${entry.variant_index}`} entry={entry} />
             ))}
@@ -338,6 +357,43 @@ export default function AdrSearch({ index }: Props) {
 
           {/* Pagination bottom */}
           {browseTotalPages > 1 && <PaginationBar currentPage={browseCurrentPage} totalPages={browseTotalPages} setPage={setPage} />}
+
+          {/* Class filter — bottom (mirror of top) */}
+          <div style={{ display: 'flex', gap: 6, marginTop: 12, flexWrap: 'wrap' }}>
+            <button
+              onClick={() => handleClassChange(null)}
+              style={{
+                padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600,
+                fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
+                border: classFilter === null ? '1.5px solid #EF9F27' : '1.5px solid var(--grey-100, #d8dce6)',
+                background: classFilter === null ? '#EF9F27' : 'var(--bg, #fff)',
+                color: classFilter === null ? '#1a1a1a' : 'var(--text-secondary, #5a6478)',
+                transition: 'all 0.15s',
+              }}
+            >
+              All classes
+            </button>
+            {ALL_CLASSES.map(cls => {
+              const cs = CLASS_COLOURS[cls];
+              const active = classFilter === cls;
+              return (
+                <button
+                  key={`btm-${cls}`}
+                  onClick={() => handleClassChange(cls)}
+                  style={{
+                    padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600,
+                    fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
+                    border: active ? `1.5px solid ${cs.text}` : '1.5px solid var(--grey-100, #d8dce6)',
+                    background: active ? cs.bg : cs.tint,
+                    color: active ? cs.text : 'var(--text-secondary, #5a6478)',
+                    transition: 'all 0.15s',
+                  }}
+                >
+                  {cls}
+                </button>
+              );
+            })}
+          </div>
         </>
       )}
     </div>

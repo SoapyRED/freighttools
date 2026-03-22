@@ -24,24 +24,47 @@ const PAGE_SIZE = 50;
 function PaginationBar({ currentPage, totalPages, setPage }: {
   currentPage: number; totalPages: number; setPage: (fn: (p: number) => number) => void;
 }) {
-  const btnStyle = (disabled: boolean): React.CSSProperties => ({
-    padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-    fontFamily: "'Outfit', sans-serif", cursor: disabled ? 'not-allowed' : 'pointer',
-    border: '1.5px solid var(--grey-100, #d8dce6)',
-    background: disabled ? 'var(--grey-50, #f8f9fb)' : 'var(--bg, #fff)',
-    color: disabled ? '#8f9ab0' : 'var(--text, #1e2535)',
-  });
+  const base: React.CSSProperties = {
+    padding: '6px 10px', borderRadius: 6, fontSize: 13, fontWeight: 600,
+    fontFamily: "'Outfit', sans-serif", cursor: 'pointer', minWidth: 34, textAlign: 'center',
+    border: '1.5px solid var(--grey-100, #d8dce6)', background: 'var(--bg, #fff)',
+    color: 'var(--text, #1e2535)', transition: 'all 0.1s',
+  };
+  const active: React.CSSProperties = { ...base, background: '#EF9F27', color: '#1a1a1a', border: '1.5px solid #EF9F27', cursor: 'default' };
+  const disabled: React.CSSProperties = { ...base, color: '#8f9ab0', cursor: 'not-allowed', background: 'var(--grey-50, #f8f9fb)' };
+
+  // Build page numbers: first, last, skip-by-10 for large sets, and 2 around current
+  const pageSet = new Set<number>();
+  pageSet.add(0);
+  pageSet.add(totalPages - 1);
+  for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+    if (i >= 0 && i < totalPages) pageSet.add(i);
+  }
+  if (totalPages > 20) {
+    // Add every 10th page
+    for (let i = 9; i < totalPages; i += 10) pageSet.add(i);
+  }
+  const pages = Array.from(pageSet).sort((a, b) => a - b);
+
+  // Insert ellipses
+  const withGaps: (number | 'ellipsis')[] = [];
+  for (let i = 0; i < pages.length; i++) {
+    if (i > 0 && pages[i] - pages[i - 1] > 1) withGaps.push('ellipsis');
+    withGaps.push(pages[i]);
+  }
+
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '12px 0' }}>
-      <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={currentPage === 0} style={btnStyle(currentPage === 0)}>
-        &larr; Previous
-      </button>
-      <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary, #5a6478)' }}>
-        Page {currentPage + 1} of {totalPages}
-      </span>
-      <button onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))} disabled={currentPage >= totalPages - 1} style={btnStyle(currentPage >= totalPages - 1)}>
-        Next &rarr;
-      </button>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, padding: '12px 0', flexWrap: 'wrap' }}>
+      <button onClick={() => setPage(() => Math.max(0, currentPage - 1))} disabled={currentPage === 0}
+        style={currentPage === 0 ? disabled : base}>&laquo;</button>
+      {withGaps.map((item, i) =>
+        item === 'ellipsis'
+          ? <span key={`e${i}`} style={{ fontSize: 13, color: '#8f9ab0', padding: '0 2px' }}>&hellip;</span>
+          : <button key={item} onClick={() => setPage(() => item as number)}
+              style={item === currentPage ? active : base}>{(item as number) + 1}</button>
+      )}
+      <button onClick={() => setPage(() => Math.min(totalPages - 1, currentPage + 1))} disabled={currentPage >= totalPages - 1}
+        style={currentPage >= totalPages - 1 ? disabled : base}>&raquo;</button>
     </div>
   );
 }
@@ -175,13 +198,12 @@ export default function AirlineSearch({ index }: Props) {
         })}
       </div>
 
-      {/* Missing airline prompt */}
+      {/* Community contribution messaging */}
       <p style={{ fontSize: 12, color: '#8f9ab0', marginBottom: 16, textAlign: 'center' }}>
-        Can&apos;t find an airline?{' '}
+        This database is built and maintained with help from the freight community. Missing an airline or spotted an error? Let us know at{' '}
         <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
-          Email contact@freightutils.com
-        </a>{' '}
-        and we&apos;ll add it.
+          contact@freightutils.com
+        </a>
       </p>
 
       {/* Heading / result count */}
@@ -225,7 +247,7 @@ export default function AirlineSearch({ index }: Props) {
 
       {/* Results table */}
       {pageItems.length > 0 && (
-        <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6' }}>
+        <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', minHeight: 600 }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
             <thead>
               <tr style={{ background: '#1a2332', color: '#fff' }}>
