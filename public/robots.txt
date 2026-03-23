@@ -1,9 +1,13 @@
 User-agent: *
 Allow: /
 Allow: /api/adr
+Allow: /api/adr-calculator
 Allow: /api/ldm
 Allow: /api/cbm
 Allow: /api/chargeable-weight
 Allow: /api/pallet
+Allow: /api/airlines
+Allow: /api/incoterms
+Allow: /openapi.json
 
 Sitemap: https://www.freightutils.com/sitemap.xml

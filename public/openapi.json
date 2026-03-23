@@ -1,0 +1,1557 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FreightUtils API",
+    "description": "Free freight calculation and reference data APIs. No authentication required. JSON responses. CORS enabled for all origins.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "FreightUtils",
+      "url": "https://www.freightutils.com",
+      "email": "contact@freightutils.com"
+    },
+    "license": {
+      "name": "Free to use",
+      "url": "https://www.freightutils.com/api-docs"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://www.freightutils.com",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/api/ldm": {
+      "get": {
+        "operationId": "calculateLdm",
+        "summary": "Loading Metres Calculator",
+        "description": "Calculate loading metres (LDM) for pallets on a vehicle. Supports preset pallet sizes or custom dimensions. Returns utilisation percentage, pallet spaces, and fit warnings.",
+        "tags": ["Calculators"],
+        "parameters": [
+          {
+            "name": "pallet",
+            "in": "query",
+            "description": "Preset pallet type. If omitted, length and width are required.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["euro", "uk", "half", "quarter"]
+            },
+            "example": "euro"
+          },
+          {
+            "name": "length",
+            "in": "query",
+            "description": "Pallet length in millimetres. Required if no pallet preset is specified.",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "example": 1200
+          },
+          {
+            "name": "width",
+            "in": "query",
+            "description": "Pallet width in millimetres. Required if no pallet preset is specified.",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "example": 800
+          },
+          {
+            "name": "qty",
+            "in": "query",
+            "description": "Number of pallets.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "example": 2
+          },
+          {
+            "name": "stackable",
+            "in": "query",
+            "description": "Whether the pallets are stackable.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": false
+          },
+          {
+            "name": "stack",
+            "in": "query",
+            "description": "Stack factor (number of pallets that can be stacked). Only relevant when stackable is true.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "enum": [2, 3],
+              "default": 2
+            },
+            "example": 2
+          },
+          {
+            "name": "weight",
+            "in": "query",
+            "description": "Weight per pallet in kilograms.",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "example": 500
+          },
+          {
+            "name": "vehicle",
+            "in": "query",
+            "description": "Vehicle type for utilisation calculation.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["artic", "rigid10", "rigid75", "luton", "us53", "us48", "custom"],
+              "default": "artic"
+            },
+            "example": "artic"
+          },
+          {
+            "name": "vehicle_length",
+            "in": "query",
+            "description": "Custom vehicle length in metres. Only used when vehicle is 'custom'.",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "example": 13.6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful LDM calculation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LdmResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cbm": {
+      "get": {
+        "operationId": "calculateCbm",
+        "summary": "CBM Calculator",
+        "description": "Calculate cubic metres (CBM), cubic feet, litres, and cubic inches from box dimensions.",
+        "tags": ["Calculators"],
+        "parameters": [
+          {
+            "name": "l",
+            "in": "query",
+            "description": "Length in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 120
+          },
+          {
+            "name": "w",
+            "in": "query",
+            "description": "Width in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 80
+          },
+          {
+            "name": "h",
+            "in": "query",
+            "description": "Height in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 100
+          },
+          {
+            "name": "pcs",
+            "in": "query",
+            "description": "Number of pieces.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "example": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful CBM calculation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CbmResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/chargeable-weight": {
+      "get": {
+        "operationId": "calculateChargeableWeight",
+        "summary": "Chargeable Weight Calculator",
+        "description": "Calculate the chargeable weight for air freight shipments by comparing actual gross weight against volumetric weight.",
+        "tags": ["Calculators"],
+        "parameters": [
+          {
+            "name": "l",
+            "in": "query",
+            "description": "Length in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 120
+          },
+          {
+            "name": "w",
+            "in": "query",
+            "description": "Width in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 80
+          },
+          {
+            "name": "h",
+            "in": "query",
+            "description": "Height in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 100
+          },
+          {
+            "name": "gw",
+            "in": "query",
+            "description": "Gross weight in kilograms.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 500
+          },
+          {
+            "name": "pcs",
+            "in": "query",
+            "description": "Number of pieces.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "example": 2
+          },
+          {
+            "name": "factor",
+            "in": "query",
+            "description": "Volumetric divisor factor. Standard air freight is 6000.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 6000
+            },
+            "example": 6000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful chargeable weight calculation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeableWeightResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pallet": {
+      "get": {
+        "operationId": "calculatePalletFitting",
+        "summary": "Pallet Fitting Calculator",
+        "description": "Calculate how many boxes fit on a pallet, including layers, orientation, volume utilisation, and weight limits.",
+        "tags": ["Calculators"],
+        "parameters": [
+          {
+            "name": "pl",
+            "in": "query",
+            "description": "Pallet length in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 120
+          },
+          {
+            "name": "pw",
+            "in": "query",
+            "description": "Pallet width in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 80
+          },
+          {
+            "name": "pmh",
+            "in": "query",
+            "description": "Pallet maximum height in centimetres (total including deck).",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 220
+          },
+          {
+            "name": "bl",
+            "in": "query",
+            "description": "Box length in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 40
+          },
+          {
+            "name": "bw",
+            "in": "query",
+            "description": "Box width in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 30
+          },
+          {
+            "name": "bh",
+            "in": "query",
+            "description": "Box height in centimetres.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 25
+          },
+          {
+            "name": "ph",
+            "in": "query",
+            "description": "Pallet deck height in centimetres.",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 15
+            },
+            "example": 15
+          },
+          {
+            "name": "bwt",
+            "in": "query",
+            "description": "Weight per box in kilograms.",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "example": 5
+          },
+          {
+            "name": "mpw",
+            "in": "query",
+            "description": "Maximum payload weight in kilograms.",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "example": 1000
+          },
+          {
+            "name": "rotate",
+            "in": "query",
+            "description": "Allow box rotation to find best fit.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "example": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful pallet fitting calculation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PalletFittingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/adr": {
+      "get": {
+        "operationId": "lookupAdr",
+        "summary": "ADR / UN Number Lookup",
+        "description": "Look up ADR dangerous goods data by UN number, name search, or hazard class filter. Provide exactly one search parameter.",
+        "tags": ["Reference Data", "ADR"],
+        "parameters": [
+          {
+            "name": "un",
+            "in": "query",
+            "description": "UN number to look up (e.g. 1203).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1203"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search term to find substances by name.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "petrol"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Alias for search. Search term to find substances by name.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "diesel"
+          },
+          {
+            "name": "class",
+            "in": "query",
+            "description": "Filter by ADR hazard class.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matching ADR substance records.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdrLookupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/adr-calculator": {
+      "get": {
+        "operationId": "calculateAdrExemptionGet",
+        "summary": "ADR 1.1.3.6 Exemption Calculator (single item)",
+        "description": "Calculate whether a single dangerous goods item qualifies for ADR 1.1.3.6 transport exemption based on transport category points.",
+        "tags": ["Reference Data", "ADR"],
+        "parameters": [
+          {
+            "name": "un",
+            "in": "query",
+            "description": "UN number of the substance.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1203"
+          },
+          {
+            "name": "qty",
+            "in": "query",
+            "description": "Quantity being transported (kg for solids, litres for liquids).",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 200
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ADR exemption calculation result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdrCalculatorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "calculateAdrExemption",
+        "summary": "ADR 1.1.3.6 Exemption Calculator (multiple items)",
+        "description": "Calculate whether multiple dangerous goods items together qualify for ADR 1.1.3.6 transport exemption. Points are summed across all items.",
+        "tags": ["Reference Data", "ADR"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdrCalculatorRequest"
+              },
+              "example": {
+                "items": [
+                  { "un_number": "1203", "quantity": 200 },
+                  { "un_number": "1950", "quantity": 50 }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ADR exemption calculation result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdrCalculatorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/airlines": {
+      "get": {
+        "operationId": "searchAirlines",
+        "summary": "Airline Lookup",
+        "description": "Search for cargo airlines by name, IATA code, ICAO code, AWB prefix, or country. Provide one search parameter.",
+        "tags": ["Reference Data"],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "General search term (matches airline name, codes, and country).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "emirates"
+          },
+          {
+            "name": "iata",
+            "in": "query",
+            "description": "2-character IATA airline code.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "EK"
+          },
+          {
+            "name": "icao",
+            "in": "query",
+            "description": "3-character ICAO airline code.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "UAE"
+          },
+          {
+            "name": "prefix",
+            "in": "query",
+            "description": "3-digit AWB prefix number.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "176"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "Country name to filter airlines by.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "United Arab Emirates"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matching airline records.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirlinesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/incoterms": {
+      "get": {
+        "operationId": "lookupIncoterms",
+        "summary": "INCOTERMS 2020 Lookup",
+        "description": "Look up INCOTERMS 2020 rules by code or filter by category. Returns detailed responsibility breakdowns for each term. When called with a specific code, returns a single detailed object. When called without a code, returns all terms.",
+        "tags": ["Reference Data"],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "INCOTERMS code (e.g. FOB, CIF, EXW).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "FOB"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter by transport mode category.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["any_mode", "sea_only"]
+            },
+            "example": "sea_only"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "INCOTERMS data. Returns a single Incoterm object when queried by code, or a list when browsing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/IncotermDetail" },
+                    { "$ref": "#/components/schemas/IncotermsListResponse" }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message.",
+            "example": "Missing required parameter: length"
+          }
+        },
+        "required": ["error"]
+      },
+      "LdmVehicle": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Human-readable vehicle name.",
+            "example": "13.6m Artic Trailer"
+          },
+          "length_m": {
+            "type": "number",
+            "description": "Vehicle loading length in metres.",
+            "example": 13.6
+          },
+          "max_payload_kg": {
+            "type": "number",
+            "description": "Maximum payload capacity in kilograms.",
+            "example": 24000
+          }
+        },
+        "required": ["name", "length_m", "max_payload_kg"]
+      },
+      "LdmPalletSpaces": {
+        "type": "object",
+        "properties": {
+          "used": {
+            "type": "integer",
+            "description": "Number of pallet spaces used.",
+            "example": 2
+          },
+          "available": {
+            "type": "integer",
+            "description": "Total pallet spaces available on the vehicle.",
+            "example": 33
+          }
+        },
+        "required": ["used", "available"]
+      },
+      "LdmMetaInputs": {
+        "type": "object",
+        "properties": {
+          "length_mm": {
+            "type": "number",
+            "description": "Pallet length in mm as interpreted.",
+            "example": 1200
+          },
+          "width_mm": {
+            "type": "number",
+            "description": "Pallet width in mm as interpreted.",
+            "example": 800
+          },
+          "qty": {
+            "type": "integer",
+            "description": "Number of pallets.",
+            "example": 2
+          },
+          "stackable": {
+            "type": "boolean",
+            "example": false
+          },
+          "stack_factor": {
+            "type": "integer",
+            "example": 2
+          },
+          "weight_per_pallet_kg": {
+            "type": "number",
+            "nullable": true,
+            "example": null
+          },
+          "vehicle": {
+            "type": "string",
+            "example": "artic"
+          }
+        }
+      },
+      "LdmResponse": {
+        "type": "object",
+        "properties": {
+          "ldm": {
+            "type": "number",
+            "description": "Calculated loading metres.",
+            "example": 0.8
+          },
+          "vehicle": {
+            "$ref": "#/components/schemas/LdmVehicle"
+          },
+          "utilisation_percent": {
+            "type": "number",
+            "description": "Percentage of vehicle length used.",
+            "example": 5.88
+          },
+          "pallet_spaces": {
+            "$ref": "#/components/schemas/LdmPalletSpaces"
+          },
+          "total_weight_kg": {
+            "type": "number",
+            "nullable": true,
+            "description": "Total weight of all pallets in kg, or null if weight not provided.",
+            "example": null
+          },
+          "fits": {
+            "type": "boolean",
+            "description": "Whether the load fits on the selected vehicle.",
+            "example": true
+          },
+          "warnings": {
+            "type": "array",
+            "description": "Any warnings about the load (e.g. overweight, overhang).",
+            "items": {
+              "type": "string"
+            },
+            "example": []
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "inputs": {
+                "$ref": "#/components/schemas/LdmMetaInputs"
+              }
+            }
+          }
+        },
+        "required": ["ldm", "vehicle", "utilisation_percent", "pallet_spaces", "total_weight_kg", "fits", "warnings", "meta"]
+      },
+      "CbmMetaInputs": {
+        "type": "object",
+        "properties": {
+          "length_cm": {
+            "type": "number",
+            "example": 120
+          },
+          "width_cm": {
+            "type": "number",
+            "example": 80
+          },
+          "height_cm": {
+            "type": "number",
+            "example": 100
+          },
+          "pieces": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      },
+      "CbmResponse": {
+        "type": "object",
+        "properties": {
+          "cbm_per_piece": {
+            "type": "number",
+            "description": "Cubic metres per single piece.",
+            "example": 0.96
+          },
+          "total_cbm": {
+            "type": "number",
+            "description": "Total cubic metres for all pieces.",
+            "example": 1.92
+          },
+          "total_volume_m3": {
+            "type": "number",
+            "description": "Total volume in cubic metres (same as total_cbm).",
+            "example": 1.92
+          },
+          "cubic_feet": {
+            "type": "number",
+            "description": "Total volume in cubic feet.",
+            "example": 67.8042
+          },
+          "litres": {
+            "type": "number",
+            "description": "Total volume in litres.",
+            "example": 1920
+          },
+          "cubic_inches": {
+            "type": "number",
+            "description": "Total volume in cubic inches.",
+            "example": 117165.5
+          },
+          "pieces": {
+            "type": "integer",
+            "description": "Number of pieces.",
+            "example": 2
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "inputs": {
+                "$ref": "#/components/schemas/CbmMetaInputs"
+              }
+            }
+          }
+        },
+        "required": ["cbm_per_piece", "total_cbm", "total_volume_m3", "cubic_feet", "litres", "cubic_inches", "pieces", "meta"]
+      },
+      "ChargeableWeightMetaInputs": {
+        "type": "object",
+        "properties": {
+          "length_cm": {
+            "type": "number",
+            "example": 120
+          },
+          "width_cm": {
+            "type": "number",
+            "example": 80
+          },
+          "height_cm": {
+            "type": "number",
+            "example": 100
+          },
+          "gross_weight_kg": {
+            "type": "number",
+            "example": 500
+          },
+          "pieces": {
+            "type": "integer",
+            "example": 2
+          },
+          "factor": {
+            "type": "integer",
+            "example": 6000
+          }
+        }
+      },
+      "ChargeableWeightResponse": {
+        "type": "object",
+        "properties": {
+          "chargeable_weight_kg": {
+            "type": "number",
+            "description": "The chargeable weight (higher of actual vs volumetric).",
+            "example": 500
+          },
+          "basis": {
+            "type": "string",
+            "description": "Whether the chargeable weight is based on 'actual' gross weight or 'volumetric' weight.",
+            "enum": ["actual", "volumetric"],
+            "example": "actual"
+          },
+          "gross_weight_kg": {
+            "type": "number",
+            "description": "Actual gross weight in kg.",
+            "example": 500
+          },
+          "volumetric_weight_kg": {
+            "type": "number",
+            "description": "Total volumetric weight in kg.",
+            "example": 320
+          },
+          "volumetric_weight_per_piece_kg": {
+            "type": "number",
+            "description": "Volumetric weight per piece in kg.",
+            "example": 160
+          },
+          "cbm": {
+            "type": "number",
+            "description": "Total cubic metres.",
+            "example": 1.92
+          },
+          "ratio": {
+            "type": "number",
+            "description": "Weight-to-volume ratio (kg per CBM).",
+            "example": 3.84
+          },
+          "factor": {
+            "type": "integer",
+            "description": "Volumetric divisor factor used.",
+            "example": 6000
+          },
+          "pieces": {
+            "type": "integer",
+            "description": "Number of pieces.",
+            "example": 2
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "inputs": {
+                "$ref": "#/components/schemas/ChargeableWeightMetaInputs"
+              }
+            }
+          }
+        },
+        "required": ["chargeable_weight_kg", "basis", "gross_weight_kg", "volumetric_weight_kg", "volumetric_weight_per_piece_kg", "cbm", "ratio", "factor", "pieces", "meta"]
+      },
+      "PalletFittingMetaInputs": {
+        "type": "object",
+        "properties": {
+          "pallet_length_cm": {
+            "type": "number",
+            "example": 120
+          },
+          "pallet_width_cm": {
+            "type": "number",
+            "example": 80
+          },
+          "pallet_max_height_cm": {
+            "type": "number",
+            "example": 220
+          },
+          "pallet_height_cm": {
+            "type": "number",
+            "example": 15
+          },
+          "box_length_cm": {
+            "type": "number",
+            "example": 40
+          },
+          "box_width_cm": {
+            "type": "number",
+            "example": 30
+          },
+          "box_height_cm": {
+            "type": "number",
+            "example": 25
+          },
+          "box_weight_kg": {
+            "type": "number",
+            "nullable": true,
+            "example": null
+          },
+          "max_payload_weight_kg": {
+            "type": "number",
+            "nullable": true,
+            "example": null
+          },
+          "allow_rotation": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "PalletFittingResponse": {
+        "type": "object",
+        "properties": {
+          "boxes_per_layer": {
+            "type": "integer",
+            "description": "Number of boxes fitting in a single layer.",
+            "example": 8
+          },
+          "layers": {
+            "type": "integer",
+            "description": "Number of layers that fit within the height constraint.",
+            "example": 8
+          },
+          "total_boxes": {
+            "type": "integer",
+            "description": "Total number of boxes fitting on the pallet.",
+            "example": 64
+          },
+          "orientation": {
+            "type": "string",
+            "description": "Whether boxes were rotated for best fit.",
+            "enum": ["standard", "rotated"],
+            "example": "rotated"
+          },
+          "boxes_per_row": {
+            "type": "integer",
+            "description": "Number of boxes per row along the pallet length.",
+            "example": 4
+          },
+          "boxes_per_col": {
+            "type": "integer",
+            "description": "Number of boxes per column along the pallet width.",
+            "example": 2
+          },
+          "usable_height_cm": {
+            "type": "number",
+            "description": "Usable stacking height after subtracting deck height.",
+            "example": 205
+          },
+          "utilisation_percent": {
+            "type": "number",
+            "description": "Volume utilisation percentage.",
+            "example": 100
+          },
+          "total_box_volume_cbm": {
+            "type": "number",
+            "description": "Total volume of all boxes in CBM.",
+            "example": 1.92
+          },
+          "pallet_volume_cbm": {
+            "type": "number",
+            "description": "Usable pallet volume in CBM.",
+            "example": 1.968
+          },
+          "wasted_space_cbm": {
+            "type": "number",
+            "description": "Wasted space in CBM.",
+            "example": 0.048
+          },
+          "weight_limited": {
+            "type": "boolean",
+            "description": "Whether the result was limited by weight rather than space.",
+            "example": false
+          },
+          "total_weight_kg": {
+            "type": "number",
+            "nullable": true,
+            "description": "Total weight of all boxes, or null if box weight not provided.",
+            "example": null
+          },
+          "remaining_weight_capacity_kg": {
+            "type": "number",
+            "nullable": true,
+            "description": "Remaining weight capacity, or null if not applicable.",
+            "example": null
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "inputs": {
+                "$ref": "#/components/schemas/PalletFittingMetaInputs"
+              }
+            }
+          }
+        },
+        "required": ["boxes_per_layer", "layers", "total_boxes", "orientation", "boxes_per_row", "boxes_per_col", "usable_height_cm", "utilisation_percent", "total_box_volume_cbm", "pallet_volume_cbm", "wasted_space_cbm", "weight_limited", "total_weight_kg", "remaining_weight_capacity_kg", "meta"]
+      },
+      "AdrSubstance": {
+        "type": "object",
+        "properties": {
+          "un_number": {
+            "type": "string",
+            "description": "UN number identifying the dangerous goods.",
+            "example": "1203"
+          },
+          "proper_shipping_name": {
+            "type": "string",
+            "description": "Official ADR proper shipping name.",
+            "example": "MOTOR SPIRIT or GASOLINE or PETROL"
+          },
+          "class": {
+            "type": "string",
+            "description": "ADR hazard class.",
+            "example": "3"
+          },
+          "classification_code": {
+            "type": "string",
+            "description": "ADR classification code.",
+            "example": "F1"
+          },
+          "packing_group": {
+            "type": "string",
+            "description": "Packing group (I, II, or III).",
+            "example": "II"
+          },
+          "labels": {
+            "type": "string",
+            "description": "Required hazard labels.",
+            "example": "3"
+          },
+          "special_provisions": {
+            "type": "string",
+            "description": "Applicable special provisions.",
+            "example": "243 534 664"
+          },
+          "limited_quantity": {
+            "type": "string",
+            "description": "Limited quantity allowance.",
+            "example": "1 L"
+          },
+          "excepted_quantity": {
+            "type": "string",
+            "description": "Excepted quantity code.",
+            "example": "E2"
+          },
+          "transport_category": {
+            "type": "string",
+            "description": "Transport category for 1.1.3.6 exemption (0-4).",
+            "example": "2"
+          },
+          "tunnel_restriction_code": {
+            "type": "string",
+            "description": "Tunnel restriction code.",
+            "example": "(D/E)"
+          },
+          "hazard_identification_number": {
+            "type": "string",
+            "description": "Kemler/HIN code for orange plates.",
+            "example": "33"
+          },
+          "variant_index": {
+            "type": "integer",
+            "description": "Index of this variant (0-based) when a UN number has multiple entries.",
+            "example": 0
+          },
+          "variant_count": {
+            "type": "integer",
+            "description": "Total number of variants for this UN number.",
+            "example": 1
+          }
+        },
+        "required": ["un_number", "proper_shipping_name", "class", "classification_code", "packing_group", "labels", "special_provisions", "limited_quantity", "excepted_quantity", "transport_category", "tunnel_restriction_code", "hazard_identification_number", "variant_index", "variant_count"]
+      },
+      "AdrLookupResponse": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "Number of matching results.",
+            "example": 1
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdrSubstance"
+            }
+          }
+        },
+        "required": ["count", "results"]
+      },
+      "AdrCalculatorRequest": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Array of dangerous goods items to calculate.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "un_number": {
+                  "type": "string",
+                  "description": "UN number of the substance.",
+                  "example": "1203"
+                },
+                "quantity": {
+                  "type": "number",
+                  "description": "Quantity being transported (kg or litres).",
+                  "example": 200
+                }
+              },
+              "required": ["un_number", "quantity"]
+            }
+          }
+        },
+        "required": ["items"]
+      },
+      "AdrCalculatorItem": {
+        "type": "object",
+        "properties": {
+          "un_number": {
+            "type": "string",
+            "description": "UN number of the substance.",
+            "example": "1203"
+          },
+          "proper_shipping_name": {
+            "type": "string",
+            "description": "Official ADR proper shipping name.",
+            "example": "MOTOR SPIRIT or GASOLINE or PETROL"
+          },
+          "class": {
+            "type": "string",
+            "description": "ADR hazard class.",
+            "example": "3"
+          },
+          "transport_category": {
+            "type": "string",
+            "description": "Transport category (0-4).",
+            "example": "2"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Quantity being transported.",
+            "example": 200
+          },
+          "multiplier": {
+            "type": "integer",
+            "description": "Points multiplier for this transport category.",
+            "example": 3
+          },
+          "points": {
+            "type": "number",
+            "description": "Calculated points (quantity x multiplier).",
+            "example": 600
+          }
+        },
+        "required": ["un_number", "proper_shipping_name", "class", "transport_category", "quantity", "multiplier", "points"]
+      },
+      "AdrCalculatorResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdrCalculatorItem"
+            }
+          },
+          "total_points": {
+            "type": "number",
+            "description": "Sum of all item points.",
+            "example": 600
+          },
+          "threshold": {
+            "type": "integer",
+            "description": "1.1.3.6 threshold (always 1000).",
+            "example": 1000
+          },
+          "exempt": {
+            "type": "boolean",
+            "description": "Whether the shipment qualifies for 1.1.3.6 exemption.",
+            "example": true
+          },
+          "has_category_zero": {
+            "type": "boolean",
+            "description": "Whether any item is transport category 0 (never exempt).",
+            "example": false
+          },
+          "has_quantity_exceedance": {
+            "type": "boolean",
+            "description": "Whether any single item exceeds its maximum quantity per transport unit.",
+            "example": false
+          },
+          "warnings": {
+            "type": "array",
+            "description": "Any warnings about the calculation.",
+            "items": {
+              "type": "string"
+            },
+            "example": []
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable exemption status message.",
+            "example": "1.1.3.6 exemption applies"
+          }
+        },
+        "required": ["items", "total_points", "threshold", "exempt", "has_category_zero", "has_quantity_exceedance", "warnings", "message"]
+      },
+      "Airline": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly airline identifier.",
+            "example": "emirates"
+          },
+          "airline_name": {
+            "type": "string",
+            "description": "Full airline name.",
+            "example": "Emirates"
+          },
+          "iata_code": {
+            "type": "string",
+            "description": "2-character IATA airline designator.",
+            "example": "EK"
+          },
+          "icao_code": {
+            "type": "string",
+            "description": "3-character ICAO airline designator.",
+            "example": "UAE"
+          },
+          "awb_prefix": {
+            "type": "array",
+            "description": "3-digit Air Waybill prefix number(s).",
+            "items": {
+              "type": "string"
+            },
+            "example": ["176"]
+          },
+          "callsign": {
+            "type": "string",
+            "description": "Radio telephony callsign.",
+            "example": "EMIRATES"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country of registration.",
+            "example": "United Arab Emirates"
+          },
+          "has_cargo": {
+            "type": "boolean",
+            "description": "Whether the airline operates cargo services.",
+            "example": true
+          },
+          "verified": {
+            "type": "boolean",
+            "description": "Whether the airline data has been verified.",
+            "example": true
+          }
+        },
+        "required": ["slug", "airline_name", "iata_code", "icao_code", "awb_prefix", "callsign", "country", "has_cargo", "verified"]
+      },
+      "AirlinesResponse": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "Number of matching results.",
+            "example": 1
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Airline"
+            }
+          }
+        },
+        "required": ["count", "results"]
+      },
+      "IncotermDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "INCOTERM code.",
+            "example": "FOB"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full INCOTERM name.",
+            "example": "Free on Board"
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly identifier.",
+            "example": "fob-free-on-board"
+          },
+          "category": {
+            "type": "string",
+            "description": "Transport mode category.",
+            "enum": ["any_mode", "sea_only"],
+            "example": "sea_only"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Brief summary of the term."
+          },
+          "seller_responsibility": {
+            "type": "string",
+            "description": "What the seller is responsible for."
+          },
+          "buyer_responsibility": {
+            "type": "string",
+            "description": "What the buyer is responsible for."
+          },
+          "risk_transfer": {
+            "type": "string",
+            "description": "Point at which risk transfers from seller to buyer."
+          },
+          "cost_transfer": {
+            "type": "string",
+            "description": "Point at which cost responsibility transfers."
+          },
+          "insurance": {
+            "type": "string",
+            "description": "Insurance obligations."
+          },
+          "export_clearance": {
+            "type": "string",
+            "description": "Who handles export customs clearance."
+          },
+          "import_clearance": {
+            "type": "string",
+            "description": "Who handles import customs clearance."
+          },
+          "best_for": {
+            "type": "string",
+            "description": "Scenarios this term is best suited for."
+          },
+          "watch_out": {
+            "type": "string",
+            "description": "Common pitfalls or things to be aware of."
+          }
+        },
+        "required": ["code", "name", "slug", "category", "summary", "seller_responsibility", "buyer_responsibility", "risk_transfer", "cost_transfer", "insurance", "export_clearance", "import_clearance", "best_for", "watch_out"]
+      },
+      "IncotermsListResponse": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "Number of INCOTERMS returned.",
+            "example": 11
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncotermDetail"
+            }
+          }
+        },
+        "required": ["count", "results"]
+      }
+    }
+  }
+}

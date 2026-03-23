@@ -36,6 +36,18 @@ export default function ApiDocsPage() {
           <div className="code-block">
             Base URL: https://www.freightutils.com/api
           </div>
+          <a
+            href="/openapi.json"
+            download
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              marginTop: 16, padding: '10px 20px', borderRadius: 8,
+              background: '#1a2332', color: '#EF9F27', textDecoration: 'none',
+              fontSize: 13, fontWeight: 700, fontFamily: "'Outfit', sans-serif",
+            }}
+          >
+            Download OpenAPI 3.0 Spec (JSON)
+          </a>
         </div>
 
         {/* LDM Endpoint */}
