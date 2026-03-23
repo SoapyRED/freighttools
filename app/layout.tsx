@@ -39,6 +39,7 @@ const footerToolLinks = [
   { href: '/chargeable-weight', label: 'Chargeable Weight' },
   { href: '/pallet', label: 'Pallet Fitting' },
   { href: '/airlines', label: 'Airline Codes' },
+  { href: '/incoterms', label: 'INCOTERMS 2020' },
   { href: '/api-docs', label: 'API Docs' },
   { href: '/about', label: 'About' },
 ];

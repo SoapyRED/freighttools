@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/chargeable-weight', label: 'Chargeable Wt' },
   { href: '/pallet', label: 'Pallet Fit' },
   { href: '/airlines', label: 'Airlines' },
+  { href: '/incoterms', label: 'INCOTERMS' },
   { href: '/api-docs', label: 'API Docs' },
   { href: '/about', label: 'About' },
 ];

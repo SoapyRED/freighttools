@@ -58,6 +58,13 @@ const tools = [
     desc: 'Search airlines by name, IATA/ICAO code, or AWB prefix',
     icon: '✈️',
   },
+  {
+    href: '/incoterms',
+    label: '/api/incoterms',
+    title: 'INCOTERMS 2020',
+    desc: 'All 11 trade terms — who pays, who bears risk, where responsibility transfers',
+    icon: '📋',
+  },
 ];
 
 const dataSources = [
