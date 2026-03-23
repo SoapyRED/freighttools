@@ -6,7 +6,7 @@ const ogUrl = '/api/og?title=About+FreightUtils&desc=Free+freight+calculators+an
 export const metadata: Metadata = {
   title: 'About FreightUtils — Free Freight Tools & API Platform',
   description:
-    'FreightUtils provides 7 free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. LDM, CBM, ADR lookup, ADR exemption calculator, chargeable weight, pallet fitting, and airline code tools.',
+    'FreightUtils provides 8 free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. LDM, CBM, chargeable weight, pallet fitting, ADR lookup, ADR exemption calculator, airline codes, and INCOTERMS reference.',
   alternates: { canonical: 'https://www.freightutils.com/about' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'About FreightUtils' }],
@@ -89,11 +89,12 @@ export default function AboutPage() {
             {[
               { name: 'Loading Metres', href: '/ldm' },
               { name: 'CBM Calculator', href: '/cbm' },
-              { name: 'ADR Lookup', href: '/adr' },
-              { name: 'ADR Exemption Calc', href: '/adr-calculator' },
               { name: 'Chargeable Weight', href: '/chargeable-weight' },
               { name: 'Pallet Fitting', href: '/pallet' },
+              { name: 'ADR Lookup', href: '/adr' },
+              { name: 'ADR Exemption Calc', href: '/adr-calculator' },
               { name: 'Airline Codes', href: '/airlines' },
+              { name: 'INCOTERMS 2020', href: '/incoterms' },
             ].map(t => (
               <Link key={t.href} href={t.href} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
@@ -152,11 +153,12 @@ export default function AboutPage() {
           <div className="code-block">
             GET /api/ldm?pallet=euro&amp;qty=10<br />
             GET /api/cbm?l=120&amp;w=80&amp;h=100<br />
-            GET /api/adr?un=1203<br />
-            GET /api/adr-calculator?un=1203&amp;qty=200<br />
             GET /api/chargeable-weight?l=120&amp;w=80&amp;h=100&amp;gw=500<br />
             GET /api/pallet?pl=120&amp;pw=80&amp;pmh=220&amp;bl=40&amp;bw=30&amp;bh=25<br />
-            GET /api/airlines?prefix=176
+            GET /api/adr?un=1203<br />
+            GET /api/adr-calculator?un=1203&amp;qty=200<br />
+            GET /api/airlines?prefix=176<br />
+            GET /api/incoterms?code=FOB
           </div>
         </Section>
 

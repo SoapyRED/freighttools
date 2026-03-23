@@ -34,10 +34,10 @@ export const metadata: Metadata = {
 const footerToolLinks = [
   { href: '/ldm', label: 'LDM Calculator' },
   { href: '/cbm', label: 'CBM Calculator' },
-  { href: '/adr', label: 'ADR Lookup' },
-  { href: '/adr-calculator', label: 'ADR Exemption Calc' },
   { href: '/chargeable-weight', label: 'Chargeable Weight' },
   { href: '/pallet', label: 'Pallet Fitting' },
+  { href: '/adr', label: 'ADR Lookup' },
+  { href: '/adr-calculator', label: 'ADR Exemption Calc' },
   { href: '/airlines', label: 'Airline Codes' },
   { href: '/incoterms', label: 'INCOTERMS 2020' },
   { href: '/api-docs', label: 'API Docs' },
@@ -106,7 +106,7 @@ export default function RootLayout({
             </Link>
 
             {/* Nav */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, overflow: 'auto' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, overflow: 'auto', position: 'relative' }}>
               <NavLinks />
               <ThemeToggle />
             </div>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
-  description: 'FreightUtils public API reference — 7 free endpoints. Loading metres, CBM, ADR lookup, ADR 1.1.3.6 exemption calculator, chargeable weight, pallet fitting, and airline codes. No auth required.',
+  description: 'FreightUtils public API reference — 8 free endpoints. Loading metres, CBM, chargeable weight, pallet fitting, ADR lookup, ADR 1.1.3.6 exemption calculator, airline codes, and INCOTERMS 2020. No auth required.',
 };
 
 const s = {
@@ -259,6 +259,244 @@ export default function ApiDocsPage() {
       "width_cm": 80,
       "height_cm": 100,
       "pieces": 5
+    }
+  }
+}`}
+            </div>
+          </div>
+        </div>
+
+        {/* Chargeable Weight Endpoint */}
+        <div id="chargeable-weight" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/chargeable-weight</span>
+            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Air Freight Chargeable Weight</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Calculate air freight chargeable weight — whichever is higher between actual gross weight
+              and volumetric (dimensional) weight. Supports custom volumetric factors for all carriers.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                    <th>Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>l</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Length of one piece in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>w</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Width of one piece in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>h</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Height of one piece in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>gw</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Total gross weight of all pieces in kg</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>pcs</code></td>
+                    <td>integer</td>
+                    <td>No</td>
+                    <td>Number of identical pieces</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><code>factor</code></td>
+                    <td>integer</td>
+                    <td>No</td>
+                    <td>Volumetric divisor: <code>6000</code> (IATA standard), <code>5000</code> (express carriers)</td>
+                    <td>6000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>2 pieces, 120×80×100 cm, 500 kg total, IATA factor:</p>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://www.freightutils.com/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000"`}
+            </div>
+            <div className="code-block">
+              {`{
+  "chargeable_weight_kg": 640,
+  "basis": "volumetric",
+  "gross_weight_kg": 500,
+  "volumetric_weight_kg": 640,
+  "volumetric_weight_per_piece_kg": 320,
+  "cbm": 1.92,
+  "ratio": 3.84,
+  "factor": 6000,
+  "pieces": 2,
+  "meta": {
+    "inputs": {
+      "length_cm": 120,
+      "width_cm": 80,
+      "height_cm": 100,
+      "gross_weight_kg": 500,
+      "pieces": 2,
+      "factor": 6000
+    }
+  }
+}`}
+            </div>
+          </div>
+        </div>
+
+        {/* Pallet Fitting Endpoint */}
+        <div id="pallet" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/pallet</span>
+            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Pallet Box Fitting Calculator</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Calculate how many boxes fit on a pallet using a layer-based algorithm. Returns boxes per
+              layer, number of layers, total boxes, orientation used, and volume/weight analysis.
+              Optional weight constraint caps the result at the pallet&apos;s maximum payload.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                    <th>Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>pl</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Pallet length in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>pw</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Pallet width in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>pmh</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Maximum total stack height in centimetres (floor to top of cargo)</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>bl</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Box length in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>bw</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Box width in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>bh</code></td>
+                    <td>number</td>
+                    <td>Yes</td>
+                    <td>Box height in centimetres</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>ph</code></td>
+                    <td>number</td>
+                    <td>No</td>
+                    <td>Pallet board/deck height in cm — deducted from usable height</td>
+                    <td>15</td>
+                  </tr>
+                  <tr>
+                    <td><code>bwt</code></td>
+                    <td>number</td>
+                    <td>No</td>
+                    <td>Weight per box in kg — enables weight constraint calculation</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>mpw</code></td>
+                    <td>number</td>
+                    <td>No</td>
+                    <td>Maximum pallet payload weight in kg — caps result if weight exceeded</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>rotate</code></td>
+                    <td>boolean</td>
+                    <td>No</td>
+                    <td>Allow 90° rotation of boxes for best fit. Pass <code>false</code> to disable.</td>
+                    <td>true</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://www.freightutils.com/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25&bwt=5&mpw=1500"`}
+            </div>
+            <div className="code-block">
+              {`{
+  "boxes_per_layer": 8,
+  "layers": 8,
+  "total_boxes": 64,
+  "orientation": "original",
+  "boxes_per_row": 3,
+  "boxes_per_col": 2,
+  "usable_height_cm": 205,
+  "utilisation_percent": 62.5,
+  "total_box_volume_cbm": 0.192,
+  "pallet_volume_cbm": 1.968,
+  "wasted_space_cbm": 1.776,
+  "weight_limited": false,
+  "total_weight_kg": 320,
+  "remaining_weight_capacity_kg": 1180,
+  "meta": {
+    "inputs": {
+      "pallet_length_cm": 120, "pallet_width_cm": 80,
+      "pallet_max_height_cm": 220, "pallet_height_cm": 15,
+      "box_length_cm": 40, "box_width_cm": 30, "box_height_cm": 25,
+      "box_weight_kg": 5, "max_payload_weight_kg": 1500,
+      "allow_rotation": true
     }
   }
 }`}
@@ -547,17 +785,18 @@ Content-Type: application/json
           </div>
         </div>
 
-        {/* Chargeable Weight Endpoint */}
-        <div id="chargeable-weight" style={s.card}>
+        {/* INCOTERMS Endpoint */}
+        <div id="incoterms" style={s.card}>
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/chargeable-weight</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Air Freight Chargeable Weight</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/incoterms</span>
+            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>INCOTERMS 2020 Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
             <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
-              Calculate air freight chargeable weight — whichever is higher between actual gross weight
-              and volumetric (dimensional) weight. Supports custom volumetric factors for all carriers.
+              Look up INCOTERMS 2020 trade terms. Returns all 11 terms by default, or filter by code
+              or transport category. Each term includes seller/buyer responsibilities, risk and cost
+              transfer points, insurance obligations, and practical guidance.
             </p>
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
@@ -567,220 +806,60 @@ Content-Type: application/json
                   <tr>
                     <th>Parameter</th>
                     <th>Type</th>
-                    <th>Required</th>
                     <th>Description</th>
-                    <th>Default</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><code>l</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Length of one piece in centimetres</td>
-                    <td>—</td>
+                    <td><code>code</code></td>
+                    <td>string</td>
+                    <td>INCOTERM code (e.g. <code>FOB</code>, <code>CIF</code>, <code>DDP</code>)</td>
                   </tr>
                   <tr>
-                    <td><code>w</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Width of one piece in centimetres</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>h</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Height of one piece in centimetres</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>gw</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Total gross weight of all pieces in kg</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>pcs</code></td>
-                    <td>integer</td>
-                    <td>No</td>
-                    <td>Number of identical pieces</td>
-                    <td>1</td>
-                  </tr>
-                  <tr>
-                    <td><code>factor</code></td>
-                    <td>integer</td>
-                    <td>No</td>
-                    <td>Volumetric divisor: <code>6000</code> (IATA standard), <code>5000</code> (express carriers)</td>
-                    <td>6000</td>
+                    <td><code>category</code></td>
+                    <td>string</td>
+                    <td>Filter by transport mode: <code>any_mode</code> or <code>sea_only</code></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>2 pieces, 120×80×100 cm, 500 kg total, IATA factor:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000"`}
-            </div>
-            <div className="code-block">
-              {`{
-  "chargeable_weight_kg": 640,
-  "basis": "volumetric",
-  "gross_weight_kg": 500,
-  "volumetric_weight_kg": 640,
-  "volumetric_weight_per_piece_kg": 320,
-  "cbm": 1.92,
-  "ratio": 3.84,
-  "factor": 6000,
-  "pieces": 2,
-  "meta": {
-    "inputs": {
-      "length_cm": 120,
-      "width_cm": 80,
-      "height_cm": 100,
-      "gross_weight_kg": 500,
-      "pieces": 2,
-      "factor": 6000
-    }
-  }
-}`}
-            </div>
-          </div>
-        </div>
-
-        {/* Pallet Fitting Endpoint */}
-        <div id="pallet" style={s.card}>
-          <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/pallet</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Pallet Box Fitting Calculator</span>
-          </div>
-          <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
-              Calculate how many boxes fit on a pallet using a layer-based algorithm. Returns boxes per
-              layer, number of layers, total boxes, orientation used, and volume/weight analysis.
-              Optional weight constraint caps the result at the pallet&apos;s maximum payload.
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 24 }}>
+              Omit all parameters to return all 11 INCOTERMS 2020 terms.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
-            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
-              <table className="ref-table">
-                <thead>
-                  <tr>
-                    <th>Parameter</th>
-                    <th>Type</th>
-                    <th>Required</th>
-                    <th>Description</th>
-                    <th>Default</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><code>pl</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Pallet length in centimetres</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>pw</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Pallet width in centimetres</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>pmh</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Maximum total stack height in centimetres (floor to top of cargo)</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>bl</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Box length in centimetres</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>bw</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Box width in centimetres</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>bh</code></td>
-                    <td>number</td>
-                    <td>Yes</td>
-                    <td>Box height in centimetres</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>ph</code></td>
-                    <td>number</td>
-                    <td>No</td>
-                    <td>Pallet board/deck height in cm — deducted from usable height</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <td><code>bwt</code></td>
-                    <td>number</td>
-                    <td>No</td>
-                    <td>Weight per box in kg — enables weight constraint calculation</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>mpw</code></td>
-                    <td>number</td>
-                    <td>No</td>
-                    <td>Maximum pallet payload weight in kg — caps result if weight exceeded</td>
-                    <td>—</td>
-                  </tr>
-                  <tr>
-                    <td><code>rotate</code></td>
-                    <td>boolean</td>
-                    <td>No</td>
-                    <td>Allow 90° rotation of boxes for best fit. Pass <code>false</code> to disable.</td>
-                    <td>true</td>
-                  </tr>
-                </tbody>
-              </table>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Single term lookup:</p>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://www.freightutils.com/api/incoterms?code=FOB"`}
+            </div>
+            <div className="code-block" style={{ marginBottom: 20 }}>
+              {`{
+  "code": "FOB",
+  "name": "Free on Board",
+  "slug": "fob-free-on-board",
+  "category": "sea_only",
+  "summary": "Seller delivers goods on board the vessel at port of shipment.",
+  "seller_responsibility": "Deliver goods on board the vessel...",
+  "buyer_responsibility": "Main sea freight, insurance...",
+  "risk_transfer": "When goods are on board the vessel...",
+  "cost_transfer": "At port of shipment...",
+  "insurance": "No obligation on either party.",
+  "export_clearance": "Seller.",
+  "import_clearance": "Buyer.",
+  "best_for": "Sea freight where buyer arranges shipping...",
+  "watch_out": "Sea and inland waterway ONLY..."
+}`}
             </div>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25&bwt=5&mpw=1500"`}
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Filter by transport category:</p>
+            <div className="code-block" style={{ marginBottom: 20 }}>
+              {`curl "https://www.freightutils.com/api/incoterms?category=sea_only"`}
             </div>
+
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>All terms:</p>
             <div className="code-block">
-              {`{
-  "boxes_per_layer": 8,
-  "layers": 8,
-  "total_boxes": 64,
-  "orientation": "original",
-  "boxes_per_row": 3,
-  "boxes_per_col": 2,
-  "usable_height_cm": 205,
-  "utilisation_percent": 62.5,
-  "total_box_volume_cbm": 0.192,
-  "pallet_volume_cbm": 1.968,
-  "wasted_space_cbm": 1.776,
-  "weight_limited": false,
-  "total_weight_kg": 320,
-  "remaining_weight_capacity_kg": 1180,
-  "meta": {
-    "inputs": {
-      "pallet_length_cm": 120, "pallet_width_cm": 80,
-      "pallet_max_height_cm": 220, "pallet_height_cm": 15,
-      "box_length_cm": 40, "box_width_cm": 30, "box_height_cm": 25,
-      "box_weight_kg": 5, "max_payload_weight_kg": 1500,
-      "allow_rotation": true
-    }
-  }
-}`}
+              {`curl "https://www.freightutils.com/api/incoterms"`}
             </div>
           </div>
         </div>
