@@ -33,16 +33,12 @@ function PaginationBar({ currentPage, totalPages, setPage }: {
   const active: React.CSSProperties = { ...base, background: '#EF9F27', color: '#1a1a1a', border: '1.5px solid #EF9F27', cursor: 'default' };
   const disabled: React.CSSProperties = { ...base, color: '#8f9ab0', cursor: 'not-allowed', background: 'var(--grey-50, #f8f9fb)' };
 
-  // Build page numbers: first, last, skip-by-10 for large sets, and 2 around current
+  // Build page numbers: first, last, and 2 around current
   const pageSet = new Set<number>();
   pageSet.add(0);
   pageSet.add(totalPages - 1);
   for (let i = currentPage - 2; i <= currentPage + 2; i++) {
     if (i >= 0 && i < totalPages) pageSet.add(i);
-  }
-  if (totalPages > 20) {
-    // Add every 10th page
-    for (let i = 9; i < totalPages; i += 10) pageSet.add(i);
   }
   const pages = Array.from(pageSet).sort((a, b) => a - b);
 
