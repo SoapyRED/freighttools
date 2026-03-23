@@ -1,7 +1,7 @@
 import { VEHICLE_MAP, Vehicle } from '@/lib/data/vehicles';
 
-export const TRAILER_WIDTH_M = 2.4;
-export const EURO_PALLET_LDM = (1.2 * 0.8) / TRAILER_WIDTH_M; // 0.4 LDM
+export const DEFAULT_TRAILER_WIDTH_M = 2.4;
+export const EURO_PALLET_LDM = (1.2 * 0.8) / DEFAULT_TRAILER_WIDTH_M; // 0.4 LDM
 
 export interface LdmInput {
   lengthMm: number;
@@ -52,15 +52,16 @@ export function calculateLdm(input: LdmInput): LdmResult {
   const widthM = widthMm / 1000;
   const factor = stackable ? stackFactor : 1;
 
-  // Core LDM formula
-  const ldm =
-    lengthM > 0 && widthM > 0 && qty > 0
-      ? (lengthM * widthM * qty) / TRAILER_WIDTH_M / factor
-      : 0;
-
   // Vehicle resolution
   const vehicle: Vehicle | null = VEHICLE_MAP[vehicleId] ?? null;
   const vehicleLengthM: number | null = vehicle?.lengthM ?? customVehicleLengthM ?? null;
+  const trailerWidthM = vehicle?.widthM ?? DEFAULT_TRAILER_WIDTH_M;
+
+  // Core LDM formula — divisor is vehicle-specific width
+  const ldm =
+    lengthM > 0 && widthM > 0 && qty > 0
+      ? (lengthM * widthM * qty) / trailerWidthM / factor
+      : 0;
 
   const vehicleInfo = {
     name: vehicle?.name ?? 'Custom Vehicle',

@@ -133,7 +133,7 @@ export default function IncotermsPage() {
                 padding: '2px 8px',
                 borderRadius: 20,
               }}>
-                Sea only
+                Sea &amp; Inland Waterway
               </span>
             </Link>
           ))}
@@ -164,10 +164,10 @@ export default function IncotermsPage() {
                 ['DAP', 'Destination', 'Yes', 'No', 'No', 'Any'],
                 ['DPU', 'Destination (unloaded)', 'Yes', 'No', 'No', 'Any'],
                 ['DDP', 'Destination', 'Yes', 'Yes', 'Yes', 'Any'],
-                ['FAS', 'Alongside ship', 'No', 'No', 'No', 'Sea'],
-                ['FOB', 'On board vessel', 'No', 'No', 'No', 'Sea'],
-                ['CFR', 'On board vessel', 'Yes', 'No', 'No', 'Sea'],
-                ['CIF', 'On board vessel', 'Yes', 'Yes (Clause C)', 'No', 'Sea'],
+                ['FAS', 'Alongside ship', 'No', 'No', 'No', 'Sea & IW'],
+                ['FOB', 'On board vessel', 'No', 'No', 'No', 'Sea & IW'],
+                ['CFR', 'On board vessel', 'Yes', 'No', 'No', 'Sea & IW'],
+                ['CIF', 'On board vessel', 'Yes', 'Yes (Clause C)', 'No', 'Sea & IW'],
               ].map(([term, risk, transport, insurance, importCl, mode]) => (
                 <tr key={term}>
                   <td><strong>{term}</strong></td>

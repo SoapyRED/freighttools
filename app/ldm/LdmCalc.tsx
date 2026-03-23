@@ -86,7 +86,7 @@ export default function LdmCalc() {
           Loading Metres <span style={{ color: '#e87722' }}>Calculator</span>
         </h1>
         <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 500, margin: '0 auto' }}>
-          Calculate LDM for UK road freight — free, instant, no signup
+          Calculate loading metres for road freight — European and North American trailer standards
         </p>
       </div>
 
@@ -305,10 +305,10 @@ export default function LdmCalc() {
               What Are Loading Metres?
             </h2>
             <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
-              A <strong style={{ color: '#1e2535' }}>loading metre (LDM)</strong> is the standard unit used across the UK and Europe to measure the floor space a consignment occupies in a road freight trailer. One loading metre represents a strip of trailer floor that is <strong style={{ color: '#1e2535' }}>1 metre long and the full width of the trailer</strong> (typically 2.4 metres wide).
+              A <strong style={{ color: '#1e2535' }}>loading metre (LDM)</strong> is the standard unit used to measure the floor space a consignment occupies in a road freight trailer. One loading metre represents a strip of trailer floor that is <strong style={{ color: '#1e2535' }}>1 metre long and the full width of the trailer</strong>.
             </p>
             <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
-              Unlike CBM (cubic metres), which measures total volume, LDM measures only floor area. This matters because road freight is priced by floor space: a tall, light pallet takes up the same LDM as a short, heavy one.
+              The standard European trailer width is 2.4m (EN 283), while North American 53ft trailers are 2.59m (102 inches) wide. This calculator automatically adjusts the divisor based on your selected vehicle type. Unlike CBM (cubic metres), which measures total volume, LDM measures only floor area — a tall, light pallet takes up the same LDM as a short, heavy one.
             </p>
 
             <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>The Loading Metres Formula</h3>
