@@ -16,6 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/adr`,               changeFrequency: 'yearly',  priority: 0.8 },
     { url: `${BASE}/chargeable-weight`, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/pallet`,            changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/airlines`,          changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/incoterms`,         changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/containers`,        changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/convert`,           changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/adr-calculator`,    changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/api-docs`,          changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/about`,             changeFrequency: 'monthly', priority: 0.5 },
   ];
@@ -33,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const containerRoutes: MetadataRoute.Sitemap = containersData.map(c => ({
-    url: `${BASE}/cbm/${c.slug}`,
+    url: `${BASE}/containers/${c.slug}`,
     changeFrequency: 'yearly' as const,
     priority: 0.6,
   }));

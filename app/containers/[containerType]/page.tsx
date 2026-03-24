@@ -160,8 +160,8 @@ export default async function ContainerDetailPage(
             <SpecRow label="Max Gross Weight" value={`${spec.maxGrossKg.toLocaleString()} kg`} />
             <SpecRow label="Max Payload" value={`${spec.maxPayloadKg.toLocaleString()} kg`} />
             <SpecRow label="CBM Capacity" value={`${spec.capacityCbm} m\u00b3`} />
-            <SpecRow label="Euro Pallets" value={spec.euroPallets} />
-            <SpecRow label="GMA Pallets" value={spec.gmaPallets} />
+            <SpecRow label="EUR Pallets (1200×800mm)" value={spec.euroPallets} />
+            <SpecRow label="GMA Pallets (48×40in)" value={spec.gmaPallets} />
           </div>
         </div>
 

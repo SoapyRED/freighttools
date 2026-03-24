@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { convert, UNITS } from '@/lib/calculations/converter';
+import { convert, UNITS, FREIGHT_CONVERSIONS } from '@/lib/calculations/converter';
 
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
 const CACHE = { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' };
@@ -13,11 +13,13 @@ export function GET(req: NextRequest) {
   const from = searchParams.get('from');
   const to = searchParams.get('to');
 
+  const freightTargets = Object.keys(FREIGHT_CONVERSIONS).map(k => k.split('->')[1]);
+
   if (!valueStr || !from || !to) {
     return NextResponse.json({
       error: 'Missing required parameters.',
       usage: '?value=100&from=kg&to=lbs',
-      supported_units: Object.keys(UNITS),
+      supported_units: [...Object.keys(UNITS), ...freightTargets],
     }, { status: 400, headers: h });
   }
 

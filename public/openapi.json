@@ -756,6 +756,157 @@
           }
         }
       }
+    },
+    "/api/containers": {
+      "get": {
+        "operationId": "getContainers",
+        "summary": "Container Capacity Reference",
+        "description": "Shipping container specifications for all 10 standard ISO container types. Returns dimensions, weights, door openings, and pallet capacity. Optionally calculate how many items of given dimensions fit in a specific container.",
+        "tags": ["Reference Data"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Container type slug. Omit to list all containers.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["20ft-standard", "40ft-standard", "20ft-high-cube", "40ft-high-cube", "20ft-open-top", "40ft-open-top", "20ft-flat-rack", "40ft-flat-rack", "20ft-reefer", "40ft-reefer"]
+            },
+            "example": "40ft-high-cube"
+          },
+          {
+            "name": "l",
+            "in": "query",
+            "description": "Item length in centimetres. Requires type, w, and h for loading calculation.",
+            "required": false,
+            "schema": { "type": "number" },
+            "example": 60
+          },
+          {
+            "name": "w",
+            "in": "query",
+            "description": "Item width in centimetres.",
+            "required": false,
+            "schema": { "type": "number" },
+            "example": 40
+          },
+          {
+            "name": "h",
+            "in": "query",
+            "description": "Item height in centimetres.",
+            "required": false,
+            "schema": { "type": "number" },
+            "example": 40
+          },
+          {
+            "name": "wt",
+            "in": "query",
+            "description": "Item weight in kilograms.",
+            "required": false,
+            "schema": { "type": "number" },
+            "example": 15
+          },
+          {
+            "name": "qty",
+            "in": "query",
+            "description": "Number of items.",
+            "required": false,
+            "schema": { "type": "integer", "default": 1 },
+            "example": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Container specifications or loading calculation result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/ContainerListResponse" },
+                    { "$ref": "#/components/schemas/ContainerSpec" },
+                    { "$ref": "#/components/schemas/ContainerLoadingResponse" }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "Container type not found.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/convert": {
+      "get": {
+        "operationId": "convertUnits",
+        "summary": "Unit Converter",
+        "description": "Convert between freight-relevant units — weights, volumes, lengths, and freight-specific conversions (CBM to chargeable weight using IATA 6000 divisor, CBM to freight tonnes using W/M rule).",
+        "tags": ["Calculators"],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "query",
+            "description": "The number to convert.",
+            "required": true,
+            "schema": { "type": "number" },
+            "example": 100
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Source unit code.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["kg", "lbs", "oz", "tonnes", "short_tons", "long_tons", "cbm", "cuft", "cuin", "litres", "gal_us", "gal_uk", "cm", "inches", "m", "feet", "mm"]
+            },
+            "example": "kg"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Target unit code. Includes freight-specific targets: chargeable_kg (from cbm only) and freight_tonnes (from cbm only).",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["kg", "lbs", "oz", "tonnes", "short_tons", "long_tons", "cbm", "cuft", "cuin", "litres", "gal_us", "gal_uk", "cm", "inches", "m", "feet", "mm", "chargeable_kg", "freight_tonnes"]
+            },
+            "example": "lbs"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Conversion result.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ConversionResult" }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1551,6 +1702,85 @@
           }
         },
         "required": ["count", "results"]
+      },
+      "ContainerSpec": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "Container type name.", "example": "40ft High Cube" },
+          "slug": { "type": "string", "description": "URL-friendly identifier.", "example": "40ft-high-cube" },
+          "internalLengthCm": { "type": "number", "description": "Internal length in cm.", "example": 1203 },
+          "internalWidthCm": { "type": "number", "description": "Internal width in cm.", "example": 235 },
+          "internalHeightCm": { "type": "number", "description": "Internal height in cm.", "example": 269 },
+          "externalLengthCm": { "type": "number", "description": "External length in cm.", "example": 1219 },
+          "externalWidthCm": { "type": "number", "description": "External width in cm.", "example": 244 },
+          "externalHeightCm": { "type": "number", "description": "External height in cm.", "example": 290 },
+          "doorWidthCm": { "type": "number", "nullable": true, "description": "Door opening width in cm.", "example": 234 },
+          "doorHeightCm": { "type": "number", "nullable": true, "description": "Door opening height in cm.", "example": 263 },
+          "capacityCbm": { "type": "number", "description": "Internal volume in CBM.", "example": 76.2 },
+          "tareWeightKg": { "type": "number", "description": "Empty container weight in kg.", "example": 3900 },
+          "maxGrossKg": { "type": "number", "description": "Maximum gross weight in kg.", "example": 30480 },
+          "maxPayloadKg": { "type": "number", "description": "Maximum cargo weight in kg.", "example": 26580 },
+          "euroPallets": { "type": "string", "description": "Number of EUR pallets (1200x800mm) that fit.", "example": "25" },
+          "gmaPallets": { "type": "string", "description": "Number of GMA pallets (48x40in) that fit.", "example": "20" },
+          "description": { "type": "string", "description": "Container description." },
+          "notes": { "type": "string", "description": "Usage notes." }
+        },
+        "required": ["name", "slug", "internalLengthCm", "internalWidthCm", "internalHeightCm", "capacityCbm", "tareWeightKg", "maxGrossKg", "maxPayloadKg", "euroPallets", "gmaPallets"]
+      },
+      "ContainerListResponse": {
+        "type": "object",
+        "properties": {
+          "count": { "type": "integer", "description": "Number of containers.", "example": 10 },
+          "results": { "type": "array", "items": { "$ref": "#/components/schemas/ContainerSpec" } }
+        },
+        "required": ["count", "results"]
+      },
+      "ContainerLoadingResponse": {
+        "type": "object",
+        "properties": {
+          "container": { "$ref": "#/components/schemas/ContainerSpec" },
+          "loading": {
+            "type": "object",
+            "properties": {
+              "fits_lengthwise": { "type": "integer", "description": "Items fitting along the length." },
+              "fits_widthwise": { "type": "integer", "description": "Items fitting along the width." },
+              "fits_height": { "type": "integer", "description": "Items fitting in height." },
+              "max_items": { "type": "integer", "description": "Maximum items that physically fit." },
+              "requested_qty": { "type": "integer", "description": "Quantity requested." },
+              "fits": { "type": "boolean", "description": "Whether all requested items fit." },
+              "total_weight_kg": { "type": "number", "description": "Total weight of loaded items." },
+              "within_payload": { "type": "boolean", "description": "Whether total weight is within payload limit." },
+              "utilisation_percent": { "type": "number", "description": "Volume utilisation percentage." }
+            }
+          }
+        },
+        "required": ["container", "loading"]
+      },
+      "ConversionResult": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number", "description": "Input value.", "example": 100 },
+              "unit": { "type": "string", "description": "Input unit code.", "example": "kg" },
+              "name": { "type": "string", "description": "Input unit name.", "example": "Kilograms" }
+            },
+            "required": ["value", "unit", "name"]
+          },
+          "result": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number", "description": "Converted value.", "example": 220.462 },
+              "unit": { "type": "string", "description": "Output unit code.", "example": "lbs" },
+              "name": { "type": "string", "description": "Output unit name.", "example": "Pounds" }
+            },
+            "required": ["value", "unit", "name"]
+          },
+          "formula": { "type": "string", "description": "Human-readable conversion formula.", "example": "Kilograms × 2.20462 = Pounds" },
+          "note": { "type": "string", "description": "Additional context for freight-specific conversions." }
+        },
+        "required": ["input", "result", "formula"]
       }
     }
   }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { UNITS, convert, type UnitDef } from '@/lib/calculations/converter';
+import { UNITS, convert, FREIGHT_CONVERSIONS, type UnitDef } from '@/lib/calculations/converter';
 
 // ─── shared micro-styles ──────────────────────────────────────────
 const inputStyle: React.CSSProperties = {
@@ -35,15 +35,27 @@ const selectStyle: React.CSSProperties = {
   appearance: 'auto',
 };
 
+// ─── Freight-specific virtual units for the "To" dropdown ────────
+const FREIGHT_UNITS: UnitDef[] = [
+  { code: 'chargeable_kg', name: 'Chargeable Weight (kg)', group: 'freight', symbol: 'kg' },
+  { code: 'freight_tonnes', name: 'Freight Tonnes (W/M)', group: 'freight', symbol: 'FT' },
+];
+
 // ─── Unit groups for <optgroup> ───────────────────────────────────
 const GROUPS: { label: string; group: string }[] = [
+  { label: 'Freight', group: 'freight' },
   { label: 'Weight', group: 'weight' },
   { label: 'Volume', group: 'volume' },
   { label: 'Length', group: 'length' },
 ];
 
 function unitsByGroup(group: string): UnitDef[] {
+  if (group === 'freight') return FREIGHT_UNITS;
   return Object.values(UNITS).filter(u => u.group === group);
+}
+
+function isFreightConversion(from: string, to: string): boolean {
+  return `${from}->${to}` in FREIGHT_CONVERSIONS;
 }
 
 // ─── Props ────────────────────────────────────────────────────────
@@ -58,22 +70,35 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
   const [from, setFrom] = useState(defaultFrom);
   const [to, setTo] = useState(defaultTo);
 
-  // Keep "to" in the same group when "from" changes
+  // Keep "to" in the same group when "from" changes (unless freight cross-group)
   function handleFromChange(newFrom: string) {
     const newUnit = UNITS[newFrom];
-    const toUnit = UNITS[to];
+    const toUnit = UNITS[to] || FREIGHT_UNITS.find(u => u.code === to);
     setFrom(newFrom);
+    // Allow freight conversions (cbm -> chargeable_kg/freight_tonnes)
+    if (toUnit && toUnit.group === 'freight') {
+      if (!isFreightConversion(newFrom, to)) {
+        // Switch to first valid freight target or same-group unit
+        const sameGroup = Object.values(UNITS).filter(u => u.group === newUnit?.group && u.code !== newFrom);
+        if (sameGroup.length > 0) setTo(sameGroup[0].code);
+      }
+      return;
+    }
     if (newUnit && toUnit && newUnit.group !== toUnit.group) {
-      // Pick the first unit in the same group that isn't the same code
       const sameGroup = Object.values(UNITS).filter(u => u.group === newUnit.group && u.code !== newFrom);
       if (sameGroup.length > 0) setTo(sameGroup[0].code);
     }
   }
 
   function handleToChange(newTo: string) {
-    const newUnit = UNITS[newTo];
+    const newUnit = UNITS[newTo] || FREIGHT_UNITS.find(u => u.code === newTo);
     const fromUnit = UNITS[from];
     setTo(newTo);
+    // Freight target selected — ensure from=cbm
+    if (newUnit && newUnit.group === 'freight') {
+      if (from !== 'cbm') setFrom('cbm');
+      return;
+    }
     if (newUnit && fromUnit && newUnit.group !== fromUnit.group) {
       const sameGroup = Object.values(UNITS).filter(u => u.group === newUnit.group && u.code !== newTo);
       if (sameGroup.length > 0) setFrom(sameGroup[0].code);
@@ -234,11 +259,19 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
             </div>
             <div style={{ fontSize: 'clamp(40px, 10vw, 64px)', fontWeight: 800, color: '#1a2332', lineHeight: 1, letterSpacing: '-2px' }}>
               {formatResult(result.result.value)}
-              <span style={{ fontSize: 22, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> {UNITS[to]?.symbol}</span>
+              <span style={{ fontSize: 22, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> {UNITS[to]?.symbol ?? FREIGHT_UNITS.find(u => u.code === to)?.symbol ?? ''}</span>
             </div>
             <div style={{ marginTop: 14, fontSize: 14, color: '#5a6478', fontFamily: 'monospace', background: '#f7f8fa', display: 'inline-block', padding: '6px 14px', borderRadius: 6 }}>
               {result.formula}
             </div>
+            {(() => {
+              const r = result as unknown as Record<string, unknown>;
+              return 'note' in r && r.note ? (
+                <p style={{ marginTop: 12, fontSize: 13, color: '#5a6478', lineHeight: 1.6, maxWidth: 500, marginLeft: 'auto', marginRight: 'auto' }}>
+                  {String(r.note)}
+                </p>
+              ) : null;
+            })()}
           </div>
         )}
       </div>

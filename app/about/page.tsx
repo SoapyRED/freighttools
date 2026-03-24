@@ -6,7 +6,7 @@ const ogUrl = '/api/og?title=About+FreightUtils&desc=Free+freight+calculators+an
 export const metadata: Metadata = {
   title: 'About FreightUtils — Free Freight Tools & API Platform',
   description:
-    'FreightUtils provides 8 free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. LDM, CBM, chargeable weight, pallet fitting, ADR lookup, ADR exemption calculator, airline codes, and INCOTERMS reference.',
+    'FreightUtils provides 10 free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. LDM, CBM, chargeable weight, pallet fitting, ADR lookup, ADR exemption calculator, airline codes, INCOTERMS reference, container capacity, and unit converter.',
   alternates: { canonical: 'https://www.freightutils.com/about' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'About FreightUtils' }],
@@ -95,6 +95,8 @@ export default function AboutPage() {
               { name: 'ADR Exemption Calc', href: '/adr-calculator' },
               { name: 'Airline Codes', href: '/airlines' },
               { name: 'INCOTERMS 2020', href: '/incoterms' },
+              { name: 'Container Capacity', href: '/containers' },
+              { name: 'Unit Converter', href: '/convert' },
             ].map(t => (
               <Link key={t.href} href={t.href} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
@@ -158,7 +160,9 @@ export default function AboutPage() {
             GET /api/adr?un=1203<br />
             GET /api/adr-calculator?un=1203&amp;qty=200<br />
             GET /api/airlines?prefix=176<br />
-            GET /api/incoterms?code=FOB
+            GET /api/incoterms?code=FOB<br />
+            GET /api/containers?type=40ft-high-cube<br />
+            GET /api/convert?value=100&amp;from=kg&amp;to=lbs
           </div>
         </Section>
 

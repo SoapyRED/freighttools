@@ -44,7 +44,7 @@ export default function ContainersPage() {
           <table className="ref-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
             <thead>
               <tr style={{ background: '#1a2332', color: '#fff' }}>
-                {['Type', 'Internal L\u00d7W\u00d7H (cm)', 'CBM', 'Tare (kg)', 'Max Payload (kg)', 'Door W\u00d7H (cm)', 'Euro Pallets'].map(h => (
+                {['Type', 'Internal L\u00d7W\u00d7H (cm)', 'CBM', 'Tare (kg)', 'Max Payload (kg)', 'Door W\u00d7H (cm)', 'EUR Pallets (1200\u00d7800mm)'].map(h => (
                   <th key={h} style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px', whiteSpace: 'nowrap' }}>{h}</th>
                 ))}
               </tr>
@@ -75,7 +75,7 @@ export default function ContainersPage() {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
             <thead>
               <tr style={{ background: '#1a2332', color: '#fff' }}>
-                {['Container', 'Euro Pallets (1200\u00d7800mm)', 'GMA Pallets (48\u00d740in)'].map(h => (
+                {['Container', 'EUR Pallets (1200\u00d7800mm)', 'GMA Pallets (48\u00d740in)'].map(h => (
                   <th key={h} style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px', whiteSpace: 'nowrap' }}>{h}</th>
                 ))}
               </tr>

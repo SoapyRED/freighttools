@@ -5,6 +5,20 @@
 
 export type UnitGroup = 'weight' | 'volume' | 'length' | 'freight';
 
+// Freight-specific virtual unit codes (cross-group conversions)
+export const FREIGHT_CONVERSIONS: Record<string, { from: string; formula: (v: number) => number; note: string }> = {
+  'cbm->chargeable_kg': {
+    from: 'cbm',
+    formula: (v) => Math.round(v * 166.67 * 100) / 100,
+    note: 'IATA volumetric weight: 1 CBM = 166.67 kg (divisor 6000). Compare against actual weight — the higher figure is chargeable.',
+  },
+  'cbm->freight_tonnes': {
+    from: 'cbm',
+    formula: (v) => Math.round(v * 1 * 1000000) / 1000000,
+    note: 'W/M rule: 1 CBM = 1 freight tonne (revenue tonne). Carrier charges whichever is greater — 1 CBM or 1,000 kg.',
+  },
+};
+
 export interface UnitDef {
   code: string;
   name: string;
@@ -47,11 +61,29 @@ export interface ConversionResult {
 }
 
 export function convert(value: number, from: string, to: string): ConversionResult | { error: string } {
+  // Check for freight-specific cross-group conversions first
+  const freightKey = `${from}->${to}`;
+  const freight = FREIGHT_CONVERSIONS[freightKey];
+  if (freight) {
+    const result = freight.formula(value);
+    const fromUnit = UNITS[from];
+    const toName = to === 'chargeable_kg' ? 'Chargeable Weight (kg)' : 'Freight Tonnes';
+    const toSymbol = to === 'chargeable_kg' ? 'kg' : 'FT';
+    return {
+      input: { value, unit: from, name: fromUnit?.name ?? from },
+      result: { value: result, unit: to, name: toName },
+      formula: to === 'chargeable_kg'
+        ? `${fromUnit?.name ?? from} \u00D7 166.67 = ${toName}`
+        : `${fromUnit?.name ?? from} \u00D7 1 = ${toName}`,
+      note: freight.note,
+    } as ConversionResult & { note: string };
+  }
+
   const fromUnit = UNITS[from];
   const toUnit = UNITS[to];
 
-  if (!fromUnit) return { error: `Unknown unit "${from}". Valid: ${Object.keys(UNITS).join(', ')}` };
-  if (!toUnit) return { error: `Unknown unit "${to}". Valid: ${Object.keys(UNITS).join(', ')}` };
+  if (!fromUnit) return { error: `Unknown unit "${from}". Valid: ${[...Object.keys(UNITS), 'chargeable_kg', 'freight_tonnes'].join(', ')}` };
+  if (!toUnit) return { error: `Unknown unit "${to}". Valid: ${[...Object.keys(UNITS), 'chargeable_kg', 'freight_tonnes'].join(', ')}` };
   if (fromUnit.group !== toUnit.group) {
     return { error: `Cannot convert ${fromUnit.group} (${from}) to ${toUnit.group} (${to}). Units must be in the same category.` };
   }
@@ -75,33 +107,6 @@ export function convert(value: number, from: string, to: string): ConversionResu
   };
 }
 
-// Common conversion pairs for SEO pages
-export interface ConversionPair {
-  slug: string;
-  from: string;
-  to: string;
-  title: string;
-  description: string;
-}
-
-export const CONVERSION_PAIRS: ConversionPair[] = [
-  { slug: 'kg-to-lbs', from: 'kg', to: 'lbs', title: 'Kilograms to Pounds', description: 'Convert kg to lbs for freight weight calculations.' },
-  { slug: 'lbs-to-kg', from: 'lbs', to: 'kg', title: 'Pounds to Kilograms', description: 'Convert lbs to kg for international shipping.' },
-  { slug: 'cbm-to-cubic-feet', from: 'cbm', to: 'cuft', title: 'CBM to Cubic Feet', description: 'Convert cubic metres to cubic feet for US freight quotes.' },
-  { slug: 'cubic-feet-to-cbm', from: 'cuft', to: 'cbm', title: 'Cubic Feet to CBM', description: 'Convert cubic feet to CBM for international shipping.' },
-  { slug: 'tonnes-to-short-tons', from: 'tonnes', to: 'short_tons', title: 'Metric Tonnes to Short Tons', description: 'Convert metric tonnes to US short tons.' },
-  { slug: 'cm-to-inches', from: 'cm', to: 'inches', title: 'Centimetres to Inches', description: 'Convert cm to inches for freight dimensions.' },
-  { slug: 'm-to-feet', from: 'm', to: 'feet', title: 'Metres to Feet', description: 'Convert metres to feet for warehouse and trailer measurements.' },
-  { slug: 'litres-to-gallons', from: 'litres', to: 'gal_us', title: 'Litres to US Gallons', description: 'Convert litres to US gallons.' },
-];
-
-export function getAllConversionSlugs(): string[] {
-  return CONVERSION_PAIRS.map(p => p.slug);
-}
-
-export function lookupConversionPair(slug: string): ConversionPair | null {
-  return CONVERSION_PAIRS.find(p => p.slug === slug) ?? null;
-}
 
 // Generate a common values table for a conversion pair
 export function generateConversionTable(from: string, to: string): Array<{ input: number; output: number }> {

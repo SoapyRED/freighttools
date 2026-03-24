@@ -3,14 +3,14 @@ import Link from 'next/link';
 import AdUnit from '@/app/components/AdUnit';
 import ConvertTool from './ConvertTool';
 
-const ogUrl = '/api/og?title=Weight+%26+Dimension+Converter&desc=Freight+unit+conversions&api=GET+/api/convert';
+const ogUrl = '/api/og?title=Freight+Unit+Converter&desc=Chargeable+weight,+freight+tonnes,+and+standard+conversions&api=GET+/api/convert';
 
 export const metadata: Metadata = {
-  title: 'Freight Weight & Dimension Converter | FreightUtils',
-  description: 'Free freight unit converter — convert between kg/lbs, CBM/cubic feet, cm/inches, tonnes/short tons, and more. Common conversion tables included. Free REST API.',
+  title: 'Freight Unit Converter — Chargeable Weight, Freight Tonnes & More | FreightUtils',
+  description: 'Free freight unit converter — CBM to chargeable weight (IATA 6000), CBM to freight tonnes (W/M rule), plus kg/lbs, CBM/cubic feet, cm/inches and more. Free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/convert' },
   openGraph: {
-    images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Weight & Dimension Converter — FreightUtils' }],
+    images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Freight Unit Converter — FreightUtils' }],
   },
   twitter: { card: 'summary_large_image', images: [ogUrl] },
 };
@@ -25,17 +25,85 @@ export default function ConvertPage() {
         textAlign: 'center',
       }}>
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          Weight &amp; Dimension <span style={{ color: '#e87722' }}>Converter</span>
+          Freight Unit <span style={{ color: '#e87722' }}>Converter</span>
         </h1>
         <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 560, margin: '0 auto' }}>
-          Convert between metric and imperial units used in freight — weights, volumes, lengths, and freight-specific calculations
+          Freight-specific conversions Google can&apos;t answer — chargeable weight, freight tonnes, plus all standard weight, volume, and length conversions
         </p>
       </div>
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
+        {/* ── Featured Freight Conversions ── */}
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          Freight-Specific Conversions
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 40 }}>
+          {/* CBM → Chargeable Weight */}
+          <div style={{
+            background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, padding: '20px 22px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+          }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722', marginBottom: 8 }}>
+              Air Freight
+            </div>
+            <div style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', marginBottom: 6 }}>
+              CBM &rarr; Chargeable Weight (kg)
+            </div>
+            <p style={{ fontSize: 13, color: '#5a6478', lineHeight: 1.6, marginBottom: 10 }}>
+              IATA volumetric: 1 CBM = 166.67 kg (divisor 6000). The higher of actual weight vs volumetric weight is chargeable.
+            </p>
+            <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#1a2332', background: '#f7f8fa', padding: '6px 12px', borderRadius: 6 }}>
+              1 CBM &times; 166.67 = 166.67 kg
+            </div>
+          </div>
+
+          {/* CBM → Freight Tonnes */}
+          <div style={{
+            background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, padding: '20px 22px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+          }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722', marginBottom: 8 }}>
+              Sea Freight
+            </div>
+            <div style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', marginBottom: 6 }}>
+              CBM &rarr; Freight Tonnes (W/M)
+            </div>
+            <p style={{ fontSize: 13, color: '#5a6478', lineHeight: 1.6, marginBottom: 10 }}>
+              W/M rule: 1 CBM = 1 freight tonne (revenue tonne). Carrier charges whichever is greater — 1 CBM or 1,000 kg.
+            </p>
+            <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#1a2332', background: '#f7f8fa', padding: '6px 12px', borderRadius: 6 }}>
+              1 CBM &times; 1 = 1 freight tonne
+            </div>
+          </div>
+
+          {/* Actual vs Volumetric */}
+          <div style={{
+            background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, padding: '20px 22px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+          }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722', marginBottom: 8 }}>
+              Chargeable Weight
+            </div>
+            <div style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', marginBottom: 6 }}>
+              Actual vs Volumetric Weight
+            </div>
+            <p style={{ fontSize: 13, color: '#5a6478', lineHeight: 1.6, marginBottom: 10 }}>
+              Air carriers charge on whichever is higher. Use our dedicated calculator for multi-piece shipments with different dimensions.
+            </p>
+            <Link href="/chargeable-weight" style={{
+              display: 'inline-block', fontSize: 13, fontWeight: 600, color: '#e87722', textDecoration: 'none',
+            }}>
+              Chargeable Weight Calculator &rarr;
+            </Link>
+          </div>
+        </div>
+
         {/* Interactive converter */}
-        <ConvertTool />
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          Convert Any Unit
+        </h2>
+        <ConvertTool defaultFrom="cbm" defaultTo="chargeable_kg" />
 
         {/* ── Reference Tables ── */}
 
@@ -137,22 +205,28 @@ export default function ConvertPage() {
         <div style={{ marginTop: 56 }}>
 
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
-            Why Freight Uses Different Units
+            Understanding Chargeable Weight
           </h2>
           <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
-            Global freight operates across metric and imperial systems. European and Asian trade uses metric (kg, cm, CBM), while the US uses imperial (lbs, inches, cubic feet). Sea freight quotes in CBM and metric tonnes; US domestic trucking quotes in lbs and cubic feet.
-          </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
-            Mismatched units lead to quoting errors, customs holds, and carrier surcharges. A reliable converter eliminates rounding mistakes and ensures your commercial invoice, packing list, and bill of lading all agree.
+            Air freight carriers charge on whichever is higher: actual gross weight or volumetric weight. Volumetric weight is calculated by dividing the cubic centimetre volume by a divisor (6,000 for IATA standard, 5,000 for express couriers). Light, bulky cargo always pays on volume. Use our{' '}
+            <Link href="/chargeable-weight" style={{ color: '#e87722', textDecoration: 'underline' }}>chargeable weight calculator</Link>{' '}
+            for multi-piece shipments.
           </p>
 
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
-            Freight Tonne vs Metric Tonne
+            The W/M Rule in Sea Freight
           </h2>
           <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
-            In sea freight, the &ldquo;freight tonne&rdquo; or &ldquo;revenue tonne&rdquo; follows the W/M rule — whichever is greater: 1 metric tonne (1,000 kg) or 1 CBM. Carriers charge per freight tonne, so a light but bulky shipment pays on volume while a dense shipment pays on weight. Use our{' '}
+            Ocean carriers price per &ldquo;freight tonne&rdquo; (revenue tonne) using the W/M rule — <strong>W</strong>eight or <strong>M</strong>easurement, whichever yields higher revenue. 1 freight tonne = 1 CBM or 1,000 kg. A 2 CBM shipment weighing 500 kg pays for 2 freight tonnes (volume-based). A 0.5 CBM shipment weighing 2,000 kg pays for 2 freight tonnes (weight-based). Use our{' '}
             <Link href="/cbm" style={{ color: '#e87722', textDecoration: 'underline' }}>CBM calculator</Link>{' '}
-            to determine the volume side of the equation.
+            to get the volume side.
+          </p>
+
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            Metric vs Imperial in Global Freight
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            European and Asian trade uses metric (kg, cm, CBM). The US uses imperial (lbs, inches, cubic feet). Sea freight quotes in CBM and metric tonnes; US domestic trucking quotes in lbs and cubic feet. Mismatched units cause quoting errors, customs holds, and carrier surcharges.
           </p>
 
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
@@ -171,9 +245,15 @@ export default function ConvertPage() {
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
             <details className="faq-item">
-              <summary>How many pounds in a kilogram?</summary>
+              <summary>How do I calculate chargeable weight for air freight?</summary>
               <div className="faq-answer">
-                1 kg = 2.20462 lbs. This is the most common conversion in international freight — metric countries ship in kilograms, while US carriers and customs declarations often require pounds.
+                Multiply L &times; W &times; H (in cm) and divide by 6,000 to get the volumetric weight in kg. Compare this to the actual gross weight — the higher figure is chargeable. For express carriers (DHL, FedEx, UPS), use a divisor of 5,000 instead. Our <Link href="/chargeable-weight" style={{ color: '#e87722', textDecoration: 'underline' }}>chargeable weight calculator</Link> handles multi-piece shipments automatically.
+              </div>
+            </details>
+            <details className="faq-item">
+              <summary>What is a freight tonne?</summary>
+              <div className="faq-answer">
+                In sea freight, a <strong>freight tonne</strong> (also revenue tonne) equals 1 CBM or 1,000 kg, whichever is greater. This is the billing unit for ocean freight. If your cargo weighs 800 kg but occupies 1.5 CBM, you pay for 1.5 freight tonnes.
               </div>
             </details>
             <details className="faq-item">
@@ -186,12 +266,6 @@ export default function ConvertPage() {
               <summary>How do I convert CBM to cubic feet?</summary>
               <div className="faq-answer">
                 Multiply CBM by 35.3147. For example, 2 CBM = 70.63 cubic feet. This conversion is needed when moving between international (CBM) and US domestic (cubic feet) freight quotes.
-              </div>
-            </details>
-            <details className="faq-item">
-              <summary>What is a freight tonne?</summary>
-              <div className="faq-answer">
-                In sea freight, a <strong>freight tonne</strong> (also revenue tonne) equals 1 CBM or 1,000 kg, whichever is greater. This is the billing unit for ocean freight. If your cargo weighs 800 kg but occupies 1.5 CBM, you pay for 1.5 freight tonnes.
               </div>
             </details>
           </div>
@@ -215,7 +289,7 @@ export default function ConvertPage() {
               Building something? Use the API.
             </div>
             <code style={{ color: '#e87722', fontSize: 13 }}>
-              GET /api/convert?value=100&amp;from=kg&amp;to=lbs
+              GET /api/convert?value=10&amp;from=cbm&amp;to=chargeable_kg
             </code>
           </div>
           <Link
@@ -242,7 +316,7 @@ export default function ConvertPage() {
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
-          Conversion factors are standard mathematical constants. Always verify unit requirements with your carrier or customs authority.
+          Conversion factors are standard mathematical constants. Freight-specific calculations use IATA standard divisor (6000). Always verify unit requirements with your carrier or customs authority.
         </p>
 
       </main>
