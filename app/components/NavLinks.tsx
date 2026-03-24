@@ -13,6 +13,8 @@ const navLinks = [
   { href: '/adr-calculator', label: 'ADR Calc' },
   { href: '/airlines', label: 'Airlines' },
   { href: '/incoterms', label: 'INCOTERMS' },
+  { href: '/containers', label: 'Containers' },
+  { href: '/convert', label: 'Converter' },
   { href: '/api-docs', label: 'API Docs' },
   { href: '/about', label: 'About' },
 ];

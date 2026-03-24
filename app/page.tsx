@@ -17,6 +17,8 @@ const tools = [
   { href: '/adr-calculator', label: '/api/adr-calculator', title: 'ADR Exemption Calculator', desc: 'Calculate 1.1.3.6 exemption points for mixed DG loads', icon: '🧮' },
   { href: '/airlines', label: '/api/airlines', title: 'Airline Codes & AWB Prefixes', desc: 'Search airlines by name, IATA/ICAO code, or AWB prefix', icon: '✈️' },
   { href: '/incoterms', label: '/api/incoterms', title: 'INCOTERMS 2020', desc: 'All 11 trade terms — who pays, who bears risk, where responsibility transfers', icon: '📋' },
+  { href: '/containers', label: '/api/containers', title: 'Container Capacity', desc: 'Shipping container dimensions, weights, and loading calculator', icon: '🚢' },
+  { href: '/convert', label: '/api/convert', title: 'Unit Converter', desc: 'Convert freight weights, volumes, and dimensions between metric and imperial', icon: '🔄' },
 ];
 
 const dataSources = [

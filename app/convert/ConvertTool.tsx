@@ -1,0 +1,247 @@
+'use client';
+
+import { useState, useMemo } from 'react';
+import { UNITS, convert, type UnitDef } from '@/lib/calculations/converter';
+
+// ─── shared micro-styles ──────────────────────────────────────────
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  padding: '10px 14px',
+  fontFamily: "'Outfit', sans-serif",
+  fontSize: 15,
+  fontWeight: 500,
+  color: '#1e2535',
+  background: '#fff',
+  border: '1.5px solid #d8dce6',
+  borderRadius: 8,
+  outline: 'none',
+  boxSizing: 'border-box',
+  transition: 'border-color 0.15s, box-shadow 0.15s',
+};
+
+const labelStyle: React.CSSProperties = {
+  fontSize: 12,
+  fontWeight: 700,
+  textTransform: 'uppercase',
+  letterSpacing: '0.4px',
+  color: '#5a6478',
+  marginBottom: 6,
+  display: 'block',
+};
+
+const selectStyle: React.CSSProperties = {
+  ...inputStyle,
+  cursor: 'pointer',
+  appearance: 'auto',
+};
+
+// ─── Unit groups for <optgroup> ───────────────────────────────────
+const GROUPS: { label: string; group: string }[] = [
+  { label: 'Weight', group: 'weight' },
+  { label: 'Volume', group: 'volume' },
+  { label: 'Length', group: 'length' },
+];
+
+function unitsByGroup(group: string): UnitDef[] {
+  return Object.values(UNITS).filter(u => u.group === group);
+}
+
+// ─── Props ────────────────────────────────────────────────────────
+interface Props {
+  defaultFrom?: string;
+  defaultTo?: string;
+}
+
+// ─── Component ────────────────────────────────────────────────────
+export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: Props) {
+  const [value, setValue] = useState('1');
+  const [from, setFrom] = useState(defaultFrom);
+  const [to, setTo] = useState(defaultTo);
+
+  // Keep "to" in the same group when "from" changes
+  function handleFromChange(newFrom: string) {
+    const newUnit = UNITS[newFrom];
+    const toUnit = UNITS[to];
+    setFrom(newFrom);
+    if (newUnit && toUnit && newUnit.group !== toUnit.group) {
+      // Pick the first unit in the same group that isn't the same code
+      const sameGroup = Object.values(UNITS).filter(u => u.group === newUnit.group && u.code !== newFrom);
+      if (sameGroup.length > 0) setTo(sameGroup[0].code);
+    }
+  }
+
+  function handleToChange(newTo: string) {
+    const newUnit = UNITS[newTo];
+    const fromUnit = UNITS[from];
+    setTo(newTo);
+    if (newUnit && fromUnit && newUnit.group !== fromUnit.group) {
+      const sameGroup = Object.values(UNITS).filter(u => u.group === newUnit.group && u.code !== newTo);
+      if (sameGroup.length > 0) setFrom(sameGroup[0].code);
+    }
+  }
+
+  function swap() {
+    setFrom(to);
+    setTo(from);
+  }
+
+  const result = useMemo(() => {
+    const v = parseFloat(value);
+    if (!v && v !== 0) return null;
+    const r = convert(v, from, to);
+    if ('error' in r) return null;
+    return r;
+  }, [value, from, to]);
+
+  // Format large/small numbers nicely
+  function formatResult(n: number): string {
+    if (Math.abs(n) >= 1_000_000) return n.toLocaleString('en-GB', { maximumFractionDigits: 2 });
+    if (Math.abs(n) >= 100) return n.toLocaleString('en-GB', { maximumFractionDigits: 4 });
+    if (Math.abs(n) >= 1) return n.toLocaleString('en-GB', { maximumFractionDigits: 6 });
+    return n.toFixed(6).replace(/0+$/, '').replace(/\.$/, '');
+  }
+
+  return (
+    <div>
+      {/* Inputs card */}
+      <div style={{
+        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 20,
+      }}>
+        <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Convert</span>
+          <span style={{ background: '#e87722', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Real-time</span>
+        </div>
+
+        <div style={{ padding: 24 }}>
+          {/* Value input */}
+          <div style={{ marginBottom: 16 }}>
+            <label htmlFor="conv-val" style={labelStyle}>Value</label>
+            <input
+              id="conv-val"
+              type="number"
+              inputMode="decimal"
+              min="0"
+              step="any"
+              value={value}
+              onChange={e => setValue(e.target.value)}
+              placeholder="e.g. 100"
+              style={inputStyle}
+              onFocus={e => {
+                e.currentTarget.style.borderColor = '#e87722';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
+              }}
+              onBlur={e => {
+                e.currentTarget.style.borderColor = '#d8dce6';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            />
+          </div>
+
+          {/* From / Swap / To */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 12, alignItems: 'end' }}>
+            {/* From */}
+            <div>
+              <label htmlFor="conv-from" style={labelStyle}>From</label>
+              <select
+                id="conv-from"
+                value={from}
+                onChange={e => handleFromChange(e.target.value)}
+                style={selectStyle}
+              >
+                {GROUPS.map(g => (
+                  <optgroup key={g.group} label={g.label}>
+                    {unitsByGroup(g.group).map(u => (
+                      <option key={u.code} value={u.code}>{u.name} ({u.symbol})</option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+
+            {/* Swap button */}
+            <button
+              type="button"
+              onClick={swap}
+              aria-label="Swap units"
+              style={{
+                background: '#f7f8fa',
+                border: '1.5px solid #d8dce6',
+                borderRadius: 8,
+                width: 44,
+                height: 44,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                fontSize: 20,
+                color: '#5a6478',
+                transition: 'border-color 0.15s, background 0.15s',
+                flexShrink: 0,
+                marginBottom: 0,
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = '#e87722';
+                e.currentTarget.style.background = '#fff7ed';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = '#d8dce6';
+                e.currentTarget.style.background = '#f7f8fa';
+              }}
+            >
+              &#8596;
+            </button>
+
+            {/* To */}
+            <div>
+              <label htmlFor="conv-to" style={labelStyle}>To</label>
+              <select
+                id="conv-to"
+                value={to}
+                onChange={e => handleToChange(e.target.value)}
+                style={selectStyle}
+              >
+                {GROUPS.map(g => (
+                  <optgroup key={g.group} label={g.label}>
+                    {unitsByGroup(g.group).map(u => (
+                      <option key={u.code} value={u.code}>{u.name} ({u.symbol})</option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Result card */}
+      <div style={{
+        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+      }}>
+        <div style={{ background: '#243044', padding: '14px 24px' }}>
+          <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Result</span>
+        </div>
+
+        {!result ? (
+          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#8f9ab0', fontSize: 14 }}>
+            Enter a value above to convert
+          </div>
+        ) : (
+          <div style={{ padding: '28px 24px', textAlign: 'center' }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#8f9ab0', marginBottom: 8 }}>
+              {result.input.name} &rarr; {result.result.name}
+            </div>
+            <div style={{ fontSize: 'clamp(40px, 10vw, 64px)', fontWeight: 800, color: '#1a2332', lineHeight: 1, letterSpacing: '-2px' }}>
+              {formatResult(result.result.value)}
+              <span style={{ fontSize: 22, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> {UNITS[to]?.symbol}</span>
+            </div>
+            <div style={{ marginTop: 14, fontSize: 14, color: '#5a6478', fontFamily: 'monospace', background: '#f7f8fa', display: 'inline-block', padding: '6px 14px', borderRadius: 6 }}>
+              {result.formula}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
