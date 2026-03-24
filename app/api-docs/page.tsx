@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
-  description: 'FreightUtils public API reference — 10 free endpoints. Loading metres, CBM, chargeable weight, pallet fitting, ADR lookup, ADR 1.1.3.6 exemption calculator, airline codes, INCOTERMS 2020, container capacity, and unit converter. No auth required.',
+  description: 'FreightUtils public API reference — 11 free endpoints. Loading metres, CBM, chargeable weight, pallet fitting, ADR lookup, ADR 1.1.3.6 exemption calculator, airline codes, INCOTERMS 2020, container capacity, unit converter, and HS code lookup. No auth required.',
 };
 
 const s = {
@@ -1068,6 +1068,106 @@ Content-Type: application/json
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>CBM to freight tonnes (W/M rule):</p>
             <div className="code-block">
               {`curl "https://www.freightutils.com/api/convert?value=5&from=cbm&to=freight_tonnes"`}
+            </div>
+          </div>
+        </div>
+
+        {/* HS Codes Endpoint */}
+        <div id="hs" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/hs</span>
+            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>HS Code Lookup</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Search and browse Harmonized System (HS 2022) commodity codes. Supports text search by product
+              description, exact code lookup with ancestor chain, and section browsing. Covers all 6,940 codes
+              across 21 sections and 97 chapters.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Query Modes</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Max results</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>q</code></td>
+                    <td>string</td>
+                    <td>Case-insensitive search on descriptions and codes. Min 2 characters.</td>
+                    <td>50</td>
+                  </tr>
+                  <tr>
+                    <td><code>code</code></td>
+                    <td>string</td>
+                    <td>Exact HS code lookup (2, 4, or 6 digit). Returns full details with ancestor chain and children.</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><code>section</code></td>
+                    <td>string</td>
+                    <td>Browse by section (Roman numeral, e.g. <code>II</code>). Returns all chapters in that section.</td>
+                    <td>All</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 24 }}>
+              Provide exactly one parameter per request. Omitting all parameters returns a 400 with usage hints.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Search by description:</p>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://www.freightutils.com/api/hs?q=coffee"`}
+            </div>
+            <div className="code-block" style={{ marginBottom: 20 }}>
+              {`{
+  "query": "coffee",
+  "results": [
+    {
+      "hscode": "0901",
+      "description": "Coffee, whether or not roasted...",
+      "level": 4,
+      "section": "II",
+      "parent": "09"
+    }
+  ],
+  "count": 12
+}`}
+            </div>
+
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Code lookup with ancestors:</p>
+            <div className="code-block" style={{ marginBottom: 4 }}>
+              {`curl "https://www.freightutils.com/api/hs?code=090111"`}
+            </div>
+            <div className="code-block" style={{ marginBottom: 20 }}>
+              {`{
+  "hscode": "090111",
+  "description": "Coffee; not roasted, not decaffeinated",
+  "level": 6,
+  "section": "II",
+  "parent": "0901",
+  "ancestors": [
+    { "hscode": "09", "description": "Coffee, tea, mate and spices", "level": 2 },
+    { "hscode": "0901", "description": "Coffee, whether or not roasted...", "level": 4 }
+  ],
+  "children": [],
+  "sectionName": "Vegetable products"
+}`}
+            </div>
+
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Browse section:</p>
+            <div className="code-block">
+              {`curl "https://www.freightutils.com/api/hs?section=II"`}
             </div>
           </div>
         </div>

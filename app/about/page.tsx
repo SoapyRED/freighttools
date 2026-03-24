@@ -6,7 +6,7 @@ const ogUrl = '/api/og?title=About+FreightUtils&desc=Free+freight+calculators+an
 export const metadata: Metadata = {
   title: 'About FreightUtils — Free Freight Tools & API Platform',
   description:
-    'FreightUtils provides 10 free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. LDM, CBM, chargeable weight, pallet fitting, ADR lookup, ADR exemption calculator, airline codes, INCOTERMS reference, container capacity, and unit converter.',
+    'FreightUtils provides 11 free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. LDM, CBM, chargeable weight, pallet fitting, ADR lookup, ADR exemption calculator, airline codes, INCOTERMS reference, container capacity, unit converter, and HS code lookup.',
   alternates: { canonical: 'https://www.freightutils.com/about' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'About FreightUtils' }],
@@ -97,6 +97,7 @@ export default function AboutPage() {
               { name: 'INCOTERMS 2020', href: '/incoterms' },
               { name: 'Container Capacity', href: '/containers' },
               { name: 'Unit Converter', href: '/convert' },
+              { name: 'HS Code Lookup', href: '/hs' },
             ].map(t => (
               <Link key={t.href} href={t.href} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
@@ -132,6 +133,7 @@ export default function AboutPage() {
               { name: 'EPAL', detail: 'Pallet specs' },
               { name: 'ISO 6780', detail: 'Pallet standards' },
               { name: 'IATA', detail: 'Air freight / ULD' },
+              { name: 'WCO', detail: 'HS 2022' },
             ].map(d => (
               <div key={d.name} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
@@ -162,7 +164,8 @@ export default function AboutPage() {
             GET /api/airlines?prefix=176<br />
             GET /api/incoterms?code=FOB<br />
             GET /api/containers?type=40ft-high-cube<br />
-            GET /api/convert?value=100&amp;from=kg&amp;to=lbs
+            GET /api/convert?value=100&amp;from=kg&amp;to=lbs<br />
+            GET /api/hs?q=coffee
           </div>
         </Section>
 

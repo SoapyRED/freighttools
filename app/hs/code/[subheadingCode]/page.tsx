@@ -1,0 +1,172 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { getAllSubheadingCodes, getCodeDetails, getSubheadingsByHeading, formatHsCode } from '@/lib/calculations/hs';
+import { HsSmallCard } from '@/app/hs/HsLinkCard';
+import AdUnit from '@/app/components/AdUnit';
+
+export function generateStaticParams() {
+  return getAllSubheadingCodes().map(s => ({ subheadingCode: s }));
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ subheadingCode: string }> }
+): Promise<Metadata> {
+  const { subheadingCode } = await params;
+  const details = getCodeDetails(subheadingCode);
+  if (!details) return { title: 'HS Code Not Found | FreightUtils' };
+
+  const ogUrl = `/api/og?title=${encodeURIComponent(`HS ${formatHsCode(subheadingCode)}`)}&desc=${encodeURIComponent(details.description)}&badge=HS`;
+
+  return {
+    title: `HS ${formatHsCode(subheadingCode)} — ${details.description} | FreightUtils`,
+    description: `HS code ${formatHsCode(subheadingCode)}: ${details.description}. Part of heading ${formatHsCode(details.parent)}. Free HS code lookup with REST API.`,
+    alternates: { canonical: `https://www.freightutils.com/hs/code/${subheadingCode}` },
+    openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS ${formatHsCode(subheadingCode)} — FreightUtils` }] },
+    twitter: { card: 'summary_large_image', images: [ogUrl] },
+  };
+}
+
+export default async function SubheadingPage(
+  { params }: { params: Promise<{ subheadingCode: string }> }
+) {
+  const { subheadingCode } = await params;
+  const details = getCodeDetails(subheadingCode);
+  if (!details) notFound();
+
+  const heading = details.ancestors.find(a => a.level === 4);
+  const chapter = details.ancestors.find(a => a.level === 2);
+  const siblings = getSubheadingsByHeading(details.parent).filter(s => s.hscode !== subheadingCode);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'FreightUtils', item: 'https://www.freightutils.com' },
+      { '@type': 'ListItem', position: 2, name: 'HS Codes', item: 'https://www.freightutils.com/hs' },
+      { '@type': 'ListItem', position: 3, name: `Section ${details.section}`, item: `https://www.freightutils.com/hs/section/${details.section.toLowerCase()}` },
+      ...(chapter ? [{ '@type': 'ListItem' as const, position: 4, name: `Chapter ${chapter.hscode}`, item: `https://www.freightutils.com/hs/chapter/${chapter.hscode}` }] : []),
+      ...(heading ? [{ '@type': 'ListItem' as const, position: 5, name: formatHsCode(heading.hscode), item: `https://www.freightutils.com/hs/heading/${heading.hscode}` }] : []),
+      { '@type': 'ListItem', position: 6, name: formatHsCode(subheadingCode) },
+    ],
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+      <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto' }}>
+          <nav style={{ marginBottom: 20, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+            <span style={{ margin: '0 8px' }}>&rsaquo;</span>
+            <Link href="/hs" style={{ color: '#8f9ab0', textDecoration: 'none' }}>HS Codes</Link>
+            <span style={{ margin: '0 8px' }}>&rsaquo;</span>
+            <Link href={`/hs/section/${details.section.toLowerCase()}`} style={{ color: '#8f9ab0', textDecoration: 'none' }}>Section {details.section}</Link>
+            <span style={{ margin: '0 8px' }}>&rsaquo;</span>
+            {chapter && (
+              <>
+                <Link href={`/hs/chapter/${chapter.hscode}`} style={{ color: '#8f9ab0', textDecoration: 'none' }}>Ch. {chapter.hscode}</Link>
+                <span style={{ margin: '0 8px' }}>&rsaquo;</span>
+              </>
+            )}
+            {heading && (
+              <>
+                <Link href={`/hs/heading/${heading.hscode}`} style={{ color: '#8f9ab0', textDecoration: 'none' }}>{formatHsCode(heading.hscode)}</Link>
+                <span style={{ margin: '0 8px' }}>&rsaquo;</span>
+              </>
+            )}
+            <span style={{ color: '#e87722' }}>{formatHsCode(subheadingCode)}</span>
+          </nav>
+          <h1 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.3px' }}>
+            HS {formatHsCode(subheadingCode)}
+          </h1>
+          <p style={{ fontSize: 16, color: '#8f9ab0', marginTop: 8, maxWidth: 700 }}>
+            {details.description}
+          </p>
+        </div>
+      </div>
+
+      <main style={{ maxWidth: 900, margin: '0 auto', padding: '28px 20px 80px' }}>
+
+        {/* Hierarchy card */}
+        <div style={{
+          background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+          overflow: 'hidden', marginBottom: 32,
+        }}>
+          <div style={{ background: '#1a2332', padding: '14px 18px', fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#fff' }}>
+            Classification Hierarchy
+          </div>
+          <div>
+            <div style={{ padding: '12px 18px', borderBottom: '1px solid #eef0f4', display: 'flex', gap: 12, alignItems: 'center' }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: '#8f9ab0', minWidth: 80 }}>SECTION</span>
+              <Link href={`/hs/section/${details.section.toLowerCase()}`} style={{ fontSize: 14, color: '#e87722', textDecoration: 'none', fontWeight: 600 }}>
+                {details.section}: {details.sectionName}
+              </Link>
+            </div>
+            {chapter && (
+              <div style={{ padding: '12px 18px', borderBottom: '1px solid #eef0f4', display: 'flex', gap: 12, alignItems: 'center', paddingLeft: 36 }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#8f9ab0', minWidth: 80 }}>CHAPTER</span>
+                <Link href={`/hs/chapter/${chapter.hscode}`} style={{ fontSize: 14, color: '#e87722', textDecoration: 'none', fontWeight: 600 }}>
+                  {chapter.hscode}: {chapter.description}
+                </Link>
+              </div>
+            )}
+            {heading && (
+              <div style={{ padding: '12px 18px', borderBottom: '1px solid #eef0f4', display: 'flex', gap: 12, alignItems: 'center', paddingLeft: 54 }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#8f9ab0', minWidth: 80 }}>HEADING</span>
+                <Link href={`/hs/heading/${heading.hscode}`} style={{ fontSize: 14, color: '#e87722', textDecoration: 'none', fontWeight: 600 }}>
+                  {formatHsCode(heading.hscode)}: {heading.description}
+                </Link>
+              </div>
+            )}
+            <div style={{ padding: '12px 18px', display: 'flex', gap: 12, alignItems: 'center', paddingLeft: 72, background: '#fff7ed' }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: '#e87722', minWidth: 80 }}>CODE</span>
+              <span style={{ fontSize: 14, fontWeight: 700, color: '#1a2332' }}>
+                {formatHsCode(subheadingCode)}: {details.description}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* National tariff note */}
+        <div style={{
+          background: '#f7f8fa', border: '1px solid #eef0f4', borderRadius: 10,
+          padding: '16px 20px', marginBottom: 32,
+        }}>
+          <p style={{ fontSize: 14, color: '#5a6478', lineHeight: 1.6, marginBottom: 0 }}>
+            This is the international 6-digit HS code. Your country may use additional digits for national tariff purposes.
+            For UK tariff and duty rates, check the{' '}
+            <a href="https://www.trade-tariff.service.gov.uk/find_commodity" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>UK Trade Tariff</a>.
+            For US rates, check the{' '}
+            <a href="https://hts.usitc.gov/" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>USITC HTS</a>.
+          </p>
+        </div>
+
+        {/* Sibling codes */}
+        {siblings.length > 0 && (
+          <>
+            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+              Related Codes Under {formatHsCode(details.parent)}
+            </h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 32 }}>
+              {siblings.map(s => (
+                <HsSmallCard key={s.hscode} href={`/hs/code/${s.hscode}`} code={formatHsCode(s.hscode)} description={s.description} />
+              ))}
+            </div>
+          </>
+        )}
+
+        <div style={{ marginBottom: 24 }}>
+          {heading && (
+            <Link href={`/hs/heading/${heading.hscode}`} style={{ color: '#e87722', textDecoration: 'none', fontSize: 14, fontWeight: 600 }}>
+              &larr; Heading {formatHsCode(heading.hscode)}: {heading.description}
+            </Link>
+          )}
+        </div>
+
+        <AdUnit format="auto" />
+      </main>
+    </>
+  );
+}

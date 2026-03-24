@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getAllUnNumbers } from '@/lib/calculations/adr';
+import { getAllSectionNumerals, getAllChapterCodes, getAllHeadingCodes, getAllSubheadingCodes } from '@/lib/calculations/hs';
 import airlinesData from '@/lib/data/airlines.json';
 import containersData from '@/lib/data/containers.json';
 import palletsData from '@/lib/data/pallets.json';
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/incoterms`,         changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/containers`,        changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/convert`,           changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/hs`,                changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/adr-calculator`,    changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/api-docs`,          changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/about`,             changeFrequency: 'monthly', priority: 0.5 },
@@ -49,5 +51,40 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...adrRoutes, ...airlineRoutes, ...containerRoutes, ...palletRoutes];
+  // HS Code routes (~6,960)
+  const hsSectionRoutes: MetadataRoute.Sitemap = getAllSectionNumerals().map(n => ({
+    url: `${BASE}/hs/section/${n}`,
+    changeFrequency: 'yearly' as const,
+    priority: 0.6,
+  }));
+
+  const hsChapterRoutes: MetadataRoute.Sitemap = getAllChapterCodes().map(c => ({
+    url: `${BASE}/hs/chapter/${c}`,
+    changeFrequency: 'yearly' as const,
+    priority: 0.6,
+  }));
+
+  const hsHeadingRoutes: MetadataRoute.Sitemap = getAllHeadingCodes().map(h => ({
+    url: `${BASE}/hs/heading/${h}`,
+    changeFrequency: 'yearly' as const,
+    priority: 0.5,
+  }));
+
+  const hsSubheadingRoutes: MetadataRoute.Sitemap = getAllSubheadingCodes().map(s => ({
+    url: `${BASE}/hs/code/${s}`,
+    changeFrequency: 'yearly' as const,
+    priority: 0.4,
+  }));
+
+  return [
+    ...staticRoutes,
+    ...adrRoutes,
+    ...airlineRoutes,
+    ...containerRoutes,
+    ...palletRoutes,
+    ...hsSectionRoutes,
+    ...hsChapterRoutes,
+    ...hsHeadingRoutes,
+    ...hsSubheadingRoutes,
+  ];
 }

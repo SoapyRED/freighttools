@@ -15,6 +15,7 @@ const navLinks = [
   { href: '/incoterms', label: 'INCOTERMS' },
   { href: '/containers', label: 'Containers' },
   { href: '/convert', label: 'Converter' },
+  { href: '/hs', label: 'HS Codes' },
   { href: '/api-docs', label: 'API Docs' },
   { href: '/about', label: 'About' },
 ];

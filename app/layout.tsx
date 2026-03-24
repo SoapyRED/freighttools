@@ -42,6 +42,7 @@ const footerToolLinks = [
   { href: '/incoterms', label: 'INCOTERMS 2020' },
   { href: '/containers', label: 'Container Specs' },
   { href: '/convert', label: 'Unit Converter' },
+  { href: '/hs', label: 'HS Code Lookup' },
   { href: '/api-docs', label: 'API Docs' },
   { href: '/about', label: 'About' },
 ];

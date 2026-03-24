@@ -19,6 +19,7 @@ const tools = [
   { href: '/incoterms', label: '/api/incoterms', title: 'INCOTERMS 2020', desc: 'All 11 trade terms — who pays, who bears risk, where responsibility transfers', icon: '📋' },
   { href: '/containers', label: '/api/containers', title: 'Container Capacity', desc: 'Shipping container dimensions, weights, and loading calculator', icon: '🚢' },
   { href: '/convert', label: '/api/convert', title: 'Unit Converter', desc: 'Convert freight weights, volumes, and dimensions between metric and imperial', icon: '🔄' },
+  { href: '/hs', label: '/api/hs', title: 'HS Code Lookup', desc: 'Search and browse 6,940 Harmonized System commodity codes across 21 sections', icon: '🏷️' },
 ];
 
 const dataSources = [

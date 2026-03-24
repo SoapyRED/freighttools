@@ -757,6 +757,72 @@
         }
       }
     },
+    "/api/hs": {
+      "get": {
+        "operationId": "lookupHsCodes",
+        "summary": "HS Code Lookup",
+        "description": "Search and browse Harmonized System (HS 2022) commodity codes. Supports text search by product description, exact code lookup with ancestor chain, and section browsing. Covers 6,940 codes across 21 sections and 97 chapters.",
+        "tags": ["Reference Data"],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Case-insensitive search on descriptions and HS codes. Min 2 characters.",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "coffee"
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Exact HS code lookup (2, 4, or 6 digit). Returns full details with ancestor chain.",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "0901"
+          },
+          {
+            "name": "section",
+            "in": "query",
+            "description": "Browse by section Roman numeral. Returns all chapters in that section.",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "II"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HS code data. Response shape varies by query mode.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/HsSearchResponse" },
+                    { "$ref": "#/components/schemas/HsCodeDetail" },
+                    { "$ref": "#/components/schemas/HsSectionResponse" }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or invalid parameters.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "Code or section not found.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/containers": {
       "get": {
         "operationId": "getContainers",
@@ -1781,6 +1847,55 @@
           "note": { "type": "string", "description": "Additional context for freight-specific conversions." }
         },
         "required": ["input", "result", "formula"]
+      },
+      "HsCode": {
+        "type": "object",
+        "properties": {
+          "hscode": { "type": "string", "description": "HS code (2, 4, or 6 digits).", "example": "0901" },
+          "description": { "type": "string", "description": "Product description.", "example": "Coffee, whether or not roasted or decaffeinated" },
+          "level": { "type": "integer", "description": "Hierarchy level: 2=chapter, 4=heading, 6=subheading.", "example": 4 },
+          "parent": { "type": "string", "description": "Parent code or TOTAL for chapters.", "example": "09" },
+          "section": { "type": "string", "description": "Section Roman numeral.", "example": "II" }
+        },
+        "required": ["hscode", "description", "level", "parent", "section"]
+      },
+      "HsCodeDetail": {
+        "type": "object",
+        "properties": {
+          "hscode": { "type": "string", "example": "090111" },
+          "description": { "type": "string", "example": "Coffee; not roasted, not decaffeinated" },
+          "level": { "type": "integer", "example": 6 },
+          "parent": { "type": "string", "example": "0901" },
+          "section": { "type": "string", "example": "II" },
+          "ancestors": { "type": "array", "items": { "$ref": "#/components/schemas/HsCode" } },
+          "children": { "type": "array", "items": { "$ref": "#/components/schemas/HsCode" } },
+          "sectionName": { "type": "string", "example": "Vegetable products" }
+        },
+        "required": ["hscode", "description", "level", "parent", "section", "ancestors", "children", "sectionName"]
+      },
+      "HsSearchResponse": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "example": "coffee" },
+          "results": { "type": "array", "items": { "$ref": "#/components/schemas/HsCode" } },
+          "count": { "type": "integer", "example": 12 }
+        },
+        "required": ["query", "results", "count"]
+      },
+      "HsSectionResponse": {
+        "type": "object",
+        "properties": {
+          "section": {
+            "type": "object",
+            "properties": {
+              "numeral": { "type": "string", "example": "ii" },
+              "name": { "type": "string", "example": "Vegetable products" }
+            }
+          },
+          "chapters": { "type": "array", "items": { "$ref": "#/components/schemas/HsCode" } },
+          "count": { "type": "integer", "example": 14 }
+        },
+        "required": ["section", "chapters", "count"]
       }
     }
   }
