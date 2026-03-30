@@ -142,6 +142,32 @@ export default function HsPage() {
               </div>
             </details>
           </div>
+
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            HS Codes and Customs Classification
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Customs classification is the process of assigning the correct HS code to a product before it crosses an international border. This classification determines the rate of customs duty, whether any import or export licences are required, and which trade agreements or preferential tariff rates may apply. Getting the classification wrong can result in overpayment of duty, underpayment (leading to penalties and back-charges), or delays at the border while customs authorities verify the goods.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            The classification process follows the <strong>General Rules for the Interpretation of the Harmonized System (GRI)</strong>, a set of six rules published by the WCO. The most important rule is GRI 1, which states that classification should be determined by the terms of the headings and any relevant section or chapter notes. When a product could fall under multiple headings, GRI 3 provides tie-breaking rules based on specificity, essential character, and numerical order.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            In practice, classification can be straightforward for commodity goods (raw coffee beans are clearly 0901) but complex for composite or novel products. A smartphone, for example, could theoretically be classified as a telephone, a camera, a computer, or a radio receiver. The correct classification (8517 — telephone apparatus) is determined by its principal function. For products where the classification is genuinely uncertain, importers can apply for a <strong>Binding Tariff Information (BTI)</strong> ruling from their national customs authority, which provides legal certainty for up to three years.
+          </p>
+
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            National Tariff Extensions Beyond 6 Digits
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            While the first 6 digits of an HS code are internationally standardised, every country adds its own digits for national tariff and statistical purposes. The <strong>European Union</strong> uses the Combined Nomenclature (CN) with 8 digits, adding two digits to the HS subheading for tariff differentiation. The <strong>United States</strong> uses the Harmonized Tariff Schedule (HTS) with 10 digits. The <strong>United Kingdom</strong> uses a 10-digit commodity code that was based on the EU CN but has diverged since Brexit. China, Japan, India, and other major trading nations each maintain their own extensions.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            This means that while the international 6-digit code is sufficient for identifying the product category, you need the full national code to determine the actual duty rate. For example, HS 090111 (unroasted, non-decaffeinated coffee) has the same 6-digit code worldwide, but the duty rate varies from 0% in the UK to 7.5% in the EU for non-preferential imports. The national extension digits determine which specific tariff rate applies.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            When preparing commercial invoices and customs declarations, always use the full national commodity code — not just the 6-digit HS code. Use this tool to identify the correct HS heading and subheading, then consult your national customs authority for the full code and applicable duty rates.
+          </p>
         </div>
 
         {/* API callout */}

@@ -104,6 +104,16 @@ export default function ChargeableWeightPage() {
           </p>
 
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            Multi-Piece Shipments and Consolidations
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            For shipments with multiple pieces of different sizes, each piece is measured individually and its volumetric weight calculated. The total chargeable weight is then the higher of total actual weight versus total volumetric weight — not the sum of per-piece chargeable weights. This means that in a mixed shipment, a few bulky pieces can push the entire consignment onto volumetric billing even if most pieces are dense. When preparing air freight bookings, list every piece with its individual dimensions and weight so the carrier can calculate the correct chargeable weight for the whole AWB.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Consolidators and freight forwarders often aggregate multiple shippers&apos; cargo under a single master AWB. In these cases, the chargeable weight is calculated on the total consolidated shipment, which can sometimes benefit shippers whose cargo would be volumetric on its own but becomes weight-based when combined with denser goods.
+          </p>
+
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Chargeable Weight by Airline
           </h2>
           <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
