@@ -1,6 +1,6 @@
 /**
  * Airline Codes & AWB Prefix Library
- * Source: airline_codes_merged.csv — 6,335 airlines, 268 with AWB prefixes
+ * Source: airline_codes_merged.csv — 6,352 airlines, 390 with AWB prefixes
  */
 
 import rawData from '@/lib/data/airline-codes.json';

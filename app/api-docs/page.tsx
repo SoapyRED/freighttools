@@ -526,7 +526,7 @@ export default function ApiDocsPage() {
           <div style={{ padding: 24 }}>
             <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Look up ADR 2025 dangerous goods by UN number, search by substance name, or filter by hazard class.
-              The dataset contains 2,336 entries from the ADR 2025 Dangerous Goods List (Table A).
+              The dataset contains 2,939 entries from the ADR 2025 Dangerous Goods List (Table A).
               Responses are cached for 1 hour (<code>s-maxage=3600</code>).
             </p>
 
@@ -551,14 +551,14 @@ export default function ApiDocsPage() {
                   <tr>
                     <td><code>search</code></td>
                     <td>string</td>
-                    <td>Case-insensitive partial match on the proper shipping name. Min 2 characters.</td>
-                    <td>20</td>
+                    <td>Case-insensitive partial match on the proper shipping name. Min 2 characters. Also accepts <code>q</code> as an alias.</td>
+                    <td>50</td>
                   </tr>
                   <tr>
                     <td><code>class</code></td>
                     <td>string</td>
                     <td>Filter by ADR hazard class (e.g. <code>3</code>, <code>6.1</code>, <code>1.1</code>).</td>
-                    <td>50</td>
+                    <td>100</td>
                   </tr>
                 </tbody>
               </table>
@@ -722,7 +722,7 @@ Content-Type: application/json
           <div style={{ padding: 24 }}>
             <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Search airlines by name, IATA code, ICAO code, AWB prefix, or country. The dataset contains
-              6,300+ airlines including 390 cargo airlines with AWB prefixes.
+              6,352 airlines including 390 cargo airlines with AWB prefixes.
             </p>
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Query Modes</h3>
