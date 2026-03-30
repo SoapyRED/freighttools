@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getAllHeadingCodes, getCodeDetails, getSubheadingsByHeading, formatHsCode } from '@/lib/calculations/hs';
+import { getCodeDetails, getSubheadingsByHeading, formatHsCode } from '@/lib/calculations/hs';
 import HsLinkCard from '@/app/hs/HsLinkCard';
 import AdUnit from '@/app/components/AdUnit';
 
+export const dynamicParams = true;
+export const revalidate = 86400;
+
 export function generateStaticParams() {
-  return getAllHeadingCodes().map(h => ({ headingCode: h }));
+  return [];
 }
 
 export async function generateMetadata(
