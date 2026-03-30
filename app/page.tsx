@@ -119,7 +119,7 @@ export default function HomePage() {
       <section style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(185px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
           gap: 12,
           marginTop: -32,
           position: 'relative',

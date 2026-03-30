@@ -66,6 +66,42 @@ export default function ChargeableWeightPage() {
           </div>
 
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            The IATA Standard: 6,000 vs 5,000 Divisor
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            The volumetric divisor determines how aggressively space is priced relative to weight. The <strong>IATA standard divisor of 6,000</strong> means that 6,000 cubic centimetres equals 1 kg of chargeable weight, or equivalently, 1 cubic metre equals 166.67 kg. This has been the default for the majority of airline cargo carriers since IATA Resolution 600a standardised the calculation.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Express and integrator carriers (DHL Express, FedEx, UPS, TNT) typically use a <strong>divisor of 5,000</strong>, which means 1 cubic metre equals 200 kg of chargeable weight. This lower divisor makes volumetric weight higher for the same dimensions, reflecting the fact that express carriers offer door-to-door delivery with faster transit times and the space in their aircraft is at a premium. The practical effect is that express shipments are more likely to be charged on volumetric weight than on actual weight.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Some carriers use their own custom divisors. For example, certain Middle Eastern and Asian carriers may offer a divisor of 6,000 for general cargo but 5,000 for e-commerce parcels. Always confirm the applicable divisor with your carrier or freight forwarder before quoting a shipment, as the difference between 5,000 and 6,000 can change a volumetric weight calculation by 20%.
+          </p>
+
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            How Carriers Round Chargeable Weight
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Rounding rules vary by carrier and can materially affect your invoice. Under IATA rules, chargeable weight is typically rounded up to the next 0.5 kg. So a calculated volumetric weight of 167.1 kg would be charged as 167.5 kg. Some carriers round to the next whole kilogram, making that same shipment 168 kg chargeable. Express carriers often round each piece individually before summing, while traditional airlines may round only the total. For multi-piece shipments, this distinction can mean a difference of several kilograms.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Additionally, most carriers apply a <strong>minimum chargeable weight</strong>, commonly 1 kg per piece for small parcels or a minimum per-shipment threshold. Even a small envelope may be charged as 1 kg chargeable weight. For consolidations, the total chargeable weight of the entire AWB (Air Waybill) is used, not the sum of individual pieces.
+          </p>
+
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            Tips for Reducing Chargeable Weight
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Since chargeable weight is the higher of actual and volumetric weight, the goal is to bring both as close together as possible. Light, bulky shipments (where volumetric weight dominates) benefit from tighter packing: reduce box dimensions by eliminating excess dunnage, vacuum-pack soft goods, and avoid oversized cartons. Even removing 2 cm from each dimension of a 50-piece shipment can meaningfully reduce the total volumetric weight.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            For dense shipments (where actual weight dominates), the focus shifts to weight reduction: consider lighter packaging materials, ship in bulk rather than individually boxed items, or use lighter pallet materials. Occasionally, switching from air freight to sea freight for the heaviest portion of a mixed-mode shipment is more cost-effective than optimising air freight dimensions.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            When booking with express carriers (divisor 5,000), the volumetric break-even density is 200 kg per cubic metre. Any cargo denser than this will be charged on actual weight; anything lighter pays on volume. For standard airlines (divisor 6,000), the break-even is 166.67 kg per cubic metre. Knowing your cargo&apos;s density helps you predict whether optimising dimensions or weight will have a bigger impact.
+          </p>
+
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Chargeable Weight by Airline
           </h2>
           <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>

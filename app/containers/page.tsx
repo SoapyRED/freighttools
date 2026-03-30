@@ -137,6 +137,44 @@ export default function ContainersPage() {
             In practice, <strong>road weight limits</strong> often restrict loading before container limits do. In the EU, the combined vehicle weight limit is typically <strong>44 tonnes</strong> (including truck, chassis, and container). In the UK, individual bridge weight limits may further reduce the practical maximum. Always check local regulations and carrier-specific restrictions before loading to the ISO maximum.
           </p>
 
+          {/* Choosing the Right Container */}
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            Choosing the Right Container
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Selecting the correct container type is one of the most impactful decisions in planning a sea freight shipment. The wrong choice can waste space, exceed weight limits, damage cargo, or incur unnecessary costs.
+          </p>
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>Standard vs High Cube</h3>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            For most general cargo, the choice is between a standard and a high cube container. High cube containers provide approximately 13% more volume than their standard counterparts at the same length, thanks to the extra 30 cm (1 foot) of internal height. This makes them the preferred choice for light, voluminous cargo where you fill the container by volume long before reaching the weight limit. Furniture, clothing, electronics packaging, and plastic goods typically ship more efficiently in high cubes.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Standard-height containers are generally cheaper to rent and more widely available in some trade lanes. They are the better choice for dense cargo where the weight limit will be reached before the volume is filled &mdash; heavy machinery parts, canned goods, beverages, and building materials often work better in standard containers. The 40ft high cube has largely become the default for most FCL (full container load) shipments in global trade, while the 20ft standard remains the workhorse for heavy cargo.
+          </p>
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>When to Use Specialist Containers</h3>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            <strong>Open top containers</strong> are designed for cargo that cannot be loaded through the doors &mdash; machinery, large industrial components, timber, and scrap metal are common examples. The removable roof allows loading by crane from above. Open tops cost more to hire than standard dry containers and require tarpaulin covers for weather protection.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            <strong>Flat rack containers</strong> have no side walls or roof, making them suitable for oversized or out-of-gauge cargo such as vehicles, boats, heavy plant equipment, and large structural steel. Flat racks can be folded when empty for efficient repositioning. They require lashing and securing equipment, and the cargo may need to be sheeted for protection. Flat rack shipments attract surcharges for the additional space they occupy on a vessel (measured in TEU equivalents plus any overwidth or overheight allowances).
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            <strong>Reefer containers</strong> are temperature-controlled units essential for perishable goods including fresh produce, frozen food, pharmaceuticals, and chemicals. Reefers can maintain temperatures between &minus;30&deg;C and +30&deg;C, with some units capable of controlled atmosphere settings to regulate oxygen and CO2 levels for fresh fruit. Reefer containers require a power connection at the port and on the vessel, and they cost significantly more than dry containers.
+          </p>
+
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            Road Weight Limits and Container Loading
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            The ISO maximum gross weight of 30,480 kg applies to the container structure itself, but road transport regulations frequently impose lower effective limits. In the <strong>EU</strong>, the maximum combined vehicle weight for container transport is typically <strong>44 tonnes</strong>, which includes the tractor unit, chassis, empty container, and cargo. After deducting the weight of the truck (around 7,500 kg), chassis (3,500&ndash;5,000 kg), and empty container (2,300&ndash;5,000 kg depending on type), the practical payload for road transport is often 25,000&ndash;28,000 kg &mdash; well below the ISO container maximum of 28,000+ kg.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            In the <strong>UK</strong>, individual bridge weight limits may further restrict the practical maximum. The UK also requires all containers over 3.5 tonnes gross to be weighed before loading onto a vessel under the SOLAS VGM (Verified Gross Mass) regulation. The VGM must be provided to the carrier and terminal before the container can be loaded. Failure to provide a VGM results in the container being refused for loading, causing delays and additional costs.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Always check the maximum vehicle weight for the specific route, including any bridge or road restrictions. Your shipping line can confirm the maximum gross weight they will accept per container, which may be lower than the ISO maximum based on their vessel stowage plan and port terminal limitations.
+          </p>
+
           {/* FAQ */}
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Frequently Asked Questions

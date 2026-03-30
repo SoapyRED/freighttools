@@ -178,7 +178,83 @@ export default function AdrPage() {
             </table>
           </div>
 
-          {/* Section 4: Tunnel Restriction Codes */}
+          {/* Section 4: Transport Categories & 1.1.3.6 Exemption */}
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            Transport Categories and the 1.1.3.6 Exemption
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Every dangerous substance in ADR Table A is assigned a <strong>transport category</strong> from 0 to 4. These categories are the foundation of the ADR 1.1.3.6 small load exemption, which allows certain quantities of dangerous goods to be carried with reduced requirements. Understanding transport categories is essential for any freight operator moving mixed loads that might include small quantities of hazardous materials.
+          </p>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 16 }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+              <thead>
+                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                  <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Category</th>
+                  <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Points Multiplier</th>
+                  <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Max Quantity Under Exemption</th>
+                  <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Typical Substances</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['0', 'No exemption', '0 — never exempt', 'Explosives (1.1A, 1.2B), self-reactive substances'],
+                  ['1', '50', '20 kg / 20 L', 'Most Class 1 articles, radioactive material, infectious substances'],
+                  ['2', '3', '333 kg / 333 L', 'Petrol (UN1203), many flammable liquids PG II, toxic substances PG I'],
+                  ['3', '1', '1,000 kg / 1,000 L', 'Diesel (UN1202), most PG III flammable liquids, corrosives PG II-III'],
+                  ['4', '0', 'Unlimited', 'Lithium batteries (UN3481), environmentally hazardous UN3082, aerosols UN1950'],
+                ].map(([cat, mult, max, examples]) => (
+                  <tr key={cat} style={{ borderBottom: '1px solid #eef0f4' }}>
+                    <td style={{ padding: '11px 16px', fontWeight: 700, fontFamily: 'monospace' }}>{cat}</td>
+                    <td style={{ padding: '11px 16px' }}>{mult}</td>
+                    <td style={{ padding: '11px 16px', fontWeight: 600 }}>{max}</td>
+                    <td style={{ padding: '11px 16px', lineHeight: 1.5 }}>{examples}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            The exemption calculation works by multiplying the quantity of each substance (in kg or litres) by the transport category multiplier, then summing all the points. If the total is 1,000 or below, the load qualifies for the 1.1.3.6 exemption. This exemption reduces requirements around vehicle placarding, written instructions, driver training certification (ADR licence), and equipment. It does not exempt the consignor from proper packaging, labelling, and documentation.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            For example, carrying 200 litres of petrol (transport category 2, multiplier 3) gives 600 points. Adding 100 kg of a category 3 substance (multiplier 1) adds 100 points, for a total of 700 &mdash; still under 1,000, so the exemption applies. Use our <Link href="/adr-calculator" style={{ color: '#e87722', textDecoration: 'underline' }}>ADR 1.1.3.6 calculator</Link> to check your mixed loads instantly.
+          </p>
+
+          {/* Section: Packing Groups */}
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            Packing Groups Explained
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Packing groups indicate the degree of danger presented by a substance and determine the performance standard required of its packaging. ADR assigns three packing groups:
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            <strong>Packing Group I (PG I)</strong> &mdash; substances presenting high danger. Packaging must meet the most stringent performance tests. Examples include carbon disulphide (Class 3, extremely flammable) and hydrogen cyanide (Class 6.1, highly toxic). PG I substances have lower quantity thresholds for exemptions and more restrictive transport conditions.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            <strong>Packing Group II (PG II)</strong> &mdash; substances presenting medium danger. This is the most common packing group in everyday freight. Petrol (UN1203), many industrial solvents, and common corrosives like hydrochloric acid fall into PG II.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            <strong>Packing Group III (PG III)</strong> &mdash; substances presenting low danger. Diesel fuel (UN1202), many paints and adhesives, and dilute acid solutions are typically PG III. These substances still require proper dangerous goods packaging and labelling, but the packaging performance standards are less demanding.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Not all hazard classes use packing groups. Classes 1 (explosives), 2 (gases), 5.2 (organic peroxides), 6.2 (infectious substances), and 7 (radioactive) have their own classification systems. When reading ADR Table A, an empty packing group column indicates that the class uses a different categorisation method.
+          </p>
+
+          {/* Section: Reading ADR Labels */}
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+            How to Read ADR Hazard Labels
+          </h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            ADR hazard labels are the diamond-shaped warning labels affixed to packages, containers, and vehicles carrying dangerous goods. Each label corresponds to a hazard class or division and follows a standardised design specified in ADR Chapter 5.2.2. The labels use a consistent system of colours, symbols, and numbers to communicate hazard information to handlers, emergency responders, and other road users.
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            Every package must carry the primary hazard label for its class. If the substance has subsidiary risks (for example, a substance that is both flammable and toxic), additional subsidiary hazard labels must also be applied. The class number appears in the bottom corner of the label. A flame symbol indicates flammability (Classes 3, 4), a skull and crossbones indicates toxicity (Class 6.1), a test tube with corrosion indicates corrosive substances (Class 8), and a trefoil symbol indicates radioactive material (Class 7).
+          </p>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+            In addition to class labels, packages must display the <strong>UN number</strong> of the substance, preceded by the letters &ldquo;UN&rdquo;. The UN number is shown in black digits at least 12 mm high (6 mm for packages of 5 litres or 5 kg or less). On vehicles and containers, orange-coloured plates display the hazard identification number (Kemler code) in the top half and the UN number in the bottom half. For example, a tanker carrying petrol would show &ldquo;33&rdquo; over &ldquo;1203&rdquo; on its orange plate, where &ldquo;33&rdquo; indicates a highly flammable liquid.
+          </p>
+
+          {/* Section 5: Tunnel Restriction Codes */}
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Tunnel Restriction Codes Explained
           </h2>

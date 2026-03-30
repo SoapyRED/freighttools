@@ -374,6 +374,41 @@ export default function LdmCalc() {
             </div>
           </div>
 
+          {/* Groupage Pricing & LDM */}
+          <div style={{ marginBottom: 48 }}>
+            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+              Loading Metres and Groupage Pricing
+            </h2>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+              In European groupage (LTL) freight, loading metres are the primary unit for quoting and invoicing. Unlike full truckload (FTL) shipments where you pay a flat rate for the whole vehicle, groupage shipments share trailer space with other consignments. The carrier needs a fair way to allocate costs, and LDM provides that by measuring exactly how much floor space your goods occupy.
+            </p>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+              Most European freight exchanges and carrier rate cards quote a per-LDM rate. A typical groupage rate might be quoted as, for example, &pound;35 per LDM for a UK-to-Germany lane. If your consignment measures 2.4 LDM, the freight charge would be 2.4 &times; &pound;35 = &pound;84, before fuel surcharges and other accessorial charges. This makes accurate LDM calculation directly relevant to your transport budget.
+            </p>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+              Many carriers also apply a minimum charge, often expressed as a minimum LDM (commonly 1 LDM or 2 LDM) or a minimum weight threshold. Even if your single pallet only measures 0.4 LDM, you may be charged for 1 LDM minimum. Understanding this helps you decide whether to consolidate shipments to get better value from the minimum charge.
+            </p>
+
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>How Stackability Affects LDM and Cost</h3>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+              Stackability has a direct impact on your freight cost because it halves (or thirds) the floor space your consignment uses. When a carrier can double-stack pallets, two pallets occupy the floor space of one. This means your LDM is divided by the stack factor: a stack factor of 2 halves the LDM, and a stack factor of 3 reduces it to one third.
+            </p>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+              For pallets to be genuinely stackable, the goods must be able to bear the weight of another pallet on top without damage, the pallet height must allow stacking within the trailer&apos;s internal height (typically 2.65m to 2.70m for a standard curtainsider), and the goods must be stable enough to remain safe during transit. Fragile goods, top-heavy loads, and irregularly shaped items are generally non-stackable regardless of physical dimensions.
+            </p>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+              When booking groupage freight, always confirm stackability with your carrier in advance. Declaring goods as stackable when they are not creates a safety risk and may result in damage claims or surcharges. Conversely, failing to declare stackable goods as such means you pay for more floor space than you need.
+            </p>
+
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>Worked Example: Groupage Quote</h3>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+              Consider a shipment of 8 Euro pallets (1200 &times; 800 mm), each weighing 400 kg, non-stackable, from Manchester to Munich. First, calculate the LDM: 8 pallets &times; 0.4 LDM each = 3.2 LDM. The total weight is 3,200 kg. A carrier quoting &pound;45 per LDM with a 1 LDM minimum would charge 3.2 &times; &pound;45 = &pound;144. However, many carriers also check whether the weight exceeds a per-LDM weight threshold (commonly 1,750 kg per LDM or 1,850 kg per LDM). At 3,200 kg across 3.2 LDM, that is exactly 1,000 kg per LDM &mdash; well within typical thresholds, so no weight surcharge applies.
+            </p>
+            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+              Now consider the same 8 pallets but stackable (stack factor 2). The LDM drops to 1.6 LDM, and the freight charge becomes 1.6 &times; &pound;45 = &pound;72 &mdash; exactly half the cost. However, the weight per LDM now rises to 2,000 kg per LDM, which may trigger a weight surcharge depending on the carrier&apos;s policy. This illustrates why both space and weight must be considered together when planning freight.
+            </p>
+          </div>
+
           {/* FAQ */}
           <div style={{ marginBottom: 48 }}>
             <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>

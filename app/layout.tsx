@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   robots: 'index, follow',
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
     ],
@@ -158,6 +159,10 @@ export default function RootLayout({
               borderTop: '1px solid var(--navy-border)', paddingTop: 16, lineHeight: 1.6,
             }}>
               © 2026 FreightUtils.com. All figures are indicative. Always confirm specifications with your carrier.
+              {' · '}
+              <Link href="/privacy" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Privacy</Link>
+              {' · '}
+              <Link href="/terms" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Terms</Link>
             </div>
           </div>
         </footer>
