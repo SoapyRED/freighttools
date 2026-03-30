@@ -116,9 +116,9 @@ export default function HomePage() {
 
       {/* ── TOOL GRID ── */}
       <section style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px' }}>
-        <div style={{
+        <div className="tool-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(2, 1fr)',
           gap: 12,
           marginTop: -32,
           position: 'relative',

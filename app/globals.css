@@ -279,6 +279,10 @@ main table thead tr { border-top: 2px solid rgba(239, 159, 39, 0.35); }
 [data-theme="dark"] .airline-name-link:hover { color: #EF9F27; }
 
 /* ─── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .tool-grid { grid-template-columns: 1fr !important; }
+}
+
 @media (max-width: 480px) {
   .mobile-stack { flex-direction: column !important; }
 }
