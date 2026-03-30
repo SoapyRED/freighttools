@@ -109,7 +109,7 @@ export default function HomePage() {
           </p>
           <div style={{ fontSize: 13, color: 'var(--text-faint)' }}>
             <span style={{ color: '#EF9F27', marginRight: 6 }}>•</span>
-            Used by freight forwarders, transport planners, and developers worldwide
+            Built by UK freight industry professionals. Data sourced from UNECE, UN Comtrade, IATA, ISO, and ICC official standards.
           </div>
         </div>
       </section>

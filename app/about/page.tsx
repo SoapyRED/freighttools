@@ -145,6 +145,27 @@ export default function AboutPage() {
           </div>
         </Section>
 
+        <Section label="Methodology" title="Data Sources &amp; Methodology">
+          <p style={{ marginBottom: 14 }}>
+            <strong>ADR 2025 Dangerous Goods</strong> &mdash; Licensed from Labeline.com, sourced from the official UNECE ADR publication (ECE/TRANS/352). 2,939 entries covering all hazard classes. Updated annually with each ADR edition.
+          </p>
+          <p style={{ marginBottom: 14 }}>
+            <strong>HS Codes</strong> &mdash; UN Comtrade HS 2022 dataset, published under the Public Domain Dedication and License (PDDL). 6,940 codes across 21 sections and 97 chapters. The next WCO update (HS 2027) is expected January 2027.
+          </p>
+          <p style={{ marginBottom: 14 }}>
+            <strong>Airlines</strong> &mdash; Compiled from public IATA/ICAO sources, cross-referenced against operational data. 6,352 airlines, 390 with verified cargo AWB prefixes. Last verified March 2026.
+          </p>
+          <p style={{ marginBottom: 14 }}>
+            <strong>INCOTERMS 2020</strong> &mdash; ICC INCOTERMS 2020 rules, verified against iccwbo.org and trade.gov official guidance. All 11 terms with full responsibility breakdowns.
+          </p>
+          <p style={{ marginBottom: 14 }}>
+            <strong>Container Specifications</strong> &mdash; ISO 668 (classification and dimensions) and ISO 1496 (specification and testing) standard values. Typical specifications &mdash; actual dimensions vary by manufacturer and age.
+          </p>
+          <p>
+            <strong>Pallet Standards</strong> &mdash; EPAL (European Pallet Association) for EUR pallets, ISO 6780 for international pallet standards, IATA ULD specifications for air freight unit load devices.
+          </p>
+        </Section>
+
         <Section label="Developers" title="For Developers">
           <p style={{ marginBottom: 14 }}>
             Every tool has a corresponding REST API endpoint. No authentication required.

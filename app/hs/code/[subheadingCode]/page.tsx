@@ -168,6 +168,13 @@ export default async function SubheadingPage(
           )}
         </div>
 
+        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 20, lineHeight: 1.6 }}>
+          Found an error?{' '}
+          <a href="mailto:contact@freightutils.com?subject=Data%20correction%20—%20HS%20codes" style={{ color: '#8f9ab0', textDecoration: 'underline' }}>
+            Let us know &rarr; contact@freightutils.com
+          </a>
+        </p>
+
         <AdUnit format="auto" />
       </main>
     </>

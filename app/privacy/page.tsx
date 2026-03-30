@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | FreightUtils',
   description: 'FreightUtils privacy policy — no accounts, no personal data collection. Learn how we handle your data.',
   alternates: { canonical: 'https://www.freightutils.com/privacy' },
+  robots: 'noindex, follow',
 };
 
 const h2 = { fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 800 as const, color: '#1a2332', margin: '36px 0 12px', letterSpacing: '-0.3px' };

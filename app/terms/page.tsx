@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: 'Terms of Service | FreightUtils',
   description: 'FreightUtils terms of service — tools and data provided for informational purposes only.',
   alternates: { canonical: 'https://www.freightutils.com/terms' },
+  robots: 'noindex, follow',
 };
 
 const h2 = { fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 800 as const, color: '#1a2332', margin: '36px 0 12px', letterSpacing: '-0.3px' };
