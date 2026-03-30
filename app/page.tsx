@@ -118,8 +118,8 @@ export default function HomePage() {
       <section style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px' }}>
         <div className="tool-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: 12,
+          gridTemplateColumns: 'repeat(5, 1fr)',
+          gap: 8,
           marginTop: -32,
           position: 'relative',
           zIndex: 2,
@@ -128,22 +128,22 @@ export default function HomePage() {
             <Link key={t.href} href={t.href} style={{
               background: 'var(--bg-card)',
               border: '1px solid var(--border)',
-              borderRadius: 12,
-              padding: '20px 18px',
+              borderRadius: 10,
+              padding: '14px 12px',
               textDecoration: 'none',
               display: 'flex',
               flexDirection: 'column',
-              gap: 8,
+              gap: 5,
               transition: 'border-color 0.2s, box-shadow 0.2s',
             }}>
-              <div style={{ fontSize: 24 }}>{t.icon}</div>
+              <div style={{ fontSize: 20 }}>{t.icon}</div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
-                <span style={{ color: 'var(--text-faint)', fontSize: 16 }}>→</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
+                <span style={{ color: 'var(--text-faint)', fontSize: 14 }}>→</span>
               </div>
-              <span style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.5 }}>{t.desc}</span>
+              <span style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>{t.desc}</span>
               <code style={{
-                fontSize: 11,
+                fontSize: 10,
                 color: '#EF9F27',
                 fontFamily: 'monospace',
                 marginTop: 'auto',
