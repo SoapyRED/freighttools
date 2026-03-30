@@ -3,6 +3,7 @@ import './globals.css';
 import Link from 'next/link';
 import ThemeToggle from './components/ThemeToggle';
 import NavLinks from './components/NavLinks';
+import SiteSearch from './components/SiteSearch';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.freightutils.com'),
@@ -109,7 +110,8 @@ export default function RootLayout({
             </Link>
 
             {/* Nav */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, overflow: 'auto', position: 'relative' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, position: 'relative' }}>
+              <SiteSearch />
               <NavLinks />
               <ThemeToggle />
             </div>

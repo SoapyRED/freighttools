@@ -4,7 +4,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { PALLET_PRESETS, PALLET_PRESET_MAP } from '@/lib/data/pallets';
 import { VEHICLES } from '@/lib/data/vehicles';
 import AdUnit from '@/app/components/AdUnit';
+import RelatedTools from '@/app/components/RelatedTools';
+import DataTimestamp from '@/app/components/DataTimestamp';
 import { calculateLdm, type LdmResult } from '@/lib/calculations/ldm';
+import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 const defaultResult: LdmResult = {
   ldm: 0.4,
@@ -27,6 +30,32 @@ export default function LdmCalc() {
   const [vehicleId, setVehicleId] = useState('artic');
   const [customVehicleLen, setCustomVehicleLen] = useState<string>('');
   const [result, setResult] = useState<LdmResult>(defaultResult);
+
+  // Load from URL params on mount
+  useEffect(() => {
+    const p = getUrlParams();
+    if (p.pallet && PALLET_PRESET_MAP[p.pallet]) {
+      setPalletType(p.pallet);
+      setLengthMm(PALLET_PRESET_MAP[p.pallet].lengthMm);
+      setWidthMm(PALLET_PRESET_MAP[p.pallet].widthMm);
+    }
+    if (p.qty) setQty(parseInt(p.qty, 10) || 1);
+    if (p.stackable === '1') setStackable(true);
+    if (p.stack) setStackFactor(parseInt(p.stack, 10) || 2);
+    if (p.weight) setWeightPerPallet(p.weight);
+    if (p.vehicle) setVehicleId(p.vehicle);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Sync state to URL
+  useUrlSync({
+    pallet: palletType !== 'custom' ? palletType : undefined,
+    qty: qty > 1 ? qty : undefined,
+    stackable: stackable || undefined,
+    stack: stackable && stackFactor !== 2 ? stackFactor : undefined,
+    weight: weightPerPallet || undefined,
+    vehicle: vehicleId !== 'artic' ? vehicleId : undefined,
+  });
 
   const recalculate = useCallback(() => {
     const res = calculateLdm({
@@ -443,6 +472,14 @@ export default function LdmCalc() {
           </div>
 
         </div>
+
+        <DataTimestamp text="Vehicle specifications per EN 283/ISO standards, last verified March 2026" />
+        <RelatedTools tools={[
+          { href: '/cbm', label: 'Calculate CBM for sea freight' },
+          { href: '/pallet', label: 'How many boxes fit on your pallets?' },
+          { href: '/containers', label: 'Check container dimensions' },
+          { href: '/adr', label: 'Shipping dangerous goods? Check ADR' },
+        ]} />
 
         {/* Ad unit */}
         <AdUnit format="auto" />

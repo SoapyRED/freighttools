@@ -64,6 +64,18 @@ export default async function AirlinePage(
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'FreightUtils', item: 'https://www.freightutils.com' },
+            { '@type': 'ListItem', position: 2, name: 'Chargeable Weight', item: 'https://www.freightutils.com/chargeable-weight' },
+            { '@type': 'ListItem', position: 3, name: data.name },
+          ],
+        }) }}
+      />
 
       {/* Hero */}
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>

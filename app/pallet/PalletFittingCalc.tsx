@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { calculatePalletFitting, type BoxLayout } from '@/lib/calculations/pallet-fitting';
+import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 // ─── Shared micro-styles ──────────────────────────────────────────
 const inputStyle: React.CSSProperties = {
@@ -160,6 +161,37 @@ export default function PalletFittingCalc({
   const [boxH,   setBoxH]   = useState('');
   const [boxWt,  setBoxWt]  = useState('');
   const [rotate, setRotate] = useState(true);
+
+  // Load from URL params on mount
+  useEffect(() => {
+    if (lockedDims) return;
+    const p = getUrlParams();
+    if (p.pl) setPalletL(p.pl);
+    if (p.pw) setPalletW(p.pw);
+    if (p.pmh) setPalletMH(p.pmh);
+    if (p.ph) setPalletH(p.ph);
+    if (p.mpw) setMaxWeight(p.mpw);
+    if (p.bl) setBoxL(p.bl);
+    if (p.bw) setBoxW(p.bw);
+    if (p.bh) setBoxH(p.bh);
+    if (p.bwt) setBoxWt(p.bwt);
+    if (p.rotate === '0') setRotate(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Sync state to URL
+  useUrlSync({
+    pl: palletL || undefined,
+    pw: palletW || undefined,
+    pmh: palletMH || undefined,
+    ph: palletH !== '15' ? palletH : undefined,
+    mpw: maxWeight || undefined,
+    bl: boxL || undefined,
+    bw: boxW || undefined,
+    bh: boxH || undefined,
+    bwt: boxWt || undefined,
+    rotate: !rotate ? '0' : undefined,
+  }, !lockedDims);
 
   const result = useMemo(() => {
     const pl  = parseFloat(palletL);

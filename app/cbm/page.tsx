@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import CbmCalc from './CbmCalc';
 import containersData from '@/lib/data/containers.json';
+import RelatedTools from '@/app/components/RelatedTools';
+import DataTimestamp from '@/app/components/DataTimestamp';
 
 const ogUrl = '/api/og?title=CBM+Calculator&desc=Cubic+metres+for+sea+and+air+freight+shipments&api=GET+/api/cbm';
 
@@ -245,6 +247,13 @@ export default function CbmPage() {
           </div>
 
         </div>
+
+        <DataTimestamp text="Conversion factors are standard mathematical constants" />
+        <RelatedTools tools={[
+          { href: '/ldm', label: 'Need loading metres instead?' },
+          { href: '/chargeable-weight', label: 'Calculate air freight chargeable weight' },
+          { href: '/containers', label: 'Check container capacity' },
+        ]} />
 
       </main>
     </>

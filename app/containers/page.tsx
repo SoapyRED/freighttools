@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import AdUnit from '@/app/components/AdUnit';
+import RelatedTools from '@/app/components/RelatedTools';
+import DataTimestamp from '@/app/components/DataTimestamp';
 import { getAllContainerSpecs, CONTAINER_COUNT } from '@/lib/calculations/container-capacity';
 
 const ogUrl = '/api/og?title=Shipping+Container+Dimensions&desc=All+10+container+types+with+specs&api=GET+/api/containers';
@@ -207,6 +209,13 @@ export default function ContainersPage() {
           </div>
 
         </div>
+
+        <DataTimestamp text="ISO container specifications, last verified March 2026" />
+        <RelatedTools tools={[
+          { href: '/cbm', label: 'Calculate CBM per item' },
+          { href: '/pallet', label: 'How many pallets fit?' },
+          { href: '/ldm', label: 'Loading metres for road freight' },
+        ]} />
 
         {/* Ad unit */}
         <AdUnit format="auto" />

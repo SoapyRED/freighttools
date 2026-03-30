@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import AdUnit from '@/app/components/AdUnit';
+import RelatedTools from '@/app/components/RelatedTools';
 import ConvertTool from './ConvertTool';
 
 const ogUrl = '/api/og?title=Freight+Unit+Converter&desc=Chargeable+weight,+freight+tonnes,+and+standard+conversions&api=GET+/api/convert';
@@ -308,6 +309,11 @@ export default function ConvertPage() {
             View API Docs &rarr;
           </Link>
         </div>
+
+        <RelatedTools tools={[
+          { href: '/cbm', label: 'Calculate CBM' },
+          { href: '/chargeable-weight', label: 'Calculate chargeable weight' },
+        ]} />
 
         {/* Ad unit */}
         <div style={{ marginTop: 32 }}>

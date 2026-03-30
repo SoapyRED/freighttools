@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { getSlimIndex, getCalcIndex, ENTRY_COUNT } from '@/lib/calculations/adr';
 import AdrTabs from './AdrTabs';
 import AdUnit from '@/app/components/AdUnit';
+import RelatedTools from '@/app/components/RelatedTools';
+import DataTimestamp from '@/app/components/DataTimestamp';
 
 const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+numbers+from+ADR+2025&api=GET+/api/adr';
 
@@ -352,6 +354,14 @@ export default function AdrPage() {
           </div>
 
         </div>
+
+        <DataTimestamp text="ADR 2025 data, last updated March 2026" />
+        <RelatedTools tools={[
+          { href: '/ldm', label: 'Calculate loading metres for DG shipments' },
+          { href: '/containers', label: 'Check container capacity for hazmat cargo' },
+          { href: '/hs', label: 'Find the HS code for this substance' },
+          { href: '/incoterms', label: 'INCOTERMS for dangerous goods shipping' },
+        ]} />
 
         {/* Ad unit (bottom) */}
         <AdUnit format="auto" />

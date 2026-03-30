@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { calculateChargeableWeight, VOLUMETRIC_FACTORS } from '@/lib/calculations/chargeable-weight';
 import AdUnit from '@/app/components/AdUnit';
+import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 // ─────────────────────────────────────────────────────────────────
 //  Helpers
@@ -92,6 +93,28 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
   const [gw,     setGw]     = useState('');
   const [pcs,    setPcs]    = useState('1');
   const [factor, setFactor] = useState(String(defaultFactor));
+
+  // Load from URL params on mount
+  useEffect(() => {
+    const p = getUrlParams();
+    if (p.l) setLength(p.l);
+    if (p.w) setWidth(p.w);
+    if (p.h) setHeight(p.h);
+    if (p.gw) setGw(p.gw);
+    if (p.pcs) setPcs(p.pcs);
+    if (p.factor) setFactor(p.factor);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Sync state to URL
+  useUrlSync({
+    l: length || undefined,
+    w: width || undefined,
+    h: height || undefined,
+    gw: gw || undefined,
+    pcs: pcs !== '1' ? pcs : undefined,
+    factor: factor !== '6000' ? factor : undefined,
+  });
 
   const result = useMemo(() => {
     const l  = parseFloat(length);

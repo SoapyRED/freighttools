@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import AdUnit from '@/app/components/AdUnit';
+import RelatedTools from '@/app/components/RelatedTools';
+import DataTimestamp from '@/app/components/DataTimestamp';
 import HsSearch from './HsSearch';
 import { HsSectionCard } from './HsLinkCard';
 import { getSlimIndex, getAllSections, TOTAL_CODES, CHAPTER_COUNT, HEADING_COUNT, SUBHEADING_COUNT, SECTION_COUNT } from '@/lib/calculations/hs';
@@ -178,6 +180,13 @@ export default function HsPage() {
             View API Docs &rarr;
           </Link>
         </div>
+
+        <DataTimestamp text="HS 2022 data from UN Comtrade, last updated March 2026" />
+        <RelatedTools tools={[
+          { href: '/chargeable-weight', label: 'Calculate import duty weight' },
+          { href: '/incoterms', label: 'Check INCOTERMS for this shipment' },
+          { href: '/adr', label: 'Is this a dangerous good? Check ADR' },
+        ]} />
 
         {/* Ad unit */}
         <div style={{ marginTop: 32 }}>

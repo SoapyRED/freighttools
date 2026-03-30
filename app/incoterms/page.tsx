@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllIncoterms, getAnyMode, getSeaOnly, INCOTERM_COUNT } from '@/lib/calculations/incoterms';
 import AdUnit from '@/app/components/AdUnit';
+import RelatedTools from '@/app/components/RelatedTools';
+import DataTimestamp from '@/app/components/DataTimestamp';
 
 const ogUrl = '/api/og?title=INCOTERMS+2020+Reference&desc=All+11+trade+terms+explained&api=GET+/api/incoterms';
 
@@ -299,6 +301,12 @@ export default function IncotermsPage() {
             View API Docs →
           </Link>
         </div>
+
+        <DataTimestamp text="INCOTERMS 2020, current as of March 2026" />
+        <RelatedTools tools={[
+          { href: '/hs', label: 'Look up HS codes for customs' },
+          { href: '/chargeable-weight', label: 'Calculate chargeable weight' },
+        ]} />
 
         {/* Ad unit */}
         <div style={{ marginTop: 32 }}>

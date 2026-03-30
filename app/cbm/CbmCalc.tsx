@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { calculateCbm } from '@/lib/calculations/cbm';
 import AdUnit from '@/app/components/AdUnit';
+import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 // ─── shared micro-styles ──────────────────────────────────────────
 const inputStyle: React.CSSProperties = {
@@ -100,6 +101,25 @@ export default function CbmCalc({
   const [width,  setWidth]  = useState(defaultW);
   const [height, setHeight] = useState(defaultH);
   const [pcs,    setPcs]    = useState('1');
+
+  // Load from URL params on mount
+  useEffect(() => {
+    if (lockedDims) return; // Don't override container-page defaults
+    const p = getUrlParams();
+    if (p.l) setLength(p.l);
+    if (p.w) setWidth(p.w);
+    if (p.h) setHeight(p.h);
+    if (p.pcs) setPcs(p.pcs);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Sync state to URL (only on the main /cbm page, not container sub-pages)
+  useUrlSync({
+    l: length || undefined,
+    w: width || undefined,
+    h: height || undefined,
+    pcs: pcs !== '1' ? pcs : undefined,
+  }, !lockedDims);
 
   const result = useMemo(() => {
     const l = parseFloat(length);
