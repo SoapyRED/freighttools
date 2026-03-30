@@ -22,7 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/containers`,        changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/convert`,           changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/hs`,                changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/adr-calculator`,    changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/api-docs`,          changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/about`,             changeFrequency: 'monthly', priority: 0.5 },
   ];

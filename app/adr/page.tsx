@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getSlimIndex, ENTRY_COUNT } from '@/lib/calculations/adr';
-import AdrSearch from './AdrSearch';
+import { getSlimIndex, getCalcIndex, ENTRY_COUNT } from '@/lib/calculations/adr';
+import AdrTabs from './AdrTabs';
 import AdUnit from '@/app/components/AdUnit';
 
 const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+numbers+from+ADR+2025&api=GET+/api/adr';
 
 export const metadata: Metadata = {
-  title: 'ADR Dangerous Goods Lookup | FreightUtils',
-  description: 'Free ADR 2025 dangerous goods lookup — search 2,939 entries by UN number or substance name. Official UNECE data with class, packing group, labels, tunnel codes, and transport category. Free REST API available.',
+  title: 'ADR Dangerous Goods — Lookup & 1.1.3.6 Exemption Calculator | FreightUtils',
+  description: 'Free ADR 2025 dangerous goods lookup — search 2,939 entries by UN number and calculate 1.1.3.6 exemption points. Official UNECE data with class, packing group, labels, tunnel codes, and transport category. Free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/adr' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'ADR Dangerous Goods Lookup — FreightUtils' }],
@@ -17,9 +17,8 @@ export const metadata: Metadata = {
 };
 
 export default function AdrPage() {
-  // Build slim index server-side — passed to Client Component as prop
-  // (~120 KB raw / ~30 KB gzipped — safe to embed)
-  const index = getSlimIndex();
+  const searchIndex = getSlimIndex();
+  const calcIndex = getCalcIndex();
 
   return (
     <>
@@ -30,17 +29,17 @@ export default function AdrPage() {
         textAlign: 'center',
       }}>
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          ADR Dangerous Goods <span style={{ color: '#e87722' }}>Lookup</span>
+          ADR Dangerous <span style={{ color: '#e87722' }}>Goods</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 500, margin: '0 auto' }}>
-          Search {ENTRY_COUNT.toLocaleString()} UN numbers from the ADR 2025 dangerous goods list — free, instant, no signup
+        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 560, margin: '0 auto' }}>
+          Search {ENTRY_COUNT.toLocaleString()} UN numbers from ADR 2025 and calculate 1.1.3.6 exemption points &mdash; free, instant, no signup
         </p>
       </div>
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
-        {/* Search */}
-        <AdrSearch index={index} />
+        {/* Tools */}
+        <AdrTabs searchIndex={searchIndex} calcIndex={calcIndex} />
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
