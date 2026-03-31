@@ -11,6 +11,12 @@ import {
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
 const CACHE = { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' };
 
+const HS_META = {
+  source: 'UN Comtrade HS 2022 (PDDL)',
+  edition: 'HS 2022',
+  codes: 6940,
+};
+
 export function OPTIONS() { return new NextResponse(null, { status: 204, headers: CORS }); }
 
 export function GET(req: NextRequest) {
@@ -26,7 +32,7 @@ export function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Search query must be at least 2 characters.' }, { status: 400, headers: h });
     }
     const results = searchCodes(q, 50);
-    return NextResponse.json({ query: q, results, count: results.length }, { headers: h });
+    return NextResponse.json({ query: q, results, count: results.length, meta: HS_META }, { headers: h });
   }
 
   // Code lookup mode
@@ -35,7 +41,7 @@ export function GET(req: NextRequest) {
     if (!details) {
       return NextResponse.json({ error: `HS code "${code}" not found.` }, { status: 404, headers: h });
     }
-    return NextResponse.json(details, { headers: h });
+    return NextResponse.json({ ...details, meta: HS_META }, { headers: h });
   }
 
   // Section browse mode
@@ -48,7 +54,7 @@ export function GET(req: NextRequest) {
       }, { status: 404, headers: h });
     }
     const chapters = getChaptersBySection(section.toLowerCase());
-    return NextResponse.json({ section: sec, chapters, count: chapters.length }, { headers: h });
+    return NextResponse.json({ section: sec, chapters, count: chapters.length, meta: HS_META }, { headers: h });
   }
 
   // No params — usage hint

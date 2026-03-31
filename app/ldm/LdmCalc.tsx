@@ -338,7 +338,7 @@ export default function LdmCalc() {
               A <strong style={{ color: '#1e2535' }}>loading metre (LDM)</strong> is the standard unit used to measure the floor space a consignment occupies in a road freight trailer. One loading metre represents a strip of trailer floor that is <strong style={{ color: '#1e2535' }}>1 metre long and the full width of the trailer</strong>.
             </p>
             <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
-              The standard European trailer width is 2.4m (EN 283), while North American 53ft trailers are 2.59m (102 inches) wide. This calculator automatically adjusts the divisor based on your selected vehicle type. Unlike CBM (cubic metres), which measures total volume, LDM measures only floor area — a tall, light pallet takes up the same LDM as a short, heavy one.
+              The standard European trailer width is 2.4m (EN 283), while North American 53ft trailers are 2.59m (102 inches) wide. When you select a US vehicle type, this calculator uses 2.59m as the divisor instead of 2.4m. The formula becomes LDM = (L &times; W &times; Qty) &divide; trailer width. Unlike CBM (cubic metres), which measures total volume, LDM measures only floor area &mdash; a tall, light pallet takes up the same LDM as a short, heavy one.
             </p>
 
             <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>The Loading Metres Formula</h3>

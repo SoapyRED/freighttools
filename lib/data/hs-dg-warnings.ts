@@ -16,8 +16,7 @@ const HARD_FLAGS: Record<string, string> = {
   '2710': '\u26A0 Dangerous Goods Alert: Petroleum oils (HS 2710), including petrol and diesel, are typically Class 3 flammable liquids under ADR.',
   '8507': '\u26A0 Dangerous Goods Alert: Batteries (HS 8507), particularly lithium-ion (8507.60), are Class 9 dangerous goods under ADR (UN 3480/UN 3481). Special packaging, labelling, and documentation required for all transport modes.',
   '2828': '\u26A0 Dangerous Goods Alert: Hypochlorites (HS 2828), including calcium hypochlorite, are Class 5.1 oxidizers under ADR (UN 2880/UN 1748). A leading cause of container ship fires.',
-  '9303': '\u26A0 Dangerous Goods Alert: Some items in this heading \u2014 particularly signal pistols, flare launchers, and captive-bolt devices \u2014 may require dangerous goods classification depending on their ammunition or pyrotechnic components. Firearms themselves are not generally classified as dangerous goods, but any accompanying ammunition or explosive components are. Always verify with the shipper.',
-  '9304': '\u26A0 Dangerous Goods Alert: Some items in this heading may have compressed gas or pyrotechnic components requiring dangerous goods classification. Air guns use compressed gas cartridges that may fall under Class 2. Always verify with the shipper.',
+  '9303': '\u26A0 Dangerous Goods Alert: Products under HS 9303 (firearms) may be shipped alongside ammunition classified as Class 1 dangerous goods under ADR/IMDG/IATA DGR. Firearms are subject to strict import/export licensing and transport security requirements. Verify all regulatory requirements before shipping.',
 };
 
 const SOFT_FLAG_CHAPTERS: Record<string, string> = {
@@ -27,6 +26,7 @@ const SOFT_FLAG_CHAPTERS: Record<string, string> = {
   '38': '\u2139 Products in HS Chapter 38 (Miscellaneous chemical products) may include substances classified as dangerous goods for transport. If shipping chemicals, solvents, acids, or reactive substances, verify ADR/IMDG classification before booking.',
   '85': '\u2139 Electrical equipment (HS Chapter 85) may contain batteries or other components classified as dangerous goods. Verify if batteries are present.',
   '87': '\u2139 Vehicles and vehicle parts (HS Chapter 87) may contain fuel, batteries, or airbag inflators classified as dangerous goods.',
+  '9304': '\u2139 Products under HS 9304 (air guns, spring guns, etc.) are not typically classified as dangerous goods, but may be subject to import/export licensing and transport restrictions in many jurisdictions. Verify regulatory requirements before shipping.',
 };
 
 const DISCLAIMER = 'Classification is the shipper\u2019s legal responsibility. This reference is based on common HS-ADR correlations from public regulatory data. Always verify against the current ADR, IMDG Code, or IATA DGR and consult a qualified DGSA where required.';
@@ -49,6 +49,15 @@ export function getHsDgWarning(hsCode: string): HsDgWarning | null {
     return { type: 'hard', message: HARD_FLAGS['8507'] };
   }
 
+  // Check soft flags by heading (e.g., 9304)
+  if (SOFT_FLAG_CHAPTERS[heading]) {
+    return {
+      type: 'soft',
+      message: SOFT_FLAG_CHAPTERS[heading],
+    };
+  }
+
+  // Check soft flags by chapter (2-digit prefix)
   if (SOFT_FLAG_CHAPTERS[chapter]) {
     return {
       type: 'soft',

@@ -73,7 +73,7 @@ export default function ApiDocsPage() {
             {[
               { label: 'Status', value: 'APIs are actively maintained and monitored.' },
               { label: 'Support', value: 'contact@freightutils.com — corrections and API issues typically addressed within 2 business days.' },
-              { label: 'Versioning', value: 'Data source versions and update dates are documented on each tool page and on the About page. API responses return current data only. Breaking changes will be announced via the API docs page.' },
+              { label: 'Versioning', value: 'Reference endpoints (ADR, HS, airlines) include a meta object with data source and edition information. Breaking changes will be announced via the API docs page.' },
             ].map(item => (
               <div key={item.label} style={{
                 background: '#f7f8fa', border: '1px solid #d8dce6', borderRadius: 8,
@@ -851,6 +851,7 @@ Content-Type: application/json
                   <tr><th>Field</th><th>Type</th><th>Description</th></tr>
                 </thead>
                 <tbody>
+                  <tr><td><code>slug</code></td><td>string</td><td>URL-friendly identifier</td></tr>
                   <tr><td><code>airline_name</code></td><td>string</td><td>Official airline name</td></tr>
                   <tr><td><code>iata_code</code></td><td>string | null</td><td>2-character IATA designator</td></tr>
                   <tr><td><code>icao_code</code></td><td>string | null</td><td>3-character ICAO designator</td></tr>
@@ -1271,12 +1272,8 @@ Content-Type: application/json
         {/* Rate limiting */}
         <h2 style={s.sectionTitle}>Rate Limiting</h2>
         <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
-          The API is currently free and unmetered. As a courtesy, please keep requests under 1,000/hour per IP. Rate limit headers are included in every response:
+          The API is currently free and unmetered. As a courtesy, please keep requests under 1,000 per hour per IP address. Excessive usage may result in temporary blocking.
         </p>
-        <div className="code-block">
-          X-RateLimit-Limit: 1000<br/>
-          X-RateLimit-Window: 3600
-        </div>
 
         {/* Error Responses */}
         <h2 style={s.sectionTitle}>Error Responses</h2>

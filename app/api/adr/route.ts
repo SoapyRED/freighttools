@@ -20,6 +20,12 @@ const CACHE_HEADERS = {
   'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
 };
 
+const ADR_META = {
+  source: 'UNECE ADR 2025, licensed from Labeline.com',
+  edition: 'ADR 2025',
+  entries: 2939,
+};
+
 // ─────────────────────────────────────────────────────────────────
 //  OPTIONS — CORS preflight
 // ─────────────────────────────────────────────────────────────────
@@ -92,7 +98,7 @@ export function GET(req: NextRequest) {
     const results = entries.map(e => stripMeta(e as unknown as Record<string, unknown>));
 
     return NextResponse.json(
-      { count: results.length, results },
+      { count: results.length, results, meta: ADR_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } }
     );
   }
@@ -118,7 +124,7 @@ export function GET(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { count: results.length, results },
+      { count: results.length, results, meta: ADR_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } }
     );
   }
@@ -144,7 +150,7 @@ export function GET(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { count: results.length, results },
+      { count: results.length, results, meta: ADR_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } }
     );
   }

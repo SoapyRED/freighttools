@@ -17,6 +17,12 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+const AIRLINES_META = {
+  source: 'Public IATA/ICAO data, cross-referenced',
+  airlines: 6352,
+  last_verified: 'March 2026',
+};
+
 const CACHE_HEADERS = {
   'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
 };
@@ -82,7 +88,7 @@ export function GET(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { count: results.length, results },
+      { count: results.length, results, meta: AIRLINES_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } }
     );
   }
@@ -108,7 +114,7 @@ export function GET(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { count: results.length, results },
+      { count: results.length, results, meta: AIRLINES_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } }
     );
   }
@@ -134,7 +140,7 @@ export function GET(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { count: results.length, results },
+      { count: results.length, results, meta: AIRLINES_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } }
     );
   }
@@ -160,7 +166,7 @@ export function GET(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { count: results.length, results },
+      { count: results.length, results, meta: AIRLINES_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } }
     );
   }
@@ -186,7 +192,7 @@ export function GET(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { count: results.length, results },
+      { count: results.length, results, meta: AIRLINES_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } }
     );
   }

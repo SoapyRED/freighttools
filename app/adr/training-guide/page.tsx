@@ -159,7 +159,7 @@ export default function AdrTrainingGuidePage() {
             Typical UK Costs
           </h2>
           <p>
-            Training costs vary by provider and location, but typical UK prices (as of 2025) are:
+            Training costs vary by provider and location, but typical UK prices (2025\u20132026) are:
           </p>
           <div style={{ marginTop: 16, marginBottom: 24 }}>
             {[
