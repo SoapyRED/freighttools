@@ -169,7 +169,7 @@ export default function AirlinesPage() {
         </div>
 
         <DataTimestamp text="Airline data last verified April 2026" />
-        <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
+        <ToolDisclaimer text="Airline data compiled from public IATA/ICAO sources. Verify current codes with your carrier or IATA." />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate chargeable weight for air freight' },
           { href: '/hs', label: 'Need HS codes for customs?' },

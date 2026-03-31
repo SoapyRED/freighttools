@@ -308,7 +308,7 @@ export default function AdrPage() {
             About This Data
           </h2>
           <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
-            This ADR dataset contains <strong>2,939 entries</strong> covering <strong>2,347 unique UN numbers</strong>, rebuilt directly from the official UNECE ADR 2025 publication (ECE/TRANS/352). The source data was purchased as the English/French Digital Package from UN Publications and includes all additions and corrections in the 2025 edition.
+            This ADR dataset contains <strong>2,939 entries</strong> covering <strong>2,347 unique UN numbers</strong>, licensed from Labeline.com, sourced from the official UNECE ADR 2025 publication (ECE/TRANS/352). The dataset includes all additions and corrections in the 2025 edition.
           </p>
           <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             For operational decisions — including classification, packaging, labelling, and routing — always refer to the full ADR text and consult your <strong>Dangerous Goods Safety Adviser (DGSA)</strong> where required. This tool is a reference aid, not a substitute for the complete regulation.
@@ -334,7 +334,7 @@ export default function AdrPage() {
             <details className="faq-item">
               <summary>What is a Dangerous Goods Safety Adviser (DGSA)?</summary>
               <div className="faq-answer">
-                Under ADR Chapter 1.8.3, any undertaking involved in the carriage of dangerous goods by road — or the related packing, loading, filling, or unloading — must appoint a <strong>DGSA</strong>. The adviser must hold a valid DGSA certificate obtained by passing the relevant examination.
+                Most undertakings involved in the carriage, packing, loading, filling, or unloading of dangerous goods are required to appoint a <strong>DGSA</strong> under ADR Chapter 1.8.3, subject to exemptions for small quantities and certain ancillary activities. The adviser must hold a valid DGSA certificate obtained by passing the relevant examination. See <a href="https://www.gov.uk/guidance/moving-dangerous-goods" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>GOV.UK guidance</a> for full details.
               </div>
             </details>
             <details className="faq-item">

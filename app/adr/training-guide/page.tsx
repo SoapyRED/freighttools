@@ -25,6 +25,7 @@ export default function AdrTrainingGuidePage() {
         <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 600, margin: '0 auto' }}>
           Understanding who needs ADR training, what the different qualification levels are, and how to prepare.
         </p>
+        <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>Last updated: April 2026</p>
       </div>
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
@@ -143,9 +144,10 @@ export default function AdrTrainingGuidePage() {
             3. Dangerous Goods Safety Adviser (DGSA)
           </h3>
           <p>
-            Any business that consigns, transports, or loads dangerous goods (above certain thresholds) must appoint
-            a Dangerous Goods Safety Adviser. The DGSA must hold a vocational qualification specific to the transport
-            mode(s) (road, rail, sea, air).
+            Most businesses that consign, transport, or load dangerous goods are required to appoint
+            a Dangerous Goods Safety Adviser, subject to exemptions for small quantities and certain ancillary
+            activities. The DGSA qualification covers the carriage of dangerous goods by road, rail, and inland
+            waterway. Sea (IMDG) and air (IATA DGR) transport have separate competent-person requirements.
           </p>
           <p>
             The DGSA qualification involves a more intensive training programme and examination covering the full

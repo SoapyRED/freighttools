@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getCodeDetails, getSubheadingsByHeading, formatHsCode } from '@/lib/calculations/hs';
 import HsLinkCard from '@/app/hs/HsLinkCard';
 import AdUnit from '@/app/components/AdUnit';
+import { getHsDgWarning, HS_DG_DISCLAIMER } from '@/lib/data/hs-dg-warnings';
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -79,6 +80,25 @@ export default async function HeadingPage(
       </div>
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '28px 20px 80px' }}>
+
+        {/* DG Warning */}
+        {(() => {
+          const warning = getHsDgWarning(headingCode);
+          if (!warning) return null;
+          const isHard = warning.type === 'hard';
+          return (
+            <div className={`warning-badge ${isHard ? 'warn' : 'info'}`} style={{ marginBottom: 24 }}>
+              <div>
+                <div style={{ marginBottom: 6 }}>{warning.message}{' '}
+                  <a href="/adr" style={{ color: isHard ? '#92400e' : '#1e40af', textDecoration: 'underline', fontWeight: 600 }}>
+                    Check ADR classification &rarr;
+                  </a>
+                </div>
+                <div style={{ fontSize: 11, opacity: 0.8 }}>{HS_DG_DISCLAIMER}</div>
+              </div>
+            </div>
+          );
+        })()}
 
         <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
           Subheadings

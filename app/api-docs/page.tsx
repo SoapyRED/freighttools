@@ -29,6 +29,13 @@ export default function ApiDocsPage() {
 
       <main style={s.main}>
 
+        {/* OpenAPI spec callout */}
+        <p style={{ fontSize: 13, color: '#5a6478', marginBottom: 32, lineHeight: 1.6 }}>
+          Full OpenAPI 3.0.3 specification:{' '}
+          <a href="/openapi.json" style={{ color: '#e87722', textDecoration: 'underline', fontWeight: 600 }}>/openapi.json</a>
+          {' '}(compatible with Swagger, Postman, and RapidAPI import)
+        </p>
+
         {/* Overview */}
         <div style={{ marginBottom: 40 }}>
           <h2 style={s.sectionTitle}>Overview</h2>
@@ -66,7 +73,7 @@ export default function ApiDocsPage() {
             {[
               { label: 'Status', value: 'APIs are actively maintained and monitored.' },
               { label: 'Support', value: 'contact@freightutils.com — corrections and API issues typically addressed within 2 business days.' },
-              { label: 'Versioning', value: 'API responses include data source versions. Breaking changes will be announced via the API docs page.' },
+              { label: 'Versioning', value: 'Data source versions and update dates are documented on each tool page and on the About page. API responses return current data only. Breaking changes will be announced via the API docs page.' },
             ].map(item => (
               <div key={item.label} style={{
                 background: '#f7f8fa', border: '1px solid #d8dce6', borderRadius: 8,
@@ -638,14 +645,15 @@ export default function ApiDocsPage() {
       "class": "3",
       "classification_code": "F1",
       "packing_group": "II",
-      "labels": ["3"],
-      "special_provisions": ["243", "534", "664"],
+      "labels": "3",
+      "special_provisions": "243 534 664",
       "limited_quantity": "1 L",
       "excepted_quantity": "E2",
-      "transport_category": 2,
-      "tunnel_restriction_code": "D/E",
-      "transport_prohibited": false,
-      "hazard_identification_number": "33"
+      "transport_category": "2",
+      "tunnel_restriction_code": "(D/E)",
+      "hazard_identification_number": "33",
+      "variant_index": 0,
+      "variant_count": 1
     }
   ]
 }`}
@@ -1243,6 +1251,16 @@ Content-Type: application/json
             </tbody>
           </table>
         </div>
+
+        {/* Field naming */}
+        <h2 style={s.sectionTitle}>Field Naming</h2>
+        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>
+          Most endpoints use <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>snake_case</code> field names.
+          <strong> Note:</strong> The <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>/api/containers</code> endpoint
+          uses <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>camelCase</code> field names
+          (e.g. <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>internalLengthCm</code>,{' '}
+          <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>maxGrossKg</code>).
+        </p>
 
         {/* Rate limiting */}
         <h2 style={s.sectionTitle}>Rate Limiting</h2>

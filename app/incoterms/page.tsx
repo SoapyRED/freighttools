@@ -304,7 +304,7 @@ export default function IncotermsPage() {
         </div>
 
         <DataTimestamp text="INCOTERMS 2020, current as of April 2026" />
-        <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
+        <ToolDisclaimer text="INCOTERMS 2020 reference based on ICC official rules. For contractual use, consult the full ICC publication." />
         <RelatedTools tools={[
           { href: '/hs', label: 'Look up HS codes for customs' },
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },

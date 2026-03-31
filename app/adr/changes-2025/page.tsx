@@ -26,6 +26,7 @@ export default function AdrChanges2025Page() {
           The ADR 2025 edition entered into force on 1 January 2025, with a mandatory transition date of 1 July 2025.
           Here are the key practical changes for transport operators and freight professionals.
         </p>
+        <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>Last updated: April 2026</p>
       </div>
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
