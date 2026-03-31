@@ -44,9 +44,12 @@ export default function AdrPage() {
         {/* Tools */}
         <AdrTabs searchIndex={searchIndex} calcIndex={calcIndex} />
 
-        {/* Disclaimer */}
+        {/* Data provenance */}
         <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
-          Data sourced from the official UNECE ADR 2025 publication (ECE/TRANS/352). For operational use, always verify against the{' '}
+          Data: UNECE ADR 2025, licensed from Labeline.com. 2,939 entries covering all hazard classes. Last verified April 2026.
+        </p>
+        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 4, lineHeight: 1.6 }}>
+          For operational use, always verify against the{' '}
           <a href="https://unece.org/transport/dangerous-goods/adr-2025" target="_blank" rel="noopener noreferrer" style={{ color: '#8f9ab0', textDecoration: 'underline' }}>
             current ADR in force
           </a>.
@@ -379,7 +382,7 @@ export default function AdrPage() {
           </div>
         </div>
 
-        <DataTimestamp text="ADR 2025 data, last updated March 2026" />
+        <DataTimestamp text="ADR 2025 data, last updated April 2026" />
         <ToolDisclaimer text="ADR reference data only. Classification is the consignor's legal responsibility. Consult a DGSA for compliance decisions." />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Calculate loading metres for DG shipments' },

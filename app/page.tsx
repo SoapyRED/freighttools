@@ -111,7 +111,7 @@ export default function HomePage() {
             Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
           </div>
           <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
-            Data last verified March 2026. Sources: UNECE ADR 2025, WCO HS 2022, IATA, ISO, ICC.
+            Data last verified April 2026. Sources: UNECE ADR 2025, WCO HS 2022, IATA, ISO, ICC.
           </div>
         </div>
       </section>

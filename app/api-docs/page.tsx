@@ -23,7 +23,7 @@ export default function ApiDocsPage() {
           All FreightUtils calculators are available as free, open REST API endpoints
         </p>
         <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
-          Last updated: March 2026
+          Last updated: April 2026
         </p>
       </div>
 
@@ -98,7 +98,7 @@ export default function ApiDocsPage() {
                 Commercial Access
               </div>
               <div style={{ fontSize: 14, color: '#c9cdd6', lineHeight: 1.5 }}>
-                For guaranteed rate limits, SLA, and priority support — available via RapidAPI (coming soon) or{' '}
+                For guaranteed rate limits, SLA, and priority support,{' '}
                 <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact us directly</a>.
               </div>
             </div>
@@ -1253,6 +1253,39 @@ Content-Type: application/json
           X-RateLimit-Limit: 1000<br/>
           X-RateLimit-Window: 3600
         </div>
+
+        {/* Error Responses */}
+        <h2 style={s.sectionTitle}>Error Responses</h2>
+        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
+          All endpoints return standard HTTP error codes with a descriptive JSON error message:
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
+          {[
+            { code: '400', label: 'Bad Request', desc: 'Missing or invalid parameters', example: '{"error": "Missing required parameter: l (length in cm)"}' },
+            { code: '404', label: 'Not Found', desc: 'Resource does not exist', example: '{"error": "No ADR entry found for UN number 9999"}' },
+            { code: '500', label: 'Server Error', desc: 'Unexpected error', example: '{"error": "Internal server error"}' },
+          ].map(err => (
+            <div key={err.code} style={{ background: '#f7f8fa', border: '1px solid #d8dce6', borderRadius: 8, padding: '14px 18px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
+                <span style={{ background: err.code === '400' ? '#f59e0b' : err.code === '404' ? '#6b7280' : '#ef4444', color: '#fff', fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 4, fontFamily: 'monospace' }}>{err.code}</span>
+                <span style={{ fontSize: 14, fontWeight: 700, color: '#1a2332' }}>{err.label}</span>
+                <span style={{ fontSize: 13, color: '#5a6478' }}>— {err.desc}</span>
+              </div>
+              <div className="code-block" style={{ marginTop: 6, fontSize: 12 }}>{err.example}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Source & Issues */}
+        <h2 style={s.sectionTitle}>Source Code &amp; Issue Reporting</h2>
+        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
+          FreightUtils is open source. Report bugs, request features, or contribute on GitHub:{' '}
+          <a href="https://github.com/SoapyRED/freighttools" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>
+            github.com/SoapyRED/freighttools
+          </a>.
+          For data corrections or API support, email{' '}
+          <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact@freightutils.com</a>.
+        </p>
 
       </main>
     </>

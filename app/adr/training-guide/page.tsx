@@ -222,6 +222,25 @@ export default function AdrTrainingGuidePage() {
             </li>
           </ul>
 
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 12, marginTop: 36 }}>
+            Official UK Government Guidance
+          </h2>
+          <ul style={{ paddingLeft: 24, marginBottom: 16 }}>
+            <li>
+              <a href="https://www.gov.uk/government/publications/dangerous-goods-adr-driver-training-syllabus" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>
+                GOV.UK: ADR driver training syllabus
+              </a>
+            </li>
+            <li>
+              <a href="https://www.gov.uk/guidance/moving-dangerous-goods" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>
+                GOV.UK: Moving dangerous goods
+              </a>
+            </li>
+          </ul>
+          <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
+            Official UK government guidance on ADR training and dangerous goods transport.
+          </p>
+
           {/* Related tools */}
           <div style={{
             background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
@@ -246,6 +265,11 @@ export default function AdrTrainingGuidePage() {
             </div>
           </div>
 
+          <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 36, lineHeight: 1.6, fontStyle: 'italic' }}>
+            ADR reference information only. Classification and compliance are the consignor&apos;s and carrier&apos;s
+            legal responsibility. Always verify against the current ADR in force and consult a qualified DGSA where required.
+          </p>
+
         </article>
 
         {/* Email capture */}
@@ -254,7 +278,7 @@ export default function AdrTrainingGuidePage() {
           marginTop: 40, textAlign: 'center',
         }}>
           <p style={{ color: '#fff', fontSize: 15, fontWeight: 600, marginBottom: 12 }}>
-            Get notified when ADR 2027 changes are published
+            Get the ADR 2025 Quick Reference Guide — key changes, tunnel codes, and LQ rules in one page
           </p>
           <form action="mailto:contact@freightutils.com" method="GET" style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
             <input
@@ -280,7 +304,7 @@ export default function AdrTrainingGuidePage() {
             </button>
           </form>
           <p style={{ fontSize: 11, color: '#6b7280', marginTop: 8 }}>
-            No spam. One email when the next ADR edition is published.
+            Enter your email and we&apos;ll send it straight to your inbox. No spam.
           </p>
         </div>
 

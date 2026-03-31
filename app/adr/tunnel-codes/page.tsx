@@ -134,6 +134,15 @@ export default function AdrTunnelCodesPage() {
             The slash notation (e.g., B/D) indicates different restrictions depending on whether goods are in
             bulk/tank or in packages. The first letter applies to tank transport; the second to packaged goods.
           </p>
+          <div className="warning-badge info" style={{ marginTop: 16 }}>
+            <span style={{ fontSize: 16 }}>&#8505;</span>
+            <div>
+              <strong>Note:</strong> The tunnel restriction code shown in the ADR dangerous goods list (e.g., &apos;D/E&apos;
+              or &apos;B1000C&apos;) is not the same as the tunnel category (A through E). The restriction code determines
+              which tunnel categories the goods are prohibited from. For example, a restriction code of &apos;(D/E)&apos;
+              means the goods are prohibited from tunnels of category D and E.
+            </div>
+          </div>
 
           <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 12, marginTop: 36 }}>
             UK-Specific Tunnel Restrictions
@@ -214,6 +223,11 @@ export default function AdrTunnelCodesPage() {
             </div>
           </div>
 
+          <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 36, lineHeight: 1.6, fontStyle: 'italic' }}>
+            ADR reference information only. Classification and compliance are the consignor&apos;s and carrier&apos;s
+            legal responsibility. Always verify against the current ADR in force and consult a qualified DGSA where required.
+          </p>
+
         </article>
 
         {/* Email capture */}
@@ -222,7 +236,7 @@ export default function AdrTunnelCodesPage() {
           marginTop: 40, textAlign: 'center',
         }}>
           <p style={{ color: '#fff', fontSize: 15, fontWeight: 600, marginBottom: 12 }}>
-            Get notified when ADR 2027 changes are published
+            Get the ADR 2025 Quick Reference Guide — key changes, tunnel codes, and LQ rules in one page
           </p>
           <form action="mailto:contact@freightutils.com" method="GET" style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
             <input
@@ -248,7 +262,7 @@ export default function AdrTunnelCodesPage() {
             </button>
           </form>
           <p style={{ fontSize: 11, color: '#6b7280', marginTop: 8 }}>
-            No spam. One email when the next ADR edition is published.
+            Enter your email and we&apos;ll send it straight to your inbox. No spam.
           </p>
         </div>
 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 const ogUrl = '/api/og?title=ADR+2025+Changes&desc=Complete+summary+of+what+changed+in+ADR+2025';
 
 export const metadata: Metadata = {
-  title: 'ADR 2025: What Changed — Complete Summary | FreightUtils',
+  title: 'ADR 2025: What Changed — Key Changes Summary | FreightUtils',
   description:
     'Full summary of ADR 2025 changes effective 1 January 2025. New UN numbers for sodium-ion batteries, updated waste transport provisions, mandatory LQ training from July 2025, and documentation changes.',
   alternates: { canonical: 'https://www.freightutils.com/adr/changes-2025' },
@@ -20,11 +20,11 @@ export default function AdrChanges2025Page() {
       {/* Hero */}
       <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          ADR 2025: What Changed — <span style={{ color: '#e87722' }}>Complete Summary</span>
+          ADR 2025: What Changed — <span style={{ color: '#e87722' }}>Key Changes Summary</span>
         </h1>
         <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 600, margin: '0 auto' }}>
           The ADR 2025 edition entered into force on 1 January 2025, with a mandatory transition date of 1 July 2025.
-          Here is everything that changed.
+          Here are the key practical changes for transport operators and freight professionals.
         </p>
       </div>
 
@@ -134,10 +134,9 @@ export default function AdrChanges2025Page() {
             Limited Quantities: Mandatory Training
           </h2>
           <p>
-            From <strong>1 July 2025</strong>, all staff handling limited quantity (LQ) dangerous goods must have
-            completed <strong>Chapter 1.3 awareness training</strong>. Previously, LQ shipments benefited from
-            broad exemptions that often meant warehouse staff and drivers handling LQ goods received no formal
-            dangerous goods training.
+            ADR 2025 explicitly closes a long-standing gap: from <strong>1 July 2025</strong>, all staff handling
+            limited quantity dangerous goods must have completed <strong>Chapter 1.3 awareness training</strong>.
+            Previously, broad LQ exemptions meant many handlers received no formal DG training.
           </p>
           <p>
             This is a significant change for many businesses. LQ covers a huge range of everyday products — aerosols,
@@ -213,6 +212,11 @@ export default function AdrChanges2025Page() {
             </div>
           </div>
 
+          <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 36, lineHeight: 1.6, fontStyle: 'italic' }}>
+            ADR reference information only. Classification and compliance are the consignor&apos;s and carrier&apos;s
+            legal responsibility. Always verify against the current ADR in force and consult a qualified DGSA where required.
+          </p>
+
         </article>
 
         {/* Email capture */}
@@ -221,7 +225,7 @@ export default function AdrChanges2025Page() {
           marginTop: 40, textAlign: 'center',
         }}>
           <p style={{ color: '#fff', fontSize: 15, fontWeight: 600, marginBottom: 12 }}>
-            Get notified when ADR 2027 changes are published
+            Get the ADR 2025 Quick Reference Guide — key changes, tunnel codes, and LQ rules in one page
           </p>
           <form action="mailto:contact@freightutils.com" method="GET" style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
             <input
@@ -247,7 +251,7 @@ export default function AdrChanges2025Page() {
             </button>
           </form>
           <p style={{ fontSize: 11, color: '#6b7280', marginTop: 8 }}>
-            No spam. One email when the next ADR edition is published.
+            Enter your email and we&apos;ll send it straight to your inbox. No spam.
           </p>
         </div>
 

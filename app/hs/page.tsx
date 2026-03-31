@@ -45,6 +45,11 @@ export default function HsPage() {
         {/* Search */}
         <HsSearch index={index} />
 
+        {/* Disclaimer */}
+        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, marginBottom: -32, lineHeight: 1.6 }}>
+          HS code reference data (WCO HS 2022). For customs declarations, always verify the correct commodity code with your national tariff authority or customs broker.
+        </p>
+
         {/* ── Section Browser ── */}
         <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, marginTop: 48, letterSpacing: '-0.3px' }}>
           Browse by Section
@@ -208,7 +213,7 @@ export default function HsPage() {
           </Link>
         </div>
 
-        <DataTimestamp text="HS 2022 data from UN Comtrade, last updated March 2026" />
+        <DataTimestamp text="HS 2022 data from UN Comtrade, last updated April 2026" />
         <ToolDisclaimer text="HS code reference only. For customs declarations, verify with your national tariff authority." />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate import duty weight' },

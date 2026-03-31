@@ -17,7 +17,7 @@ export default function PrivacyPage() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.5px' }}>
           Privacy Policy
         </h1>
-        <p style={{ fontSize: 14, color: '#8f9ab0', marginTop: 8 }}>Last updated: March 2026</p>
+        <p style={{ fontSize: 14, color: '#8f9ab0', marginTop: 8 }}>Last updated: April 2026</p>
       </div>
 
       <main style={{ maxWidth: 740, margin: '0 auto', padding: '32px 20px 80px' }}>
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
 
         <h2 style={h2}>What Data We Collect</h2>
         <p style={p}>
-          <strong>We do not collect personal data.</strong> FreightUtils does not require user accounts, registration, login, or any form of signup. There are no contact forms that store submissions, no user profiles, and no tracking of individual users.
+          FreightUtils does not require user accounts or intentionally collect user-submitted personal data. There are no contact forms that store submissions, no user profiles, and no tracking of individual users. However, third-party services integrated into the site (Google AdSense, Vercel hosting, Google Fonts) may process cookies, IP addresses, or access logs as described in their respective privacy policies.
         </p>
         <p style={p}>
           All calculations are performed client-side in your browser. The values you enter into our calculators (dimensions, weights, UN numbers, etc.) are processed locally and are never transmitted to our servers.

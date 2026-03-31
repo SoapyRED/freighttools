@@ -137,9 +137,9 @@ export default function AdrLimitedQuantitiesPage() {
           <div className="warning-badge warn" style={{ marginBottom: 16 }}>
             <span style={{ fontSize: 18 }}>&#9888;</span>
             <div>
-              <strong>New from 1 July 2025:</strong> All staff involved in the handling, loading, or transport of
-              limited quantity dangerous goods must have completed Chapter 1.3 awareness training. This is a
-              mandatory requirement under ADR 2025.
+              <strong>ADR 2025 closes a long-standing gap:</strong> From 1 July 2025, all staff handling
+              limited quantity dangerous goods must have completed Chapter 1.3 awareness training.
+              Previously, broad LQ exemptions meant many handlers received no formal DG training.
             </div>
           </div>
           <p>
@@ -201,6 +201,11 @@ export default function AdrLimitedQuantitiesPage() {
             </div>
           </div>
 
+          <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 36, lineHeight: 1.6, fontStyle: 'italic' }}>
+            ADR reference information only. Classification and compliance are the consignor&apos;s and carrier&apos;s
+            legal responsibility. Always verify against the current ADR in force and consult a qualified DGSA where required.
+          </p>
+
         </article>
 
         {/* Email capture */}
@@ -209,7 +214,7 @@ export default function AdrLimitedQuantitiesPage() {
           marginTop: 40, textAlign: 'center',
         }}>
           <p style={{ color: '#fff', fontSize: 15, fontWeight: 600, marginBottom: 12 }}>
-            Get notified when ADR 2027 changes are published
+            Get the ADR 2025 Quick Reference Guide — key changes, tunnel codes, and LQ rules in one page
           </p>
           <form action="mailto:contact@freightutils.com" method="GET" style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
             <input
@@ -235,7 +240,7 @@ export default function AdrLimitedQuantitiesPage() {
             </button>
           </form>
           <p style={{ fontSize: 11, color: '#6b7280', marginTop: 8 }}>
-            No spam. One email when the next ADR edition is published.
+            Enter your email and we&apos;ll send it straight to your inbox. No spam.
           </p>
         </div>
 

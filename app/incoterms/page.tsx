@@ -303,7 +303,7 @@ export default function IncotermsPage() {
           </Link>
         </div>
 
-        <DataTimestamp text="INCOTERMS 2020, current as of March 2026" />
+        <DataTimestamp text="INCOTERMS 2020, current as of April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/hs', label: 'Look up HS codes for customs' },

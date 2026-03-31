@@ -17,7 +17,7 @@ export default function TermsPage() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.5px' }}>
           Terms of Service
         </h1>
-        <p style={{ fontSize: 14, color: '#8f9ab0', marginTop: 8 }}>Last updated: March 2026</p>
+        <p style={{ fontSize: 14, color: '#8f9ab0', marginTop: 8 }}>Last updated: April 2026</p>
       </div>
 
       <main style={{ maxWidth: 740, margin: '0 auto', padding: '32px 20px 80px' }}>
@@ -73,7 +73,7 @@ export default function TermsPage() {
 
         <h2 style={h2}>Intellectual Property</h2>
         <p style={p}>
-          The FreightUtils website, interface, and original content are the property of their respective creators. Data sourced from public domain and open datasets (such as UN Comtrade HS data published under PDDL) retains its original licence. Reference data from international standards bodies (UNECE, ISO, ICC, IATA) is reproduced for informational purposes in accordance with fair use principles.
+          ADR 2025 data: licensed from Labeline.com, sourced from the official UNECE ADR publication. HS 2022 data: UN Comtrade dataset, published under the Public Domain Dedication and License (PDDL). Airline data: compiled from public IATA/ICAO sources. INCOTERMS 2020: referenced from ICC official publications and trade.gov guidance. Container and pallet specifications: based on ISO 668, ISO 1496, ISO 6780, and EPAL published standards. Site design, code, and original content: &copy; 2026 FreightUtils.com.
         </p>
 
         <h2 style={h2}>Changes to Terms</h2>

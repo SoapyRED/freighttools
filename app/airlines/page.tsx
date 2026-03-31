@@ -168,7 +168,7 @@ export default function AirlinesPage() {
 
         </div>
 
-        <DataTimestamp text="Airline data last verified March 2026" />
+        <DataTimestamp text="Airline data last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate chargeable weight for air freight' },
@@ -180,7 +180,7 @@ export default function AirlinesPage() {
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
-          Data compiled from public aviation sources. Airline codes and AWB prefixes may change — always verify with the carrier for critical shipments. Last updated March 2026.
+          Data compiled from public aviation sources. Airline codes and AWB prefixes may change — always verify with the carrier for critical shipments. Last updated April 2026.
         </p>
 
       </main>
