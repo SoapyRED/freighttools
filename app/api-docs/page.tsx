@@ -592,7 +592,12 @@ export default function ApiDocsPage() {
       "transport_prohibited": false,
       "hazard_identification_number": "33"
     }
-  ]
+  ],
+  "meta": {
+    "source": "UNECE ADR 2025, licensed from Labeline.com",
+    "edition": "ADR 2025",
+    "entries": 2939
+  }
 }`}
             </div>
 
@@ -762,7 +767,12 @@ Content-Type: application/json
       "has_cargo": true,
       "verified": true
     }
-  ]
+  ],
+  "meta": {
+    "source": "Public IATA/ICAO data, cross-referenced",
+    "airlines": 6352,
+    "last_verified": "March 2026"
+  }
 }`}
             </div>
 

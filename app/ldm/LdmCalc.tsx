@@ -313,11 +313,12 @@ export default function LdmCalc() {
 
             <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>The Loading Metres Formula</h3>
             <div className="code-block">
-              LDM = (Length × Width × Quantity) ÷ 2.4<br/>
-              <span className="comment">— Where Length and Width are in metres, 2.4m = standard trailer width</span><br/>
+              LDM = (Length × Width × Quantity) ÷ Trailer Width<br/>
+              <span className="comment">— European trailers: 2.4m (EN 283)</span><br/>
+              <span className="comment">— North American trailers: 2.59m (102&quot;)</span><br/>
               <br/>
               <span className="comment">If stackable:</span><br/>
-              LDM = (Length × Width × Quantity) ÷ 2.4 ÷ Stack Factor
+              LDM = (Length × Width × Quantity) ÷ Trailer Width ÷ Stack Factor
             </div>
 
             <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>Common Pallet LDM Reference</h3>
