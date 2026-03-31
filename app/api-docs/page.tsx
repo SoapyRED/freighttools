@@ -659,7 +659,12 @@ export default function ApiDocsPage() {
       "variant_index": 0,
       "variant_count": 1
     }
-  ]
+  ],
+  "meta": {
+    "source": "UNECE ADR 2025, licensed from Labeline.com",
+    "edition": "ADR 2025",
+    "entries": 2939
+  }
 }`}
             </div>
 
@@ -830,7 +835,12 @@ Content-Type: application/json
       "aliases": ["Emirates SkyCargo"],
       "verified": true
     }
-  ]
+  ],
+  "meta": {
+    "source": "Public IATA/ICAO data, cross-referenced",
+    "airlines": 6352,
+    "last_verified": "March 2026"
+  }
 }`}
             </div>
 

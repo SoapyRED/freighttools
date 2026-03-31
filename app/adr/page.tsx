@@ -273,11 +273,11 @@ export default function AdrPage() {
               </thead>
               <tbody>
                 {[
-                  ['A', 'Prohibited in tunnels of category A only (most restricted tunnels)'],
-                  ['B', 'Prohibited in tunnels of categories B, C, D, and E'],
-                  ['C', 'Prohibited in tunnels of categories C, D, and E'],
-                  ['D', 'Prohibited in tunnels of categories D and E'],
-                  ['E', 'Prohibited in tunnels of category E (least restricted — almost all tunnels)'],
+                  ['A', 'Passage prohibited through Category A tunnels only — very few tunnels apply this restriction'],
+                  ['B', 'Prohibited through tunnels of categories B, C, D, and E'],
+                  ['C', 'Prohibited through tunnels of categories C, D, and E'],
+                  ['D', 'Prohibited through tunnels of categories D and E'],
+                  ['E', 'Prohibited through Category E tunnels only — only the most restrictive tunnels'],
                   ['— (dash)', 'No tunnel restriction'],
                 ].map(([code, meaning]) => (
                   <tr key={code} style={{ borderBottom: '1px solid #eef0f4' }}>
