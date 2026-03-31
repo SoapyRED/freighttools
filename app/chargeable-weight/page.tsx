@@ -4,6 +4,7 @@ import ChargeableWeightCalc from './ChargeableWeightCalc';
 import airlinesData from '@/lib/data/airlines.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
+import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 
 const ogUrl = '/api/og?title=Chargeable+Weight+Calculator&desc=Air+freight+volumetric+vs+actual+weight&api=GET+/api/chargeable-weight';
 
@@ -159,6 +160,7 @@ export default function ChargeableWeightPage() {
         </div>
 
         <DataTimestamp text="IATA standards, last verified March 2026" />
+        <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/airlines', label: "Find your airline's AWB prefix" },
           { href: '/cbm', label: 'Calculate CBM for volume' },

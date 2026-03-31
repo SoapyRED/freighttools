@@ -4,6 +4,7 @@ import { getAllIncoterms, getAnyMode, getSeaOnly, INCOTERM_COUNT } from '@/lib/c
 import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
+import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 
 const ogUrl = '/api/og?title=INCOTERMS+2020+Reference&desc=All+11+trade+terms+explained&api=GET+/api/incoterms';
 
@@ -303,6 +304,7 @@ export default function IncotermsPage() {
         </div>
 
         <DataTimestamp text="INCOTERMS 2020, current as of March 2026" />
+        <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/hs', label: 'Look up HS codes for customs' },
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },

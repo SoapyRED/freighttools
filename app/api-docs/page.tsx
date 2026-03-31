@@ -53,15 +53,56 @@ export default function ApiDocsPage() {
           </a>
         </div>
 
-        {/* Reliability */}
+        {/* Reliability & Support */}
         <div style={{ marginBottom: 40 }}>
-          <h2 style={s.sectionTitle}>Reliability</h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7 }}>
-            FreightUtils APIs are hosted on Vercel&apos;s global edge network. The APIs are currently free and open access.
-            For guaranteed rate limits and commercial SLA, contact{' '}
-            <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact@freightutils.com</a>
-            {' '}or access via RapidAPI (coming soon).
+          <h2 style={s.sectionTitle}>Reliability &amp; Support</h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
+            FreightUtils APIs are hosted on Vercel&apos;s global edge network with automatic SSL and CDN caching.
           </p>
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: 12, marginBottom: 16,
+          }}>
+            {[
+              { label: 'Status', value: 'APIs are actively maintained and monitored.' },
+              { label: 'Support', value: 'contact@freightutils.com — corrections and API issues typically addressed within 2 business days.' },
+              { label: 'Versioning', value: 'API responses include data source versions. Breaking changes will be announced via the API docs page.' },
+            ].map(item => (
+              <div key={item.label} style={{
+                background: '#f7f8fa', border: '1px solid #d8dce6', borderRadius: 8,
+                padding: '14px 16px',
+              }}>
+                <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#8f9ab0', marginBottom: 4 }}>
+                  {item.label}
+                </div>
+                <div style={{ fontSize: 14, color: '#5a6478', lineHeight: 1.5 }}>
+                  {item.value}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{
+            background: '#1a2332', borderRadius: 10, padding: '16px 20px',
+            display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16,
+          }}>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>
+                Open Access Tier
+              </div>
+              <div style={{ fontSize: 14, color: '#c9cdd6', lineHeight: 1.5 }}>
+                No authentication required. Courtesy rate limit of 1,000 requests per hour per IP.
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>
+                Commercial Access
+              </div>
+              <div style={{ fontSize: 14, color: '#c9cdd6', lineHeight: 1.5 }}>
+                For guaranteed rate limits, SLA, and priority support — available via RapidAPI (coming soon) or{' '}
+                <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact us directly</a>.
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* LDM Endpoint */}

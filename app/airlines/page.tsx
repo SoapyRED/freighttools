@@ -5,6 +5,7 @@ import AirlineSearch from './AirlineSearch';
 import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
+import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 
 const ogUrl = '/api/og?title=Airline+Codes+%26+AWB+Prefix+Lookup&desc=Search+6,350%2B+airlines+by+name,+code,+or+AWB+prefix&api=GET+/api/airlines';
 
@@ -168,6 +169,7 @@ export default function AirlinesPage() {
         </div>
 
         <DataTimestamp text="Airline data last verified March 2026" />
+        <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate chargeable weight for air freight' },
           { href: '/hs', label: 'Need HS codes for customs?' },

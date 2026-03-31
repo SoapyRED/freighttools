@@ -33,20 +33,32 @@ export const metadata: Metadata = {
   },
 };
 
-const footerToolLinks = [
-  { href: '/ldm', label: 'LDM Calculator' },
-  { href: '/cbm', label: 'CBM Calculator' },
-  { href: '/chargeable-weight', label: 'Chargeable Weight' },
-  { href: '/pallet', label: 'Pallet Fitting' },
-  { href: '/adr', label: 'ADR Dangerous Goods' },
-  { href: '/airlines', label: 'Airline Codes' },
-  { href: '/incoterms', label: 'INCOTERMS 2020' },
-  { href: '/containers', label: 'Container Specs' },
-  { href: '/convert', label: 'Unit Converter' },
-  { href: '/hs', label: 'HS Code Lookup' },
-  { href: '/api-docs', label: 'API Docs' },
-  { href: '/about', label: 'About' },
-];
+const footerColumns = {
+  calculators: [
+    { href: '/ldm', label: 'LDM Calculator' },
+    { href: '/cbm', label: 'CBM Calculator' },
+    { href: '/chargeable-weight', label: 'Chargeable Weight' },
+    { href: '/pallet', label: 'Pallet Fitting' },
+    { href: '/containers', label: 'Container Capacity' },
+    { href: '/convert', label: 'Unit Converter' },
+  ],
+  reference: [
+    { href: '/adr', label: 'ADR Dangerous Goods' },
+    { href: '/airlines', label: 'Airline Codes' },
+    { href: '/incoterms', label: 'INCOTERMS 2020' },
+    { href: '/hs', label: 'HS Code Lookup' },
+  ],
+  guides: [
+    { href: '/adr/changes-2025', label: 'ADR 2025 Changes' },
+    { href: '/adr/tunnel-codes', label: 'Tunnel Codes' },
+    { href: '/adr/limited-quantities', label: 'Limited Quantities' },
+    { href: '/adr/training-guide', label: 'ADR Training' },
+  ],
+  developers: [
+    { href: '/api-docs', label: 'API Docs' },
+    { href: '/about', label: 'About' },
+  ],
+};
 
 /* Inline script that runs before first paint to prevent dark mode flash */
 const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}})();`;
@@ -129,41 +141,28 @@ export default function RootLayout({
           borderTop: '2px solid var(--navy-border)',
         }}>
           <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-            {/* Top row: brand + nav */}
-            <div style={{
-              display: 'flex', justifyContent: 'space-between',
-              alignItems: 'flex-start', flexWrap: 'wrap', gap: 20, marginBottom: 20,
+            {/* Column grid */}
+            <div className="footer-grid" style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: 32,
+              marginBottom: 28,
             }}>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: 17, color: '#fff', marginBottom: 6 }}>
-                  <span style={{ color: '#9CA3AF' }}>Freight</span><span style={{ color: '#EF9F27' }}>Utils</span>
-                  <span style={{ color: 'var(--text-faint)', fontWeight: 400 }}>.com</span>
-                </div>
-                <div style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
-                  Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
-                </div>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-                  {footerToolLinks.map(l => (
-                    <Link key={l.href} href={l.href} style={{
-                      color: 'var(--text-faint)', textDecoration: 'none', fontSize: 13,
-                    }}>
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-                <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#6b7280', marginBottom: 8 }}>
-                    Guides
+              {([
+                { title: 'Calculators', links: footerColumns.calculators },
+                { title: 'Reference', links: footerColumns.reference },
+                { title: 'Guides', links: footerColumns.guides },
+                { title: 'Developers', links: footerColumns.developers },
+              ] as const).map(col => (
+                <div key={col.title}>
+                  <div style={{
+                    fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+                    letterSpacing: '1px', color: '#6b7280', marginBottom: 10,
+                  }}>
+                    {col.title}
                   </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-                    {[
-                      { href: '/adr/changes-2025', label: 'ADR 2025 Changes' },
-                      { href: '/adr/tunnel-codes', label: 'Tunnel Codes' },
-                      { href: '/adr/limited-quantities', label: 'Limited Quantities' },
-                      { href: '/adr/training-guide', label: 'ADR Training' },
-                    ].map(l => (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {col.links.map(l => (
                       <Link key={l.href} href={l.href} style={{
                         color: 'var(--text-faint)', textDecoration: 'none', fontSize: 13,
                       }}>
@@ -172,15 +171,25 @@ export default function RootLayout({
                     ))}
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
 
-            {/* Bottom row */}
+            {/* Brand line */}
             <div style={{
-              fontSize: 12, color: 'var(--navy-border)',
-              borderTop: '1px solid var(--navy-border)', paddingTop: 16, lineHeight: 1.6,
+              borderTop: '1px solid var(--navy-border)', paddingTop: 16,
+              marginBottom: 8, fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6,
             }}>
-              © 2026 FreightUtils.com. Data sourced from official standards (UNECE, WCO, IATA, ISO, ICC). Always verify against current regulations and confirm operational details with your carrier.
+              Built by Marius C, ADR-certified freight transport planner.{' '}
+              <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
+                contact@freightutils.com
+              </a>
+            </div>
+
+            {/* Legal line */}
+            <div style={{
+              fontSize: 12, color: 'var(--navy-border)', lineHeight: 1.6,
+            }}>
+              © 2026 FreightUtils.com · Reference tool only. Does not replace DGSA, customs broker, or carrier verification.
               {' · '}
               <Link href="/privacy" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Privacy</Link>
               {' · '}

@@ -69,9 +69,19 @@ export default function AboutPage() {
           maxWidth: 620, margin: '0 auto', lineHeight: 1.6,
         }}>
           FreightUtils is a free utility toolkit and API platform for the freight and logistics
-          industry. Built by a UK freight transport planner with hands-on ADR certification
-          and operational experience at Heathrow air cargo facilities. Every dataset is sourced
-          from official standards and verified against real-world freight operations.
+          industry. Built and maintained by Marius C, a UK freight transport planner with hands-on
+          ADR certification and operational experience at Heathrow air cargo facilities. Every
+          dataset is sourced from official standards and verified against real-world freight operations.
+        </p>
+        <p style={{
+          fontSize: 14, color: 'var(--text-faint)',
+          maxWidth: 620, margin: '12px auto 0', lineHeight: 1.6,
+        }}>
+          Questions, corrections, or integration help:{' '}
+          <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
+            contact@freightutils.com
+          </a>
+          {' '}&mdash; typical response within 2 business days.
         </p>
       </div>
 
@@ -197,6 +207,38 @@ export default function AboutPage() {
             workflows.
           </p>
         </Section>
+
+        {/* Disclaimer */}
+        <section style={{
+          marginTop: 56,
+          border: '1px solid var(--border)',
+          borderLeft: '4px solid #f59e0b',
+          borderRadius: 10,
+          padding: '24px 28px',
+          background: 'var(--bg-card)',
+        }}>
+          <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span>&#9888;</span> Important Disclaimer
+          </h2>
+          <div style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7 }}>
+            <p style={{ marginBottom: 12 }}>
+              FreightUtils is a reference and calculation tool only. It does not replace professional
+              classification by a certified Dangerous Goods Safety Adviser (DGSA), licensed customs
+              broker, or qualified compliance officer.
+            </p>
+            <p style={{ marginBottom: 12 }}>
+              ADR data is provided for reference purposes. The shipper and carrier assume all legal
+              responsibility for dangerous goods classification, documentation, and transport compliance.
+            </p>
+            <p style={{ marginBottom: 12 }}>
+              HS code data is for reference only. For official customs classification, consult your
+              national customs authority or a licensed broker.
+            </p>
+            <p style={{ margin: 0 }}>
+              All calculations should be independently verified before use in commercial operations.
+            </p>
+          </div>
+        </section>
 
         {/* Contact */}
         <section style={{

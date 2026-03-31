@@ -110,6 +110,9 @@ export default function HomePage() {
           <div style={{ fontSize: 13, color: 'var(--text-faint)' }}>
             Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
           </div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
+            Data last verified March 2026. Sources: UNECE ADR 2025, WCO HS 2022, IATA, ISO, ICC.
+          </div>
         </div>
       </section>
 
@@ -155,6 +158,44 @@ export default function HomePage() {
       </section>
 
       <main style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px 80px' }}>
+
+        {/* ── FOR FREIGHT PROFESSIONALS ── */}
+        <section style={{ marginTop: 64 }}>
+          <div style={{
+            fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+            letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+          }}>
+            For Freight Professionals
+          </div>
+          <h2 style={{
+            fontSize: 'clamp(22px, 4vw, 30px)', fontWeight: 800,
+            color: 'var(--text)', letterSpacing: '-0.3px', marginBottom: 12,
+          }}>
+            Quick, accurate answers — no signup required
+          </h2>
+          <p style={{
+            fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7,
+            marginBottom: 20, maxWidth: 700,
+          }}>
+            Built for transport planners, freight forwarders, warehouse teams, and customs brokers
+            who need answers fast. No login, no paywall — just open the tool and get your result.
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {[
+              { href: '/ldm', text: 'Calculate loading metres for your next trailer' },
+              { href: '/adr', text: 'Look up ADR dangerous goods by UN number' },
+              { href: '/hs', text: 'Check HS codes for customs declarations' },
+              { href: '/airlines', text: 'Find airline codes and AWB prefixes' },
+            ].map(link => (
+              <Link key={link.href} href={link.href} style={{
+                color: '#EF9F27', textDecoration: 'none', fontSize: 15,
+                fontWeight: 600, display: 'flex', alignItems: 'center', gap: 8,
+              }}>
+                <span>&rarr;</span> {link.text}
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* ── FOR DEVELOPERS ── */}
         <section style={{ marginTop: 64 }}>

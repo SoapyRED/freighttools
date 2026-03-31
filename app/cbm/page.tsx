@@ -4,6 +4,7 @@ import CbmCalc from './CbmCalc';
 import containersData from '@/lib/data/containers.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
+import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 
 const ogUrl = '/api/og?title=CBM+Calculator&desc=Cubic+metres+for+sea+and+air+freight+shipments&api=GET+/api/cbm';
 
@@ -249,6 +250,7 @@ export default function CbmPage() {
         </div>
 
         <DataTimestamp text="Conversion factors are standard mathematical constants" />
+        <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Need loading metres instead?' },
           { href: '/chargeable-weight', label: 'Calculate air freight chargeable weight' },

@@ -5,6 +5,7 @@ import palletsData from '@/lib/data/pallets.json';
 import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
+import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 
 const ogUrl = '/api/og?title=Pallet+Fitting+Calculator&desc=How+many+boxes+fit+on+a+pallet%3F+Visual+layer+diagram.&api=GET+/api/pallet';
 
@@ -225,6 +226,7 @@ export default function PalletPage() {
         </div>
 
         <DataTimestamp text="Pallet specifications per EPAL/ISO 6780, last verified March 2026" />
+        <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Calculate loading metres' },
           { href: '/containers', label: 'Check container capacity for palletised cargo' },

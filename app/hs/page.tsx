@@ -3,6 +3,7 @@ import Link from 'next/link';
 import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
+import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import HsSearch from './HsSearch';
 import { HsSectionCard } from './HsLinkCard';
 import { getSlimIndex, getAllSections, TOTAL_CODES, CHAPTER_COUNT, HEADING_COUNT, SUBHEADING_COUNT, SECTION_COUNT } from '@/lib/calculations/hs';
@@ -208,6 +209,7 @@ export default function HsPage() {
         </div>
 
         <DataTimestamp text="HS 2022 data from UN Comtrade, last updated March 2026" />
+        <ToolDisclaimer text="HS code reference only. For customs declarations, verify with your national tariff authority." />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate import duty weight' },
           { href: '/incoterms', label: 'Check INCOTERMS for this shipment' },

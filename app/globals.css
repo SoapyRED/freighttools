@@ -284,6 +284,7 @@ main table thead tr { border-top: 2px solid rgba(239, 159, 39, 0.35); }
 }
 @media (max-width: 768px) {
   .tool-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 @media (max-width: 480px) {

@@ -6,6 +6,7 @@ import { VEHICLES } from '@/lib/data/vehicles';
 import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
+import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import { calculateLdm, type LdmResult } from '@/lib/calculations/ldm';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
@@ -474,6 +475,7 @@ export default function LdmCalc() {
         </div>
 
         <DataTimestamp text="Vehicle specifications per EN 283/ISO standards, last verified March 2026" />
+        <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/cbm', label: 'Calculate CBM for sea freight' },
           { href: '/pallet', label: 'How many boxes fit on your pallets?' },

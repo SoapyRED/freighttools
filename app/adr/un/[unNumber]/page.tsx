@@ -7,6 +7,7 @@ import {
   type AdrEntry,
 } from '@/lib/calculations/adr';
 import AdUnit from '@/app/components/AdUnit';
+import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 
 // ─────────────────────────────────────────────────────────────────
 //  Static generation — one page per unique UN number
@@ -509,6 +510,8 @@ export default async function UnNumberPage(
             View API Docs →
           </Link>
         </div>
+
+        <ToolDisclaimer text="ADR reference data only. Classification is the consignor's legal responsibility. Consult a DGSA for compliance decisions." />
 
         <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 20, lineHeight: 1.6 }}>
           Found an error?{' '}

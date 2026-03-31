@@ -33,6 +33,15 @@ const nav: NavEntry[] = [
       { href: '/hs', label: 'HS Code Lookup' },
     ],
   },
+  {
+    label: 'Guides',
+    items: [
+      { href: '/adr/changes-2025', label: 'ADR 2025 Changes' },
+      { href: '/adr/tunnel-codes', label: 'ADR Tunnel Codes' },
+      { href: '/adr/limited-quantities', label: 'ADR Limited Quantities' },
+      { href: '/adr/training-guide', label: 'ADR Training Guide' },
+    ],
+  },
   { href: '/api-docs', label: 'API Docs' },
   { href: '/about', label: 'About' },
 ];
