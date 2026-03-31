@@ -108,8 +108,7 @@ export default function HomePage() {
             Free freight calculation tools and dangerous goods reference data. Open access — just use it. Every tool has a REST API.
           </p>
           <div style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-            <span style={{ color: '#EF9F27', marginRight: 6 }}>•</span>
-            Built by UK freight industry professionals. Data sourced from UNECE, UN Comtrade, IATA, ISO, and ICC official standards.
+            Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
           </div>
         </div>
       </section>

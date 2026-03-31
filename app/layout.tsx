@@ -140,7 +140,7 @@ export default function RootLayout({
                   <span style={{ color: 'var(--text-faint)', fontWeight: 400 }}>.com</span>
                 </div>
                 <div style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
-                  Built by a UK freight transport planner with ADR certification and air cargo operations experience.
+                  Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
                 </div>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
