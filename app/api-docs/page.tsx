@@ -22,6 +22,9 @@ export default function ApiDocsPage() {
         <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 500, margin: '0 auto' }}>
           All FreightUtils calculators are available as free, open REST API endpoints
         </p>
+        <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
+          Last updated: March 2026
+        </p>
       </div>
 
       <main style={s.main}>
@@ -48,6 +51,17 @@ export default function ApiDocsPage() {
           >
             Download OpenAPI 3.0 Spec (JSON)
           </a>
+        </div>
+
+        {/* Reliability */}
+        <div style={{ marginBottom: 40 }}>
+          <h2 style={s.sectionTitle}>Reliability</h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7 }}>
+            FreightUtils APIs are hosted on Vercel&apos;s global edge network. The APIs are currently free and open access.
+            For guaranteed rate limits and commercial SLA, contact{' '}
+            <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact@freightutils.com</a>
+            {' '}or access via RapidAPI (coming soon).
+          </p>
         </div>
 
         {/* LDM Endpoint */}

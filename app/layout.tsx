@@ -140,17 +140,38 @@ export default function RootLayout({
                   <span style={{ color: 'var(--text-faint)', fontWeight: 400 }}>.com</span>
                 </div>
                 <div style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
-                  Built by UK freight industry professionals.
+                  Built by a UK freight transport planner with ADR certification and air cargo operations experience.
                 </div>
               </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-                {footerToolLinks.map(l => (
-                  <Link key={l.href} href={l.href} style={{
-                    color: 'var(--text-faint)', textDecoration: 'none', fontSize: 13,
-                  }}>
-                    {l.label}
-                  </Link>
-                ))}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+                  {footerToolLinks.map(l => (
+                    <Link key={l.href} href={l.href} style={{
+                      color: 'var(--text-faint)', textDecoration: 'none', fontSize: 13,
+                    }}>
+                      {l.label}
+                    </Link>
+                  ))}
+                </div>
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#6b7280', marginBottom: 8 }}>
+                    Guides
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+                    {[
+                      { href: '/adr/changes-2025', label: 'ADR 2025 Changes' },
+                      { href: '/adr/tunnel-codes', label: 'Tunnel Codes' },
+                      { href: '/adr/limited-quantities', label: 'Limited Quantities' },
+                      { href: '/adr/training-guide', label: 'ADR Training' },
+                    ].map(l => (
+                      <Link key={l.href} href={l.href} style={{
+                        color: 'var(--text-faint)', textDecoration: 'none', fontSize: 13,
+                      }}>
+                        {l.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -159,7 +180,7 @@ export default function RootLayout({
               fontSize: 12, color: 'var(--navy-border)',
               borderTop: '1px solid var(--navy-border)', paddingTop: 16, lineHeight: 1.6,
             }}>
-              © 2026 FreightUtils.com. All figures are indicative. Always confirm specifications with your carrier.
+              © 2026 FreightUtils.com. Data sourced from official standards (UNECE, WCO, IATA, ISO, ICC). Always verify against current regulations and confirm operational details with your carrier.
               {' · '}
               <Link href="/privacy" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Privacy</Link>
               {' · '}

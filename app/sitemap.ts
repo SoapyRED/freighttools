@@ -24,6 +24,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/hs`,                changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/api-docs`,          changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/about`,             changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/adr/changes-2025`,   changeFrequency: 'yearly',  priority: 0.7 },
+    { url: `${BASE}/adr/tunnel-codes`,   changeFrequency: 'yearly',  priority: 0.7 },
+    { url: `${BASE}/adr/limited-quantities`, changeFrequency: 'yearly', priority: 0.7 },
+    { url: `${BASE}/adr/training-guide`, changeFrequency: 'yearly',  priority: 0.7 },
   ];
 
   const adrRoutes: MetadataRoute.Sitemap = unNumbers.map(un => ({

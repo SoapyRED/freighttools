@@ -355,6 +355,29 @@ export default function AdrPage() {
 
         </div>
 
+        {/* Learn More */}
+        <div style={{ marginTop: 48 }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+            Learn More
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
+            {[
+              { href: '/adr/changes-2025', title: 'ADR 2025 Changes', desc: 'Full summary of what changed in the latest edition' },
+              { href: '/adr/tunnel-codes', title: 'Tunnel Codes Guide', desc: 'Categories A–E explained with UK-specific tunnels' },
+              { href: '/adr/limited-quantities', title: 'Limited Quantities (LQ)', desc: 'Packaging, exemptions, and the July 2025 training rule' },
+              { href: '/adr/training-guide', title: 'ADR Training Guide', desc: 'Who needs training, course types, and UK costs' },
+            ].map(g => (
+              <Link key={g.href} href={g.href} style={{
+                background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+                padding: '16px 18px', textDecoration: 'none', display: 'block',
+              }}>
+                <div style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 4 }}>{g.title}</div>
+                <div style={{ fontSize: 13, color: '#5a6478', lineHeight: 1.5 }}>{g.desc}</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         <DataTimestamp text="ADR 2025 data, last updated March 2026" />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Calculate loading metres for DG shipments' },

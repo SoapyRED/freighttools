@@ -69,8 +69,9 @@ export default function AboutPage() {
           maxWidth: 620, margin: '0 auto', lineHeight: 1.6,
         }}>
           FreightUtils is a free utility toolkit and API platform for the freight and logistics
-          industry. Built by UK freight industry professionals who understand the daily
-          calculations transport planners, freight forwarders, and logistics teams rely on.
+          industry. Built by a UK freight transport planner with hands-on ADR certification
+          and operational experience at Heathrow air cargo facilities. Every dataset is sourced
+          from official standards and verified against real-world freight operations.
         </p>
       </div>
 
