@@ -164,7 +164,7 @@ export default function AboutPage() {
             <strong>HS Codes</strong> &mdash; UN Comtrade HS 2022 dataset, published under the Public Domain Dedication and License (PDDL). 6,940 codes across 21 sections and 97 chapters. The next WCO update (HS 2027) is expected January 2027.
           </p>
           <p style={{ marginBottom: 14 }}>
-            <strong>Airlines</strong> &mdash; Compiled from public IATA/ICAO sources, cross-referenced against operational data. 6,352 airlines, 390 with verified cargo AWB prefixes. Last verified April 2026.
+            <strong>Airlines</strong> &mdash; Compiled from public IATA/ICAO sources, cross-referenced against operational data. 6,352 airlines, 390 with verified cargo AWB prefixes. Last verified March 2026.
           </p>
           <p style={{ marginBottom: 14 }}>
             <strong>INCOTERMS 2020</strong> &mdash; ICC INCOTERMS 2020 rules, verified against iccwbo.org and trade.gov official guidance. All 11 terms with full responsibility breakdowns.

@@ -46,7 +46,7 @@ export default function AdrPage() {
 
         {/* Data provenance */}
         <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
-          Data: UNECE ADR 2025, licensed from Labeline.com. 2,939 entries covering all hazard classes. Last verified April 2026.
+          Data: UNECE ADR 2025, licensed from Labeline.com. 2,939 entries covering all hazard classes. Last verified March 2026.
         </p>
         <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 4, lineHeight: 1.6 }}>
           For operational use, always verify against the{' '}
@@ -132,7 +132,7 @@ export default function AdrPage() {
                   ['Classification Code', 'A letter/number code indicating the specific hazard within the class (e.g. FC = flammable corrosive)'],
                   ['Packing Group', 'I (great danger), II (medium danger), or III (minor danger). Not all classes use packing groups'],
                   ['Labels', 'The hazard labels required on packages — may include subsidiary hazard labels'],
-                  ['Tunnel Restriction Code', 'Determines which road tunnels the goods may pass through (A–E scale, with A being most restrictive)'],
+                  ['Tunnel Restriction Code', 'Determines which road tunnels the goods may pass through (A = least restrictive, E = most restrictive)'],
                   ['Transport Category', 'Used for calculating the 1.1.3.6 exemption threshold — categories 0–4'],
                 ].map(([field, desc]) => (
                   <tr key={field} style={{ borderBottom: '1px solid #eef0f4' }}>
@@ -382,7 +382,7 @@ export default function AdrPage() {
           </div>
         </div>
 
-        <DataTimestamp text="ADR 2025 data, last updated April 2026" />
+        <DataTimestamp text="ADR 2025 data, last updated March 2026" />
         <ToolDisclaimer text="ADR reference data only. Classification is the consignor's legal responsibility. Consult a DGSA for compliance decisions." />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Calculate loading metres for DG shipments' },

@@ -1660,6 +1660,13 @@
             "description": "Whether the airline operates cargo services.",
             "example": true
           },
+          "aliases": {
+            "type": "array",
+            "items": { "type": "string" },
+            "nullable": true,
+            "description": "Alternative names (e.g. cargo division name).",
+            "example": ["Emirates SkyCargo"]
+          },
           "verified": {
             "type": "boolean",
             "description": "Whether the airline data has been verified.",

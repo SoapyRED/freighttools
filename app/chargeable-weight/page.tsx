@@ -159,7 +159,7 @@ export default function ChargeableWeightPage() {
           </div>
         </div>
 
-        <DataTimestamp text="IATA standards, last verified April 2026" />
+        <DataTimestamp text="IATA standards, last verified March 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/airlines', label: "Find your airline's AWB prefix" },

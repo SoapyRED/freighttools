@@ -25,7 +25,7 @@ export default function AdrTrainingGuidePage() {
         <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 600, margin: '0 auto' }}>
           Understanding who needs ADR training, what the different qualification levels are, and how to prepare.
         </p>
-        <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>Last updated: April 2026</p>
+        <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>Last updated: March 2026</p>
       </div>
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>

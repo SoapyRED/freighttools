@@ -23,7 +23,7 @@ export default function ApiDocsPage() {
           All FreightUtils calculators are available as free, open REST API endpoints
         </p>
         <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
-          Last updated: April 2026
+          Last updated: March 2026
         </p>
       </div>
 
@@ -190,7 +190,7 @@ export default function ApiDocsPage() {
                     <td><code>vehicle</code></td>
                     <td>string</td>
                     <td>No</td>
-                    <td><code>artic</code>, <code>rigid10</code>, <code>rigid75</code>, <code>luton</code>, <code>custom</code></td>
+                    <td><code>artic</code>, <code>rigid10</code>, <code>rigid75</code>, <code>luton</code>, <code>us53</code> (53ft US/Canada), <code>us48</code> (48ft US), <code>custom</code></td>
                     <td>artic</td>
                   </tr>
                   <tr>
@@ -320,12 +320,12 @@ export default function ApiDocsPage() {
             </div>
             <div className="code-block">
               {`{
-  "cbm_per_piece": 0.096,
-  "total_cbm": 0.48,
-  "total_volume_m3": 0.48,
-  "cubic_feet": 16.951,
-  "litres": 480,
-  "cubic_inches": 29291.4,
+  "cbm_per_piece": 0.96,
+  "total_cbm": 4.8,
+  "total_volume_m3": 4.8,
+  "cubic_feet": 169.5106,
+  "litres": 4800,
+  "cubic_inches": 292913.8,
   "pieces": 5,
   "meta": {
     "inputs": {
@@ -419,11 +419,11 @@ export default function ApiDocsPage() {
             </div>
             <div className="code-block">
               {`{
-  "chargeable_weight_kg": 640,
-  "basis": "volumetric",
+  "chargeable_weight_kg": 500,
+  "basis": "actual",
   "gross_weight_kg": 500,
-  "volumetric_weight_kg": 640,
-  "volumetric_weight_per_piece_kg": 320,
+  "volumetric_weight_kg": 320,
+  "volumetric_weight_per_piece_kg": 160,
   "cbm": 1.92,
   "ratio": 3.84,
   "factor": 6000,
@@ -823,6 +823,7 @@ Content-Type: application/json
       "callsign": "EMIRATES",
       "country": "United Arab Emirates",
       "has_cargo": true,
+      "aliases": ["Emirates SkyCargo"],
       "verified": true
     }
   ]
@@ -853,6 +854,7 @@ Content-Type: application/json
                   <tr><td><code>callsign</code></td><td>string | null</td><td>Radio callsign for ATC communication</td></tr>
                   <tr><td><code>country</code></td><td>string | null</td><td>Country of registration</td></tr>
                   <tr><td><code>has_cargo</code></td><td>boolean</td><td>true if airline has AWB prefix(es)</td></tr>
+                  <tr><td><code>aliases</code></td><td>string[] | null</td><td>Alternative names (e.g. cargo division name)</td></tr>
                   <tr><td><code>verified</code></td><td>boolean</td><td>true if prefix confirmed from multiple independent sources</td></tr>
                 </tbody>
               </table>
@@ -914,16 +916,16 @@ Content-Type: application/json
   "name": "Free on Board",
   "slug": "fob-free-on-board",
   "category": "sea_only",
-  "summary": "Seller delivers goods on board the vessel at port of shipment.",
-  "seller_responsibility": "Deliver goods on board the vessel...",
-  "buyer_responsibility": "Main sea freight, insurance...",
-  "risk_transfer": "When goods are on board the vessel...",
-  "cost_transfer": "At port of shipment...",
+  "summary": "Seller delivers goods on board the vessel at port of shipment. One of the most commonly used terms.",
+  "seller_responsibility": "Deliver goods on board the vessel at named port. Export clearance. Loading costs.",
+  "buyer_responsibility": "Main sea freight, insurance, import clearance, duties.",
+  "risk_transfer": "When goods are on board the vessel at port of shipment.",
+  "cost_transfer": "At port of shipment, once loaded on board.",
   "insurance": "No obligation on either party.",
   "export_clearance": "Seller.",
   "import_clearance": "Buyer.",
-  "best_for": "Sea freight where buyer arranges shipping...",
-  "watch_out": "Sea and inland waterway ONLY..."
+  "best_for": "Sea freight where buyer wants to arrange their own shipping and insurance. Very commonly used in international trade.",
+  "watch_out": "Sea and inland waterway ONLY. Despite being widely used, FOB is technically incorrect for containerised cargo..."
 }`}
             </div>
 

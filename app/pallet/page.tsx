@@ -225,7 +225,7 @@ export default function PalletPage() {
 
         </div>
 
-        <DataTimestamp text="Pallet specifications per EPAL/ISO 6780, last verified April 2026" />
+        <DataTimestamp text="Pallet specifications per EPAL/ISO 6780, last verified March 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Calculate loading metres' },
