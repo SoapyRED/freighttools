@@ -145,15 +145,19 @@ export function getAllCargoSlugs(): string[] {
 
 // Slim index for client-side search
 export function getSlimIndex(): AirlineSlim[] {
-  return ALL_AIRLINES.map(({ slug, airline_name, iata_code, icao_code, awb_prefix, country, has_cargo, aliases, verified }) => ({
-    slug,
-    airline_name,
-    iata_code,
-    icao_code,
-    awb_prefix,
-    country,
-    has_cargo,
-    ...(aliases ? { aliases } : {}),
-    ...(verified !== undefined ? { verified } : {}),
-  }));
+  // Filter out entries with no IATA code, no ICAO code, and no AWB prefix
+  // (incomplete data rows that render poorly in the browse table)
+  return ALL_AIRLINES
+    .filter(a => a.iata_code || a.icao_code || (a.awb_prefix && a.awb_prefix.length > 0))
+    .map(({ slug, airline_name, iata_code, icao_code, awb_prefix, country, has_cargo, aliases, verified }) => ({
+      slug,
+      airline_name,
+      iata_code,
+      icao_code,
+      awb_prefix,
+      country,
+      has_cargo,
+      ...(aliases ? { aliases } : {}),
+      ...(verified !== undefined ? { verified } : {}),
+    }));
 }

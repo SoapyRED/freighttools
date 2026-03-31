@@ -192,7 +192,6 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
               {VOLUMETRIC_FACTORS.map(f => (
                 <option key={f.value} value={f.value}>{f.label}</option>
               ))}
-              <option value="4000">4000 — Charter / specialist carriers</option>
             </select>
           </div>
         </div>

@@ -29,7 +29,7 @@ export default function PrivacyPage() {
 
         <h2 style={h2}>What Data We Collect</h2>
         <p style={p}>
-          FreightUtils complies with UK GDPR. We do not require user accounts or intentionally collect personal data. There are no contact forms that store submissions, no user profiles, and no tracking of individual users. However, third-party services integrated into the site (Google AdSense, Vercel hosting, Google Fonts) may process cookies, IP addresses, or access logs as described in their respective privacy policies.
+          FreightUtils complies with UK GDPR. We do not require user accounts or intentionally collect personal data. Our guide pages offer an optional email signup for the ADR 2025 Quick Reference Guide. This form uses a mailto link that opens your email client &mdash; no email addresses are stored on our servers or by any third-party email service. No other personal data is intentionally collected. However, third-party services integrated into the site (Google AdSense, Vercel hosting, Google Fonts) may process cookies, IP addresses, or access logs as described in their respective privacy policies.
         </p>
         <p style={p}>
           All calculations are performed client-side in your browser. The values you enter into our calculators (dimensions, weights, UN numbers, etc.) are processed locally and are never transmitted to our servers.

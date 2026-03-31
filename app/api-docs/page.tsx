@@ -218,8 +218,12 @@ export default function ApiDocsPage() {
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>cURL example:</p>
-            <div className="code-block" style={{ marginBottom: 24 }}>
+            <div className="code-block" style={{ marginBottom: 16 }}>
               {`curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=12&vehicle=artic"`}
+            </div>
+            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>US 53ft trailer:</p>
+            <div className="code-block" style={{ marginBottom: 24 }}>
+              {`curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=20&vehicle=us53"`}
             </div>
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Response</h3>
@@ -1112,8 +1116,8 @@ Content-Type: application/json
             <div className="code-block" style={{ marginBottom: 16 }}>
               {`{
   "input": { "value": 100, "unit": "kg", "name": "Kilograms" },
-  "result": { "value": 220.462, "unit": "lbs", "name": "Pounds" },
-  "formula": "Kilograms \u00d7 2.20462 = Pounds"
+  "result": { "value": 220.462442, "unit": "lbs", "name": "Pounds" },
+  "formula": "Kilograms × 2.204624 = Pounds"
 }`}
             </div>
 
