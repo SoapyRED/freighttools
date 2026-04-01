@@ -26,7 +26,7 @@ export default function JsonBlock({ json, style }: { json: string; style?: React
   return (
     <div
       className="code-block"
-      style={style}
+      style={{ ...style, color: '#6b7280' }}
       dangerouslySetInnerHTML={{ __html: highlightJson(json) }}
     />
   );

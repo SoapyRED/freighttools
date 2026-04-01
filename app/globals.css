@@ -243,10 +243,17 @@ details.faq-item .faq-answer {
 .ref-table td:first-child { font-weight: 600; }
 .ref-table .highlight { color: var(--orange); font-weight: 700; }
 
-[data-theme="dark"] .ref-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
-[data-theme="dark"] .ref-table tbody tr:hover { background: rgba(239,159,39,0.06); }
+[data-theme="dark"] .ref-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.05); }
+[data-theme="dark"] .ref-table tbody tr:hover { background: rgba(239,159,39,0.08); }
 
 [data-theme="dark"] .ref-table thead { background: #010409; }
+
+/* ─── All main tables: zebra + hover ────────────────────────── */
+main table tbody tr:nth-child(even) { background: var(--grey-50); }
+main table tbody tr { transition: background 0.12s; }
+main table tbody tr:hover { background: rgba(232, 119, 34, 0.06); }
+[data-theme="dark"] main table tbody tr:nth-child(even) { background: rgba(255,255,255,0.05); }
+[data-theme="dark"] main table tbody tr:hover { background: rgba(239,159,39,0.08); }
 
 /* ─── Table cell colours ─────────────────────────────────────── */
 main table td { color: #5a6478; }
@@ -318,11 +325,11 @@ button:active:not(:disabled) { transform: scale(0.98); }
 
 /* ─── Code block enhancements ──────────────────────────────────── */
 .code-block { position: relative; }
-.code-block .json-key { color: #93c5fd; }
-.code-block .json-str { color: #86efac; }
-.code-block .json-num { color: #fde68a; }
-.code-block .json-bool { color: #c4b5fd; }
-.code-block .json-null { color: #9ca3af; }
+.code-block .json-key { color: #EF9F27; }
+.code-block .json-str { color: #a5d6a7; }
+.code-block .json-num { color: #90caf9; }
+.code-block .json-bool { color: #ce93d8; }
+.code-block .json-null { color: #ce93d8; }
 
 /* ─── Tool card hover ──────────────────────────────────────────── */
 .tool-card {
@@ -396,6 +403,14 @@ button:active:not(:disabled) { transform: scale(0.98); }
   border-radius: 4px;
   font-family: monospace;
   letter-spacing: 0.3px;
+}
+
+/* ─── Line clamp utility ───────────────────────────────────────── */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 /* ─── Responsive ────────────────────────────────────────────────── */
