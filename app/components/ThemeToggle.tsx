@@ -22,7 +22,7 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     // Render placeholder to avoid layout shift
-    return <div style={{ width: 36, height: 36 }} />;
+    return <div style={{ width: 36, height: 36, marginLeft: 12 }} />;
   }
 
   return (
@@ -36,6 +36,7 @@ export default function ThemeToggle() {
         borderRadius: 8,
         width: 36,
         height: 36,
+        marginLeft: 12,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

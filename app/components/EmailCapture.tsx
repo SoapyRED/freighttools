@@ -57,33 +57,40 @@ export default function EmailCapture() {
         <li>LQ training mandate + tunnel code quick reference</li>
       </ul>
 
-      <div style={{
+      <a href="/ADR-2025-Quick-Reference-Guide.pdf" target="_blank" rel="noopener noreferrer" style={{
         display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16,
-        background: '#0f1724', borderRadius: 8, padding: '10px 14px',
+        background: '#0f1724', borderRadius: 10, padding: '12px 14px',
+        textDecoration: 'none', border: '1px solid #1e2a3d',
+        transition: 'border-color 0.15s',
       }}>
-        <a href="/ADR-2025-Quick-Reference-Guide.pdf" target="_blank" rel="noopener noreferrer" style={{
+        <div style={{
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-          width: 52, height: 66, background: '#1e2a3d', borderRadius: 6,
-          border: '1px solid #374151', flexShrink: 0, textDecoration: 'none', gap: 2,
+          width: 56, height: 72, background: '#fff', borderRadius: 6,
+          boxShadow: '0 1px 4px rgba(0,0,0,0.15)', flexShrink: 0, gap: 3,
+          border: '1px solid #e5e7eb', position: 'relative', overflow: 'hidden',
         }}>
-          <svg width="20" height="24" viewBox="0 0 20 24" fill="none" style={{ marginTop: 2 }}>
-            <path d="M12 0H2C0.9 0 0 0.9 0 2v20c0 1.1 0.9 2 2 2h16c1.1 0 2-0.9 2-2V8l-8-8z" fill="#374151"/>
-            <path d="M12 0v6c0 1.1 0.9 2 2 2h6L12 0z" fill="#4b5563"/>
-            <rect x="4" y="12" width="12" height="1.5" rx="0.75" fill="#6b7280"/>
-            <rect x="4" y="15" width="9" height="1.5" rx="0.75" fill="#6b7280"/>
-            <rect x="4" y="18" width="10" height="1.5" rx="0.75" fill="#6b7280"/>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: '#e87722' }} />
+          <svg width="18" height="22" viewBox="0 0 20 24" fill="none" style={{ marginTop: 4 }}>
+            <path d="M12 0H2C0.9 0 0 0.9 0 2v20c0 1.1 0.9 2 2 2h16c1.1 0 2-0.9 2-2V8l-8-8z" fill="#e5e7eb"/>
+            <path d="M12 0v6c0 1.1 0.9 2 2 2h6L12 0z" fill="#d1d5db"/>
+            <rect x="3" y="12" width="10" height="1.2" rx="0.6" fill="#9ca3af"/>
+            <rect x="3" y="14.5" width="7" height="1.2" rx="0.6" fill="#9ca3af"/>
+            <rect x="3" y="17" width="8" height="1.2" rx="0.6" fill="#9ca3af"/>
           </svg>
-          <span style={{ fontSize: 9, fontWeight: 800, color: '#e87722', letterSpacing: '0.5px' }}>PDF</span>
-        </a>
+          <span style={{ fontSize: 8, fontWeight: 800, color: '#e87722', letterSpacing: '0.5px' }}>PDF</span>
+        </div>
         <div>
-          <p style={{ color: '#8f9ab0', fontSize: 12, margin: 0, lineHeight: 1.5 }}>
-            1-page PDF. Instant delivery. No spam — just this guide.
+          <p style={{ color: '#e5e7eb', fontSize: 13, fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
+            ADR 2025 Quick Reference Guide
           </p>
-          <p style={{ color: '#6b7280', fontSize: 11, margin: '4px 0 0', lineHeight: 1.4 }}>
+          <p style={{ color: '#6b7280', fontSize: 11, margin: '3px 0 0', lineHeight: 1.3 }}>
+            2 pages &middot; PDF &middot; No spam, just this guide
+          </p>
+          <p style={{ color: '#4b5563', fontSize: 10, margin: '3px 0 0', lineHeight: 1.3 }}>
             For transport planners, warehouse teams, trainers, and DGSA revision.
           </p>
         </div>
-      </div>
+      </a>
 
       {submitted ? (
         <div style={{

@@ -73,6 +73,32 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "FreightUtils",
+      "url": "https://www.freightutils.com",
+      "description": "Free freight calculators and dangerous goods reference data with open REST APIs"
+    },
+    {
+      "@type": "Organization",
+      "name": "FreightUtils",
+      "url": "https://www.freightutils.com",
+      "email": "contact@freightutils.com",
+      "sameAs": [
+        "https://x.com/FreightUtils",
+        "https://www.linkedin.com/company/freightutils"
+      ]
+    }
+  ]
+}`
+          }}
+        />
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3441075477232453"
           crossOrigin="anonymous"

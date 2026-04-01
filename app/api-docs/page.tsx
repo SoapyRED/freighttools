@@ -17,19 +17,19 @@ const s = {
 };
 
 export default function ApiDocsPage() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    name: 'FreightUtils API Documentation',
-    description: 'Free REST API documentation for freight calculators, ADR dangerous goods lookup, airline codes, HS codes, INCOTERMS, and more.',
-    url: 'https://www.freightutils.com/api-docs',
-  };
-
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: `{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "FreightUtils API Documentation",
+  "description": "REST API documentation for freight calculators, ADR dangerous goods, airline codes, HS codes, and INCOTERMS",
+  "url": "https://www.freightutils.com/api-docs"
+}`
+        }}
       />
       <div style={s.hero}>
         <h1 style={s.h1}>API <span style={{ color: '#e87722' }}>Documentation</span></h1>
