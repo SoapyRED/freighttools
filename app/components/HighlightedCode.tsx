@@ -22,7 +22,7 @@ function highlightCode(code: string, lang: 'javascript' | 'python' | 'n8n'): str
       // Strings (single/double/backtick)
       .replace(/('(?:[^'\\]|\\.)*')/g, '<span style="color:#a5d6a7">$1</span>')
       .replace(/("(?:[^"\\]|\\.)*")/g, '<span style="color:#a5d6a7">$1</span>')
-      .replace(/(`.+?`)/gs, '<span style="color:#a5d6a7">$1</span>')
+      .replace(/(`.+?`)/g, '<span style="color:#a5d6a7">$1</span>')
       // Keywords
       .replace(/\b(const|let|var|await|async|function|return|import|from|export|new)\b/g,
         '<span style="color:#ce93d8">$1</span>')
