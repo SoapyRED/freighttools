@@ -165,11 +165,19 @@ export default function AboutPage() {
               'Data verified and dated — you always know what edition you\'re using',
             ].map((point, i) => (
               <div key={i} style={{
-                display: 'flex', gap: 10, alignItems: 'flex-start',
+                display: 'flex', gap: 12, alignItems: 'flex-start',
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
-                borderRadius: 8, padding: '12px 16px',
+                borderRadius: 8, padding: '14px 16px',
               }}>
-                <span style={{ color: '#e87722', fontSize: 16, lineHeight: 1 }}>&#10003;</span>
+                <span style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  width: 24, height: 24, borderRadius: '50%', flexShrink: 0,
+                  background: 'rgba(232,119,34,0.12)', marginTop: 1,
+                }}>
+                  <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
+                    <path d="M1 5l3.5 3.5L11 1" stroke="#e87722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
                 <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{point}</p>
               </div>
             ))}
@@ -177,24 +185,32 @@ export default function AboutPage() {
         </Section>
 
         <Section label="Methodology" title="Data Sources &amp; Methodology">
-          <p style={{ marginBottom: 14 }}>
-            <strong>ADR 2025 Dangerous Goods</strong> &mdash; Licensed from Labeline.com, sourced from the official UNECE ADR publication (ECE/TRANS/352). 2,939 entries covering all hazard classes. Updated with each ADR edition (published every two years by UNECE). Current edition: ADR 2025. Next edition: ADR 2027, expected January 2027.
-          </p>
-          <p style={{ marginBottom: 14 }}>
-            <strong>HS Codes</strong> &mdash; UN Comtrade HS 2022 dataset, published under the Public Domain Dedication and License (PDDL). 6,940 codes across 21 sections and 97 chapters. The next WCO update (HS 2027) is expected January 2027.
-          </p>
-          <p style={{ marginBottom: 14 }}>
-            <strong>Airlines</strong> &mdash; Compiled from public IATA/ICAO sources, cross-referenced against operational data. 6,352 airlines, 390 with verified cargo AWB prefixes. Last verified April 2026.
-          </p>
-          <p style={{ marginBottom: 14 }}>
-            <strong>INCOTERMS 2020</strong> &mdash; ICC INCOTERMS 2020 rules, verified against iccwbo.org and trade.gov official guidance. All 11 terms with full responsibility breakdowns.
-          </p>
-          <p style={{ marginBottom: 14 }}>
-            <strong>Container Specifications</strong> &mdash; ISO 668 (classification and dimensions) and ISO 1496 (specification and testing) standard values. Typical specifications &mdash; actual dimensions vary by manufacturer and age.
-          </p>
-          <p>
-            <strong>Pallet Standards</strong> &mdash; EPAL (European Pallet Association) for EUR pallets, ISO 6780 for international pallet standards, IATA ULD specifications for air freight unit load devices.
-          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
+            {[
+              { name: 'ADR 2025', badge: 'UNECE', entries: '2,939 entries', desc: 'Licensed from Labeline.com (ECE/TRANS/352). Next edition: ADR 2027.' },
+              { name: 'HS Codes', badge: 'WCO', entries: '6,940 codes', desc: 'UN Comtrade HS 2022 (PDDL). 21 sections, 97 chapters.' },
+              { name: 'Airlines', badge: 'IATA/ICAO', entries: '6,352 airlines', desc: 'Public sources, cross-referenced. 390 verified cargo AWB prefixes.' },
+              { name: 'INCOTERMS', badge: 'ICC', entries: '11 terms', desc: 'ICC INCOTERMS 2020 rules with full responsibility breakdowns.' },
+              { name: 'Containers', badge: 'ISO', entries: '10 types', desc: 'ISO 668 + ISO 1496 standard dimensions and capacities.' },
+              { name: 'Pallets', badge: 'EPAL/ISO', entries: '6 types', desc: 'EPAL EUR pallets, ISO 6780 international, IATA ULD specs.' },
+            ].map(s => (
+              <div key={s.name} style={{
+                background: 'var(--bg-card)', border: '1px solid var(--border)',
+                borderRadius: 10, padding: '16px 18px',
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                  <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>{s.name}</span>
+                  <span style={{
+                    fontSize: 10, fontWeight: 700, color: '#e87722',
+                    background: 'rgba(232,119,34,0.1)', padding: '2px 8px', borderRadius: 10,
+                    textTransform: 'uppercase', letterSpacing: '0.5px',
+                  }}>{s.badge}</span>
+                </div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>{s.entries}</div>
+                <p style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.5, margin: 0 }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
         </Section>
 
         <Section label="Developers" title="For Developers">

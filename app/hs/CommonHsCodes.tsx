@@ -64,15 +64,8 @@ export default function CommonHsCodes() {
                   <td style={{ padding: '8px 14px', color: '#1e2535' }}>
                     {desc}
                     {dg && (
-                      <Link
-                        href="/adr"
-                        style={{
-                          marginLeft: 8, fontSize: 11, fontWeight: 700,
-                          color: '#dc2626', textDecoration: 'none',
-                          background: '#fef2f2', padding: '2px 6px', borderRadius: 4,
-                        }}
-                      >
-                        &#9888;&#65039; DG
+                      <Link href="/adr" className="dg-badge">
+                        DG
                       </Link>
                     )}
                   </td>

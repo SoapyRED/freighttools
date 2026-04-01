@@ -58,7 +58,7 @@ export default function HsPage() {
         <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, marginTop: 48, letterSpacing: '-0.3px' }}>
           Browse by Section
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 48 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 10, marginBottom: 48 }}>
           {sections.map(s => (
             <HsSectionCard key={s.numeral} href={`/hs/section/${s.numeral}`} numeral={s.numeral} name={s.name} />
           ))}

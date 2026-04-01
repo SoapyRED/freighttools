@@ -125,16 +125,15 @@ export default function HomePage() {
           zIndex: 2,
         }}>
           {tools.map(t => (
-            <Link key={t.href} href={t.href} style={{
+            <Link key={t.href} href={t.href} className="tool-card" style={{
               background: 'var(--bg-card)',
               border: '1px solid var(--border)',
               borderRadius: 10,
-              padding: '14px 12px',
+              padding: '16px 14px',
               textDecoration: 'none',
               display: 'flex',
               flexDirection: 'column',
-              gap: 5,
-              transition: 'border-color 0.2s, box-shadow 0.2s',
+              gap: 6,
             }}>
               <div style={{ fontSize: 20 }}>{t.icon}</div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

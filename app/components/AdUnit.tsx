@@ -28,28 +28,15 @@ export default function AdUnit({ slot, format = 'auto' }: AdUnitProps) {
 
   return (
     <aside
-      aria-label="Advertisement"
+      aria-label="Sponsored"
       suppressHydrationWarning
       style={{
         marginTop: 40,
         marginBottom: 16,
         padding: '16px 0',
-        borderTop: '1px solid var(--border, #d8dce6)',
-        borderBottom: '1px solid var(--border, #d8dce6)',
+        minHeight: 0,
       }}
     >
-      <div
-        style={{
-          fontSize: 11,
-          fontWeight: 600,
-          letterSpacing: '0.5px',
-          textTransform: 'uppercase',
-          color: 'var(--text-faint, #8f9ab0)',
-          marginBottom: 8,
-        }}
-      >
-        Advertisement
-      </div>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}

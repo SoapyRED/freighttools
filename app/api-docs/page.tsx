@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CopyableCode from '@/app/components/CopyableCode';
+import JsonBlock from '@/app/components/JsonBlock';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
@@ -46,10 +47,11 @@ export default function ApiDocsPage() {
         <a
           href="/openapi.json"
           style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
+            display: 'inline-flex', alignItems: 'center', gap: 10,
             background: '#1a2332', color: '#fff', borderRadius: 10,
-            padding: '12px 22px', fontSize: 15, fontWeight: 700,
+            padding: '14px 28px', fontSize: 16, fontWeight: 700,
             textDecoration: 'none', marginBottom: 28,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
             fontFamily: "'Outfit', sans-serif",
             border: '1.5px solid #374151',
           }}
@@ -247,8 +249,7 @@ export default function ApiDocsPage() {
             <CopyableCode code={'curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=20&vehicle=us53"'} style={{ marginBottom: 24 }} />
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Response</h3>
-            <div className="code-block">
-              {`{
+            <JsonBlock json={`{
   "ldm": 4.8,
   "vehicle": {
     "name": "13.6m Artic Trailer",
@@ -274,8 +275,7 @@ export default function ApiDocsPage() {
       "vehicle": "artic"
     }
   }
-}`}
-            </div>
+}`} />
           </div>
         </div>
 
@@ -340,8 +340,7 @@ export default function ApiDocsPage() {
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>5 boxes, 120×80×100 cm each:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/cbm?l=120&w=80&h=100&pcs=5"'} style={{ marginBottom: 4 }} />
-            <div className="code-block">
-              {`{
+            <JsonBlock json={`{
   "cbm_per_piece": 0.96,
   "total_cbm": 4.8,
   "total_volume_m3": 4.8,
@@ -357,8 +356,7 @@ export default function ApiDocsPage() {
       "pieces": 5
     }
   }
-}`}
-            </div>
+}`} />
           </div>
         </div>
 
@@ -437,8 +435,7 @@ export default function ApiDocsPage() {
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>2 pieces, 120×80×100 cm, 500 kg total, IATA factor:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000"'} style={{ marginBottom: 4 }} />
-            <div className="code-block">
-              {`{
+            <JsonBlock json={`{
   "chargeable_weight_kg": 500,
   "basis": "actual",
   "gross_weight_kg": 500,
@@ -458,8 +455,7 @@ export default function ApiDocsPage() {
       "factor": 6000
     }
   }
-}`}
-            </div>
+}`} />
           </div>
         </div>
 
@@ -566,8 +562,7 @@ export default function ApiDocsPage() {
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
             <CopyableCode code={'curl "https://www.freightutils.com/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25&bwt=5&mpw=1500"'} style={{ marginBottom: 4 }} />
-            <div className="code-block">
-              {`{
+            <JsonBlock json={`{
   "boxes_per_layer": 8,
   "layers": 8,
   "total_boxes": 64,
@@ -591,8 +586,7 @@ export default function ApiDocsPage() {
       "allow_rotation": true
     }
   }
-}`}
-            </div>
+}`} />
           </div>
         </div>
 
@@ -651,8 +645,7 @@ export default function ApiDocsPage() {
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Exact UN number lookup:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/adr?un=1203"'} style={{ marginBottom: 4 }} />
-            <div className="code-block" style={{ marginBottom: 20 }}>
-              {`{
+            <JsonBlock json={`{
   "count": 1,
   "results": [
     {
@@ -677,20 +670,15 @@ export default function ApiDocsPage() {
     "edition": "ADR 2025",
     "entries": 2939
   }
-}`}
-            </div>
+}`} style={{ marginBottom: 20 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Search by substance name:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/adr?search=acetone"'} style={{ marginBottom: 4 }} />
-            <div className="code-block" style={{ marginBottom: 20 }}>
-              {`{ "count": 3, "results": [ ... ] }`}
-            </div>
+            <JsonBlock json={`{ "count": 3, "results": [ ... ] }`} style={{ marginBottom: 20 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Filter by hazard class:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/adr?class=3"'} style={{ marginBottom: 4 }} />
-            <div className="code-block">
-              {`{ "count": 50, "results": [ ... ] }`}
-            </div>
+            <JsonBlock json={`{ "count": 50, "results": [ ... ] }`} />
           </div>
         </div>
 
@@ -729,8 +717,7 @@ export default function ApiDocsPage() {
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Example — 200 litres of petrol:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/adr-calculator?un=1203&qty=200"'} style={{ marginBottom: 4 }} />
-            <div className="code-block" style={{ marginBottom: 24 }}>
-              {`{
+            <JsonBlock json={`{
   "items": [
     {
       "un_number": "1203",
@@ -749,8 +736,7 @@ export default function ApiDocsPage() {
   "has_quantity_exceedance": false,
   "warnings": [],
   "message": "1.1.3.6 exemption applies"
-}`}
-            </div>
+}`} style={{ marginBottom: 24 }} />
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>POST — Multi-Substance Load</h3>
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Request body:</p>
@@ -823,8 +809,7 @@ Content-Type: application/json
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>AWB prefix lookup:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/airlines?prefix=176"'} style={{ marginBottom: 4 }} />
-            <div className="code-block" style={{ marginBottom: 20 }}>
-              {`{
+            <JsonBlock json={`{
   "count": 1,
   "results": [
     {
@@ -845,8 +830,7 @@ Content-Type: application/json
     "airlines": 6352,
     "last_verified": "April 2026"
   }
-}`}
-            </div>
+}`} style={{ marginBottom: 20 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>IATA code lookup:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/airlines?iata=EK"'} style={{ marginBottom: 20 }} />
@@ -923,8 +907,7 @@ Content-Type: application/json
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Single term lookup:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/incoterms?code=FOB"'} style={{ marginBottom: 4 }} />
-            <div className="code-block" style={{ marginBottom: 20 }}>
-              {`{
+            <JsonBlock json={`{
   "code": "FOB",
   "name": "Free on Board",
   "slug": "fob-free-on-board",
@@ -939,8 +922,7 @@ Content-Type: application/json
   "import_clearance": "Buyer.",
   "best_for": "Sea freight where buyer wants to arrange their own shipping and insurance. Very commonly used in international trade.",
   "watch_out": "Sea and inland waterway ONLY. Despite being widely used, FOB is technically incorrect for containerised cargo..."
-}`}
-            </div>
+}`} style={{ marginBottom: 20 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Filter by transport category:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/incoterms?category=sea_only"'} style={{ marginBottom: 20 }} />
@@ -1025,8 +1007,7 @@ Content-Type: application/json
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Loading calculation — how many 60×40×40cm boxes fit in a 40ft HC:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/containers?type=40ft-high-cube&l=60&w=40&h=40&wt=15&qty=500"'} style={{ marginBottom: 4 }} />
-            <div className="code-block">
-              {`{
+            <JsonBlock json={`{
   "container": { "name": "40ft High Cube", "slug": "40ft-high-cube", ... },
   "loading": {
     "fits_lengthwise": 20,
@@ -1039,8 +1020,7 @@ Content-Type: application/json
     "within_payload": true,
     "utilisation_percent": 63.2
   }
-}`}
-            </div>
+}`} />
           </div>
         </div>
 
@@ -1110,24 +1090,20 @@ Content-Type: application/json
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Standard conversion:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/convert?value=100&from=kg&to=lbs"'} style={{ marginBottom: 4 }} />
-            <div className="code-block" style={{ marginBottom: 16 }}>
-              {`{
+            <JsonBlock json={`{
   "input": { "value": 100, "unit": "kg", "name": "Kilograms" },
   "result": { "value": 220.462442, "unit": "lbs", "name": "Pounds" },
   "formula": "Kilograms × 2.204624 = Pounds"
-}`}
-            </div>
+}`} style={{ marginBottom: 16 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>CBM to chargeable weight (IATA 6000 divisor):</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/convert?value=10&from=cbm&to=chargeable_kg"'} style={{ marginBottom: 4 }} />
-            <div className="code-block" style={{ marginBottom: 16 }}>
-              {`{
+            <JsonBlock json={`{
   "input": { "value": 10, "unit": "cbm", "name": "Cubic Metres" },
   "result": { "value": 1666.7, "unit": "chargeable_kg", "name": "Chargeable Weight (kg)" },
   "formula": "Cubic Metres \u00d7 166.67 = Chargeable Weight (kg)",
   "note": "IATA volumetric weight: 1 CBM = 166.67 kg (divisor 6000)..."
-}`}
-            </div>
+}`} style={{ marginBottom: 16 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>CBM to freight tonnes (W/M rule):</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/convert?value=5&from=cbm&to=freight_tonnes"'} />
@@ -1189,8 +1165,7 @@ Content-Type: application/json
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Search by description:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/hs?q=coffee"'} style={{ marginBottom: 4 }} />
-            <div className="code-block" style={{ marginBottom: 20 }}>
-              {`{
+            <JsonBlock json={`{
   "query": "coffee",
   "results": [
     {
@@ -1202,13 +1177,11 @@ Content-Type: application/json
     }
   ],
   "count": 12
-}`}
-            </div>
+}`} style={{ marginBottom: 20 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Code lookup with ancestors:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/hs?code=090111"'} style={{ marginBottom: 4 }} />
-            <div className="code-block" style={{ marginBottom: 20 }}>
-              {`{
+            <JsonBlock json={`{
   "hscode": "090111",
   "description": "Coffee; not roasted, not decaffeinated",
   "level": 6,
@@ -1220,8 +1193,7 @@ Content-Type: application/json
   ],
   "children": [],
   "sectionName": "Vegetable products"
-}`}
-            </div>
+}`} style={{ marginBottom: 20 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Browse section:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/hs?section=II"'} />
