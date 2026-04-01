@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import EmailCapture from '@/app/components/EmailCapture';
 
 const ogUrl = '/api/og?title=ADR+Tunnel+Codes+Explained&desc=Restriction+categories+A+to+E+for+dangerous+goods+road+transport';
 
@@ -231,41 +232,7 @@ export default function AdrTunnelCodesPage() {
 
         </article>
 
-        {/* Email capture */}
-        <div style={{
-          background: '#1a2332', borderRadius: 12, padding: '24px 28px',
-          marginTop: 40, textAlign: 'center',
-        }}>
-          <p style={{ color: '#fff', fontSize: 15, fontWeight: 600, marginBottom: 12 }}>
-            Get the ADR 2025 Quick Reference Guide — key changes, tunnel codes, and LQ rules in one page
-          </p>
-          <form action="mailto:contact@freightutils.com" method="GET" style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <input
-              type="email"
-              name="subject"
-              placeholder="Enter your email"
-              required
-              style={{
-                padding: '10px 16px', borderRadius: 8, border: '1px solid #374151',
-                background: '#0f1724', color: '#fff', fontSize: 14, minWidth: 240,
-                outline: 'none',
-              }}
-            />
-            <button
-              type="submit"
-              style={{
-                background: '#e87722', color: '#fff', border: 'none', borderRadius: 8,
-                padding: '10px 20px', fontWeight: 700, fontSize: 14, cursor: 'pointer',
-                fontFamily: "'Outfit', sans-serif",
-              }}
-            >
-              Notify Me
-            </button>
-          </form>
-          <p style={{ fontSize: 11, color: '#6b7280', marginTop: 8 }}>
-            Enter your email and we&apos;ll send it straight to your inbox. No spam.
-          </p>
-        </div>
+        <EmailCapture />
 
       </main>
     </>
