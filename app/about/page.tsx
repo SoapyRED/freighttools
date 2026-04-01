@@ -156,6 +156,26 @@ export default function AboutPage() {
           </div>
         </Section>
 
+        <Section label="Value" title="Why FreightUtils">
+          <div style={{ display: 'grid', gap: 12 }}>
+            {[
+              'Every dataset sourced from official publications (UNECE, WCO, ICC, IATA)',
+              'Built for freight workflows, not generic unit conversion',
+              'Open REST APIs — no auth, no paywall, no vendor lock-in',
+              'Data verified and dated — you always know what edition you\'re using',
+            ].map((point, i) => (
+              <div key={i} style={{
+                display: 'flex', gap: 10, alignItems: 'flex-start',
+                background: 'var(--bg-card)', border: '1px solid var(--border)',
+                borderRadius: 8, padding: '12px 16px',
+              }}>
+                <span style={{ color: '#e87722', fontSize: 16, lineHeight: 1 }}>&#10003;</span>
+                <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{point}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
         <Section label="Methodology" title="Data Sources &amp; Methodology">
           <p style={{ marginBottom: 14 }}>
             <strong>ADR 2025 Dangerous Goods</strong> &mdash; Licensed from Labeline.com, sourced from the official UNECE ADR publication (ECE/TRANS/352). 2,939 entries covering all hazard classes. Updated with each ADR edition (published every two years by UNECE). Current edition: ADR 2025. Next edition: ADR 2027, expected January 2027.
@@ -260,6 +280,14 @@ export default function AboutPage() {
               contact@freightutils.com
             </a>
           </p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 14 }}>
+            <a href="https://x.com/FreightUtils" target="_blank" rel="noopener noreferrer" style={{ color: '#EF9F27', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              @FreightUtils on X
+            </a>
+            <a href="https://www.linkedin.com/company/freightutils" target="_blank" rel="noopener noreferrer" style={{ color: '#EF9F27', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              LinkedIn
+            </a>
+          </div>
         </section>
 
       </main>

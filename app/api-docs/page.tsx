@@ -16,25 +16,48 @@ const s = {
 };
 
 export default function ApiDocsPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    name: 'FreightUtils API Documentation',
+    description: 'Free REST API documentation for freight calculators, ADR dangerous goods lookup, airline codes, HS codes, INCOTERMS, and more.',
+    url: 'https://www.freightutils.com/api-docs',
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div style={s.hero}>
         <h1 style={s.h1}>API <span style={{ color: '#e87722' }}>Documentation</span></h1>
         <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 500, margin: '0 auto' }}>
           All FreightUtils calculators are available as free, open REST API endpoints
         </p>
         <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
-          Last updated: March 2026
+          Last updated: April 2026
         </p>
       </div>
 
       <main style={s.main}>
 
-        {/* OpenAPI spec callout */}
-        <p style={{ fontSize: 13, color: '#5a6478', marginBottom: 32, lineHeight: 1.6 }}>
-          Full OpenAPI 3.0.3 specification:{' '}
-          <a href="/openapi.json" style={{ color: '#e87722', textDecoration: 'underline', fontWeight: 600 }}>/openapi.json</a>
-          {' '}(compatible with Swagger, Postman, and RapidAPI import)
+        {/* OpenAPI spec callout — prominent */}
+        <a
+          href="/openapi.json"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            background: '#1a2332', color: '#fff', borderRadius: 10,
+            padding: '12px 22px', fontSize: 15, fontWeight: 700,
+            textDecoration: 'none', marginBottom: 28,
+            fontFamily: "'Outfit', sans-serif",
+            border: '1.5px solid #374151',
+          }}
+        >
+          &#128229; Download OpenAPI 3.0 Spec (JSON)
+        </a>
+        <p style={{ fontSize: 13, color: '#5a6478', marginBottom: 32, lineHeight: 1.6, marginTop: -16 }}>
+          Compatible with Swagger, Postman, and RapidAPI import
         </p>
 
         {/* Overview */}

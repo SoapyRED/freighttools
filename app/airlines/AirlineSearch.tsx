@@ -171,8 +171,8 @@ export default function AirlineSearch({ index }: Props) {
       {/* Toggle: All airlines / Cargo only */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
         {[
-          { label: 'All airlines', val: false },
-          { label: 'Cargo only', val: true },
+          { label: `All airlines (${index.length.toLocaleString()})`, val: false },
+          { label: `Cargo airlines (${index.filter(a => a.has_cargo).length})`, val: true },
         ].map(opt => {
           const active = cargoOnly === opt.val;
           return (

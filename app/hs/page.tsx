@@ -5,6 +5,7 @@ import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import HsSearch from './HsSearch';
+import CommonHsCodes from './CommonHsCodes';
 import { HsSectionCard } from './HsLinkCard';
 import { getSlimIndex, getAllSections, TOTAL_CODES, CHAPTER_COUNT, HEADING_COUNT, SUBHEADING_COUNT, SECTION_COUNT } from '@/lib/calculations/hs';
 
@@ -41,6 +42,9 @@ export default function HsPage() {
       </div>
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
+
+        {/* Common codes quick reference */}
+        <CommonHsCodes />
 
         {/* Search */}
         <HsSearch index={index} />

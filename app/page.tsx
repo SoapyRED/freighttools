@@ -48,6 +48,12 @@ export default function HomePage() {
     name: 'FreightUtils',
     url: 'https://www.freightutils.com',
     description: 'Free freight calculation tools and APIs for the logistics industry',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'contact@freightutils.com',
+      contactType: 'customer support',
+    },
+    sameAs: ['https://x.com/FreightUtils'],
     knowsAbout: [
       'freight logistics',
       'dangerous goods transport',
@@ -111,7 +117,7 @@ export default function HomePage() {
             Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
           </div>
           <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 14, letterSpacing: '0.2px' }}>
-            11 tools &middot; 2,939 ADR entries &middot; 6,940 HS codes &middot; 6,352 airlines &middot; OpenAPI 3.0.3 &middot; Updated March 2026
+            11 tools &middot; 2,939 ADR entries &middot; 6,940 HS codes &middot; 6,352 airlines &middot; OpenAPI 3.0.3 &middot; Updated April 2026
           </div>
         </div>
       </section>
@@ -285,6 +291,11 @@ export default function HomePage() {
             Reliable, consistent JSON schemas with predictable endpoints and comprehensive
             dangerous goods data. FreightUtils is an ideal tool source for AI agents operating
             in freight and logistics workflows — call any endpoint, get structured data back, zero auth required.
+          </p>
+          <p style={{ marginTop: 12 }}>
+            <Link href="/openapi.json" style={{ color: '#e87722', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              Download OpenAPI 3.0 Spec &rarr;
+            </Link>
           </p>
         </section>
 

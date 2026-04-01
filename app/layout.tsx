@@ -183,6 +183,10 @@ export default function RootLayout({
               <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
                 contact@freightutils.com
               </a>
+              {' · '}
+              <a href="https://x.com/FreightUtils" target="_blank" rel="noopener noreferrer" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
+                @FreightUtils
+              </a>
             </div>
 
             {/* Legal line */}

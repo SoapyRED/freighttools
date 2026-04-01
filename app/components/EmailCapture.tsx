@@ -57,9 +57,26 @@ export default function EmailCapture() {
         <li>LQ training mandate + tunnel code quick reference</li>
       </ul>
 
-      <p style={{ color: '#8f9ab0', fontSize: 12, margin: '0 0 16px', lineHeight: 1.5 }}>
-        1-page PDF. Instant delivery. No spam — just this guide.
-      </p>
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16,
+        background: '#0f1724', borderRadius: 8, padding: '10px 14px',
+      }}>
+        <a href="/ADR-2025-Quick-Reference-Guide.pdf" target="_blank" rel="noopener noreferrer" style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          width: 48, height: 62, background: '#1e2a3d', borderRadius: 4,
+          border: '1px solid #374151', flexShrink: 0, textDecoration: 'none',
+        }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: '#e87722' }}>PDF</span>
+        </a>
+        <div>
+          <p style={{ color: '#8f9ab0', fontSize: 12, margin: 0, lineHeight: 1.5 }}>
+            1-page PDF. Instant delivery. No spam — just this guide.
+          </p>
+          <p style={{ color: '#6b7280', fontSize: 11, margin: '4px 0 0', lineHeight: 1.4 }}>
+            For transport planners, warehouse teams, trainers, and DGSA revision.
+          </p>
+        </div>
+      </div>
 
       {submitted ? (
         <div style={{
@@ -105,7 +122,7 @@ export default function EmailCapture() {
               opacity: loading ? 0.7 : 1,
             }}
           >
-            {loading ? 'Sending...' : 'Get the Guide'}
+            {loading ? 'Sending...' : 'Email me the 1-page ADR update'}
           </button>
         </form>
       )}
