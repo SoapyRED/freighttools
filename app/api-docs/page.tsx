@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import CopyableCode from '@/app/components/CopyableCode';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
@@ -218,13 +219,9 @@ export default function ApiDocsPage() {
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>cURL example:</p>
-            <div className="code-block" style={{ marginBottom: 16 }}>
-              {`curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=12&vehicle=artic"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=12&vehicle=artic"'} style={{ marginBottom: 16 }} />
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>US 53ft trailer:</p>
-            <div className="code-block" style={{ marginBottom: 24 }}>
-              {`curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=20&vehicle=us53"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=20&vehicle=us53"'} style={{ marginBottom: 24 }} />
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Response</h3>
             <div className="code-block">
@@ -319,9 +316,7 @@ export default function ApiDocsPage() {
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>5 boxes, 120×80×100 cm each:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/cbm?l=120&w=80&h=100&pcs=5"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/cbm?l=120&w=80&h=100&pcs=5"'} style={{ marginBottom: 4 }} />
             <div className="code-block">
               {`{
   "cbm_per_piece": 0.96,
@@ -418,9 +413,7 @@ export default function ApiDocsPage() {
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>2 pieces, 120×80×100 cm, 500 kg total, IATA factor:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000"'} style={{ marginBottom: 4 }} />
             <div className="code-block">
               {`{
   "chargeable_weight_kg": 500,
@@ -549,9 +542,7 @@ export default function ApiDocsPage() {
             </div>
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25&bwt=5&mpw=1500"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25&bwt=5&mpw=1500"'} style={{ marginBottom: 4 }} />
             <div className="code-block">
               {`{
   "boxes_per_layer": 8,
@@ -636,9 +627,7 @@ export default function ApiDocsPage() {
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Exact UN number lookup:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/adr?un=1203"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/adr?un=1203"'} style={{ marginBottom: 4 }} />
             <div className="code-block" style={{ marginBottom: 20 }}>
               {`{
   "count": 1,
@@ -669,17 +658,13 @@ export default function ApiDocsPage() {
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Search by substance name:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/adr?search=acetone"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/adr?search=acetone"'} style={{ marginBottom: 4 }} />
             <div className="code-block" style={{ marginBottom: 20 }}>
               {`{ "count": 3, "results": [ ... ] }`}
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Filter by hazard class:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/adr?class=3"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/adr?class=3"'} style={{ marginBottom: 4 }} />
             <div className="code-block">
               {`{ "count": 50, "results": [ ... ] }`}
             </div>
@@ -720,9 +705,7 @@ export default function ApiDocsPage() {
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Example — 200 litres of petrol:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/adr-calculator?un=1203&qty=200"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/adr-calculator?un=1203&qty=200"'} style={{ marginBottom: 4 }} />
             <div className="code-block" style={{ marginBottom: 24 }}>
               {`{
   "items": [
@@ -816,9 +799,7 @@ Content-Type: application/json
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>AWB prefix lookup:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/airlines?prefix=176"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/airlines?prefix=176"'} style={{ marginBottom: 4 }} />
             <div className="code-block" style={{ marginBottom: 20 }}>
               {`{
   "count": 1,
@@ -845,14 +826,10 @@ Content-Type: application/json
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>IATA code lookup:</p>
-            <div className="code-block" style={{ marginBottom: 20 }}>
-              {`curl "https://www.freightutils.com/api/airlines?iata=EK"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/airlines?iata=EK"'} style={{ marginBottom: 20 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Name search:</p>
-            <div className="code-block" style={{ marginBottom: 24 }}>
-              {`curl "https://www.freightutils.com/api/airlines?q=emirates"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/airlines?q=emirates"'} style={{ marginBottom: 24 }} />
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Response Fields</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 16 }}>
@@ -922,9 +899,7 @@ Content-Type: application/json
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Single term lookup:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/incoterms?code=FOB"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/incoterms?code=FOB"'} style={{ marginBottom: 4 }} />
             <div className="code-block" style={{ marginBottom: 20 }}>
               {`{
   "code": "FOB",
@@ -945,14 +920,10 @@ Content-Type: application/json
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Filter by transport category:</p>
-            <div className="code-block" style={{ marginBottom: 20 }}>
-              {`curl "https://www.freightutils.com/api/incoterms?category=sea_only"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/incoterms?category=sea_only"'} style={{ marginBottom: 20 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>All terms:</p>
-            <div className="code-block">
-              {`curl "https://www.freightutils.com/api/incoterms"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/incoterms"'} />
           </div>
         </div>
 
@@ -1024,19 +995,13 @@ Content-Type: application/json
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>List all containers:</p>
-            <div className="code-block" style={{ marginBottom: 16 }}>
-              {`curl "https://www.freightutils.com/api/containers"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/containers"'} style={{ marginBottom: 16 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Single container specs:</p>
-            <div className="code-block" style={{ marginBottom: 16 }}>
-              {`curl "https://www.freightutils.com/api/containers?type=40ft-high-cube"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/containers?type=40ft-high-cube"'} style={{ marginBottom: 16 }} />
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Loading calculation — how many 60×40×40cm boxes fit in a 40ft HC:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/containers?type=40ft-high-cube&l=60&w=40&h=40&wt=15&qty=500"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/containers?type=40ft-high-cube&l=60&w=40&h=40&wt=15&qty=500"'} style={{ marginBottom: 4 }} />
             <div className="code-block">
               {`{
   "container": { "name": "40ft High Cube", "slug": "40ft-high-cube", ... },
@@ -1121,9 +1086,7 @@ Content-Type: application/json
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Standard conversion:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/convert?value=100&from=kg&to=lbs"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/convert?value=100&from=kg&to=lbs"'} style={{ marginBottom: 4 }} />
             <div className="code-block" style={{ marginBottom: 16 }}>
               {`{
   "input": { "value": 100, "unit": "kg", "name": "Kilograms" },
@@ -1133,9 +1096,7 @@ Content-Type: application/json
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>CBM to chargeable weight (IATA 6000 divisor):</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/convert?value=10&from=cbm&to=chargeable_kg"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/convert?value=10&from=cbm&to=chargeable_kg"'} style={{ marginBottom: 4 }} />
             <div className="code-block" style={{ marginBottom: 16 }}>
               {`{
   "input": { "value": 10, "unit": "cbm", "name": "Cubic Metres" },
@@ -1146,9 +1107,7 @@ Content-Type: application/json
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>CBM to freight tonnes (W/M rule):</p>
-            <div className="code-block">
-              {`curl "https://www.freightutils.com/api/convert?value=5&from=cbm&to=freight_tonnes"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/convert?value=5&from=cbm&to=freight_tonnes"'} />
           </div>
         </div>
 
@@ -1206,9 +1165,7 @@ Content-Type: application/json
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Search by description:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/hs?q=coffee"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/hs?q=coffee"'} style={{ marginBottom: 4 }} />
             <div className="code-block" style={{ marginBottom: 20 }}>
               {`{
   "query": "coffee",
@@ -1226,9 +1183,7 @@ Content-Type: application/json
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Code lookup with ancestors:</p>
-            <div className="code-block" style={{ marginBottom: 4 }}>
-              {`curl "https://www.freightutils.com/api/hs?code=090111"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/hs?code=090111"'} style={{ marginBottom: 4 }} />
             <div className="code-block" style={{ marginBottom: 20 }}>
               {`{
   "hscode": "090111",
@@ -1246,9 +1201,7 @@ Content-Type: application/json
             </div>
 
             <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Browse section:</p>
-            <div className="code-block">
-              {`curl "https://www.freightutils.com/api/hs?section=II"`}
-            </div>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/hs?section=II"'} />
           </div>
         </div>
 

@@ -67,7 +67,7 @@ function PaginationBar({ currentPage, totalPages, setPage }: {
 
 export default function AirlineSearch({ index }: Props) {
   const [query, setQuery] = useState('');
-  const [cargoOnly, setCargoOnly] = useState(false);
+  const [cargoOnly, setCargoOnly] = useState(true);
   const [page, setPage] = useState(0);
 
   const cargoAirlines = useMemo(() => {

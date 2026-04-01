@@ -66,9 +66,20 @@ export default function EmailCapture() {
           background: '#0d2818', border: '1px solid #166534', borderRadius: 8,
           padding: '14px 18px', textAlign: 'center',
         }}>
-          <p style={{ color: '#4ade80', fontSize: 14, fontWeight: 600, margin: 0 }}>
-            Thanks! We&apos;ll send the guide to your inbox.
+          <p style={{ color: '#4ade80', fontSize: 14, fontWeight: 600, margin: '0 0 8px' }}>
+            Thanks! Download your guide now:
           </p>
+          <a
+            href="/ADR-2025-Quick-Reference-Guide.pdf"
+            download
+            style={{
+              display: 'inline-block', background: '#e87722', color: '#fff',
+              borderRadius: 8, padding: '10px 20px', fontWeight: 700, fontSize: 14,
+              textDecoration: 'none', fontFamily: "'Outfit', sans-serif",
+            }}
+          >
+            Download ADR 2025 Quick Reference Guide (PDF)
+          </a>
         </div>
       ) : (
         <form onSubmit={handleSubmit} style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -103,9 +114,20 @@ export default function EmailCapture() {
         <p style={{ color: '#ef4444', fontSize: 12, marginTop: 8 }}>{error}</p>
       )}
 
-      <p style={{ fontSize: 11, color: '#6b7280', marginTop: 10 }}>
-        Built from official UNECE ADR 2025 data.
-      </p>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 10, flexWrap: 'wrap', gap: 4 }}>
+        <p style={{ fontSize: 11, color: '#6b7280', margin: 0 }}>
+          Built from official UNECE ADR 2025 data.
+        </p>
+        {!submitted && (
+          <a
+            href="/ADR-2025-Quick-Reference-Guide.pdf"
+            download
+            style={{ fontSize: 11, color: '#8f9ab0', textDecoration: 'none' }}
+          >
+            Or download directly without signing up &rarr;
+          </a>
+        )}
+      </div>
     </div>
   );
 }
