@@ -168,8 +168,8 @@ export default function AirlineSearch({ index }: Props) {
         />
       </div>
 
-      {/* Toggle: All airlines / Cargo only */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
+      {/* Toggle + CSV export */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
         {[
           { label: `All airlines (${index.length.toLocaleString()})`, val: false },
           { label: `Cargo airlines (${index.filter(a => a.has_cargo).length})`, val: true },
@@ -192,6 +192,39 @@ export default function AirlineSearch({ index }: Props) {
             </button>
           );
         })}
+        <button
+          onClick={() => {
+            const rows = filtered.items;
+            const header = 'airline_name,iata_code,icao_code,awb_prefix,callsign,country,has_cargo,verified';
+            const csv = [header, ...rows.map(a =>
+              [
+                `"${(a.airline_name || '').replace(/"/g, '""')}"`,
+                a.iata_code || '',
+                a.icao_code || '',
+                a.awb_prefix ? a.awb_prefix.join(';') : '',
+                '',
+                `"${(a.country || '').replace(/"/g, '""')}"`,
+                a.has_cargo ? 'true' : 'false',
+                a.verified ? 'true' : 'false',
+              ].join(',')
+            )].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = cargoOnly ? 'freightutils-airlines-cargo.csv' : filtered.isSearch ? 'freightutils-airlines-search.csv' : 'freightutils-airlines-all.csv';
+            link.click();
+            URL.revokeObjectURL(url);
+          }}
+          style={{
+            padding: '8px 16px', borderRadius: 20, fontSize: 13, fontWeight: 600,
+            fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
+            border: '1.5px solid #EF9F27', background: 'transparent',
+            color: '#EF9F27', transition: 'all 0.15s', marginLeft: 'auto',
+          }}
+        >
+          &#128229; Download CSV ({totalItems.toLocaleString()})
+        </button>
       </div>
 
       {/* Community contribution messaging */}

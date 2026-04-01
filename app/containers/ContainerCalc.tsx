@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { calculateContainerLoading, getAllContainerSpecs, type LoadingResult } from '@/lib/calculations/container-capacity';
+import ContainerViz from './ContainerViz';
 
 // ─── shared micro-styles ──────────────────────────────────────────
 const inputStyle: React.CSSProperties = {
@@ -215,6 +216,19 @@ export default function ContainerCalc() {
               </div>
             )}
           </div>
+
+          {/* Container visualization */}
+          <ContainerViz
+            itemsPerRow={result.itemsPerRow}
+            itemsPerCol={result.itemsPerCol}
+            layers={result.layers}
+            totalItemsFit={result.totalItemsFit}
+            containerWidthCm={result.container.internalWidthCm}
+            containerHeightCm={result.container.internalHeightCm}
+            itemWidthCm={parseFloat(itemW) || 0}
+            itemHeightCm={parseFloat(itemH) || 0}
+            volumeUtilisation={result.volumeUtilisation}
+          />
 
           {/* Stats grid */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#eef0f4' }}>

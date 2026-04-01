@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import CopyableCode from './CopyableCode';
+import HighlightedCode from './HighlightedCode';
 
-const TABS = [
+const TABS: { label: string; lang: 'javascript' | 'python' | 'n8n'; code: string }[] = [
   {
     label: 'JavaScript',
+    lang: 'javascript',
     code: `// FreightUtils API — JavaScript example
 // Calculate loading metres for 10 Euro pallets
 
@@ -20,6 +21,7 @@ console.log(\`Fits: \${data.fits}\`);`,
   },
   {
     label: 'Python',
+    lang: 'python',
     code: `# FreightUtils API — Python example
 # Calculate loading metres for 10 Euro pallets
 
@@ -37,6 +39,7 @@ print(f"Fits: {data['fits']}")`,
   },
   {
     label: 'n8n',
+    lang: 'n8n',
     code: `n8n HTTP Request Node Configuration:
 
 Method: GET
@@ -85,8 +88,9 @@ export default function QuickstartTabs() {
       </div>
 
       {/* Code block */}
-      <CopyableCode
+      <HighlightedCode
         code={TABS[active].code}
+        lang={TABS[active].lang}
         style={{ borderRadius: '0 8px 8px 8px', marginBottom: 0 }}
       />
 

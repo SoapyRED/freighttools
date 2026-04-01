@@ -59,6 +59,20 @@ export default function ApiDocsPage() {
         >
           &#128229; Download OpenAPI 3.0 Spec (JSON)
         </a>
+        <a
+          href="/FreightUtils.postman_collection.json"
+          download
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 10,
+            background: 'transparent', color: '#EF9F27', borderRadius: 10,
+            padding: '14px 28px', fontSize: 14, fontWeight: 700,
+            textDecoration: 'none', marginBottom: 28, marginLeft: 12,
+            fontFamily: "'Outfit', sans-serif",
+            border: '1.5px solid #EF9F27',
+          }}
+        >
+          &#128229; Download Postman Collection
+        </a>
         <p style={{ fontSize: 13, color: '#5a6478', marginBottom: 32, lineHeight: 1.6, marginTop: -16 }}>
           Compatible with Swagger, Postman, and RapidAPI import
         </p>

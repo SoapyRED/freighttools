@@ -1,0 +1,223 @@
+{
+  "info": {
+    "name": "FreightUtils API",
+    "description": "Free freight calculation and reference data APIs. No authentication required.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.freightutils.com",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Calculators",
+      "item": [
+        {
+          "name": "LDM Calculator",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/ldm?pallet=euro&qty=12&vehicle=artic",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ldm"],
+              "query": [
+                { "key": "pallet", "value": "euro", "description": "Pallet preset: euro, uk, half, quarter" },
+                { "key": "qty", "value": "12", "description": "Number of pallets" },
+                { "key": "vehicle", "value": "artic", "description": "Vehicle type: artic, rigid10, rigid75, luton, us53, us48" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "CBM Calculator",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/cbm?l=120&w=80&h=100&pcs=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cbm"],
+              "query": [
+                { "key": "l", "value": "120", "description": "Length in cm" },
+                { "key": "w", "value": "80", "description": "Width in cm" },
+                { "key": "h", "value": "100", "description": "Height in cm" },
+                { "key": "pcs", "value": "5", "description": "Number of pieces" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Chargeable Weight",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "chargeable-weight"],
+              "query": [
+                { "key": "l", "value": "120", "description": "Length in cm" },
+                { "key": "w", "value": "80", "description": "Width in cm" },
+                { "key": "h", "value": "100", "description": "Height in cm" },
+                { "key": "gw", "value": "500", "description": "Gross weight in kg" },
+                { "key": "pcs", "value": "2", "description": "Number of pieces" },
+                { "key": "factor", "value": "6000", "description": "Volumetric divisor (5000 or 6000)" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Pallet Fitting",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pallet"],
+              "query": [
+                { "key": "pl", "value": "120", "description": "Pallet length in cm" },
+                { "key": "pw", "value": "80", "description": "Pallet width in cm" },
+                { "key": "pmh", "value": "220", "description": "Max stack height in cm" },
+                { "key": "bl", "value": "40", "description": "Box length in cm" },
+                { "key": "bw", "value": "30", "description": "Box width in cm" },
+                { "key": "bh", "value": "25", "description": "Box height in cm" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Unit Converter",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/convert?value=100&from=kg&to=lbs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "convert"],
+              "query": [
+                { "key": "value", "value": "100", "description": "Value to convert" },
+                { "key": "from", "value": "kg", "description": "Source unit" },
+                { "key": "to", "value": "lbs", "description": "Target unit" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reference Data",
+      "item": [
+        {
+          "name": "ADR Lookup — by UN number",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/adr?un=1203",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "adr"],
+              "query": [
+                { "key": "un", "value": "1203", "description": "UN number" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ADR Lookup — by name",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/adr?search=acetone",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "adr"],
+              "query": [
+                { "key": "search", "value": "acetone", "description": "Search term" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ADR 1.1.3.6 Calculator",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/adr-calculator?un=1203&qty=200",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "adr-calculator"],
+              "query": [
+                { "key": "un", "value": "1203", "description": "UN number" },
+                { "key": "qty", "value": "200", "description": "Quantity in kg or litres" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Airlines — by AWB prefix",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/airlines?prefix=176",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "airlines"],
+              "query": [
+                { "key": "prefix", "value": "176", "description": "AWB prefix number" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Airlines — by name",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/airlines?q=emirates",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "airlines"],
+              "query": [
+                { "key": "q", "value": "emirates", "description": "Airline name search" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "HS Code Lookup",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/hs?q=coffee",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "hs"],
+              "query": [
+                { "key": "q", "value": "coffee", "description": "Search term or HS code" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "INCOTERMS — single term",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/incoterms?code=FOB",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "incoterms"],
+              "query": [
+                { "key": "code", "value": "FOB", "description": "INCOTERM code" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Container Specs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/containers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "containers"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
