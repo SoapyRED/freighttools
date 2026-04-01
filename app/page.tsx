@@ -29,39 +29,35 @@ const dataSources = [
 ];
 
 export default function HomePage() {
-  const jsonLdWebsite = {
+  const jsonLdGraph = {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'FreightUtils',
-    url: 'https://www.freightutils.com',
-    description: 'Free freight calculators and dangerous goods data with open REST APIs',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://www.freightutils.com/adr?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
-    },
-  };
-
-  const jsonLdOrg = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'FreightUtils',
-    url: 'https://www.freightutils.com',
-    description: 'Free freight calculation tools and APIs for the logistics industry',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      email: 'contact@freightutils.com',
-      contactType: 'customer support',
-    },
-    sameAs: ['https://x.com/FreightUtils'],
-    knowsAbout: [
-      'freight logistics',
-      'dangerous goods transport',
-      'ADR regulations',
-      'loading metres',
-      'pallet specifications',
-      'air freight',
-      'chargeable weight',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        name: 'FreightUtils',
+        url: 'https://www.freightutils.com',
+        description: 'Free freight calculators and dangerous goods reference data with open REST APIs',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: 'https://www.freightutils.com/adr?q={search_term_string}',
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'Organization',
+        name: 'FreightUtils',
+        url: 'https://www.freightutils.com',
+        email: 'contact@freightutils.com',
+        sameAs: [
+          'https://x.com/FreightUtils',
+          'https://www.linkedin.com/company/freightutils',
+        ],
+        contactPoint: {
+          '@type': 'ContactPoint',
+          email: 'contact@freightutils.com',
+          contactType: 'customer support',
+        },
+      },
     ],
   };
 
@@ -69,11 +65,7 @@ export default function HomePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
       />
 
       {/* ── HERO ── */}

@@ -62,11 +62,18 @@ export default function EmailCapture() {
         background: '#0f1724', borderRadius: 8, padding: '10px 14px',
       }}>
         <a href="/ADR-2025-Quick-Reference-Guide.pdf" target="_blank" rel="noopener noreferrer" style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          width: 48, height: 62, background: '#1e2a3d', borderRadius: 4,
-          border: '1px solid #374151', flexShrink: 0, textDecoration: 'none',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          width: 52, height: 66, background: '#1e2a3d', borderRadius: 6,
+          border: '1px solid #374151', flexShrink: 0, textDecoration: 'none', gap: 2,
         }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#e87722' }}>PDF</span>
+          <svg width="20" height="24" viewBox="0 0 20 24" fill="none" style={{ marginTop: 2 }}>
+            <path d="M12 0H2C0.9 0 0 0.9 0 2v20c0 1.1 0.9 2 2 2h16c1.1 0 2-0.9 2-2V8l-8-8z" fill="#374151"/>
+            <path d="M12 0v6c0 1.1 0.9 2 2 2h6L12 0z" fill="#4b5563"/>
+            <rect x="4" y="12" width="12" height="1.5" rx="0.75" fill="#6b7280"/>
+            <rect x="4" y="15" width="9" height="1.5" rx="0.75" fill="#6b7280"/>
+            <rect x="4" y="18" width="10" height="1.5" rx="0.75" fill="#6b7280"/>
+          </svg>
+          <span style={{ fontSize: 9, fontWeight: 800, color: '#e87722', letterSpacing: '0.5px' }}>PDF</span>
         </a>
         <div>
           <p style={{ color: '#8f9ab0', fontSize: 12, margin: 0, lineHeight: 1.5 }}>
