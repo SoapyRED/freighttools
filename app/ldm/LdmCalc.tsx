@@ -475,7 +475,7 @@ export default function LdmCalc() {
 
         </div>
 
-        <DataTimestamp text="Vehicle specifications per EN 283/ISO standards, last verified March 2026" />
+        <DataTimestamp text="Vehicle specifications per EN 283/ISO standards, last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/cbm', label: 'Calculate CBM for sea freight' },

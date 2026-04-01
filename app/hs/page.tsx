@@ -217,7 +217,7 @@ export default function HsPage() {
           </Link>
         </div>
 
-        <DataTimestamp text="HS 2022 data from UN Comtrade, last updated March 2026" />
+        <DataTimestamp text="HS 2022 data from UN Comtrade, last updated April 2026" />
         <ToolDisclaimer text="HS code reference only. For customs declarations, verify with your national tariff authority." />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },

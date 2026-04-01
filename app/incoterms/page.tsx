@@ -303,7 +303,7 @@ export default function IncotermsPage() {
           </Link>
         </div>
 
-        <DataTimestamp text="INCOTERMS 2020, current as of March 2026" />
+        <DataTimestamp text="INCOTERMS 2020, current as of April 2026" />
         <ToolDisclaimer text="INCOTERMS 2020 reference based on ICC official rules. For contractual use, consult the full ICC publication." />
         <RelatedTools tools={[
           { href: '/hs', label: 'Look up HS codes for customs' },

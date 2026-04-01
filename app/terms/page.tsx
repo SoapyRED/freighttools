@@ -17,7 +17,7 @@ export default function TermsPage() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.5px' }}>
           Terms of Service
         </h1>
-        <p style={{ fontSize: 14, color: '#8f9ab0', marginTop: 8 }}>Last updated: March 2026</p>
+        <p style={{ fontSize: 14, color: '#8f9ab0', marginTop: 8 }}>Last updated: April 2026</p>
       </div>
 
       <main style={{ maxWidth: 740, margin: '0 auto', padding: '32px 20px 80px' }}>

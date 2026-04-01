@@ -211,7 +211,7 @@ export default function ContainersPage() {
 
         </div>
 
-        <DataTimestamp text="ISO container specifications, last verified March 2026" />
+        <DataTimestamp text="ISO container specifications, last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/cbm', label: 'Calculate CBM per item' },
