@@ -449,7 +449,7 @@ export default function LdmCalc() {
               <details className="faq-item">
                 <summary>How do I calculate loading metres?</summary>
                 <div className="faq-answer">
-                  Loading metres are calculated using: <strong>LDM = (Length × Width × Quantity) ÷ 2.4</strong>, where Length and Width are in metres, and 2.4m is the standard trailer width. For a single Euro pallet (1.2m × 0.8m): LDM = (1.2 × 0.8 × 1) ÷ 2.4 = <strong>0.4 LDM</strong>.
+                  Loading metres are calculated using: <strong>LDM = (Length × Width × Quantity) ÷ Trailer Width</strong>, where Length and Width are in metres. The trailer width is 2.4m for EU/UK trailers (EN 283) or 2.59m for US/Canada 53ft/48ft trailers (102&quot;). For a single Euro pallet (1.2m × 0.8m): LDM = (1.2 × 0.8 × 1) ÷ 2.4 = <strong>0.4 LDM</strong>.
                 </div>
               </details>
               <details className="faq-item">

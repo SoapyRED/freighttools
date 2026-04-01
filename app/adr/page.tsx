@@ -132,7 +132,7 @@ export default function AdrPage() {
                   ['Classification Code', 'A letter/number code indicating the specific hazard within the class (e.g. FC = flammable corrosive)'],
                   ['Packing Group', 'I (great danger), II (medium danger), or III (minor danger). Not all classes use packing groups'],
                   ['Labels', 'The hazard labels required on packages — may include subsidiary hazard labels'],
-                  ['Tunnel Restriction Code', 'Determines which road tunnels the goods may pass through (A\u2013E scale, with A being the least restrictive \u2014 tunnel allows all goods \u2014 and E being the most restrictive \u2014 tunnel bans most dangerous goods)'],
+                  ['Tunnel Restriction Code', 'Determines which road tunnels the goods may pass through. Tunnel categories range from A (least restrictive — most DG permitted) to E (most restrictive — almost no DG permitted). A restriction code of (D/E) means the goods are prohibited from tunnels of categories D and E.'],
                   ['Transport Category', 'Used for calculating the 1.1.3.6 exemption threshold — categories 0–4'],
                 ].map(([field, desc]) => (
                   <tr key={field} style={{ borderBottom: '1px solid #eef0f4' }}>
