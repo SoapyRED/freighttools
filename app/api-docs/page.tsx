@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import CopyableCode from '@/app/components/CopyableCode';
 import JsonBlock from '@/app/components/JsonBlock';
+import QuickstartTabs from '@/app/components/QuickstartTabs';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
@@ -136,6 +137,12 @@ export default function ApiDocsPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Quickstart */}
+        <div style={{ marginBottom: 40 }}>
+          <h2 style={s.sectionTitle}>Get Started in 2 Minutes</h2>
+          <QuickstartTabs />
         </div>
 
         {/* LDM Endpoint */}

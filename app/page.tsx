@@ -194,6 +194,64 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* ── COMMON FREIGHT WORKFLOWS ── */}
+        <section style={{ marginTop: 64 }}>
+          <div style={{
+            fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+            letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+          }}>
+            Common Freight Workflows
+          </div>
+          <h2 style={{
+            fontSize: 'clamp(22px, 4vw, 30px)', fontWeight: 800,
+            color: 'var(--text)', letterSpacing: '-0.3px', marginBottom: 20,
+          }}>
+            See how the tools work together
+          </h2>
+          <div className="workflow-grid" style={{
+            display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16,
+          }}>
+            {[
+              {
+                emoji: '\u2708\uFE0F', title: 'Air Freight Quote',
+                chain: 'CBM \u2192 Chargeable Weight \u2192 Airlines',
+                steps: ['Calculate shipment volume (CBM)', 'Get chargeable weight (volumetric vs actual)', 'Find carrier codes and AWB prefixes'],
+                href: '/cbm',
+              },
+              {
+                emoji: '\u26A0\uFE0F', title: 'DG Road Transport',
+                chain: 'ADR Lookup \u2192 1.1.3.6 Calculator \u2192 Tunnel Codes',
+                steps: ['Look up UN number and hazard class', 'Check if 1.1.3.6 exemption applies', 'Verify tunnel restriction codes for route'],
+                href: '/adr',
+              },
+              {
+                emoji: '\uD83C\uDFF7\uFE0F', title: 'Customs Preparation',
+                chain: 'HS Code \u2192 INCOTERMS \u2192 Containers',
+                steps: ['Find the correct HS commodity code', 'Confirm trade term responsibilities', 'Check container specs for your shipment'],
+                href: '/hs',
+              },
+            ].map(w => (
+              <div key={w.title} className="tool-card" style={{
+                background: 'var(--bg-card)', border: '1px solid var(--border)',
+                borderRadius: 10, padding: '20px 18px', display: 'flex', flexDirection: 'column',
+              }}>
+                <div style={{ fontSize: 28, marginBottom: 10 }}>{w.emoji}</div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', margin: '0 0 4px' }}>{w.title}</h3>
+                <div style={{ fontSize: 12, color: '#EF9F27', fontWeight: 600, marginBottom: 14 }}>{w.chain}</div>
+                <ol style={{ margin: 0, paddingLeft: 18, fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.8, flex: 1 }}>
+                  {w.steps.map((s, i) => <li key={i}>{s}</li>)}
+                </ol>
+                <Link href={w.href} style={{
+                  marginTop: 16, fontSize: 13, fontWeight: 600, color: '#EF9F27',
+                  textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4,
+                }}>
+                  Start &rarr;
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* ── FOR DEVELOPERS ── */}
         <section style={{ marginTop: 64 }}>
           <div style={{

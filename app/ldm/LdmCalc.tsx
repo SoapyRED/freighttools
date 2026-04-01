@@ -8,6 +8,7 @@ import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import { calculateLdm, type LdmResult } from '@/lib/calculations/ldm';
+import TrailerViz from './TrailerViz';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 const defaultResult: LdmResult = {
@@ -252,6 +253,17 @@ export default function LdmCalc() {
             </div>
           </div>
         </section>
+
+        {/* ── TRAILER VISUALIZATION ── */}
+        <TrailerViz
+          lengthMm={lengthMm}
+          widthMm={widthMm}
+          qty={qty}
+          stackable={stackable}
+          stackFactor={stackFactor}
+          vehicleId={vehicleId}
+          result={result}
+        />
 
         {/* ── RESULTS CARD ── */}
         <section style={{ ...s.card, marginTop: 20 }} aria-label="LDM calculation results" aria-live="polite">
