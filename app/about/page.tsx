@@ -120,11 +120,16 @@ export default function AboutPage() {
           </div>
         </Section>
 
-        <Section label="Philosophy" title="Why Free?">
+        <Section label="Approach" title="Why Open?">
+          <p style={{ marginBottom: 14 }}>
+            Every tool has a free REST API. No authentication, no paywall, no vendor lock-in.
+            Use the website, call the API, or build it into your own systems.
+          </p>
           <p>
-            Freight calculations shouldn&apos;t be locked behind logins, paywalls, or enterprise contracts.
-            The formulas are standard. The data is published by international bodies. We believe the
-            tools should be free and the APIs should be open.
+            The data comes from official international standards &mdash; UNECE, WCO, ICC, IATA.
+            We make it accessible, structured, and ready to use. Whether you&apos;re a transport
+            planner checking a load at 3am or a developer wiring freight calculations into a TMS,
+            the answer is the same: just use it.
           </p>
         </Section>
 
