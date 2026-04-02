@@ -12,6 +12,8 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
+  'X-RateLimit-Limit': '100',
+  'X-RateLimit-Window': '86400',
 };
 
 const CACHE_HEADERS = {

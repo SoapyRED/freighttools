@@ -138,7 +138,7 @@ export default function ApiDocsPage() {
                 Open Access Tier
               </div>
               <div style={{ fontSize: 14, color: '#c9cdd6', lineHeight: 1.5 }}>
-                No authentication required. Courtesy rate limit of 1,000 requests per hour per IP.
+                No authentication required. Courtesy rate limit of 100 requests per day per IP.
               </div>
             </div>
             <div>
@@ -146,8 +146,9 @@ export default function ApiDocsPage() {
                 Commercial Access
               </div>
               <div style={{ fontSize: 14, color: '#c9cdd6', lineHeight: 1.5 }}>
-                For guaranteed rate limits, SLA, and priority support,{' '}
-                <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact us directly</a>.
+                For production integrations with higher limits, subscribe via{' '}
+                <a href="https://rapidapi.com/freightutils" style={{ color: '#e87722', textDecoration: 'underline' }}>RapidAPI</a>{' '}
+                or <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact us directly</a>.
               </div>
             </div>
           </div>
@@ -1251,7 +1252,7 @@ Content-Type: application/json
         {/* Rate limiting */}
         <h2 style={s.sectionTitle}>Rate Limiting</h2>
         <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
-          The API is currently free and unmetered. As a courtesy, please keep requests under 1,000 per hour per IP address. Excessive usage may result in temporary blocking.
+          The API is currently free with a courtesy limit of 100 requests per day per IP address. Excessive usage may result in temporary blocking.
         </p>
 
         {/* Error Responses */}

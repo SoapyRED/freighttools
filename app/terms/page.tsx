@@ -68,7 +68,7 @@ export default function TermsPage() {
           The FreightUtils REST API is provided free of charge with no authentication required. There is <strong>no service level agreement (SLA)</strong> and no guarantee of uptime or availability. We reserve the right to introduce rate limiting, modify API response formats, or discontinue API endpoints at any time without prior notice.
         </p>
         <p style={p}>
-          As a courtesy, please keep API requests under 1,000 per hour per IP address. Excessive usage may result in temporary or permanent blocking.
+          As a courtesy, please keep API requests under 100 per day per IP address. Excessive usage may result in temporary or permanent blocking.
         </p>
 
         <h2 style={h2}>Intellectual Property</h2>
