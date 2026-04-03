@@ -125,11 +125,17 @@ export default function AboutPage() {
             Every tool has a free REST API. No authentication, no paywall, no vendor lock-in.
             Use the website, call the API, or build it into your own systems.
           </p>
-          <p>
+          <p style={{ marginBottom: 14 }}>
             The data comes from official international standards &mdash; UNECE, WCO, ICC, IATA.
             We make it accessible, structured, and ready to use. Whether you&apos;re a transport
             planner checking a load at 3am or a developer wiring freight calculations into a TMS,
             the answer is the same: just use it.
+          </p>
+          <p>
+            FreightUtils is also available as a <strong>Model Context Protocol (MCP) server</strong> &mdash; the
+            first freight-specific tool server for AI agents including Claude, GPT, and custom LLM
+            applications. Install via <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>npx freightutils-mcp</code> or{' '}
+            <a href="/api-docs#mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>read the setup guide</a>.
           </p>
         </Section>
 

@@ -337,13 +337,16 @@ export default function HomePage() {
             lineHeight: 1.7,
             maxWidth: 700,
           }}>
-            Reliable, consistent JSON schemas with predictable endpoints and comprehensive
-            dangerous goods data. FreightUtils is an ideal tool source for AI agents operating
-            in freight and logistics workflows — call any endpoint, get structured data back, zero auth required.
+            Now available as an <strong>MCP server</strong> — the first and only freight MCP server for AI agents.
+            Install via <code style={{ background: 'var(--bg-card)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>npx freightutils-mcp</code> or
+            connect via URL. Reliable JSON schemas, predictable endpoints, zero auth required.
           </p>
-          <p style={{ marginTop: 12 }}>
+          <p style={{ marginTop: 12, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            <Link href="/api-docs#mcp" style={{ color: '#e87722', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              MCP Server Setup &rarr;
+            </Link>
             <Link href="/openapi.json" style={{ color: '#e87722', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
-              Download OpenAPI 3.0 Spec &rarr;
+              OpenAPI 3.0 Spec &rarr;
             </Link>
           </p>
         </section>

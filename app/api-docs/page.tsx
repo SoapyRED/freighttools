@@ -154,6 +154,63 @@ export default function ApiDocsPage() {
           </div>
         </div>
 
+        {/* MCP Server */}
+        <div id="mcp" style={{ marginBottom: 40 }}>
+          <h2 style={s.sectionTitle}>MCP Server — AI Agent Integration</h2>
+          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
+            FreightUtils is available as a <strong>Model Context Protocol (MCP) server</strong>, giving
+            AI agents direct access to all 11 freight calculation and reference tools. The first and only freight MCP server.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
+            <div style={{ background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 10, padding: 20 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 8 }}>Install via npm</div>
+              <CopyableCode code="npx freightutils-mcp" />
+            </div>
+            <div style={{ background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 10, padding: 20 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 8 }}>Or connect via URL</div>
+              <CopyableCode code="https://www.freightutils.com/api/mcp/mcp" />
+            </div>
+          </div>
+
+          <div style={{ background: '#1a2332', borderRadius: 10, padding: 20, marginBottom: 20 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 12 }}>Claude Desktop Configuration</div>
+            <div style={{ fontSize: 13, color: '#c9cdd6', marginBottom: 8 }}>Add to your <code style={{ background: '#2a3442', padding: '2px 6px', borderRadius: 4, fontSize: 12 }}>claude_desktop_config.json</code>:</div>
+            <CopyableCode code={`{
+  "mcpServers": {
+    "freightutils": {
+      "command": "npx",
+      "args": ["freightutils-mcp"]
+    }
+  }
+}`} />
+          </div>
+
+          <div style={{ background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 10, padding: 20, marginBottom: 20 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 12 }}>What AI agents can do</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {[
+                'Calculate loading metres for 20 Euro pallets on an artic trailer',
+                'Look up UN 1203 and check if 200 litres qualifies for ADR exemption',
+                "What's the chargeable weight for 2 boxes 120\u00d780\u00d7100cm at 500kg?",
+                'Find the airline with AWB prefix 176',
+                'How many boxes 40\u00d730\u00d725cm fit on a Euro pallet?',
+              ].map((q, i) => (
+                <div key={i} style={{ fontSize: 14, color: '#374151', lineHeight: 1.5, paddingLeft: 16, borderLeft: '3px solid #e87722' }}>
+                  &ldquo;{q}&rdquo;
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p style={{ fontSize: 13, color: '#8f9ab0' }}>
+            View on npm:{' '}
+            <a href="https://www.npmjs.com/package/freightutils-mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>npmjs.com/package/freightutils-mcp</a>
+            {' '}&middot;{' '}
+            <a href="https://github.com/SoapyRED/freightutils-mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>GitHub</a>
+          </p>
+        </div>
+
         {/* Quickstart */}
         <div style={{ marginBottom: 40 }}>
           <h2 style={s.sectionTitle}>Get Started in 2 Minutes</h2>
