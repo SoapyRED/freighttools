@@ -46,31 +46,19 @@ const nav: NavEntry[] = [
   { href: '/about', label: 'About' },
 ];
 
-// ─── Dropdown component (hover on desktop, click on mobile) ─────
+// ─── Dropdown component (single-container hover) ────────────────
 
 function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
   group: NavGroup; pathname: string; openGroup: string | null; setOpenGroup: (g: string | null) => void;
 }) {
   const isOpen = openGroup === group.label;
   const hasActive = group.items.some(i => pathname === i.href || pathname.startsWith(i.href + '/'));
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const open = () => {
-    if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; }
-    setOpenGroup(group.label);
-  };
-
-  const scheduleClose = () => {
-    closeTimer.current = setTimeout(() => setOpenGroup(null), 400);
-  };
-
-  useEffect(() => () => { if (closeTimer.current) clearTimeout(closeTimer.current); }, []);
 
   return (
     <div
       style={{ position: 'relative' }}
-      onMouseEnter={open}
-      onMouseLeave={scheduleClose}
+      onMouseEnter={() => setOpenGroup(group.label)}
+      onMouseLeave={() => setOpenGroup(null)}
     >
       <button
         onClick={() => setOpenGroup(isOpen ? null : group.label)}
@@ -78,7 +66,7 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
           background: 'none', border: 'none', cursor: 'pointer',
           color: hasActive ? '#EF9F27' : 'var(--text-faint)',
           fontSize: 13, fontWeight: hasActive ? 600 : 500,
-          padding: '6px 10px', borderRadius: 6, whiteSpace: 'nowrap',
+          padding: '6px 10px 12px', borderRadius: 6, whiteSpace: 'nowrap',
           borderBottom: hasActive ? '2px solid #EF9F27' : '2px solid transparent',
           fontFamily: "'Outfit', sans-serif",
           display: 'flex', alignItems: 'center', gap: 4,
@@ -88,18 +76,14 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
         <span style={{ fontSize: 9, opacity: 0.6, marginLeft: 2, transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0)' }}>{'\u25BC'}</span>
       </button>
 
-      {/* Invisible bridge + dropdown panel */}
       <div style={{
-        position: 'absolute', top: '100%', left: 0, paddingTop: 6,
-        zIndex: 100,
-        pointerEvents: isOpen ? 'auto' : 'none',
-      }}>
-      <div style={{
+        position: 'absolute', top: '100%', left: 0,
         background: '#1a2332', border: '1px solid #2d3a4d',
         borderRadius: 8, padding: '6px 0', minWidth: 210,
-        boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+        zIndex: 100, boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
         opacity: isOpen ? 1 : 0,
         transform: isOpen ? 'translateY(0)' : 'translateY(-6px)',
+        pointerEvents: isOpen ? 'auto' : 'none',
         transition: 'opacity 0.15s ease, transform 0.15s ease',
       }}>
         {group.items.map(item => {
@@ -129,7 +113,6 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
             </Link>
           );
         })}
-      </div>
       </div>
     </div>
   );
