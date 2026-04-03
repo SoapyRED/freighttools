@@ -426,3 +426,44 @@ button:active:not(:disabled) { transform: scale(0.98); }
 @media (max-width: 480px) {
   .mobile-stack { flex-direction: column !important; }
 }
+
+/* ─── Brand logo hover ──────────────────────────────────────────── */
+.brand-link:hover .brand-slash {
+  transform: rotate(-12deg) scale(1.08);
+}
+
+/* ─── Announcement banner ───────────────────────────────────────── */
+.announce-banner {
+  background: linear-gradient(90deg, #e87722, #f0a050);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px 40px 8px 16px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.announce-banner a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.announce-banner-close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.8);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+.announce-banner-close:hover {
+  color: #fff;
+}

@@ -46,16 +46,32 @@ const nav: NavEntry[] = [
   { href: '/about', label: 'About' },
 ];
 
-// ─── Dropdown component (click-based) ────────────────────────────
+// ─── Dropdown component (hover on desktop, click on mobile) ─────
 
 function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
   group: NavGroup; pathname: string; openGroup: string | null; setOpenGroup: (g: string | null) => void;
 }) {
   const isOpen = openGroup === group.label;
   const hasActive = group.items.some(i => pathname === i.href || pathname.startsWith(i.href + '/'));
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const open = () => {
+    if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; }
+    setOpenGroup(group.label);
+  };
+
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => setOpenGroup(null), 200);
+  };
+
+  useEffect(() => () => { if (closeTimer.current) clearTimeout(closeTimer.current); }, []);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div
+      style={{ position: 'relative' }}
+      onMouseEnter={open}
+      onMouseLeave={scheduleClose}
+    >
       <button
         onClick={() => setOpenGroup(isOpen ? null : group.label)}
         style={{
@@ -69,44 +85,47 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
         }}
       >
         {group.label}
-        <span style={{ fontSize: 9, opacity: 0.6, marginLeft: 2 }}>{isOpen ? '\u25B2' : '\u25BC'}</span>
+        <span style={{ fontSize: 9, opacity: 0.6, marginLeft: 2, transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0)' }}>{'\u25BC'}</span>
       </button>
 
-      {isOpen && (
-        <div style={{
-          position: 'absolute', top: 'calc(100% + 4px)', left: 0,
-          background: '#1a2332', border: '1px solid #2d3a4d',
-          borderRadius: 8, padding: '6px 0', minWidth: 210,
-          zIndex: 100, boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-        }}>
-          {group.items.map(item => {
-            const active = pathname === item.href || pathname.startsWith(item.href + '/');
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpenGroup(null)}
-                style={{
-                  display: 'block', padding: '9px 18px',
-                  color: active ? '#EF9F27' : '#c9cdd6',
-                  textDecoration: 'none', fontSize: 13, fontWeight: active ? 600 : 400,
-                  background: active ? 'rgba(239,159,39,0.08)' : 'transparent',
-                }}
-                onMouseEnter={e => {
-                  if (!active) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
-                  if (!active) (e.currentTarget as HTMLElement).style.color = '#EF9F27';
-                }}
-                onMouseLeave={e => {
-                  if (!active) (e.currentTarget as HTMLElement).style.background = 'transparent';
-                  if (!active) (e.currentTarget as HTMLElement).style.color = '#c9cdd6';
-                }}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </div>
-      )}
+      <div style={{
+        position: 'absolute', top: 'calc(100% + 4px)', left: 0,
+        background: '#1a2332', border: '1px solid #2d3a4d',
+        borderRadius: 8, padding: '6px 0', minWidth: 210,
+        zIndex: 100, boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+        opacity: isOpen ? 1 : 0,
+        transform: isOpen ? 'translateY(0)' : 'translateY(-6px)',
+        pointerEvents: isOpen ? 'auto' : 'none',
+        transition: 'opacity 0.15s ease, transform 0.15s ease',
+      }}>
+        {group.items.map(item => {
+          const active = pathname === item.href || pathname.startsWith(item.href + '/');
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpenGroup(null)}
+              style={{
+                display: 'block', padding: '9px 18px',
+                color: active ? '#EF9F27' : '#c9cdd6',
+                textDecoration: 'none', fontSize: 13, fontWeight: active ? 600 : 400,
+                background: active ? 'rgba(239,159,39,0.08)' : 'transparent',
+                transition: 'background 0.1s, color 0.1s',
+              }}
+              onMouseEnter={e => {
+                if (!active) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
+                if (!active) (e.currentTarget as HTMLElement).style.color = '#EF9F27';
+              }}
+              onMouseLeave={e => {
+                if (!active) (e.currentTarget as HTMLElement).style.background = 'transparent';
+                if (!active) (e.currentTarget as HTMLElement).style.color = '#c9cdd6';
+              }}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

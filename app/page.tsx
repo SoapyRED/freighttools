@@ -338,7 +338,7 @@ export default function HomePage() {
             maxWidth: 700,
           }}>
             Now available as an <strong>MCP server</strong> — the first and only freight MCP server for AI agents.
-            Install via <code style={{ background: 'var(--bg-card)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>npx freightutils-mcp</code> or
+            Install via <code style={{ background: 'var(--bg-card)', padding: '2px 6px', borderRadius: 4, fontSize: 13, whiteSpace: 'nowrap' }}>npx freightutils-mcp</code> or
             connect via URL. Reliable JSON schemas, predictable endpoints, zero auth required.
           </p>
           <p style={{ marginTop: 12, display: 'flex', gap: 16, flexWrap: 'wrap' }}>

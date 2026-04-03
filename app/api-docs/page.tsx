@@ -12,7 +12,7 @@ const s = {
   main: { maxWidth: 900, margin: '0 auto', padding: '40px 20px 80px' } as React.CSSProperties,
   hero: { background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' as const },
   h1: { fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 800, color: '#fff', marginBottom: 12 },
-  sectionTitle: { fontSize: 22, fontWeight: 800, color: '#1a2332', marginBottom: 12, letterSpacing: '-0.3px', marginTop: 40 } as React.CSSProperties,
+  sectionTitle: { fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.3px', marginTop: 40 } as React.CSSProperties,
   card: { background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, overflow: 'hidden', marginBottom: 32, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as React.CSSProperties,
   endpointHeader: { background: '#1a2332', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 12 } as React.CSSProperties,
 };

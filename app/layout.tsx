@@ -4,6 +4,7 @@ import Link from 'next/link';
 import ThemeToggle from './components/ThemeToggle';
 import NavLinks from './components/NavLinks';
 import SiteSearch from './components/SiteSearch';
+import AnnounceBanner from './components/AnnounceBanner';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.freightutils.com'),
@@ -112,6 +113,9 @@ export default function RootLayout({
       </head>
       <body>
 
+        {/* ── ANNOUNCEMENT BANNER ── */}
+        <AnnounceBanner />
+
         {/* ── HEADER ── */}
         <header style={{
           background: 'var(--navy)',
@@ -130,14 +134,15 @@ export default function RootLayout({
             height: 56,
           }}>
             {/* Brand */}
-            <Link href="/" style={{
+            <Link href="/" className="brand-link" style={{
               display: 'flex', alignItems: 'center', gap: 10,
               textDecoration: 'none', color: '#fff', flexShrink: 0,
             }}>
-              <div style={{
+              <div className="brand-slash" style={{
                 width: 32, height: 32, background: '#EF9F27', borderRadius: 6,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: 'monospace', fontWeight: 800, fontSize: 20, color: '#412402',
+                transition: 'transform 0.3s ease',
               }}>
                 /
               </div>
