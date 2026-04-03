@@ -428,8 +428,13 @@ button:active:not(:disabled) { transform: scale(0.98); }
 }
 
 /* ─── Brand logo hover ──────────────────────────────────────────── */
+@keyframes brand-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 .brand-link:hover .brand-slash {
-  transform: rotate(-12deg) scale(1.08);
+  animation: brand-spin 2.5s ease-in-out 1;
 }
 
 /* ─── Announcement banner ───────────────────────────────────────── */

@@ -61,7 +61,7 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
   };
 
   const scheduleClose = () => {
-    closeTimer.current = setTimeout(() => setOpenGroup(null), 200);
+    closeTimer.current = setTimeout(() => setOpenGroup(null), 400);
   };
 
   useEffect(() => () => { if (closeTimer.current) clearTimeout(closeTimer.current); }, []);
@@ -88,14 +88,18 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
         <span style={{ fontSize: 9, opacity: 0.6, marginLeft: 2, transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0)' }}>{'\u25BC'}</span>
       </button>
 
+      {/* Invisible bridge + dropdown panel */}
       <div style={{
-        position: 'absolute', top: 'calc(100% + 4px)', left: 0,
+        position: 'absolute', top: '100%', left: 0, paddingTop: 6,
+        zIndex: 100,
+        pointerEvents: isOpen ? 'auto' : 'none',
+      }}>
+      <div style={{
         background: '#1a2332', border: '1px solid #2d3a4d',
         borderRadius: 8, padding: '6px 0', minWidth: 210,
-        zIndex: 100, boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
         opacity: isOpen ? 1 : 0,
         transform: isOpen ? 'translateY(0)' : 'translateY(-6px)',
-        pointerEvents: isOpen ? 'auto' : 'none',
         transition: 'opacity 0.15s ease, transform 0.15s ease',
       }}>
         {group.items.map(item => {
@@ -125,6 +129,7 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
             </Link>
           );
         })}
+      </div>
       </div>
     </div>
   );
