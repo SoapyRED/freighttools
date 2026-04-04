@@ -36,8 +36,8 @@ export default function LoginPage() {
 
   const s = {
     page: { maxWidth: 460, margin: '80px auto', padding: '0 20px', fontFamily: 'Outfit, system-ui, sans-serif' } as const,
-    card: { background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, padding: 32, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as const,
-    h1: { fontSize: 24, fontWeight: 700, color: '#1a2332', margin: '0 0 8px' } as const,
+    card: { background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 32, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as const,
+    h1: { fontSize: 24, fontWeight: 700, color: 'var(--text)', margin: '0 0 8px' } as const,
     sub: { fontSize: 15, color: '#6b7280', margin: '0 0 24px', lineHeight: 1.5 } as const,
     label: { display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 } as const,
     input: { width: '100%', padding: '12px 14px', fontSize: 16, border: '1px solid #d1d5db', borderRadius: 8, outline: 'none', boxSizing: 'border-box' as const } as const,

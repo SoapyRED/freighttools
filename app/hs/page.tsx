@@ -36,7 +36,7 @@ export default function HsPage() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           HS Code Lookup &mdash; Harmonized System <span style={{ color: '#e87722' }}>Search</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 600, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 600, margin: '0 auto' }}>
           Search {TOTAL_CODES.toLocaleString()} HS codes across {SECTION_COUNT} sections and {CHAPTER_COUNT} chapters &mdash; free, instant, no signup
         </p>
       </div>
@@ -50,12 +50,12 @@ export default function HsPage() {
         <HsSearch index={index} />
 
         {/* Disclaimer */}
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, marginBottom: -32, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, marginBottom: -32, lineHeight: 1.6 }}>
           HS code reference data (WCO HS 2022). For customs declarations, always verify the correct commodity code with your national tariff authority or customs broker.
         </p>
 
         {/* ── Section Browser ── */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, marginTop: 48, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, marginTop: 48, letterSpacing: '-0.3px' }}>
           Browse by Section
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 10, marginBottom: 48 }}>
@@ -67,24 +67,24 @@ export default function HsPage() {
         {/* ── Authority Content ── */}
         <div style={{ marginTop: 16 }}>
 
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
             What Are HS Codes?
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             The Harmonized System (HS) is a standardised numerical system for classifying internationally traded products, maintained by the <strong>World Customs Organization (WCO)</strong>. Over 200 countries use the HS as the basis for their customs tariffs and trade statistics.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             The system classifies approximately {SUBHEADING_COUNT.toLocaleString()} commodity groups using 6-digit codes, organised into {SECTION_COUNT} sections and {CHAPTER_COUNT} chapters. The first 6 digits are internationally harmonised &mdash; meaning code 090111 refers to the same product (unroasted, non-decaffeinated coffee) in every country in the world.
           </p>
 
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             How HS Codes Are Structured
           </h2>
           <div style={{
-            background: '#f7f8fa', border: '1px solid #eef0f4', borderRadius: 10,
+            background: 'var(--bg)', border: '1px solid #eef0f4', borderRadius: 10,
             padding: '20px 24px', marginBottom: 14,
           }}>
-            <div style={{ fontSize: 13, color: '#8f9ab0', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <div style={{ fontSize: 13, color: 'var(--text-faint)', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Example: Coffee
             </div>
             {[
@@ -98,24 +98,24 @@ export default function HsPage() {
                 borderLeft: item.indent > 0 ? '2px solid #e87722' : 'none',
                 marginBottom: 4,
               }}>
-                <span style={{ fontWeight: 700, fontSize: 14, color: '#1a2332' }}>{item.label}</span>
-                <span style={{ fontSize: 14, color: '#5a6478', marginLeft: 8 }}>&mdash; {item.desc}</span>
+                <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--text)' }}>{item.label}</span>
+                <span style={{ fontSize: 14, color: 'var(--text-muted)', marginLeft: 8 }}>&mdash; {item.desc}</span>
               </div>
             ))}
           </div>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>Sections</strong> ({SECTION_COUNT}, Roman numerals) &rarr; <strong>Chapters</strong> ({CHAPTER_COUNT}, 2-digit) &rarr; <strong>Headings</strong> ({HEADING_COUNT.toLocaleString()}, 4-digit) &rarr; <strong>Subheadings</strong> ({SUBHEADING_COUNT.toLocaleString()}, 6-digit). Countries add digits beyond 6 for their own tariff schedules (UK uses 10 digits, US uses 10 digits, EU uses 8&ndash;10 digits).
           </p>
 
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Why HS Codes Matter
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             HS codes determine: <strong>customs duty rates</strong>, <strong>import/export restrictions</strong>, <strong>trade statistics</strong>, and <strong>regulatory compliance</strong>. Incorrect classification can result in wrong duty payments, customs delays, seized goods, or fines. Every commercial invoice for international trade must include the correct HS code.
           </p>
 
           {/* FAQ */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Frequently Asked Questions
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
@@ -153,29 +153,29 @@ export default function HsPage() {
             </details>
           </div>
 
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             HS Codes and Customs Classification
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Customs classification is the process of assigning the correct HS code to a product before it crosses an international border. This classification determines the rate of customs duty, whether any import or export licences are required, and which trade agreements or preferential tariff rates may apply. Getting the classification wrong can result in overpayment of duty, underpayment (leading to penalties and back-charges), or delays at the border while customs authorities verify the goods.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             The classification process follows the <strong>General Rules for the Interpretation of the Harmonized System (GRI)</strong>, a set of six rules published by the WCO. The most important rule is GRI 1, which states that classification should be determined by the terms of the headings and any relevant section or chapter notes. When a product could fall under multiple headings, GRI 3 provides tie-breaking rules based on specificity, essential character, and numerical order.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             In practice, classification can be straightforward for commodity goods (raw coffee beans are clearly 0901) but complex for composite or novel products. A smartphone, for example, could theoretically be classified as a telephone, a camera, a computer, or a radio receiver. The correct classification (8517 — telephone apparatus) is determined by its principal function. For products where the classification is genuinely uncertain, importers can apply for a <strong>Binding Tariff Information (BTI)</strong> ruling from their national customs authority, which provides legal certainty for up to three years.
           </p>
 
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             National Tariff Extensions Beyond 6 Digits
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             While the first 6 digits of an HS code are internationally standardised, every country adds its own digits for national tariff and statistical purposes. The <strong>European Union</strong> uses the Combined Nomenclature (CN) with 8 digits, adding two digits to the HS subheading for tariff differentiation. The <strong>United States</strong> uses the Harmonized Tariff Schedule (HTS) with 10 digits. The <strong>United Kingdom</strong> uses a 10-digit commodity code that was based on the EU CN but has diverged since Brexit. China, Japan, India, and other major trading nations each maintain their own extensions.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             This means that while the international 6-digit code is sufficient for identifying the product category, you need the full national code to determine the actual duty rate. For example, HS 090111 (unroasted, non-decaffeinated coffee) has the same 6-digit code worldwide, but the duty rate varies from 0% in the UK to 7.5% in the EU for non-preferential imports. The national extension digits determine which specific tariff rate applies.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             When preparing commercial invoices and customs declarations, always use the full national commodity code — not just the 6-digit HS code. Use this tool to identify the correct HS heading and subheading, then consult your national customs authority for the full code and applicable duty rates.
           </p>
         </div>
@@ -231,7 +231,7 @@ export default function HsPage() {
         </div>
 
         {/* Data attribution */}
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>
           HS code data sourced from UN Comtrade (HS 2022). Published under the Public Domain Dedication and License (PDDL). For official tariff classifications, always consult your national customs authority.
         </p>
 

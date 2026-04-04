@@ -44,11 +44,11 @@ function StatCard({ label, value, sub, highlight }: { label: string; value: stri
   return (
     <div style={{
       background: '#fff',
-      border: '1px solid #d8dce6',
+      border: '1px solid var(--border)',
       borderRadius: 10,
       padding: '16px 18px',
     }}>
-      <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 6 }}>
+      <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 6 }}>
         {label}
       </div>
       <div style={{
@@ -61,7 +61,7 @@ function StatCard({ label, value, sub, highlight }: { label: string; value: stri
         {value}
       </div>
       {sub && (
-        <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 4 }}>{sub}</div>
+        <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 4 }}>{sub}</div>
       )}
     </div>
   );
@@ -112,10 +112,10 @@ export default async function AirlineDetailPage({ params }: PageProps) {
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
-          <nav style={{ marginBottom: 20, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+          <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
             <span style={{ margin: '0 8px' }}>›</span>
-            <Link href="/airlines" style={{ color: '#8f9ab0', textDecoration: 'none' }}>Airlines</Link>
+            <Link href="/airlines" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Airlines</Link>
             <span style={{ margin: '0 8px' }}>›</span>
             <span style={{ color: '#e87722' }}>{airline.airline_name}</span>
           </nav>
@@ -219,20 +219,20 @@ export default async function AirlineDetailPage({ params }: PageProps) {
         {airline.has_cargo && airline.awb_prefix && (
           <div style={{
             background: '#fff',
-            border: '1px solid #d8dce6',
+            border: '1px solid var(--border)',
             borderRadius: 10,
             overflow: 'hidden',
             marginBottom: 28,
           }}>
             <div style={{
-              background: '#f7f8fa',
+              background: 'var(--bg)',
               borderBottom: '1px solid #eef0f4',
               padding: '11px 18px',
               fontSize: 12,
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.5px',
-              color: '#5a6478',
+              color: 'var(--text-muted)',
             }}>
               Air Waybill Prefix
             </div>
@@ -255,7 +255,7 @@ export default async function AirlineDetailPage({ params }: PageProps) {
                   </span>
                 ))}
               </div>
-              <p style={{ fontSize: 14, color: '#5a6478', lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>
                 Air Waybill numbers issued by {airline.airline_name} begin with{' '}
                 <strong style={{ fontFamily: 'monospace' }}>{airline.awb_prefix[0]}</strong>.
                 {exampleAwb && (
@@ -271,20 +271,20 @@ export default async function AirlineDetailPage({ params }: PageProps) {
         {/* Related links */}
         <div style={{
           background: '#fff',
-          border: '1px solid #d8dce6',
+          border: '1px solid var(--border)',
           borderRadius: 10,
           overflow: 'hidden',
           marginBottom: 28,
         }}>
           <div style={{
-            background: '#f7f8fa',
+            background: 'var(--bg)',
             borderBottom: '1px solid #eef0f4',
             padding: '11px 18px',
             fontSize: 12,
             fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
-            color: '#5a6478',
+            color: 'var(--text-muted)',
           }}>
             Related
           </div>
@@ -296,7 +296,7 @@ export default async function AirlineDetailPage({ params }: PageProps) {
                   display: 'flex',
                   alignItems: 'center',
                   gap: 10,
-                  color: '#1a2332',
+                  color: 'var(--text)',
                   textDecoration: 'none',
                   fontSize: 14,
                   fontWeight: 600,
@@ -314,7 +314,7 @@ export default async function AirlineDetailPage({ params }: PageProps) {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 10,
-                color: '#1a2332',
+                color: 'var(--text)',
                 textDecoration: 'none',
                 fontSize: 14,
                 fontWeight: 600,
@@ -331,7 +331,7 @@ export default async function AirlineDetailPage({ params }: PageProps) {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 10,
-                color: '#1a2332',
+                color: 'var(--text)',
                 textDecoration: 'none',
                 fontSize: 14,
                 fontWeight: 600,
@@ -351,11 +351,11 @@ export default async function AirlineDetailPage({ params }: PageProps) {
         <div style={{ marginTop: 24, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
           <Link href="/airlines" style={{
             background: '#fff',
-            border: '1px solid #d8dce6',
+            border: '1px solid var(--border)',
             borderRadius: 8,
             padding: '10px 18px',
             textDecoration: 'none',
-            color: '#1a2332',
+            color: 'var(--text)',
             fontSize: 13,
             fontWeight: 600,
           }}>

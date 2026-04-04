@@ -37,7 +37,7 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 700,
   textTransform: 'uppercase',
   letterSpacing: '0.4px',
-  color: '#5a6478',
+  color: 'var(--text-muted)',
   marginBottom: 6,
   display: 'block',
 };
@@ -147,7 +147,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
       {/* Input card */}
       <div style={{
         background: 'var(--bg-card)',
-        border: '1px solid #d8dce6',
+        border: '1px solid var(--border)',
         borderRadius: 12,
         overflow: 'hidden',
         boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -206,7 +206,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
       {/* Results */}
       <div style={{
         background: 'var(--bg-card)',
-        border: '1px solid #d8dce6',
+        border: '1px solid var(--border)',
         borderRadius: 12,
         overflow: 'hidden',
         boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -216,7 +216,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
         </div>
 
         {!result ? (
-          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#8f9ab0', fontSize: 14 }}>
+          <div style={{ padding: '40px 24px', textAlign: 'center', color: 'var(--text-faint)', fontSize: 14 }}>
             Enter dimensions, weight, and pieces above to calculate
           </div>
         ) : (
@@ -227,12 +227,12 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
               textAlign: 'center',
               borderBottom: '1px solid #eef0f4',
             }}>
-              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#8f9ab0', marginBottom: 8 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
                 Chargeable Weight
               </div>
-              <div style={{ fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: '#1a2332', lineHeight: 1, letterSpacing: '-2px' }}>
+              <div style={{ fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: 'var(--text)', lineHeight: 1, letterSpacing: '-2px' }}>
                 {fmt(result.chargeableWeightKg, 1)}
-                <span style={{ fontSize: 22, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> kg</span>
+                <span style={{ fontSize: 22, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: 0 }}> kg</span>
               </div>
               <div style={{
                 display: 'inline-flex',
@@ -293,18 +293,18 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
                   padding: '16px 20px',
                   borderLeft: cell.highlight ? '3px solid #e87722' : '3px solid transparent',
                 }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>
                     {cell.label}
                     {cell.highlight && <span style={{ marginLeft: 6, background: '#e87722', color: '#fff', fontSize: 9, padding: '1px 5px', borderRadius: 10 }}>WINS</span>}
                   </div>
-                  <div style={{ fontSize: 20, fontWeight: 700, color: '#1a2332' }}>{cell.value}</div>
-                  <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>{cell.sub}</div>
+                  <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)' }}>{cell.value}</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 2 }}>{cell.sub}</div>
                 </div>
               ))}
             </div>
 
             {/* Explanation */}
-            <div style={{ padding: '14px 20px', background: 'var(--bg)', fontSize: 13, color: '#5a6478', lineHeight: 1.6 }}>
+            <div style={{ padding: '14px 20px', background: 'var(--bg)', fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6 }}>
               {isVol
                 ? <>Your shipment is <strong>light for its size</strong>. The volumetric weight ({fmt(result.volumetricWeightTotalKg)} kg) exceeds the actual gross weight ({fmt(result.grossWeightKg)} kg), so airlines charge based on the space it occupies — not how much it weighs. Denser packing or smaller outer dimensions would reduce the chargeable weight.</>
                 : <>Your shipment is <strong>dense for its size</strong>. The actual gross weight ({fmt(result.grossWeightKg)} kg) exceeds the volumetric weight ({fmt(result.volumetricWeightTotalKg)} kg), so the actual weight determines the charge. This is typical for heavy goods like machinery, metals, or liquids.</>
@@ -346,43 +346,43 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
       <div style={{ marginTop: 56 }}>
 
         {/* What Is Chargeable Weight? */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           What Is Chargeable Weight?
         </h2>
-        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
           Chargeable weight is the figure airlines use to price your air freight shipment. It is always the greater of two values: the <strong>actual gross weight</strong> (what the shipment weighs on a scale) or the <strong>volumetric weight</strong> (a calculated figure based on the shipment&apos;s dimensions). This principle — known in the industry as &ldquo;weight or measure&rdquo; — ensures carriers are compensated fairly for both the mass and the space a shipment occupies in the aircraft.
         </p>
-        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
           A heavy, compact shipment (like machine parts) will typically be charged on actual weight. A light, bulky shipment (like clothing or plastic goods) will be charged on volumetric weight — often significantly more than the actual weight.
         </p>
 
         {/* The Volumetric Weight Formula */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
           The Volumetric Weight Formula
         </h2>
-        <div style={{ background: 'var(--bg)', border: '1px solid #d8dce6', borderRadius: 10, padding: '20px 24px', marginBottom: 16 }}>
+        <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 10, padding: '20px 24px', marginBottom: 16 }}>
           <div style={{ marginBottom: 16 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 6 }}>Metric (cm/kg) — IATA standard</div>
-            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#1a2332' }}>Volumetric Weight (kg) = (L × W × H in cm) ÷ 6,000</div>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 6 }}>Metric (cm/kg) — IATA standard</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: 'var(--text)' }}>Volumetric Weight (kg) = (L × W × H in cm) ÷ 6,000</div>
           </div>
           <div style={{ marginBottom: 16 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 6 }}>Imperial (in/lb)</div>
-            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#1a2332' }}>Volumetric Weight (lb) = (L × W × H in inches) ÷ 166</div>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 6 }}>Imperial (in/lb)</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: 'var(--text)' }}>Volumetric Weight (lb) = (L × W × H in inches) ÷ 166</div>
           </div>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 6 }}>From CBM</div>
-            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#1a2332' }}>Volumetric Weight (kg) = Total CBM × 167</div>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 6 }}>From CBM</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: 'var(--text)' }}>Volumetric Weight (kg) = Total CBM × 167</div>
           </div>
         </div>
-        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
           The divisor of 6,000 is the IATA standard used by most international air freight carriers. It assumes a density ratio where 1 cubic metre of cargo should weigh at least approximately 167 kg.
         </p>
 
         {/* Divisor Variations */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
           Divisor Variations by Carrier Type
         </h2>
-        <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 16 }}>
+        <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
             <thead>
               <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -407,12 +407,12 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
             </tbody>
           </table>
         </div>
-        <p style={{ color: '#8f9ab0', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
+        <p style={{ color: 'var(--text-faint)', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
           Always confirm the divisor with your carrier before quoting. A shipment quoted at divisor 6,000 will have a different chargeable weight than the same shipment at 5,000. The difference can be significant on bulky cargo.
         </p>
 
         {/* Worked Examples */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
           Worked Examples
         </h2>
 
@@ -447,10 +447,10 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
         </div>
 
         {/* How to Reduce Chargeable Weight */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
           How to Reduce Chargeable Weight
         </h2>
-        <ul style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.8, paddingLeft: 20, marginBottom: 14 }}>
+        <ul style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.8, paddingLeft: 20, marginBottom: 14 }}>
           <li><strong>Use right-sized packaging</strong> — every centimetre of empty space increases volumetric weight at your expense</li>
           <li>Avoid oversized boxes for small items</li>
           <li>Consider flat-packing or vacuum compression for textiles and soft goods</li>
@@ -459,7 +459,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
         </ul>
 
         {/* FAQ */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
           Frequently Asked Questions
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
@@ -496,7 +496,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
         </div>
 
         {/* Attribution */}
-        <p style={{ fontSize: 12, color: '#8f9ab0', lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', lineHeight: 1.6 }}>
           Formulas and divisors based on IATA Cargo Tariff standards. Carrier-specific divisors may vary — always confirm with your carrier.
         </p>
       </div>

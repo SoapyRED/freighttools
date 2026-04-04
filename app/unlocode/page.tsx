@@ -22,7 +22,7 @@ export default function UnlocodePage() {
         <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           UN/LOCODE <span style={{ color: '#e87722' }}>Lookup</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 580, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 580, margin: '0 auto' }}>
           Search 116,000+ transport locations worldwide. Seaports, airports, rail terminals, road terminals, and inland clearance depots.
         </p>
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
@@ -81,6 +81,13 @@ export default function UnlocodePage() {
           </h3>
           <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
             UNECE publishes updated UN/LOCODE editions twice per year (typically in spring and autumn). This database contains {(116129).toLocaleString()} entries from the 2024-2 edition, covering every country in the world. Not all entries have coordinates &mdash; approximately 80% include latitude/longitude data. New locations are added continuously as countries submit updates to UNECE, and existing entries are corrected when errors are identified.
+          </p>
+
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>
+            Relationship with other code systems
+          </h3>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            UN/LOCODE is complementary to other transport code systems. IATA airport codes (3-letter, e.g., LHR) and ICAO codes (4-letter, e.g., EGLL) identify airports specifically for the aviation industry. UN/LOCODE includes these airports but also covers seaports, rail terminals, and road hubs that IATA does not. In electronic customs declarations (such as the UK&apos;s CHIEF and CDS systems), UN/LOCODE is the required format for identifying ports of loading and discharge. Many freight management systems cross-reference UN/LOCODE with IATA codes to provide a unified location database.
           </p>
 
           <details style={{ marginTop: 24, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>

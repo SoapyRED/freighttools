@@ -34,7 +34,7 @@ export default function AdrPage() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           ADR Dangerous <span style={{ color: '#e87722' }}>Goods</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 560, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto' }}>
           Search {ENTRY_COUNT.toLocaleString()} UN numbers from ADR 2025 and calculate 1.1.3.6 exemption points &mdash; free, instant, no signup
         </p>
       </div>
@@ -45,12 +45,12 @@ export default function AdrPage() {
         <AdrTabs searchIndex={searchIndex} calcIndex={calcIndex} />
 
         {/* Data provenance */}
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>
           Data: UNECE ADR 2025, licensed from Labeline.com. 2,939 entries covering all hazard classes. Last verified April 2026.
         </p>
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 4, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 4, lineHeight: 1.6 }}>
           For operational use, always verify against the{' '}
-          <a href="https://unece.org/transport/dangerous-goods/adr-2025" target="_blank" rel="noopener noreferrer" style={{ color: '#8f9ab0', textDecoration: 'underline' }}>
+          <a href="https://unece.org/transport/dangerous-goods/adr-2025" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-faint)', textDecoration: 'underline' }}>
             current ADR in force
           </a>.
         </p>
@@ -96,27 +96,27 @@ export default function AdrPage() {
         <div style={{ marginTop: 56 }}>
 
           {/* Section 1: What Is ADR? */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
             What Is ADR?
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>ADR</strong> (Accord européen relatif au transport international des marchandises Dangereuses par Route) is the European Agreement concerning the International Carriage of Dangerous Goods by Road. It is a United Nations treaty administered by <strong>UNECE</strong> (the United Nations Economic Commission for Europe) that sets out the rules for transporting hazardous materials by road across 54 contracting parties — covering the EU, UK, and beyond.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             ADR is updated every two years. The current edition, <strong>ADR 2025</strong>, entered into force on 1 January 2025 with a six-month transitional period for full implementation.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             The agreement covers classification of dangerous goods, packaging and labelling requirements, vehicle construction and equipment standards, documentation (including the transport document and instructions in writing), and training requirements for drivers and other personnel involved in the carriage of dangerous goods.
           </p>
 
           {/* Section 2: Understanding ADR Table A */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Understanding ADR Table A
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
             Table A of Chapter 3.2 is the core reference in ADR — the complete list of dangerous goods authorised for international road transport. Each entry includes:
           </p>
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 16 }}>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -145,10 +145,10 @@ export default function AdrPage() {
           </div>
 
           {/* Section 3: ADR Hazard Classes */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             ADR Hazard Classes
           </h2>
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 16 }}>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -184,13 +184,13 @@ export default function AdrPage() {
           </div>
 
           {/* Section 4: Transport Categories & 1.1.3.6 Exemption */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Transport Categories and the 1.1.3.6 Exemption
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Every dangerous substance in ADR Table A is assigned a <strong>transport category</strong> from 0 to 4. These categories are the foundation of the ADR 1.1.3.6 small load exemption, which allows certain quantities of dangerous goods to be carried with reduced requirements. Understanding transport categories is essential for any freight operator moving mixed loads that might include small quantities of hazardous materials.
           </p>
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 16 }}>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -218,52 +218,52 @@ export default function AdrPage() {
               </tbody>
             </table>
           </div>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             The exemption calculation works by multiplying the quantity of each substance (in kg or litres) by the transport category multiplier, then summing all the points. If the total is 1,000 or below, the load qualifies for the 1.1.3.6 exemption. This exemption reduces requirements around vehicle placarding, written instructions, driver training certification (ADR licence), and equipment. It does not exempt the consignor from proper packaging, labelling, and documentation.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             For example, carrying 200 litres of petrol (transport category 2, multiplier 3) gives 600 points. Adding 100 kg of a category 3 substance (multiplier 1) adds 100 points, for a total of 700 &mdash; still under 1,000, so the exemption applies. Use our <Link href="/adr-calculator" style={{ color: '#e87722', textDecoration: 'underline' }}>ADR 1.1.3.6 calculator</Link> to check your mixed loads instantly.
           </p>
 
           {/* Section: Packing Groups */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Packing Groups Explained
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Packing groups indicate the degree of danger presented by a substance and determine the performance standard required of its packaging. ADR assigns three packing groups:
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>Packing Group I (PG I)</strong> &mdash; substances presenting high danger. Packaging must meet the most stringent performance tests. Examples include carbon disulphide (Class 3, extremely flammable) and hydrogen cyanide (Class 6.1, highly toxic). PG I substances have lower quantity thresholds for exemptions and more restrictive transport conditions.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>Packing Group II (PG II)</strong> &mdash; substances presenting medium danger. This is the most common packing group in everyday freight. Petrol (UN1203), many industrial solvents, and common corrosives like hydrochloric acid fall into PG II.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>Packing Group III (PG III)</strong> &mdash; substances presenting low danger. Diesel fuel (UN1202), many paints and adhesives, and dilute acid solutions are typically PG III. These substances still require proper dangerous goods packaging and labelling, but the packaging performance standards are less demanding.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Not all hazard classes use packing groups. Classes 1 (explosives), 2 (gases), 5.2 (organic peroxides), 6.2 (infectious substances), and 7 (radioactive) have their own classification systems. When reading ADR Table A, an empty packing group column indicates that the class uses a different categorisation method.
           </p>
 
           {/* Section: Reading ADR Labels */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             How to Read ADR Hazard Labels
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             ADR hazard labels are the diamond-shaped warning labels affixed to packages, containers, and vehicles carrying dangerous goods. Each label corresponds to a hazard class or division and follows a standardised design specified in ADR Chapter 5.2.2. The labels use a consistent system of colours, symbols, and numbers to communicate hazard information to handlers, emergency responders, and other road users.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Every package must carry the primary hazard label for its class. If the substance has subsidiary risks (for example, a substance that is both flammable and toxic), additional subsidiary hazard labels must also be applied. The class number appears in the bottom corner of the label. A flame symbol indicates flammability (Classes 3, 4), a skull and crossbones indicates toxicity (Class 6.1), a test tube with corrosion indicates corrosive substances (Class 8), and a trefoil symbol indicates radioactive material (Class 7).
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             In addition to class labels, packages must display the <strong>UN number</strong> of the substance, preceded by the letters &ldquo;UN&rdquo;. The UN number is shown in black digits at least 12 mm high (6 mm for packages of 5 litres or 5 kg or less). On vehicles and containers, orange-coloured plates display the hazard identification number (Kemler code) in the top half and the UN number in the bottom half. For example, a tanker carrying petrol would show &ldquo;33&rdquo; over &ldquo;1203&rdquo; on its orange plate, where &ldquo;33&rdquo; indicates a highly flammable liquid.
           </p>
 
           {/* Section 5: Tunnel Restriction Codes */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Tunnel Restriction Codes Explained
           </h2>
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 12 }}>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 12 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -288,34 +288,34 @@ export default function AdrPage() {
               </tbody>
             </table>
           </div>
-          <p style={{ color: '#8f9ab0', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-faint)', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
             Tunnel codes appear in parentheses in ADR Table A, e.g. (D/E). Where two codes are shown separated by a slash, the first applies to bulk/tank transport and the second to packages.
           </p>
 
           {/* Section 5: Variant Entries */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Variant Entries
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Some UN numbers have multiple entries in Table A — these are called <strong>variants</strong>. A single UN number may appear several times with different proper shipping names, hazard divisions, or packing groups. For example, <Link href="/adr/un/0015" style={{ color: '#e87722', textDecoration: 'underline' }}>UN0015</Link> (Ammunition, Smoke) has three entries for different explosive divisions.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             FreightUtils preserves all variant entries from the official ADR 2025 Table A. When you look up a UN number with multiple variants, all entries are displayed so you can identify the correct classification for your specific substance or article.
           </p>
 
           {/* Section 6: About This Data */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             About This Data
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             This ADR dataset contains <strong>2,939 entries</strong> covering <strong>2,347 unique UN numbers</strong>, licensed from Labeline.com, sourced from the official UNECE ADR 2025 publication (ECE/TRANS/352). The dataset includes all additions and corrections in the 2025 edition.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             For operational decisions — including classification, packaging, labelling, and routing — always refer to the full ADR text and consult your <strong>Dangerous Goods Safety Adviser (DGSA)</strong> where required. This tool is a reference aid, not a substitute for the complete regulation.
           </p>
 
           {/* Section 7: FAQ */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Frequently Asked Questions
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
@@ -361,7 +361,7 @@ export default function AdrPage() {
 
         {/* Learn More */}
         <div style={{ marginTop: 48 }}>
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
             Learn More
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
@@ -372,11 +372,11 @@ export default function AdrPage() {
               { href: '/adr/training-guide', title: 'ADR Training Guide', desc: 'Who needs training, course types, and UK costs' },
             ].map(g => (
               <Link key={g.href} href={g.href} style={{
-                background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+                background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
                 padding: '16px 18px', textDecoration: 'none', display: 'block',
               }}>
-                <div style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 4 }}>{g.title}</div>
-                <div style={{ fontSize: 13, color: '#5a6478', lineHeight: 1.5 }}>{g.desc}</div>
+                <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>{g.title}</div>
+                <div style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.5 }}>{g.desc}</div>
               </Link>
             ))}
           </div>

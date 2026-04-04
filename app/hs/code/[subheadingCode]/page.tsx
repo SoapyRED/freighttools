@@ -61,22 +61,22 @@ export default async function SubheadingPage(
 
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <nav style={{ marginBottom: 20, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+          <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <Link href="/hs" style={{ color: '#8f9ab0', textDecoration: 'none' }}>HS Codes</Link>
+            <Link href="/hs" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>HS Codes</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <Link href={`/hs/section/${details.section.toLowerCase()}`} style={{ color: '#8f9ab0', textDecoration: 'none' }}>Section {details.section}</Link>
+            <Link href={`/hs/section/${details.section.toLowerCase()}`} style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Section {details.section}</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
             {chapter && (
               <>
-                <Link href={`/hs/chapter/${chapter.hscode}`} style={{ color: '#8f9ab0', textDecoration: 'none' }}>Ch. {chapter.hscode}</Link>
+                <Link href={`/hs/chapter/${chapter.hscode}`} style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Ch. {chapter.hscode}</Link>
                 <span style={{ margin: '0 8px' }}>&rsaquo;</span>
               </>
             )}
             {heading && (
               <>
-                <Link href={`/hs/heading/${heading.hscode}`} style={{ color: '#8f9ab0', textDecoration: 'none' }}>{formatHsCode(heading.hscode)}</Link>
+                <Link href={`/hs/heading/${heading.hscode}`} style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>{formatHsCode(heading.hscode)}</Link>
                 <span style={{ margin: '0 8px' }}>&rsaquo;</span>
               </>
             )}
@@ -85,7 +85,7 @@ export default async function SubheadingPage(
           <h1 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.3px' }}>
             HS {formatHsCode(subheadingCode)}
           </h1>
-          <p style={{ fontSize: 16, color: '#8f9ab0', marginTop: 8, maxWidth: 700 }}>
+          <p style={{ fontSize: 16, color: 'var(--text-faint)', marginTop: 8, maxWidth: 700 }}>
             {details.description}
           </p>
         </div>
@@ -114,7 +114,7 @@ export default async function SubheadingPage(
 
         {/* Hierarchy card */}
         <div style={{
-          background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+          background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
           overflow: 'hidden', marginBottom: 32,
         }}>
           <div style={{ background: '#1a2332', padding: '14px 18px', fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#fff' }}>
@@ -122,14 +122,14 @@ export default async function SubheadingPage(
           </div>
           <div>
             <div style={{ padding: '12px 18px', borderBottom: '1px solid #eef0f4', display: 'flex', gap: 12, alignItems: 'center' }}>
-              <span style={{ fontSize: 12, fontWeight: 700, color: '#8f9ab0', minWidth: 80 }}>SECTION</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-faint)', minWidth: 80 }}>SECTION</span>
               <Link href={`/hs/section/${details.section.toLowerCase()}`} style={{ fontSize: 14, color: '#e87722', textDecoration: 'none', fontWeight: 600 }}>
                 {details.section}: {details.sectionName}
               </Link>
             </div>
             {chapter && (
               <div style={{ padding: '12px 18px', borderBottom: '1px solid #eef0f4', display: 'flex', gap: 12, alignItems: 'center', paddingLeft: 36 }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#8f9ab0', minWidth: 80 }}>CHAPTER</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-faint)', minWidth: 80 }}>CHAPTER</span>
                 <Link href={`/hs/chapter/${chapter.hscode}`} style={{ fontSize: 14, color: '#e87722', textDecoration: 'none', fontWeight: 600 }}>
                   {chapter.hscode}: {chapter.description}
                 </Link>
@@ -137,7 +137,7 @@ export default async function SubheadingPage(
             )}
             {heading && (
               <div style={{ padding: '12px 18px', borderBottom: '1px solid #eef0f4', display: 'flex', gap: 12, alignItems: 'center', paddingLeft: 54 }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#8f9ab0', minWidth: 80 }}>HEADING</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-faint)', minWidth: 80 }}>HEADING</span>
                 <Link href={`/hs/heading/${heading.hscode}`} style={{ fontSize: 14, color: '#e87722', textDecoration: 'none', fontWeight: 600 }}>
                   {formatHsCode(heading.hscode)}: {heading.description}
                 </Link>
@@ -145,7 +145,7 @@ export default async function SubheadingPage(
             )}
             <div style={{ padding: '12px 18px', display: 'flex', gap: 12, alignItems: 'center', paddingLeft: 72, background: '#fff7ed' }}>
               <span style={{ fontSize: 12, fontWeight: 700, color: '#e87722', minWidth: 80 }}>CODE</span>
-              <span style={{ fontSize: 14, fontWeight: 700, color: '#1a2332' }}>
+              <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>
                 {formatHsCode(subheadingCode)}: {details.description}
               </span>
             </div>
@@ -154,10 +154,10 @@ export default async function SubheadingPage(
 
         {/* National tariff note */}
         <div style={{
-          background: '#f7f8fa', border: '1px solid #eef0f4', borderRadius: 10,
+          background: 'var(--bg)', border: '1px solid #eef0f4', borderRadius: 10,
           padding: '16px 20px', marginBottom: 32,
         }}>
-          <p style={{ fontSize: 14, color: '#5a6478', lineHeight: 1.6, marginBottom: 0 }}>
+          <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 0 }}>
             This is the international 6-digit HS code. Your country may use additional digits for national tariff purposes.
             For UK tariff and duty rates, check the{' '}
             <a href="https://www.trade-tariff.service.gov.uk/find_commodity" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>UK Trade Tariff</a>.
@@ -169,7 +169,7 @@ export default async function SubheadingPage(
         {/* Sibling codes */}
         {siblings.length > 0 && (
           <>
-            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
               Related Codes Under {formatHsCode(details.parent)}
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 32 }}>
@@ -188,9 +188,9 @@ export default async function SubheadingPage(
           )}
         </div>
 
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 20, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 20, lineHeight: 1.6 }}>
           Found an error?{' '}
-          <a href="mailto:contact@freightutils.com?subject=Data%20correction%20—%20HS%20codes" style={{ color: '#8f9ab0', textDecoration: 'underline' }}>
+          <a href="mailto:contact@freightutils.com?subject=Data%20correction%20—%20HS%20codes" style={{ color: 'var(--text-faint)', textDecoration: 'underline' }}>
             Let us know &rarr; contact@freightutils.com
           </a>
         </p>

@@ -56,7 +56,7 @@ export default function ChangelogPage() {
         <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           Change<span style={{ color: '#e87722' }}>log</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 520, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 520, margin: '0 auto' }}>
           Data updates, new tools, and API changes. FreightUtils is actively maintained.
         </p>
       </div>

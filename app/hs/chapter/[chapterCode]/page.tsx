@@ -54,19 +54,19 @@ export default async function ChapterPage(
 
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <nav style={{ marginBottom: 20, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+          <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <Link href="/hs" style={{ color: '#8f9ab0', textDecoration: 'none' }}>HS Codes</Link>
+            <Link href="/hs" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>HS Codes</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <Link href={`/hs/section/${details.section.toLowerCase()}`} style={{ color: '#8f9ab0', textDecoration: 'none' }}>Section {details.section}</Link>
+            <Link href={`/hs/section/${details.section.toLowerCase()}`} style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Section {details.section}</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
             <span style={{ color: '#e87722' }}>Chapter {chapterCode}</span>
           </nav>
           <h1 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.3px' }}>
             Chapter {chapterCode} &mdash; <span style={{ color: '#e87722' }}>{details.description}</span>
           </h1>
-          <p style={{ fontSize: 15, color: '#8f9ab0', marginTop: 8 }}>
+          <p style={{ fontSize: 15, color: 'var(--text-faint)', marginTop: 8 }}>
             {headings.length} headings &middot; Section {details.section}: {details.sectionName}
           </p>
         </div>
@@ -92,7 +92,7 @@ export default async function ChapterPage(
           );
         })()}
 
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           Headings
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 40 }}>

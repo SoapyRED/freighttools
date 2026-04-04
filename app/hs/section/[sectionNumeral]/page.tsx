@@ -60,17 +60,17 @@ export default async function SectionPage(
       {/* Hero */}
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <nav style={{ marginBottom: 20, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+          <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <Link href="/hs" style={{ color: '#8f9ab0', textDecoration: 'none' }}>HS Codes</Link>
+            <Link href="/hs" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>HS Codes</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
             <span style={{ color: '#e87722' }}>Section {section.numeral.toUpperCase()}</span>
           </nav>
           <h1 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.3px' }}>
             Section {section.numeral.toUpperCase()} &mdash; <span style={{ color: '#e87722' }}>{section.name}</span>
           </h1>
-          <p style={{ fontSize: 15, color: '#8f9ab0', marginTop: 8 }}>
+          <p style={{ fontSize: 15, color: 'var(--text-faint)', marginTop: 8 }}>
             {chapters.length} chapters in this section
           </p>
         </div>
@@ -79,7 +79,7 @@ export default async function SectionPage(
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '28px 20px 80px' }}>
 
         {/* Chapters list */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           Chapters
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 40 }}>
@@ -98,16 +98,16 @@ export default async function SectionPage(
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
           {prev ? (
             <Link href={`/hs/section/${prev.numeral}`} style={{
-              background: '#fff', border: '1px solid #d8dce6', borderRadius: 8,
-              padding: '11px 16px', textDecoration: 'none', color: '#1a2332', fontSize: 13, fontWeight: 600,
+              background: '#fff', border: '1px solid var(--border)', borderRadius: 8,
+              padding: '11px 16px', textDecoration: 'none', color: 'var(--text)', fontSize: 13, fontWeight: 600,
             }}>
               &larr; Section {prev.numeral.toUpperCase()}
             </Link>
           ) : <div />}
           {next ? (
             <Link href={`/hs/section/${next.numeral}`} style={{
-              background: '#fff', border: '1px solid #d8dce6', borderRadius: 8,
-              padding: '11px 16px', textDecoration: 'none', color: '#1a2332', fontSize: 13, fontWeight: 600,
+              background: '#fff', border: '1px solid var(--border)', borderRadius: 8,
+              padding: '11px 16px', textDecoration: 'none', color: 'var(--text)', fontSize: 13, fontWeight: 600,
             }}>
               Section {next.numeral.toUpperCase()} &rarr;
             </Link>

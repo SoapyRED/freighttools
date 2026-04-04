@@ -23,7 +23,7 @@ export default function AdrChanges2025Page() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           ADR 2025: What Changed — <span style={{ color: '#e87722' }}>Key Changes Summary</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 600, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 600, margin: '0 auto' }}>
           The ADR 2025 edition entered into force on 1 January 2025, with a mandatory transition date of 1 July 2025.
           Here are the key practical changes for transport operators and freight professionals.
         </p>
@@ -33,10 +33,10 @@ export default function AdrChanges2025Page() {
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* Breadcrumb */}
-        <nav style={{ marginBottom: 28, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-          <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+        <nav style={{ marginBottom: 28, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+          <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
           <span style={{ margin: '0 8px' }}>›</span>
-          <Link href="/adr" style={{ color: '#8f9ab0', textDecoration: 'none' }}>ADR Lookup</Link>
+          <Link href="/adr" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>ADR Lookup</Link>
           <span style={{ margin: '0 8px' }}>›</span>
           <span style={{ color: '#e87722' }}>ADR 2025 Changes</span>
         </nav>

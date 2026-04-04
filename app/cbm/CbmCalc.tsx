@@ -27,7 +27,7 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 700,
   textTransform: 'uppercase',
   letterSpacing: '0.4px',
-  color: '#5a6478',
+  color: 'var(--text-muted)',
   marginBottom: 6,
   display: 'block',
 };
@@ -145,7 +145,7 @@ export default function CbmCalc({
     <div>
       {/* Inputs */}
       <div style={{
-        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 20,
       }}>
         <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -160,7 +160,7 @@ export default function CbmCalc({
             <Field label="Pieces" id="cbm-p" value={pcs}    onChange={setPcs}    placeholder="1" />
           </div>
           {lockedDims && (
-            <p style={{ fontSize: 13, color: '#8f9ab0', margin: 0 }}>
+            <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: 0 }}>
               Dimensions are pre-filled from the container spec. Adjust <strong>Pieces</strong> to calculate how many units fill this container.
             </p>
           )}
@@ -169,7 +169,7 @@ export default function CbmCalc({
 
       {/* Results */}
       <div style={{
-        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
       }}>
         <div style={{ background: '#243044', padding: '14px 24px' }}>
@@ -177,22 +177,22 @@ export default function CbmCalc({
         </div>
 
         {!result ? (
-          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#8f9ab0', fontSize: 14 }}>
+          <div style={{ padding: '40px 24px', textAlign: 'center', color: 'var(--text-faint)', fontSize: 14 }}>
             Enter dimensions and pieces above to calculate
           </div>
         ) : (
           <>
             {/* Total CBM hero */}
             <div style={{ padding: '28px 24px 20px', textAlign: 'center', borderBottom: '1px solid #eef0f4' }}>
-              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#8f9ab0', marginBottom: 8 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
                 Total Volume
               </div>
-              <div style={{ fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: '#1a2332', lineHeight: 1, letterSpacing: '-2px' }}>
+              <div style={{ fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: 'var(--text)', lineHeight: 1, letterSpacing: '-2px' }}>
                 {result.totalCbm.toFixed(4)}
-                <span style={{ fontSize: 22, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> m³</span>
+                <span style={{ fontSize: 22, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: 0 }}> m³</span>
               </div>
               {result.pieces > 1 && (
-                <div style={{ marginTop: 10, fontSize: 13, color: '#8f9ab0' }}>
+                <div style={{ marginTop: 10, fontSize: 13, color: 'var(--text-faint)' }}>
                   {result.cbmPerPiece.toFixed(4)} m³ per piece × {result.pieces} pieces
                 </div>
               )}
@@ -202,10 +202,10 @@ export default function CbmCalc({
             {capacityCbm && utilisationPct !== null && (
               <div style={{ padding: '18px 24px', borderBottom: '1px solid #eef0f4' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 8 }}>
-                  <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#8f9ab0' }}>Container Fill</span>
-                  <span style={{ fontSize: 20, fontWeight: 800, color: '#1a2332' }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--text-faint)' }}>Container Fill</span>
+                  <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--text)' }}>
                     {utilisationPct.toFixed(1)}%
-                    <span style={{ fontSize: 13, fontWeight: 400, color: '#8f9ab0', marginLeft: 4 }}>of {capacityCbm} m³</span>
+                    <span style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-faint)', marginLeft: 4 }}>of {capacityCbm} m³</span>
                   </span>
                 </div>
                 <div style={{ width: '100%', height: 20, background: '#eef0f4', borderRadius: 10, overflow: 'hidden' }}>
@@ -221,7 +221,7 @@ export default function CbmCalc({
                     transition: 'width 0.35s cubic-bezier(0.4,0,0.2,1)',
                   }} />
                 </div>
-                <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 6 }}>
+                <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 6 }}>
                   {utilisationPct >= 100
                     ? 'Exceeds container capacity — reduce pieces or use a larger container.'
                     : utilisationPct >= 80
@@ -240,9 +240,9 @@ export default function CbmCalc({
                 { label: 'Cubic Inches',   value: `${result.cubicInches.toLocaleString('en-GB')} in³`, sub: '1 m³ = 61,023.7 in³' },
               ].map(cell => (
                 <div key={cell.label} style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>{cell.label}</div>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>{cell.value}</div>
-                  <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>{cell.sub}</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>{cell.label}</div>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)' }}>{cell.value}</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 2 }}>{cell.sub}</div>
                 </div>
               ))}
             </div>
@@ -254,21 +254,21 @@ export default function CbmCalc({
       <div style={{ marginTop: 20, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <Link href="/chargeable-weight" style={{
           flex: 1, minWidth: 200,
-          background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 10,
+          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
           padding: '14px 18px', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 4,
         }}>
           <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722' }}>Air Freight?</span>
-          <span style={{ fontSize: 14, fontWeight: 600, color: '#1a2332' }}>Calculate Chargeable Weight →</span>
-          <span style={{ fontSize: 12, color: '#8f9ab0' }}>Volumetric vs actual weight for air cargo</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Calculate Chargeable Weight →</span>
+          <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>Volumetric vs actual weight for air cargo</span>
         </Link>
         <Link href="/ldm" style={{
           flex: 1, minWidth: 200,
-          background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 10,
+          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
           padding: '14px 18px', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 4,
         }}>
           <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722' }}>Road Freight?</span>
-          <span style={{ fontSize: 14, fontWeight: 600, color: '#1a2332' }}>Calculate Loading Metres →</span>
-          <span style={{ fontSize: 12, color: '#8f9ab0' }}>LDM calculator for UK/EU trailers</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Calculate Loading Metres →</span>
+          <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>LDM calculator for UK/EU trailers</span>
         </Link>
       </div>
 

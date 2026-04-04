@@ -28,7 +28,7 @@ export default function ConvertPage() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           Freight Unit <span style={{ color: '#e87722' }}>Converter</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 560, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto' }}>
           Freight-specific conversions Google can&apos;t answer — chargeable weight, freight tonnes, plus all standard weight, volume, and length conversions
         </p>
       </div>
@@ -36,60 +36,60 @@ export default function ConvertPage() {
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* ── Featured Freight Conversions ── */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           Freight-Specific Conversions
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 40 }}>
           {/* CBM → Chargeable Weight */}
           <div style={{
-            background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, padding: '20px 22px',
+            background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
           }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722', marginBottom: 8 }}>
               Air Freight
             </div>
-            <div style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', marginBottom: 6 }}>
+            <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>
               CBM &rarr; Chargeable Weight (kg)
             </div>
-            <p style={{ fontSize: 13, color: '#5a6478', lineHeight: 1.6, marginBottom: 10 }}>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 10 }}>
               IATA volumetric: 1 CBM = 166.67 kg (divisor 6000). The higher of actual weight vs volumetric weight is chargeable.
             </p>
-            <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#1a2332', background: '#f7f8fa', padding: '6px 12px', borderRadius: 6 }}>
+            <div style={{ fontFamily: 'monospace', fontSize: 13, color: 'var(--text)', background: 'var(--bg)', padding: '6px 12px', borderRadius: 6 }}>
               1 CBM &times; 166.67 = 166.67 kg
             </div>
           </div>
 
           {/* CBM → Freight Tonnes */}
           <div style={{
-            background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, padding: '20px 22px',
+            background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
           }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722', marginBottom: 8 }}>
               Sea Freight
             </div>
-            <div style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', marginBottom: 6 }}>
+            <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>
               CBM &rarr; Freight Tonnes (W/M)
             </div>
-            <p style={{ fontSize: 13, color: '#5a6478', lineHeight: 1.6, marginBottom: 10 }}>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 10 }}>
               W/M rule: 1 CBM = 1 freight tonne (revenue tonne). Carrier charges whichever is greater — 1 CBM or 1,000 kg.
             </p>
-            <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#1a2332', background: '#f7f8fa', padding: '6px 12px', borderRadius: 6 }}>
+            <div style={{ fontFamily: 'monospace', fontSize: 13, color: 'var(--text)', background: 'var(--bg)', padding: '6px 12px', borderRadius: 6 }}>
               1 CBM &times; 1 = 1 freight tonne
             </div>
           </div>
 
           {/* Actual vs Volumetric */}
           <div style={{
-            background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, padding: '20px 22px',
+            background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
           }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722', marginBottom: 8 }}>
               Chargeable Weight
             </div>
-            <div style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', marginBottom: 6 }}>
+            <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>
               Actual vs Volumetric Weight
             </div>
-            <p style={{ fontSize: 13, color: '#5a6478', lineHeight: 1.6, marginBottom: 10 }}>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 10 }}>
               Air carriers charge on whichever is higher. Use our dedicated calculator for multi-piece shipments with different dimensions.
             </p>
             <Link href="/chargeable-weight" style={{
@@ -101,7 +101,7 @@ export default function ConvertPage() {
         </div>
 
         {/* Interactive converter */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           Convert Any Unit
         </h2>
         <ConvertTool defaultFrom="cbm" defaultTo="chargeable_kg" />
@@ -109,7 +109,7 @@ export default function ConvertPage() {
         {/* ── Reference Tables ── */}
 
         {/* Weight Conversions */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, marginTop: 48, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, marginTop: 48, letterSpacing: '-0.3px' }}>
           Weight Conversions
         </h2>
         <div className="ref-table-wrap" style={{ marginBottom: 32 }}>
@@ -141,7 +141,7 @@ export default function ConvertPage() {
         </div>
 
         {/* Volume Conversions */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           Volume Conversions
         </h2>
         <div className="ref-table-wrap" style={{ marginBottom: 32 }}>
@@ -172,7 +172,7 @@ export default function ConvertPage() {
         </div>
 
         {/* Length Conversions */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           Length Conversions
         </h2>
         <div className="ref-table-wrap" style={{ marginBottom: 32 }}>
@@ -205,43 +205,43 @@ export default function ConvertPage() {
         {/* ── Authority Content ── */}
         <div style={{ marginTop: 56 }}>
 
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
             Understanding Chargeable Weight
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Air freight carriers charge on whichever is higher: actual gross weight or volumetric weight. Volumetric weight is calculated by dividing the cubic centimetre volume by a divisor (6,000 for IATA standard, 5,000 for express couriers). Light, bulky cargo always pays on volume. Use our{' '}
             <Link href="/chargeable-weight" style={{ color: '#e87722', textDecoration: 'underline' }}>chargeable weight calculator</Link>{' '}
             for multi-piece shipments.
           </p>
 
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             The W/M Rule in Sea Freight
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Ocean carriers price per &ldquo;freight tonne&rdquo; (revenue tonne) using the W/M rule — <strong>W</strong>eight or <strong>M</strong>easurement, whichever yields higher revenue. 1 freight tonne = 1 CBM or 1,000 kg. A 2 CBM shipment weighing 500 kg pays for 2 freight tonnes (volume-based). A 0.5 CBM shipment weighing 2,000 kg pays for 2 freight tonnes (weight-based). Use our{' '}
             <Link href="/cbm" style={{ color: '#e87722', textDecoration: 'underline' }}>CBM calculator</Link>{' '}
             to get the volume side.
           </p>
 
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Metric vs Imperial in Global Freight
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             European and Asian trade uses metric (kg, cm, CBM). The US uses imperial (lbs, inches, cubic feet). Sea freight quotes in CBM and metric tonnes; US domestic trucking quotes in lbs and cubic feet. Mismatched units cause quoting errors, customs holds, and carrier surcharges.
           </p>
 
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Common Freight Conversion Mistakes
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>Short tons vs long tons vs metric tonnes</strong> — Short tons (2,000 lbs / 907 kg) are used in US domestic freight. Long tons (2,240 lbs / 1,016 kg) appear in UK bulk commodities. Metric tonnes (2,204 lbs / 1,000 kg) are the international standard. Confusing these causes billing disputes of 10% or more.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>US gallons vs UK imperial gallons</strong> — A US gallon is 3.785 litres; a UK imperial gallon is 4.546 litres. When shipping liquids, always confirm which gallon your trading partner means.
           </p>
 
           {/* FAQ */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Frequently Asked Questions
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
@@ -321,7 +321,7 @@ export default function ConvertPage() {
         </div>
 
         {/* Disclaimer */}
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>
           Conversion factors are standard mathematical constants. Freight-specific calculations use IATA standard divisor (6000). Always verify unit requirements with your carrier or customs authority.
         </p>
 

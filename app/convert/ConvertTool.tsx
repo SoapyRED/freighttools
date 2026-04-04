@@ -24,7 +24,7 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 700,
   textTransform: 'uppercase',
   letterSpacing: '0.4px',
-  color: '#5a6478',
+  color: 'var(--text-muted)',
   marginBottom: 6,
   display: 'block',
 };
@@ -130,7 +130,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
     <div>
       {/* Inputs card */}
       <div style={{
-        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 20,
       }}>
         <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -200,7 +200,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
                 justifyContent: 'center',
                 cursor: 'pointer',
                 fontSize: 20,
-                color: '#5a6478',
+                color: 'var(--text-muted)',
                 transition: 'border-color 0.15s, background 0.15s',
                 flexShrink: 0,
                 marginBottom: 0,
@@ -241,7 +241,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
 
       {/* Result card */}
       <div style={{
-        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
       }}>
         <div style={{ background: '#243044', padding: '14px 24px' }}>
@@ -254,20 +254,20 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
           </div>
         ) : (
           <div style={{ padding: '28px 24px', textAlign: 'center' }}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#8f9ab0', marginBottom: 8 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
               {result.input.name} &rarr; {result.result.name}
             </div>
-            <div style={{ fontSize: 'clamp(40px, 10vw, 64px)', fontWeight: 800, color: '#1a2332', lineHeight: 1, letterSpacing: '-2px' }}>
+            <div style={{ fontSize: 'clamp(40px, 10vw, 64px)', fontWeight: 800, color: 'var(--text)', lineHeight: 1, letterSpacing: '-2px' }}>
               {formatResult(result.result.value)}
-              <span style={{ fontSize: 22, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> {UNITS[to]?.symbol ?? FREIGHT_UNITS.find(u => u.code === to)?.symbol ?? ''}</span>
+              <span style={{ fontSize: 22, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: 0 }}> {UNITS[to]?.symbol ?? FREIGHT_UNITS.find(u => u.code === to)?.symbol ?? ''}</span>
             </div>
-            <div style={{ marginTop: 14, fontSize: 14, color: '#5a6478', fontFamily: 'monospace', background: 'var(--bg)', display: 'inline-block', padding: '6px 14px', borderRadius: 6 }}>
+            <div style={{ marginTop: 14, fontSize: 14, color: 'var(--text-muted)', fontFamily: 'monospace', background: 'var(--bg)', display: 'inline-block', padding: '6px 14px', borderRadius: 6 }}>
               {result.formula}
             </div>
             {(() => {
               const r = result as unknown as Record<string, unknown>;
               return 'note' in r && r.note ? (
-                <p style={{ marginTop: 12, fontSize: 13, color: '#5a6478', lineHeight: 1.6, maxWidth: 500, marginLeft: 'auto', marginRight: 'auto' }}>
+                <p style={{ marginTop: 12, fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 500, marginLeft: 'auto', marginRight: 'auto' }}>
                   {String(r.note)}
                 </p>
               ) : null;

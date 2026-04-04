@@ -105,7 +105,7 @@ export default function ConsignmentCalc() {
       <div style={card}>
         <div style={cardHead}>
           <span>Consignment Items</span>
-          <span style={{ fontSize: 12, fontWeight: 400, color: '#8f9ab0' }}>{rows.length} item{rows.length !== 1 ? 's' : ''}</span>
+          <span style={{ fontSize: 12, fontWeight: 400, color: 'var(--text-faint)' }}>{rows.length} item{rows.length !== 1 ? 's' : ''}</span>
         </div>
         <div style={{ padding: 16 }}>
           {rows.map((row, idx) => (
@@ -181,7 +181,7 @@ export default function ConsignmentCalc() {
           <div style={card}>
             <div style={cardHead}>
               <span>Consignment Totals</span>
-              <span style={{ fontSize: 12, fontWeight: 400, color: '#8f9ab0' }}>
+              <span style={{ fontSize: 12, fontWeight: 400, color: 'var(--text-faint)' }}>
                 {result.totals.itemCount} line{result.totals.itemCount !== 1 ? 's' : ''} &middot; {result.totals.pieceCount} piece{result.totals.pieceCount !== 1 ? 's' : ''}
               </span>
             </div>

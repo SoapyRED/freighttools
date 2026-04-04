@@ -88,7 +88,7 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
 
       <div style={{
         position: 'absolute', top: '100%', left: 0,
-        background: '#1a2332', border: '1px solid #2d3a4d',
+        background: '#1a2332', border: '1px solid var(--navy-border)',
         borderRadius: 8, padding: '6px 0', minWidth: 210,
         zIndex: 100, boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
         opacity: isOpen ? 1 : 0,

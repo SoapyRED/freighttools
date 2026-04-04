@@ -438,14 +438,28 @@ button:active:not(:disabled) { transform: scale(0.98); }
 }
 
 /* ─── Brand logo hover ──────────────────────────────────────────── */
-@keyframes brand-spin {
+@keyframes brand-spin-continuous {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes brand-spin-decel {
   0%   { transform: rotate(0deg); }
-  50%  { transform: rotate(300deg); }
+  30%  { transform: rotate(180deg); }
   100% { transform: rotate(360deg); }
 }
 
+.brand-slash {
+  animation: none;
+}
+
 .brand-link:hover .brand-slash {
-  animation: brand-spin 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) 1;
+  animation: brand-spin-continuous 0.4s linear infinite;
+}
+
+/* When not hovered, play deceleration once then stop */
+.brand-link:not(:hover) .brand-slash.was-spinning {
+  animation: brand-spin-decel 1s cubic-bezier(0.2, 0.8, 0.2, 1) 1 forwards;
 }
 
 /* ─── Announcement banner ───────────────────────────────────────── */

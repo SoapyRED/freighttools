@@ -33,7 +33,7 @@ export default function AirlinesPage() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           Airline Codes &amp; AWB Prefix <span style={{ color: '#e87722' }}>Lookup</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 560, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto' }}>
           Search {AIRLINE_COUNT.toLocaleString()} airlines by name, IATA code, ICAO code, or AWB prefix — free, instant, no signup
         </p>
       </div>
@@ -84,21 +84,21 @@ export default function AirlinesPage() {
         <div style={{ marginTop: 56 }}>
 
           {/* Section 1: What Are Airline AWB Prefixes? */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
             What Are Airline AWB Prefixes?
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             An Air Waybill (AWB) prefix is a three-digit code assigned by IATA to each airline that carries cargo. It forms the first three digits of every air waybill number and uniquely identifies the issuing carrier. For example, an AWB starting with 176 identifies an Emirates shipment, while 020 is Lufthansa Cargo.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             When a freight forwarder or shipper books air cargo, the AWB prefix is essential for tracking, documentation, and carrier identification. Knowing the prefix allows operations teams to quickly identify which airline is carrying a shipment from the AWB number alone.
           </p>
 
           {/* Section 2: Understanding Airline Codes */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Understanding Airline Codes
           </h2>
-          <div className="ref-table-wrap" style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 16 }}>
+          <div className="ref-table-wrap" style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table className="ref-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -125,12 +125,12 @@ export default function AirlinesPage() {
               </tbody>
             </table>
           </div>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Airlines are identified by several different code systems, each serving a distinct purpose. <strong>IATA codes</strong> are two-letter designators used commercially — they appear on tickets, booking systems, and timetables. <strong>ICAO codes</strong> are three-letter designators used in air traffic control, flight plans, and operational contexts. The <strong>AWB prefix</strong> is specific to cargo operations and forms the first three digits of every air waybill number. <strong>Callsigns</strong> are used in radio communication between pilots and air traffic controllers.
           </p>
 
           {/* Section 3: FAQ */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Frequently Asked Questions
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
@@ -179,7 +179,7 @@ export default function AirlinesPage() {
         <AdUnit format="auto" />
 
         {/* Disclaimer */}
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>
           Data compiled from public aviation sources. Airline codes and AWB prefixes may change — always verify with the carrier for critical shipments. Last updated April 2026.
         </p>
 

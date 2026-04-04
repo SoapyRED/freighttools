@@ -13,7 +13,7 @@ const s = {
   hero: { background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' as const },
   h1: { fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 800, color: '#fff', marginBottom: 12 },
   sectionTitle: { fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.3px', marginTop: 40 } as React.CSSProperties,
-  card: { background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, overflow: 'hidden', marginBottom: 32, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as React.CSSProperties,
+  card: { background: '#fff', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden', marginBottom: 32, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as React.CSSProperties,
   endpointHeader: { background: '#1a2332', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 12 } as React.CSSProperties,
 };
 
@@ -34,7 +34,7 @@ export default function ApiDocsPage() {
       />
       <div style={s.hero}>
         <h1 style={s.h1}>API <span style={{ color: '#e87722' }}>Documentation</span></h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 500, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 500, margin: '0 auto' }}>
           All FreightUtils calculators are available as free, open REST API endpoints
         </p>
         <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
@@ -73,14 +73,14 @@ export default function ApiDocsPage() {
         >
           &#128229; Download Postman Collection
         </a>
-        <p style={{ fontSize: 13, color: '#5a6478', marginBottom: 32, lineHeight: 1.6, marginTop: -16 }}>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 32, lineHeight: 1.6, marginTop: -16 }}>
           Compatible with Swagger, Postman, and RapidAPI import
         </p>
 
         {/* Overview */}
         <div style={{ marginBottom: 40 }}>
           <h2 style={s.sectionTitle}>Overview</h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
             The FreightUtils API is a free, stateless REST API. Every calculator on this site has a corresponding API endpoint.
             No authentication is required. Responses are JSON. CORS is enabled for all origins.
           </p>
@@ -104,7 +104,7 @@ export default function ApiDocsPage() {
         {/* Reliability & Support */}
         <div style={{ marginBottom: 40 }}>
           <h2 style={s.sectionTitle}>Reliability &amp; Support</h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
             FreightUtils APIs are hosted on Vercel&apos;s global edge network with automatic SSL and CDN caching.
           </p>
           <div style={{
@@ -117,13 +117,13 @@ export default function ApiDocsPage() {
               { label: 'Versioning', value: 'Reference endpoints (ADR, HS, airlines) include a meta object with data source and edition information. Breaking changes will be announced via the API docs page.' },
             ].map(item => (
               <div key={item.label} style={{
-                background: '#f7f8fa', border: '1px solid #d8dce6', borderRadius: 8,
+                background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8,
                 padding: '14px 16px',
               }}>
-                <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#8f9ab0', marginBottom: 4 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--text-faint)', marginBottom: 4 }}>
                   {item.label}
                 </div>
-                <div style={{ fontSize: 14, color: '#5a6478', lineHeight: 1.5 }}>
+                <div style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.5 }}>
                   {item.value}
                 </div>
               </div>
@@ -134,18 +134,18 @@ export default function ApiDocsPage() {
             display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16,
           }}>
             <div>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>
                 Open Access Tier
               </div>
-              <div style={{ fontSize: 14, color: '#c9cdd6', lineHeight: 1.5 }}>
+              <div style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.5 }}>
                 No authentication required. Courtesy rate limit of 100 requests per day per IP.
               </div>
             </div>
             <div>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>
                 Commercial Access
               </div>
-              <div style={{ fontSize: 14, color: '#c9cdd6', lineHeight: 1.5 }}>
+              <div style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.5 }}>
                 For production integrations with higher limits, subscribe via{' '}
                 <a href="https://rapidapi.com/freightutils" style={{ color: '#e87722', textDecoration: 'underline' }}>RapidAPI</a>{' '}
                 or <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact us directly</a>.
@@ -157,25 +157,25 @@ export default function ApiDocsPage() {
         {/* MCP Server */}
         <div id="mcp" style={{ marginBottom: 40 }}>
           <h2 style={s.sectionTitle}>MCP Server — AI Agent Integration</h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
             FreightUtils is available as a <strong>Model Context Protocol (MCP) server</strong>, giving
             AI agents direct access to all 11 freight calculation and reference tools. The first and only freight MCP server.
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
-            <div style={{ background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 10, padding: 20 }}>
-              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 8 }}>Install via npm</div>
+            <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 10, padding: 20 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 8 }}>Install via npm</div>
               <CopyableCode code="npx freightutils-mcp" />
             </div>
-            <div style={{ background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 10, padding: 20 }}>
-              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 8 }}>Or connect via URL</div>
+            <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 10, padding: 20 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 8 }}>Or connect via URL</div>
               <CopyableCode code="https://www.freightutils.com/api/mcp/mcp" />
             </div>
           </div>
 
           <div style={{ background: '#1a2332', borderRadius: 10, padding: 20, marginBottom: 20 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 12 }}>Claude Desktop Configuration</div>
-            <div style={{ fontSize: 13, color: '#c9cdd6', marginBottom: 8 }}>Add to your <code style={{ background: '#2a3442', padding: '2px 6px', borderRadius: 4, fontSize: 12 }}>claude_desktop_config.json</code>:</div>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 12 }}>Claude Desktop Configuration</div>
+            <div style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 8 }}>Add to your <code style={{ background: '#2a3442', padding: '2px 6px', borderRadius: 4, fontSize: 12 }}>claude_desktop_config.json</code>:</div>
             <CopyableCode code={`{
   "mcpServers": {
     "freightutils": {
@@ -186,8 +186,8 @@ export default function ApiDocsPage() {
 }`} />
           </div>
 
-          <div style={{ background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 10, padding: 20, marginBottom: 20 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 12 }}>What AI agents can do</div>
+          <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 10, padding: 20, marginBottom: 20 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 12 }}>What AI agents can do</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {[
                 'Calculate loading metres for 20 Euro pallets on an artic trailer',
@@ -203,7 +203,7 @@ export default function ApiDocsPage() {
             </div>
           </div>
 
-          <p style={{ fontSize: 13, color: '#8f9ab0' }}>
+          <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
             View on npm:{' '}
             <a href="https://www.npmjs.com/package/freightutils-mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>npmjs.com/package/freightutils-mcp</a>
             {' '}&middot;{' '}
@@ -222,14 +222,14 @@ export default function ApiDocsPage() {
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/ldm</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Loading Metres Calculator</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Loading Metres Calculator</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Calculate the loading metres (LDM) required for a consignment on a UK/EU road freight trailer.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Parameters</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -308,26 +308,26 @@ export default function ApiDocsPage() {
                 </tbody>
               </table>
             </div>
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 20 }}>* Either <code>pallet</code> (preset ID) <strong>or</strong> both <code>length</code> and <code>width</code> must be provided.</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 20 }}>* Either <code>pallet</code> (preset ID) <strong>or</strong> both <code>length</code> and <code>width</code> must be provided.</p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>12 Euro pallets on an artic:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>12 Euro pallets on an artic:</p>
             <div className="code-block" style={{ marginBottom: 16 }}>
               GET /api/ldm?pallet=euro&qty=12&vehicle=artic
             </div>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Custom dimensions, stackable, with weight check:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Custom dimensions, stackable, with weight check:</p>
             <div className="code-block" style={{ marginBottom: 16 }}>
               GET /api/ldm?length=1200&width=1000&qty=5&stackable=true&stack=2&weight=300&vehicle=rigid10
             </div>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>cURL example:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>cURL example:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=12&vehicle=artic"'} style={{ marginBottom: 16 }} />
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>US 53ft trailer:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>US 53ft trailer:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=20&vehicle=us53"'} style={{ marginBottom: 24 }} />
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Response</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Response</h3>
             <JsonBlock json={`{
   "ldm": 4.8,
   "vehicle": {
@@ -363,15 +363,15 @@ export default function ApiDocsPage() {
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/cbm</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Cubic Metres Calculator</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Cubic Metres Calculator</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Calculate the cubic metre (CBM) volume of a shipment. Returns total CBM plus equivalents
               in cubic feet, litres, and cubic inches.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Parameters</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -416,8 +416,8 @@ export default function ApiDocsPage() {
               </table>
             </div>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>5 boxes, 120×80×100 cm each:</p>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Request</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>5 boxes, 120×80×100 cm each:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/cbm?l=120&w=80&h=100&pcs=5"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "cbm_per_piece": 0.96,
@@ -444,15 +444,15 @@ export default function ApiDocsPage() {
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/chargeable-weight</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Air Freight Chargeable Weight</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Air Freight Chargeable Weight</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Calculate air freight chargeable weight — whichever is higher between actual gross weight
               and volumetric (dimensional) weight. Supports custom volumetric factors for all carriers.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Parameters</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -511,8 +511,8 @@ export default function ApiDocsPage() {
               </table>
             </div>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>2 pieces, 120×80×100 cm, 500 kg total, IATA factor:</p>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Request</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>2 pieces, 120×80×100 cm, 500 kg total, IATA factor:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/chargeable-weight?l=120&w=80&h=100&gw=500&pcs=2&factor=6000"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "chargeable_weight_kg": 500,
@@ -543,16 +543,16 @@ export default function ApiDocsPage() {
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/pallet</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Pallet Box Fitting Calculator</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Pallet Box Fitting Calculator</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Calculate how many boxes fit on a pallet using a layer-based algorithm. Returns boxes per
               layer, number of layers, total boxes, orientation used, and volume/weight analysis.
               Optional weight constraint caps the result at the pallet&apos;s maximum payload.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Parameters</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -639,7 +639,7 @@ export default function ApiDocsPage() {
               </table>
             </div>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Request</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Request</h3>
             <CopyableCode code={'curl "https://www.freightutils.com/api/pallet?pl=120&pw=80&pmh=220&bl=40&bw=30&bh=25&bwt=5&mpw=1500"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "boxes_per_layer": 8,
@@ -674,16 +674,16 @@ export default function ApiDocsPage() {
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>ADR 2025 Dangerous Goods Lookup</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>ADR 2025 Dangerous Goods Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Look up ADR 2025 dangerous goods by UN number, search by substance name, or filter by hazard class.
               The dataset contains 2,939 entries from the ADR 2025 Dangerous Goods List (Table A).
               Responses are cached for 1 hour (<code>s-maxage=3600</code>).
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Query Modes</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Query Modes</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -716,13 +716,13 @@ export default function ApiDocsPage() {
                 </tbody>
               </table>
             </div>
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 24 }}>
               Provide exactly one parameter per request. Omitting all parameters returns a 400 with usage hints.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Exact UN number lookup:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Exact UN number lookup:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/adr?un=1203"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "count": 1,
@@ -751,11 +751,11 @@ export default function ApiDocsPage() {
   }
 }`} style={{ marginBottom: 20 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Search by substance name:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Search by substance name:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/adr?search=acetone"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{ "count": 3, "results": [ ... ] }`} style={{ marginBottom: 20 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Filter by hazard class:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Filter by hazard class:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/adr?class=3"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{ "count": 50, "results": [ ... ] }`} />
           </div>
@@ -767,16 +767,16 @@ export default function ApiDocsPage() {
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace', marginLeft: -4 }}>POST</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr-calculator</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>ADR 1.1.3.6 Exemption Calculator</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>ADR 1.1.3.6 Exemption Calculator</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Calculate whether the ADR 1.1.3.6 small load exemption applies to a dangerous goods consignment.
               Supports single-substance GET queries and multi-substance POST requests. Checks both total points
               threshold (1,000) and per-substance quantity limits per ADR 1.1.3.6.3.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>GET — Single Substance</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>GET — Single Substance</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -794,7 +794,7 @@ export default function ApiDocsPage() {
               </table>
             </div>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Example — 200 litres of petrol:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Example — 200 litres of petrol:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/adr-calculator?un=1203&qty=200"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "items": [
@@ -817,8 +817,8 @@ export default function ApiDocsPage() {
   "message": "1.1.3.6 exemption applies"
 }`} style={{ marginBottom: 24 }} />
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>POST — Multi-Substance Load</h3>
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Request body:</p>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>POST — Multi-Substance Load</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Request body:</p>
             <div className="code-block" style={{ marginBottom: 6 }}>
               {`POST /api/adr-calculator
 Content-Type: application/json
@@ -830,11 +830,11 @@ Content-Type: application/json
   ]
 }`}
             </div>
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 24 }}>
               Response structure is identical to the GET endpoint, with multiple items in the array.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Response Fields</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Response Fields</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 16 }}>
               <table className="ref-table">
                 <thead>
@@ -860,15 +860,15 @@ Content-Type: application/json
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/airlines</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Airline Codes &amp; AWB Prefix Lookup</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Airline Codes &amp; AWB Prefix Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Search airlines by name, IATA code, ICAO code, AWB prefix, or country. The dataset contains
               6,352 airlines including 390 cargo airlines with AWB prefixes.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Query Modes</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Query Modes</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -884,9 +884,9 @@ Content-Type: application/json
               </table>
             </div>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>AWB prefix lookup:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>AWB prefix lookup:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/airlines?prefix=176"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "count": 1,
@@ -911,13 +911,13 @@ Content-Type: application/json
   }
 }`} style={{ marginBottom: 20 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>IATA code lookup:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>IATA code lookup:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/airlines?iata=EK"'} style={{ marginBottom: 20 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Name search:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Name search:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/airlines?q=emirates"'} style={{ marginBottom: 24 }} />
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Response Fields</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Response Fields</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 16 }}>
               <table className="ref-table">
                 <thead>
@@ -945,16 +945,16 @@ Content-Type: application/json
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/incoterms</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>INCOTERMS 2020 Lookup</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>INCOTERMS 2020 Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Look up INCOTERMS 2020 trade terms. Returns all 11 terms by default, or filter by code
               or transport category. Each term includes seller/buyer responsibilities, risk and cost
               transfer points, insurance obligations, and practical guidance.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Parameters</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -978,13 +978,13 @@ Content-Type: application/json
                 </tbody>
               </table>
             </div>
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 24 }}>
               Omit all parameters to return all 11 INCOTERMS 2020 terms.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Single term lookup:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Single term lookup:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/incoterms?code=FOB"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "code": "FOB",
@@ -1003,10 +1003,10 @@ Content-Type: application/json
   "watch_out": "Sea and inland waterway ONLY. Despite being widely used, FOB is technically incorrect for containerised cargo..."
 }`} style={{ marginBottom: 20 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Filter by transport category:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Filter by transport category:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/incoterms?category=sea_only"'} style={{ marginBottom: 20 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>All terms:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>All terms:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/incoterms"'} />
           </div>
         </div>
@@ -1016,15 +1016,15 @@ Content-Type: application/json
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/containers</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Container Capacity Reference</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Container Capacity Reference</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Shipping container specifications — internal/external dimensions, weights, door openings, and pallet
               capacity for all 10 standard ISO container types. Optionally calculate how many items fit in a specific container.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Query Modes</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Query Modes</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -1076,15 +1076,15 @@ Content-Type: application/json
               </table>
             </div>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>List all containers:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>List all containers:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/containers"'} style={{ marginBottom: 16 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Single container specs:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Single container specs:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/containers?type=40ft-high-cube"'} style={{ marginBottom: 16 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Loading calculation — how many 60×40×40cm boxes fit in a 40ft HC:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Loading calculation — how many 60×40×40cm boxes fit in a 40ft HC:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/containers?type=40ft-high-cube&l=60&w=40&h=40&wt=15&qty=500"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "container": { "name": "40ft High Cube", "slug": "40ft-high-cube", ... },
@@ -1108,15 +1108,15 @@ Content-Type: application/json
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/convert</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>Unit Converter</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Unit Converter</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Convert between freight-relevant units — weights, volumes, lengths, and freight-specific conversions
               (CBM to chargeable weight, CBM to freight tonnes).
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Parameters</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Parameters</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -1150,7 +1150,7 @@ Content-Type: application/json
               </table>
             </div>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Supported Unit Codes</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Supported Unit Codes</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -1165,9 +1165,9 @@ Content-Type: application/json
               </table>
             </div>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Standard conversion:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Standard conversion:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/convert?value=100&from=kg&to=lbs"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "input": { "value": 100, "unit": "kg", "name": "Kilograms" },
@@ -1175,7 +1175,7 @@ Content-Type: application/json
   "formula": "Kilograms × 2.204624 = Pounds"
 }`} style={{ marginBottom: 16 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>CBM to chargeable weight (IATA 6000 divisor):</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>CBM to chargeable weight (IATA 6000 divisor):</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/convert?value=10&from=cbm&to=chargeable_kg"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "input": { "value": 10, "unit": "cbm", "name": "Cubic Metres" },
@@ -1184,7 +1184,7 @@ Content-Type: application/json
   "note": "IATA volumetric weight: 1 CBM = 166.67 kg (divisor 6000)..."
 }`} style={{ marginBottom: 16 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>CBM to freight tonnes (W/M rule):</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>CBM to freight tonnes (W/M rule):</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/convert?value=5&from=cbm&to=freight_tonnes"'} />
           </div>
         </div>
@@ -1194,16 +1194,16 @@ Content-Type: application/json
           <div style={s.endpointHeader}>
             <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
             <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/hs</span>
-            <span style={{ color: '#8f9ab0', fontSize: 13, marginLeft: 'auto' }}>HS Code Lookup</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>HS Code Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Search and browse Harmonized System (HS 2022) commodity codes. Supports text search by product
               description, exact code lookup with ancestor chain, and section browsing. Covers all 6,940 codes
               across 21 sections and 97 chapters.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Query Modes</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Query Modes</h3>
             <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
               <table className="ref-table">
                 <thead>
@@ -1236,13 +1236,13 @@ Content-Type: application/json
                 </tbody>
               </table>
             </div>
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 24 }}>
               Provide exactly one parameter per request. Omitting all parameters returns a 400 with usage hints.
             </p>
 
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1a2332', marginBottom: 12 }}>Example Requests</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Search by description:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Search by description:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/hs?q=coffee"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "query": "coffee",
@@ -1258,7 +1258,7 @@ Content-Type: application/json
   "count": 12
 }`} style={{ marginBottom: 20 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Code lookup with ancestors:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Code lookup with ancestors:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/hs?code=090111"'} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "hscode": "090111",
@@ -1274,7 +1274,7 @@ Content-Type: application/json
   "sectionName": "Vegetable products"
 }`} style={{ marginBottom: 20 }} />
 
-            <p style={{ color: '#5a6478', fontSize: 13, marginBottom: 6 }}>Browse section:</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Browse section:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/hs?section=II"'} />
           </div>
         </div>
@@ -1298,7 +1298,7 @@ Content-Type: application/json
 
         {/* Field naming */}
         <h2 style={s.sectionTitle}>Field Naming</h2>
-        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>
           Most endpoints use <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>snake_case</code> field names.
           <strong> Note:</strong> The <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>/api/containers</code> endpoint
           uses <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>camelCase</code> field names
@@ -1308,13 +1308,13 @@ Content-Type: application/json
 
         {/* Rate limiting */}
         <h2 style={s.sectionTitle}>Rate Limiting</h2>
-        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
           The API is currently free with a courtesy limit of 100 requests per day per IP address. Excessive usage may result in temporary blocking.
         </p>
 
         {/* Error Responses */}
         <h2 style={s.sectionTitle}>Error Responses</h2>
-        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
           All endpoints return standard HTTP error codes with a descriptive JSON error message:
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
@@ -1323,11 +1323,11 @@ Content-Type: application/json
             { code: '404', label: 'Not Found', desc: 'Resource does not exist', example: '{"error": "No ADR entry found for UN number 9999"}' },
             { code: '500', label: 'Server Error', desc: 'Unexpected error', example: '{"error": "Internal server error"}' },
           ].map(err => (
-            <div key={err.code} style={{ background: '#f7f8fa', border: '1px solid #d8dce6', borderRadius: 8, padding: '14px 18px' }}>
+            <div key={err.code} style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8, padding: '14px 18px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
                 <span style={{ background: err.code === '400' ? '#f59e0b' : err.code === '404' ? '#6b7280' : '#ef4444', color: '#fff', fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 4, fontFamily: 'monospace' }}>{err.code}</span>
-                <span style={{ fontSize: 14, fontWeight: 700, color: '#1a2332' }}>{err.label}</span>
-                <span style={{ fontSize: 13, color: '#5a6478' }}>— {err.desc}</span>
+                <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{err.label}</span>
+                <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>— {err.desc}</span>
               </div>
               <div className="code-block" style={{ marginTop: 6, fontSize: 12 }}>{err.example}</div>
             </div>
@@ -1336,7 +1336,7 @@ Content-Type: application/json
 
         {/* Source & Issues */}
         <h2 style={s.sectionTitle}>Source Code &amp; Issue Reporting</h2>
-        <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
           FreightUtils is open source. Report bugs, request features, or contribute on GitHub:{' '}
           <a href="https://github.com/SoapyRED/freighttools" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>
             github.com/SoapyRED/freighttools

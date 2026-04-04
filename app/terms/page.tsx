@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   robots: 'noindex, follow',
 };
 
-const h2 = { fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 800 as const, color: '#1a2332', margin: '36px 0 12px', letterSpacing: '-0.3px' };
-const p = { color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 };
+const h2 = { fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 800 as const, color: 'var(--text)', margin: '36px 0 12px', letterSpacing: '-0.3px' };
+const p = { color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 };
 
 export default function TermsPage() {
   return (
@@ -17,7 +17,7 @@ export default function TermsPage() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.5px' }}>
           Terms of Service
         </h1>
-        <p style={{ fontSize: 14, color: '#8f9ab0', marginTop: 8 }}>Last updated: April 2026</p>
+        <p style={{ fontSize: 14, color: 'var(--text-faint)', marginTop: 8 }}>Last updated: April 2026</p>
       </div>
 
       <main style={{ maxWidth: 740, margin: '0 auto', padding: '32px 20px 80px' }}>

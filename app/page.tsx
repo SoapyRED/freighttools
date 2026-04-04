@@ -133,7 +133,7 @@ export default function HomePage() {
           <div style={{ fontSize: 13, color: 'var(--text-faint)' }}>
             Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
           </div>
-          <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 14, letterSpacing: '0.2px' }}>
+          <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 14, letterSpacing: '0.2px' }}>
             14 tools &middot; 2,939 ADR entries &middot; 6,940 HS codes &middot; 6,352 airlines &middot; 116K+ locations &middot; OpenAPI 3.0.3 &middot; Updated April 2026
           </div>
         </div>

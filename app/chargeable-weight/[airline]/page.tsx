@@ -81,10 +81,10 @@ export default async function AirlinePage(
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
-          <nav style={{ marginBottom: 16, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+          <nav style={{ marginBottom: 16, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
             <span style={{ margin: '0 8px' }}>›</span>
-            <Link href="/chargeable-weight" style={{ color: '#8f9ab0', textDecoration: 'none' }}>Chargeable Weight</Link>
+            <Link href="/chargeable-weight" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Chargeable Weight</Link>
             <span style={{ margin: '0 8px' }}>›</span>
             <span style={{ color: '#e87722' }}>{data.name}</span>
           </nav>
@@ -152,10 +152,10 @@ export default async function AirlinePage(
 
         {/* Content */}
         <div style={{ marginTop: 48 }}>
-          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#1a2332', marginBottom: 14, letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 14, letterSpacing: '-0.3px' }}>
             How {data.name} Calculates Chargeable Weight
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             {data.name} ({data.iata}) uses a volumetric factor of <strong>{data.factor.toLocaleString()}</strong> to calculate
             dimensional weight. The formula is:
           </p>
@@ -165,13 +165,13 @@ export default async function AirlinePage(
               Chargeable Weight = MAX(Actual Gross Weight, Volumetric Weight)
             </code>
           </div>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             {data.express
               ? `As an express carrier, ${data.name} applies a factor of ${data.factor.toLocaleString()} — which is lower than the IATA standard of 6,000. This means the volumetric weight will be higher relative to the same shipment dimensions, making it more common for volumetric weight to be the chargeable basis.`
               : `${data.name} follows the IATA standard volumetric factor of 6,000, meaning 1 cubic metre (1,000,000 cm³) of cargo is treated as 166.67 kg of chargeable weight. If your shipment weighs less than this, you will be charged on volume.`
             }
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7 }}>
             Always verify the exact rate basis with {data.name} or your freight forwarder before booking,
             as surcharges, fuel levies, and lane-specific tariffs may apply on top of the base chargeable weight rate.
           </p>
@@ -180,8 +180,8 @@ export default async function AirlinePage(
         {/* Back link + API callout */}
         <div style={{ marginTop: 40, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
           <Link href="/chargeable-weight" style={{
-            background: '#fff', border: '1px solid #d8dce6', borderRadius: 8,
-            padding: '10px 18px', textDecoration: 'none', color: '#1a2332',
+            background: '#fff', border: '1px solid var(--border)', borderRadius: 8,
+            padding: '10px 18px', textDecoration: 'none', color: 'var(--text)',
             fontSize: 13, fontWeight: 600,
           }}>
             ← All Airlines

@@ -350,7 +350,7 @@ export default function AdrExemptionCalc({ index }: Props) {
                     <span style={{
                       fontSize: 11,
                       fontWeight: 600,
-                      color: '#8f9ab0',
+                      color: 'var(--text-faint)',
                       flexShrink: 0,
                     }}>
                       {entry.transport_category !== null ? `Cat ${entry.transport_category}` : '—'}
@@ -382,7 +382,7 @@ export default function AdrExemptionCalc({ index }: Props) {
                 }}>
                   UN{selectedEntry.un_number}
                 </span>
-                <span style={{ fontSize: 12, fontWeight: 600, color: '#8f9ab0' }}>
+                <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-faint)' }}>
                   Class {selectedEntry.class}
                 </span>
                 <span style={{
@@ -487,7 +487,7 @@ export default function AdrExemptionCalc({ index }: Props) {
           {loadItems.length === 0 ? (
             <div style={{
               textAlign: 'center',
-              color: '#8f9ab0',
+              color: 'var(--text-faint)',
               fontSize: 14,
               padding: '24px 16px',
             }}>
@@ -597,7 +597,7 @@ export default function AdrExemptionCalc({ index }: Props) {
                       background: 'none',
                       border: '1px solid var(--grey-100, #d8dce6)',
                       borderRadius: 6,
-                      color: '#8f9ab0',
+                      color: 'var(--text-faint)',
                       fontSize: 12,
                       fontWeight: 600,
                       padding: '4px 10px',
@@ -635,7 +635,7 @@ export default function AdrExemptionCalc({ index }: Props) {
         <div style={{ ...cardBodyStyle, textAlign: 'center', padding: '28px 16px' }}>
 
           {loadItems.length === 0 ? (
-            <div style={{ color: '#8f9ab0', fontSize: 15 }}>
+            <div style={{ color: 'var(--text-faint)', fontSize: 15 }}>
               Add substances above to calculate exemption status.
             </div>
           ) : (
@@ -652,7 +652,7 @@ export default function AdrExemptionCalc({ index }: Props) {
                 }}>
                   {totalPoints.toLocaleString(undefined, { maximumFractionDigits: 1 })}
                 </div>
-                <div style={{ fontSize: 13, color: '#8f9ab0', marginTop: 4, fontWeight: 600 }}>
+                <div style={{ fontSize: 13, color: 'var(--text-faint)', marginTop: 4, fontWeight: 600 }}>
                   points out of 1,000
                 </div>
               </div>

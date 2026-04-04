@@ -26,7 +26,7 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 700,
   textTransform: 'uppercase',
   letterSpacing: '0.4px',
-  color: '#5a6478',
+  color: 'var(--text-muted)',
   marginBottom: 6,
   display: 'block',
 };
@@ -232,13 +232,13 @@ export default function PalletFittingCalc({
     <div>
       {/* ── Pallet Dimensions ── */}
       <div style={{
-        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 16,
       }}>
         <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Pallet Dimensions</span>
           {lockedDims && (
-            <span style={{ background: '#2e3d55', color: '#8f9ab0', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Pre-filled</span>
+            <span style={{ background: '#2e3d55', color: 'var(--text-faint)', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Pre-filled</span>
           )}
         </div>
         <div style={{ padding: 24 }}>
@@ -250,7 +250,7 @@ export default function PalletFittingCalc({
             <Field label="Max Weight" id="pl-mw" value={maxWeight} onChange={setMaxWeight} placeholder="optional" unit="kg" readOnly={lockedDims} />
           </div>
           {lockedDims && (
-            <p style={{ fontSize: 13, color: '#8f9ab0', margin: 0 }}>
+            <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: 0 }}>
               Pallet dimensions are pre-filled from the selected pallet type. Adjust <strong>Box Dimensions</strong> below.
             </p>
           )}
@@ -259,7 +259,7 @@ export default function PalletFittingCalc({
 
       {/* ── Box Dimensions ── */}
       <div style={{
-        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 20,
       }}>
         <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -294,9 +294,9 @@ export default function PalletFittingCalc({
                 transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
               }} />
             </button>
-            <span style={{ fontSize: 13, color: '#5a6478', fontWeight: 500 }}>
+            <span style={{ fontSize: 13, color: 'var(--text-muted)', fontWeight: 500 }}>
               Allow 90° rotation of boxes on pallet
-              <span style={{ marginLeft: 6, fontSize: 11, color: '#8f9ab0' }}>
+              <span style={{ marginLeft: 6, fontSize: 11, color: 'var(--text-faint)' }}>
                 ({rotate ? 'on — best orientation selected automatically' : 'off — input orientation only'})
               </span>
             </span>
@@ -306,7 +306,7 @@ export default function PalletFittingCalc({
 
       {/* ── Results ── */}
       <div style={{
-        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
       }}>
         <div style={{ background: '#243044', padding: '14px 24px' }}>
@@ -314,14 +314,14 @@ export default function PalletFittingCalc({
         </div>
 
         {!result ? (
-          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#8f9ab0', fontSize: 14 }}>
+          <div style={{ padding: '40px 24px', textAlign: 'center', color: 'var(--text-faint)', fontSize: 14 }}>
             Enter pallet and box dimensions above to calculate
           </div>
         ) : result.totalBoxes === 0 ? (
           <div style={{ padding: '40px 24px', textAlign: 'center' }}>
             <div style={{ fontSize: 32, marginBottom: 8 }}>⚠️</div>
-            <div style={{ fontWeight: 700, color: '#1a2332', marginBottom: 6 }}>No boxes fit</div>
-            <div style={{ fontSize: 13, color: '#8f9ab0' }}>
+            <div style={{ fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>No boxes fit</div>
+            <div style={{ fontSize: 13, color: 'var(--text-faint)' }}>
               The box is too large for the pallet footprint or height. Try smaller box dimensions.
             </div>
           </div>
@@ -329,7 +329,7 @@ export default function PalletFittingCalc({
           <>
             {/* SVG diagram */}
             <div style={{ padding: '24px 24px 16px', borderBottom: '1px solid #eef0f4' }}>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#8f9ab0', marginBottom: 12, textAlign: 'center' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 12, textAlign: 'center' }}>
                 Top-Down Layer View (1 of {result.layers} layer{result.layers !== 1 ? 's' : ''})
               </div>
               <PalletSvg
@@ -338,11 +338,11 @@ export default function PalletFittingCalc({
                 layout={result.layout}
               />
               <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 10 }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#5a6478' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--text-muted)' }}>
                   <span style={{ width: 12, height: 12, borderRadius: 2, background: '#e87722', display: 'inline-block', opacity: 0.82 }} />
                   Boxes
                 </span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#5a6478' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--text-muted)' }}>
                   <span style={{ width: 12, height: 12, borderRadius: 2, background: '#d8dce6', display: 'inline-block' }} />
                   Unused space
                 </span>
@@ -356,13 +356,13 @@ export default function PalletFittingCalc({
 
             {/* Hero stats */}
             <div style={{ padding: '24px 24px 16px', borderBottom: '1px solid #eef0f4', textAlign: 'center' }}>
-              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#8f9ab0', marginBottom: 8 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
                 Total Boxes on Pallet
               </div>
-              <div style={{ fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: '#1a2332', lineHeight: 1, letterSpacing: '-2px' }}>
+              <div style={{ fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: 'var(--text)', lineHeight: 1, letterSpacing: '-2px' }}>
                 {result.totalBoxes.toLocaleString('en-GB')}
               </div>
-              <div style={{ marginTop: 10, fontSize: 14, color: '#8f9ab0' }}>
+              <div style={{ marginTop: 10, fontSize: 14, color: 'var(--text-faint)' }}>
                 {result.boxesPerLayer} per layer × {result.layers} layer{result.layers !== 1 ? 's' : ''}
                 {result.weightLimited && (
                   <span style={{ marginLeft: 8, background: '#fef3c7', color: '#92400e', fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 20 }}>
@@ -397,9 +397,9 @@ export default function PalletFittingCalc({
                 },
               ].map(cell => (
                 <div key={cell.label} style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>{cell.label}</div>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>{cell.value}</div>
-                  <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>{cell.sub}</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>{cell.label}</div>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)' }}>{cell.value}</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 2 }}>{cell.sub}</div>
                 </div>
               ))}
             </div>
@@ -408,19 +408,19 @@ export default function PalletFittingCalc({
             {result.totalWeightKg != null && (
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#eef0f4', marginTop: 1 }}>
                 <div style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>Total Weight</div>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>{result.totalWeightKg.toLocaleString('en-GB')} kg</div>
-                  <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>Total Weight</div>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)' }}>{result.totalWeightKg.toLocaleString('en-GB')} kg</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 2 }}>
                     {result.weightLimited ? 'Weight-limited result' : 'Within pallet capacity'}
                   </div>
                 </div>
                 {result.remainingWeightCapacityKg != null && (
                   <div style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
-                    <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>Remaining Capacity</div>
+                    <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>Remaining Capacity</div>
                     <div style={{ fontSize: 18, fontWeight: 700, color: result.remainingWeightCapacityKg < 0 ? '#dc2626' : '#1a2332' }}>
                       {result.remainingWeightCapacityKg.toLocaleString('en-GB')} kg
                     </div>
-                    <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>
+                    <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 2 }}>
                       {result.remainingWeightCapacityKg < 0 ? 'Exceeds max weight' : 'before max payload'}
                     </div>
                   </div>
@@ -435,21 +435,21 @@ export default function PalletFittingCalc({
       <div style={{ marginTop: 20, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <Link href="/cbm" style={{
           flex: 1, minWidth: 200,
-          background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 10,
+          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
           padding: '14px 18px', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 4,
         }}>
           <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722' }}>Volume?</span>
-          <span style={{ fontSize: 14, fontWeight: 600, color: '#1a2332' }}>Calculate CBM →</span>
-          <span style={{ fontSize: 12, color: '#8f9ab0' }}>Cubic metres for sea and air freight</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Calculate CBM →</span>
+          <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>Cubic metres for sea and air freight</span>
         </Link>
         <Link href="/ldm" style={{
           flex: 1, minWidth: 200,
-          background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 10,
+          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
           padding: '14px 18px', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 4,
         }}>
           <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722' }}>Road Freight?</span>
-          <span style={{ fontSize: 14, fontWeight: 600, color: '#1a2332' }}>Calculate Loading Metres →</span>
-          <span style={{ fontSize: 12, color: '#8f9ab0' }}>LDM calculator for UK/EU trailers</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Calculate Loading Metres →</span>
+          <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>LDM calculator for UK/EU trailers</span>
         </Link>
       </div>
 

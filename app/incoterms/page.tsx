@@ -33,7 +33,7 @@ export default function IncotermsPage() {
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           INCOTERMS 2020 <span style={{ color: '#e87722' }}>Reference</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 560, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto' }}>
           All 11 international commercial terms explained. Who pays, who bears risk, and where responsibility transfers.
         </p>
       </div>
@@ -41,12 +41,12 @@ export default function IncotermsPage() {
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* ── Quick Reference Cards ── */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 8, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 8, letterSpacing: '-0.3px' }}>
           Quick Reference
         </h2>
 
         {/* Any Mode of Transport */}
-        <h3 style={{ fontSize: 15, fontWeight: 700, color: '#5a6478', marginBottom: 12, marginTop: 24 }}>
+        <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 12, marginTop: 24 }}>
           Any Mode of Transport
         </h3>
         <div style={{
@@ -61,7 +61,7 @@ export default function IncotermsPage() {
               href={`/incoterms/${term.slug}`}
               style={{
                 borderRadius: 12,
-                border: '1px solid #d8dce6',
+                border: '1px solid var(--border)',
                 padding: 16,
                 textDecoration: 'none',
                 display: 'block',
@@ -69,13 +69,13 @@ export default function IncotermsPage() {
               }}
               onMouseEnter={undefined}
             >
-              <div style={{ fontSize: 24, fontWeight: 800, color: '#1a2332', marginBottom: 4 }}>
+              <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 4 }}>
                 {term.code}
               </div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: '#1a2332', marginBottom: 6 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>
                 {term.name}
               </div>
-              <div style={{ fontSize: 12, color: '#5a6478', lineHeight: 1.5, marginBottom: 10 }}>
+              <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: 10 }}>
                 {term.summary}
               </div>
               <span style={{
@@ -95,7 +95,7 @@ export default function IncotermsPage() {
         </div>
 
         {/* Sea and Inland Waterway Only */}
-        <h3 style={{ fontSize: 15, fontWeight: 700, color: '#5a6478', marginBottom: 12 }}>
+        <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 12 }}>
           Sea and Inland Waterway Only
         </h3>
         <div style={{
@@ -110,20 +110,20 @@ export default function IncotermsPage() {
               href={`/incoterms/${term.slug}`}
               style={{
                 borderRadius: 12,
-                border: '1px solid #d8dce6',
+                border: '1px solid var(--border)',
                 padding: 16,
                 textDecoration: 'none',
                 display: 'block',
                 transition: 'border-color 0.15s',
               }}
             >
-              <div style={{ fontSize: 24, fontWeight: 800, color: '#1a2332', marginBottom: 4 }}>
+              <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 4 }}>
                 {term.code}
               </div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: '#1a2332', marginBottom: 6 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>
                 {term.name}
               </div>
-              <div style={{ fontSize: 12, color: '#5a6478', lineHeight: 1.5, marginBottom: 10 }}>
+              <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: 10 }}>
                 {term.summary}
               </div>
               <span style={{
@@ -143,7 +143,7 @@ export default function IncotermsPage() {
         </div>
 
         {/* ── Comparison Table ── */}
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           INCOTERMS 2020 Comparison Table
         </h2>
         <div className="ref-table-wrap" style={{ marginBottom: 48 }}>
@@ -189,24 +189,24 @@ export default function IncotermsPage() {
         <div style={{ marginTop: 56 }}>
 
           {/* What Are INCOTERMS? */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
             What Are INCOTERMS?
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>INCOTERMS</strong> (International Commercial Terms) are a set of 11 standardised trade terms published by the <strong>International Chamber of Commerce (ICC)</strong>. They define the responsibilities, costs, and risks between buyers and sellers in international and domestic trade transactions.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             The current edition, <strong>INCOTERMS 2020</strong>, came into effect on 1 January 2020 and replaced the previous 2010 edition. These terms are incorporated into sales contracts worldwide and are recognised by courts and trade authorities in virtually every country.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Each INCOTERM specifies which party (buyer or seller) is responsible for arranging transport, paying freight costs, arranging and paying for insurance, handling export and import customs clearance, and bearing risk during transit. They do <strong>not</strong> cover transfer of ownership, payment terms, or remedies for breach of contract.
           </p>
 
           {/* Key Changes in INCOTERMS 2020 */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Key Changes in INCOTERMS 2020
           </h2>
-          <ul style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.8, marginBottom: 14, paddingLeft: 24 }}>
+          <ul style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.8, marginBottom: 14, paddingLeft: 24 }}>
             <li style={{ marginBottom: 8 }}>
               <strong>DAT renamed to DPU</strong> — Delivered at Terminal (DAT) was renamed to Delivered at Place Unloaded (DPU) to clarify that delivery can occur at any named place, not just a terminal or port.
             </li>
@@ -222,7 +222,7 @@ export default function IncotermsPage() {
           </ul>
 
           {/* FAQ */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Frequently Asked Questions
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
@@ -316,7 +316,7 @@ export default function IncotermsPage() {
         </div>
 
         {/* Disclaimer */}
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 12, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>
           INCOTERMS is a registered trademark of the International Chamber of Commerce (ICC). This tool provides general guidance only — always refer to the official ICC publication for contractual purposes.
         </p>
 

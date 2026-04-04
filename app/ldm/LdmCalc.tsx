@@ -116,7 +116,7 @@ export default function LdmCalc() {
         <h1 style={s.h1}>
           Loading Metres <span style={{ color: '#e87722' }}>Calculator</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 500, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 500, margin: '0 auto' }}>
           Calculate loading metres for road freight — European and North American trailer standards
         </p>
       </div>
@@ -144,7 +144,7 @@ export default function LdmCalc() {
 
               {/* Length */}
               <div style={s.formGroup}>
-                <label htmlFor="palletLength">Length <span style={{ fontWeight: 400, textTransform: 'none', color: '#8f9ab0', letterSpacing: 0 }}>(mm)</span></label>
+                <label htmlFor="palletLength">Length <span style={{ fontWeight: 400, textTransform: 'none', color: 'var(--text-faint)', letterSpacing: 0 }}>(mm)</span></label>
                 <input
                   type="number" id="palletLength"
                   value={lengthMm}
@@ -158,7 +158,7 @@ export default function LdmCalc() {
 
               {/* Width */}
               <div style={s.formGroup}>
-                <label htmlFor="palletWidth">Width <span style={{ fontWeight: 400, textTransform: 'none', color: '#8f9ab0', letterSpacing: 0 }}>(mm)</span></label>
+                <label htmlFor="palletWidth">Width <span style={{ fontWeight: 400, textTransform: 'none', color: 'var(--text-faint)', letterSpacing: 0 }}>(mm)</span></label>
                 <input
                   type="number" id="palletWidth"
                   value={widthMm}
@@ -178,7 +178,7 @@ export default function LdmCalc() {
 
               {/* Weight */}
               <div style={s.formGroup}>
-                <label htmlFor="weightPerPallet">Weight per Pallet <span style={{ fontWeight: 400, textTransform: 'none', color: '#8f9ab0', letterSpacing: 0 }}>(kg, optional)</span></label>
+                <label htmlFor="weightPerPallet">Weight per Pallet <span style={{ fontWeight: 400, textTransform: 'none', color: 'var(--text-faint)', letterSpacing: 0 }}>(kg, optional)</span></label>
                 <input type="number" id="weightPerPallet" value={weightPerPallet} onChange={e => setWeightPerPallet(e.target.value)} placeholder="e.g. 500" min={0} />
               </div>
 
@@ -190,7 +190,7 @@ export default function LdmCalc() {
                 <div style={s.toggleRow}>
                   <div>
                     <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Pallets can be stacked</div>
-                    <div style={{ fontSize: 12, color: '#5a6478', marginTop: 1 }}>Halves the floor space needed when enabled</div>
+                    <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 1 }}>Halves the floor space needed when enabled</div>
                   </div>
                   <label style={{ position: 'relative', width: 44, height: 24, flexShrink: 0, cursor: 'pointer' }}>
                     <input
@@ -247,7 +247,7 @@ export default function LdmCalc() {
               {/* Custom vehicle length */}
               {isCustomVehicle && (
                 <div style={{ ...s.formGroup, gridColumn: '1 / -1' }}>
-                  <label htmlFor="customVehicleLength">Custom Vehicle Length <span style={{ fontWeight: 400, textTransform: 'none', color: '#8f9ab0', letterSpacing: 0 }}>(metres)</span></label>
+                  <label htmlFor="customVehicleLength">Custom Vehicle Length <span style={{ fontWeight: 400, textTransform: 'none', color: 'var(--text-faint)', letterSpacing: 0 }}>(metres)</span></label>
                   <input type="number" id="customVehicleLength" value={customVehicleLen} onChange={e => setCustomVehicleLen(e.target.value)} placeholder="e.g. 8.0" min={0.5} max={30} step={0.1} />
                 </div>
               )}
@@ -275,22 +275,22 @@ export default function LdmCalc() {
 
           {/* LDM headline */}
           <div style={s.ldmDisplay}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#5a6478', marginBottom: 8 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: 'var(--text-muted)', marginBottom: 8 }}>
               Loading Metres Required
             </div>
             <div style={s.ldmNumber}>
               {result.ldm.toFixed(2)}
-              <span style={{ fontSize: 22, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> LDM</span>
+              <span style={{ fontSize: 22, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: 0 }}> LDM</span>
             </div>
           </div>
 
           {/* Utilisation */}
           <div style={s.utilSection}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 10 }}>
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#5a6478', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Vehicle Utilisation</span>
-              <span style={{ fontSize: 22, fontWeight: 800, color: '#1a2332' }}>{result.utilisationPercent.toFixed(1)}%</span>
+              <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Vehicle Utilisation</span>
+              <span style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)' }}>{result.utilisationPercent.toFixed(1)}%</span>
             </div>
-            <div style={{ fontSize: 13, color: '#5a6478', marginBottom: 10 }}>
+            <div style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 10 }}>
               {result.vehicle.name} ({result.vehicle.lengthM !== null ? `${result.vehicle.lengthM}m available` : 'enter length above'})
             </div>
             <div className="progress-track">
@@ -304,20 +304,20 @@ export default function LdmCalc() {
           {/* Stats */}
           <div style={s.statsGrid}>
             <div style={s.statCell}>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#5a6478', marginBottom: 4 }}>Pallet Spaces</div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-muted)', marginBottom: 4 }}>Pallet Spaces</div>
+              <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)' }}>
                 {result.palletSpaces.available
                   ? `${result.palletSpaces.used} of ${result.palletSpaces.available}`
                   : result.palletSpaces.used > 0 ? `${result.palletSpaces.used}` : '—'}
               </div>
-              <div style={{ fontSize: 12, color: '#5a6478', marginTop: 2 }}>floor positions used</div>
+              <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>floor positions used</div>
             </div>
             <div style={s.statCell}>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#5a6478', marginBottom: 4 }}>Total Weight</div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-muted)', marginBottom: 4 }}>Total Weight</div>
+              <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)' }}>
                 {result.totalWeightKg !== null ? `${result.totalWeightKg.toLocaleString('en-GB')} kg` : '—'}
               </div>
-              <div style={{ fontSize: 12, color: '#5a6478', marginTop: 2 }}>
+              <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>
                 {result.totalWeightKg !== null && result.vehicle.maxPayloadKg
                   ? `of ${result.vehicle.maxPayloadKg.toLocaleString('en-GB')} kg capacity`
                   : 'enter weight per pallet'}
@@ -345,17 +345,17 @@ export default function LdmCalc() {
 
           {/* What are loading metres */}
           <div style={{ marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
               What Are Loading Metres?
             </h2>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               A <strong style={{ color: 'var(--text)' }}>loading metre (LDM)</strong> is the standard unit used to measure the floor space a consignment occupies in a road freight trailer. One loading metre represents a strip of trailer floor that is <strong style={{ color: 'var(--text)' }}>1 metre long and the full width of the trailer</strong>.
             </p>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               The standard European trailer width is 2.4m (EN 283), while North American 53ft trailers are 2.59m (102 inches) wide. When you select a US vehicle type, this calculator uses 2.59m as the divisor instead of 2.4m. The formula becomes LDM = (L &times; W &times; Qty) &divide; trailer width. Unlike CBM (cubic metres), which measures total volume, LDM measures only floor area &mdash; a tall, light pallet takes up the same LDM as a short, heavy one.
             </p>
 
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>The Loading Metres Formula</h3>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', margin: '20px 0 8px' }}>The Loading Metres Formula</h3>
             <div className="code-block">
               LDM = (Length × Width × Quantity) ÷ Trailer Width<br/>
               <span className="comment">— European trailers: 2.4m (EN 283)</span><br/>
@@ -365,7 +365,7 @@ export default function LdmCalc() {
               LDM = (Length × Width × Quantity) ÷ Trailer Width ÷ Stack Factor
             </div>
 
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>Common Pallet LDM Reference</h3>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', margin: '20px 0 8px' }}>Common Pallet LDM Reference</h3>
             <div className="ref-table-wrap">
               <table className="ref-table">
                 <thead>
@@ -390,7 +390,7 @@ export default function LdmCalc() {
 
           {/* Vehicle table */}
           <div style={{ marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
               How Many Pallets Fit in a Truck?
             </h2>
             <div className="ref-table-wrap">
@@ -421,42 +421,42 @@ export default function LdmCalc() {
 
           {/* Groupage Pricing & LDM */}
           <div style={{ marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
               Loading Metres and Groupage Pricing
             </h2>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               In European groupage (LTL) freight, loading metres are the primary unit for quoting and invoicing. Unlike full truckload (FTL) shipments where you pay a flat rate for the whole vehicle, groupage shipments share trailer space with other consignments. The carrier needs a fair way to allocate costs, and LDM provides that by measuring exactly how much floor space your goods occupy.
             </p>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               Most European freight exchanges and carrier rate cards quote a per-LDM rate. A typical groupage rate might be quoted as, for example, &pound;35 per LDM for a UK-to-Germany lane. If your consignment measures 2.4 LDM, the freight charge would be 2.4 &times; &pound;35 = &pound;84, before fuel surcharges and other accessorial charges. This makes accurate LDM calculation directly relevant to your transport budget.
             </p>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               Many carriers also apply a minimum charge, often expressed as a minimum LDM (commonly 1 LDM or 2 LDM) or a minimum weight threshold. Even if your single pallet only measures 0.4 LDM, you may be charged for 1 LDM minimum. Understanding this helps you decide whether to consolidate shipments to get better value from the minimum charge.
             </p>
 
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>How Stackability Affects LDM and Cost</h3>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', margin: '20px 0 8px' }}>How Stackability Affects LDM and Cost</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               Stackability has a direct impact on your freight cost because it halves (or thirds) the floor space your consignment uses. When a carrier can double-stack pallets, two pallets occupy the floor space of one. This means your LDM is divided by the stack factor: a stack factor of 2 halves the LDM, and a stack factor of 3 reduces it to one third.
             </p>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               For pallets to be genuinely stackable, the goods must be able to bear the weight of another pallet on top without damage, the pallet height must allow stacking within the trailer&apos;s internal height (typically 2.65m to 2.70m for a standard curtainsider), and the goods must be stable enough to remain safe during transit. Fragile goods, top-heavy loads, and irregularly shaped items are generally non-stackable regardless of physical dimensions.
             </p>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               When booking groupage freight, always confirm stackability with your carrier in advance. Declaring goods as stackable when they are not creates a safety risk and may result in damage claims or surcharges. Conversely, failing to declare stackable goods as such means you pay for more floor space than you need.
             </p>
 
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', margin: '20px 0 8px' }}>Worked Example: Groupage Quote</h3>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', margin: '20px 0 8px' }}>Worked Example: Groupage Quote</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               Consider a shipment of 8 Euro pallets (1200 &times; 800 mm), each weighing 400 kg, non-stackable, from Manchester to Munich. First, calculate the LDM: 8 pallets &times; 0.4 LDM each = 3.2 LDM. The total weight is 3,200 kg. A carrier quoting &pound;45 per LDM with a 1 LDM minimum would charge 3.2 &times; &pound;45 = &pound;144. However, many carriers also check whether the weight exceeds a per-LDM weight threshold (commonly 1,750 kg per LDM or 1,850 kg per LDM). At 3,200 kg across 3.2 LDM, that is exactly 1,000 kg per LDM &mdash; well within typical thresholds, so no weight surcharge applies.
             </p>
-            <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               Now consider the same 8 pallets but stackable (stack factor 2). The LDM drops to 1.6 LDM, and the freight charge becomes 1.6 &times; &pound;45 = &pound;72 &mdash; exactly half the cost. However, the weight per LDM now rises to 2,000 kg per LDM, which may trigger a weight surcharge depending on the carrier&apos;s policy. This illustrates why both space and weight must be considered together when planning freight.
             </p>
           </div>
 
           {/* FAQ */}
           <div style={{ marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+            <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
               Frequently Asked Questions
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

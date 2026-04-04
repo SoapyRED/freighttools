@@ -79,10 +79,10 @@ export default async function PalletTypePage(
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
-          <nav style={{ marginBottom: 16, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+          <nav style={{ marginBottom: 16, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
             <span style={{ margin: '0 8px' }}>›</span>
-            <Link href="/pallet" style={{ color: '#8f9ab0', textDecoration: 'none' }}>Pallet Fitting Calculator</Link>
+            <Link href="/pallet" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Pallet Fitting Calculator</Link>
             <span style={{ margin: '0 8px' }}>›</span>
             <span style={{ color: '#e87722' }}>{p.name}</span>
           </nav>
@@ -121,35 +121,35 @@ export default async function PalletTypePage(
             { label: 'Max Weight',   value: `${p.maxWeightKg.toLocaleString('en-GB')} kg`, sub: `maximum payload` },
           ].map(stat => (
             <div key={stat.label} style={{
-              background: '#fff', border: '1px solid #d8dce6', borderRadius: 10, padding: '14px 16px',
+              background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '14px 16px',
             }}>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>
                 {stat.label}
               </div>
-              <div style={{ fontSize: 20, fontWeight: 700, color: '#1a2332' }}>{stat.value}</div>
-              <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>{stat.sub}</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)' }}>{stat.value}</div>
+              <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 2 }}>{stat.sub}</div>
             </div>
           ))}
         </div>
 
         {/* About */}
         <div style={{
-          background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
-          padding: '18px 20px', marginBottom: 28, fontSize: 15, color: '#5a6478', lineHeight: 1.7,
+          background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
+          padding: '18px 20px', marginBottom: 28, fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7,
         }}>
           <p style={{ margin: 0 }}>{p.description}</p>
           {p.notes && (
-            <p style={{ margin: '10px 0 0', fontSize: 13, color: '#8f9ab0' }}>
+            <p style={{ margin: '10px 0 0', fontSize: 13, color: 'var(--text-faint)' }}>
               <strong>Standard:</strong> {p.notes}
             </p>
           )}
         </div>
 
         {/* Calculator */}
-        <h2 style={{ fontSize: 18, fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.2px' }}>
+        <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.2px' }}>
           How Many Boxes Fit on a {p.name}?
         </h2>
-        <p style={{ color: '#5a6478', fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
           The calculator is pre-filled with the {p.name}&apos;s dimensions and weight rating.
           Enter your <strong>box dimensions</strong> below to see the fitting result and top-down layer diagram.
         </p>
@@ -165,18 +165,18 @@ export default async function PalletTypePage(
 
         {/* Other pallet types */}
         <div style={{ marginTop: 48 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 800, color: '#1a2332', marginBottom: 14, letterSpacing: '-0.2px' }}>
+          <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', marginBottom: 14, letterSpacing: '-0.2px' }}>
             Other Pallet Types
           </h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {siblings.map(s => (
               <Link key={s.slug} href={`/pallet/${s.slug}`} style={{
-                background: '#fff', border: '1px solid #d8dce6', borderRadius: 8,
+                background: '#fff', border: '1px solid var(--border)', borderRadius: 8,
                 padding: '8px 14px', textDecoration: 'none',
                 display: 'flex', flexDirection: 'column', gap: 2,
               }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#1a2332' }}>{s.name}</span>
-                <span style={{ fontSize: 11, color: '#8f9ab0', fontFamily: 'monospace' }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{s.name}</span>
+                <span style={{ fontSize: 11, color: 'var(--text-faint)', fontFamily: 'monospace' }}>
                   {s.lengthCm} × {s.widthCm} cm · {s.maxWeightKg.toLocaleString('en-GB')} kg
                 </span>
               </Link>
@@ -187,8 +187,8 @@ export default async function PalletTypePage(
         {/* Bottom links */}
         <div style={{ marginTop: 36, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
           <Link href="/pallet" style={{
-            background: '#fff', border: '1px solid #d8dce6', borderRadius: 8,
-            padding: '10px 18px', textDecoration: 'none', color: '#1a2332',
+            background: '#fff', border: '1px solid var(--border)', borderRadius: 8,
+            padding: '10px 18px', textDecoration: 'none', color: 'var(--text)',
             fontSize: 13, fontWeight: 600,
           }}>
             ← All Pallet Types

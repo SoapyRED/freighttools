@@ -65,14 +65,14 @@ function SpecRow({ label, value }: { label: string; value: string }) {
         fontWeight: 700,
         textTransform: 'uppercase',
         letterSpacing: '0.4px',
-        color: '#8f9ab0',
+        color: 'var(--text-faint)',
         minWidth: 170,
         flexShrink: 0,
         paddingTop: 2,
       }}>
         {label}
       </div>
-      <div style={{ fontSize: 14, color: '#1a2332', lineHeight: 1.6, flex: 1 }}>
+      <div style={{ fontSize: 14, color: 'var(--text)', lineHeight: 1.6, flex: 1 }}>
         {value}
       </div>
     </div>
@@ -123,10 +123,10 @@ export default async function ContainerDetailPage(
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
-          <nav style={{ marginBottom: 20, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+          <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <Link href="/containers" style={{ color: '#8f9ab0', textDecoration: 'none' }}>Container Specs</Link>
+            <Link href="/containers" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Container Specs</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
             <span style={{ color: '#e87722' }}>{spec.name}</span>
           </nav>
@@ -148,7 +148,7 @@ export default async function ContainerDetailPage(
         {/* Spec card */}
         <div style={{
           background: '#fff',
-          border: '1px solid #d8dce6',
+          border: '1px solid var(--border)',
           borderRadius: 10,
           overflow: 'hidden',
           marginBottom: 24,
@@ -180,7 +180,7 @@ export default async function ContainerDetailPage(
         {/* Description */}
         <p style={{
           fontSize: 15,
-          color: '#5a6478',
+          color: 'var(--text-muted)',
           lineHeight: 1.7,
           marginBottom: 14,
         }}>
@@ -190,11 +190,11 @@ export default async function ContainerDetailPage(
         {/* Notes */}
         <p style={{
           fontSize: 14,
-          color: '#8f9ab0',
+          color: 'var(--text-faint)',
           lineHeight: 1.6,
           marginBottom: 28,
           padding: '14px 18px',
-          background: '#f7f8fa',
+          background: 'var(--bg)',
           borderRadius: 10,
           border: '1px solid #eef0f4',
         }}>
@@ -246,11 +246,11 @@ export default async function ContainerDetailPage(
           {prev ? (
             <Link href={`/containers/${prev.slug}`} style={{
               background: '#fff',
-              border: '1px solid #d8dce6',
+              border: '1px solid var(--border)',
               borderRadius: 8,
               padding: '11px 16px',
               textDecoration: 'none',
-              color: '#1a2332',
+              color: 'var(--text)',
               fontSize: 13,
               fontWeight: 600,
               display: 'flex',
@@ -263,11 +263,11 @@ export default async function ContainerDetailPage(
 
           <Link href="/containers" style={{
             background: '#fff',
-            border: '1px solid #d8dce6',
+            border: '1px solid var(--border)',
             borderRadius: 8,
             padding: '11px 16px',
             textDecoration: 'none',
-            color: '#5a6478',
+            color: 'var(--text-muted)',
             fontSize: 13,
             fontWeight: 600,
           }}>
@@ -277,11 +277,11 @@ export default async function ContainerDetailPage(
           {next ? (
             <Link href={`/containers/${next.slug}`} style={{
               background: '#fff',
-              border: '1px solid #d8dce6',
+              border: '1px solid var(--border)',
               borderRadius: 8,
               padding: '11px 16px',
               textDecoration: 'none',
-              color: '#1a2332',
+              color: 'var(--text)',
               fontSize: 13,
               fontWeight: 600,
               display: 'flex',

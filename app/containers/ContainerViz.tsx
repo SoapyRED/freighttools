@@ -54,7 +54,7 @@ export default function ContainerViz({
       padding: '16px 20px', borderBottom: '1px solid #eef0f4',
       background: '#0f1724', textAlign: 'center',
     }}>
-      <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#8f9ab0', marginBottom: 8 }}>
+      <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
         Front-Face Cross Section &middot; {itemsPerRow} across &times; {layers} high &middot; {itemsPerCol} deep
       </div>
       <svg
@@ -76,7 +76,7 @@ export default function ContainerViz({
           <rect key={i} x={item.x} y={item.y} width={item.w} height={item.h} rx={1} fill="#EF9F27" opacity={0.85} />
         ))}
       </svg>
-      <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 8 }}>
+      <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 8 }}>
         <strong style={{ color: '#EF9F27' }}>{totalItemsFit}</strong> items fit &middot; <strong>{volumeUtilisation}%</strong> volume utilisation
       </div>
     </div>

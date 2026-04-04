@@ -29,7 +29,7 @@ export default function CbmPage() {
         <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           CBM <span style={{ color: '#e87722' }}>Calculator</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>
           Calculate cubic metres (CBM) for any shipment. Enter length, width, height in centimetres
           and get instant volume in m³, cubic feet, and litres.
         </p>
@@ -43,42 +43,42 @@ export default function CbmPage() {
         <div style={{ marginTop: 56 }}>
 
           {/* Section 1: What Is CBM? */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
             What Is CBM?
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>CBM</strong> stands for cubic metre (m³) — the standard unit of volume measurement used in international shipping and logistics. One cubic metre is the volume of a cube measuring 1 metre on each side, equivalent to 1,000 litres.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             In freight, CBM determines how much space your cargo occupies in a shipping container, aircraft, or warehouse. It is the primary volume measurement for sea freight pricing (particularly <strong>LCL — Less than Container Load</strong>) and is used alongside weight to calculate chargeable weight in air freight.
           </p>
 
           {/* Section 2: How to Calculate CBM */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             How to Calculate CBM
           </h2>
           <div style={{ background: '#1a2332', borderRadius: 12, padding: '20px 24px', marginBottom: 16 }}>
             <code style={{ display: 'block', fontFamily: "'Courier New', monospace", fontSize: 14, color: '#f59e0b', lineHeight: 2 }}>
               CBM = Length (m) × Width (m) × Height (m)<br/>
-              <span style={{ color: '#8f9ab0' }}>If measuring in centimetres:</span><br/>
+              <span style={{ color: 'var(--text-faint)' }}>If measuring in centimetres:</span><br/>
               CBM = (Length × Width × Height in cm) ÷ 1,000,000<br/>
               <br/>
-              <span style={{ color: '#8f9ab0' }}>For multiple items of the same size:</span><br/>
+              <span style={{ color: 'var(--text-faint)' }}>For multiple items of the same size:</span><br/>
               Total CBM = CBM per item × Quantity
             </code>
           </div>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             For mixed cargo (different sizes), calculate each item separately and sum the totals.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>Important:</strong> always measure the outermost dimensions of the packaged goods — including any bulges, protrusions, or irregular shapes. Carriers measure from the widest point.
           </p>
 
           {/* Section 3: CBM and Container Capacity */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             CBM and Container Capacity
           </h2>
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 12 }}>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 12 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -104,38 +104,38 @@ export default function CbmPage() {
               </tbody>
             </table>
           </div>
-          <p style={{ color: '#8f9ab0', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-faint)', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
             Usable capacity is always less than the maximum internal volume due to pallet gaps, door clearance, and cargo shape. Plan for approximately 80–85% utilisation in practice.
           </p>
 
           {/* Container links */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Calculate CBM by Container Type
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
             Select a container or ULD below to open a pre-filled calculator with its internal dimensions.
           </p>
 
           <div style={{ marginBottom: 28 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#5a6478', marginBottom: 10 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-muted)', marginBottom: 10 }}>
               Sea Freight Containers
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {seaContainers.map(c => (
                 <Link key={c.slug} href={`/cbm/${c.slug}`} style={{
-                  background: '#fff', border: '1px solid #d8dce6', borderRadius: 8,
+                  background: '#fff', border: '1px solid var(--border)', borderRadius: 8,
                   padding: '8px 14px', textDecoration: 'none',
                   display: 'flex', flexDirection: 'column', gap: 2,
                 }}>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: '#1a2332' }}>{c.name}</span>
-                  <span style={{ fontSize: 11, color: '#8f9ab0', fontFamily: 'monospace' }}>{c.capacityCbm} m³ max</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{c.name}</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-faint)', fontFamily: 'monospace' }}>{c.capacityCbm} m³ max</span>
                 </Link>
               ))}
             </div>
           </div>
 
           <div style={{ marginBottom: 28 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#5a6478', marginBottom: 10 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-muted)', marginBottom: 10 }}>
               Air Freight ULDs
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -145,18 +145,18 @@ export default function CbmPage() {
                   padding: '8px 14px', textDecoration: 'none',
                   display: 'flex', flexDirection: 'column', gap: 2,
                 }}>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: '#1a2332' }}>{c.name}</span>
-                  <span style={{ fontSize: 11, color: '#8f9ab0', fontFamily: 'monospace' }}>{c.capacityCbm} m³ max</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{c.name}</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-faint)', fontFamily: 'monospace' }}>{c.capacityCbm} m³ max</span>
                 </Link>
               ))}
             </div>
           </div>
 
           {/* Section 4: CBM in Sea Freight Pricing */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             CBM in Sea Freight Pricing (W/M Rule)
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             In LCL (Less than Container Load) sea freight, carriers apply the &ldquo;Weight or Measure&rdquo; rule:
           </p>
           <div style={{ background: '#1a2332', borderRadius: 12, padding: '16px 24px', marginBottom: 16 }}>
@@ -164,22 +164,22 @@ export default function CbmPage() {
               1 CBM = 1,000 kg (1 freight tonne)
             </code>
           </div>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             The carrier charges based on whichever is greater — the volume in CBM or the weight in tonnes. For example:
           </p>
-          <ul style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, paddingLeft: 24, marginBottom: 14 }}>
+          <ul style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, paddingLeft: 24, marginBottom: 14 }}>
             <li style={{ marginBottom: 8 }}>A shipment of <strong>2 CBM weighing 500 kg</strong> → charged for 2 CBM (volume is greater: 2 freight tonnes &gt; 0.5 actual tonnes)</li>
             <li>A shipment of <strong>1 CBM weighing 1,800 kg</strong> → charged for 1.8 tonnes (weight is greater: 1.8 tonnes &gt; 1 CBM)</li>
           </ul>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             This is a much more generous ratio than air freight, where 1 CBM equates to approximately 167 kg. This is why bulky, lightweight goods are almost always cheaper to ship by sea.
           </p>
 
           {/* Section 5: CBM vs LDM */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             CBM vs LDM — When to Use Which
           </h2>
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 16 }}>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -203,15 +203,15 @@ export default function CbmPage() {
               </tbody>
             </table>
           </div>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Road freight in Europe typically prices by LDM (floor space) rather than CBM because trailer height is usually not a constraint — most standard goods don&apos;t stack to the roof. Sea and air freight price by volume because container and aircraft space is three-dimensional.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             For a detailed LDM calculation, use our <Link href="/ldm" style={{ color: '#e87722', textDecoration: 'underline' }}>Loading Metres Calculator</Link>.
           </p>
 
           {/* Section 6: FAQ */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Frequently Asked Questions
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>

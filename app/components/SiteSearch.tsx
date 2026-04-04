@@ -132,7 +132,7 @@ export default function SiteSearch() {
         <div style={{
           position: 'absolute', top: 'calc(100% + 4px)', left: 0, right: 0,
           minWidth: 320,
-          background: '#1a2332', border: '1px solid #2d3a4d',
+          background: '#1a2332', border: '1px solid var(--navy-border)',
           borderRadius: 8, padding: '6px 0',
           zIndex: 200, boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
           maxHeight: 400, overflowY: 'auto',
@@ -150,13 +150,13 @@ export default function SiteSearch() {
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
             >
               <span style={{
-                color: '#c9cdd6', fontSize: 13, fontWeight: 400,
+                color: 'var(--text-muted)', fontSize: 13, fontWeight: 400,
                 overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1,
               }}>
                 {r.label}
               </span>
               <span style={{
-                fontSize: 10, fontWeight: 700, color: '#8f9ab0',
+                fontSize: 10, fontWeight: 700, color: 'var(--text-faint)',
                 background: 'rgba(255,255,255,0.06)', padding: '2px 6px',
                 borderRadius: 4, flexShrink: 0, textTransform: 'uppercase',
                 letterSpacing: '0.5px',

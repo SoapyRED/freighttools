@@ -27,7 +27,7 @@ export default function PalletPage() {
         <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           Pallet Fitting <span style={{ color: '#e87722' }}>Calculator</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 560, margin: '0 auto', lineHeight: 1.6 }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto', lineHeight: 1.6 }}>
           Enter your pallet and box dimensions to see exactly how many boxes fit per layer,
           how many layers stack within the height limit, and a live top-down diagram of the arrangement.
         </p>
@@ -41,33 +41,33 @@ export default function PalletPage() {
         <div style={{ marginTop: 56 }}>
 
           {/* Section 1: What Is Pallet Fitting? */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
             What Is Pallet Fitting?
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Pallet fitting (also called pallet loading or pallet optimisation) is the process of calculating how many boxes, cartons, or items can be loaded onto a pallet while respecting the pallet&apos;s dimensions and weight limits.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             Efficient pallet loading reduces shipping costs, minimises wasted space, and ensures cargo stability during transport. A well-packed pallet uses the full footprint and stacks to a safe height without overhanging the pallet edges — overhang increases the risk of damage during handling and can prevent pallets from fitting into racking systems.
           </p>
 
           {/* Algorithm explainer */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             How Does the Calculator Work?
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             The calculator uses a <strong>layer-based greedy algorithm</strong> — the same method warehouse operatives use when manually building pallet loads. It works in two steps:
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>Step 1 — One layer:</strong> The box footprint (length × width) is tiled across the pallet footprint using simple integer division. If rotation is enabled, both orientations are tried and whichever fits more boxes per layer is chosen.
           </p>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>Step 2 — Stack height:</strong> The number of layers is calculated as <code style={{ background: '#f0f2f5', padding: '1px 5px', borderRadius: 4 }}>floor(usable height ÷ box height)</code> where usable height = max stack height − pallet board height. If box weight and max pallet weight are provided, the result is further capped so total weight never exceeds the pallet rating.
           </p>
           <div style={{ background: '#1a2332', borderRadius: 12, padding: '20px 24px', margin: '20px 0' }}>
             <code style={{ display: 'block', fontFamily: "'Courier New', monospace", fontSize: 13, color: '#f59e0b', lineHeight: 2 }}>
               Boxes per layer = floor(pallet L ÷ box L) × floor(pallet W ÷ box W)<br />
-              <span style={{ color: '#8f9ab0' }}>— repeated for rotated orientation, best wins</span><br />
+              <span style={{ color: 'var(--text-faint)' }}>— repeated for rotated orientation, best wins</span><br />
               <br />
               Layers = floor((max stack height − pallet board height) ÷ box height)<br />
               <br />
@@ -76,13 +76,13 @@ export default function PalletPage() {
           </div>
 
           {/* Section 2: Common Pallet Types */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Common Pallet Types and Dimensions
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
             FreightUtils includes 15 pallet types with specifications audited against official standards from EPAL, ISO 6780, and IATA.
           </p>
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 12 }}>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 12 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -113,26 +113,26 @@ export default function PalletPage() {
               </tbody>
             </table>
           </div>
-          <p style={{ color: '#8f9ab0', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-faint)', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
             All specifications audited against EPAL, ISO 6780, and IATA official publications. For the complete list of 15 pallet types, use the calculator above.
           </p>
 
           {/* Pallet type links */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Calculate by Pallet Type
           </h2>
-          <p style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
             Select a standard pallet type to open a pre-filled calculator with its exact dimensions.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
             {palletsData.map(p => (
               <Link key={p.slug} href={`/pallet/${p.slug}`} style={{
-                background: '#fff', border: '1px solid #d8dce6', borderRadius: 8,
+                background: '#fff', border: '1px solid var(--border)', borderRadius: 8,
                 padding: '8px 14px', textDecoration: 'none',
                 display: 'flex', flexDirection: 'column', gap: 2,
               }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#1a2332' }}>{p.name}</span>
-                <span style={{ fontSize: 11, color: '#8f9ab0', fontFamily: 'monospace' }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{p.name}</span>
+                <span style={{ fontSize: 11, color: 'var(--text-faint)', fontFamily: 'monospace' }}>
                   {p.lengthCm} × {p.widthCm} cm · {p.maxHeightCm} cm max
                 </span>
               </Link>
@@ -140,10 +140,10 @@ export default function PalletPage() {
           </div>
 
           {/* Section 3: Pallet Loading Best Practices */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Pallet Loading Best Practices
           </h2>
-          <ul style={{ color: '#5a6478', fontSize: 15, lineHeight: 1.7, paddingLeft: 24, marginBottom: 14 }}>
+          <ul style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, paddingLeft: 24, marginBottom: 14 }}>
             <li style={{ marginBottom: 12 }}><strong>Fill the footprint first.</strong> Maximise the pallet area before stacking height. A pallet loaded to 80% area but full height wastes 20% of every layer.</li>
             <li style={{ marginBottom: 12 }}><strong>Interlock layers where possible.</strong> Alternating box orientation between layers (brick pattern) improves stack stability and reduces the need for excessive stretch wrapping.</li>
             <li style={{ marginBottom: 12 }}><strong>Respect the pallet edge.</strong> Overhang beyond the pallet edge causes damage during forklift handling and prevents pallets from fitting into standard racking (typical beam clearance is designed for flush-loaded pallets).</li>
@@ -152,10 +152,10 @@ export default function PalletPage() {
           </ul>
 
           {/* Section 4: Vehicle Compatibility */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Pallet Dimensions and Vehicle Compatibility
           </h2>
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', marginBottom: 12 }}>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 12 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -182,12 +182,12 @@ export default function PalletPage() {
               </tbody>
             </table>
           </div>
-          <p style={{ color: '#8f9ab0', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
+          <p style={{ color: 'var(--text-faint)', fontSize: 13, lineHeight: 1.6, marginBottom: 14 }}>
             Container widths (2,350mm) are tighter than European trailers (2,450mm). Two EUR 1 pallets side by side (2 × 800mm = 1,600mm) fit with clearance, but two EUR 2 pallets (2 × 1,000mm = 2,000mm) leave only 350mm gap — check your specific container.
           </p>
 
           {/* Section 5: FAQ */}
-          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             Frequently Asked Questions
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>

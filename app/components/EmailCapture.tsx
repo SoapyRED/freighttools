@@ -67,7 +67,7 @@ export default function EmailCapture() {
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           width: 56, height: 72, background: '#fff', borderRadius: 6,
           boxShadow: '0 1px 4px rgba(0,0,0,0.15)', flexShrink: 0, gap: 3,
-          border: '1px solid #e5e7eb', position: 'relative', overflow: 'hidden',
+          border: '1px solid var(--border)', position: 'relative', overflow: 'hidden',
         }}>
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: '#e87722' }} />
           <svg width="18" height="22" viewBox="0 0 20 24" fill="none" style={{ marginTop: 4 }}>
@@ -153,7 +153,7 @@ export default function EmailCapture() {
           <a
             href="/ADR-2025-Quick-Reference-Guide.pdf"
             download
-            style={{ fontSize: 11, color: '#8f9ab0', textDecoration: 'none' }}
+            style={{ fontSize: 11, color: 'var(--text-faint)', textDecoration: 'none' }}
           >
             Or download directly without signing up &rarr;
           </a>

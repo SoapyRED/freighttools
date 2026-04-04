@@ -89,7 +89,7 @@ export default function TrailerViz({ lengthMm, widthMm, qty, stackable, stackFac
           <span style={{ fontSize: 13, fontWeight: 600, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
             Trailer Layout
           </span>
-          <span style={{ fontSize: 12, color: '#8f9ab0' }}>
+          <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>
             {trailerL}m trailer · top-down view
           </span>
         </div>

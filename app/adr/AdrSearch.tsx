@@ -41,8 +41,8 @@ function PaginationBar({ currentPage, totalPages, setPage }: {
     color: 'var(--text, #1e2535)', transition: 'all 0.1s',
   };
   const active: React.CSSProperties = { ...base, background: '#EF9F27', color: '#1a1a1a', border: '1.5px solid #EF9F27', cursor: 'default' };
-  const disabled: React.CSSProperties = { ...base, color: '#8f9ab0', cursor: 'not-allowed', background: 'var(--grey-50, #f8f9fb)' };
-  const ellipsis = <span key="ell" style={{ fontSize: 13, color: '#8f9ab0', padding: '0 2px' }}>&hellip;</span>;
+  const disabled: React.CSSProperties = { ...base, color: 'var(--text-faint)', cursor: 'not-allowed', background: 'var(--grey-50, #f8f9fb)' };
+  const ellipsis = <span key="ell" style={{ fontSize: 13, color: 'var(--text-faint)', padding: '0 2px' }}>&hellip;</span>;
 
   // Build page numbers: first, last, and 2 around current
   const pages: (number | 'ellipsis')[] = [];
@@ -65,7 +65,7 @@ function PaginationBar({ currentPage, totalPages, setPage }: {
         style={currentPage === 0 ? disabled : base}>&laquo;</button>
       {withGaps.map((item, i) =>
         item === 'ellipsis'
-          ? <span key={`e${i}`} style={{ fontSize: 13, color: '#8f9ab0', padding: '0 2px' }}>&hellip;</span>
+          ? <span key={`e${i}`} style={{ fontSize: 13, color: 'var(--text-faint)', padding: '0 2px' }}>&hellip;</span>
           : <button key={item} onClick={() => setPage(() => item as number)}
               style={item === currentPage ? active : base}>{(item as number) + 1}</button>
       )}
@@ -124,7 +124,7 @@ function EntryCard({ entry }: { entry: AdrEntrySlim }) {
           }}>
             {entry.proper_shipping_name}
           </div>
-          <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>
+          <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 2 }}>
             {entry.packing_group ? `PG ${entry.packing_group}` : ''}
             {entry.packing_group && variantLabel ? ' · ' : ''}
             {variantLabel && (
@@ -223,7 +223,7 @@ export default function AdrSearch({ index }: Props) {
       <div style={{ position: 'relative', marginBottom: 16 }}>
         <div style={{
           position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)',
-          color: '#8f9ab0', fontSize: 18, pointerEvents: 'none',
+          color: 'var(--text-faint)', fontSize: 18, pointerEvents: 'none',
         }}>
           🔍
         </div>
@@ -266,7 +266,7 @@ export default function AdrSearch({ index }: Props) {
       {mode === 'search' && (
         <>
           {query.trim().length < 2 && (
-            <p style={{ color: '#8f9ab0', fontSize: 14, textAlign: 'center', padding: '24px 0' }}>
+            <p style={{ color: 'var(--text-faint)', fontSize: 14, textAlign: 'center', padding: '24px 0' }}>
               Type at least 2 characters to search {index.length.toLocaleString()} ADR 2025 dangerous goods entries
             </p>
           )}
@@ -276,10 +276,10 @@ export default function AdrSearch({ index }: Props) {
               background: 'var(--bg, #fff)', border: '1px solid var(--grey-100, #d8dce6)',
               borderRadius: 10, padding: '24px', textAlign: 'center',
             }}>
-              <p style={{ color: '#5a6478', marginBottom: 8 }}>
+              <p style={{ color: 'var(--text-muted)', marginBottom: 8 }}>
                 No results for <strong>&ldquo;{query}&rdquo;</strong>
               </p>
-              <p style={{ color: '#8f9ab0', fontSize: 13 }}>
+              <p style={{ color: 'var(--text-faint)', fontSize: 13 }}>
                 Try a UN number (e.g. 1203) or part of the substance name (e.g. petrol, acid, gas)
               </p>
             </div>
@@ -291,7 +291,7 @@ export default function AdrSearch({ index }: Props) {
                 <EntryCard key={`${entry.un_number}_${entry.variant_index}`} entry={entry} />
               ))}
               {searchHasMore && (
-                <p style={{ color: '#8f9ab0', fontSize: 13, textAlign: 'center', padding: '8px 0' }}>
+                <p style={{ color: 'var(--text-faint)', fontSize: 13, textAlign: 'center', padding: '8px 0' }}>
                   Showing first {MAX_SEARCH} results &mdash; refine your search to narrow down
                 </p>
               )}
@@ -340,7 +340,7 @@ export default function AdrSearch({ index }: Props) {
             })}
           </div>
 
-          <p style={{ fontSize: 13, color: '#8f9ab0', marginBottom: 12 }}>
+          <p style={{ fontSize: 13, color: 'var(--text-faint)', marginBottom: 12 }}>
             {browseData.length.toLocaleString()} entries
             {classFilter ? ` in Class ${classFilter}` : ''}
             {browseTotalPages > 1 ? ` — page ${browseCurrentPage + 1} of ${browseTotalPages}` : ''}

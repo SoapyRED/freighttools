@@ -25,7 +25,7 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 700,
   textTransform: 'uppercase',
   letterSpacing: '0.4px',
-  color: '#5a6478',
+  color: 'var(--text-muted)',
   marginBottom: 6,
   display: 'block',
 };
@@ -69,9 +69,9 @@ function Field({
 function StatCell({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
-      <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>{label}</div>
-      <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>{value}</div>
-      {sub && <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>{sub}</div>}
+      <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>{label}</div>
+      <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)' }}>{value}</div>
+      {sub && <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 2 }}>{sub}</div>}
     </div>
   );
 }
@@ -201,15 +201,15 @@ export default function ContainerCalc() {
 
           {/* Hero number */}
           <div style={{ padding: '28px 24px 20px', textAlign: 'center', borderBottom: '1px solid #eef0f4' }}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#8f9ab0', marginBottom: 8 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
               Total Items That Fit
             </div>
-            <div style={{ fontSize: 'clamp(48px, 12vw, 64px)', fontWeight: 800, color: '#1a2332', lineHeight: 1, letterSpacing: '-2px' }}>
+            <div style={{ fontSize: 'clamp(48px, 12vw, 64px)', fontWeight: 800, color: 'var(--text)', lineHeight: 1, letterSpacing: '-2px' }}>
               {result.totalItemsFit.toLocaleString()}
-              <span style={{ fontSize: 20, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> items</span>
+              <span style={{ fontSize: 20, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: 0 }}> items</span>
             </div>
             {result.itemsRequested > 1 && (
-              <div style={{ marginTop: 10, fontSize: 13, color: '#8f9ab0' }}>
+              <div style={{ marginTop: 10, fontSize: 13, color: 'var(--text-faint)' }}>
                 {result.allFit
                   ? `All ${result.itemsRequested.toLocaleString()} items fit`
                   : `${result.totalItemsFit.toLocaleString()} of ${result.itemsRequested.toLocaleString()} requested items fit`}
@@ -241,7 +241,7 @@ export default function ContainerCalc() {
           {/* Limiting factor & warnings */}
           <div style={{ padding: '18px 24px', borderTop: '1px solid #eef0f4' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: result.warnings.length > 0 ? 12 : 0 }}>
-              <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#8f9ab0' }}>Limiting Factor:</span>
+              <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--text-faint)' }}>Limiting Factor:</span>
               {result.limitingFactor === 'volume' && <Badge text="Volume" color="amber" />}
               {result.limitingFactor === 'weight' && <Badge text="Weight" color="red" />}
               {result.limitingFactor === 'none' && <Badge text="All items fit" color="green" />}

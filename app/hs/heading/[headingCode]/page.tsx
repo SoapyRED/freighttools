@@ -59,21 +59,21 @@ export default async function HeadingPage(
 
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <nav style={{ marginBottom: 20, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+          <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <Link href="/hs" style={{ color: '#8f9ab0', textDecoration: 'none' }}>HS Codes</Link>
+            <Link href="/hs" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>HS Codes</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <Link href={`/hs/section/${details.section.toLowerCase()}`} style={{ color: '#8f9ab0', textDecoration: 'none' }}>Section {details.section}</Link>
+            <Link href={`/hs/section/${details.section.toLowerCase()}`} style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Section {details.section}</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <Link href={`/hs/chapter/${details.parent}`} style={{ color: '#8f9ab0', textDecoration: 'none' }}>Chapter {details.parent}</Link>
+            <Link href={`/hs/chapter/${details.parent}`} style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Chapter {details.parent}</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
             <span style={{ color: '#e87722' }}>{formatHsCode(headingCode)}</span>
           </nav>
           <h1 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.3px' }}>
             HS {formatHsCode(headingCode)} &mdash; <span style={{ color: '#e87722' }}>{details.description}</span>
           </h1>
-          <p style={{ fontSize: 15, color: '#8f9ab0', marginTop: 8 }}>
+          <p style={{ fontSize: 15, color: 'var(--text-faint)', marginTop: 8 }}>
             {subheadings.length} subheadings &middot; Chapter {details.parent}: {chapter?.description ?? ''}
           </p>
         </div>
@@ -100,7 +100,7 @@ export default async function HeadingPage(
           );
         })()}
 
-        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', marginBottom: 16, letterSpacing: '-0.3px' }}>
+        <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           Subheadings
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 40 }}>
@@ -108,7 +108,7 @@ export default async function HeadingPage(
             <HsLinkCard key={sh.hscode} href={`/hs/code/${sh.hscode}`} code={formatHsCode(sh.hscode)} description={sh.description} />
           ))}
           {subheadings.length === 0 && (
-            <p style={{ color: '#8f9ab0', fontSize: 14, padding: '16px 0' }}>
+            <p style={{ color: 'var(--text-faint)', fontSize: 14, padding: '16px 0' }}>
               No 6-digit subheadings listed for this heading in the HS 2022 data.
             </p>
           )}
@@ -120,9 +120,9 @@ export default async function HeadingPage(
           </Link>
         </div>
 
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 20, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 20, lineHeight: 1.6 }}>
           Found an error?{' '}
-          <a href="mailto:contact@freightutils.com?subject=Data%20correction%20—%20HS%20codes" style={{ color: '#8f9ab0', textDecoration: 'underline' }}>
+          <a href="mailto:contact@freightutils.com?subject=Data%20correction%20—%20HS%20codes" style={{ color: 'var(--text-faint)', textDecoration: 'underline' }}>
             Let us know &rarr; contact@freightutils.com
           </a>
         </p>

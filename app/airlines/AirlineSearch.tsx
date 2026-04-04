@@ -31,7 +31,7 @@ function PaginationBar({ currentPage, totalPages, setPage }: {
     color: 'var(--text, #1e2535)', transition: 'all 0.1s',
   };
   const active: React.CSSProperties = { ...base, background: '#EF9F27', color: '#1a1a1a', border: '1.5px solid #EF9F27', cursor: 'default' };
-  const disabled: React.CSSProperties = { ...base, color: '#8f9ab0', cursor: 'not-allowed', background: 'var(--grey-50, #f8f9fb)' };
+  const disabled: React.CSSProperties = { ...base, color: 'var(--text-faint)', cursor: 'not-allowed', background: 'var(--grey-50, #f8f9fb)' };
 
   // Build page numbers: first, last, and 2 around current
   const pageSet = new Set<number>();
@@ -55,7 +55,7 @@ function PaginationBar({ currentPage, totalPages, setPage }: {
         style={currentPage === 0 ? disabled : base}>&laquo;</button>
       {withGaps.map((item, i) =>
         item === 'ellipsis'
-          ? <span key={`e${i}`} style={{ fontSize: 13, color: '#8f9ab0', padding: '0 2px' }}>&hellip;</span>
+          ? <span key={`e${i}`} style={{ fontSize: 13, color: 'var(--text-faint)', padding: '0 2px' }}>&hellip;</span>
           : <button key={item} onClick={() => setPage(() => item as number)}
               style={item === currentPage ? active : base}>{(item as number) + 1}</button>
       )}
@@ -133,7 +133,7 @@ export default function AirlineSearch({ index }: Props) {
       <div style={{ position: 'relative', marginBottom: 16 }}>
         <div style={{
           position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)',
-          color: '#8f9ab0', fontSize: 18, pointerEvents: 'none',
+          color: 'var(--text-faint)', fontSize: 18, pointerEvents: 'none',
         }}>
           {'\u{1F50D}'}
         </div>
@@ -149,9 +149,9 @@ export default function AirlineSearch({ index }: Props) {
             fontSize: 16,
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 500,
-            color: '#1e2535',
+            color: 'var(--text)',
             background: '#fff',
-            border: '2px solid #d8dce6',
+            border: '2px solid var(--border)',
             borderRadius: 10,
             outline: 'none',
             transition: 'border-color 0.15s, box-shadow 0.15s',
@@ -228,7 +228,7 @@ export default function AirlineSearch({ index }: Props) {
       </div>
 
       {/* Community contribution messaging */}
-      <p style={{ fontSize: 12, color: '#8f9ab0', marginBottom: 16, textAlign: 'center' }}>
+      <p style={{ fontSize: 12, color: 'var(--text-faint)', marginBottom: 16, textAlign: 'center' }}>
         This database is built and maintained with help from the freight community. Missing an airline or spotted an error? Let us know at{' '}
         <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
           contact@freightutils.com
@@ -238,17 +238,17 @@ export default function AirlineSearch({ index }: Props) {
       {/* Heading / result count */}
       {!filtered.isSearch && (
         <div style={{ marginBottom: 16 }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1a2332', marginBottom: 4 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
             {cargoOnly ? 'Cargo Airlines' : 'All Airlines'}
           </h2>
-          <p style={{ fontSize: 13, color: '#8f9ab0' }}>
+          <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
             {totalItems.toLocaleString()} {cargoOnly ? 'cargo ' : ''}airlines — page {currentPage + 1} of {totalPages}
           </p>
         </div>
       )}
 
       {filtered.isSearch && totalItems > 0 && (
-        <p style={{ fontSize: 13, color: '#8f9ab0', marginBottom: 12 }}>
+        <p style={{ fontSize: 13, color: 'var(--text-faint)', marginBottom: 12 }}>
           {totalItems.toLocaleString()} result{totalItems !== 1 ? 's' : ''}
           {cargoOnly ? ' (cargo airlines only)' : ''}
           {totalPages > 1 ? ` — page ${currentPage + 1} of ${totalPages}` : ''}
@@ -258,14 +258,14 @@ export default function AirlineSearch({ index }: Props) {
       {/* No results */}
       {isEmpty && (
         <div style={{
-          background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+          background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
           padding: '24px', textAlign: 'center',
         }}>
-          <p style={{ color: '#5a6478', marginBottom: 8 }}>
+          <p style={{ color: 'var(--text-muted)', marginBottom: 8 }}>
             No results for <strong>&ldquo;{query}&rdquo;</strong>
             {cargoOnly ? ' in cargo airlines' : ''}
           </p>
-          <p style={{ color: '#8f9ab0', fontSize: 13 }}>
+          <p style={{ color: 'var(--text-faint)', fontSize: 13 }}>
             Try an airline name (e.g. Emirates), IATA code (EK), ICAO code (UAE), or AWB prefix (176)
           </p>
         </div>
@@ -276,7 +276,7 @@ export default function AirlineSearch({ index }: Props) {
 
       {/* Results table */}
       {pageItems.length > 0 && (
-        <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #d8dce6', minHeight: 600 }}>
+        <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', minHeight: 600 }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
             <thead>
               <tr style={{ background: '#1a2332', color: '#fff' }}>
@@ -342,7 +342,7 @@ export default function AirlineSearch({ index }: Props) {
                           </span>
                         ))}
                         {airline.verified === false && (
-                          <span style={{ fontSize: 10, color: '#8f9ab0', fontStyle: 'italic' }}>(unverified)</span>
+                          <span style={{ fontSize: 10, color: 'var(--text-faint)', fontStyle: 'italic' }}>(unverified)</span>
                         )}
                       </span>
                     ) : (

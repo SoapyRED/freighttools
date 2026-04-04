@@ -31,26 +31,26 @@ export default function CommonHsCodes() {
         onClick={() => setOpen(!open)}
         style={{
           display: 'flex', alignItems: 'center', gap: 8, width: '100%',
-          background: 'none', border: '1px solid #d8dce6', borderRadius: 10,
+          background: 'none', border: '1px solid var(--border)', borderRadius: 10,
           padding: '12px 16px', cursor: 'pointer', fontFamily: "'Outfit', sans-serif",
         }}
       >
-        <span style={{ fontSize: 14, fontWeight: 700, color: '#1a2332', flex: 1, textAlign: 'left' }}>
+        <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', flex: 1, textAlign: 'left' }}>
           Common freight HS codes
         </span>
-        <span style={{ fontSize: 12, color: '#8f9ab0', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+        <span style={{ fontSize: 12, color: 'var(--text-faint)', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
           &#9660;
         </span>
       </button>
 
       {open && (
-        <div style={{ overflowX: 'auto', borderRadius: '0 0 10px 10px', border: '1px solid #d8dce6', borderTop: 'none' }}>
+        <div style={{ overflowX: 'auto', borderRadius: '0 0 10px 10px', border: '1px solid var(--border)', borderTop: 'none' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
             <thead>
               <tr style={{ background: '#f8f9fc' }}>
-                <th style={{ padding: '8px 14px', textAlign: 'left', fontWeight: 600, fontSize: 11, textTransform: 'uppercase', color: '#5a6478', letterSpacing: '0.3px' }}>Code</th>
-                <th style={{ padding: '8px 14px', textAlign: 'left', fontWeight: 600, fontSize: 11, textTransform: 'uppercase', color: '#5a6478', letterSpacing: '0.3px' }}>Description</th>
-                <th style={{ padding: '8px 14px', textAlign: 'left', fontWeight: 600, fontSize: 11, textTransform: 'uppercase', color: '#5a6478', letterSpacing: '0.3px' }}></th>
+                <th style={{ padding: '8px 14px', textAlign: 'left', fontWeight: 600, fontSize: 11, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.3px' }}>Code</th>
+                <th style={{ padding: '8px 14px', textAlign: 'left', fontWeight: 600, fontSize: 11, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.3px' }}>Description</th>
+                <th style={{ padding: '8px 14px', textAlign: 'left', fontWeight: 600, fontSize: 11, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.3px' }}></th>
               </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@ export default function CommonHsCodes() {
                       {code}
                     </Link>
                   </td>
-                  <td style={{ padding: '8px 14px', color: '#1e2535' }}>
+                  <td style={{ padding: '8px 14px', color: 'var(--text)' }}>
                     {desc}
                     {dg && (
                       <Link href="/adr" className="dg-badge">
@@ -70,7 +70,7 @@ export default function CommonHsCodes() {
                     )}
                   </td>
                   <td style={{ padding: '8px 14px' }}>
-                    <Link href={`/hs?code=${code}`} style={{ color: '#8f9ab0', fontSize: 12, textDecoration: 'none' }}>
+                    <Link href={`/hs?code=${code}`} style={{ color: 'var(--text-faint)', fontSize: 12, textDecoration: 'none' }}>
                       View &rarr;
                     </Link>
                   </td>

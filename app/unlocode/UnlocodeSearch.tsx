@@ -85,7 +85,7 @@ export default function UnlocodeSearch() {
       <div style={card}>
         <div style={cardHead}>
           <span>Search Locations</span>
-          <span style={{ fontSize: 12, fontWeight: 400, color: '#8f9ab0' }}>
+          <span style={{ fontSize: 12, fontWeight: 400, color: 'var(--text-faint)' }}>
             {total.toLocaleString()} locations in database
           </span>
         </div>
@@ -124,7 +124,7 @@ export default function UnlocodeSearch() {
         <div style={card}>
           <div style={cardHead}>
             <span>Results</span>
-            <span style={{ fontSize: 12, fontWeight: 400, color: '#8f9ab0' }}>{results.length} found</span>
+            <span style={{ fontSize: 12, fontWeight: 400, color: 'var(--text-faint)' }}>{results.length} found</span>
           </div>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
@@ -174,7 +174,7 @@ export default function UnlocodeSearch() {
         <div style={card}>
           <div style={cardHead}>
             <span>{selected.code} — {selected.name}</span>
-            <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', color: '#8f9ab0', cursor: 'pointer', fontSize: 14 }}>&larr; Back to results</button>
+            <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', color: 'var(--text-faint)', cursor: 'pointer', fontSize: 14 }}>&larr; Back to results</button>
           </div>
           <div style={{ padding: 20 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>

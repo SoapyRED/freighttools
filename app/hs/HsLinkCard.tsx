@@ -13,7 +13,7 @@ export default function HsLinkCard({ href, code, description, arrow = true }: Pr
   return (
     <Link href={href} style={{ textDecoration: 'none' }}>
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+        background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
         padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 14,
         transition: 'border-color 0.12s',
       }}
@@ -26,7 +26,7 @@ export default function HsLinkCard({ href, code, description, arrow = true }: Pr
         }}>
           {code}
         </div>
-        <div style={{ fontSize: 14, fontWeight: 600, color: '#1a2332', flex: 1 }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', flex: 1 }}>
           {description}
         </div>
         {arrow && <div style={{ color: '#d8dce6', fontSize: 16, flexShrink: 0 }}>&rarr;</div>}
@@ -81,7 +81,7 @@ export function HsSmallCard({ href, code, description }: SmallCardProps) {
   return (
     <Link href={href} style={{ textDecoration: 'none' }}>
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+        background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
         padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12,
         transition: 'border-color 0.12s',
       }}
@@ -94,7 +94,7 @@ export function HsSmallCard({ href, code, description }: SmallCardProps) {
         }}>
           {code}
         </div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1a2332', flex: 1 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', flex: 1 }}>
           {description}
         </div>
         <div style={{ color: '#d8dce6', fontSize: 14, flexShrink: 0 }}>&rarr;</div>

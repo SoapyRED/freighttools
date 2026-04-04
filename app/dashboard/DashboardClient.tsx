@@ -49,22 +49,22 @@ export default function DashboardClient({ email, plan, apiKey, usageToday, usage
   const s = {
     page: { maxWidth: 700, margin: '40px auto', padding: '0 20px', fontFamily: 'Outfit, system-ui, sans-serif' } as const,
     header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 } as const,
-    h1: { fontSize: 24, fontWeight: 700, color: '#1a2332', margin: 0 } as const,
+    h1: { fontSize: 24, fontWeight: 700, color: 'var(--text)', margin: 0 } as const,
     logoutBtn: { background: 'none', border: '1px solid #d1d5db', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: 'pointer', color: '#6b7280' } as const,
-    card: { background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, padding: 24, marginBottom: 20, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as const,
-    label: { fontSize: 11, fontWeight: 700, textTransform: 'uppercase' as const, letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 8 } as const,
+    card: { background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 24, marginBottom: 20, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as const,
+    label: { fontSize: 11, fontWeight: 700, textTransform: 'uppercase' as const, letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 8 } as const,
     badge: (color: string) => ({
       display: 'inline-block', padding: '4px 12px', borderRadius: 20, fontSize: 12,
       fontWeight: 700, background: color === 'pro' ? '#e87722' : '#e5e7eb',
       color: color === 'pro' ? '#fff' : '#374151',
     }),
     keyBox: { display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 } as const,
-    keyText: { fontFamily: 'monospace', fontSize: 14, background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 6, padding: '10px 14px', flex: 1, wordBreak: 'break-all' as const } as const,
+    keyText: { fontFamily: 'monospace', fontSize: 14, background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 6, padding: '10px 14px', flex: 1, wordBreak: 'break-all' as const } as const,
     btn: (bg: string) => ({ padding: '8px 16px', fontSize: 13, fontWeight: 600, color: '#fff', background: bg, border: 'none', borderRadius: 6, cursor: 'pointer' }),
     statsGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 12 } as const,
     stat: { textAlign: 'center' as const } as const,
-    statNum: { fontSize: 28, fontWeight: 700, color: '#1a2332' } as const,
-    statLabel: { fontSize: 12, color: '#8f9ab0', marginTop: 4 } as const,
+    statNum: { fontSize: 28, fontWeight: 700, color: 'var(--text)' } as const,
+    statLabel: { fontSize: 12, color: 'var(--text-faint)', marginTop: 4 } as const,
     bar: { height: 8, background: '#e5e7eb', borderRadius: 4, marginTop: 16, overflow: 'hidden' as const } as const,
   };
 
@@ -150,7 +150,7 @@ export default function DashboardClient({ email, plan, apiKey, usageToday, usage
       {/* Quick Start */}
       <div style={s.card}>
         <div style={s.label}>Quick Start</div>
-        <pre style={{ background: '#1a2332', color: '#c9cdd6', padding: 16, borderRadius: 8, fontSize: 13, overflow: 'auto', margin: 0 }}>
+        <pre style={{ background: '#1a2332', color: 'var(--text-muted)', padding: 16, borderRadius: 8, fontSize: 13, overflow: 'auto', margin: 0 }}>
 {`curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=12" \\
   -H "Authorization: Bearer ${apiKey.slice(0, 10)}..."`}
         </pre>

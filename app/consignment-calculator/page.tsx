@@ -24,7 +24,7 @@ export default function ConsignmentPage() {
         <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           Multi-Item Consignment <span style={{ color: '#e87722' }}>Calculator</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 580, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 580, margin: '0 auto' }}>
           Calculate total CBM, weight, loading metres, and chargeable weight for mixed consignments. Add multiple items and get per-line and grand totals instantly.
         </p>
         <DataTimestamp text="Calculation engine verified April 2026" />

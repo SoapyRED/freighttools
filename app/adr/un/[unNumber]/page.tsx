@@ -91,18 +91,18 @@ function StatCard({ label, value, sub }: { label: string; value: string; sub?: s
   return (
     <div style={{
       background: '#fff',
-      border: '1px solid #d8dce6',
+      border: '1px solid var(--border)',
       borderRadius: 10,
       padding: '16px 18px',
     }}>
-      <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 6 }}>
+      <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 6 }}>
         {label}
       </div>
-      <div style={{ fontSize: 20, fontWeight: 700, color: '#1a2332', lineHeight: 1.2 }}>
+      <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', lineHeight: 1.2 }}>
         {value}
       </div>
       {sub && (
-        <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 4 }}>{sub}</div>
+        <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 4 }}>{sub}</div>
       )}
     </div>
   );
@@ -131,20 +131,20 @@ function SectionBox({ title, children }: { title: string; children: React.ReactN
   return (
     <div style={{
       background: '#fff',
-      border: '1px solid #d8dce6',
+      border: '1px solid var(--border)',
       borderRadius: 10,
       overflow: 'hidden',
       marginBottom: 16,
     }}>
       <div style={{
-        background: '#f7f8fa',
+        background: 'var(--bg)',
         borderBottom: '1px solid #eef0f4',
         padding: '11px 18px',
         fontSize: 12,
         fontWeight: 700,
         textTransform: 'uppercase',
         letterSpacing: '0.5px',
-        color: '#5a6478',
+        color: 'var(--text-muted)',
       }}>
         {title}
       </div>
@@ -200,7 +200,7 @@ function VariantCard({ entry, showHeader }: { entry: AdrEntry; showHeader: boole
         {/* PSN if multi-variant (different names per variant) */}
         {showHeader && (
           <h3 style={{
-            fontSize: 16, fontWeight: 700, color: '#1a2332',
+            fontSize: 16, fontWeight: 700, color: 'var(--text)',
             marginBottom: 16, lineHeight: 1.4,
           }}>
             {entry.proper_shipping_name}
@@ -257,7 +257,7 @@ function VariantCard({ entry, showHeader }: { entry: AdrEntry; showHeader: boole
                 <Tag key={label} value={`Label ${label}`} colour="#1a2332" />
               ))}
             </div>
-            <p style={{ fontSize: 13, color: '#8f9ab0', marginTop: 10 }}>
+            <p style={{ fontSize: 13, color: 'var(--text-faint)', marginTop: 10 }}>
               These labels must be displayed on packages and vehicle placards in accordance with ADR 2025.
             </p>
           </SectionBox>
@@ -271,7 +271,7 @@ function VariantCard({ entry, showHeader }: { entry: AdrEntry; showHeader: boole
                 <Tag key={sp} value={`SP ${sp}`} />
               ))}
             </div>
-            <p style={{ fontSize: 13, color: '#8f9ab0', marginTop: 10 }}>
+            <p style={{ fontSize: 13, color: 'var(--text-faint)', marginTop: 10 }}>
               Refer to ADR 2025 Chapter 3.3 for full text of each provision.
             </p>
           </SectionBox>
@@ -291,13 +291,13 @@ function VariantCard({ entry, showHeader }: { entry: AdrEntry; showHeader: boole
               { label: 'Tunnel Restriction', value: entry.tunnel_restriction_code ?? 'None', sub: 'Code governing tunnel passage' },
             ].map(item => (
               <div key={item.label}>
-                <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#8f9ab0', marginBottom: 4 }}>
+                <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--text-faint)', marginBottom: 4 }}>
                   {item.label}
                 </div>
-                <div style={{ fontSize: 17, fontWeight: 700, color: '#1a2332', marginBottom: 2 }}>
+                <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 2 }}>
                   {item.value}
                 </div>
-                <div style={{ fontSize: 12, color: '#8f9ab0' }}>{item.sub}</div>
+                <div style={{ fontSize: 12, color: 'var(--text-faint)' }}>{item.sub}</div>
               </div>
             ))}
           </div>
@@ -372,10 +372,10 @@ export default async function UnNumberPage(
       <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
-          <nav style={{ marginBottom: 20, fontSize: 13, color: '#8f9ab0' }} aria-label="Breadcrumb">
-            <Link href="/" style={{ color: '#8f9ab0', textDecoration: 'none' }}>FreightUtils</Link>
+          <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
+            <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
             <span style={{ margin: '0 8px' }}>›</span>
-            <Link href="/adr" style={{ color: '#8f9ab0', textDecoration: 'none' }}>ADR Lookup</Link>
+            <Link href="/adr" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>ADR Lookup</Link>
             <span style={{ margin: '0 8px' }}>›</span>
             <span style={{ color: '#e87722' }}>UN {primary.un_number}</span>
           </nav>
@@ -513,9 +513,9 @@ export default async function UnNumberPage(
 
         <ToolDisclaimer text="ADR reference data only. Classification is the consignor's legal responsibility. Consult a DGSA for compliance decisions." />
 
-        <p style={{ fontSize: 12, color: '#8f9ab0', marginTop: 20, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 20, lineHeight: 1.6 }}>
           Found an error?{' '}
-          <a href="mailto:contact@freightutils.com?subject=Data%20correction%20—%20ADR" style={{ color: '#8f9ab0', textDecoration: 'underline' }}>
+          <a href="mailto:contact@freightutils.com?subject=Data%20correction%20—%20ADR" style={{ color: 'var(--text-faint)', textDecoration: 'underline' }}>
             Let us know &rarr; contact@freightutils.com
           </a>
         </p>
@@ -533,11 +533,11 @@ export default async function UnNumberPage(
           {prev ? (
             <Link href={`/adr/un/${prev}`} style={{
               background: '#fff',
-              border: '1px solid #d8dce6',
+              border: '1px solid var(--border)',
               borderRadius: 8,
               padding: '11px 16px',
               textDecoration: 'none',
-              color: '#1a2332',
+              color: 'var(--text)',
               fontSize: 13,
               fontWeight: 600,
               display: 'flex',
@@ -550,11 +550,11 @@ export default async function UnNumberPage(
 
           <Link href="/adr" style={{
             background: '#fff',
-            border: '1px solid #d8dce6',
+            border: '1px solid var(--border)',
             borderRadius: 8,
             padding: '11px 16px',
             textDecoration: 'none',
-            color: '#5a6478',
+            color: 'var(--text-muted)',
             fontSize: 13,
             fontWeight: 600,
           }}>
@@ -564,11 +564,11 @@ export default async function UnNumberPage(
           {next ? (
             <Link href={`/adr/un/${next}`} style={{
               background: '#fff',
-              border: '1px solid #d8dce6',
+              border: '1px solid var(--border)',
               borderRadius: 8,
               padding: '11px 16px',
               textDecoration: 'none',
-              color: '#1a2332',
+              color: 'var(--text)',
               fontSize: 13,
               fontWeight: 600,
               display: 'flex',

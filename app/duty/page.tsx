@@ -22,7 +22,7 @@ export default function DutyPage() {
         <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
           UK Import Duty & VAT <span style={{ color: '#e87722' }}>Estimator</span>
         </h1>
-        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 580, margin: '0 auto' }}>
+        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 580, margin: '0 auto' }}>
           Estimate import duty and VAT for goods entering the United Kingdom. Uses live GOV.UK Trade Tariff data.
         </p>
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
@@ -76,7 +76,8 @@ export default function DutyPage() {
             When to use this tool vs a customs broker
           </h3>
           <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
-            This calculator gives you a reliable estimate for standard imports. Use it for budgeting, quoting landed costs to customers, or checking whether an import is commercially viable. For actual customs declarations, you should use a licensed customs broker or freight forwarder &mdash; they handle classification, preferential origin claims, trade remedies, and compliance requirements that go beyond a simple duty/VAT calculation. For complex goods (chemicals, dual-use items, food products), professional classification advice is essential.
+            This calculator gives you a reliable estimate for standard imports. Use it for budgeting, quoting landed costs to customers, or checking whether an import is commercially viable. For actual customs declarations, you should use a licensed customs broker or freight forwarder &mdash; they handle classification, preferential origin claims, trade remedies, and compliance requirements that go beyond a simple duty/VAT calculation. For complex goods (chemicals, dual-use items, food products), professional classification advice is essential. For official rates, check the{' '}
+            <a href="https://www.trade-tariff.service.gov.uk" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>GOV.UK Trade Tariff</a> directly.
           </p>
 
           <details style={{ marginTop: 24, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
