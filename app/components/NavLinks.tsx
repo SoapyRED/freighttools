@@ -187,17 +187,18 @@ export default function NavLinks() {
         {mobileOpen ? '\u2715' : '\u2630'}
       </button>
 
-      {/* Mobile dropdown */}
+      {/* Mobile dropdown — fixed to viewport so it spans full width */}
       {mobileOpen && (
         <div
           className="nav-mobile"
           style={{
-            position: 'absolute', top: '100%', right: 0, left: 0,
+            position: 'fixed', top: 56, left: 0, right: 0,
             background: 'var(--bg, #fff)',
             borderBottom: '1px solid var(--grey-100, #d8dce6)',
-            padding: '8px 16px 12px', zIndex: 50,
+            padding: '8px 16px 12px', zIndex: 99,
             display: 'none', flexDirection: 'column', gap: 0,
             boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+            maxHeight: 'calc(100vh - 56px)', overflowY: 'auto',
           }}
         >
           {nav.map((entry, i) => {
