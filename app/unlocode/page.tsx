@@ -62,6 +62,27 @@ export default function UnlocodePage() {
             ))}
           </div>
 
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>
+            How UN/LOCODE codes are structured
+          </h3>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            Each UN/LOCODE is exactly 5 characters: a 2-letter ISO 3166 country code followed by a 3-character location code. For example, <strong>GB</strong>LHR identifies London Heathrow in the United Kingdom, <strong>NL</strong>RTM identifies Rotterdam in the Netherlands, and <strong>CN</strong>SHA identifies Shanghai in China. The location code is typically derived from the location name but is not always intuitive &mdash; some codes are assigned sequentially when the name-based abbreviation is already taken.
+          </p>
+
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>
+            Common use cases in freight
+          </h3>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            UN/LOCODE codes appear throughout international trade documentation. They are used on bills of lading (port of loading, port of discharge), air waybills (airport of departure, airport of destination), customs declarations, booking requests, and shipping instructions. Transport management systems (TMS) and enterprise resource planning (ERP) systems use UN/LOCODE as the standard identifier for locations, enabling automated routing, rate calculation, and compliance checks. If you&apos;re building freight software, UN/LOCODE is the de facto standard for identifying transport locations programmatically.
+          </p>
+
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>
+            Data coverage and updates
+          </h3>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            UNECE publishes updated UN/LOCODE editions twice per year (typically in spring and autumn). This database contains {(116129).toLocaleString()} entries from the 2024-2 edition, covering every country in the world. Not all entries have coordinates &mdash; approximately 80% include latitude/longitude data. New locations are added continuously as countries submit updates to UNECE, and existing entries are corrected when errors are identified.
+          </p>
+
           <details style={{ marginTop: 24, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
             <summary style={{ padding: '14px 18px', fontSize: 15, fontWeight: 600, color: 'var(--text)', cursor: 'pointer' }}>
               REST API — GET /api/unlocode

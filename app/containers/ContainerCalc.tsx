@@ -11,9 +11,9 @@ const inputStyle: React.CSSProperties = {
   fontFamily: "'Outfit', sans-serif",
   fontSize: 15,
   fontWeight: 500,
-  color: '#1e2535',
-  background: '#fff',
-  border: '1.5px solid #d8dce6',
+  color: 'var(--text)',
+  background: 'var(--bg-card)',
+  border: '1.5px solid var(--border)',
   borderRadius: 8,
   outline: 'none',
   boxSizing: 'border-box',
@@ -58,7 +58,7 @@ function Field({
           e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
         }}
         onBlur={e => {
-          e.currentTarget.style.borderColor = '#d8dce6';
+          e.currentTarget.style.borderColor = '';
           e.currentTarget.style.boxShadow = 'none';
         }}
       />
@@ -68,7 +68,7 @@ function Field({
 
 function StatCell({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div style={{ background: '#fff', padding: '16px 20px' }}>
+    <div style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
       <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>{label}</div>
       <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>{value}</div>
       {sub && <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>{sub}</div>}
@@ -127,7 +127,7 @@ export default function ContainerCalc() {
     <div>
       {/* Inputs */}
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 20,
       }}>
         <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -192,7 +192,7 @@ export default function ContainerCalc() {
       {/* Results */}
       {result && (
         <div style={{
-          background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
           overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
         }}>
           <div style={{ background: '#243044', padding: '14px 24px' }}>

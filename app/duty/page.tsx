@@ -44,6 +44,41 @@ export default function DutyPage() {
             The UK has <strong>preferential trade agreements</strong> with many countries that reduce or eliminate duty. These require proof of origin documentation. This calculator shows the standard third-country duty rate by default and flags when a preference may be available.
           </p>
 
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>
+            Understanding CIF value
+          </h3>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            HMRC calculates duty on the <strong>CIF value</strong> of your goods &mdash; the cost of the goods plus insurance and freight to the UK port of entry. If you&apos;re buying on an EXW or FOB basis, you need to add the freight and insurance costs to arrive at the CIF value. If the price already includes delivery (CIF, CIP, DAP, DDP terms), the customs value is typically the invoice value. Getting this wrong is one of the most common causes of unexpected duty bills.
+          </p>
+
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>
+            How duty rates are determined
+          </h3>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            The UK Global Tariff replaced the EU Common External Tariff after Brexit. Duty rates depend on two factors: the <strong>commodity code</strong> (a 10-digit classification that identifies exactly what you&apos;re importing) and the <strong>country of origin</strong> (where the goods were manufactured, not where they were shipped from). Electronics like laptops (8471) are 0% duty under the Information Technology Agreement. Clothing (6204) carries 12% duty from most countries. Food products can have complex duty structures including specific duties (per kg) alongside ad valorem rates.
+          </p>
+
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>
+            Preferential trade agreements
+          </h3>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            The UK has free trade agreements with the EU (TCA), Japan (CEPA), Australia, New Zealand, Canada, South Korea, Singapore, Vietnam, and many others through the DCTS (Developing Countries Trading Scheme). These can reduce or eliminate duty entirely, but you need valid proof of origin documentation &mdash; typically a supplier&apos;s declaration or an origin statement on the invoice. Without proof of origin, the standard third-country duty rate applies even if an FTA exists.
+          </p>
+
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>
+            VAT on imports
+          </h3>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            Import VAT is charged at the UK standard rate of 20% on most goods (5% reduced rate on some items like children&apos;s car seats, 0% on certain foods, books, and children&apos;s clothing). The VAT is calculated on the CIF value <strong>plus</strong> the duty amount &mdash; so you pay VAT on the duty itself. VAT-registered businesses can reclaim import VAT on their VAT return, making the effective cost just the duty. The Postponed VAT Accounting (PVA) scheme allows UK VAT-registered importers to account for import VAT on their return without paying it at the border.
+          </p>
+
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>
+            When to use this tool vs a customs broker
+          </h3>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            This calculator gives you a reliable estimate for standard imports. Use it for budgeting, quoting landed costs to customers, or checking whether an import is commercially viable. For actual customs declarations, you should use a licensed customs broker or freight forwarder &mdash; they handle classification, preferential origin claims, trade remedies, and compliance requirements that go beyond a simple duty/VAT calculation. For complex goods (chemicals, dual-use items, food products), professional classification advice is essential.
+          </p>
+
           <details style={{ marginTop: 24, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
             <summary style={{ padding: '14px 18px', fontSize: 15, fontWeight: 600, color: 'var(--text)', cursor: 'pointer' }}>
               REST API — POST /api/duty

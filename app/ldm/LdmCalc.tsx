@@ -189,7 +189,7 @@ export default function LdmCalc() {
                 <label>Stackable?</label>
                 <div style={s.toggleRow}>
                   <div>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: '#1e2535' }}>Pallets can be stacked</div>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Pallets can be stacked</div>
                     <div style={{ fontSize: 12, color: '#5a6478', marginTop: 1 }}>Halves the floor space needed when enabled</div>
                   </div>
                   <label style={{ position: 'relative', width: 44, height: 24, flexShrink: 0, cursor: 'pointer' }}>
@@ -201,7 +201,7 @@ export default function LdmCalc() {
                     />
                     <span style={{
                       position: 'absolute', inset: 0,
-                      background: stackable ? '#e87722' : '#d8dce6',
+                      background: stackable ? '#e87722' : 'var(--border)',
                       borderRadius: 12,
                       transition: 'background 0.2s',
                     }}>
@@ -349,7 +349,7 @@ export default function LdmCalc() {
               What Are Loading Metres?
             </h2>
             <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
-              A <strong style={{ color: '#1e2535' }}>loading metre (LDM)</strong> is the standard unit used to measure the floor space a consignment occupies in a road freight trailer. One loading metre represents a strip of trailer floor that is <strong style={{ color: '#1e2535' }}>1 metre long and the full width of the trailer</strong>.
+              A <strong style={{ color: 'var(--text)' }}>loading metre (LDM)</strong> is the standard unit used to measure the floor space a consignment occupies in a road freight trailer. One loading metre represents a strip of trailer floor that is <strong style={{ color: 'var(--text)' }}>1 metre long and the full width of the trailer</strong>.
             </p>
             <p style={{ color: '#5a6478', fontSize: 15, marginBottom: 14, lineHeight: 1.7 }}>
               The standard European trailer width is 2.4m (EN 283), while North American 53ft trailers are 2.59m (102 inches) wide. When you select a US vehicle type, this calculator uses 2.59m as the divisor instead of 2.4m. The formula becomes LDM = (L &times; W &times; Qty) &divide; trailer width. Unlike CBM (cubic metres), which measures total volume, LDM measures only floor area &mdash; a tall, light pallet takes up the same LDM as a short, heavy one.

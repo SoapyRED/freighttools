@@ -12,7 +12,7 @@ const inputStyle: React.CSSProperties = {
   fontWeight: 500,
   color: 'var(--text)',
   background: 'var(--bg-card)',
-  border: '1.5px solid #d8dce6',
+  border: '1.5px solid var(--border)',
   borderRadius: 8,
   outline: 'none',
   boxSizing: 'border-box',
@@ -157,7 +157,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
                 e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
               }}
               onBlur={e => {
-                e.currentTarget.style.borderColor = '#d8dce6';
+                e.currentTarget.style.borderColor = '';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             />
@@ -191,7 +191,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
               aria-label="Swap units"
               style={{
                 background: 'var(--bg)',
-                border: '1.5px solid #d8dce6',
+                border: '1.5px solid var(--border)',
                 borderRadius: 8,
                 width: 44,
                 height: 44,
@@ -210,7 +210,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
                 e.currentTarget.style.background = '#fff7ed';
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = '#d8dce6';
+                e.currentTarget.style.borderColor = '';
                 e.currentTarget.style.background = '#f7f8fa';
               }}
             >

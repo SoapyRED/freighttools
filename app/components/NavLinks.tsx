@@ -55,7 +55,12 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
   group: NavGroup; pathname: string; openGroup: string | null; setOpenGroup: (g: string | null) => void;
 }) {
   const isOpen = openGroup === group.label;
-  const hasActive = group.items.some(i => pathname === i.href || pathname.startsWith(i.href + '/'));
+  const hasActive = group.items.some(i => {
+    if (pathname === i.href) return true;
+    // For /adr in Reference, don't match /adr/* guide pages (those belong to Guides)
+    if (i.href === '/adr' && pathname.startsWith('/adr/')) return false;
+    return pathname.startsWith(i.href + '/');
+  });
 
   return (
     <div
@@ -76,7 +81,9 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
         }}
       >
         {group.label}
-        <span style={{ fontSize: 9, opacity: 0.6, marginLeft: 2, transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0)' }}>{'\u25BC'}</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style={{ marginLeft: 2, opacity: 0.5, transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0)' }}>
+          <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
       </button>
 
       <div style={{
@@ -90,7 +97,7 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
         transition: 'opacity 0.15s ease, transform 0.15s ease',
       }}>
         {group.items.map(item => {
-          const active = pathname === item.href || pathname.startsWith(item.href + '/');
+          const active = pathname === item.href || (item.href !== '/adr' && pathname.startsWith(item.href + '/'));
           return (
             <Link
               key={item.href}

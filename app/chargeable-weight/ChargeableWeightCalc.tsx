@@ -25,7 +25,7 @@ const inputStyle: React.CSSProperties = {
   fontWeight: 500,
   color: 'var(--text)',
   background: 'var(--bg-card)',
-  border: '1.5px solid #d8dce6',
+  border: '1.5px solid var(--border)',
   borderRadius: 8,
   outline: 'none',
   boxSizing: 'border-box',
@@ -66,7 +66,7 @@ function Field({
           e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
         }}
         onBlur={e => {
-          e.currentTarget.style.borderColor = '#d8dce6';
+          e.currentTarget.style.borderColor = '';
           e.currentTarget.style.boxShadow = 'none';
           const v = e.target.value;
           if (v) {
