@@ -361,6 +361,41 @@ Note: Short tons (US) = 2,000 lbs. Long tons (UK) = 2,240 lbs. Metric tonnes = 2
 };
 
 // ─────────────────────────────────────────────────────────────
+//  12. Consignment Calculator
+// ─────────────────────────────────────────────────────────────
+
+const consignmentCalculator: ToolDef = {
+  name: 'consignment_calculator',
+  description: `Calculate total CBM, weight, LDM, and chargeable weight for multi-item mixed consignments.
+
+Accepts multiple line items with different dimensions, quantities, weights, and stackability. Returns per-item breakdown, grand totals, trailer utilisation (against 13.6m artic), and suggested vehicle size.
+
+Use this tool when you need to:
+- Calculate freight metrics for a mixed consignment with multiple item types
+- Get total CBM, weight, loading metres, and chargeable weight across all items
+- Determine if a mixed load fits on a single trailer
+- Get both air freight and road freight chargeable weights
+
+Chargeable weight (air): 1 CBM = 167 kg. Chargeable weight (road): 1 LDM = 1,750 kg.`,
+
+  schema: z.object({
+    items: z.array(z.object({
+      description: z.string().optional().describe('Item label'),
+      lengthCm: z.number().positive().describe('Length in cm'),
+      widthCm: z.number().positive().describe('Width in cm'),
+      heightCm: z.number().positive().describe('Height in cm'),
+      quantity: z.number().int().positive().describe('Number of pieces'),
+      grossWeightKg: z.number().describe('Weight per piece in kg'),
+      stackable: z.boolean().optional().describe('Can items be stacked?'),
+      palletType: z.enum(['none', 'euro', 'uk', 'us']).optional().describe('Pallet type'),
+    })).describe('Array of consignment items'),
+  }),
+
+  handler: async (args) =>
+    apiPost('consignment', { items: args.items }),
+};
+
+// ─────────────────────────────────────────────────────────────
 //  Export all tools
 // ─────────────────────────────────────────────────────────────
 
@@ -376,4 +411,5 @@ export const ALL_TOOLS: ToolDef[] = [
   incotermsLookup,
   palletFittingCalculator,
   unitConverter,
+  consignmentCalculator,
 ];

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { createMcpHandler } from 'mcp-handler';
 import { calculateCbm } from '@/lib/calculations/cbm';
+import { calculateConsignment } from '@/lib/calculations/consignment';
 import { calculateChargeableWeight, DEFAULT_FACTOR } from '@/lib/calculations/chargeable-weight';
 import { calculateLdm } from '@/lib/calculations/ldm';
 import { lookupByUnNumber, searchByName, filterByClass, normaliseUnNumber } from '@/lib/calculations/adr';
@@ -295,6 +296,27 @@ const handler = createMcpHandler(
         if (!result) return { content: [{ type: 'text' as const, text: `Cannot convert from "${from}" to "${to}"` }], isError: true };
         return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
       },
+    );
+
+    // ── Consignment Calculator ────────────────────────────
+    server.tool(
+      'consignment_calculator',
+      `Calculate total CBM, weight, LDM, and chargeable weight for multi-item mixed consignments. Accepts multiple line items with different dimensions, weights, and stackability. Returns per-item breakdown, grand totals, trailer utilisation, and suggested vehicle.`,
+      {
+        items: z.array(z.object({
+          description: z.string().optional().describe('Item label'),
+          lengthCm: z.number().positive().describe('Length in cm'),
+          widthCm: z.number().positive().describe('Width in cm'),
+          heightCm: z.number().positive().describe('Height in cm'),
+          quantity: z.number().int().positive().describe('Number of pieces'),
+          grossWeightKg: z.number().describe('Weight per piece in kg'),
+          stackable: z.boolean().optional().describe('Can items be stacked?'),
+          palletType: z.enum(['none', 'euro', 'uk', 'us']).optional().describe('Pallet type'),
+        })).describe('Array of consignment items'),
+      },
+      async ({ items }) => ({
+        content: [{ type: 'text' as const, text: JSON.stringify(calculateConsignment(items), null, 2) }],
+      }),
     );
 
   },

@@ -22,6 +22,7 @@ const nav: NavEntry[] = [
       { href: '/pallet', label: 'Pallet Fitting' },
       { href: '/containers', label: 'Container Capacity' },
       { href: '/convert', label: 'Unit Converter' },
+      { href: '/consignment-calculator', label: 'Consignment Calculator' },
     ],
   },
   {

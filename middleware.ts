@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { kv } from '@vercel/kv';
 
-// Match only the 11 calculation API routes (not /api/auth, /api/stripe, /api/mcp, /api/subscribe)
+// Match only the 12 calculation API routes (not /api/auth, /api/stripe, /api/mcp, /api/subscribe)
 export const config = {
   matcher: [
     '/api/cbm/:path*',
     '/api/chargeable-weight/:path*',
+    '/api/consignment/:path*',
     '/api/convert/:path*',
     '/api/adr',
     '/api/adr-calculator/:path*',
