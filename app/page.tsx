@@ -25,7 +25,7 @@ const toolGroups = [
     label: 'Dangerous Goods',
     tools: [
       { href: '/adr', label: '/api/adr', title: 'ADR Dangerous Goods', desc: '2,939 entries from UNECE ADR 2025 — lookup by UN number and 1.1.3.6 exemption calculator', icon: '⚠️' },
-      { href: '/adr-calculator', label: '/api/adr-calculator', title: 'ADR Exemption Calculator', desc: '1.1.3.6 small load exemption check for mixed hazardous loads', icon: '🧮' },
+      { href: '/adr?tab=exemption', label: '/api/adr-calculator', title: 'ADR Exemption Calculator', desc: '1.1.3.6 small load exemption check for mixed hazardous loads', icon: '🧮' },
     ],
   },
   {

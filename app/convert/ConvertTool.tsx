@@ -37,7 +37,7 @@ const selectStyle: React.CSSProperties = {
 
 // ─── Freight-specific virtual units for the "To" dropdown ────────
 const FREIGHT_UNITS: UnitDef[] = [
-  { code: 'chargeable_kg', name: 'Chargeable Weight (kg)', group: 'freight', symbol: 'kg' },
+  { code: 'chargeable_kg', name: 'Chargeable Weight', group: 'freight', symbol: 'kg' },
   { code: 'freight_tonnes', name: 'Freight Tonnes (W/M)', group: 'freight', symbol: 'FT' },
 ];
 
@@ -110,12 +110,12 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
     setTo(from);
   }
 
-  const result = useMemo(() => {
+  const { result, convertError } = useMemo(() => {
     const v = parseFloat(value);
-    if (!v && v !== 0) return null;
+    if (!v && v !== 0) return { result: null, convertError: null };
     const r = convert(v, from, to);
-    if ('error' in r) return null;
-    return r;
+    if ('error' in r) return { result: null, convertError: String(r.error) };
+    return { result: r, convertError: null };
   }, [value, from, to]);
 
   // Format large/small numbers nicely
@@ -249,8 +249,8 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
         </div>
 
         {!result ? (
-          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#8f9ab0', fontSize: 14 }}>
-            Enter a value above to convert
+          <div style={{ padding: '40px 24px', textAlign: 'center', color: convertError ? '#dc2626' : '#8f9ab0', fontSize: 14 }}>
+            {convertError ? 'These units cannot be converted directly. Choose units from the same category.' : 'Enter a value above to convert'}
           </div>
         ) : (
           <div style={{ padding: '28px 24px', textAlign: 'center' }}>

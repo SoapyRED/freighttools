@@ -69,6 +69,13 @@ function Field({
         onBlur={e => {
           e.currentTarget.style.borderColor = '#d8dce6';
           e.currentTarget.style.boxShadow = 'none';
+          // Strip leading zeros and clamp negatives
+          const v = e.target.value;
+          if (v && !readOnly) {
+            const n = parseFloat(v);
+            if (n < 0) onChange('0');
+            else if (v !== String(n) && !isNaN(n)) onChange(String(n));
+          }
         }}
       />
     </div>

@@ -110,61 +110,63 @@ export default function ConsignmentCalc() {
         <div style={{ padding: 16 }}>
           {rows.map((row, idx) => (
             <div key={row.id} style={{
-              display: 'grid',
-              gridTemplateColumns: 'minmax(100px, 1.2fr) repeat(3, minmax(60px, 0.7fr)) minmax(50px, 0.5fr) minmax(70px, 0.8fr) 60px 90px 32px',
-              gap: 8, alignItems: 'end', marginBottom: 12,
-              paddingBottom: 12, borderBottom: idx < rows.length - 1 ? '1px solid var(--border-light)' : 'none',
-            }} className="consignment-row">
-              <div>
-                {idx === 0 && <div style={lbl}>Description</div>}
-                <input style={inp} placeholder="e.g. Pallet A" value={row.description} onChange={e => updateRow(row.id, 'description', e.target.value)} />
-              </div>
-              <div>
-                {idx === 0 && <div style={lbl}>L (cm)</div>}
-                <input style={inp} type="number" placeholder="120" value={row.lengthCm} onChange={e => updateRow(row.id, 'lengthCm', e.target.value)} />
-              </div>
-              <div>
-                {idx === 0 && <div style={lbl}>W (cm)</div>}
-                <input style={inp} type="number" placeholder="80" value={row.widthCm} onChange={e => updateRow(row.id, 'widthCm', e.target.value)} />
-              </div>
-              <div>
-                {idx === 0 && <div style={lbl}>H (cm)</div>}
-                <input style={inp} type="number" placeholder="150" value={row.heightCm} onChange={e => updateRow(row.id, 'heightCm', e.target.value)} />
-              </div>
-              <div>
-                {idx === 0 && <div style={lbl}>Qty</div>}
-                <input style={inp} type="number" placeholder="1" min="1" value={row.quantity} onChange={e => updateRow(row.id, 'quantity', e.target.value)} />
-              </div>
-              <div>
-                {idx === 0 && <div style={lbl}>Weight (kg)</div>}
-                <input style={inp} type="number" placeholder="450" value={row.grossWeightKg} onChange={e => updateRow(row.id, 'grossWeightKg', e.target.value)} />
-              </div>
-              <div>
-                {idx === 0 && <div style={lbl}>Stack</div>}
-                <button
-                  onClick={() => updateRow(row.id, 'stackable', !row.stackable)}
-                  style={{
-                    ...inp, cursor: 'pointer', textAlign: 'center', fontSize: 12, fontWeight: 600,
-                    background: row.stackable ? 'rgba(232,119,34,0.12)' : 'var(--bg)',
-                    color: row.stackable ? '#e87722' : 'var(--text-faint)',
-                    border: row.stackable ? '1px solid #e87722' : '1px solid var(--border)',
-                  }}
-                >
-                  {row.stackable ? 'Yes' : 'No'}
-                </button>
-              </div>
-              <div>
-                {idx === 0 && <div style={lbl}>Pallet</div>}
-                <select style={{ ...inp, fontSize: 12 }} value={row.palletType} onChange={e => updateRow(row.id, 'palletType', e.target.value)}>
-                  <option value="none">None</option>
-                  <option value="euro">Euro</option>
-                  <option value="uk">UK</option>
-                  <option value="us">US</option>
-                </select>
-              </div>
-              <div>
-                {idx === 0 && <div style={lbl}>&nbsp;</div>}
+              marginBottom: 16, paddingBottom: 16,
+              borderBottom: idx < rows.length - 1 ? '1px solid var(--border-light)' : 'none',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-faint)' }}>Item {idx + 1}</span>
                 <button style={removeBtn} onClick={() => removeRow(row.id)} title="Remove item">&times;</button>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 8, marginBottom: 8 }}>
+                <div>
+                  <div style={lbl}>Description</div>
+                  <input style={inp} placeholder="e.g. Pallet A" value={row.description} onChange={e => updateRow(row.id, 'description', e.target.value)} />
+                </div>
+                <div>
+                  <div style={lbl}>L (cm)</div>
+                  <input style={inp} type="number" placeholder="120" value={row.lengthCm} onChange={e => updateRow(row.id, 'lengthCm', e.target.value)} />
+                </div>
+                <div>
+                  <div style={lbl}>W (cm)</div>
+                  <input style={inp} type="number" placeholder="80" value={row.widthCm} onChange={e => updateRow(row.id, 'widthCm', e.target.value)} />
+                </div>
+                <div>
+                  <div style={lbl}>H (cm)</div>
+                  <input style={inp} type="number" placeholder="150" value={row.heightCm} onChange={e => updateRow(row.id, 'heightCm', e.target.value)} />
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8 }}>
+                <div>
+                  <div style={lbl}>Qty</div>
+                  <input style={inp} type="number" placeholder="1" min="1" value={row.quantity} onChange={e => updateRow(row.id, 'quantity', e.target.value)} />
+                </div>
+                <div>
+                  <div style={lbl}>Weight (kg)</div>
+                  <input style={inp} type="number" placeholder="450" value={row.grossWeightKg} onChange={e => updateRow(row.id, 'grossWeightKg', e.target.value)} />
+                </div>
+                <div>
+                  <div style={lbl}>Stackable</div>
+                  <button
+                    onClick={() => updateRow(row.id, 'stackable', !row.stackable)}
+                    style={{
+                      ...inp, cursor: 'pointer', textAlign: 'center', fontSize: 13, fontWeight: 600,
+                      background: row.stackable ? 'rgba(232,119,34,0.12)' : 'var(--bg)',
+                      color: row.stackable ? '#e87722' : 'var(--text-faint)',
+                      border: row.stackable ? '1px solid #e87722' : '1px solid var(--border)',
+                    }}
+                  >
+                    {row.stackable ? 'Yes' : 'No'}
+                  </button>
+                </div>
+                <div>
+                  <div style={lbl}>Pallet</div>
+                  <select style={{ ...inp, fontSize: 13 }} value={row.palletType} onChange={e => updateRow(row.id, 'palletType', e.target.value)}>
+                    <option value="none">None</option>
+                    <option value="euro">Euro</option>
+                    <option value="uk">UK</option>
+                    <option value="us">US</option>
+                  </select>
+                </div>
               </div>
             </div>
           ))}
@@ -295,16 +297,11 @@ export default function ConsignmentCalc() {
         </>
       )}
 
-      {/* Mobile responsive styles */}
+      {/* Mobile responsive */}
       <style>{`
-        @media (max-width: 900px) {
-          .consignment-row {
-            grid-template-columns: 1fr 1fr 1fr !important;
-            gap: 6px !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .consignment-row {
+        @media (max-width: 600px) {
+          div[style*="grid-template-columns: 2fr 1fr 1fr 1fr"],
+          div[style*="grid-template-columns: 1fr 1fr 1fr 1fr"] {
             grid-template-columns: 1fr 1fr !important;
           }
         }

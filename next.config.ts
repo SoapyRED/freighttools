@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: '/api', destination: '/api-docs', permanent: true },
+      { source: '/adr-exemption', destination: '/adr-calculator', permanent: true },
+      { source: '/guides/adr-changes-2025', destination: '/adr/changes-2025', permanent: true },
+      { source: '/guides/adr-tunnel-codes', destination: '/adr/tunnel-codes', permanent: true },
+      { source: '/guides/adr-limited-quantities', destination: '/adr/limited-quantities', permanent: true },
+      { source: '/guides/adr-training-guide', destination: '/adr/training-guide', permanent: true },
     ];
   },
 

@@ -6,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdrCalculatorRedirect() {
-  redirect('/adr');
+  redirect('/adr?tab=exemption');
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { AdrEntrySlim, AdrCalcEntry } from '@/lib/calculations/adr';
 import AdrSearch from './AdrSearch';
 import AdrExemptionCalc from '../adr-calculator/AdrExemptionCalc';
@@ -12,6 +12,12 @@ interface Props {
 
 export default function AdrTabs({ searchIndex, calcIndex }: Props) {
   const [tab, setTab] = useState<'lookup' | 'exemption'>('lookup');
+
+  // Read tab from URL on mount (e.g. ?tab=exemption)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('tab') === 'exemption') setTab('exemption');
+  }, []);
 
   const btnStyle = (active: boolean): React.CSSProperties => ({
     padding: '10px 20px',
