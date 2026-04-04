@@ -13,8 +13,8 @@ const inputStyle: React.CSSProperties = {
   fontFamily: "'Outfit', sans-serif",
   fontSize: 15,
   fontWeight: 500,
-  color: '#1e2535',
-  background: '#fff',
+  color: 'var(--text)',
+  background: 'var(--bg-card)',
   border: '1.5px solid #d8dce6',
   borderRadius: 8,
   outline: 'none',
@@ -57,7 +57,7 @@ function Field({
         readOnly={readOnly}
         style={{
           ...inputStyle,
-          background: readOnly ? '#f7f8fa' : '#fff',
+          background: readOnly ? 'var(--bg)' : 'var(--bg-card)',
           cursor: readOnly ? 'default' : 'text',
         }}
         onFocus={e => {
@@ -138,7 +138,7 @@ export default function CbmCalc({
     <div>
       {/* Inputs */}
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 20,
       }}>
         <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -162,7 +162,7 @@ export default function CbmCalc({
 
       {/* Results */}
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
       }}>
         <div style={{ background: '#243044', padding: '14px 24px' }}>
@@ -232,7 +232,7 @@ export default function CbmCalc({
                 { label: 'Litres',         value: `${result.litres.toLocaleString('en-GB')} L`,  sub: '1 m³ = 1,000 litres' },
                 { label: 'Cubic Inches',   value: `${result.cubicInches.toLocaleString('en-GB')} in³`, sub: '1 m³ = 61,023.7 in³' },
               ].map(cell => (
-                <div key={cell.label} style={{ background: '#fff', padding: '16px 20px' }}>
+                <div key={cell.label} style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
                   <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>{cell.label}</div>
                   <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>{cell.value}</div>
                   <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>{cell.sub}</div>
@@ -247,7 +247,7 @@ export default function CbmCalc({
       <div style={{ marginTop: 20, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <Link href="/chargeable-weight" style={{
           flex: 1, minWidth: 200,
-          background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+          background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 10,
           padding: '14px 18px', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 4,
         }}>
           <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722' }}>Air Freight?</span>
@@ -256,7 +256,7 @@ export default function CbmCalc({
         </Link>
         <Link href="/ldm" style={{
           flex: 1, minWidth: 200,
-          background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+          background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 10,
           padding: '14px 18px', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 4,
         }}>
           <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722' }}>Road Freight?</span>

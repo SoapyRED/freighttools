@@ -10,8 +10,8 @@ const inputStyle: React.CSSProperties = {
   fontFamily: "'Outfit', sans-serif",
   fontSize: 15,
   fontWeight: 500,
-  color: '#1e2535',
-  background: '#fff',
+  color: 'var(--text)',
+  background: 'var(--bg-card)',
   border: '1.5px solid #d8dce6',
   borderRadius: 8,
   outline: 'none',
@@ -130,7 +130,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
     <div>
       {/* Inputs card */}
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 20,
       }}>
         <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -190,7 +190,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
               onClick={swap}
               aria-label="Swap units"
               style={{
-                background: '#f7f8fa',
+                background: 'var(--bg)',
                 border: '1.5px solid #d8dce6',
                 borderRadius: 8,
                 width: 44,
@@ -241,7 +241,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
 
       {/* Result card */}
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
       }}>
         <div style={{ background: '#243044', padding: '14px 24px' }}>
@@ -261,7 +261,7 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
               {formatResult(result.result.value)}
               <span style={{ fontSize: 22, fontWeight: 600, color: '#8f9ab0', letterSpacing: 0 }}> {UNITS[to]?.symbol ?? FREIGHT_UNITS.find(u => u.code === to)?.symbol ?? ''}</span>
             </div>
-            <div style={{ marginTop: 14, fontSize: 14, color: '#5a6478', fontFamily: 'monospace', background: '#f7f8fa', display: 'inline-block', padding: '6px 14px', borderRadius: 6 }}>
+            <div style={{ marginTop: 14, fontSize: 14, color: '#5a6478', fontFamily: 'monospace', background: 'var(--bg)', display: 'inline-block', padding: '6px 14px', borderRadius: 6 }}>
               {result.formula}
             </div>
             {(() => {

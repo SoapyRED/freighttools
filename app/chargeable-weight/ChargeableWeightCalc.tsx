@@ -23,8 +23,8 @@ const inputStyle: React.CSSProperties = {
   fontFamily: "'Outfit', sans-serif",
   fontSize: 15,
   fontWeight: 500,
-  color: '#1e2535',
-  background: '#fff',
+  color: 'var(--text)',
+  background: 'var(--bg-card)',
   border: '1.5px solid #d8dce6',
   borderRadius: 8,
   outline: 'none',
@@ -140,7 +140,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
     <div>
       {/* Input card */}
       <div style={{
-        background: '#fff',
+        background: 'var(--bg-card)',
         border: '1px solid #d8dce6',
         borderRadius: 12,
         overflow: 'hidden',
@@ -199,7 +199,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
 
       {/* Results */}
       <div style={{
-        background: '#fff',
+        background: 'var(--bg-card)',
         border: '1px solid #d8dce6',
         borderRadius: 12,
         overflow: 'hidden',
@@ -283,7 +283,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
                 },
               ].map(cell => (
                 <div key={cell.label} style={{
-                  background: cell.highlight ? '#fffbeb' : '#fff',
+                  background: cell.highlight ? 'rgba(232,119,34,0.06)' : 'var(--bg-card)',
                   padding: '16px 20px',
                   borderLeft: cell.highlight ? '3px solid #e87722' : '3px solid transparent',
                 }}>
@@ -298,7 +298,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
             </div>
 
             {/* Explanation */}
-            <div style={{ padding: '14px 20px', background: '#f7f8fa', fontSize: 13, color: '#5a6478', lineHeight: 1.6 }}>
+            <div style={{ padding: '14px 20px', background: 'var(--bg)', fontSize: 13, color: '#5a6478', lineHeight: 1.6 }}>
               {isVol
                 ? <>Your shipment is <strong>light for its size</strong>. The volumetric weight ({fmt(result.volumetricWeightTotalKg)} kg) exceeds the actual gross weight ({fmt(result.grossWeightKg)} kg), so airlines charge based on the space it occupies — not how much it weighs. Denser packing or smaller outer dimensions would reduce the chargeable weight.</>
                 : <>Your shipment is <strong>dense for its size</strong>. The actual gross weight ({fmt(result.grossWeightKg)} kg) exceeds the volumetric weight ({fmt(result.volumetricWeightTotalKg)} kg), so the actual weight determines the charge. This is typical for heavy goods like machinery, metals, or liquids.</>
@@ -354,7 +354,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
         <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: '#1a2332', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
           The Volumetric Weight Formula
         </h2>
-        <div style={{ background: '#f7f8fa', border: '1px solid #d8dce6', borderRadius: 10, padding: '20px 24px', marginBottom: 16 }}>
+        <div style={{ background: 'var(--bg)', border: '1px solid #d8dce6', borderRadius: 10, padding: '20px 24px', marginBottom: 16 }}>
           <div style={{ marginBottom: 16 }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 6 }}>Metric (cm/kg) — IATA standard</div>
             <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#1a2332' }}>Volumetric Weight (kg) = (L × W × H in cm) ÷ 6,000</div>

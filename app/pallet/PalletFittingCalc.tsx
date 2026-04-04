@@ -12,8 +12,8 @@ const inputStyle: React.CSSProperties = {
   fontFamily: "'Outfit', sans-serif",
   fontSize: 15,
   fontWeight: 500,
-  color: '#1e2535',
-  background: '#fff',
+  color: 'var(--text)',
+  background: 'var(--bg-card)',
   border: '1.5px solid #d8dce6',
   borderRadius: 8,
   outline: 'none',
@@ -56,7 +56,7 @@ function Field({
         readOnly={readOnly}
         style={{
           ...inputStyle,
-          background: readOnly ? '#f7f8fa' : '#fff',
+          background: readOnly ? 'var(--bg)' : 'var(--bg-card)',
           cursor: readOnly ? 'default' : 'text',
         }}
         onFocus={e => {
@@ -226,7 +226,7 @@ export default function PalletFittingCalc({
     <div>
       {/* ── Pallet Dimensions ── */}
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 16,
       }}>
         <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -253,7 +253,7 @@ export default function PalletFittingCalc({
 
       {/* ── Box Dimensions ── */}
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 20,
       }}>
         <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -284,7 +284,7 @@ export default function PalletFittingCalc({
             >
               <span style={{
                 position: 'absolute', top: 3, left: rotate ? 23 : 3,
-                width: 18, height: 18, borderRadius: '50%', background: '#fff',
+                width: 18, height: 18, borderRadius: '50%', background: 'var(--bg-card)',
                 transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
               }} />
             </button>
@@ -300,7 +300,7 @@ export default function PalletFittingCalc({
 
       {/* ── Results ── */}
       <div style={{
-        background: '#fff', border: '1px solid #d8dce6', borderRadius: 12,
+        background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
       }}>
         <div style={{ background: '#243044', padding: '14px 24px' }}>
@@ -390,7 +390,7 @@ export default function PalletFittingCalc({
                   sub: `${result.palletVolumeCbm > 0 ? ((result.wastedSpaceCbm / result.palletVolumeCbm) * 100).toFixed(1) : 0}% of envelope`,
                 },
               ].map(cell => (
-                <div key={cell.label} style={{ background: '#fff', padding: '16px 20px' }}>
+                <div key={cell.label} style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
                   <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>{cell.label}</div>
                   <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>{cell.value}</div>
                   <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>{cell.sub}</div>
@@ -401,7 +401,7 @@ export default function PalletFittingCalc({
             {/* Weight row (conditional) */}
             {result.totalWeightKg != null && (
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#eef0f4', marginTop: 1 }}>
-                <div style={{ background: '#fff', padding: '16px 20px' }}>
+                <div style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
                   <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>Total Weight</div>
                   <div style={{ fontSize: 18, fontWeight: 700, color: '#1a2332' }}>{result.totalWeightKg.toLocaleString('en-GB')} kg</div>
                   <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 2 }}>
@@ -409,7 +409,7 @@ export default function PalletFittingCalc({
                   </div>
                 </div>
                 {result.remainingWeightCapacityKg != null && (
-                  <div style={{ background: '#fff', padding: '16px 20px' }}>
+                  <div style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
                     <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#8f9ab0', marginBottom: 4 }}>Remaining Capacity</div>
                     <div style={{ fontSize: 18, fontWeight: 700, color: result.remainingWeightCapacityKg < 0 ? '#dc2626' : '#1a2332' }}>
                       {result.remainingWeightCapacityKg.toLocaleString('en-GB')} kg
@@ -429,7 +429,7 @@ export default function PalletFittingCalc({
       <div style={{ marginTop: 20, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <Link href="/cbm" style={{
           flex: 1, minWidth: 200,
-          background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+          background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 10,
           padding: '14px 18px', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 4,
         }}>
           <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722' }}>Volume?</span>
@@ -438,7 +438,7 @@ export default function PalletFittingCalc({
         </Link>
         <Link href="/ldm" style={{
           flex: 1, minWidth: 200,
-          background: '#fff', border: '1px solid #d8dce6', borderRadius: 10,
+          background: 'var(--bg-card)', border: '1px solid #d8dce6', borderRadius: 10,
           padding: '14px 18px', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 4,
         }}>
           <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722' }}>Road Freight?</span>

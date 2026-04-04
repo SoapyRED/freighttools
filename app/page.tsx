@@ -8,20 +8,42 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.freightutils.com' },
 };
 
-const tools = [
-  { href: '/ldm', label: '/api/ldm', title: 'Loading Metres', desc: 'Floor space for UK/EU road freight trailers', icon: '📐' },
-  { href: '/cbm', label: '/api/cbm', title: 'CBM Calculator', desc: 'Cubic metres for sea and air shipments', icon: '📦' },
-  { href: '/chargeable-weight', label: '/api/chargeable-weight', title: 'Chargeable Weight', desc: 'Air freight volumetric vs actual weight', icon: '✈️' },
-  { href: '/pallet', label: '/api/pallet', title: 'Pallet Fitting', desc: 'Box fitting with visual layer diagram', icon: '🔲' },
-  { href: '/adr', label: '/api/adr', title: 'ADR Dangerous Goods', desc: '2,939 entries from UNECE ADR 2025 — lookup by UN number and 1.1.3.6 exemption calculator', icon: '⚠️' },
-  { href: '/airlines', label: '/api/airlines', title: 'Airline Codes & AWB Prefixes', desc: 'Search airlines by name, IATA/ICAO code, or AWB prefix', icon: '✈️' },
-  { href: '/incoterms', label: '/api/incoterms', title: 'INCOTERMS 2020', desc: 'All 11 trade terms — who pays, who bears risk, where responsibility transfers', icon: '📋' },
-  { href: '/containers', label: '/api/containers', title: 'Container Capacity', desc: 'Shipping container dimensions, weights, and loading calculator', icon: '🚢' },
-  { href: '/convert', label: '/api/convert', title: 'Unit Converter', desc: 'Convert freight weights, volumes, and dimensions between metric and imperial', icon: '🔄' },
-  { href: '/hs', label: '/api/hs', title: 'HS Code Lookup', desc: 'Search and browse 6,940 Harmonized System commodity codes across 21 sections', icon: '🏷️' },
-  { href: '/consignment-calculator', label: '/api/consignment', title: 'Consignment Calculator', desc: 'Multi-item CBM, weight, LDM, and chargeable weight for mixed consignments', icon: '📦' },
-  { href: '/unlocode', label: '/api/unlocode', title: 'UN/LOCODE Lookup', desc: '116,000+ transport locations — seaports, airports, rail terminals, inland depots', icon: '🌍' },
+const toolGroups = [
+  {
+    label: 'Freight Operations',
+    tools: [
+      { href: '/ldm', label: '/api/ldm', title: 'Loading Metres', desc: 'Floor space for UK/EU road freight trailers', icon: '📐' },
+      { href: '/cbm', label: '/api/cbm', title: 'CBM Calculator', desc: 'Cubic metres for sea and air shipments', icon: '📦' },
+      { href: '/chargeable-weight', label: '/api/chargeable-weight', title: 'Chargeable Weight', desc: 'Air freight volumetric vs actual weight', icon: '✈️' },
+      { href: '/pallet', label: '/api/pallet', title: 'Pallet Fitting', desc: 'Box fitting with visual layer diagram', icon: '🔲' },
+      { href: '/containers', label: '/api/containers', title: 'Container Capacity', desc: 'Shipping container dimensions, weights, and loading calculator', icon: '🚢' },
+      { href: '/convert', label: '/api/convert', title: 'Unit Converter', desc: 'Convert freight weights, volumes, and dimensions between metric and imperial', icon: '🔄' },
+      { href: '/consignment-calculator', label: '/api/consignment', title: 'Consignment Calculator', desc: 'Multi-item CBM, weight, LDM, and chargeable weight for mixed consignments', icon: '📦' },
+    ],
+  },
+  {
+    label: 'Dangerous Goods',
+    tools: [
+      { href: '/adr', label: '/api/adr', title: 'ADR Dangerous Goods', desc: '2,939 entries from UNECE ADR 2025 — lookup by UN number and 1.1.3.6 exemption calculator', icon: '⚠️' },
+      { href: '/adr-calculator', label: '/api/adr-calculator', title: 'ADR Exemption Calculator', desc: '1.1.3.6 small load exemption check for mixed hazardous loads', icon: '🧮' },
+    ],
+  },
+  {
+    label: 'Customs & Trade',
+    tools: [
+      { href: '/hs', label: '/api/hs', title: 'HS Code Lookup', desc: 'Search and browse 6,940 Harmonized System commodity codes across 21 sections', icon: '🏷️' },
+      { href: '/incoterms', label: '/api/incoterms', title: 'INCOTERMS 2020', desc: 'All 11 trade terms — who pays, who bears risk, where responsibility transfers', icon: '📋' },
+    ],
+  },
+  {
+    label: 'Reference Data',
+    tools: [
+      { href: '/airlines', label: '/api/airlines', title: 'Airline Codes & AWB Prefixes', desc: 'Search airlines by name, IATA/ICAO code, or AWB prefix', icon: '✈️' },
+      { href: '/unlocode', label: '/api/unlocode', title: 'UN/LOCODE Lookup', desc: '116,000+ transport locations — seaports, airports, rail terminals, inland depots', icon: '🌍' },
+    ],
+  },
 ];
+const tools = toolGroups.flatMap(g => g.tools);
 
 const dataSources = [
   { name: 'UNECE', detail: 'ADR 2025' },
@@ -151,44 +173,52 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── TOOL GRID ── */}
+      {/* ── TOOL GRID (grouped by category) ── */}
       <section style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px' }}>
-        <div className="tool-grid" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: 8,
-          marginTop: 8,
-          position: 'relative',
-          zIndex: 2,
-        }}>
-          {tools.map(t => (
-            <Link key={t.href} href={t.href} className="tool-card" style={{
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border)',
-              borderRadius: 10,
-              padding: '16px 14px',
-              textDecoration: 'none',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 6,
+        {toolGroups.map((group) => (
+          <div key={group.label} style={{ marginTop: 16 }}>
+            <div style={{
+              fontSize: 10, fontWeight: 700, textTransform: 'uppercase',
+              letterSpacing: '1.5px', color: 'var(--text-faint)',
+              padding: '0 4px 6px',
             }}>
-              <div style={{ fontSize: 20 }}>{t.icon}</div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
-                <span style={{ color: 'var(--text-faint)', fontSize: 14 }}>→</span>
-              </div>
-              <span style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>{t.desc}</span>
-              <code style={{
-                fontSize: 10,
-                color: '#EF9F27',
-                fontFamily: 'monospace',
-                marginTop: 'auto',
-              }}>
-                {t.label}
-              </code>
-            </Link>
-          ))}
-        </div>
+              {group.label}
+            </div>
+            <div className="tool-grid" style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(5, 1fr)',
+              gap: 8,
+            }}>
+              {group.tools.map(t => (
+                <Link key={t.href} href={t.href} className="tool-card" style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 10,
+                  padding: '16px 14px',
+                  textDecoration: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 6,
+                }}>
+                  <div style={{ fontSize: 20 }}>{t.icon}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
+                    <span style={{ color: 'var(--text-faint)', fontSize: 14 }}>&rarr;</span>
+                  </div>
+                  <span style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>{t.desc}</span>
+                  <code style={{
+                    fontSize: 10,
+                    color: '#EF9F27',
+                    fontFamily: 'monospace',
+                    marginTop: 'auto',
+                  }}>
+                    {t.label}
+                  </code>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
       </section>
 
       <main style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px 80px' }}>

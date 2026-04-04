@@ -23,8 +23,8 @@ const defaultResult: LdmResult = {
 
 export default function LdmCalc() {
   const [palletType, setPalletType] = useState('euro');
-  const [lengthMm, setLengthMm] = useState(1200);
-  const [widthMm, setWidthMm] = useState(800);
+  const [lengthMm, setLengthMm] = useState('1200');
+  const [widthMm, setWidthMm] = useState('800');
   const [qty, setQty] = useState(1);
   const [stackable, setStackable] = useState(false);
   const [stackFactor, setStackFactor] = useState(2);
@@ -38,8 +38,8 @@ export default function LdmCalc() {
     const p = getUrlParams();
     if (p.pallet && PALLET_PRESET_MAP[p.pallet]) {
       setPalletType(p.pallet);
-      setLengthMm(PALLET_PRESET_MAP[p.pallet].lengthMm);
-      setWidthMm(PALLET_PRESET_MAP[p.pallet].widthMm);
+      setLengthMm(String(PALLET_PRESET_MAP[p.pallet].lengthMm));
+      setWidthMm(String(PALLET_PRESET_MAP[p.pallet].widthMm));
     }
     if (p.qty) setQty(parseInt(p.qty, 10) || 1);
     if (p.stackable === '1') setStackable(true);
@@ -61,8 +61,8 @@ export default function LdmCalc() {
 
   const recalculate = useCallback(() => {
     const res = calculateLdm({
-      lengthMm,
-      widthMm,
+      lengthMm: Number(lengthMm) || 0,
+      widthMm: Number(widthMm) || 0,
       qty,
       stackable,
       stackFactor,
@@ -81,8 +81,8 @@ export default function LdmCalc() {
     setPalletType(val);
     const preset = PALLET_PRESET_MAP[val];
     if (preset) {
-      setLengthMm(preset.lengthMm);
-      setWidthMm(preset.widthMm);
+      setLengthMm(String(preset.lengthMm));
+      setWidthMm(String(preset.widthMm));
     }
   };
 
@@ -95,18 +95,18 @@ export default function LdmCalc() {
     main: { maxWidth: 900, margin: '0 auto', padding: '32px 20px 60px' } as React.CSSProperties,
     hero: { background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' as const },
     h1: { fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', lineHeight: 1.2, marginBottom: 12 },
-    card: { background: '#fff', border: '1px solid #d8dce6', borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' } as React.CSSProperties,
+    card: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' } as React.CSSProperties,
     cardHeader: { background: '#1a2332', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 10 } as React.CSSProperties,
     cardBody: { padding: 24 } as React.CSSProperties,
     formGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 } as React.CSSProperties,
     formGroup: { display: 'flex', flexDirection: 'column' as const, gap: 6 },
     divider: { gridColumn: '1 / -1', border: 'none', borderTop: '1px solid #eef0f4', margin: '4px 0' } as React.CSSProperties,
-    toggleRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: '#f7f8fa', border: '1.5px solid #d8dce6', borderRadius: 8 } as React.CSSProperties,
+    toggleRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'var(--bg)', border: '1.5px solid var(--border)', borderRadius: 8 } as React.CSSProperties,
     ldmDisplay: { textAlign: 'center' as const, padding: '32px 24px 24px', borderBottom: '1px solid #eef0f4', background: 'rgba(232,119,34,0.03)' },
     ldmNumber: { fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: '#e87722', lineHeight: 1, letterSpacing: -2 } as React.CSSProperties,
     utilSection: { padding: '20px 24px', borderBottom: '1px solid #eef0f4' } as React.CSSProperties,
     statsGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: '#eef0f4' } as React.CSSProperties,
-    statCell: { background: '#fff', padding: '16px 20px' } as React.CSSProperties,
+    statCell: { background: 'var(--bg-card)', padding: '16px 20px' } as React.CSSProperties,
   };
 
   return (
@@ -148,9 +148,10 @@ export default function LdmCalc() {
                 <input
                   type="number" id="palletLength"
                   value={lengthMm}
-                  onChange={e => setLengthMm(Number(e.target.value))}
+                  onChange={e => setLengthMm(e.target.value)}
+                  onFocus={e => { if (isCustomPallet && e.target.value === '0') setLengthMm(''); }}
                   readOnly={!isCustomPallet}
-                  style={{ background: isCustomPallet ? '#fff' : '#f7f8fa' }}
+                  style={{ background: isCustomPallet ? 'var(--bg-card)' : 'var(--bg)', color: 'var(--text)' }}
                   min={1} max={9999}
                 />
               </div>
@@ -161,9 +162,10 @@ export default function LdmCalc() {
                 <input
                   type="number" id="palletWidth"
                   value={widthMm}
-                  onChange={e => setWidthMm(Number(e.target.value))}
+                  onChange={e => setWidthMm(e.target.value)}
+                  onFocus={e => { if (isCustomPallet && e.target.value === '0') setWidthMm(''); }}
                   readOnly={!isCustomPallet}
-                  style={{ background: isCustomPallet ? '#fff' : '#f7f8fa' }}
+                  style={{ background: isCustomPallet ? 'var(--bg-card)' : 'var(--bg)', color: 'var(--text)' }}
                   min={1} max={9999}
                 />
               </div>
@@ -256,8 +258,8 @@ export default function LdmCalc() {
 
         {/* ── TRAILER VISUALIZATION ── */}
         <TrailerViz
-          lengthMm={lengthMm}
-          widthMm={widthMm}
+          lengthMm={Number(lengthMm) || 0}
+          widthMm={Number(widthMm) || 0}
           qty={qty}
           stackable={stackable}
           stackFactor={stackFactor}
