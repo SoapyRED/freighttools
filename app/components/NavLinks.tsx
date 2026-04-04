@@ -32,6 +32,7 @@ const nav: NavEntry[] = [
       { href: '/airlines', label: 'Airline Codes' },
       { href: '/incoterms', label: 'INCOTERMS 2020' },
       { href: '/hs', label: 'HS Code Lookup' },
+      { href: '/unlocode', label: 'UN/LOCODE Lookup' },
     ],
   },
   {

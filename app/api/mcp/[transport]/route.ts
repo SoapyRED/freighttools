@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { createMcpHandler } from 'mcp-handler';
 import { calculateCbm } from '@/lib/calculations/cbm';
 import { calculateConsignment } from '@/lib/calculations/consignment';
+import { search as unlocodeSearch, lookupByCode as unlocodeLookup, TOTAL_ENTRIES as UNLOCODE_TOTAL } from '@/lib/calculations/unlocode';
 import { calculateChargeableWeight, DEFAULT_FACTOR } from '@/lib/calculations/chargeable-weight';
 import { calculateLdm } from '@/lib/calculations/ldm';
 import { lookupByUnNumber, searchByName, filterByClass, normaliseUnNumber } from '@/lib/calculations/adr';
@@ -317,6 +318,28 @@ const handler = createMcpHandler(
       async ({ items }) => ({
         content: [{ type: 'text' as const, text: JSON.stringify(calculateConsignment(items), null, 2) }],
       }),
+    );
+
+    // ── UN/LOCODE Lookup ────────────────────────────────────
+    server.tool(
+      'unlocode_lookup',
+      `Search ${UNLOCODE_TOTAL.toLocaleString()} UN/LOCODE transport locations worldwide. Covers seaports, airports, rail terminals, road terminals, inland clearance depots, and border crossings. Search by location name, code (e.g. GBLHR), country, or function type.`,
+      {
+        query: z.string().optional().describe('Search by name or code (e.g. "Rotterdam", "GBLHR", "LHR")'),
+        code: z.string().optional().describe('Exact UN/LOCODE lookup (e.g. "GBLHR", "NLRTM")'),
+        country: z.string().optional().describe('ISO 2-letter country code filter (e.g. "GB", "NL")'),
+        function_type: z.enum(['port', 'airport', 'rail', 'road', 'icd', 'border']).optional().describe('Filter by location function'),
+        limit: z.number().int().min(1).max(100).optional().describe('Max results (default 20)'),
+      },
+      async ({ query, code, country, function_type, limit }) => {
+        if (code) {
+          const entry = unlocodeLookup(code);
+          if (!entry) return { content: [{ type: 'text' as const, text: `UN/LOCODE "${code}" not found` }], isError: true };
+          return { content: [{ type: 'text' as const, text: JSON.stringify(entry, null, 2) }] };
+        }
+        const results = unlocodeSearch(query ?? '', { country, func: function_type, limit: limit ?? 20 });
+        return { content: [{ type: 'text' as const, text: JSON.stringify({ count: results.length, results }, null, 2) }] };
+      },
     );
 
   },

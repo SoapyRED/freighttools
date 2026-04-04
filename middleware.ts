@@ -16,6 +16,7 @@ export const config = {
     '/api/incoterms/:path*',
     '/api/ldm/:path*',
     '/api/pallet/:path*',
+    '/api/unlocode/:path*',
   ],
 };
 

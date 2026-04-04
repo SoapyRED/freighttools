@@ -24,6 +24,7 @@ const entries: { month: string; items: Entry[] }[] = [
   {
     month: 'April 2026',
     items: [
+      { date: 'Apr 4', tag: 'New Tool', title: 'UN/LOCODE Lookup', desc: '116,000+ transport locations from UNECE UN/LOCODE 2024-2. Searchable by name, code, country, and function type (port, airport, rail, road, ICD, border).' },
       { date: 'Apr 4', tag: 'New Tool', title: 'Multi-Item Consignment Calculator', desc: 'Calculate total CBM, weight, LDM, and chargeable weight across mixed items. Available as web tool, REST API, and MCP tool.' },
       { date: 'Apr 3', tag: 'MCP Update', title: 'Published to Official MCP Registry', desc: 'FreightUtils MCP Server v1.0.1 now on registry.modelcontextprotocol.io. Also listed on Smithery.ai, mcp.so, and 5+ directories.' },
       { date: 'Apr 3', tag: 'API Change', title: 'MCP Remote SSE Endpoint Live', desc: 'Connect AI agents to all FreightUtils tools at freightutils.com/api/mcp/mcp. Streamable HTTP transport via mcp-handler.' },

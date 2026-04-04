@@ -20,6 +20,7 @@ const tools = [
   { href: '/convert', label: '/api/convert', title: 'Unit Converter', desc: 'Convert freight weights, volumes, and dimensions between metric and imperial', icon: '🔄' },
   { href: '/hs', label: '/api/hs', title: 'HS Code Lookup', desc: 'Search and browse 6,940 Harmonized System commodity codes across 21 sections', icon: '🏷️' },
   { href: '/consignment-calculator', label: '/api/consignment', title: 'Consignment Calculator', desc: 'Multi-item CBM, weight, LDM, and chargeable weight for mixed consignments', icon: '📦' },
+  { href: '/unlocode', label: '/api/unlocode', title: 'UN/LOCODE Lookup', desc: '116,000+ transport locations — seaports, airports, rail terminals, inland depots', icon: '🌍' },
 ];
 
 const dataSources = [
@@ -110,16 +111,17 @@ export default function HomePage() {
             Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
           </div>
           <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 14, letterSpacing: '0.2px' }}>
-            11 tools &middot; 2,939 ADR entries &middot; 6,940 HS codes &middot; 6,352 airlines &middot; OpenAPI 3.0.3 &middot; Updated April 2026
+            13 tools &middot; 2,939 ADR entries &middot; 6,940 HS codes &middot; 6,352 airlines &middot; 116K+ locations &middot; OpenAPI 3.0.3 &middot; Updated April 2026
           </div>
         </div>
       </section>
 
       {/* ── ECOSYSTEM STRIP ── */}
-      <section style={{ maxWidth: 1080, margin: '0 auto', padding: '16px 20px 0', position: 'relative', zIndex: 3 }}>
+      <section style={{ maxWidth: 1080, margin: '0 auto', padding: '24px 20px 24px', position: 'relative', zIndex: 3 }}>
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          gap: 24, flexWrap: 'wrap', padding: '12px 0',
+          gap: 24, flexWrap: 'wrap', padding: '14px 0',
+          borderBottom: '1px solid var(--border-light)',
         }}>
           <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)' }}>
             Available on
@@ -155,7 +157,7 @@ export default function HomePage() {
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)',
           gap: 8,
-          marginTop: -32,
+          marginTop: 8,
           position: 'relative',
           zIndex: 2,
         }}>

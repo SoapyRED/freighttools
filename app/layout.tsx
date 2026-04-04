@@ -49,6 +49,7 @@ const footerColumns = {
     { href: '/airlines', label: 'Airline Codes' },
     { href: '/incoterms', label: 'INCOTERMS 2020' },
     { href: '/hs', label: 'HS Code Lookup' },
+    { href: '/unlocode', label: 'UN/LOCODE Lookup' },
   ],
   guides: [
     { href: '/adr/changes-2025', label: 'ADR 2025 Changes' },

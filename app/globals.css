@@ -427,6 +427,9 @@ button:active:not(:disabled) { transform: scale(0.98); }
   .mobile-stack { flex-direction: column !important; }
 }
 
+/* ─── Dark theme tag overrides ──────────────────────────────────── */
+[data-theme="dark"] .announce-banner { background: linear-gradient(90deg, #b45e18, #d48a3a); }
+
 /* ─── Ecosystem badges ──────────────────────────────────────────── */
 .ecosystem-badge:hover {
   color: var(--orange) !important;

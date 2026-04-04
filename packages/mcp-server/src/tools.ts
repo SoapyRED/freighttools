@@ -399,6 +399,41 @@ Chargeable weight (air): 1 CBM = 167 kg. Chargeable weight (road): 1 LDM = 1,750
 //  Export all tools
 // ─────────────────────────────────────────────────────────────
 
+// ─────────────────────────────────────────────────────────────
+//  13. UN/LOCODE Lookup
+// ─────────────────────────────────────────────────────────────
+
+const unlocodeLookup: ToolDef = {
+  name: 'unlocode_lookup',
+  description: `Search 116,000+ UN/LOCODE transport locations worldwide.
+
+UN/LOCODE identifies seaports, airports, rail terminals, road terminals, inland clearance depots, and border crossings. Each code = 2-letter country + 3-char location (e.g., GBLHR, NLRTM, DEHAM).
+
+Use this tool when you need to:
+- Find the UN/LOCODE for a port, airport, or terminal
+- Look up what type of location a code represents
+- Search for locations by country or function type
+- Get coordinates for a transport location`,
+
+  schema: z.object({
+    query: z.string().optional().describe('Search by name or code'),
+    code: z.string().optional().describe('Exact UN/LOCODE (e.g., "GBLHR")'),
+    country: z.string().optional().describe('ISO country code filter (e.g., "GB")'),
+    function_type: z.enum(['port', 'airport', 'rail', 'road', 'icd', 'border']).optional().describe('Function filter'),
+    limit: z.number().int().min(1).max(100).optional().describe('Max results (default 20)'),
+  }),
+
+  handler: async (args) => {
+    const params: Record<string, unknown> = {};
+    if (args.code) params.code = args.code;
+    else if (args.query) params.q = args.query;
+    if (args.country) params.country = args.country;
+    if (args.function_type) params.function = args.function_type;
+    if (args.limit) params.limit = args.limit;
+    return apiGet('unlocode', params);
+  },
+};
+
 export const ALL_TOOLS: ToolDef[] = [
   cbmCalculator,
   chargeableWeightCalculator,
@@ -412,4 +447,5 @@ export const ALL_TOOLS: ToolDef[] = [
   palletFittingCalculator,
   unitConverter,
   consignmentCalculator,
+  unlocodeLookup,
 ];

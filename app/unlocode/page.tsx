@@ -1,0 +1,94 @@
+import type { Metadata } from 'next';
+import UnlocodeSearch from './UnlocodeSearch';
+import RelatedTools from '@/app/components/RelatedTools';
+import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+
+const ogUrl = '/api/og?title=UN/LOCODE+Lookup&desc=116,000+transport+locations+worldwide&api=GET+/api/unlocode';
+
+export const metadata: Metadata = {
+  title: 'UN/LOCODE Lookup — FreightUtils',
+  description: 'Search 116,000+ UN/LOCODE transport locations worldwide. Ports, airports, rail terminals, and inland depots. Free lookup with REST API.',
+  alternates: { canonical: 'https://www.freightutils.com/unlocode' },
+  openGraph: {
+    images: [{ url: ogUrl, width: 1200, height: 630, alt: 'UN/LOCODE Lookup — FreightUtils' }],
+  },
+  twitter: { card: 'summary_large_image', images: [ogUrl] },
+};
+
+export default function UnlocodePage() {
+  return (
+    <>
+      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
+        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
+          UN/LOCODE <span style={{ color: '#e87722' }}>Lookup</span>
+        </h1>
+        <p style={{ fontSize: 16, color: '#8f9ab0', maxWidth: 580, margin: '0 auto' }}>
+          Search 116,000+ transport locations worldwide. Seaports, airports, rail terminals, road terminals, and inland clearance depots.
+        </p>
+        <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
+          Source: UNECE UN/LOCODE 2024-2 (PDDL)
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px 16px 48px' }}>
+        <UnlocodeSearch />
+
+        <div style={{ maxWidth: 700, margin: '48px auto 0' }}>
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
+            What is UN/LOCODE?
+          </h2>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            UN/LOCODE (United Nations Code for Trade and Transport Locations) is a standardised code system for identifying ports, airports, rail terminals, and other transport-related locations worldwide. Each code consists of a 2-letter country code and a 3-character location code (e.g., GBLHR = London Heathrow, NLRTM = Rotterdam).
+          </p>
+          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+            The codes are maintained by UNECE and used in international trade documents, customs declarations, bills of lading, and freight management systems. This database contains {(116129).toLocaleString()} locations across all countries.
+          </p>
+
+          <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginTop: 24, marginBottom: 8 }}>Function types</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 14, color: 'var(--text-muted)' }}>
+            {[
+              ['Port', 'Maritime port or harbour'],
+              ['Airport', 'Civil or cargo airport'],
+              ['Rail', 'Railway terminal or station'],
+              ['Road', 'Road freight terminal'],
+              ['ICD', 'Inland clearance depot (dry port)'],
+              ['Border', 'Border crossing point'],
+              ['Postal', 'Postal exchange office'],
+              ['Pipeline', 'Fixed transport installation'],
+            ].map(([label, desc]) => (
+              <div key={label} style={{ padding: '8px 12px', background: 'var(--bg)', borderRadius: 6 }}>
+                <strong>{label}</strong> — {desc}
+              </div>
+            ))}
+          </div>
+
+          <details style={{ marginTop: 24, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
+            <summary style={{ padding: '14px 18px', fontSize: 15, fontWeight: 600, color: 'var(--text)', cursor: 'pointer' }}>
+              REST API — GET /api/unlocode
+            </summary>
+            <div style={{ padding: '0 18px 18px', fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7 }}>
+              <p style={{ marginBottom: 8 }}>Search by name, code, country, or function type:</p>
+              <pre style={{ background: 'var(--navy)', color: '#f9913a', padding: 14, borderRadius: 8, fontSize: 12, overflow: 'auto' }}>
+{`curl "https://www.freightutils.com/api/unlocode?q=rotterdam"
+curl "https://www.freightutils.com/api/unlocode?code=NLRTM"
+curl "https://www.freightutils.com/api/unlocode?country=GB&function=port&limit=50"`}
+              </pre>
+            </div>
+          </details>
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
+          <RelatedTools tools={[
+            { href: '/airlines', label: 'Airline Codes' },
+            { href: '/hs', label: 'HS Code Lookup' },
+            { href: '/adr', label: 'ADR Dangerous Goods' },
+          ]} />
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '24px auto 0' }}>
+          <ToolDisclaimer text="UN/LOCODE data from UNECE 2024-2 edition (PDDL). Coordinates are approximate. For official data, consult the UNECE Trade Facilitation website." />
+        </div>
+      </div>
+    </>
+  );
+}
