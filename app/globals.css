@@ -419,6 +419,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 }
 @media (max-width: 768px) {
   .tool-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .tool-card { grid-column: span 1 !important; }
   .workflow-grid { grid-template-columns: 1fr !important; }
   .footer-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }

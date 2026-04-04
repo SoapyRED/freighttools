@@ -175,50 +175,55 @@ export default function HomePage() {
 
       {/* ── TOOL GRID (grouped by category) ── */}
       <section style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px' }}>
-        {toolGroups.map((group) => (
-          <div key={group.label} style={{ marginTop: 16 }}>
-            <div style={{
-              fontSize: 10, fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '1.5px', color: 'var(--text-faint)',
-              padding: '0 4px 6px',
-            }}>
-              {group.label}
-            </div>
-            <div className="tool-grid" style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(5, 1fr)',
-              gap: 8,
-            }}>
-              {group.tools.map(t => (
-                <Link key={t.href} href={t.href} className="tool-card" style={{
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border)',
-                  borderRadius: 10,
-                  padding: '16px 14px',
-                  textDecoration: 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 6,
-                }}>
-                  <div style={{ fontSize: 20 }}>{t.icon}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
-                    <span style={{ color: 'var(--text-faint)', fontSize: 14 }}>&rarr;</span>
-                  </div>
-                  <span style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>{t.desc}</span>
-                  <code style={{
-                    fontSize: 10,
-                    color: '#EF9F27',
-                    fontFamily: 'monospace',
-                    marginTop: 'auto',
+        {toolGroups.map((group) => {
+          // Groups with 2 cards: span 2 cols each on a 4-col grid to fill the row
+          const useWide = group.tools.length === 2;
+          return (
+            <div key={group.label} style={{ marginTop: 16 }}>
+              <div style={{
+                fontSize: 10, fontWeight: 700, textTransform: 'uppercase',
+                letterSpacing: '1.5px', color: 'var(--text-faint)',
+                padding: '0 4px 6px',
+              }}>
+                {group.label}
+              </div>
+              <div className="tool-grid" style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: 8,
+              }}>
+                {group.tools.map(t => (
+                  <Link key={t.href} href={t.href} className="tool-card" style={{
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border)',
+                    borderRadius: 10,
+                    padding: '16px 14px',
+                    textDecoration: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 6,
+                    gridColumn: useWide ? 'span 2' : undefined,
                   }}>
-                    {t.label}
-                  </code>
-                </Link>
-              ))}
+                    <div style={{ fontSize: 20 }}>{t.icon}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
+                      <span style={{ color: 'var(--text-faint)', fontSize: 14 }}>&rarr;</span>
+                    </div>
+                    <span style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>{t.desc}</span>
+                    <code style={{
+                      fontSize: 10,
+                      color: '#EF9F27',
+                      fontFamily: 'monospace',
+                      marginTop: 'auto',
+                    }}>
+                      {t.label}
+                    </code>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </section>
 
       <main style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px 80px' }}>
