@@ -49,6 +49,7 @@ const footerColumns = {
     { href: '/airlines', label: 'Airline Codes' },
     { href: '/incoterms', label: 'INCOTERMS 2020' },
     { href: '/hs', label: 'HS Code Lookup' },
+    { href: '/duty', label: 'UK Import Duty & VAT' },
     { href: '/unlocode', label: 'UN/LOCODE Lookup' },
   ],
   guides: [

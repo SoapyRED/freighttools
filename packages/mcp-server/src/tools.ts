@@ -434,6 +434,44 @@ Use this tool when you need to:
   },
 };
 
+// ─────────────────────────────────────────────────────────────
+//  14. UK Import Duty & VAT Estimator
+// ─────────────────────────────────────────────────────────────
+
+const ukDutyCalculator: ToolDef = {
+  name: 'uk_duty_calculator',
+  description: `Estimate UK import duty and VAT for a commodity code from a specific origin country.
+
+Uses live GOV.UK Trade Tariff data. Returns CIF value, duty rate and amount, VAT rate and amount, total import taxes, and total landed cost.
+
+Use this tool when you need to:
+- Estimate import costs for goods entering the UK
+- Find the duty rate for a specific tariff/commodity code
+- Calculate landed cost including duty and VAT
+- Check if a preferential rate exists for a trade agreement country
+
+Requires: commodity code (6-10 digit UK tariff code), origin country (ISO 2-letter), and customs value in GBP.`,
+
+  schema: z.object({
+    commodityCode: z.string().describe('UK tariff commodity code (6-10 digits)'),
+    originCountry: z.string().describe('ISO 2-letter country of origin'),
+    customsValue: z.number().positive().describe('Customs value in GBP'),
+    freightCost: z.number().optional().describe('Freight cost in GBP'),
+    insuranceCost: z.number().optional().describe('Insurance cost in GBP'),
+    incoterm: z.string().optional().describe('Incoterm basis (EXW, FOB, CIF, etc.)'),
+  }),
+
+  handler: async (args) =>
+    apiPost('duty', {
+      commodityCode: args.commodityCode,
+      originCountry: args.originCountry,
+      customsValue: args.customsValue,
+      freightCost: args.freightCost ?? 0,
+      insuranceCost: args.insuranceCost ?? 0,
+      incoterm: args.incoterm,
+    }),
+};
+
 export const ALL_TOOLS: ToolDef[] = [
   cbmCalculator,
   chargeableWeightCalculator,
@@ -448,4 +486,5 @@ export const ALL_TOOLS: ToolDef[] = [
   unitConverter,
   consignmentCalculator,
   unlocodeLookup,
+  ukDutyCalculator,
 ];

@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { createMcpHandler } from 'mcp-handler';
 import { calculateCbm } from '@/lib/calculations/cbm';
 import { calculateConsignment } from '@/lib/calculations/consignment';
+import { calculateDuty } from '@/lib/calculations/duty';
 import { search as unlocodeSearch, lookupByCode as unlocodeLookup, TOTAL_ENTRIES as UNLOCODE_TOTAL } from '@/lib/calculations/unlocode';
 import { calculateChargeableWeight, DEFAULT_FACTOR } from '@/lib/calculations/chargeable-weight';
 import { calculateLdm } from '@/lib/calculations/ldm';
@@ -339,6 +340,33 @@ const handler = createMcpHandler(
         }
         const results = unlocodeSearch(query ?? '', { country, func: function_type, limit: limit ?? 20 });
         return { content: [{ type: 'text' as const, text: JSON.stringify({ count: results.length, results }, null, 2) }] };
+      },
+    );
+
+    // ── UK Import Duty & VAT Estimator ──────────────────────
+    server.tool(
+      'uk_duty_calculator',
+      `Estimate UK import duty and VAT for a commodity code and origin country. Uses live GOV.UK Trade Tariff data. Returns CIF value, duty rate/amount, VAT rate/amount, total import taxes, and total landed cost. Flags preferential rates and import restrictions.`,
+      {
+        commodityCode: z.string().describe('UK tariff commodity code (6-10 digits)'),
+        originCountry: z.string().describe('ISO 2-letter country of origin (e.g. "CN", "US")'),
+        customsValue: z.number().positive().describe('Customs value in GBP'),
+        freightCost: z.number().optional().describe('Freight cost in GBP (default 0)'),
+        insuranceCost: z.number().optional().describe('Insurance cost in GBP (default 0)'),
+        incoterm: z.enum(['EXW','FCA','FAS','FOB','CFR','CIF','CPT','CIP','DAP','DPU','DDP']).optional().describe('Incoterm basis'),
+      },
+      async ({ commodityCode, originCountry, customsValue, freightCost, insuranceCost, incoterm }) => {
+        try {
+          const result = await calculateDuty({
+            commodityCode, originCountry, customsValue,
+            freightCost: freightCost ?? 0, insuranceCost: insuranceCost ?? 0,
+            incoterm,
+          });
+          return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
+        } catch (err: unknown) {
+          const msg = err instanceof Error ? err.message : String(err);
+          return { content: [{ type: 'text' as const, text: `Error: ${msg}` }], isError: true };
+        }
       },
     );
 

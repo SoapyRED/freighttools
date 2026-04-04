@@ -8,6 +8,7 @@ export const config = {
     '/api/chargeable-weight/:path*',
     '/api/consignment/:path*',
     '/api/convert/:path*',
+    '/api/duty/:path*',
     '/api/adr',
     '/api/adr-calculator/:path*',
     '/api/airlines/:path*',

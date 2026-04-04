@@ -33,6 +33,7 @@ const toolGroups = [
     tools: [
       { href: '/hs', label: '/api/hs', title: 'HS Code Lookup', desc: 'Search and browse 6,940 Harmonized System commodity codes across 21 sections', icon: '🏷️' },
       { href: '/incoterms', label: '/api/incoterms', title: 'INCOTERMS 2020', desc: 'All 11 trade terms — who pays, who bears risk, where responsibility transfers', icon: '📋' },
+      { href: '/duty', label: '/api/duty', title: 'UK Import Duty & VAT', desc: 'Estimate import duty and VAT using live GOV.UK Trade Tariff data', icon: '🇬🇧' },
     ],
   },
   {
@@ -133,7 +134,7 @@ export default function HomePage() {
             Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
           </div>
           <div style={{ fontSize: 12, color: '#8f9ab0', marginTop: 14, letterSpacing: '0.2px' }}>
-            13 tools &middot; 2,939 ADR entries &middot; 6,940 HS codes &middot; 6,352 airlines &middot; 116K+ locations &middot; OpenAPI 3.0.3 &middot; Updated April 2026
+            14 tools &middot; 2,939 ADR entries &middot; 6,940 HS codes &middot; 6,352 airlines &middot; 116K+ locations &middot; OpenAPI 3.0.3 &middot; Updated April 2026
           </div>
         </div>
       </section>
