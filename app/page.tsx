@@ -115,6 +115,40 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── ECOSYSTEM STRIP ── */}
+      <section style={{ maxWidth: 1080, margin: '0 auto', padding: '16px 20px 0', position: 'relative', zIndex: 3 }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          gap: 24, flexWrap: 'wrap', padding: '12px 0',
+        }}>
+          <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)' }}>
+            Available on
+          </span>
+          {[
+            { label: 'npm', href: 'https://www.npmjs.com/package/freightutils-mcp' },
+            { label: 'MCP Registry', href: 'https://registry.modelcontextprotocol.io' },
+            { label: 'Postman', href: 'https://www.postman.com/warped-moon-987147/freightutils' },
+            { label: 'GitHub', href: 'https://github.com/SoapyRED/freightutils-mcp' },
+          ].map(p => (
+            <a
+              key={p.label}
+              href={p.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ecosystem-badge"
+              style={{
+                fontSize: 13, fontWeight: 600, color: 'var(--text-faint)',
+                textDecoration: 'none', padding: '6px 14px',
+                border: '1px solid var(--border)', borderRadius: 6,
+                transition: 'color 0.15s, border-color 0.15s',
+              }}
+            >
+              {p.label}
+            </a>
+          ))}
+        </div>
+      </section>
+
       {/* ── TOOL GRID ── */}
       <section style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px' }}>
         <div className="tool-grid" style={{

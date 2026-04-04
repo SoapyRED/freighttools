@@ -427,6 +427,12 @@ button:active:not(:disabled) { transform: scale(0.98); }
   .mobile-stack { flex-direction: column !important; }
 }
 
+/* ─── Ecosystem badges ──────────────────────────────────────────── */
+.ecosystem-badge:hover {
+  color: var(--orange) !important;
+  border-color: var(--orange) !important;
+}
+
 /* ─── Brand logo hover ──────────────────────────────────────────── */
 @keyframes brand-spin {
   0%   { transform: rotate(0deg); }

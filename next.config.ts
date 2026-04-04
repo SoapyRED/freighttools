@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  async redirects() {
+    return [
+      { source: '/api', destination: '/api-docs', permanent: true },
+    ];
+  },
+
   // TODO: freighttools.co.uk → freightutils.com 301 redirect
   // Handled at DNS level (Cloudflare) — not via Next.js redirects.
   // If domain is connected to Vercel in future, add:

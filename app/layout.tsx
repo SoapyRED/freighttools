@@ -42,6 +42,7 @@ const footerColumns = {
     { href: '/pallet', label: 'Pallet Fitting' },
     { href: '/containers', label: 'Container Capacity' },
     { href: '/convert', label: 'Unit Converter' },
+    { href: '/consignment-calculator', label: 'Consignment Calculator' },
   ],
   reference: [
     { href: '/adr', label: 'ADR Dangerous Goods' },
@@ -57,6 +58,7 @@ const footerColumns = {
   ],
   developers: [
     { href: '/api-docs', label: 'API Docs' },
+    { href: '/changelog', label: 'Changelog' },
     { href: '/about', label: 'About' },
   ],
 };
