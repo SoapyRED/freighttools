@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -49,7 +49,7 @@ const nav: NavEntry[] = [
   { href: '/about', label: 'About' },
 ];
 
-// ─── Dropdown component — CSS :hover baseline + JS enhancement ──
+// ─── Dropdown component — CSS :hover baseline ───────────────────
 
 function Dropdown({ group, pathname }: {
   group: NavGroup; pathname: string;
@@ -98,29 +98,32 @@ function Dropdown({ group, pathname }: {
   );
 }
 
+// ─── Mobile menu item (closes menu on click via JS enhancement) ──
+
+function MobileLink({ href, active, label, checkboxRef }: {
+  href: string; active: boolean; label: string; checkboxRef: React.RefObject<HTMLInputElement | null>;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={() => { if (checkboxRef.current) checkboxRef.current.checked = false; }}
+      className={`nav-mobile-link${active ? ' nav-mobile-link-active' : ''}`}
+    >
+      {label}
+    </Link>
+  );
+}
+
 // ─── Main NavLinks component ─────────────────────────────────────
 
 export default function NavLinks() {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
+  const checkboxRef = useRef<HTMLInputElement>(null);
 
-  // Close on route change
+  // Close mobile menu on route change (JS enhancement)
   useEffect(() => {
-    setMobileOpen(false);
+    if (checkboxRef.current) checkboxRef.current.checked = false;
   }, [pathname]);
-
-  // Close mobile menu on click outside
-  const handleClickOutside = useCallback((e: MouseEvent) => {
-    if (navRef.current && !navRef.current.contains(e.target as Node)) {
-      setMobileOpen(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [handleClickOutside]);
 
   const topLinkStyle = (isActive: boolean): React.CSSProperties => ({
     color: isActive ? '#EF9F27' : 'var(--text-faint)',
@@ -136,7 +139,7 @@ export default function NavLinks() {
   return (
     <>
       {/* Desktop nav */}
-      <nav ref={navRef} className="nav-desktop" style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+      <nav className="nav-desktop" style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
         {nav.map((entry, i) => {
           if (isGroup(entry)) {
             return <Dropdown key={i} group={entry} pathname={pathname} />;
@@ -150,93 +153,58 @@ export default function NavLinks() {
         })}
       </nav>
 
-      {/* Mobile hamburger */}
-      <button
-        className="nav-hamburger"
-        onClick={() => setMobileOpen(o => !o)}
-        aria-label="Toggle navigation menu"
-        style={{
-          display: 'none',
-          background: 'none', border: 'none',
-          color: 'var(--text-faint)', fontSize: 24,
-          cursor: 'pointer', padding: '4px 8px', lineHeight: 1,
-        }}
-      >
-        {mobileOpen ? '\u2715' : '\u2630'}
-      </button>
+      {/* ── Mobile: CSS-only checkbox toggle pattern ── */}
+      {/* Hidden checkbox controls the menu via CSS :checked ~ .nav-mobile */}
+      <input
+        ref={checkboxRef}
+        type="checkbox"
+        id="nav-toggle"
+        className="nav-toggle-checkbox"
+        aria-hidden="true"
+      />
+      <label htmlFor="nav-toggle" className="nav-hamburger" aria-label="Toggle navigation menu">
+        <span className="nav-hamburger-icon"></span>
+      </label>
 
-      {/* Mobile dropdown — fixed to viewport so it spans full width */}
-      {mobileOpen && (
-        <div
-          className="nav-mobile"
-          style={{
-            position: 'fixed', top: 56, left: 0, right: 0,
-            background: 'var(--bg, #fff)',
-            borderBottom: '1px solid var(--border)',
-            padding: '8px 16px 12px', zIndex: 99,
-            display: 'none', flexDirection: 'column', gap: 0,
-            boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-            maxHeight: 'calc(100vh - 56px)', overflowY: 'auto',
-          }}
-        >
-          {nav.map((entry, i) => {
-            if (isGroup(entry)) {
-              return (
-                <div key={i}>
-                  <div style={{
-                    fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-                    letterSpacing: '1px', color: 'var(--text-faint)',
-                    padding: '12px 12px 4px', marginTop: i > 0 ? 4 : 0,
-                  }}>
-                    {entry.label}
-                  </div>
-                  {entry.items.map(item => {
-                    const active = pathname === item.href || pathname.startsWith(item.href + '/');
-                    return (
-                      <Link
-                        key={item.href} href={item.href}
-                        onClick={() => setMobileOpen(false)}
-                        style={{
-                          color: active ? '#EF9F27' : 'var(--text)',
-                          textDecoration: 'none', fontSize: 14,
-                          fontWeight: active ? 700 : 500,
-                          padding: '10px 12px', borderRadius: 8,
-                          background: active ? 'rgba(239,159,39,0.08)' : 'transparent',
-                          borderLeft: active ? '3px solid #EF9F27' : '3px solid transparent',
-                          display: 'block',
-                        }}
-                      >
-                        {item.label}
-                      </Link>
-                    );
-                  })}
-                </div>
-              );
-            }
-            const active = pathname === entry.href || pathname.startsWith(entry.href + '/');
+      {/* Mobile menu — ALWAYS in DOM, shown/hidden via CSS :checked */}
+      <div className="nav-mobile">
+        {nav.map((entry, i) => {
+          if (isGroup(entry)) {
             return (
-              <Link
-                key={entry.href} href={entry.href}
-                onClick={() => setMobileOpen(false)}
-                style={{
-                  color: active ? '#EF9F27' : 'var(--text)',
-                  textDecoration: 'none', fontSize: 14,
-                  fontWeight: active ? 700 : 500,
-                  padding: '10px 12px', borderRadius: 8,
-                  background: active ? 'rgba(239,159,39,0.08)' : 'transparent',
-                  borderLeft: active ? '3px solid #EF9F27' : '3px solid transparent',
-                  display: 'block', marginTop: 4,
-                }}
-              >
-                {entry.label}
-              </Link>
+              <div key={i}>
+                <div className="nav-mobile-group-label">
+                  {entry.label}
+                </div>
+                {entry.items.map(item => {
+                  const active = pathname === item.href || pathname.startsWith(item.href + '/');
+                  return (
+                    <MobileLink
+                      key={item.href}
+                      href={item.href}
+                      active={active}
+                      label={item.label}
+                      checkboxRef={checkboxRef}
+                    />
+                  );
+                })}
+              </div>
             );
-          })}
-        </div>
-      )}
+          }
+          const active = pathname === entry.href || pathname.startsWith(entry.href + '/');
+          return (
+            <MobileLink
+              key={entry.href}
+              href={entry.href}
+              active={active}
+              label={entry.label}
+              checkboxRef={checkboxRef}
+            />
+          );
+        })}
+      </div>
 
       <style>{`
-        /* ── Desktop dropdown — CSS-only baseline (works without JS) ── */
+        /* ── Desktop dropdown — CSS-only hover baseline ── */
         .nav-dropdown {
           position: relative;
         }
@@ -259,7 +227,6 @@ export default function NavLinks() {
           transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
         }
 
-        /* CSS :hover — the critical baseline that works even if JS fails */
         .nav-dropdown:hover .nav-dropdown-panel,
         .nav-dropdown:focus-within .nav-dropdown-panel {
           opacity: 1;
@@ -277,7 +244,6 @@ export default function NavLinks() {
           transition: transform 0.2s ease;
         }
 
-        /* Dropdown items */
         .nav-dropdown-item {
           display: block;
           padding: 9px 18px;
@@ -300,11 +266,122 @@ export default function NavLinks() {
           background: rgba(239,159,39,0.08);
         }
 
-        /* ── Mobile responsive ── */
+        /* ── Mobile hamburger — CSS checkbox toggle (NO JS NEEDED) ── */
+        .nav-toggle-checkbox {
+          display: none; /* hidden checkbox */
+        }
+
+        .nav-hamburger {
+          display: none; /* hidden on desktop */
+          cursor: pointer;
+          padding: 4px 8px;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-hamburger-icon {
+          display: block;
+          width: 22px;
+          height: 2px;
+          background: var(--text-faint, #8f9ab0);
+          position: relative;
+          transition: background 0.2s;
+        }
+
+        .nav-hamburger-icon::before,
+        .nav-hamburger-icon::after {
+          content: '';
+          display: block;
+          width: 22px;
+          height: 2px;
+          background: var(--text-faint, #8f9ab0);
+          position: absolute;
+          left: 0;
+          transition: transform 0.2s ease;
+        }
+
+        .nav-hamburger-icon::before { top: -7px; }
+        .nav-hamburger-icon::after { top: 7px; }
+
+        /* Animate hamburger to X when checked */
+        .nav-toggle-checkbox:checked ~ .nav-hamburger .nav-hamburger-icon {
+          background: transparent;
+        }
+        .nav-toggle-checkbox:checked ~ .nav-hamburger .nav-hamburger-icon::before {
+          transform: rotate(45deg);
+          top: 0;
+        }
+        .nav-toggle-checkbox:checked ~ .nav-hamburger .nav-hamburger-icon::after {
+          transform: rotate(-45deg);
+          top: 0;
+        }
+
+        /* Mobile menu panel — always in DOM, hidden by default */
+        .nav-mobile {
+          display: none;
+          position: fixed;
+          top: 56px;
+          left: 0;
+          right: 0;
+          background: var(--bg, #fff);
+          border-bottom: 1px solid var(--border, #d8dce6);
+          padding: 8px 16px 12px;
+          z-index: 99;
+          flex-direction: column;
+          gap: 0;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+          max-height: calc(100vh - 56px);
+          overflow-y: auto;
+          transition: opacity 0.2s ease;
+        }
+
+        /* CSS :checked shows the mobile menu — works without JS */
+        .nav-toggle-checkbox:checked ~ .nav-mobile {
+          display: flex;
+        }
+
+        .nav-mobile-group-label {
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: var(--text-faint, #8f9ab0);
+          padding: 12px 12px 4px;
+        }
+
+        .nav-mobile-link {
+          color: var(--text, #1e2535);
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 500;
+          padding: 10px 12px;
+          border-radius: 8px;
+          background: transparent;
+          border-left: 3px solid transparent;
+          display: block;
+        }
+
+        .nav-mobile-link:active {
+          background: rgba(239,159,39,0.08);
+        }
+
+        .nav-mobile-link-active {
+          color: #EF9F27 !important;
+          font-weight: 700;
+          background: rgba(239,159,39,0.08);
+          border-left-color: #EF9F27;
+        }
+
+        /* ── Responsive breakpoints ── */
         @media (max-width: 768px) {
           .nav-desktop { display: none !important; }
           .nav-hamburger { display: block !important; }
-          .nav-mobile { display: flex !important; }
+        }
+
+        /* On desktop, hide mobile elements completely */
+        @media (min-width: 769px) {
+          .nav-hamburger { display: none !important; }
+          .nav-mobile { display: none !important; }
+          .nav-toggle-checkbox { display: none !important; }
         }
       `}</style>
     </>
