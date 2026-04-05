@@ -42,7 +42,7 @@ export default function ConvertPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 40 }}>
           {/* CBM → Chargeable Weight */}
           <div style={{
-            background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px',
+            background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
           }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722', marginBottom: 8 }}>
@@ -61,7 +61,7 @@ export default function ConvertPage() {
 
           {/* CBM → Freight Tonnes */}
           <div style={{
-            background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px',
+            background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
           }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722', marginBottom: 8 }}>
@@ -80,7 +80,7 @@ export default function ConvertPage() {
 
           {/* Actual vs Volumetric */}
           <div style={{
-            background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px',
+            background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
           }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: '#e87722', marginBottom: 8 }}>

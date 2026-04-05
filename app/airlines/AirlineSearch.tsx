@@ -150,7 +150,7 @@ export default function AirlineSearch({ index }: Props) {
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 500,
             color: 'var(--text)',
-            background: '#fff',
+            background: 'var(--bg-card)',
             border: '2px solid var(--border)',
             borderRadius: 10,
             outline: 'none',
@@ -258,7 +258,7 @@ export default function AirlineSearch({ index }: Props) {
       {/* No results */}
       {isEmpty && (
         <div style={{
-          background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
+          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
           padding: '24px', textAlign: 'center',
         }}>
           <p style={{ color: 'var(--text-muted)', marginBottom: 8 }}>

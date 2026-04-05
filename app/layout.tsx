@@ -7,6 +7,8 @@ import SiteSearch from './components/SiteSearch';
 import AnnounceBanner from './components/AnnounceBanner';
 import BrandLogo from './components/BrandLogo';
 import CookieConsent from './components/CookieConsent';
+import ScrollToTop from './components/ScrollToTop';
+import ConditionalAdSense from './components/ConditionalAdSense';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.freightutils.com'),
@@ -105,11 +107,7 @@ export default function RootLayout({
 }`
           }}
         />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3441075477232453"
-          crossOrigin="anonymous"
-        />
+        {/* AdSense loaded conditionally via ConditionalAdSense client component */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -151,6 +149,7 @@ export default function RootLayout({
           </div>
         </header>
 
+        <ScrollToTop />
         {children}
 
         {/* ── FOOTER ── */}
@@ -231,6 +230,9 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+
+        {/* Conditional AdSense — only loads if user accepted all cookies */}
+        <ConditionalAdSense />
 
         {/* Cookie consent — loads after page content */}
         <CookieConsent />

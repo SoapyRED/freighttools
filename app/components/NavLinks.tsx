@@ -224,19 +224,30 @@ export default function NavLinks() {
           visibility: hidden;
           transform: translateY(-6px);
           pointer-events: none;
-          transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+          transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s;
         }
 
-        .nav-dropdown:hover .nav-dropdown-panel,
-        .nav-dropdown:focus-within .nav-dropdown-panel {
+        /* Only show the panel for the DIRECTLY hovered dropdown */
+        .nav-dropdown:hover > .nav-dropdown-panel,
+        .nav-dropdown:focus-within > .nav-dropdown-panel {
           opacity: 1;
           visibility: visible;
           transform: translateY(0);
           pointer-events: auto;
+          transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0s;
         }
 
-        .nav-dropdown:hover .nav-dropdown-chevron,
-        .nav-dropdown:focus-within .nav-dropdown-chevron {
+        /* When ANY dropdown in the nav is hovered, immediately hide all OTHER panels */
+        .nav-desktop:hover .nav-dropdown:not(:hover) > .nav-dropdown-panel {
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-6px);
+          pointer-events: none;
+          transition: opacity 0.08s ease, transform 0.08s ease, visibility 0s linear 0.08s;
+        }
+
+        .nav-dropdown:hover > .nav-dropdown-chevron,
+        .nav-dropdown:focus-within > .nav-dropdown-chevron {
           transform: rotate(180deg);
         }
 
