@@ -11,23 +11,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const unNumbers = getAllUnNumbers();
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${BASE}/`,                  changeFrequency: 'monthly', priority: 1.0 },
-    { url: `${BASE}/ldm`,               changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/cbm`,               changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/adr`,               changeFrequency: 'yearly',  priority: 0.8 },
-    { url: `${BASE}/chargeable-weight`, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/pallet`,            changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/airlines`,          changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/incoterms`,         changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/containers`,        changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/convert`,           changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/hs`,                changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/api-docs`,          changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/about`,             changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE}/adr/changes-2025`,   changeFrequency: 'yearly',  priority: 0.7 },
-    { url: `${BASE}/adr/tunnel-codes`,   changeFrequency: 'yearly',  priority: 0.7 },
-    { url: `${BASE}/adr/limited-quantities`, changeFrequency: 'yearly', priority: 0.7 },
-    { url: `${BASE}/adr/training-guide`, changeFrequency: 'yearly',  priority: 0.7 },
+    // Core pages
+    { url: `${BASE}/`,                        changeFrequency: 'monthly', priority: 1.0 },
+    { url: `${BASE}/api-docs`,                changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/about`,                   changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/changelog`,               changeFrequency: 'weekly',  priority: 0.5 },
+    { url: `${BASE}/privacy`,                 changeFrequency: 'yearly',  priority: 0.3 },
+    { url: `${BASE}/terms`,                   changeFrequency: 'yearly',  priority: 0.3 },
+    // Freight calculators
+    { url: `${BASE}/ldm`,                     changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/cbm`,                     changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/chargeable-weight`,       changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/pallet`,                  changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/containers`,              changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/convert`,                 changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/consignment-calculator`,  changeFrequency: 'monthly', priority: 0.8 },
+    // Dangerous goods
+    { url: `${BASE}/adr`,                     changeFrequency: 'yearly',  priority: 0.8 },
+    { url: `${BASE}/adr-calculator`,          changeFrequency: 'yearly',  priority: 0.7 },
+    { url: `${BASE}/adr/changes-2025`,        changeFrequency: 'yearly',  priority: 0.7 },
+    { url: `${BASE}/adr/tunnel-codes`,        changeFrequency: 'yearly',  priority: 0.7 },
+    { url: `${BASE}/adr/limited-quantities`,  changeFrequency: 'yearly',  priority: 0.7 },
+    { url: `${BASE}/adr/training-guide`,      changeFrequency: 'yearly',  priority: 0.7 },
+    // Customs & trade
+    { url: `${BASE}/hs`,                      changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/incoterms`,               changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/duty`,                    changeFrequency: 'monthly', priority: 0.8 },
+    // Reference data
+    { url: `${BASE}/airlines`,                changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/unlocode`,                changeFrequency: 'monthly', priority: 0.8 },
   ];
 
   const adrRoutes: MetadataRoute.Sitemap = unNumbers.map(un => ({
