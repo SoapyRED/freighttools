@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { calculateChargeableWeight, DEFAULT_FACTOR } from '@/lib/calculations/chargeable-weight';
+import { calculateChargeableWeight, calculateSeaChargeableWeight, DEFAULT_FACTOR } from '@/lib/calculations/chargeable-weight';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -66,7 +66,27 @@ export function GET(req: NextRequest) {
     );
   }
 
-  // ── Calculate ──
+  // ── Mode ──
+  const mode = p.get('mode') ?? 'air';
+
+  if (mode === 'sea') {
+    const seaResult = calculateSeaChargeableWeight({ lengthCm, widthCm, heightCm, grossWeightKg, pieces });
+    return NextResponse.json({
+      chargeable_weight_kg: seaResult.chargeableWeightKg,
+      basis: seaResult.billingBasis,
+      gross_weight_kg: seaResult.grossWeightKg,
+      gross_weight_tonnes: seaResult.grossWeightTonnes,
+      revenue_tonnes: seaResult.revenueTonnes,
+      cbm: seaResult.cbm,
+      ratio: seaResult.ratio,
+      billing_basis: seaResult.billingBasis,
+      mode: 'sea',
+      pieces: seaResult.pieces,
+      meta: { inputs: { length_cm: lengthCm, width_cm: widthCm, height_cm: heightCm, gross_weight_kg: grossWeightKg, pieces, mode: 'sea' } },
+    }, { headers: CORS_HEADERS });
+  }
+
+  // ── Calculate (air mode) ──
   const result = calculateChargeableWeight({
     lengthCm,
     widthCm,

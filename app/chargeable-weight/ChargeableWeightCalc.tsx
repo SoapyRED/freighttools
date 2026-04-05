@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { calculateChargeableWeight, VOLUMETRIC_FACTORS } from '@/lib/calculations/chargeable-weight';
+import { calculateChargeableWeight, calculateSeaChargeableWeight, VOLUMETRIC_FACTORS } from '@/lib/calculations/chargeable-weight';
 import AdUnit from '@/app/components/AdUnit';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
@@ -99,6 +99,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
   const [gw,     setGw]     = useState('');
   const [pcs,    setPcs]    = useState('1');
   const [factor, setFactor] = useState(String(defaultFactor));
+  const [freightMode, setFreightMode] = useState<'air' | 'sea'>('air');
 
   // Load from URL params on mount
   useEffect(() => {
@@ -140,10 +141,34 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
     });
   }, [length, width, height, gw, pcs, factor]);
 
+  const seaResult = useMemo(() => {
+    const l  = parseFloat(length);
+    const w  = parseFloat(width);
+    const h  = parseFloat(height);
+    const g  = parseFloat(gw);
+    const p  = parseInt(pcs, 10);
+    if (!l || !w || !h || !g || l <= 0 || w <= 0 || h <= 0 || g <= 0 || p < 1) return null;
+    return calculateSeaChargeableWeight({ lengthCm: l, widthCm: w, heightCm: h, grossWeightKg: g, pieces: p });
+  }, [length, width, height, gw, pcs]);
+
   const isVol = result?.basis === 'volumetric';
+
+  const modeBtnStyle = (m: 'air' | 'sea') => ({
+    padding: '8px 20px', fontSize: 13, fontWeight: freightMode === m ? 700 : 500,
+    color: freightMode === m ? '#fff' : 'var(--text-faint)',
+    background: freightMode === m ? '#e87722' : 'transparent',
+    border: freightMode === m ? '1px solid #e87722' : '1px solid var(--border)',
+    borderRadius: 6, cursor: 'pointer' as const, fontFamily: 'inherit',
+  });
 
   return (
     <div>
+      {/* Mode toggle */}
+      <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+        <button onClick={() => setFreightMode('air')} style={modeBtnStyle('air')}>Air Freight</button>
+        <button onClick={() => setFreightMode('sea')} style={modeBtnStyle('sea')}>Sea Freight (W/M)</button>
+      </div>
+
       {/* Input card */}
       <div style={{
         background: 'var(--bg-card)',
@@ -179,7 +204,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
             <Field label="Pieces"       id="cw-pcs" value={pcs} onChange={setPcs} placeholder="1" />
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {freightMode === 'air' && <div style={{ display: 'flex', flexDirection: 'column' }}>
             <label htmlFor="cw-factor" style={labelStyle}>Volumetric Factor</label>
             <select
               id="cw-factor"
@@ -199,7 +224,13 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
                 <option key={f.value} value={f.value}>{f.label}</option>
               ))}
             </select>
-          </div>
+          </div>}
+          {freightMode === 'sea' && <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <label style={labelStyle}>Formula</label>
+            <div style={{ ...inputStyle, display: 'flex', alignItems: 'center', fontSize: 13, color: 'var(--text-muted)' }}>
+              W/M: 1 CBM = 1 revenue tonne (1,000 kg)
+            </div>
+          </div>}
         </div>
       </div>
 
@@ -215,7 +246,29 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
           <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Results</span>
         </div>
 
-        {!result ? (
+        {freightMode === 'sea' && seaResult ? (
+          <div style={{ padding: '28px 24px', textAlign: 'center' }}>
+            <div style={{ fontSize: 48, fontWeight: 800, color: '#e87722', lineHeight: 1.1, marginBottom: 4 }}>
+              {seaResult.revenueTonnes.toFixed(2)} <span style={{ fontSize: 18, fontWeight: 600, color: 'var(--text-faint)' }}>RT</span>
+            </div>
+            <div style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 20 }}>
+              Revenue Tonnes (W/M) &mdash; Billing basis: <strong>{seaResult.billingBasis === 'measure' ? 'Measure (volume)' : 'Weight'}</strong>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8 }}>
+              {[
+                { label: 'CBM', value: seaResult.cbm.toFixed(2), unit: 'm\u00B3' },
+                { label: 'Gross Weight', value: seaResult.grossWeightTonnes.toFixed(2), unit: 'tonnes' },
+                { label: 'Chargeable', value: seaResult.chargeableWeightKg.toLocaleString(), unit: 'kg' },
+                { label: 'Stowage Factor', value: seaResult.ratio?.toFixed(2) ?? '\u2014', unit: 'CBM/t' },
+              ].map(s => (
+                <div key={s.label} style={{ background: 'var(--bg)', padding: '12px 8px', borderRadius: 8, textAlign: 'center' }}>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)' }}>{s.value}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-faint)', marginTop: 2 }}>{s.label} ({s.unit})</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : !result ? (
           <div style={{ padding: '40px 24px', textAlign: 'center', color: 'var(--text-faint)', fontSize: 14 }}>
             Enter dimensions, weight, and pieces above to calculate
           </div>

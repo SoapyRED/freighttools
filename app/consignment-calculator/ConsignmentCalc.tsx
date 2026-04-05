@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { calculateConsignment, ConsignmentItemInput, ConsignmentResult } from '@/lib/calculations/consignment';
+import { calculateConsignment, ConsignmentItemInput, ConsignmentResult, ConsignmentMode } from '@/lib/calculations/consignment';
 
 // ─── Types ──────────────────────────────────────────────────────
 
@@ -27,6 +27,7 @@ const emptyRow = (id: number): Row => ({
 export default function ConsignmentCalc() {
   const [rows, setRows] = useState<Row[]>([emptyRow(1), emptyRow(2), emptyRow(3)]);
   const [nextId, setNextId] = useState(4);
+  const [mode, setMode] = useState<ConsignmentMode>('road');
 
   const updateRow = useCallback((id: number, field: keyof Row, value: string | boolean) => {
     setRows(prev => prev.map(r => r.id === id ? { ...r, [field]: value } : r));
@@ -55,7 +56,7 @@ export default function ConsignmentCalc() {
       palletType: r.palletType,
     }));
 
-  const result: ConsignmentResult | null = validInputs.length > 0 ? calculateConsignment(validInputs) : null;
+  const result: ConsignmentResult | null = validInputs.length > 0 ? calculateConsignment(validInputs, mode) : null;
 
   // ── Styles ──────────────────────────────────────────────────
 
@@ -99,8 +100,23 @@ export default function ConsignmentCalc() {
     cursor: 'pointer', fontSize: 18, padding: '4px 8px', lineHeight: 1,
   };
 
+  const modeBtn = (m: ConsignmentMode, label: string) => ({
+    padding: '8px 20px', fontSize: 13, fontWeight: mode === m ? 700 : 500,
+    color: mode === m ? '#fff' : 'var(--text-faint)',
+    background: mode === m ? '#e87722' : 'transparent',
+    border: mode === m ? '1px solid #e87722' : '1px solid var(--border)',
+    borderRadius: 6, cursor: 'pointer' as const, fontFamily: 'inherit',
+  });
+
   return (
     <>
+      {/* ── Mode Selector ── */}
+      <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+        <button onClick={() => setMode('road')} style={modeBtn('road', 'Road')}>Road</button>
+        <button onClick={() => setMode('air')} style={modeBtn('air', 'Air')}>Air</button>
+        <button onClick={() => setMode('sea')} style={modeBtn('sea', 'Sea')}>Sea</button>
+      </div>
+
       {/* ── Item Rows ── */}
       <div style={card}>
         <div style={cardHead}>
@@ -195,58 +211,90 @@ export default function ConsignmentCalc() {
                   <div style={statNum}>{result.totals.grossWeightKg.toLocaleString()}</div>
                   <div style={statLabel}>Gross Weight (kg)</div>
                 </div>
-                <div style={statBox}>
-                  <div style={statNum}>{result.totals.ldm.toFixed(2)}</div>
-                  <div style={statLabel}>Loading Metres</div>
-                </div>
-                <div style={statBox}>
-                  <div style={statNum}>{result.totals.chargeableWeightAir.toLocaleString()}</div>
-                  <div style={statLabel}>Chargeable (Air)</div>
-                </div>
-                <div style={statBox}>
-                  <div style={statNum}>{result.totals.chargeableWeightRoad.toLocaleString()}</div>
-                  <div style={statLabel}>Chargeable (Road)</div>
-                </div>
-                <div style={statBox}>
-                  <div style={statNum}>{result.totals.palletSpaces}</div>
-                  <div style={statLabel}>Pallet Spaces</div>
-                </div>
+                {mode === 'road' && (
+                  <>
+                    <div style={statBox}>
+                      <div style={statNum}>{result.totals.ldm.toFixed(2)}</div>
+                      <div style={statLabel}>Loading Metres</div>
+                    </div>
+                    <div style={statBox}>
+                      <div style={statNum}>{result.totals.chargeableWeightRoad.toLocaleString()}</div>
+                      <div style={statLabel}>Chargeable Weight</div>
+                    </div>
+                    <div style={statBox}>
+                      <div style={statNum}>{result.totals.palletSpaces}</div>
+                      <div style={statLabel}>Pallet Spaces</div>
+                    </div>
+                  </>
+                )}
+                {mode === 'air' && (
+                  <>
+                    <div style={statBox}>
+                      <div style={statNum}>{result.totals.chargeableWeightAir.toLocaleString()}</div>
+                      <div style={statLabel}>Chargeable Weight</div>
+                    </div>
+                    <div style={statBox}>
+                      <div style={statNum}>{result.billingBasis === 'volume' ? 'Volume' : 'Weight'}</div>
+                      <div style={statLabel}>Billing Basis</div>
+                    </div>
+                  </>
+                )}
+                {mode === 'sea' && (
+                  <>
+                    <div style={statBox}>
+                      <div style={statNum}>{result.totals.revenueTonnes.toFixed(2)}</div>
+                      <div style={statLabel}>Revenue Tonnes</div>
+                    </div>
+                    <div style={statBox}>
+                      <div style={statNum}>{result.totals.chargeableWeightSea.toLocaleString()}</div>
+                      <div style={statLabel}>Chargeable Weight</div>
+                    </div>
+                    <div style={statBox}>
+                      <div style={statNum}>{result.sea.containerCount}&times; {result.sea.suggestedContainer.split(' ')[0]}</div>
+                      <div style={statLabel}>Container</div>
+                    </div>
+                  </>
+                )}
               </div>
 
-              {/* Trailer utilisation bar */}
-              <div style={{ marginBottom: 12 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--text-faint)', marginBottom: 4 }}>
-                  <span>Trailer Utilisation (13.6m artic)</span>
-                  <span>{result.trailer.utilisationPercent.toFixed(1)}%</span>
+              {/* Mode-specific details */}
+              {mode === 'road' && (
+                <>
+                  <div style={{ marginBottom: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--text-faint)', marginBottom: 4 }}>
+                      <span>Trailer Utilisation (13.6m artic)</span>
+                      <span>{result.trailer.utilisationPercent.toFixed(1)}%</span>
+                    </div>
+                    <div className="progress-track">
+                      <div className={`progress-fill ${result.trailer.utilisationPercent > 100 ? 'danger' : result.trailer.utilisationPercent > 85 ? 'high' : ''}`}
+                        style={{ width: `${Math.min(100, result.trailer.utilisationPercent)}%` }} />
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--text-faint)', marginBottom: 4 }}>
+                      <span>Weight Utilisation (24T payload)</span>
+                      <span>{result.trailer.weightUtilisationPercent.toFixed(1)}%</span>
+                    </div>
+                    <div className="progress-track">
+                      <div className={`progress-fill ${result.trailer.weightUtilisationPercent > 100 ? 'danger' : result.trailer.weightUtilisationPercent > 85 ? 'high' : ''}`}
+                        style={{ width: `${Math.min(100, result.trailer.weightUtilisationPercent)}%` }} />
+                    </div>
+                  </div>
+                  <div style={{ display: 'inline-block', padding: '8px 16px', borderRadius: 8, background: 'rgba(232,119,34,0.1)', border: '1px solid rgba(232,119,34,0.3)', fontSize: 14, fontWeight: 600, color: '#e87722' }}>
+                    Suggested vehicle: {result.suggestedVehicle}
+                  </div>
+                </>
+              )}
+              {mode === 'air' && (
+                <div style={{ display: 'inline-block', padding: '8px 16px', borderRadius: 8, background: 'rgba(232,119,34,0.1)', border: '1px solid rgba(232,119,34,0.3)', fontSize: 14, fontWeight: 600, color: '#e87722' }}>
+                  Billing basis: {result.billingBasis === 'volume' ? 'Volumetric (CBM \u00d7 167)' : 'Actual weight'}
                 </div>
-                <div className="progress-track">
-                  <div
-                    className={`progress-fill ${result.trailer.utilisationPercent > 100 ? 'danger' : result.trailer.utilisationPercent > 85 ? 'high' : ''}`}
-                    style={{ width: `${Math.min(100, result.trailer.utilisationPercent)}%` }}
-                  />
+              )}
+              {mode === 'sea' && (
+                <div style={{ display: 'inline-block', padding: '8px 16px', borderRadius: 8, background: 'rgba(232,119,34,0.1)', border: '1px solid rgba(232,119,34,0.3)', fontSize: 14, fontWeight: 600, color: '#e87722' }}>
+                  Container: {result.sea.containerCount}&times; {result.sea.suggestedContainer} &middot; Billing: {result.billingBasis === 'volume' ? 'Measure (CBM)' : 'Weight (tonnes)'}
                 </div>
-              </div>
-              <div style={{ marginBottom: 12 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--text-faint)', marginBottom: 4 }}>
-                  <span>Weight Utilisation (24T payload)</span>
-                  <span>{result.trailer.weightUtilisationPercent.toFixed(1)}%</span>
-                </div>
-                <div className="progress-track">
-                  <div
-                    className={`progress-fill ${result.trailer.weightUtilisationPercent > 100 ? 'danger' : result.trailer.weightUtilisationPercent > 85 ? 'high' : ''}`}
-                    style={{ width: `${Math.min(100, result.trailer.weightUtilisationPercent)}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* Suggested vehicle */}
-              <div style={{
-                display: 'inline-block', padding: '8px 16px', borderRadius: 8,
-                background: 'rgba(232,119,34,0.1)', border: '1px solid rgba(232,119,34,0.3)',
-                fontSize: 14, fontWeight: 600, color: '#e87722',
-              }}>
-                Suggested vehicle: {result.suggestedVehicle}
-              </div>
+              )}
             </div>
           </div>
 

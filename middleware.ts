@@ -18,6 +18,7 @@ export const config = {
     '/api/ldm/:path*',
     '/api/pallet/:path*',
     '/api/unlocode/:path*',
+    '/api/shipment/:path*',
   ],
 };
 

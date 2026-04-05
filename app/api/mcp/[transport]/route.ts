@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { createMcpHandler } from 'mcp-handler';
 import { calculateCbm } from '@/lib/calculations/cbm';
 import { calculateConsignment } from '@/lib/calculations/consignment';
+import { calculateShipmentSummary } from '@/lib/calculations/shipment-summary';
 import { calculateDuty } from '@/lib/calculations/duty';
 import { search as unlocodeSearch, lookupByCode as unlocodeLookup, TOTAL_ENTRIES as UNLOCODE_TOTAL } from '@/lib/calculations/unlocode';
 import { calculateChargeableWeight, DEFAULT_FACTOR } from '@/lib/calculations/chargeable-weight';
@@ -362,6 +363,42 @@ const handler = createMcpHandler(
             freightCost: freightCost ?? 0, insuranceCost: insuranceCost ?? 0,
             incoterm,
           });
+          return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
+        } catch (err: unknown) {
+          const msg = err instanceof Error ? err.message : String(err);
+          return { content: [{ type: 'text' as const, text: `Error: ${msg}` }], isError: true };
+        }
+      },
+    );
+
+    // ── Shipment Summary (composite) ────────────────────────
+    server.tool(
+      'shipment_summary',
+      `Composite shipment summary — chains CBM, weight, LDM/volumetric/W&M, ADR compliance, and UK duty estimation into one response. Accepts multiple items with a transport mode (road/air/sea/multimodal). Returns per-mode calculations, DG compliance flags, and customs estimates.`,
+      {
+        mode: z.enum(['road', 'air', 'sea', 'multimodal']).describe('Transport mode'),
+        items: z.array(z.object({
+          description: z.string().optional(),
+          length: z.number().positive().describe('Length cm'),
+          width: z.number().positive().describe('Width cm'),
+          height: z.number().positive().describe('Height cm'),
+          weight: z.number().describe('Gross weight kg per item'),
+          quantity: z.number().int().positive(),
+          stackable: z.boolean().optional(),
+          palletType: z.enum(['euro', 'uk', 'us', 'custom', 'none']).optional(),
+          hsCode: z.string().optional(),
+          unNumber: z.string().optional(),
+          customsValue: z.number().optional(),
+        })),
+        origin: z.object({ country: z.string(), locode: z.string().optional() }).optional(),
+        destination: z.object({ country: z.string(), locode: z.string().optional() }).optional(),
+        incoterm: z.string().optional(),
+        freightCost: z.number().optional(),
+        insuranceCost: z.number().optional(),
+      },
+      async (args) => {
+        try {
+          const result = await calculateShipmentSummary(args as Parameters<typeof calculateShipmentSummary>[0]);
           return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
         } catch (err: unknown) {
           const msg = err instanceof Error ? err.message : String(err);

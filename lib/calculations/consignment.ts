@@ -12,6 +12,9 @@ const TRAILER_PALLET_SPACES = 33;
 
 const AIR_VOLUMETRIC_FACTOR = 167; // 1 CBM = 167 kg
 const ROAD_LDM_FACTOR = 1750;     // 1 LDM = 1,750 kg
+const SEA_FACTOR = 1000;           // 1 CBM = 1 revenue tonne (1,000 kg)
+
+export type ConsignmentMode = 'road' | 'air' | 'sea';
 
 const PALLET_TYPES: Record<string, { lengthCm: number; widthCm: number; label: string }> = {
   euro:   { lengthCm: 120, widthCm: 80,  label: 'Euro 120×80' },
@@ -41,6 +44,8 @@ export interface ConsignmentItemResult {
   ldm: number;
   chargeableWeightAir: number;
   chargeableWeightRoad: number;
+  chargeableWeightSea: number;
+  revenueTonnes: number;
   palletSpaces: number;
   stackable: boolean;
   palletType: string;
@@ -59,10 +64,14 @@ export interface ConsignmentResult {
     ldm: number;
     chargeableWeightAir: number;
     chargeableWeightRoad: number;
+    chargeableWeightSea: number;
+    revenueTonnes: number;
     palletSpaces: number;
     itemCount: number;
     pieceCount: number;
   };
+  mode: ConsignmentMode;
+  billingBasis: 'weight' | 'volume';
   trailer: {
     utilisationPercent: number;
     weightUtilisationPercent: number;
@@ -70,19 +79,25 @@ export interface ConsignmentResult {
     palletSpacesAvailable: number;
     fits: boolean;
   };
+  sea: {
+    suggestedContainer: string;
+    containerCount: number;
+  };
   suggestedVehicle: string;
   warnings: ConsignmentWarning[];
 }
 
 // ─── Calculation ────────────────────────────────────────────────
 
-export function calculateConsignment(inputs: ConsignmentItemInput[]): ConsignmentResult {
+export function calculateConsignment(inputs: ConsignmentItemInput[], mode: ConsignmentMode = 'road'): ConsignmentResult {
   const warnings: ConsignmentWarning[] = [];
   let totalCbm = 0;
   let totalWeight = 0;
   let totalLdm = 0;
   let totalChargeAir = 0;
   let totalChargeRoad = 0;
+  let totalChargeSea = 0;
+  let totalRevenueTonnes = 0;
   let totalPalletSpaces = 0;
   let totalPieces = 0;
 
@@ -109,6 +124,11 @@ export function calculateConsignment(inputs: ConsignmentItemInput[]): Consignmen
     const ldmWeight = round(ldm * ROAD_LDM_FACTOR);
     const chargeableWeightRoad = Math.max(weight, ldmWeight);
 
+    // Chargeable weight (sea): W/M — max of weight (tonnes) vs CBM, expressed as revenue tonnes
+    const weightTonnes = round(weight / SEA_FACTOR);
+    const revenueTonnes = round(Math.max(weightTonnes, cbm));
+    const chargeableWeightSea = round(revenueTonnes * SEA_FACTOR);
+
     // Pallet spaces — based on pallet footprint or item footprint
     const pallet = PALLET_TYPES[palletType];
     const footprintL = pallet ? pallet.lengthCm : lengthCm;
@@ -126,6 +146,8 @@ export function calculateConsignment(inputs: ConsignmentItemInput[]): Consignmen
     totalLdm += ldm;
     totalChargeAir += chargeableWeightAir;
     totalChargeRoad += chargeableWeightRoad;
+    totalChargeSea += chargeableWeightSea;
+    totalRevenueTonnes += revenueTonnes;
     totalPalletSpaces += palletSpaces;
     totalPieces += quantity;
 
@@ -138,6 +160,8 @@ export function calculateConsignment(inputs: ConsignmentItemInput[]): Consignmen
       ldm,
       chargeableWeightAir,
       chargeableWeightRoad,
+      chargeableWeightSea,
+      revenueTonnes,
       palletSpaces,
       stackable,
       palletType: pallet?.label ?? (palletType === 'none' ? 'None' : palletType),
@@ -149,6 +173,17 @@ export function calculateConsignment(inputs: ConsignmentItemInput[]): Consignmen
   totalLdm = round(totalLdm);
   totalChargeAir = round(totalChargeAir);
   totalChargeRoad = round(totalChargeRoad);
+  totalChargeSea = round(totalChargeSea);
+  totalRevenueTonnes = round(totalRevenueTonnes);
+
+  // Billing basis (mode-specific)
+  let billingBasis: 'weight' | 'volume' = 'weight';
+  if (mode === 'road') billingBasis = totalChargeRoad > totalWeight ? 'volume' : 'weight';
+  else if (mode === 'air') billingBasis = totalChargeAir > totalWeight ? 'volume' : 'weight';
+  else if (mode === 'sea') billingBasis = totalCbm > round(totalWeight / SEA_FACTOR) ? 'volume' : 'weight';
+
+  // Sea container suggestion
+  const seaContainer = suggestContainer(totalCbm, totalWeight);
 
   // Trailer utilisation
   const utilisationPercent = round((totalLdm / TRAILER_LENGTH_M) * 100);
@@ -177,16 +212,24 @@ export function calculateConsignment(inputs: ConsignmentItemInput[]): Consignmen
       ldm: totalLdm,
       chargeableWeightAir: totalChargeAir,
       chargeableWeightRoad: totalChargeRoad,
+      chargeableWeightSea: totalChargeSea,
+      revenueTonnes: totalRevenueTonnes,
       palletSpaces: totalPalletSpaces,
       itemCount: items.length,
       pieceCount: totalPieces,
     },
+    mode,
+    billingBasis,
     trailer: {
       utilisationPercent,
       weightUtilisationPercent,
       palletSpacesUsed: totalPalletSpaces,
       palletSpacesAvailable: TRAILER_PALLET_SPACES,
       fits,
+    },
+    sea: {
+      suggestedContainer: seaContainer.name,
+      containerCount: seaContainer.count,
     },
     suggestedVehicle,
     warnings,
@@ -197,6 +240,22 @@ export function calculateConsignment(inputs: ConsignmentItemInput[]): Consignmen
 
 function round(n: number, dp = 2): number {
   return parseFloat(n.toFixed(dp));
+}
+
+function suggestContainer(cbm: number, weightKg: number): { name: string; count: number } {
+  const specs = [
+    { name: '40ft High Cube', cbm: 76.3, payloadKg: 26460 },
+    { name: '40ft Standard', cbm: 67.7, payloadKg: 26680 },
+    { name: '20ft Standard', cbm: 33.2, payloadKg: 28200 },
+  ];
+  for (const s of specs) {
+    const byVol = Math.ceil(cbm / s.cbm);
+    const byWt = Math.ceil(weightKg / s.payloadKg);
+    const count = Math.max(byVol, byWt);
+    if (count <= 5) return { name: s.name, count };
+  }
+  const s = specs[0];
+  return { name: s.name, count: Math.max(Math.ceil(cbm / s.cbm), Math.ceil(weightKg / s.payloadKg)) };
 }
 
 function suggestVehicle(ldm: number, weightKg: number): string {

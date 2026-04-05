@@ -24,6 +24,9 @@ const entries: { month: string; items: Entry[] }[] = [
   {
     month: 'April 2026',
     items: [
+      { date: 'Apr 5', tag: 'API Change', title: 'Composite Shipment Summary Endpoint', desc: 'POST /api/shipment/summary chains CBM, LDM, chargeable weight, ADR compliance, and UK duty estimation into one response. Accepts road/air/sea/multimodal modes.' },
+      { date: 'Apr 5', tag: 'API Change', title: 'Sea Freight W/M Added to Calculators', desc: 'Consignment calculator and chargeable weight calculator now support sea freight mode with W/M (Weight or Measure) at 1 CBM = 1 revenue tonne.' },
+      { date: 'Apr 5', tag: 'API Change', title: 'Shipment Object Schema v1', desc: 'Canonical FreightUtils Shipment schema defined — the foundational data model for all composite endpoints.' },
       { date: 'Apr 4', tag: 'New Tool', title: 'UK Import Duty & VAT Estimator', desc: 'Estimate UK import duty and VAT for any commodity code using live GOV.UK Trade Tariff data. Supports Incoterm-adjusted CIF, preferential rate flagging, and cross-tool HS code workflow.' },
       { date: 'Apr 4', tag: 'New Tool', title: 'UN/LOCODE Lookup', desc: '116,000+ transport locations from UNECE UN/LOCODE 2024-2. Searchable by name, code, country, and function type (port, airport, rail, road, ICD, border).' },
       { date: 'Apr 4', tag: 'New Tool', title: 'Multi-Item Consignment Calculator', desc: 'Calculate total CBM, weight, LDM, and chargeable weight across mixed items. Available as web tool, REST API, and MCP tool.' },
