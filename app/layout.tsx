@@ -6,6 +6,7 @@ import NavLinks from './components/NavLinks';
 import SiteSearch from './components/SiteSearch';
 import AnnounceBanner from './components/AnnounceBanner';
 import BrandLogo from './components/BrandLogo';
+import CookieConsent from './components/CookieConsent';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.freightutils.com'),
@@ -230,6 +231,9 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+
+        {/* Cookie consent — loads after page content */}
+        <CookieConsent />
       </body>
     </html>
   );

@@ -257,11 +257,11 @@ export default function NavLinks() {
 
         .nav-dropdown-item:hover {
           background: rgba(255,255,255,0.06);
-          color: #EF9F27;
+          color: var(--accent, #EF9F27);
         }
 
         .nav-dropdown-item-active {
-          color: #EF9F27 !important;
+          color: var(--accent, #EF9F27) !important;
           font-weight: 600;
           background: rgba(239,159,39,0.08);
         }
@@ -365,10 +365,10 @@ export default function NavLinks() {
         }
 
         .nav-mobile-link-active {
-          color: #EF9F27 !important;
+          color: var(--accent, #EF9F27) !important;
           font-weight: 700;
           background: rgba(239,159,39,0.08);
-          border-left-color: #EF9F27;
+          border-left-color: var(--accent, #EF9F27);
         }
 
         /* ── Responsive breakpoints ── */

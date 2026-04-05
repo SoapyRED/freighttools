@@ -241,17 +241,30 @@ export default function AboutPage() {
             Build freight calculations into your TMS, WMS, booking platform, or any system
             that needs them.
           </p>
-          <div className="code-block">
+          <div className="code-block" style={{ fontSize: 12, lineHeight: 1.8 }}>
+            <span style={{ color: 'var(--text-faint)' }}># Composite endpoint — chains multiple tools in one call</span><br />
+            POST /api/shipment/summary<br />
+            <span style={{ color: 'var(--text-faint)' }}>&nbsp;&nbsp;{`{ "mode": "road", "items": [...] }`}</span><br />
+            <br />
+            <span style={{ color: 'var(--text-faint)' }}># Freight calculators</span><br />
             GET /api/ldm?pallet=euro&amp;qty=10<br />
             GET /api/cbm?l=120&amp;w=80&amp;h=100<br />
             GET /api/chargeable-weight?l=120&amp;w=80&amp;h=100&amp;gw=500<br />
             GET /api/pallet?pl=120&amp;pw=80&amp;pmh=220&amp;bl=40&amp;bw=30&amp;bh=25<br />
-            GET /api/adr?un=1203<br />
-            GET /api/airlines?prefix=176<br />
-            GET /api/incoterms?code=FOB<br />
             GET /api/containers?type=40ft-high-cube<br />
             GET /api/convert?value=100&amp;from=kg&amp;to=lbs<br />
-            GET /api/hs?q=coffee
+            POST /api/consignment<br />
+            <span style={{ color: 'var(--text-faint)' }}>&nbsp;&nbsp;{`{ "mode": "air", "items": [...] }`}</span><br />
+            <br />
+            <span style={{ color: 'var(--text-faint)' }}># Reference data &amp; compliance</span><br />
+            GET /api/adr?un=1203<br />
+            GET /api/adr-calculator?un=1203&amp;qty=200<br />
+            GET /api/hs?q=coffee<br />
+            GET /api/incoterms?code=FOB<br />
+            POST /api/duty<br />
+            <span style={{ color: 'var(--text-faint)' }}>&nbsp;&nbsp;{`{ "commodityCode": "847989", "originCountry": "CN", "customsValue": 10000 }`}</span><br />
+            GET /api/airlines?prefix=176<br />
+            GET /api/unlocode?q=rotterdam
           </div>
         </Section>
 

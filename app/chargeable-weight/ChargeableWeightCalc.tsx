@@ -101,6 +101,13 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
   const [factor, setFactor] = useState(String(defaultFactor));
   const [freightMode, setFreightMode] = useState<'air' | 'sea'>('air');
 
+  // Update page title when mode changes
+  useEffect(() => {
+    document.title = freightMode === 'sea'
+      ? 'Sea Freight (W/M) Chargeable Weight Calculator | FreightUtils.com'
+      : 'Air Freight Chargeable Weight Calculator | FreightUtils.com';
+  }, [freightMode]);
+
   // Load from URL params on mount
   useEffect(() => {
     const p = getUrlParams();
