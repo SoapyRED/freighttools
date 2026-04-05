@@ -49,27 +49,21 @@ const nav: NavEntry[] = [
   { href: '/about', label: 'About' },
 ];
 
-// ─── Dropdown component (single-container hover) ────────────────
+// ─── Dropdown component — CSS :hover baseline + JS enhancement ──
 
-function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
-  group: NavGroup; pathname: string; openGroup: string | null; setOpenGroup: (g: string | null) => void;
+function Dropdown({ group, pathname }: {
+  group: NavGroup; pathname: string;
 }) {
-  const isOpen = openGroup === group.label;
   const hasActive = group.items.some(i => {
     if (pathname === i.href) return true;
-    // For /adr in Reference, don't match /adr/* guide pages (those belong to Guides)
     if (i.href === '/adr' && pathname.startsWith('/adr/')) return false;
     return pathname.startsWith(i.href + '/');
   });
 
   return (
-    <div
-      style={{ position: 'relative' }}
-      onMouseEnter={() => setOpenGroup(group.label)}
-      onMouseLeave={() => setOpenGroup(null)}
-    >
+    <div className="nav-dropdown">
       <button
-        onClick={() => setOpenGroup(isOpen ? null : group.label)}
+        className="nav-dropdown-trigger"
         style={{
           background: 'none', border: 'none', cursor: 'pointer',
           color: hasActive ? '#EF9F27' : 'var(--text-faint)',
@@ -81,43 +75,19 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
         }}
       >
         {group.label}
-        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style={{ marginLeft: 2, opacity: 0.5, transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0)' }}>
+        <svg className="nav-dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" style={{ marginLeft: 2, opacity: 0.5 }}>
           <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </button>
 
-      <div style={{
-        position: 'absolute', top: '100%', left: 0,
-        background: '#1a2332', border: '1px solid var(--navy-border)',
-        borderRadius: 8, padding: '6px 0', minWidth: 210,
-        zIndex: 100, boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-        opacity: isOpen ? 1 : 0,
-        transform: isOpen ? 'translateY(0)' : 'translateY(-6px)',
-        pointerEvents: isOpen ? 'auto' : 'none',
-        transition: 'opacity 0.15s ease, transform 0.15s ease',
-      }}>
+      <div className="nav-dropdown-panel">
         {group.items.map(item => {
           const active = pathname === item.href || (item.href !== '/adr' && pathname.startsWith(item.href + '/'));
           return (
             <Link
               key={item.href}
               href={item.href}
-              onClick={() => setOpenGroup(null)}
-              style={{
-                display: 'block', padding: '9px 18px',
-                color: active ? '#EF9F27' : '#c9cdd6',
-                textDecoration: 'none', fontSize: 13, fontWeight: active ? 600 : 400,
-                background: active ? 'rgba(239,159,39,0.08)' : 'transparent',
-                transition: 'background 0.1s, color 0.1s',
-              }}
-              onMouseEnter={e => {
-                if (!active) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
-                if (!active) (e.currentTarget as HTMLElement).style.color = '#EF9F27';
-              }}
-              onMouseLeave={e => {
-                if (!active) (e.currentTarget as HTMLElement).style.background = 'transparent';
-                if (!active) (e.currentTarget as HTMLElement).style.color = '#c9cdd6';
-              }}
+              className={`nav-dropdown-item${active ? ' nav-dropdown-item-active' : ''}`}
             >
               {item.label}
             </Link>
@@ -133,13 +103,17 @@ function Dropdown({ group, pathname, openGroup, setOpenGroup }: {
 export default function NavLinks() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openGroup, setOpenGroup] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
 
-  // Close dropdown when clicking outside
+  // Close on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Close mobile menu on click outside
   const handleClickOutside = useCallback((e: MouseEvent) => {
     if (navRef.current && !navRef.current.contains(e.target as Node)) {
-      setOpenGroup(null);
+      setMobileOpen(false);
     }
   }, []);
 
@@ -147,12 +121,6 @@ export default function NavLinks() {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, [handleClickOutside]);
-
-  // Close on route change
-  useEffect(() => {
-    setOpenGroup(null);
-    setMobileOpen(false);
-  }, [pathname]);
 
   const topLinkStyle = (isActive: boolean): React.CSSProperties => ({
     color: isActive ? '#EF9F27' : 'var(--text-faint)',
@@ -171,7 +139,7 @@ export default function NavLinks() {
       <nav ref={navRef} className="nav-desktop" style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
         {nav.map((entry, i) => {
           if (isGroup(entry)) {
-            return <Dropdown key={i} group={entry} pathname={pathname} openGroup={openGroup} setOpenGroup={setOpenGroup} />;
+            return <Dropdown key={i} group={entry} pathname={pathname} />;
           }
           const active = pathname === entry.href || pathname.startsWith(entry.href + '/');
           return (
@@ -204,7 +172,7 @@ export default function NavLinks() {
           style={{
             position: 'fixed', top: 56, left: 0, right: 0,
             background: 'var(--bg, #fff)',
-            borderBottom: '1px solid var(--grey-100, #d8dce6)',
+            borderBottom: '1px solid var(--border)',
             padding: '8px 16px 12px', zIndex: 99,
             display: 'none', flexDirection: 'column', gap: 0,
             boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
@@ -217,7 +185,7 @@ export default function NavLinks() {
                 <div key={i}>
                   <div style={{
                     fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-                    letterSpacing: '1px', color: 'var(--text-faint, #8f9ab0)',
+                    letterSpacing: '1px', color: 'var(--text-faint)',
                     padding: '12px 12px 4px', marginTop: i > 0 ? 4 : 0,
                   }}>
                     {entry.label}
@@ -229,7 +197,7 @@ export default function NavLinks() {
                         key={item.href} href={item.href}
                         onClick={() => setMobileOpen(false)}
                         style={{
-                          color: active ? '#EF9F27' : 'var(--text, #1e2535)',
+                          color: active ? '#EF9F27' : 'var(--text)',
                           textDecoration: 'none', fontSize: 14,
                           fontWeight: active ? 700 : 500,
                           padding: '10px 12px', borderRadius: 8,
@@ -251,7 +219,7 @@ export default function NavLinks() {
                 key={entry.href} href={entry.href}
                 onClick={() => setMobileOpen(false)}
                 style={{
-                  color: active ? '#EF9F27' : 'var(--text, #1e2535)',
+                  color: active ? '#EF9F27' : 'var(--text)',
                   textDecoration: 'none', fontSize: 14,
                   fontWeight: active ? 700 : 500,
                   padding: '10px 12px', borderRadius: 8,
@@ -268,6 +236,71 @@ export default function NavLinks() {
       )}
 
       <style>{`
+        /* ── Desktop dropdown — CSS-only baseline (works without JS) ── */
+        .nav-dropdown {
+          position: relative;
+        }
+
+        .nav-dropdown-panel {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: var(--navy, #1a2332);
+          border: 1px solid var(--navy-border, #2e3d55);
+          border-radius: 8px;
+          padding: 6px 0;
+          min-width: 210px;
+          z-index: 100;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-6px);
+          pointer-events: none;
+          transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+        }
+
+        /* CSS :hover — the critical baseline that works even if JS fails */
+        .nav-dropdown:hover .nav-dropdown-panel,
+        .nav-dropdown:focus-within .nav-dropdown-panel {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-chevron,
+        .nav-dropdown:focus-within .nav-dropdown-chevron {
+          transform: rotate(180deg);
+        }
+
+        .nav-dropdown-chevron {
+          transition: transform 0.2s ease;
+        }
+
+        /* Dropdown items */
+        .nav-dropdown-item {
+          display: block;
+          padding: 9px 18px;
+          color: var(--text-muted, #c9cdd6);
+          text-decoration: none;
+          font-size: 13px;
+          font-weight: 400;
+          background: transparent;
+          transition: background 0.1s, color 0.1s;
+        }
+
+        .nav-dropdown-item:hover {
+          background: rgba(255,255,255,0.06);
+          color: #EF9F27;
+        }
+
+        .nav-dropdown-item-active {
+          color: #EF9F27 !important;
+          font-weight: 600;
+          background: rgba(239,159,39,0.08);
+        }
+
+        /* ── Mobile responsive ── */
         @media (max-width: 768px) {
           .nav-desktop { display: none !important; }
           .nav-hamburger { display: block !important; }
