@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { SITE_STATS, SITE_COPY } from '@/lib/constants/siteStats';
 
 const ogUrl = '/api/og?title=About+FreightUtils&desc=Free+freight+calculators+and+open+APIs+for+the+logistics+industry';
 
 export const metadata: Metadata = {
   title: 'About FreightUtils — Free Freight Tools & API Platform',
   description:
-    'FreightUtils provides 10 free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. LDM, CBM, chargeable weight, pallet fitting, ADR dangerous goods, airline codes, INCOTERMS reference, container capacity, unit converter, and HS code lookup.',
+    `FreightUtils provides ${SITE_STATS.toolCount} free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. LDM, CBM, chargeable weight, pallet fitting, ADR dangerous goods, ADR exemption calculator, airline codes, INCOTERMS reference, container capacity, unit converter, HS code lookup, UK duty & VAT, UN/LOCODE, and consignment calculator.`,
   alternates: { canonical: 'https://www.freightutils.com/about' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'About FreightUtils' }],
@@ -102,12 +103,16 @@ export default function AboutPage() {
               { name: 'CBM Calculator', href: '/cbm' },
               { name: 'Chargeable Weight', href: '/chargeable-weight' },
               { name: 'Pallet Fitting', href: '/pallet' },
-              { name: 'ADR Dangerous Goods', href: '/adr' },
-              { name: 'Airline Codes', href: '/airlines' },
-              { name: 'INCOTERMS 2020', href: '/incoterms' },
               { name: 'Container Capacity', href: '/containers' },
               { name: 'Unit Converter', href: '/convert' },
+              { name: 'Consignment Calculator', href: '/consignment-calculator' },
+              { name: 'ADR Dangerous Goods', href: '/adr' },
+              { name: 'ADR Exemption Calculator', href: '/adr-calculator' },
               { name: 'HS Code Lookup', href: '/hs' },
+              { name: 'INCOTERMS 2020', href: '/incoterms' },
+              { name: 'UK Import Duty & VAT', href: '/duty' },
+              { name: 'Airline Codes', href: '/airlines' },
+              { name: 'UN/LOCODE Lookup', href: '/unlocode' },
             ].map(t => (
               <Link key={t.href} href={t.href} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
@@ -200,11 +205,11 @@ export default function AboutPage() {
         <Section label="Methodology" title="Data Sources &amp; Methodology">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {[
-              { name: 'ADR 2025', badge: 'UNECE', entries: '2,939 entries', desc: 'Licensed from Labeline.com (ECE/TRANS/352). Next edition: ADR 2027.' },
-              { name: 'HS Codes', badge: 'WCO', entries: '6,940 codes', desc: 'UN Comtrade HS 2022 (PDDL). 21 sections, 97 chapters.' },
-              { name: 'Airlines', badge: 'IATA/ICAO', entries: '6,352 airlines', desc: 'Public sources, cross-referenced. 390 verified cargo AWB prefixes.' },
-              { name: 'INCOTERMS', badge: 'ICC', entries: '11 terms', desc: 'ICC INCOTERMS 2020 rules with full responsibility breakdowns.' },
-              { name: 'UN/LOCODE', badge: 'UNECE', entries: '116,129 locations', desc: 'Ports, airports, rail terminals, inland depots. UNECE 2024-2 (PDDL).' },
+              { name: 'ADR 2025', badge: 'UNECE', entries: `${SITE_STATS.adrEntries.toLocaleString()} entries`, desc: 'Licensed from Labeline.com (ECE/TRANS/352). Next edition: ADR 2027.' },
+              { name: 'HS Codes', badge: 'WCO', entries: `${SITE_STATS.hsCodeCount.toLocaleString()} codes`, desc: 'UN Comtrade HS 2022 (PDDL). 21 sections, 97 chapters.' },
+              { name: 'Airlines', badge: 'IATA/ICAO', entries: `${SITE_STATS.airlineCount.toLocaleString()} airlines`, desc: 'Public sources, cross-referenced. 390 verified cargo AWB prefixes.' },
+              { name: 'INCOTERMS', badge: 'ICC', entries: `${SITE_STATS.incotermsCount} terms`, desc: 'ICC INCOTERMS 2020 rules with full responsibility breakdowns.' },
+              { name: 'UN/LOCODE', badge: 'UNECE', entries: `${SITE_STATS.unlocodeCount.toLocaleString()} locations`, desc: 'Ports, airports, rail terminals, inland depots. UNECE 2024-2 (PDDL).' },
               { name: 'UK Duty Rates', badge: 'GOV.UK', entries: 'Live API', desc: 'GOV.UK Trade Tariff API. Open Government Licence v3.' },
               { name: 'Containers', badge: 'ISO', entries: '10 types', desc: 'ISO 668 + ISO 1496 standard dimensions and capacities.' },
               { name: 'Pallets', badge: 'EPAL/ISO', entries: '6 types', desc: 'EPAL EUR pallets, ISO 6780 international, IATA ULD specs.' },
@@ -230,7 +235,7 @@ export default function AboutPage() {
 
         <Section label="Developers" title="For Developers">
           <p style={{ marginBottom: 14 }}>
-            14 tools across 15+ REST API endpoints. No authentication required. Includes a composite Shipment Summary endpoint that chains CBM, chargeable weight, ADR compliance, and UK duty estimation into one call.
+            {SITE_STATS.toolCount} tools across {SITE_STATS.apiEndpointCount} REST API endpoints. No authentication required. Includes a composite Shipment Summary endpoint that chains CBM, chargeable weight, ADR compliance, and UK duty estimation into one call.
             JSON responses. Full documentation at{' '}
             <Link href="/api-docs" style={{ color: '#EF9F27', textDecoration: 'underline' }}>/api-docs</Link>.
             Build freight calculations into your TMS, WMS, booking platform, or any system

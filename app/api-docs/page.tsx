@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import CopyableCode from '@/app/components/CopyableCode';
 import JsonBlock from '@/app/components/JsonBlock';
 import QuickstartTabs from '@/app/components/QuickstartTabs';
+import { SITE_STATS } from '@/lib/constants/siteStats';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
-  description: 'FreightUtils public API reference — 11 free endpoints. Loading metres, CBM, chargeable weight, pallet fitting, ADR lookup, ADR 1.1.3.6 exemption calculator, airline codes, INCOTERMS 2020, container capacity, unit converter, and HS code lookup. No auth required.',
+  description: `FreightUtils public API reference — ${SITE_STATS.apiEndpointCount} free endpoints. Loading metres, CBM, chargeable weight, pallet fitting, consignment calculator, ADR lookup, ADR exemption calculator, airline codes, INCOTERMS 2020, container capacity, unit converter, HS code lookup, UK duty & VAT, UN/LOCODE, and shipment summary. No auth required.`,
 };
 
 const s = {
@@ -38,7 +39,7 @@ export default function ApiDocsPage() {
           All FreightUtils calculators are available as free, open REST API endpoints
         </p>
         <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
-          Last updated: April 2026
+          Last updated: {SITE_STATS.lastUpdated}
         </p>
       </div>
 
@@ -159,7 +160,7 @@ export default function ApiDocsPage() {
           <h2 style={s.sectionTitle}>MCP Server — AI Agent Integration</h2>
           <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
             FreightUtils is available as a <strong>Model Context Protocol (MCP) server</strong>, giving
-            AI agents direct access to all 11 freight calculation and reference tools. The first and only freight MCP server.
+            AI agents direct access to all {SITE_STATS.toolCount} freight calculation and reference tools. The first and only freight MCP server.
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
@@ -215,6 +216,124 @@ export default function ApiDocsPage() {
         <div style={{ marginBottom: 40 }}>
           <h2 style={s.sectionTitle}>Get Started in 2 Minutes</h2>
           <QuickstartTabs />
+        </div>
+
+        {/* ── Shipment Summary (Composite) ── */}
+        <div id="shipment-summary" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/shipment/summary</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Shipment Summary (Composite)</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <div style={{ display: 'inline-block', background: 'rgba(232,119,34,0.12)', color: '#e87722', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 6, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              Flagship Endpoint
+            </div>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Composite endpoint that chains CBM, chargeable weight, LDM, ADR compliance, and UK duty/VAT
+              estimation into a single call. Accepts a unified Shipment object and returns comprehensive
+              results based on transport mode.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Mode Parameter</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr><th>Mode</th><th>Calculations Included</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>road</code></td><td>CBM, LDM, pallet spaces, trailer utilisation, road chargeable weight (1 LDM = 1,750 kg), vehicle suggestion</td></tr>
+                  <tr><td><code>air</code></td><td>CBM, volumetric weight (1 CBM = 167 kg), air chargeable weight</td></tr>
+                  <tr><td><code>sea</code></td><td>CBM, revenue tonnes (W/M at 1 CBM = 1,000 kg), container suggestion</td></tr>
+                  <tr><td><code>multimodal</code></td><td>All of the above — road, air, and sea calculations combined</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Request</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Mixed 3-item road shipment with a DG item and HS code:</p>
+            <CopyableCode code={`curl -X POST "https://www.freightutils.com/api/shipment/summary" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+  "mode": "road",
+  "origin": { "country": "DE", "locode": "DEHAM" },
+  "destination": { "country": "GB", "locode": "GBFXT" },
+  "incoterm": "CIF",
+  "freightCost": 850,
+  "insuranceCost": 120,
+  "items": [
+    {
+      "description": "Machine parts on Euro pallets",
+      "length": 120, "width": 80, "height": 110,
+      "weight": 480, "quantity": 6,
+      "stackable": false, "palletType": "euro",
+      "hsCode": "847989", "customsValue": 12000
+    },
+    {
+      "description": "Cleaning solvent (DG)",
+      "length": 60, "width": 40, "height": 50,
+      "weight": 25, "quantity": 4,
+      "unNumber": "1993"
+    },
+    {
+      "description": "Spare filters",
+      "length": 40, "width": 30, "height": 20,
+      "weight": 8, "quantity": 10,
+      "stackable": true
+    }
+  ]
+}'`} style={{ marginBottom: 16 }} />
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Response</h3>
+            <JsonBlock json={`{
+  "mode": "road",
+  "itemCount": 3,
+  "totals": {
+    "pieces": 20,
+    "grossWeight": 3060,
+    "volumeCBM": 7.28,
+    "chargeableWeight": 3060,
+    "billingBasis": "weight"
+  },
+  "modeSpecific": {
+    "loadingMetres": 4.0,
+    "palletSpaces": 10,
+    "trailerUtilisation": 29.41,
+    "suggestedVehicle": "13.6m Artic Trailer",
+    "chargeableWeightRoad": 7000
+  },
+  "compliance": {
+    "hasDangerousGoods": true,
+    "adrFlags": {
+      "unNumbers": ["1993"],
+      "totalPoints": 300,
+      "exemptionApplicable": true
+    }
+  },
+  "customs": {
+    "hsCodesPresent": true,
+    "canEstimateUkDuty": true,
+    "dutyEstimate": {
+      "cifValue": 12970,
+      "dutyRate": "1.7%",
+      "dutyAmount": 220.49,
+      "vatRate": "20%",
+      "vatAmount": 2638.1,
+      "totalTaxes": 2858.59
+    }
+  },
+  "warnings": [],
+  "disclaimer": "Estimates only — verify with carrier and customs broker",
+  "dataVersion": {
+    "adr": "UNECE ADR 2025",
+    "hs": "WCO HS 2022",
+    "duty": "GOV.UK Trade Tariff API"
+  }
+}`} />
+            <p style={{ color: '#e87722', fontSize: 13, fontWeight: 600, marginTop: 16, padding: '10px 14px', background: 'rgba(232,119,34,0.08)', borderRadius: 8, border: '1px solid rgba(232,119,34,0.2)' }}>
+              Pro tier endpoint. Free tier: 10 calls/day. Subscribe for higher limits.
+            </p>
+          </div>
         </div>
 
         {/* LDM Endpoint */}
@@ -389,14 +508,14 @@ export default function ApiDocsPage() {
                     <td>number</td>
                     <td>Yes</td>
                     <td>Length of one piece in centimetres</td>
-                    <td>—</td>
+                    <td>&mdash;</td>
                   </tr>
                   <tr>
                     <td><code>w</code></td>
                     <td>number</td>
                     <td>Yes</td>
                     <td>Width of one piece in centimetres</td>
-                    <td>—</td>
+                    <td>&mdash;</td>
                   </tr>
                   <tr>
                     <td><code>h</code></td>
@@ -679,7 +798,7 @@ export default function ApiDocsPage() {
           <div style={{ padding: 24 }}>
             <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Look up ADR 2025 dangerous goods by UN number, search by substance name, or filter by hazard class.
-              The dataset contains 2,939 entries from the ADR 2025 Dangerous Goods List (Table A).
+              The dataset contains {SITE_STATS.adrEntries.toLocaleString()} entries from the ADR 2025 Dangerous Goods List (Table A).
               Responses are cached for 1 hour (<code>s-maxage=3600</code>).
             </p>
 
@@ -865,7 +984,7 @@ Content-Type: application/json
           <div style={{ padding: 24 }}>
             <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Search airlines by name, IATA code, ICAO code, AWB prefix, or country. The dataset contains
-              6,352 airlines including 390 cargo airlines with AWB prefixes.
+              {SITE_STATS.airlineCount.toLocaleString()} airlines including 390 cargo airlines with AWB prefixes.
             </p>
 
             <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Query Modes</h3>
@@ -1199,7 +1318,7 @@ Content-Type: application/json
           <div style={{ padding: 24 }}>
             <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
               Search and browse Harmonized System (HS 2022) commodity codes. Supports text search by product
-              description, exact code lookup with ancestor chain, and section browsing. Covers all 6,940 codes
+              description, exact code lookup with ancestor chain, and section browsing. Covers all {SITE_STATS.hsCodeCount.toLocaleString()} codes
               across 21 sections and 97 chapters.
             </p>
 
@@ -1276,6 +1395,185 @@ Content-Type: application/json
 
             <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Browse section:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/hs?section=II"'} />
+          </div>
+        </div>
+
+        {/* Consignment Calculator Endpoint */}
+        <div id="consignment" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/consignment</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Multi-Item Consignment Calculator</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Calculate total CBM, gross weight, LDM, and chargeable weight across multiple mixed items in a single
+              consignment. Supports road, air, and sea modes with mode-specific chargeable weight calculations.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Request Body (JSON)</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>mode</code></td><td>string</td><td>No</td><td><code>road</code> (default), <code>air</code>, or <code>sea</code></td></tr>
+                  <tr><td><code>items</code></td><td>array</td><td>Yes</td><td>1&ndash;50 item objects (see below)</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Item Object Fields</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>length</code></td><td>number</td><td>Yes</td><td>Length in cm</td></tr>
+                  <tr><td><code>width</code></td><td>number</td><td>Yes</td><td>Width in cm</td></tr>
+                  <tr><td><code>height</code></td><td>number</td><td>Yes</td><td>Height in cm</td></tr>
+                  <tr><td><code>quantity</code></td><td>integer</td><td>No</td><td>Number of items (default: 1)</td></tr>
+                  <tr><td><code>grossWeight</code></td><td>number</td><td>No</td><td>Gross weight per item in kg</td></tr>
+                  <tr><td><code>stackable</code></td><td>boolean</td><td>No</td><td>Whether items can be stacked (default: false)</td></tr>
+                  <tr><td><code>palletType</code></td><td>string</td><td>No</td><td><code>euro</code>, <code>uk</code>, <code>us</code>, <code>custom</code>, <code>none</code></td></tr>
+                  <tr><td><code>description</code></td><td>string</td><td>No</td><td>Item description</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Request</h3>
+            <CopyableCode code={`curl -X POST "https://www.freightutils.com/api/consignment" \\
+  -H "Content-Type: application/json" \\
+  -d '{ "mode": "air", "items": [
+    { "length": 120, "width": 80, "height": 100, "quantity": 4, "grossWeight": 300 },
+    { "length": 60, "width": 40, "height": 50, "quantity": 10, "grossWeight": 15 }
+  ]}'`} style={{ marginBottom: 4 }} />
+            <JsonBlock json={`{
+  "mode": "air",
+  "itemCount": 2,
+  "totalPieces": 14,
+  "totalGrossWeight": 1350,
+  "totalCBM": 5.04,
+  "chargeableWeight": 1350,
+  "billingBasis": "weight",
+  "volumetricWeight": 841.68,
+  "items": [ ... ]
+}`} />
+          </div>
+        </div>
+
+        {/* UK Import Duty & VAT Endpoint */}
+        <div id="duty" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/duty</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>UK Import Duty &amp; VAT Estimator</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Estimate UK import duty and VAT for a commodity code using live GOV.UK Trade Tariff data.
+              Accepts customs value, origin country, freight/insurance costs, and INCOTERM for CIF adjustment.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Request Body (JSON)</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>commodityCode</code></td><td>string</td><td>Yes</td><td>HS/tariff code (min 6 digits)</td></tr>
+                  <tr><td><code>originCountry</code></td><td>string</td><td>Yes</td><td>ISO 2-letter country code (e.g. <code>CN</code>, <code>DE</code>)</td></tr>
+                  <tr><td><code>customsValue</code></td><td>number</td><td>Yes</td><td>Goods value in GBP</td></tr>
+                  <tr><td><code>freightCost</code></td><td>number</td><td>No</td><td>Freight cost in GBP (added to CIF value)</td></tr>
+                  <tr><td><code>insuranceCost</code></td><td>number</td><td>No</td><td>Insurance cost in GBP (added to CIF value)</td></tr>
+                  <tr><td><code>incoterm</code></td><td>string</td><td>No</td><td>INCOTERM (e.g. <code>FOB</code>, <code>CIF</code>, <code>EXW</code>)</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Request</h3>
+            <CopyableCode code={`curl -X POST "https://www.freightutils.com/api/duty" \\
+  -H "Content-Type: application/json" \\
+  -d '{ "commodityCode": "847989", "originCountry": "CN", "customsValue": 10000, "freightCost": 500, "insuranceCost": 50, "incoterm": "FOB" }'`} style={{ marginBottom: 4 }} />
+            <JsonBlock json={`{
+  "commodityCode": "847989",
+  "originCountry": "CN",
+  "cifValue": 10550,
+  "dutyRate": "1.7%",
+  "dutyAmount": 179.35,
+  "vatRate": "20%",
+  "vatAmount": 2145.87,
+  "totalTaxes": 2325.22,
+  "preferentialRate": false,
+  "meta": {
+    "source": "GOV.UK Trade Tariff API",
+    "licence": "Open Government Licence v3"
+  }
+}`} />
+          </div>
+        </div>
+
+        {/* UN/LOCODE Endpoint */}
+        <div id="unlocode" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/unlocode</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>UN/LOCODE Lookup</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Search and look up UN/LOCODE transport locations &mdash; {SITE_STATS.unlocodeCount.toLocaleString()}+ seaports,
+              airports, rail terminals, inland depots, and border crossings worldwide.
+              Responses are cached for 24 hours.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Query Modes</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>code</code></td><td>string</td><td>Exact UN/LOCODE lookup (e.g. <code>GBLHR</code>, <code>NLRTM</code>)</td></tr>
+                  <tr><td><code>q</code></td><td>string</td><td>Search by name (e.g. <code>rotterdam</code>, <code>heathrow</code>)</td></tr>
+                  <tr><td><code>country</code></td><td>string</td><td>Filter by country code (e.g. <code>GB</code>, <code>NL</code>)</td></tr>
+                  <tr><td><code>function</code></td><td>string</td><td>Filter by function: <code>port</code>, <code>airport</code>, <code>rail</code>, <code>road</code>, <code>icd</code>, <code>border</code></td></tr>
+                  <tr><td><code>limit</code></td><td>integer</td><td>Max results (1&ndash;100, default: 20)</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
+
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Search by name:</p>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/unlocode?q=rotterdam"'} style={{ marginBottom: 4 }} />
+            <JsonBlock json={`{
+  "query": "rotterdam",
+  "count": 3,
+  "results": [
+    {
+      "locode": "NLRTM",
+      "name": "Rotterdam",
+      "country": "NL",
+      "subdivision": "ZH",
+      "functions": ["port", "rail", "road"],
+      "coordinates": { "lat": 51.92, "lon": 4.48 }
+    }
+  ],
+  "meta": {
+    "source": "UNECE UN/LOCODE 2024-2 (PDDL)",
+    "total_entries": ${SITE_STATS.unlocodeCount}
+  }
+}`} style={{ marginBottom: 20 }} />
+
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Exact code lookup:</p>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/unlocode?code=GBLHR"'} style={{ marginBottom: 20 }} />
+
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Filter by country and function:</p>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/unlocode?country=GB&function=port&limit=10"'} />
           </div>
         </div>
 

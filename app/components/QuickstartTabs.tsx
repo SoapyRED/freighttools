@@ -98,7 +98,7 @@ export default function QuickstartTabs() {
       <p style={{
         fontSize: 13, color: 'var(--text-muted, #5a6478)', marginTop: 12, lineHeight: 1.6,
       }}>
-        All 11 endpoints work the same way. No auth, no signup. Full reference below ↓
+        All endpoints work the same way. No auth, no signup. Full reference below ↓
       </p>
     </div>
   );

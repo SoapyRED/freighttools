@@ -8,12 +8,13 @@ import HsSearch from './HsSearch';
 import CommonHsCodes from './CommonHsCodes';
 import { HsSectionCard } from './HsLinkCard';
 import { getSlimIndex, getAllSections, TOTAL_CODES, CHAPTER_COUNT, HEADING_COUNT, SUBHEADING_COUNT, SECTION_COUNT } from '@/lib/calculations/hs';
+import { SITE_STATS } from '@/lib/constants/siteStats';
 
 const ogUrl = '/api/og?title=HS+Code+Lookup&desc=Search+6%2C940+Harmonized+System+codes&api=GET+/api/hs';
 
 export const metadata: Metadata = {
   title: 'HS Code Lookup — Harmonized System Search | FreightUtils',
-  description: 'Free HS code lookup — search and browse all 6,940 Harmonized System codes across 21 sections and 97 chapters. HS 2022 data with free REST API.',
+  description: `Free HS code lookup — search and browse all ${SITE_STATS.hsCodeCount.toLocaleString()} Harmonized System codes across 21 sections and 97 chapters. HS 2022 data with free REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/hs' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'HS Code Lookup — FreightUtils' }],

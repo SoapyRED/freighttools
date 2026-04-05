@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import UnlocodeSearch from './UnlocodeSearch';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import { SITE_STATS } from '@/lib/constants/siteStats';
 
 const ogUrl = '/api/og?title=UN/LOCODE+Lookup&desc=116,000+transport+locations+worldwide&api=GET+/api/unlocode';
 
 export const metadata: Metadata = {
   title: 'UN/LOCODE Lookup — FreightUtils',
-  description: 'Search 116,000+ UN/LOCODE transport locations worldwide. Ports, airports, rail terminals, and inland depots. Free lookup with REST API.',
+  description: `Search ${SITE_STATS.unlocodeCount.toLocaleString()}+ UN/LOCODE transport locations worldwide. Ports, airports, rail terminals, and inland depots. Free lookup with REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/unlocode' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'UN/LOCODE Lookup — FreightUtils' }],
@@ -23,7 +24,7 @@ export default function UnlocodePage() {
           UN/LOCODE <span style={{ color: '#e87722' }}>Lookup</span>
         </h1>
         <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 580, margin: '0 auto' }}>
-          Search 116,000+ transport locations worldwide. Seaports, airports, rail terminals, road terminals, and inland clearance depots.
+          Search {SITE_STATS.unlocodeCount.toLocaleString()}+ transport locations worldwide. Seaports, airports, rail terminals, road terminals, and inland clearance depots.
         </p>
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
           Source: UNECE UN/LOCODE 2024-2 (PDDL)
@@ -41,7 +42,7 @@ export default function UnlocodePage() {
             UN/LOCODE (United Nations Code for Trade and Transport Locations) is a standardised code system for identifying ports, airports, rail terminals, and other transport-related locations worldwide. Each code consists of a 2-letter country code and a 3-character location code (e.g., GBLHR = London Heathrow, NLRTM = Rotterdam).
           </p>
           <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
-            The codes are maintained by UNECE and used in international trade documents, customs declarations, bills of lading, and freight management systems. This database contains {(116129).toLocaleString()} locations across all countries.
+            The codes are maintained by UNECE and used in international trade documents, customs declarations, bills of lading, and freight management systems. This database contains {SITE_STATS.unlocodeCount.toLocaleString()} locations across all countries.
           </p>
 
           <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginTop: 24, marginBottom: 8 }}>Function types</h3>
@@ -80,7 +81,7 @@ export default function UnlocodePage() {
             Data coverage and updates
           </h3>
           <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
-            UNECE publishes updated UN/LOCODE editions twice per year (typically in spring and autumn). This database contains {(116129).toLocaleString()} entries from the 2024-2 edition, covering every country in the world. Not all entries have coordinates &mdash; approximately 80% include latitude/longitude data. New locations are added continuously as countries submit updates to UNECE, and existing entries are corrected when errors are identified.
+            UNECE publishes updated UN/LOCODE editions twice per year (typically in spring and autumn). This database contains {SITE_STATS.unlocodeCount.toLocaleString()} entries from the 2024-2 edition, covering every country in the world. Not all entries have coordinates &mdash; approximately 80% include latitude/longitude data. New locations are added continuously as countries submit updates to UNECE, and existing entries are corrected when errors are identified.
           </p>
 
           <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginTop: 28, marginBottom: 10 }}>

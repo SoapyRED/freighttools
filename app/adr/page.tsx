@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getSlimIndex, getCalcIndex, ENTRY_COUNT } from '@/lib/calculations/adr';
+import { SITE_STATS } from '@/lib/constants/siteStats';
 import AdrTabs from './AdrTabs';
 import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
@@ -11,7 +12,7 @@ const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+n
 
 export const metadata: Metadata = {
   title: 'ADR Dangerous Goods — Lookup & 1.1.3.6 Exemption Calculator | FreightUtils',
-  description: 'Free ADR 2025 dangerous goods lookup — search 2,939 entries by UN number and calculate 1.1.3.6 exemption points. Official UNECE data with class, packing group, labels, tunnel codes, and transport category. Free REST API.',
+  description: `Free ADR 2025 dangerous goods lookup — search ${SITE_STATS.adrEntries.toLocaleString()} entries by UN number and calculate 1.1.3.6 exemption points. Official UNECE data with class, packing group, labels, tunnel codes, and transport category. Free REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/adr' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'ADR Dangerous Goods Lookup — FreightUtils' }],
@@ -46,7 +47,7 @@ export default function AdrPage() {
 
         {/* Data provenance */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>
-          Data: UNECE ADR 2025, licensed from Labeline.com. 2,939 entries covering all hazard classes. Last verified April 2026.
+          Data: {SITE_STATS.adrEdition}, licensed from Labeline.com. {SITE_STATS.adrEntries.toLocaleString()} entries covering all hazard classes. Last verified {SITE_STATS.lastUpdated}.
         </p>
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 4, lineHeight: 1.6 }}>
           For operational use, always verify against the{' '}
@@ -308,7 +309,7 @@ export default function AdrPage() {
             About This Data
           </h2>
           <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
-            This ADR dataset contains <strong>2,939 entries</strong> covering <strong>2,347 unique UN numbers</strong>, licensed from Labeline.com, sourced from the official UNECE ADR 2025 publication (ECE/TRANS/352). The dataset includes all additions and corrections in the 2025 edition.
+            This ADR dataset contains <strong>{SITE_STATS.adrEntries.toLocaleString()} entries</strong> covering <strong>2,347 unique UN numbers</strong>, licensed from Labeline.com, sourced from the official {SITE_STATS.adrEdition} publication (ECE/TRANS/352). The dataset includes all additions and corrections in the 2025 edition.
           </p>
           <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             For operational decisions — including classification, packaging, labelling, and routing — always refer to the full ADR text and consult your <strong>Dangerous Goods Safety Adviser (DGSA)</strong> where required. This tool is a reference aid, not a substitute for the complete regulation.

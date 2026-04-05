@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { SITE_STATS, SITE_COPY } from '@/lib/constants/siteStats';
 
 export const metadata: Metadata = {
   title: 'FreightUtils — Free Freight Calculators & APIs | LDM, CBM, ADR Lookup',
@@ -24,15 +25,15 @@ const toolGroups = [
   {
     label: 'Dangerous Goods',
     tools: [
-      { href: '/adr', label: '/api/adr', title: 'ADR Dangerous Goods', desc: '2,939 entries from UNECE ADR 2025 — lookup by UN number and 1.1.3.6 exemption calculator', icon: '⚠️' },
+      { href: '/adr', label: '/api/adr', title: 'ADR Dangerous Goods', desc: `${SITE_STATS.adrEntries.toLocaleString()} entries from ${SITE_STATS.adrEdition} — lookup by UN number and 1.1.3.6 exemption calculator`, icon: '⚠️' },
       { href: '/adr?tab=exemption', label: '/api/adr-calculator', title: 'ADR Exemption Calculator', desc: '1.1.3.6 small load exemption check for mixed hazardous loads', icon: '🧮' },
     ],
   },
   {
     label: 'Customs & Trade',
     tools: [
-      { href: '/hs', label: '/api/hs', title: 'HS Code Lookup', desc: 'Search and browse 6,940 Harmonized System commodity codes across 21 sections', icon: '🏷️' },
-      { href: '/incoterms', label: '/api/incoterms', title: 'INCOTERMS 2020', desc: 'All 11 trade terms — who pays, who bears risk, where responsibility transfers', icon: '📋' },
+      { href: '/hs', label: '/api/hs', title: 'HS Code Lookup', desc: `Search and browse ${SITE_STATS.hsCodeCount.toLocaleString()} Harmonized System commodity codes across 21 sections`, icon: '🏷️' },
+      { href: '/incoterms', label: '/api/incoterms', title: 'INCOTERMS 2020', desc: `All ${SITE_STATS.incotermsCount} trade terms — who pays, who bears risk, where responsibility transfers`, icon: '📋' },
       { href: '/duty', label: '/api/duty', title: 'UK Import Duty & VAT', desc: 'Estimate import duty and VAT using live GOV.UK Trade Tariff data', icon: '🇬🇧' },
     ],
   },
@@ -40,7 +41,7 @@ const toolGroups = [
     label: 'Reference Data',
     tools: [
       { href: '/airlines', label: '/api/airlines', title: 'Airline Codes & AWB Prefixes', desc: 'Search airlines by name, IATA/ICAO code, or AWB prefix', icon: '✈️' },
-      { href: '/unlocode', label: '/api/unlocode', title: 'UN/LOCODE Lookup', desc: '116,000+ transport locations — seaports, airports, rail terminals, inland depots', icon: '🌍' },
+      { href: '/unlocode', label: '/api/unlocode', title: 'UN/LOCODE Lookup', desc: `${SITE_STATS.unlocodeCount.toLocaleString()}+ transport locations — seaports, airports, rail terminals, inland depots`, icon: '🌍' },
     ],
   },
 ];
@@ -134,7 +135,7 @@ export default function HomePage() {
             Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
           </div>
           <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 14, letterSpacing: '0.2px' }}>
-            14 tools &middot; 2,939 ADR entries &middot; 6,940 HS codes &middot; 6,352 airlines &middot; 116K+ locations &middot; OpenAPI 3.0.3 &middot; Updated April 2026
+            {SITE_COPY.statsLine}
           </div>
         </div>
       </section>
