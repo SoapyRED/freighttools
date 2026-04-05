@@ -31,8 +31,8 @@ export default function ChargeableWeightPage() {
           Chargeable Weight <span style={{ color: '#e87722' }}>Calculator</span>
         </h1>
         <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>
-          Air freight is charged on the higher of actual gross weight or volumetric weight.
-          Enter your dimensions to find out which applies and what you&apos;ll pay for.
+          Carriers charge the higher of actual weight or calculated weight.
+          Enter your dimensions to find out which applies — air or sea freight.
         </p>
       </div>
 

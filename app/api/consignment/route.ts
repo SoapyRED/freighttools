@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { calculateConsignment, ConsignmentItemInput } from '@/lib/calculations/consignment';
+import { calculateConsignment, ConsignmentItemInput, ConsignmentMode } from '@/lib/calculations/consignment';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -60,7 +60,9 @@ export async function POST(req: NextRequest) {
       };
     });
 
-    const result = calculateConsignment(items);
+    const modeRaw = String(body?.mode ?? 'road');
+    const mode: ConsignmentMode = (['road', 'air', 'sea'].includes(modeRaw) ? modeRaw : 'road') as ConsignmentMode;
+    const result = calculateConsignment(items, mode);
 
     return NextResponse.json(result, { headers: h });
   } catch (err) {

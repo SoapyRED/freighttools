@@ -110,6 +110,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
     if (p.gw) setGw(p.gw);
     if (p.pcs) setPcs(p.pcs);
     if (p.factor) setFactor(p.factor);
+    if (p.mode === 'sea') setFreightMode('sea');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -384,7 +385,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
             Automate this with the API
           </div>
           <code style={{ color: '#e87722', fontSize: 12 }}>
-            GET /api/chargeable-weight?l=120&amp;w=80&amp;h=100&amp;gw=500
+            GET /api/chargeable-weight?l=120&amp;w=80&amp;h=100&amp;gw=500{freightMode === 'sea' ? '&mode=sea' : ''}
           </code>
         </div>
         <Link href="/api-docs#chargeable-weight" style={{

@@ -230,6 +230,10 @@ export default function ConsignmentCalc() {
                 {mode === 'air' && (
                   <>
                     <div style={statBox}>
+                      <div style={statNum}>{Math.round(result.totals.cbm * 167).toLocaleString()}</div>
+                      <div style={statLabel}>Volumetric (kg)</div>
+                    </div>
+                    <div style={statBox}>
                       <div style={statNum}>{result.totals.chargeableWeightAir.toLocaleString()}</div>
                       <div style={statLabel}>Chargeable Weight</div>
                     </div>

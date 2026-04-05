@@ -14,6 +14,13 @@ export function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
+export function GET() {
+  return NextResponse.json(
+    { error: 'Method not allowed. Use POST with a JSON body.', usage: 'POST /api/shipment/summary with { mode, items: [...] }' },
+    { status: 405, headers: { ...CORS, Allow: 'POST, OPTIONS' } },
+  );
+}
+
 export async function POST(req: NextRequest) {
   const h = { ...CORS, 'Content-Type': 'application/json' };
 

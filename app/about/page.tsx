@@ -132,10 +132,12 @@ export default function AboutPage() {
             the answer is the same: just use it.
           </p>
           <p>
-            FreightUtils is also available as a <strong>Model Context Protocol (MCP) server</strong> &mdash; the
-            first freight-specific tool server for AI agents including Claude, GPT, and custom LLM
-            applications. Install via <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>npx freightutils-mcp</code> or{' '}
-            <a href="/api-docs#mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>read the setup guide</a>.
+            FreightUtils is available as a <strong>Model Context Protocol (MCP) server</strong> &mdash; the
+            first freight-specific tool server for AI agents, listed on the{' '}
+            <a href="https://registry.modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>Official MCP Registry</a>.
+            All tools including the composite Shipment Summary, sea freight W/M, and mode selectors are accessible
+            via <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>npx freightutils-mcp</code> or{' '}
+            <a href="/api-docs#mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>the remote endpoint</a>.
           </p>
         </Section>
 
@@ -202,6 +204,8 @@ export default function AboutPage() {
               { name: 'HS Codes', badge: 'WCO', entries: '6,940 codes', desc: 'UN Comtrade HS 2022 (PDDL). 21 sections, 97 chapters.' },
               { name: 'Airlines', badge: 'IATA/ICAO', entries: '6,352 airlines', desc: 'Public sources, cross-referenced. 390 verified cargo AWB prefixes.' },
               { name: 'INCOTERMS', badge: 'ICC', entries: '11 terms', desc: 'ICC INCOTERMS 2020 rules with full responsibility breakdowns.' },
+              { name: 'UN/LOCODE', badge: 'UNECE', entries: '116,129 locations', desc: 'Ports, airports, rail terminals, inland depots. UNECE 2024-2 (PDDL).' },
+              { name: 'UK Duty Rates', badge: 'GOV.UK', entries: 'Live API', desc: 'GOV.UK Trade Tariff API. Open Government Licence v3.' },
               { name: 'Containers', badge: 'ISO', entries: '10 types', desc: 'ISO 668 + ISO 1496 standard dimensions and capacities.' },
               { name: 'Pallets', badge: 'EPAL/ISO', entries: '6 types', desc: 'EPAL EUR pallets, ISO 6780 international, IATA ULD specs.' },
             ].map(s => (
@@ -226,7 +230,7 @@ export default function AboutPage() {
 
         <Section label="Developers" title="For Developers">
           <p style={{ marginBottom: 14 }}>
-            Every tool has a corresponding REST API endpoint. No authentication required.
+            14 tools across 15+ REST API endpoints. No authentication required. Includes a composite Shipment Summary endpoint that chains CBM, chargeable weight, ADR compliance, and UK duty estimation into one call.
             JSON responses. Full documentation at{' '}
             <Link href="/api-docs" style={{ color: '#EF9F27', textDecoration: 'underline' }}>/api-docs</Link>.
             Build freight calculations into your TMS, WMS, booking platform, or any system
