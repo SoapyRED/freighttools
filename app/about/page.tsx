@@ -113,6 +113,8 @@ export default function AboutPage() {
               { name: 'UK Import Duty & VAT', href: '/duty' },
               { name: 'Airline Codes', href: '/airlines' },
               { name: 'UN/LOCODE Lookup', href: '/unlocode' },
+              { name: 'ULD Types', href: '/uld' },
+              { name: 'Vehicle & Trailer Types', href: '/vehicles' },
             ].map(t => (
               <Link key={t.href} href={t.href} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',

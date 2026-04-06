@@ -34,6 +34,8 @@ const nav: NavEntry[] = [
       { href: '/hs', label: 'HS Code Lookup' },
       { href: '/duty', label: 'UK Import Duty & VAT' },
       { href: '/unlocode', label: 'UN/LOCODE Lookup' },
+      { href: '/uld', label: 'ULD Types (Air Cargo)' },
+      { href: '/vehicles', label: 'Vehicle & Trailer Types' },
     ],
   },
   {

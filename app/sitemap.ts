@@ -40,6 +40,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Reference data
     { url: `${BASE}/airlines`,                changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/unlocode`,                changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/uld`,                     changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/vehicles`,                changeFrequency: 'monthly', priority: 0.8 },
   ];
 
   const adrRoutes: MetadataRoute.Sitemap = unNumbers.map(un => ({

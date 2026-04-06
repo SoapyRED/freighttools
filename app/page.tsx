@@ -42,6 +42,8 @@ const toolGroups = [
     tools: [
       { href: '/airlines', label: '/api/airlines', title: 'Airline Codes & AWB Prefixes', desc: 'Search airlines by name, IATA/ICAO code, or AWB prefix', icon: '✈️' },
       { href: '/unlocode', label: '/api/unlocode', title: 'UN/LOCODE Lookup', desc: `${SITE_STATS.unlocodeCount.toLocaleString()}+ transport locations — seaports, airports, rail terminals, inland depots`, icon: '🌍' },
+      { href: '/uld', label: '/api/uld', title: 'ULD Types (Air Cargo)', desc: 'Air freight unit load device specs — containers, pallets, and special units', icon: '📦' },
+      { href: '/vehicles', label: '/api/vehicles', title: 'Vehicle & Trailer Types', desc: 'Road freight vehicle dimensions, payload limits, and pallet capacity', icon: '🚛' },
     ],
   },
 ];

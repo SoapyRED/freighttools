@@ -55,6 +55,8 @@ const footerColumns = {
     { href: '/hs', label: 'HS Code Lookup' },
     { href: '/duty', label: 'UK Import Duty & VAT' },
     { href: '/unlocode', label: 'UN/LOCODE Lookup' },
+    { href: '/uld', label: 'ULD Types' },
+    { href: '/vehicles', label: 'Vehicle Types' },
   ],
   guides: [
     { href: '/adr/changes-2025', label: 'ADR 2025 Changes' },

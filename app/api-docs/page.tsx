@@ -6,7 +6,7 @@ import { SITE_STATS } from '@/lib/constants/siteStats';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
-  description: `FreightUtils public API reference — ${SITE_STATS.apiEndpointCount} free endpoints. Loading metres, CBM, chargeable weight, pallet fitting, consignment calculator, ADR lookup, ADR exemption calculator, airline codes, INCOTERMS 2020, container capacity, unit converter, HS code lookup, UK duty & VAT, UN/LOCODE, and shipment summary. No auth required.`,
+  description: `FreightUtils public API reference — ${SITE_STATS.apiEndpointCount} free endpoints. Loading metres, CBM, chargeable weight, pallet fitting, consignment calculator, ADR lookup, ADR exemption calculator, airline codes, INCOTERMS 2020, container capacity, unit converter, HS code lookup, UK duty & VAT, UN/LOCODE, ULD types, vehicle types, and shipment summary. No auth required.`,
 };
 
 const s = {
@@ -1574,6 +1574,72 @@ Content-Type: application/json
 
             <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Filter by country and function:</p>
             <CopyableCode code={'curl "https://www.freightutils.com/api/unlocode?country=GB&function=port&limit=10"'} />
+          </div>
+        </div>
+
+        {/* ULD Types Endpoint */}
+        <div id="uld" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/uld</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Air Freight ULD Types</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Look up air freight Unit Load Device (ULD) specifications. 15 types including LD3 (AKE), PMC main deck pallet,
+              temperature-controlled containers, and more. Returns dimensions, weights, volume, and aircraft compatibility.
+            </p>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Parameters</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code>type</code></td><td>string</td><td>ULD code or slug (e.g. <code>AKE</code>, <code>PMC</code>). Omit to list all.</td></tr>
+                  <tr><td><code>category</code></td><td>string</td><td>Filter: <code>container</code>, <code>pallet</code>, or <code>special</code></td></tr>
+                  <tr><td><code>deck</code></td><td>string</td><td>Filter by deck: <code>lower</code> or <code>main</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Single ULD lookup:</p>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/uld?type=AKE"'} style={{ marginBottom: 16 }} />
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Filter by category:</p>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/uld?category=pallet"'} style={{ marginBottom: 16 }} />
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>All ULD types:</p>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/uld"'} />
+          </div>
+        </div>
+
+        {/* Vehicle & Trailer Types Endpoint */}
+        <div id="vehicles" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/vehicles</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Vehicle &amp; Trailer Types</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Look up road freight vehicle and trailer specifications. 17 types covering articulated trailers, rigid trucks,
+              and vans. Returns internal dimensions, payload limits, pallet capacity, and features.
+            </p>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Parameters</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code>slug</code></td><td>string</td><td>Vehicle slug (e.g. <code>standard-curtainsider</code>). Omit to list all.</td></tr>
+                  <tr><td><code>category</code></td><td>string</td><td>Filter: <code>articulated</code>, <code>rigid</code>, or <code>van</code></td></tr>
+                  <tr><td><code>region</code></td><td>string</td><td>Filter: <code>EU</code> or <code>US</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Requests</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Single vehicle lookup:</p>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/vehicles?slug=standard-curtainsider"'} style={{ marginBottom: 16 }} />
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Filter by category:</p>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/vehicles?category=articulated"'} style={{ marginBottom: 16 }} />
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Filter by region:</p>
+            <CopyableCode code={'curl "https://www.freightutils.com/api/vehicles?region=EU"'} />
           </div>
         </div>
 

@@ -1353,6 +1353,78 @@
         }
       }
     },
+    "/api/uld": {
+      "get": {
+        "operationId": "getULDs",
+        "summary": "Air Freight ULD Types",
+        "description": "Look up air freight ULD specifications. 15 types including AKE (LD3), PMC, temperature-controlled containers. Returns dimensions, weights, volume, aircraft compatibility.",
+        "tags": ["Reference Data"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "ULD code or slug (e.g. AKE, PMC). Omit to list all.",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "AKE"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter by category: container, pallet, or special.",
+            "required": false,
+            "schema": { "type": "string", "enum": ["container", "pallet", "special"] }
+          },
+          {
+            "name": "deck",
+            "in": "query",
+            "description": "Filter by deck position: lower or main.",
+            "required": false,
+            "schema": { "type": "string", "enum": ["lower", "main"] }
+          }
+        ],
+        "responses": {
+          "200": { "description": "ULD specification(s)." },
+          "404": { "description": "ULD type not found." }
+        }
+      }
+    },
+    "/api/vehicles": {
+      "get": {
+        "operationId": "getVehicles",
+        "summary": "Vehicle & Trailer Types",
+        "description": "Look up road freight vehicle and trailer specifications. 17 types covering articulated trailers, rigid trucks, and vans. Returns dimensions, payload limits, pallet capacity.",
+        "tags": ["Reference Data"],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "query",
+            "description": "Vehicle slug (e.g. standard-curtainsider). Omit to list all.",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "standard-curtainsider"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter by category: articulated, rigid, or van.",
+            "required": false,
+            "schema": { "type": "string", "enum": ["articulated", "rigid", "van"] }
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "description": "Filter by region: EU or US.",
+            "required": false,
+            "schema": { "type": "string", "enum": ["EU", "US"] }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Vehicle specification(s)." },
+          "404": { "description": "Vehicle type not found." }
+        }
+      }
+    },
     "/api/shipment/summary": {
       "post": {
         "summary": "Composite shipment summary",

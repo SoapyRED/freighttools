@@ -24,6 +24,8 @@ const entries: { month: string; items: Entry[] }[] = [
   {
     month: 'April 2026',
     items: [
+      { date: 'Apr 5', tag: 'New Tool', title: 'Air Freight ULD Type Reference', desc: '15 unit load device types — AKE (LD3), PMC, PLA, and more. Dimensions, weights, volume, aircraft compatibility, and deck positions. Free REST API at /api/uld.' },
+      { date: 'Apr 5', tag: 'New Tool', title: 'Vehicle & Trailer Type Reference', desc: '17 road freight vehicle and trailer types — curtainsiders, rigids, vans, US 53ft. Dimensions, payload limits, pallet capacity. Free REST API at /api/vehicles.' },
       { date: 'Apr 5', tag: 'API Change', title: 'Composite Shipment Summary Endpoint', desc: 'POST /api/shipment/summary chains CBM, LDM, chargeable weight, ADR compliance, and UK duty estimation into one response. Accepts road/air/sea/multimodal modes.' },
       { date: 'Apr 5', tag: 'API Change', title: 'Sea Freight W/M Added to Calculators', desc: 'Consignment calculator and chargeable weight calculator now support sea freight mode with W/M (Weight or Measure) at 1 CBM = 1 revenue tonne.' },
       { date: 'Apr 5', tag: 'API Change', title: 'Shipment Object Schema v1', desc: 'Canonical FreightUtils Shipment schema defined — the foundational data model for all composite endpoints.' },

@@ -15,6 +15,8 @@ import { getAllIncoterms, lookupByCode, getAnyMode, getSeaOnly } from '@/lib/cal
 import { calculatePalletFitting } from '@/lib/calculations/pallet-fitting';
 import { convert } from '@/lib/calculations/converter';
 import { PALLET_PRESET_MAP } from '@/lib/data/pallets';
+import { getAllULDs, getULD, getULDsByCategory, getULDsByDeck, ULD_COUNT } from '@/lib/calculations/uld';
+import { getAllVehicles, getVehicle, getVehiclesByCategory, getVehiclesByRegion, VEHICLE_REF_COUNT } from '@/lib/calculations/vehicle-ref';
 
 // ─────────────────────────────────────────────────────────────
 //  MCP Handler — Streamable HTTP transport for Vercel
@@ -404,6 +406,50 @@ const handler = createMcpHandler(
           const msg = err instanceof Error ? err.message : String(err);
           return { content: [{ type: 'text' as const, text: `Error: ${msg}` }], isError: true };
         }
+      },
+    );
+
+    // ── ULD Lookup ───────────────────────────────────────────
+    server.tool(
+      'uld_lookup',
+      `Look up air freight ULD (Unit Load Device) specs. ${ULD_COUNT} types including AKE (LD3), PMC, PLA, and special units. Returns dimensions, weights, volume, aircraft compatibility, and deck position.`,
+      {
+        type: z.string().optional().describe('ULD code (e.g., "AKE", "PMC"). Omit to list all.'),
+        category: z.enum(['container', 'pallet', 'special']).optional().describe('Filter by ULD category'),
+        deck: z.enum(['lower', 'main']).optional().describe('Filter by deck position'),
+      },
+      async ({ type, category, deck }) => {
+        if (type) {
+          const uld = getULD(type);
+          if (!uld) return { content: [{ type: 'text' as const, text: `Error: ULD "${type}" not found` }], isError: true };
+          return { content: [{ type: 'text' as const, text: JSON.stringify(uld, null, 2) }] };
+        }
+        let results = getAllULDs();
+        if (category) results = getULDsByCategory(category);
+        if (deck) results = getULDsByDeck(deck);
+        return { content: [{ type: 'text' as const, text: JSON.stringify({ count: results.length, results }, null, 2) }] };
+      },
+    );
+
+    // ── Vehicle/Trailer Lookup ─────────────────────────────────
+    server.tool(
+      'vehicle_lookup',
+      `Look up road freight vehicle and trailer specs. ${VEHICLE_REF_COUNT} types: curtainsiders, rigids, vans, US trailers. Returns internal dimensions, payload limits, pallet capacity, and features.`,
+      {
+        slug: z.string().optional().describe('Vehicle slug (e.g., "standard-curtainsider"). Omit to list all.'),
+        category: z.enum(['articulated', 'rigid', 'van']).optional().describe('Filter by category'),
+        region: z.enum(['EU', 'US']).optional().describe('Filter by region'),
+      },
+      async ({ slug, category, region }) => {
+        if (slug) {
+          const v = getVehicle(slug);
+          if (!v) return { content: [{ type: 'text' as const, text: `Error: Vehicle "${slug}" not found` }], isError: true };
+          return { content: [{ type: 'text' as const, text: JSON.stringify(v, null, 2) }] };
+        }
+        let results = getAllVehicles();
+        if (category) results = getVehiclesByCategory(category);
+        if (region) results = getVehiclesByRegion(region);
+        return { content: [{ type: 'text' as const, text: JSON.stringify({ count: results.length, results }, null, 2) }] };
       },
     );
 
