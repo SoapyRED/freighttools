@@ -119,6 +119,21 @@ export default function RootLayout({
       </head>
       <body>
 
+        {/* Visible only when JS is disabled or blocked */}
+        <noscript>
+          <div style={{
+            background: '#ef9f27',
+            color: '#000',
+            padding: '12px 20px',
+            textAlign: 'center' as const,
+            fontWeight: 700,
+            fontSize: 14,
+            fontFamily: "'Outfit', sans-serif",
+          }}>
+            Interactive features require JavaScript. If calculators aren&apos;t responding, please check your browser settings or try a different network.
+          </div>
+        </noscript>
+
         {/* ── ANNOUNCEMENT BANNER ── */}
         <AnnounceBanner />
 
