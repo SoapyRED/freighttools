@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -218,9 +217,6 @@ export default function ContainersPage() {
           { href: '/pallet', label: 'How many pallets fit?' },
           { href: '/ldm', label: 'Loading metres for road freight' },
         ]} />
-
-        {/* Ad unit */}
-        <AdUnit format="auto" />
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

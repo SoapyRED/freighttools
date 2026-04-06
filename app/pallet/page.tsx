@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PalletFittingCalc from './PalletFittingCalc';
 import palletsData from '@/lib/data/pallets.json';
-import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -231,9 +230,6 @@ export default function PalletPage() {
           { href: '/ldm', label: 'Calculate loading metres' },
           { href: '/containers', label: 'Check container capacity for palletised cargo' },
         ]} />
-
-        {/* Ad unit */}
-        <AdUnit format="auto" />
 
       </main>
     </>

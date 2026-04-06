@@ -6,7 +6,6 @@ import {
   getAllUnNumbers,
   type AdrEntry,
 } from '@/lib/calculations/adr';
-import AdUnit from '@/app/components/AdUnit';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 
 // ─────────────────────────────────────────────────────────────────
@@ -519,9 +518,6 @@ export default async function UnNumberPage(
             Let us know &rarr; contact@freightutils.com
           </a>
         </p>
-
-        {/* Ad unit */}
-        <AdUnit format="auto" />
 
         {/* Prev / Next navigation */}
         <div style={{

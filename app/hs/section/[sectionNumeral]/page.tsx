@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllSectionNumerals, getSectionByNumeral, getChaptersBySection, getAllSections } from '@/lib/calculations/hs';
 import HsLinkCard from '@/app/hs/HsLinkCard';
-import AdUnit from '@/app/components/AdUnit';
 
 export function generateStaticParams() {
   return getAllSectionNumerals().map(n => ({ sectionNumeral: n }));
@@ -114,7 +113,6 @@ export default async function SectionPage(
           ) : <div />}
         </div>
 
-        <div style={{ marginTop: 32 }}><AdUnit format="auto" /></div>
       </main>
     </>
   );

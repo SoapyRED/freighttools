@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { getSlimIndex, getCalcIndex, ENTRY_COUNT } from '@/lib/calculations/adr';
 import { SITE_STATS } from '@/lib/constants/siteStats';
 import AdrTabs from './AdrTabs';
-import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -391,9 +390,6 @@ export default function AdrPage() {
           { href: '/hs', label: 'Find the HS code for this substance' },
           { href: '/incoterms', label: 'INCOTERMS for dangerous goods shipping' },
         ]} />
-
-        {/* Ad unit (bottom) */}
-        <AdUnit format="auto" />
 
       </main>
     </>

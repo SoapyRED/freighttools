@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { lookupBySlug, getAllCargoSlugs, type Airline } from '@/lib/calculations/airlines';
-import AdUnit from '@/app/components/AdUnit';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -343,9 +342,6 @@ export default async function AirlineDetailPage({ params }: PageProps) {
             </Link>
           </div>
         </div>
-
-        {/* Ad unit */}
-        <AdUnit format="auto" />
 
         {/* Bottom navigation */}
         <div style={{ marginTop: 24, display: 'flex', flexWrap: 'wrap', gap: 12 }}>

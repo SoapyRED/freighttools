@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { calculateCbm } from '@/lib/calculations/cbm';
-import AdUnit from '@/app/components/AdUnit';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 // ─── shared micro-styles ──────────────────────────────────────────
@@ -288,9 +287,6 @@ export default function CbmCalc({
           View API Docs →
         </Link>
       </div>
-
-      {/* Ad unit */}
-      <AdUnit format="auto" />
 
     </div>
   );

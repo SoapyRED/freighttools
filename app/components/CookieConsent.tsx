@@ -21,8 +21,6 @@ export default function CookieConsent() {
 
   const accept = () => {
     localStorage.setItem(STORAGE_KEY, 'accepted');
-    // Notify ConditionalAdSense in the same tab
-    window.dispatchEvent(new Event('cookie-consent-accepted'));
     setVisible(false);
   };
 
@@ -66,7 +64,7 @@ export default function CookieConsent() {
         lineHeight: 1.5,
         maxWidth: 600,
       }}>
-        This site uses cookies for analytics and advertising.
+        This site uses cookies for analytics.
         By continuing, you consent to our use of cookies.
       </p>
       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexShrink: 0, flexWrap: 'wrap' }}>

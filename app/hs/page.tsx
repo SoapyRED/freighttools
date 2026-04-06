@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -225,11 +224,6 @@ export default function HsPage() {
           { href: '/incoterms', label: 'Check INCOTERMS for this shipment' },
           { href: '/adr', label: 'Is this a dangerous good? Check ADR' },
         ]} />
-
-        {/* Ad unit */}
-        <div style={{ marginTop: 32 }}>
-          <AdUnit format="auto" />
-        </div>
 
         {/* Data attribution */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

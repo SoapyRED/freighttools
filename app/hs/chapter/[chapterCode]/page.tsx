@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllChapterCodes, getCodeDetails, getHeadingsByChapter, formatHsCode } from '@/lib/calculations/hs';
 import HsLinkCard from '@/app/hs/HsLinkCard';
-import AdUnit from '@/app/components/AdUnit';
 import { getHsDgWarning, HS_DG_DISCLAIMER } from '@/lib/data/hs-dg-warnings';
 
 export function generateStaticParams() {
@@ -107,7 +106,6 @@ export default async function ChapterPage(
           </Link>
         </div>
 
-        <AdUnit format="auto" />
       </main>
     </>
   );

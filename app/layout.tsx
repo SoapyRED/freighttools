@@ -8,7 +8,7 @@ import AnnounceBanner from './components/AnnounceBanner';
 import BrandLogo from './components/BrandLogo';
 import CookieConsent from './components/CookieConsent';
 import ScrollToTop from './components/ScrollToTop';
-import ConditionalAdSense from './components/ConditionalAdSense';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.freightutils.com'),
@@ -109,7 +109,6 @@ export default function RootLayout({
 }`
           }}
         />
-        {/* AdSense loaded conditionally via ConditionalAdSense client component */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -233,10 +232,10 @@ export default function RootLayout({
           </div>
         </footer>
 
-        {/* Conditional AdSense — only loads if user accepted all cookies */}
-        <ConditionalAdSense />
+        {/* Vercel Analytics */}
+        <Analytics />
 
-        {/* Cookie consent — loads after page content */}
+        {/* Cookie consent — GDPR compliance */}
         <CookieConsent />
       </body>
     </html>

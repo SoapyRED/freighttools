@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import ConvertTool from './ConvertTool';
 
@@ -314,11 +313,6 @@ export default function ConvertPage() {
           { href: '/cbm', label: 'Calculate CBM' },
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },
         ]} />
-
-        {/* Ad unit */}
-        <div style={{ marginTop: 32 }}>
-          <AdUnit format="auto" />
-        </div>
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

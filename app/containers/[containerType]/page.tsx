@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllContainerSlugs, getContainerSpec, getAllContainerSpecs, type ContainerSpec } from '@/lib/calculations/container-capacity';
-import AdUnit from '@/app/components/AdUnit';
 
 // ─────────────────────────────────────────────────────────────────
 //  Static generation — one page per container type
@@ -231,9 +230,6 @@ export default async function ContainerDetailPage(
             &larr; Back to all containers
           </Link>
         </div>
-
-        {/* Ad unit */}
-        <AdUnit format="auto" />
 
         {/* Prev / Next navigation */}
         <div style={{

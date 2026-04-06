@@ -29,7 +29,7 @@ export default function PrivacyPage() {
 
         <h2 style={h2}>What Data We Collect</h2>
         <p style={p}>
-          FreightUtils complies with UK GDPR. We do not require user accounts or intentionally collect personal data. Our guide pages offer an optional email signup for the ADR 2025 Quick Reference Guide. This form uses a mailto link that opens your email client &mdash; no email addresses are stored on our servers or by any third-party email service. No other personal data is intentionally collected. However, third-party services integrated into the site (Google AdSense, Vercel hosting, Google Fonts) may process cookies, IP addresses, or access logs as described in their respective privacy policies.
+          FreightUtils complies with UK GDPR. We do not require user accounts or intentionally collect personal data. Our guide pages offer an optional email signup for the ADR 2025 Quick Reference Guide. This form uses a mailto link that opens your email client &mdash; no email addresses are stored on our servers or by any third-party email service. No other personal data is intentionally collected. However, third-party services integrated into the site (Vercel hosting, Google Fonts) may process cookies, IP addresses, or access logs as described in their respective privacy policies.
         </p>
         <p style={p}>
           All calculations are performed client-side in your browser. The values you enter into our calculators (dimensions, weights, UN numbers, etc.) are processed locally and are never transmitted to our servers.
@@ -45,9 +45,6 @@ export default function PrivacyPage() {
           FreightUtils uses the following third-party services:
         </p>
         <p style={p}>
-          <strong>Google AdSense</strong> &mdash; We display advertisements provided by Google AdSense. Google may use cookies and web beacons to serve ads based on your prior visits to this site or other websites. You can opt out of personalised advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722' }}>Google Ads Settings</a>. For more information, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722' }}>Google&apos;s Privacy Policy</a>.
-        </p>
-        <p style={p}>
           <strong>Vercel</strong> &mdash; Our site is hosted on Vercel. Vercel may collect standard server access logs (IP addresses, request timestamps, URLs). See <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722' }}>Vercel&apos;s Privacy Policy</a>.
         </p>
         <p style={p}>
@@ -56,7 +53,7 @@ export default function PrivacyPage() {
 
         <h2 style={h2}>Cookies</h2>
         <p style={p}>
-          FreightUtils does not set any first-party cookies. Cookies may be set by third-party services (Google AdSense, Google Fonts) as described above. You can manage or block cookies through your browser settings.
+          FreightUtils does not set any first-party cookies. Cookies may be set by third-party services (Google Fonts) as described above. You can manage or block cookies through your browser settings.
         </p>
 
         <h2 style={h2}>Data Retention</h2>

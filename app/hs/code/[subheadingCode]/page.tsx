@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCodeDetails, getSubheadingsByHeading, formatHsCode } from '@/lib/calculations/hs';
 import { HsSmallCard } from '@/app/hs/HsLinkCard';
-import AdUnit from '@/app/components/AdUnit';
 import { getHsDgWarning, HS_DG_DISCLAIMER } from '@/lib/data/hs-dg-warnings';
 
 export const dynamicParams = true;
@@ -195,7 +194,6 @@ export default async function SubheadingPage(
           </a>
         </p>
 
-        <AdUnit format="auto" />
       </main>
     </>
   );

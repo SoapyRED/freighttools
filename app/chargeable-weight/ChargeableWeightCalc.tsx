@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { calculateChargeableWeight, calculateSeaChargeableWeight, VOLUMETRIC_FACTORS } from '@/lib/calculations/chargeable-weight';
-import AdUnit from '@/app/components/AdUnit';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 // ─────────────────────────────────────────────────────────────────
@@ -561,9 +560,6 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
           Formulas and divisors based on IATA Cargo Tariff standards. Carrier-specific divisors may vary — always confirm with your carrier.
         </p>
       </div>
-
-      {/* Ad unit */}
-      <AdUnit format="auto" />
 
     </div>
   );

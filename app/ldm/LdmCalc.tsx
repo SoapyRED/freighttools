@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { PALLET_PRESETS, PALLET_PRESET_MAP } from '@/lib/data/pallets';
 import { VEHICLES } from '@/lib/data/vehicles';
-import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -497,9 +496,6 @@ export default function LdmCalc() {
           { href: '/containers', label: 'Check container dimensions' },
           { href: '/adr', label: 'Shipping dangerous goods? Check ADR' },
         ]} />
-
-        {/* Ad unit */}
-        <AdUnit format="auto" />
 
       </main>
     </>

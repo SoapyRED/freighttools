@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllIncoterms, getAnyMode, getSeaOnly, INCOTERM_COUNT } from '@/lib/calculations/incoterms';
-import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -309,11 +308,6 @@ export default function IncotermsPage() {
           { href: '/hs', label: 'Look up HS codes for customs' },
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },
         ]} />
-
-        {/* Ad unit */}
-        <div style={{ marginTop: 32 }}>
-          <AdUnit format="auto" />
-        </div>
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

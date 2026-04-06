@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getSlimIndex, AIRLINE_COUNT, CARGO_AIRLINE_COUNT } from '@/lib/calculations/airlines';
 import AirlineSearch from './AirlineSearch';
-import AdUnit from '@/app/components/AdUnit';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -174,9 +173,6 @@ export default function AirlinesPage() {
           { href: '/chargeable-weight', label: 'Calculate chargeable weight for air freight' },
           { href: '/hs', label: 'Need HS codes for customs?' },
         ]} />
-
-        {/* Ad unit (bottom) */}
-        <AdUnit format="auto" />
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

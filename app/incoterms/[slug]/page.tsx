@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllSlugs, lookupBySlug, getAllIncoterms, type Incoterm } from '@/lib/calculations/incoterms';
-import AdUnit from '@/app/components/AdUnit';
 
 // ─────────────────────────────────────────────────────────────────
 //  Static generation — one page per INCOTERM
@@ -296,9 +295,6 @@ export default async function IncotermDetailPage(
             ← Back to all INCOTERMS
           </Link>
         </div>
-
-        {/* Ad unit */}
-        <AdUnit format="auto" />
 
         {/* Prev / Next navigation */}
         <div style={{
