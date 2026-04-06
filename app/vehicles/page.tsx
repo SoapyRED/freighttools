@@ -4,6 +4,7 @@ import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import VehicleSearch from './VehicleSearch';
 import { getAllVehicles, VEHICLE_REF_COUNT } from '@/lib/calculations/vehicle-ref';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Vehicle+%26+Trailer+Types&desc=17+vehicle+specs+with+dimensions+%26+payload&api=GET+/api/vehicles';
 
@@ -39,7 +40,7 @@ export default function VehiclesPage() {
       <main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* Interactive search */}
-        <VehicleSearch vehicles={vehicles} />
+        <ErrorBoundary><VehicleSearch vehicles={vehicles} /></ErrorBoundary>
 
         {/* ── Educational Content ── */}
         <div style={{ marginTop: 56 }}>

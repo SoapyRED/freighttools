@@ -5,6 +5,7 @@ import UldSearch from './UldSearch';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Air+Freight+ULD+Types&desc=15%2B+unit+load+device+specs,+dimensions+%26+weights&api=GET+/api/uld';
 
@@ -44,7 +45,7 @@ export default function UldPage() {
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* Search + Cards */}
-        <UldSearch data={data} />
+        <ErrorBoundary><UldSearch data={data} /></ErrorBoundary>
 
         {/* API callout */}
         <div style={{

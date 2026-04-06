@@ -3,6 +3,7 @@ import ConsignmentCalc from './ConsignmentCalc';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Consignment+Calculator&desc=Multi-item+CBM,+weight,+LDM+and+chargeable+weight&api=POST+/api/consignment';
 
@@ -32,7 +33,7 @@ export default function ConsignmentPage() {
 
       {/* Calculator */}
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 16px 48px' }}>
-        <ConsignmentCalc />
+        <ErrorBoundary><ConsignmentCalc /></ErrorBoundary>
 
         {/* SEO Content */}
         <div style={{ maxWidth: 700, margin: '48px auto 0' }}>

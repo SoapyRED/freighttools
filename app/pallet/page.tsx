@@ -5,6 +5,7 @@ import palletsData from '@/lib/data/pallets.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Pallet+Fitting+Calculator&desc=How+many+boxes+fit+on+a+pallet%3F+Visual+layer+diagram.&api=GET+/api/pallet';
 
@@ -34,7 +35,7 @@ export default function PalletPage() {
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
-        <PalletFittingCalc />
+        <ErrorBoundary><PalletFittingCalc /></ErrorBoundary>
 
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>

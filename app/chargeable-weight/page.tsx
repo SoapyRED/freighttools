@@ -5,6 +5,7 @@ import airlinesData from '@/lib/data/airlines.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Chargeable+Weight+Calculator&desc=Air+freight+volumetric+vs+actual+weight&api=GET+/api/chargeable-weight';
 
@@ -38,7 +39,7 @@ export default function ChargeableWeightPage() {
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
-        <ChargeableWeightCalc />
+        <ErrorBoundary><ChargeableWeightCalc /></ErrorBoundary>
 
         {/* What is chargeable weight */}
         <div style={{ marginTop: 56 }}>

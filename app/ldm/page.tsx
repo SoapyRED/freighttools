@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import LdmCalc from './LdmCalc';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Loading+Metres+Calculator&desc=Calculate+LDM+for+European+and+North+American+trailers&api=GET+/api/ldm';
 
@@ -15,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function LdmPage() {
-  return <LdmCalc />;
+  return <ErrorBoundary><LdmCalc /></ErrorBoundary>;
 }

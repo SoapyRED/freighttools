@@ -5,6 +5,7 @@ import AirlineSearch from './AirlineSearch';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Airline+Codes+%26+AWB+Prefix+Lookup&desc=Search+6,350%2B+airlines+by+name,+code,+or+AWB+prefix&api=GET+/api/airlines';
 
@@ -40,7 +41,7 @@ export default function AirlinesPage() {
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* Search */}
-        <AirlineSearch index={index} />
+        <ErrorBoundary><AirlineSearch index={index} /></ErrorBoundary>
 
         {/* API callout */}
         <div style={{

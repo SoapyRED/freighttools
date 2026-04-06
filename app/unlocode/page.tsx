@@ -3,6 +3,7 @@ import UnlocodeSearch from './UnlocodeSearch';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import { SITE_STATS } from '@/lib/constants/siteStats';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=UN/LOCODE+Lookup&desc=116,000+transport+locations+worldwide&api=GET+/api/unlocode';
 
@@ -32,7 +33,7 @@ export default function UnlocodePage() {
       </div>
 
       <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px 16px 48px' }}>
-        <UnlocodeSearch />
+        <ErrorBoundary><UnlocodeSearch /></ErrorBoundary>
 
         <div style={{ maxWidth: 700, margin: '48px auto 0' }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>

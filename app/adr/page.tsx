@@ -6,6 +6,7 @@ import AdrTabs from './AdrTabs';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+numbers+from+ADR+2025&api=GET+/api/adr';
 
@@ -42,7 +43,7 @@ export default function AdrPage() {
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* Tools */}
-        <AdrTabs searchIndex={searchIndex} calcIndex={calcIndex} />
+        <ErrorBoundary><AdrTabs searchIndex={searchIndex} calcIndex={calcIndex} /></ErrorBoundary>
 
         {/* Data provenance */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

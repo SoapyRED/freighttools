@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import DutyCalc from './DutyCalc';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=UK+Import+Duty+Calculator&desc=Estimate+duty+and+VAT+for+UK+imports&api=POST+/api/duty';
 
@@ -31,7 +32,7 @@ export default function DutyPage() {
       </div>
 
       <div style={{ maxWidth: 800, margin: '0 auto', padding: '24px 16px 48px' }}>
-        <DutyCalc />
+        <ErrorBoundary><DutyCalc /></ErrorBoundary>
 
         <div style={{ maxWidth: 700, margin: '48px auto 0' }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>

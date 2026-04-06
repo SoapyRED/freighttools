@@ -5,6 +5,7 @@ import containersData from '@/lib/data/containers.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=CBM+Calculator&desc=Cubic+metres+for+sea+and+air+freight+shipments&api=GET+/api/cbm';
 
@@ -37,7 +38,7 @@ export default function CbmPage() {
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
-        <CbmCalc />
+        <ErrorBoundary><CbmCalc /></ErrorBoundary>
 
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>

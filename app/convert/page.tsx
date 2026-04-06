@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import RelatedTools from '@/app/components/RelatedTools';
 import ConvertTool from './ConvertTool';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Freight+Unit+Converter&desc=Chargeable+weight,+freight+tonnes,+and+standard+conversions&api=GET+/api/convert';
 
@@ -103,7 +104,7 @@ export default function ConvertPage() {
         <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
           Convert Any Unit
         </h2>
-        <ConvertTool defaultFrom="cbm" defaultTo="chargeable_kg" />
+        <ErrorBoundary><ConvertTool defaultFrom="cbm" defaultTo="chargeable_kg" /></ErrorBoundary>
 
         {/* ── Reference Tables ── */}
 

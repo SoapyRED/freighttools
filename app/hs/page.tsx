@@ -8,6 +8,7 @@ import CommonHsCodes from './CommonHsCodes';
 import { HsSectionCard } from './HsLinkCard';
 import { getSlimIndex, getAllSections, TOTAL_CODES, CHAPTER_COUNT, HEADING_COUNT, SUBHEADING_COUNT, SECTION_COUNT } from '@/lib/calculations/hs';
 import { SITE_STATS } from '@/lib/constants/siteStats';
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=HS+Code+Lookup&desc=Search+6%2C940+Harmonized+System+codes&api=GET+/api/hs';
 
@@ -47,7 +48,7 @@ export default function HsPage() {
         <CommonHsCodes />
 
         {/* Search */}
-        <HsSearch index={index} />
+        <ErrorBoundary><HsSearch index={index} /></ErrorBoundary>
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, marginBottom: -32, lineHeight: 1.6 }}>

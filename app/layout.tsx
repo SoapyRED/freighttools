@@ -8,6 +8,7 @@ import AnnounceBanner from './components/AnnounceBanner';
 import BrandLogo from './components/BrandLogo';
 import CookieConsent from './components/CookieConsent';
 import ScrollToTop from './components/ScrollToTop';
+import HydrationCheck from './components/HydrationCheck';
 import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
@@ -151,6 +152,7 @@ export default function RootLayout({
         </header>
 
         <ScrollToTop />
+        <HydrationCheck />
         {children}
 
         {/* ── FOOTER ── */}
