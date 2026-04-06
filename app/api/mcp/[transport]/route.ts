@@ -458,4 +458,58 @@ const handler = createMcpHandler(
   { basePath: '/api/mcp' },
 );
 
-export { handler as GET, handler as POST, handler as DELETE };
+// ─────────────────────────────────────────────────────────────
+//  Request logging wrapper for debugging MCP client issues
+// ─────────────────────────────────────────────────────────────
+
+function withLogging(method: string, fn: (req: Request) => Promise<Response>) {
+  return async (req: Request) => {
+    const ua = req.headers.get('user-agent') ?? 'unknown';
+    const ct = req.headers.get('content-type') ?? 'none';
+    const url = new URL(req.url);
+    console.log(`[MCP] ${method} ${url.pathname}${url.search} | UA: ${ua} | CT: ${ct}`);
+    try {
+      const res = await fn(req);
+      console.log(`[MCP] ${method} → ${res.status}`);
+      return res;
+    } catch (err) {
+      console.error(`[MCP] ${method} ERROR:`, err instanceof Error ? err.message : err);
+      throw err;
+    }
+  };
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Route exports
+// ─────────────────────────────────────────────────────────────
+
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, DELETE, HEAD, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept',
+  'Access-Control-Max-Age': '86400',
+};
+
+// HEAD — health checks from MCP registries and monitoring
+export async function HEAD() {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      ...CORS_HEADERS,
+      'Content-Type': 'text/event-stream',
+    },
+  });
+}
+
+// OPTIONS — CORS preflight
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: CORS_HEADERS,
+  });
+}
+
+// Wrap MCP handler with logging
+export const GET = withLogging('GET', handler);
+export const POST = withLogging('POST', handler);
+export const DELETE = withLogging('DELETE', handler);
