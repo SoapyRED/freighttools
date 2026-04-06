@@ -468,9 +468,37 @@ function withLogging(method: string, fn: (req: Request) => Promise<Response>) {
     const ct = req.headers.get('content-type') ?? 'none';
     const url = new URL(req.url);
     console.log(`[MCP] ${method} ${url.pathname}${url.search} | UA: ${ua} | CT: ${ct}`);
+
+    // For POST, read body into text, then create a new request with that body
+    // This ensures we can both log AND pass to handler without stream issues
+    let bodyPreview = '';
+    if (method === 'POST') {
+      try {
+        const bodyText = await req.text();
+        bodyPreview = bodyText.substring(0, 500);
+        console.log(`[MCP] ${method} body: ${bodyPreview}`);
+        // Reconstruct request with the body so handler can read it
+        req = new Request(req.url, {
+          method: req.method,
+          headers: req.headers,
+          body: bodyText,
+        });
+      } catch { /* body already consumed or empty */ }
+    }
+
     try {
       const res = await fn(req);
-      console.log(`[MCP] ${method} → ${res.status}`);
+      if (res.status >= 400) {
+        // Log error responses with body preview for debugging
+        let errorBody = '';
+        try {
+          const resClone = res.clone();
+          errorBody = (await resClone.text()).substring(0, 300);
+        } catch { /* */ }
+        console.error(`[MCP] ${method} → ${res.status} | Error: ${errorBody} | Request body: ${bodyPreview}`);
+      } else {
+        console.log(`[MCP] ${method} → ${res.status}`);
+      }
       return res;
     } catch (err) {
       console.error(`[MCP] ${method} ERROR:`, err instanceof Error ? err.message : err);
