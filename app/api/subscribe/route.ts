@@ -23,6 +23,8 @@ export async function OPTIONS() {
 
 export async function POST(req: NextRequest) {
   const h = CORS_HEADERS;
+  console.log('[Email] RESEND_API_KEY configured:', !!process.env.RESEND_API_KEY);
+  console.log('[Email] RESEND_AUDIENCE_ID configured:', !!process.env.RESEND_AUDIENCE_ID);
   try {
     const body = await req.json();
     const email = (body?.email ?? '').trim().toLowerCase();
