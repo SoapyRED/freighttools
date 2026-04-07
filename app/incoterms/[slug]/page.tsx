@@ -56,7 +56,7 @@ function DetailRow({ label, value }: { label: string; value: string }) {
       display: 'flex',
       gap: 16,
       padding: '14px 18px',
-      borderBottom: '1px solid #eef0f4',
+      borderBottom: '1px solid var(--border-light)',
       flexWrap: 'wrap',
     }}>
       <div style={{
@@ -203,14 +203,14 @@ export default async function IncotermDetailPage(
           padding: '16px 20px',
           background: 'var(--bg)',
           borderRadius: 10,
-          border: '1px solid #eef0f4',
+          border: '1px solid var(--border-light)',
         }}>
           {term.summary}
         </p>
 
         {/* Detail card */}
         <div style={{
-          background: '#fff',
+          background: 'var(--bg-card)',
           border: '1px solid var(--border)',
           borderRadius: 10,
           overflow: 'hidden',

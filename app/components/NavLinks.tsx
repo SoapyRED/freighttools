@@ -122,9 +122,14 @@ export default function NavLinks() {
   const pathname = usePathname();
   const checkboxRef = useRef<HTMLInputElement>(null);
 
-  // Close mobile menu on route change (JS enhancement)
+  // Close mobile menu + desktop dropdowns on route change
   useEffect(() => {
     if (checkboxRef.current) checkboxRef.current.checked = false;
+    // Blur active element to clear :focus-within on dropdown panels
+    // This prevents dropdowns from staying open after clicking a link
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   }, [pathname]);
 
   const topLinkStyle = (isActive: boolean): React.CSSProperties => ({

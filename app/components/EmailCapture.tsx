@@ -97,8 +97,11 @@ export default function EmailCapture() {
           background: '#0d2818', border: '1px solid #166534', borderRadius: 8,
           padding: '14px 18px', textAlign: 'center',
         }}>
-          <p style={{ color: '#4ade80', fontSize: 14, fontWeight: 600, margin: '0 0 8px' }}>
-            Thanks! Download your guide now:
+          <p style={{ color: '#4ade80', fontSize: 14, fontWeight: 600, margin: '0 0 4px' }}>
+            &#10003; Your guide is ready
+          </p>
+          <p style={{ color: '#86efac', fontSize: 12, margin: '0 0 12px' }}>
+            Download it now — we&apos;ll also email a copy to your inbox.
           </p>
           <a
             href="/ADR-2025-Quick-Reference-Guide.pdf"
