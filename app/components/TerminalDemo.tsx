@@ -16,11 +16,22 @@ const PAUSE = 600;
 const RESP_SPEED = 12;
 const RESTART_DELAY = 4000;
 
+// The raw curl command (without $ prefix) for clipboard
+const CURL_TEXT = 'curl "https://www.freightutils.com/api/cbm?l=120&w=80&h=100"';
+
 export default function TerminalDemo() {
   const [displayedCmd, setDisplayedCmd] = useState('');
   const [displayedResp, setDisplayedResp] = useState('');
   const [phase, setPhase] = useState<'cmd' | 'pause' | 'resp' | 'done'>('cmd');
+  const [copied, setCopied] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  function handleCopy() {
+    navigator.clipboard.writeText(CURL_TEXT).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -92,6 +103,42 @@ export default function TerminalDemo() {
         <div className="terminal-dot yellow" />
         <div className="terminal-dot green" />
         <span className="terminal-title">Terminal — FreightUtils API</span>
+        <button
+          onClick={handleCopy}
+          style={{
+            marginLeft: 'auto',
+            background: copied ? 'rgba(40, 200, 64, 0.15)' : 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: 4,
+            padding: '3px 10px',
+            fontSize: 11,
+            fontWeight: 600,
+            color: copied ? '#7ee787' : '#6e7681',
+            cursor: 'pointer',
+            fontFamily: "'Outfit', sans-serif",
+            transition: 'all 0.15s',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 4,
+          }}
+        >
+          {copied ? (
+            <>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+              Copied!
+            </>
+          ) : (
+            <>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              Copy
+            </>
+          )}
+        </button>
       </div>
       <div className="terminal-body">
         <div>
