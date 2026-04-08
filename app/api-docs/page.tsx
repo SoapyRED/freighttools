@@ -3,6 +3,7 @@ import CopyableCode from '@/app/components/CopyableCode';
 import JsonBlock from '@/app/components/JsonBlock';
 import QuickstartTabs from '@/app/components/QuickstartTabs';
 import { SITE_STATS } from '@/lib/constants/siteStats';
+import PostmanButton from '@/app/components/PostmanButton';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
@@ -74,6 +75,7 @@ export default function ApiDocsPage() {
         >
           &#128229; Download Postman Collection
         </a>
+        <PostmanButton />
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 32, lineHeight: 1.6, marginTop: -16 }}>
           Compatible with Swagger, Postman, and RapidAPI import
         </p>
