@@ -27,6 +27,7 @@
   --border: #d8dce6;
   --border-light: #eef0f4;
   --bg-card-hover: #f0f2f6;
+  --bg-results: #f0f4ff;
   --glow-accent: rgba(232, 119, 34, 0.15);
   --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(232, 119, 34, 0.08) 0%, transparent 70%);
   --radius: 8px;
@@ -54,6 +55,7 @@
   --border: #30363d;
   --border-light: #21262d;
   --bg-card-hover: #1c2333;
+  --bg-results: #1a1f2e;
   --glow-accent: rgba(239, 159, 39, 0.12);
   --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(239, 159, 39, 0.06) 0%, transparent 70%);
 }
@@ -614,10 +616,48 @@ button:active:not(:disabled) { transform: scale(0.98); }
 
 /* ─── Section card ──────────────────────────────────────────────── */
 .section-card {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
 }
 [data-theme="dark"] .section-card {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+/* ─── Data table (modern reference tables) ──────────────────────── */
+.data-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.data-table th {
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border);
+  text-align: left;
+}
+.data-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-size: 14px;
+}
+.data-table tbody tr:hover td { background: var(--bg-card-hover); }
+.data-table tbody tr:last-child td { border-bottom: none; }
+[data-theme="dark"] .data-table th { background: var(--navy-light); }
+
+/* ─── Incoterm card hover ───────────────────────────────────────── */
+.incoterm-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.incoterm-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--glow-accent);
 }
 
 /* ─── Footer gradient border ────────────────────────────────────── */

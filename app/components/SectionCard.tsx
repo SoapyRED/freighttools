@@ -15,10 +15,11 @@ interface SectionCardProps {
 export default function SectionCard({ title, children, variant = 'default' }: SectionCardProps) {
   const borderLeft = variant === 'accent' ? '3px solid var(--accent)' : undefined;
   const borderTop = variant === 'results' ? '3px solid var(--accent)' : undefined;
+  const bg = variant === 'results' ? 'var(--bg-results)' : 'var(--bg-card)';
 
   return (
     <div className="section-card" style={{
-      background: 'var(--bg-card)',
+      background: bg,
       border: '1px solid var(--border)',
       borderRadius: 12,
       padding: 24,
