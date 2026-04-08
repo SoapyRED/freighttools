@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { calculateCbm } from '@/lib/calculations/cbm';
+import MetricStrip from '@/app/components/MetricStrip';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 // ─── shared micro-styles ──────────────────────────────────────────
@@ -182,14 +183,12 @@ export default function CbmCalc({
         ) : (
           <>
             {/* Total CBM hero */}
-            <div style={{ padding: '28px 24px 20px', textAlign: 'center', borderBottom: '1px solid #eef0f4' }}>
-              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
-                Total Volume
-              </div>
-              <div style={{ fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: 'var(--text)', lineHeight: 1, letterSpacing: '-2px' }}>
-                {result.totalCbm.toFixed(4)}
-                <span style={{ fontSize: 22, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: 0 }}> m³</span>
-              </div>
+            <div style={{ padding: '24px 24px 20px', borderBottom: '1px solid var(--border-light)' }}>
+              <MetricStrip metrics={[
+                { value: result.totalCbm.toFixed(4), unit: 'm\u00B3', label: 'Cubic Metres', accent: true },
+                { value: result.cubicFeet.toFixed(1), unit: 'ft\u00B3', label: 'Cubic Feet' },
+                { value: result.litres.toFixed(0), unit: 'L', label: 'Litres' },
+              ]} />
               {result.pieces > 1 && (
                 <div style={{ marginTop: 10, fontSize: 13, color: 'var(--text-faint)' }}>
                   {result.cbmPerPiece.toFixed(4)} m³ per piece × {result.pieces} pieces
@@ -287,6 +286,8 @@ export default function CbmCalc({
           View API Docs →
         </Link>
       </div>
+
+      {/* Ad unit */}
 
     </div>
   );

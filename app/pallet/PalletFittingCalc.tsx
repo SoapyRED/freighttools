@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { calculatePalletFitting, type BoxLayout } from '@/lib/calculations/pallet-fitting';
+import MetricStrip from '@/app/components/MetricStrip';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 // ─── Shared micro-styles ──────────────────────────────────────────
@@ -355,21 +356,20 @@ export default function PalletFittingCalc({
             </div>
 
             {/* Hero stats */}
-            <div style={{ padding: '24px 24px 16px', borderBottom: '1px solid #eef0f4', textAlign: 'center' }}>
-              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
-                Total Boxes on Pallet
-              </div>
-              <div style={{ fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: 'var(--text)', lineHeight: 1, letterSpacing: '-2px' }}>
-                {result.totalBoxes.toLocaleString('en-GB')}
-              </div>
-              <div style={{ marginTop: 10, fontSize: 14, color: 'var(--text-faint)' }}>
-                {result.boxesPerLayer} per layer × {result.layers} layer{result.layers !== 1 ? 's' : ''}
-                {result.weightLimited && (
-                  <span style={{ marginLeft: 8, background: '#fef3c7', color: '#92400e', fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 20 }}>
+            <div style={{ padding: '24px 24px 16px', borderBottom: '1px solid var(--border-light)' }}>
+              <MetricStrip metrics={[
+                { value: result.totalBoxes.toLocaleString('en-GB'), label: 'Total Boxes', accent: true },
+                { value: String(result.layers), label: 'Layers' },
+                { value: String(result.boxesPerLayer), label: 'Per Layer' },
+                { value: `${result.utilisationPercent.toFixed(1)}%`, label: 'Volume Utilisation' },
+              ]} />
+              {result.weightLimited && (
+                <div style={{ marginTop: 10 }}>
+                  <span style={{ background: '#fef3c7', color: '#92400e', fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 20 }}>
                     weight-limited
                   </span>
-                )}
-              </div>
+                </div>
+              )}
             </div>
 
             {/* Stats grid */}

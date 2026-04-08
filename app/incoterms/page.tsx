@@ -48,15 +48,15 @@ export default function IncotermsPage() {
             <Link
               key={term.code}
               href={`/incoterms/${term.slug}`}
+              className="incoterm-card"
               style={{
                 borderRadius: 12,
                 border: '1px solid var(--border)',
                 padding: 16,
                 textDecoration: 'none',
                 display: 'block',
-                transition: 'border-color 0.15s',
+                background: 'var(--bg-card)',
               }}
-              onMouseEnter={undefined}
             >
               <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 4 }}>
                 {term.code}
@@ -67,18 +67,7 @@ export default function IncotermsPage() {
               <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: 10 }}>
                 {term.summary}
               </div>
-              <span style={{
-                display: 'inline-block',
-                background: '#fff7ed',
-                color: '#9a3412',
-                border: '1px solid #fdba74',
-                fontSize: 11,
-                fontWeight: 700,
-                padding: '2px 8px',
-                borderRadius: 20,
-              }}>
-                Any mode
-              </span>
+              <span className="mode-badge mode-badge--any">Any mode</span>
             </Link>
           ))}
         </div>
@@ -97,13 +86,14 @@ export default function IncotermsPage() {
             <Link
               key={term.code}
               href={`/incoterms/${term.slug}`}
+              className="incoterm-card"
               style={{
                 borderRadius: 12,
                 border: '1px solid var(--border)',
                 padding: 16,
                 textDecoration: 'none',
                 display: 'block',
-                transition: 'border-color 0.15s',
+                background: 'var(--bg-card)',
               }}
             >
               <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 4 }}>
@@ -115,18 +105,7 @@ export default function IncotermsPage() {
               <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: 10 }}>
                 {term.summary}
               </div>
-              <span style={{
-                display: 'inline-block',
-                background: '#dbeafe',
-                color: '#1e40af',
-                border: '1px solid #93c5fd',
-                fontSize: 11,
-                fontWeight: 700,
-                padding: '2px 8px',
-                borderRadius: 20,
-              }}>
-                Sea &amp; Inland Waterway
-              </span>
+              <span className="mode-badge mode-badge--sea">Sea &amp; Inland Waterway</span>
             </Link>
           ))}
         </div>

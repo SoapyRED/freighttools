@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { PALLET_PRESETS, PALLET_PRESET_MAP } from '@/lib/data/pallets';
 import { VEHICLES } from '@/lib/data/vehicles';
+import MetricStrip from '@/app/components/MetricStrip';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -265,14 +266,13 @@ export default function LdmCalc() {
           </div>
 
           {/* LDM headline */}
-          <div style={s.ldmDisplay}>
-            <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: 'var(--text-muted)', marginBottom: 8 }}>
-              Loading Metres Required
-            </div>
-            <div style={s.ldmNumber}>
-              {result.ldm.toFixed(2)}
-              <span style={{ fontSize: 22, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: 0 }}> LDM</span>
-            </div>
+          <div style={{ padding: '24px 24px 20px', borderBottom: '1px solid var(--border-light)', background: 'rgba(232,119,34,0.03)' }}>
+            <MetricStrip metrics={[
+              { value: result.ldm.toFixed(2), unit: 'LDM', label: 'Loading Metres Required', accent: true },
+              { value: `${result.utilisationPercent.toFixed(1)}%`, label: 'Vehicle Utilisation' },
+              { value: result.palletSpaces.available ? `${result.palletSpaces.used} of ${result.palletSpaces.available}` : `${result.palletSpaces.used}`, label: 'Pallet Spaces' },
+              ...(result.totalWeightKg !== null ? [{ value: `${result.totalWeightKg.toLocaleString('en-GB')}`, unit: 'kg', label: 'Total Weight' }] : []),
+            ]} />
           </div>
 
           {/* Utilisation */}
@@ -490,6 +490,7 @@ export default function LdmCalc() {
           { href: '/adr', label: 'Shipping dangerous goods? Check ADR' },
         ]} />
 
+        {/* Ad unit */}
 
       </main>
     </>

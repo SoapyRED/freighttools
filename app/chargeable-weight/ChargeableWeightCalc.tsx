@@ -2,8 +2,8 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import SegmentedControl from '@/app/components/SegmentedControl';
 import { calculateChargeableWeight, calculateSeaChargeableWeight, VOLUMETRIC_FACTORS } from '@/lib/calculations/chargeable-weight';
+import MetricStrip from '@/app/components/MetricStrip';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
 // ─────────────────────────────────────────────────────────────────
@@ -161,15 +161,20 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
 
   const isVol = result?.basis === 'volumetric';
 
+  const modeBtnStyle = (m: 'air' | 'sea') => ({
+    padding: '8px 20px', fontSize: 13, fontWeight: freightMode === m ? 700 : 500,
+    color: freightMode === m ? '#fff' : 'var(--text-faint)',
+    background: freightMode === m ? '#e87722' : 'transparent',
+    border: freightMode === m ? '1px solid #e87722' : '1px solid var(--border)',
+    borderRadius: 6, cursor: 'pointer' as const, fontFamily: 'inherit',
+  });
+
   return (
     <div>
       {/* Mode toggle */}
-      <div style={{ marginBottom: 16 }}>
-        <SegmentedControl
-          options={[{ label: 'Air Freight', value: 'air' }, { label: 'Sea Freight (W/M)', value: 'sea' }]}
-          activeValue={freightMode}
-          onChange={(v) => setFreightMode(v as 'air' | 'sea')}
-        />
+      <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+        <button onClick={() => setFreightMode('air')} style={modeBtnStyle('air')}>Air Freight</button>
+        <button onClick={() => setFreightMode('sea')} style={modeBtnStyle('sea')}>Sea Freight (W/M)</button>
       </div>
 
       {/* Input card */}
@@ -250,26 +255,13 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
         </div>
 
         {freightMode === 'sea' && seaResult ? (
-          <div style={{ padding: '28px 24px', textAlign: 'center' }}>
-            <div style={{ fontSize: 48, fontWeight: 800, color: '#e87722', lineHeight: 1.1, marginBottom: 4 }}>
-              {seaResult.revenueTonnes.toFixed(2)} <span style={{ fontSize: 18, fontWeight: 600, color: 'var(--text-faint)' }}>RT</span>
-            </div>
-            <div style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 20 }}>
-              Revenue Tonnes (W/M) &mdash; Billing basis: <strong>{seaResult.billingBasis === 'measure' ? 'Measure (volume)' : 'Weight'}</strong>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8 }}>
-              {[
-                { label: 'CBM', value: seaResult.cbm.toFixed(2), unit: 'm\u00B3' },
-                { label: 'Gross Weight', value: seaResult.grossWeightTonnes.toFixed(2), unit: 'tonnes' },
-                { label: 'Chargeable', value: seaResult.chargeableWeightKg.toLocaleString(), unit: 'kg' },
-                { label: 'Stowage Factor', value: seaResult.ratio?.toFixed(2) ?? '\u2014', unit: 'CBM/t' },
-              ].map(s => (
-                <div key={s.label} style={{ background: 'var(--bg)', padding: '12px 8px', borderRadius: 8, textAlign: 'center' }}>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)' }}>{s.value}</div>
-                  <div style={{ fontSize: 11, color: 'var(--text-faint)', marginTop: 2 }}>{s.label} ({s.unit})</div>
-                </div>
-              ))}
-            </div>
+          <div style={{ padding: '24px 24px 20px' }}>
+            <MetricStrip metrics={[
+              { value: seaResult.revenueTonnes.toFixed(2), unit: 'RT', label: 'Revenue Tonnes (W/M)', accent: true },
+              { value: seaResult.cbm.toFixed(2), unit: 'm\u00B3', label: 'CBM' },
+              { value: seaResult.grossWeightTonnes.toFixed(2), unit: 't', label: 'Gross Weight' },
+              { value: seaResult.billingBasis === 'measure' ? 'Measure' : 'Weight', label: 'Billing Basis' },
+            ]} />
           </div>
         ) : !result ? (
           <div style={{ padding: '40px 24px', textAlign: 'center', color: 'var(--text-faint)', fontSize: 14 }}>
@@ -279,17 +271,15 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
           <>
             {/* Chargeable weight hero */}
             <div style={{
-              padding: '28px 24px 20px',
-              textAlign: 'center',
-              borderBottom: '1px solid #eef0f4',
+              padding: '24px 24px 20px',
+              borderBottom: '1px solid var(--border-light)',
             }}>
-              <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
-                Chargeable Weight
-              </div>
-              <div style={{ fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: 'var(--text)', lineHeight: 1, letterSpacing: '-2px' }}>
-                {fmt(result.chargeableWeightKg, 1)}
-                <span style={{ fontSize: 22, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: 0 }}> kg</span>
-              </div>
+              <MetricStrip metrics={[
+                { value: fmt(result.chargeableWeightKg, 1), unit: 'kg', label: 'Chargeable Weight', accent: true },
+                { value: fmt(result.volumetricWeightTotalKg, 1), unit: 'kg', label: 'Volumetric Weight' },
+                { value: fmt(parseFloat(gw), 1), unit: 'kg', label: 'Actual Weight' },
+                { value: isVol ? 'Volumetric' : 'Actual', label: 'Billing Basis' },
+              ]} />
               <div style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -556,6 +546,8 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
           Formulas and divisors based on IATA Cargo Tariff standards. Carrier-specific divisors may vary — always confirm with your carrier.
         </p>
       </div>
+
+      {/* Ad unit */}
 
     </div>
   );
