@@ -4,6 +4,8 @@ import { getAllIncoterms, getAnyMode, getSeaOnly, INCOTERM_COUNT } from '@/lib/c
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 
 const ogUrl = '/api/og?title=INCOTERMS+2020+Reference&desc=All+11+trade+terms+explained&api=GET+/api/incoterms';
 
@@ -23,19 +25,7 @@ export default function IncotermsPage() {
 
   return (
     <>
-      {/* Hero */}
-      <div style={{
-        background: '#1a2332',
-        padding: '40px 20px 48px',
-        textAlign: 'center',
-      }}>
-        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          INCOTERMS 2020 <span style={{ color: '#e87722' }}>Reference</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto' }}>
-          All 11 international commercial terms explained. Who pays, who bears risk, and where responsibility transfers.
-        </p>
-      </div>
+      <PageHero title="INCOTERMS" titleAccent="2020" subtitle="International commercial terms — who pays, who bears risk, where responsibility transfers" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
@@ -265,42 +255,7 @@ export default function IncotermsPage() {
 
         </div>
 
-        {/* API callout */}
-        <div style={{
-          marginTop: 48,
-          background: '#1a2332',
-          borderRadius: 12,
-          padding: '20px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 16,
-        }}>
-          <div>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: 15, marginBottom: 4 }}>
-              Building something? Use the API.
-            </div>
-            <code style={{ color: '#e87722', fontSize: 13 }}>
-              GET /api/incoterms?code=FOB
-            </code>
-          </div>
-          <Link
-            href="/api-docs#incoterms"
-            style={{
-              background: '#e87722',
-              color: '#fff',
-              textDecoration: 'none',
-              padding: '9px 18px',
-              borderRadius: 8,
-              fontWeight: 700,
-              fontSize: 14,
-              flexShrink: 0,
-            }}
-          >
-            View API Docs →
-          </Link>
-        </div>
+        <ApiCallout endpoint="/api/incoterms" />
 
         <DataTimestamp text="INCOTERMS 2020, current as of April 2026" />
         <ToolDisclaimer text="INCOTERMS 2020 reference based on ICC official rules. For contractual use, consult the full ICC publication." />
@@ -308,6 +263,9 @@ export default function IncotermsPage() {
           { href: '/hs', label: 'Look up HS codes for customs' },
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },
         ]} />
+
+        <div style={{ marginTop: 32 }}>
+        </div>
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

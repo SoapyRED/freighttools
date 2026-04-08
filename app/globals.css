@@ -612,6 +612,14 @@ button:active:not(:disabled) { transform: scale(0.98); }
   border: 1px solid rgba(239, 159, 39, 0.15);
 }
 
+/* ─── Section card ──────────────────────────────────────────────── */
+.section-card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.03);
+}
+[data-theme="dark"] .section-card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
 /* ─── Footer gradient border ────────────────────────────────────── */
 .footer-gradient-border {
   height: 2px;

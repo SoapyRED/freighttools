@@ -1,8 +1,10 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import DutyCalc from './DutyCalc';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 
 const ogUrl = '/api/og?title=UK+Import+Duty+Calculator&desc=Estimate+duty+and+VAT+for+UK+imports&api=POST+/api/duty';
 
@@ -19,17 +21,11 @@ export const metadata: Metadata = {
 export default function DutyPage() {
   return (
     <>
-      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          UK Import Duty & VAT <span style={{ color: '#e87722' }}>Estimator</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 580, margin: '0 auto' }}>
-          Estimate import duty and VAT for goods entering the United Kingdom. Uses live GOV.UK Trade Tariff data.
-        </p>
+      <PageHero title="UK Import Duty &" titleAccent="VAT" subtitle="Estimate import duty and VAT for any commodity code using live GOV.UK Trade Tariff data">
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
           Source: GOV.UK Trade Tariff API (Open Government Licence v3)
         </div>
-      </div>
+      </PageHero>
 
       <div style={{ maxWidth: 800, margin: '0 auto', padding: '24px 16px 48px' }}>
         <ErrorBoundary><DutyCalc /></ErrorBoundary>
@@ -96,6 +92,10 @@ export default function DutyPage() {
               </pre>
             </div>
           </details>
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
+          <ApiCallout method="POST" endpoint="/api/duty" />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>

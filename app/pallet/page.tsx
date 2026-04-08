@@ -1,3 +1,4 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PalletFittingCalc from './PalletFittingCalc';
@@ -5,7 +6,8 @@ import palletsData from '@/lib/data/pallets.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 
 const ogUrl = '/api/og?title=Pallet+Fitting+Calculator&desc=How+many+boxes+fit+on+a+pallet%3F+Visual+layer+diagram.&api=GET+/api/pallet';
 
@@ -22,16 +24,7 @@ export const metadata: Metadata = {
 export default function PalletPage() {
   return (
     <>
-      {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          Pallet Fitting <span style={{ color: '#e87722' }}>Calculator</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto', lineHeight: 1.6 }}>
-          Enter your pallet and box dimensions to see exactly how many boxes fit per layer,
-          how many layers stack within the height limit, and a live top-down diagram of the arrangement.
-        </p>
-      </div>
+      <PageHero title="Pallet Fitting" titleAccent="Calculator" subtitle="Calculate how many boxes fit on a pallet with layer-by-layer stacking" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
@@ -225,12 +218,14 @@ export default function PalletPage() {
 
         </div>
 
+        <ApiCallout endpoint="/api/pallet" />
         <DataTimestamp text="Pallet specifications per EPAL/ISO 6780, last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Calculate loading metres' },
           { href: '/containers', label: 'Check container capacity for palletised cargo' },
         ]} />
+
 
       </main>
     </>

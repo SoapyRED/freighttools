@@ -1,10 +1,12 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 import VehicleSearch from './VehicleSearch';
 import { getAllVehicles, VEHICLE_REF_COUNT } from '@/lib/calculations/vehicle-ref';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Vehicle+%26+Trailer+Types&desc=17+vehicle+specs+with+dimensions+%26+payload&api=GET+/api/vehicles';
 
@@ -23,19 +25,7 @@ export default function VehiclesPage() {
 
   return (
     <>
-      {/* Hero */}
-      <div style={{
-        background: 'var(--navy)',
-        padding: '40px 20px 48px',
-        textAlign: 'center',
-      }}>
-        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          Vehicle &amp; Trailer <span style={{ color: '#e87722' }}>Types</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 620, margin: '0 auto' }}>
-          Internal dimensions, payload limits, and pallet capacity for {VEHICLE_REF_COUNT} common road freight vehicles across EU and US
-        </p>
-      </div>
+      <PageHero title="Vehicle & Trailer" titleAccent="Types" subtitle="Road freight vehicle dimensions, payload limits, and pallet capacity" />
 
       <main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 80px' }}>
 
@@ -79,28 +69,7 @@ export default function VehiclesPage() {
           </p>
         </div>
 
-        {/* ── API Callout ── */}
-        <div style={{
-          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
-          padding: '24px 28px', marginTop: 48, marginBottom: 32,
-        }}>
-          <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>
-            Free REST API
-          </h3>
-          <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 12 }}>
-            Access all {VEHICLE_REF_COUNT} vehicle specifications programmatically. Filter by category, region, or look up individual vehicles by slug.
-          </p>
-          <div style={{
-            background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8,
-            padding: '12px 16px', fontFamily: 'monospace', fontSize: 13, color: 'var(--text)',
-            overflowX: 'auto', lineHeight: 1.6,
-          }}>
-            <div><span style={{ color: 'var(--text-faint)' }}>GET</span> /api/vehicles</div>
-            <div><span style={{ color: 'var(--text-faint)' }}>GET</span> /api/vehicles?slug=standard-curtainsider</div>
-            <div><span style={{ color: 'var(--text-faint)' }}>GET</span> /api/vehicles?category=articulated</div>
-            <div><span style={{ color: 'var(--text-faint)' }}>GET</span> /api/vehicles?region=US</div>
-          </div>
-        </div>
+        <ApiCallout endpoint="/api/vehicles" />
 
         {/* Cross-links */}
         <RelatedTools tools={[

@@ -1,11 +1,12 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { getAllULDs, ULD_COUNT } from '@/lib/calculations/uld';
 import UldSearch from './UldSearch';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 
 const ogUrl = '/api/og?title=Air+Freight+ULD+Types&desc=15%2B+unit+load+device+specs,+dimensions+%26+weights&api=GET+/api/uld';
 
@@ -25,64 +26,14 @@ export default function UldPage() {
 
   return (
     <>
-      {/* Hero */}
-      <div style={{
-        background: 'var(--navy)',
-        padding: '40px 20px 48px',
-        textAlign: 'center',
-      }}>
-        <h1 style={{
-          fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800,
-          color: '#fff', marginBottom: 12, letterSpacing: '-0.5px',
-        }}>
-          ULD <span style={{ color: '#e87722' }}>Types</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 600, margin: '0 auto' }}>
-          Reference {ULD_COUNT} standard air cargo unit load devices — containers, pallets, and special ULDs with full IATA specifications
-        </p>
-      </div>
+      <PageHero title="ULD" titleAccent="Types" subtitle="Air cargo unit load device specifications — containers, pallets, and special units" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* Search + Cards */}
         <ErrorBoundary><UldSearch data={data} /></ErrorBoundary>
 
-        {/* API callout */}
-        <div style={{
-          marginTop: 48,
-          background: 'var(--navy)',
-          borderRadius: 12,
-          padding: '20px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 16,
-        }}>
-          <div>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: 15, marginBottom: 4 }}>
-              Building something? Use the API.
-            </div>
-            <code style={{ color: '#e87722', fontSize: 13 }}>
-              curl freightutils.com/api/uld?type=AKE
-            </code>
-          </div>
-          <Link
-            href="/api-docs#uld"
-            style={{
-              background: '#e87722',
-              color: '#fff',
-              textDecoration: 'none',
-              padding: '9px 18px',
-              borderRadius: 8,
-              fontWeight: 700,
-              fontSize: 14,
-              flexShrink: 0,
-            }}
-          >
-            View API Docs &rarr;
-          </Link>
-        </div>
+        <ApiCallout endpoint="/api/uld" />
 
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>

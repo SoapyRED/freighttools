@@ -1,9 +1,11 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import ConsignmentCalc from './ConsignmentCalc';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 
 const ogUrl = '/api/og?title=Consignment+Calculator&desc=Multi-item+CBM,+weight,+LDM+and+chargeable+weight&api=POST+/api/consignment';
 
@@ -20,14 +22,8 @@ export const metadata: Metadata = {
 export default function ConsignmentPage() {
   return (
     <>
-      {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          Multi-Item Consignment <span style={{ color: '#e87722' }}>Calculator</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 580, margin: '0 auto' }}>
-          Calculate total CBM, weight, loading metres, and chargeable weight for mixed consignments. Add multiple items and get per-line and grand totals instantly.
-        </p>
+      <PageHero title="Multi-Item Consignment" titleAccent="Calculator" subtitle="Calculate total CBM, weight, loading metres and chargeable weight for mixed consignments" />
+      <div style={{ textAlign: 'center', marginTop: -24, marginBottom: 8 }}>
         <DataTimestamp text="Calculation engine verified April 2026" />
       </div>
 
@@ -94,6 +90,10 @@ export default function ConsignmentPage() {
               </pre>
             </div>
           </details>
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
+          <ApiCallout method="POST" endpoint="/api/consignment" />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>

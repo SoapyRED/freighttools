@@ -1,3 +1,4 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getSlimIndex, getCalcIndex, ENTRY_COUNT } from '@/lib/calculations/adr';
@@ -6,7 +7,8 @@ import AdrTabs from './AdrTabs';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 
 const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+numbers+from+ADR+2025&api=GET+/api/adr';
 
@@ -26,19 +28,7 @@ export default function AdrPage() {
 
   return (
     <>
-      {/* Hero */}
-      <div style={{
-        background: '#1a2332',
-        padding: '40px 20px 48px',
-        textAlign: 'center',
-      }}>
-        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          ADR Dangerous <span style={{ color: '#e87722' }}>Goods</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto' }}>
-          Search {ENTRY_COUNT.toLocaleString()} UN numbers from ADR 2025 and calculate 1.1.3.6 exemption points &mdash; free, instant, no signup
-        </p>
-      </div>
+      <PageHero title="ADR Dangerous Goods" titleAccent="Lookup" subtitle="Search dangerous goods by UN number, substance name, or hazard class" badge="ADR 2025" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
@@ -56,42 +46,7 @@ export default function AdrPage() {
           </a>.
         </p>
 
-        {/* API callout */}
-        <div style={{
-          marginTop: 48,
-          background: '#1a2332',
-          borderRadius: 12,
-          padding: '20px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 16,
-        }}>
-          <div>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: 15, marginBottom: 4 }}>
-              Building something? Use the API.
-            </div>
-            <code style={{ color: '#e87722', fontSize: 13 }}>
-              GET /api/adr?un=1203
-            </code>
-          </div>
-          <Link
-            href="/api-docs#adr"
-            style={{
-              background: '#e87722',
-              color: '#fff',
-              textDecoration: 'none',
-              padding: '9px 18px',
-              borderRadius: 8,
-              fontWeight: 700,
-              fontSize: 14,
-              flexShrink: 0,
-            }}
-          >
-            View API Docs →
-          </Link>
-        </div>
+        <ApiCallout endpoint="/api/adr" />
 
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>
@@ -391,6 +346,7 @@ export default function AdrPage() {
           { href: '/hs', label: 'Find the HS code for this substance' },
           { href: '/incoterms', label: 'INCOTERMS for dangerous goods shipping' },
         ]} />
+
 
       </main>
     </>

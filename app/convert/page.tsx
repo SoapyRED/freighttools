@@ -1,8 +1,10 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import RelatedTools from '@/app/components/RelatedTools';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 import ConvertTool from './ConvertTool';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=Freight+Unit+Converter&desc=Chargeable+weight,+freight+tonnes,+and+standard+conversions&api=GET+/api/convert';
 
@@ -19,19 +21,7 @@ export const metadata: Metadata = {
 export default function ConvertPage() {
   return (
     <>
-      {/* Hero */}
-      <div style={{
-        background: '#1a2332',
-        padding: '40px 20px 48px',
-        textAlign: 'center',
-      }}>
-        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          Freight Unit <span style={{ color: '#e87722' }}>Converter</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto' }}>
-          Freight-specific conversions Google can&apos;t answer — chargeable weight, freight tonnes, plus all standard weight, volume, and length conversions
-        </p>
-      </div>
+      <PageHero title="Unit" titleAccent="Converter" subtitle="Convert freight weights, volumes, and dimensions between metric and imperial" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
@@ -273,42 +263,7 @@ export default function ConvertPage() {
 
         </div>
 
-        {/* API callout */}
-        <div style={{
-          marginTop: 48,
-          background: '#1a2332',
-          borderRadius: 12,
-          padding: '20px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 16,
-        }}>
-          <div>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: 15, marginBottom: 4 }}>
-              Building something? Use the API.
-            </div>
-            <code style={{ color: '#e87722', fontSize: 13 }}>
-              GET /api/convert?value=10&amp;from=cbm&amp;to=chargeable_kg
-            </code>
-          </div>
-          <Link
-            href="/api-docs#convert"
-            style={{
-              background: '#e87722',
-              color: '#fff',
-              textDecoration: 'none',
-              padding: '9px 18px',
-              borderRadius: 8,
-              fontWeight: 700,
-              fontSize: 14,
-              flexShrink: 0,
-            }}
-          >
-            View API Docs &rarr;
-          </Link>
-        </div>
+        <ApiCallout endpoint="/api/convert" />
 
         <RelatedTools tools={[
           { href: '/cbm', label: 'Calculate CBM' },

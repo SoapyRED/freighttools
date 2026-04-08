@@ -1,3 +1,4 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import CbmCalc from './CbmCalc';
@@ -5,7 +6,8 @@ import containersData from '@/lib/data/containers.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 
 const ogUrl = '/api/og?title=CBM+Calculator&desc=Cubic+metres+for+sea+and+air+freight+shipments&api=GET+/api/cbm';
 
@@ -25,16 +27,7 @@ const airUlds       = containersData.filter(c => c.category === 'air');
 export default function CbmPage() {
   return (
     <>
-      {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          CBM <span style={{ color: '#e87722' }}>Calculator</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>
-          Calculate cubic metres (CBM) for any shipment. Enter length, width, height in centimetres
-          and get instant volume in m³, cubic feet, and litres.
-        </p>
-      </div>
+      <PageHero title="CBM" titleAccent="Calculator" subtitle="Calculate cubic metres for sea freight, air freight, and container loading" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
@@ -250,6 +243,7 @@ export default function CbmPage() {
 
         </div>
 
+        <ApiCallout endpoint="/api/cbm" />
         <DataTimestamp text="Conversion factors are standard mathematical constants" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[

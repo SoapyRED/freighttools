@@ -1,9 +1,11 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import UnlocodeSearch from './UnlocodeSearch';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 import { SITE_STATS } from '@/lib/constants/siteStats';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=UN/LOCODE+Lookup&desc=116,000+transport+locations+worldwide&api=GET+/api/unlocode';
 
@@ -20,17 +22,11 @@ export const metadata: Metadata = {
 export default function UnlocodePage() {
   return (
     <>
-      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          UN/LOCODE <span style={{ color: '#e87722' }}>Lookup</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 580, margin: '0 auto' }}>
-          Search {SITE_STATS.unlocodeCount.toLocaleString()}+ transport locations worldwide. Seaports, airports, rail terminals, road terminals, and inland clearance depots.
-        </p>
+      <PageHero title="UN/LOCODE" titleAccent="Lookup" subtitle="Search transport locations worldwide — seaports, airports, rail terminals, and inland depots">
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
           Source: UNECE UN/LOCODE 2024-2 (PDDL)
         </div>
-      </div>
+      </PageHero>
 
       <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px 16px 48px' }}>
         <ErrorBoundary><UnlocodeSearch /></ErrorBoundary>
@@ -105,6 +101,10 @@ curl "https://www.freightutils.com/api/unlocode?country=GB&function=port&limit=5
               </pre>
             </div>
           </details>
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
+          <ApiCallout endpoint="/api/unlocode" />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>

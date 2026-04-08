@@ -6,6 +6,8 @@ import { VEHICLES } from '@/lib/data/vehicles';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 import { calculateLdm, type LdmResult } from '@/lib/calculations/ldm';
 import TrailerViz from './TrailerViz';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
@@ -92,8 +94,6 @@ export default function LdmCalc() {
 
   const s = {
     main: { maxWidth: 900, margin: '0 auto', padding: '32px 20px 60px' } as React.CSSProperties,
-    hero: { background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' as const },
-    h1: { fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', lineHeight: 1.2, marginBottom: 12 },
     card: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' } as React.CSSProperties,
     cardHeader: { background: '#1a2332', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 10 } as React.CSSProperties,
     cardBody: { padding: 24 } as React.CSSProperties,
@@ -110,15 +110,7 @@ export default function LdmCalc() {
 
   return (
     <>
-      {/* Hero */}
-      <div style={s.hero}>
-        <h1 style={s.h1}>
-          Loading Metres <span style={{ color: '#e87722' }}>Calculator</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 500, margin: '0 auto' }}>
-          Calculate loading metres for road freight — European and North American trailer standards
-        </p>
-      </div>
+      <PageHero title="Loading Metres" titleAccent="Calculator" subtitle="Calculate LDM for European and North American trailer standards" />
 
       <main style={s.main}>
         {/* ── INPUT CARD ── */}
@@ -489,6 +481,7 @@ export default function LdmCalc() {
         </div>
 
         <DataTimestamp text="Vehicle specifications per EN 283/ISO standards, last verified April 2026" />
+        <ApiCallout endpoint="/api/ldm" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
           { href: '/cbm', label: 'Calculate CBM for sea freight' },
@@ -496,6 +489,7 @@ export default function LdmCalc() {
           { href: '/containers', label: 'Check container dimensions' },
           { href: '/adr', label: 'Shipping dangerous goods? Check ADR' },
         ]} />
+
 
       </main>
     </>

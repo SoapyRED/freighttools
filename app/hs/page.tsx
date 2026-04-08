@@ -1,14 +1,16 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 import HsSearch from './HsSearch';
 import CommonHsCodes from './CommonHsCodes';
 import { HsSectionCard } from './HsLinkCard';
 import { getSlimIndex, getAllSections, TOTAL_CODES, CHAPTER_COUNT, HEADING_COUNT, SUBHEADING_COUNT, SECTION_COUNT } from '@/lib/calculations/hs';
 import { SITE_STATS } from '@/lib/constants/siteStats';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
 
 const ogUrl = '/api/og?title=HS+Code+Lookup&desc=Search+6%2C940+Harmonized+System+codes&api=GET+/api/hs';
 
@@ -28,19 +30,7 @@ export default function HsPage() {
 
   return (
     <>
-      {/* Hero */}
-      <div style={{
-        background: '#1a2332',
-        padding: '40px 20px 48px',
-        textAlign: 'center',
-      }}>
-        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          HS Code Lookup &mdash; Harmonized System <span style={{ color: '#e87722' }}>Search</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 600, margin: '0 auto' }}>
-          Search {TOTAL_CODES.toLocaleString()} HS codes across {SECTION_COUNT} sections and {CHAPTER_COUNT} chapters &mdash; free, instant, no signup
-        </p>
-      </div>
+      <PageHero title="HS Code" titleAccent="Lookup" subtitle="Search and browse Harmonized System commodity codes across 21 sections" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
@@ -181,42 +171,7 @@ export default function HsPage() {
           </p>
         </div>
 
-        {/* API callout */}
-        <div style={{
-          marginTop: 48,
-          background: '#1a2332',
-          borderRadius: 12,
-          padding: '20px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 16,
-        }}>
-          <div>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: 15, marginBottom: 4 }}>
-              Building something? Use the API.
-            </div>
-            <code style={{ color: '#e87722', fontSize: 13 }}>
-              GET /api/hs?q=coffee
-            </code>
-          </div>
-          <Link
-            href="/api-docs#hs"
-            style={{
-              background: '#e87722',
-              color: '#fff',
-              textDecoration: 'none',
-              padding: '9px 18px',
-              borderRadius: 8,
-              fontWeight: 700,
-              fontSize: 14,
-              flexShrink: 0,
-            }}
-          >
-            View API Docs &rarr;
-          </Link>
-        </div>
+        <ApiCallout endpoint="/api/hs" />
 
         <DataTimestamp text="HS 2022 data from UN Comtrade, last updated April 2026" />
         <ToolDisclaimer text="HS code reference only. For customs declarations, verify with your national tariff authority." />
@@ -225,6 +180,9 @@ export default function HsPage() {
           { href: '/incoterms', label: 'Check INCOTERMS for this shipment' },
           { href: '/adr', label: 'Is this a dangerous good? Check ADR' },
         ]} />
+
+        <div style={{ marginTop: 32 }}>
+        </div>
 
         {/* Data attribution */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

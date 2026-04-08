@@ -3,6 +3,8 @@ import Link from 'next/link';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 import { getAllContainerSpecs, CONTAINER_COUNT } from '@/lib/calculations/container-capacity';
 
 const ogUrl = '/api/og?title=Shipping+Container+Dimensions&desc=All+10+container+types+with+specs&api=GET+/api/containers';
@@ -22,19 +24,7 @@ export default function ContainersPage() {
 
   return (
     <>
-      {/* Hero */}
-      <div style={{
-        background: '#1a2332',
-        padding: '40px 20px 48px',
-        textAlign: 'center',
-      }}>
-        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          Shipping Container Dimensions &amp; <span style={{ color: '#e87722' }}>Capacity</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 600, margin: '0 auto' }}>
-          Internal dimensions, weights, door openings, and pallet capacity for all {CONTAINER_COUNT} standard ISO shipping container types
-        </p>
-      </div>
+      <PageHero title="Container" titleAccent="Specs" subtitle="Shipping container dimensions, weights, door openings, and pallet capacity" />
 
       <main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 80px' }}>
 
@@ -210,6 +200,7 @@ export default function ContainersPage() {
 
         </div>
 
+        <ApiCallout endpoint="/api/containers" />
         <DataTimestamp text="ISO container specifications, last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[
@@ -217,6 +208,7 @@ export default function ContainersPage() {
           { href: '/pallet', label: 'How many pallets fit?' },
           { href: '/ldm', label: 'Loading metres for road freight' },
         ]} />
+
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

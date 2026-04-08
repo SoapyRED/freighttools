@@ -1,3 +1,4 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import ChargeableWeightCalc from './ChargeableWeightCalc';
@@ -5,13 +6,14 @@ import airlinesData from '@/lib/data/airlines.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 
 const ogUrl = '/api/og?title=Chargeable+Weight+Calculator&desc=Air+freight+volumetric+vs+actual+weight&api=GET+/api/chargeable-weight';
 
 export const metadata: Metadata = {
   title: 'Air Freight Chargeable Weight Calculator | FreightUtils',
-  description: 'Free chargeable weight calculator for air and sea freight. Compare actual vs volumetric weight using IATA 6,000 divisor or W/M rule. Includes carrier variations, worked examples, and REST API.',
+  description: 'Free air freight chargeable weight calculator. Compare actual vs volumetric weight using IATA standard divisor 6,000. Includes carrier divisor variations, worked examples, and tips to reduce chargeable weight.',
   alternates: { canonical: 'https://www.freightutils.com/chargeable-weight' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Chargeable Weight Calculator — FreightUtils' }],
@@ -26,16 +28,7 @@ const expressAirlines  = airlinesData.filter(a => a.express);
 export default function ChargeableWeightPage() {
   return (
     <>
-      {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          Chargeable Weight <span style={{ color: '#e87722' }}>Calculator</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>
-          Carriers charge the higher of actual weight or calculated weight.
-          Enter your dimensions to find out which applies — air or sea freight.
-        </p>
-      </div>
+      <PageHero title="Chargeable Weight" titleAccent="Calculator" subtitle="Compare actual vs volumetric weight for air and sea freight" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
@@ -160,6 +153,7 @@ export default function ChargeableWeightPage() {
           </div>
         </div>
 
+        <ApiCallout endpoint="/api/chargeable-weight" />
         <DataTimestamp text="IATA standards, last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <RelatedTools tools={[

@@ -1,3 +1,4 @@
+import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getSlimIndex, AIRLINE_COUNT, CARGO_AIRLINE_COUNT } from '@/lib/calculations/airlines';
@@ -5,7 +6,8 @@ import AirlineSearch from './AirlineSearch';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
+import PageHero from '@/app/components/PageHero';
+import ApiCallout from '@/app/components/ApiCallout';
 
 const ogUrl = '/api/og?title=Airline+Codes+%26+AWB+Prefix+Lookup&desc=Search+6,350%2B+airlines+by+name,+code,+or+AWB+prefix&api=GET+/api/airlines';
 
@@ -24,61 +26,14 @@ export default function AirlinesPage() {
 
   return (
     <>
-      {/* Hero */}
-      <div style={{
-        background: '#1a2332',
-        padding: '40px 20px 48px',
-        textAlign: 'center',
-      }}>
-        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          Airline Codes &amp; AWB Prefix <span style={{ color: '#e87722' }}>Lookup</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 560, margin: '0 auto' }}>
-          Search {AIRLINE_COUNT.toLocaleString()} airlines by name, IATA code, ICAO code, or AWB prefix — free, instant, no signup
-        </p>
-      </div>
+      <PageHero title="Airline Codes &" titleAccent="AWB Prefixes" subtitle="Search airlines by name, IATA code, ICAO code, or AWB prefix" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* Search */}
         <ErrorBoundary><AirlineSearch index={index} /></ErrorBoundary>
 
-        {/* API callout */}
-        <div style={{
-          marginTop: 48,
-          background: '#1a2332',
-          borderRadius: 12,
-          padding: '20px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 16,
-        }}>
-          <div>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: 15, marginBottom: 4 }}>
-              Building something? Use the API.
-            </div>
-            <code style={{ color: '#e87722', fontSize: 13 }}>
-              GET /api/airlines?q=emirates
-            </code>
-          </div>
-          <Link
-            href="/api-docs#airlines"
-            style={{
-              background: '#e87722',
-              color: '#fff',
-              textDecoration: 'none',
-              padding: '9px 18px',
-              borderRadius: 8,
-              fontWeight: 700,
-              fontSize: 14,
-              flexShrink: 0,
-            }}
-          >
-            View API Docs →
-          </Link>
-        </div>
+        <ApiCallout endpoint="/api/airlines" />
 
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>
@@ -174,6 +129,7 @@ export default function AirlinesPage() {
           { href: '/chargeable-weight', label: 'Calculate chargeable weight for air freight' },
           { href: '/hs', label: 'Need HS codes for customs?' },
         ]} />
+
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>
