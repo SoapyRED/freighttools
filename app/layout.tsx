@@ -171,12 +171,11 @@ export default function RootLayout({
         {children}
 
         {/* ── FOOTER ── */}
+        <div className="footer-gradient-border" style={{ marginTop: 60 }} />
         <footer style={{
           background: 'var(--navy)',
           color: 'var(--text-faint)',
-          padding: '36px 20px 28px',
-          marginTop: 60,
-          borderTop: '2px solid var(--navy-border)',
+          padding: '40px 20px 32px',
         }}>
           <div style={{ maxWidth: 1080, margin: '0 auto' }}>
             {/* Column grid */}

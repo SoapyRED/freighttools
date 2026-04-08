@@ -26,6 +26,9 @@
   --bg-card: #ffffff;
   --border: #d8dce6;
   --border-light: #eef0f4;
+  --bg-card-hover: #f0f2f6;
+  --glow-accent: rgba(232, 119, 34, 0.15);
+  --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(232, 119, 34, 0.08) 0%, transparent 70%);
   --radius: 8px;
   --radius-lg: 12px;
 }
@@ -50,6 +53,9 @@
   --bg-card: #161b22;
   --border: #30363d;
   --border-light: #21262d;
+  --bg-card-hover: #1c2333;
+  --glow-accent: rgba(239, 159, 39, 0.12);
+  --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(239, 159, 39, 0.06) 0%, transparent 70%);
 }
 
 html { scroll-behavior: smooth; }
@@ -333,15 +339,16 @@ button:active:not(:disabled) { transform: scale(0.98); }
 
 /* ─── Tool card hover ──────────────────────────────────────────── */
 .tool-card {
-  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
 }
 .tool-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px var(--glow-accent), 0 1px 3px rgba(0,0,0,0.06);
   border-color: var(--orange) !important;
   transform: translateY(-2px);
+  background: var(--bg-card-hover) !important;
 }
 [data-theme="dark"] .tool-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 24px var(--glow-accent), 0 1px 6px rgba(0,0,0,0.3);
 }
 
 /* ─── DG badge ─────────────────────────────────────────────────── */
@@ -496,4 +503,112 @@ button:active:not(:disabled) { transform: scale(0.98); }
 
 .announce-banner-close:hover {
   color: #fff;
+}
+
+/* ─── Terminal animation ────────────────────────────────────────── */
+.terminal-window {
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.terminal-header {
+  background: #161b22;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-bottom: 1px solid #30363d;
+}
+.terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+.terminal-title {
+  color: #6e7681;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 8px;
+  font-family: 'Outfit', sans-serif;
+}
+.terminal-body { padding: 16px 20px; color: #c9d1d9; min-height: 160px; }
+.terminal-prompt { color: #7ee787; }
+.terminal-url { color: #79c0ff; }
+.terminal-json-key { color: #EF9F27; }
+.terminal-json-num { color: #79c0ff; }
+
+@keyframes terminal-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: #c9d1d9;
+  vertical-align: text-bottom;
+  animation: terminal-blink 1s step-end infinite;
+}
+
+/* ─── Scroll fade-in ────────────────────────────────────────────── */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-in-section.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── Category label with accent border ─────────────────────────── */
+.category-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-faint);
+  padding: 0 4px 8px;
+  border-left: 3px solid var(--orange);
+  padding-left: 12px;
+}
+
+/* ─── Stats pill ────────────────────────────────────────────────── */
+.stats-pill {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--text-faint);
+  letter-spacing: 0.2px;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.03);
+}
+
+/* ─── Section divider ───────────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0;
+  border: none;
+}
+
+/* ─── API badge on cards ────────────────────────────────────────── */
+.api-badge {
+  font-size: 10px;
+  color: var(--accent);
+  font-family: 'Courier New', monospace;
+  background: rgba(239, 159, 39, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(239, 159, 39, 0.15);
+}
+
+/* ─── Footer gradient border ────────────────────────────────────── */
+.footer-gradient-border {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--orange), transparent);
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_STATS, SITE_COPY } from '@/lib/constants/siteStats';
+import TerminalDemo from './components/TerminalDemo';
+import FadeInSection from './components/FadeInSection';
 
 export const metadata: Metadata = {
   title: 'FreightUtils — Free Freight Calculators & APIs | LDM, CBM, ADR Lookup',
@@ -47,7 +49,6 @@ const toolGroups = [
     ],
   },
 ];
-const tools = toolGroups.flatMap(g => g.tools);
 
 const dataSources = [
   { name: 'UNECE', detail: 'ADR 2025' },
@@ -99,45 +100,63 @@ export default function HomePage() {
       {/* ── HERO ── */}
       <section style={{
         background: 'var(--navy)',
-        padding: '56px 20px 64px',
+        padding: '64px 20px 72px',
         textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
       }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+        {/* Subtle background glow */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'var(--gradient-hero)',
+          pointerEvents: 'none',
+        }} />
+        <div style={{ maxWidth: 1080, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div style={{
             fontSize: 11,
             fontWeight: 700,
             textTransform: 'uppercase',
-            letterSpacing: '2px',
+            letterSpacing: '2.5px',
             color: 'var(--text-faint)',
-            marginBottom: 16,
+            marginBottom: 20,
           }}>
-            Freight Calculators
+            Freight Calculators &amp; APIs
           </div>
           <h1 style={{
-            fontSize: 'clamp(28px, 5vw, 44px)',
+            fontSize: 'clamp(32px, 6vw, 56px)',
             fontWeight: 800,
+            lineHeight: 1.1,
+            letterSpacing: '-1px',
+            marginBottom: 20,
             color: '#fff',
-            lineHeight: 1.15,
-            letterSpacing: '-0.5px',
-            marginBottom: 16,
           }}>
-            Free Freight Calculators{' '}
-            <span style={{ color: '#EF9F27' }}>&amp; APIs</span>
+            Free Freight Tools{' '}
+            <span style={{
+              background: 'linear-gradient(135deg, #EF9F27, #f9913a, #EF9F27)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              for Everyone
+            </span>
           </h1>
           <p style={{
             fontSize: 'clamp(15px, 2.5vw, 18px)',
             color: 'var(--text-faint)',
-            maxWidth: 600,
-            margin: '0 auto 20px',
-            lineHeight: 1.6,
+            maxWidth: 620,
+            margin: '0 auto 28px',
+            lineHeight: 1.65,
           }}>
-            Free freight calculation tools and dangerous goods reference data. Open access — just use it. Every tool has a REST API.
+            Calculators, reference data, and open REST APIs for freight professionals,
+            developers, and AI agents. No signup required.
           </p>
-          <div style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-            Built by a UK freight transport planner with hands-on ADR certification and operational experience at Heathrow air cargo facilities.
-          </div>
-          <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 14, letterSpacing: '0.2px' }}>
+          <div className="stats-pill" style={{ marginBottom: 32 }}>
             {SITE_COPY.statsLine}
+          </div>
+
+          {/* Terminal demo */}
+          <div style={{ marginTop: 8 }}>
+            <TerminalDemo />
           </div>
         </div>
       </section>
@@ -180,46 +199,36 @@ export default function HomePage() {
       {/* ── TOOL GRID (grouped by category) ── */}
       <section style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px' }}>
         {toolGroups.map((group) => {
-          // Groups with 2 cards: span 2 cols each on a 4-col grid to fill the row
           const useWide = group.tools.length === 2;
           return (
-            <div key={group.label} style={{ marginTop: 16 }}>
-              <div style={{
-                fontSize: 10, fontWeight: 700, textTransform: 'uppercase',
-                letterSpacing: '1.5px', color: 'var(--text-faint)',
-                padding: '0 4px 6px',
-              }}>
+            <div key={group.label} style={{ marginTop: 20 }}>
+              <div className="category-label">
                 {group.label}
               </div>
               <div className="tool-grid" style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: 8,
+                gap: 10,
               }}>
                 {group.tools.map(t => (
                   <Link key={t.href} href={t.href} className="tool-card" style={{
                     background: 'var(--bg-card)',
                     border: '1px solid var(--border)',
                     borderRadius: 10,
-                    padding: '16px 14px',
+                    padding: '18px 16px',
                     textDecoration: 'none',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 6,
                     gridColumn: useWide ? 'span 2' : undefined,
                   }}>
-                    <div style={{ fontSize: 20 }}>{t.icon}</div>
+                    <div style={{ fontSize: 22 }}>{t.icon}</div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
+                      <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
                       <span style={{ color: 'var(--text-faint)', fontSize: 14 }}>&rarr;</span>
                     </div>
-                    <span style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>{t.desc}</span>
-                    <code style={{
-                      fontSize: 10,
-                      color: '#EF9F27',
-                      fontFamily: 'monospace',
-                      marginTop: 'auto',
-                    }}>
+                    <span style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.45 }}>{t.desc}</span>
+                    <code className="api-badge" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>
                       {t.label}
                     </code>
                   </Link>
@@ -232,238 +241,232 @@ export default function HomePage() {
 
       <main style={{ maxWidth: 1080, margin: '0 auto', padding: '0 20px 80px' }}>
 
+        {/* ── Section divider ── */}
+        <hr className="section-divider" style={{ margin: '56px 0' }} />
+
         {/* ── FOR FREIGHT PROFESSIONALS ── */}
-        <section style={{ marginTop: 64 }}>
-          <div style={{
-            fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-            letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
-          }}>
-            For Freight Professionals
-          </div>
-          <h2 style={{
-            fontSize: 'clamp(22px, 4vw, 30px)', fontWeight: 800,
-            color: 'var(--text)', letterSpacing: '-0.3px', marginBottom: 12,
-          }}>
-            Quick, accurate answers — no signup required
-          </h2>
-          <p style={{
-            fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7,
-            marginBottom: 20, maxWidth: 700,
-          }}>
-            Built for transport planners, freight forwarders, warehouse teams, and customs brokers
-            who need answers fast. No login, no paywall — just open the tool and get your result.
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {[
-              { href: '/ldm', text: 'Calculate loading metres for your next trailer' },
-              { href: '/adr', text: 'Look up ADR dangerous goods by UN number' },
-              { href: '/hs', text: 'Check HS codes for customs declarations' },
-              { href: '/airlines', text: 'Find airline codes and AWB prefixes' },
-            ].map(link => (
-              <Link key={link.href} href={link.href} style={{
-                color: '#EF9F27', textDecoration: 'none', fontSize: 15,
-                fontWeight: 600, display: 'flex', alignItems: 'center', gap: 8,
-              }}>
-                <span>&rarr;</span> {link.text}
-              </Link>
-            ))}
-          </div>
-        </section>
+        <FadeInSection>
+          <section>
+            <div style={{
+              fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+            }}>
+              For Freight Professionals
+            </div>
+            <h2 style={{
+              fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 800,
+              color: 'var(--text)', letterSpacing: '-0.3px', marginBottom: 14,
+            }}>
+              Quick, accurate answers — no signup required
+            </h2>
+            <p style={{
+              fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7,
+              marginBottom: 20, maxWidth: 700,
+            }}>
+              Built for transport planners, freight forwarders, warehouse teams, and customs brokers
+              who need answers fast. No login, no paywall — just open the tool and get your result.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {[
+                { href: '/ldm', text: 'Calculate loading metres for your next trailer' },
+                { href: '/adr', text: 'Look up ADR dangerous goods by UN number' },
+                { href: '/hs', text: 'Check HS codes for customs declarations' },
+                { href: '/airlines', text: 'Find airline codes and AWB prefixes' },
+              ].map(link => (
+                <Link key={link.href} href={link.href} style={{
+                  color: 'var(--accent)', textDecoration: 'none', fontSize: 15,
+                  fontWeight: 600, display: 'flex', alignItems: 'center', gap: 8,
+                  transition: 'opacity 0.15s',
+                }}>
+                  <span>&rarr;</span> {link.text}
+                </Link>
+              ))}
+            </div>
+          </section>
+        </FadeInSection>
+
+        <hr className="section-divider" style={{ margin: '56px 0' }} />
 
         {/* ── COMMON FREIGHT WORKFLOWS ── */}
-        <section style={{ marginTop: 64 }}>
-          <div style={{
-            fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-            letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
-          }}>
-            Common Freight Workflows
-          </div>
-          <h2 style={{
-            fontSize: 'clamp(22px, 4vw, 30px)', fontWeight: 800,
-            color: 'var(--text)', letterSpacing: '-0.3px', marginBottom: 20,
-          }}>
-            See how the tools work together
-          </h2>
-          <div className="workflow-grid" style={{
-            display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16,
-          }}>
-            {[
-              {
-                emoji: '\u2708\uFE0F', title: 'Air Freight Quote',
-                chain: 'CBM \u2192 Chargeable Weight \u2192 Airlines',
-                steps: ['Calculate shipment volume (CBM)', 'Get chargeable weight (volumetric vs actual)', 'Find carrier codes and AWB prefixes'],
-                href: '/cbm',
-              },
-              {
-                emoji: '\u26A0\uFE0F', title: 'DG Road Transport',
-                chain: 'ADR Lookup \u2192 1.1.3.6 Calculator \u2192 Tunnel Codes',
-                steps: ['Look up UN number and hazard class', 'Check if 1.1.3.6 exemption applies', 'Verify tunnel restriction codes for route'],
-                href: '/adr',
-              },
-              {
-                emoji: '\uD83C\uDFF7\uFE0F', title: 'Customs Preparation',
-                chain: 'HS Code \u2192 INCOTERMS \u2192 Containers',
-                steps: ['Find the correct HS commodity code', 'Confirm trade term responsibilities', 'Check container specs for your shipment'],
-                href: '/hs',
-              },
-            ].map(w => (
-              <div key={w.title} className="tool-card" style={{
-                background: 'var(--bg-card)', border: '1px solid var(--border)',
-                borderRadius: 10, padding: '20px 18px', display: 'flex', flexDirection: 'column',
-              }}>
-                <div style={{ fontSize: 28, marginBottom: 10 }}>{w.emoji}</div>
-                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', margin: '0 0 4px' }}>{w.title}</h3>
-                <div style={{ fontSize: 12, color: '#EF9F27', fontWeight: 600, marginBottom: 14 }}>{w.chain}</div>
-                <ol style={{ margin: 0, paddingLeft: 18, fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.8, flex: 1 }}>
-                  {w.steps.map((s, i) => <li key={i}>{s}</li>)}
-                </ol>
-                <Link href={w.href} style={{
-                  marginTop: 16, fontSize: 13, fontWeight: 600, color: '#EF9F27',
-                  textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4,
+        <FadeInSection>
+          <section>
+            <div style={{
+              fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+            }}>
+              Common Freight Workflows
+            </div>
+            <h2 style={{
+              fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 800,
+              color: 'var(--text)', letterSpacing: '-0.3px', marginBottom: 24,
+            }}>
+              See how the tools work together
+            </h2>
+            <div className="workflow-grid" style={{
+              display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16,
+            }}>
+              {[
+                {
+                  emoji: '\u2708\uFE0F', title: 'Air Freight Quote',
+                  chain: 'CBM \u2192 Chargeable Weight \u2192 Airlines',
+                  steps: ['Calculate shipment volume (CBM)', 'Get chargeable weight (volumetric vs actual)', 'Find carrier codes and AWB prefixes'],
+                  href: '/cbm',
+                },
+                {
+                  emoji: '\u26A0\uFE0F', title: 'DG Road Transport',
+                  chain: 'ADR Lookup \u2192 1.1.3.6 Calculator \u2192 Tunnel Codes',
+                  steps: ['Look up UN number and hazard class', 'Check if 1.1.3.6 exemption applies', 'Verify tunnel restriction codes for route'],
+                  href: '/adr',
+                },
+                {
+                  emoji: '\uD83C\uDFF7\uFE0F', title: 'Customs Preparation',
+                  chain: 'HS Code \u2192 INCOTERMS \u2192 Containers',
+                  steps: ['Find the correct HS commodity code', 'Confirm trade term responsibilities', 'Check container specs for your shipment'],
+                  href: '/hs',
+                },
+              ].map(w => (
+                <div key={w.title} className="tool-card" style={{
+                  background: 'var(--bg-card)', border: '1px solid var(--border)',
+                  borderRadius: 10, padding: '20px 18px', display: 'flex', flexDirection: 'column',
                 }}>
-                  Start &rarr;
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
+                  <div style={{ fontSize: 28, marginBottom: 10 }}>{w.emoji}</div>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', margin: '0 0 4px' }}>{w.title}</h3>
+                  <div style={{ fontSize: 12, color: 'var(--accent)', fontWeight: 600, marginBottom: 14 }}>{w.chain}</div>
+                  <ol style={{ margin: 0, paddingLeft: 18, fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.8, flex: 1 }}>
+                    {w.steps.map((s, i) => <li key={i}>{s}</li>)}
+                  </ol>
+                  <Link href={w.href} style={{
+                    marginTop: 16, fontSize: 13, fontWeight: 600, color: 'var(--accent)',
+                    textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4,
+                    transition: 'opacity 0.15s',
+                  }}>
+                    Start &rarr;
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </section>
+        </FadeInSection>
+
+        <hr className="section-divider" style={{ margin: '56px 0' }} />
 
         {/* ── FOR DEVELOPERS ── */}
-        <section style={{ marginTop: 64 }}>
-          <div style={{
-            fontSize: 11,
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            color: 'var(--text-faint)',
-            marginBottom: 12,
-          }}>
-            For Developers
-          </div>
-          <h2 style={{
-            fontSize: 'clamp(22px, 4vw, 30px)',
-            fontWeight: 800,
-            color: 'var(--text)',
-            letterSpacing: '-0.3px',
-            marginBottom: 12,
-          }}>
-            Every tool has a REST API
-          </h2>
-          <p style={{
-            fontSize: 15,
-            color: 'var(--text-muted)',
-            lineHeight: 1.7,
-            marginBottom: 20,
-            maxWidth: 700,
-          }}>
-            No authentication. JSON responses. CORS enabled for all origins.
-            Build freight calculations into your TMS, WMS, or any system that needs them.
-          </p>
-          <div className="code-block" style={{ marginBottom: 12 }}>
-            {`$ curl "https://www.freightutils.com/api/cbm?l=120&w=80&h=100"`}
-          </div>
-          <div className="code-block" style={{ marginBottom: 24 }}>
-            {`{
-  "total_cbm": 0.96,
-  "cubic_feet": 33.9021,
-  "litres": 960,
-  "pieces": 1
-}`}
-          </div>
-          <Link href="/api-docs" style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            background: '#EF9F27',
-            color: '#fff',
-            textDecoration: 'none',
-            padding: '10px 20px',
-            borderRadius: 8,
-            fontWeight: 700,
-            fontSize: 14,
-          }}>
-            View full API documentation →
-          </Link>
-        </section>
+        <FadeInSection>
+          <section>
+            <div style={{
+              fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+            }}>
+              For Developers
+            </div>
+            <h2 style={{
+              fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 800,
+              color: 'var(--text)', letterSpacing: '-0.3px', marginBottom: 14,
+            }}>
+              Every tool has a REST API
+            </h2>
+            <p style={{
+              fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7,
+              marginBottom: 24, maxWidth: 700,
+            }}>
+              No authentication. JSON responses. CORS enabled for all origins.
+              Build freight calculations into your TMS, WMS, or any system that needs them.
+            </p>
+            <TerminalDemo />
+            <div style={{ marginTop: 24, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <Link href="/api-docs" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                background: 'var(--accent)', color: '#fff',
+                textDecoration: 'none', padding: '12px 24px',
+                borderRadius: 8, fontWeight: 700, fontSize: 14,
+                transition: 'opacity 0.15s',
+              }}>
+                View full API documentation &rarr;
+              </Link>
+              <Link href="/openapi.json" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                background: 'transparent', color: 'var(--text-muted)',
+                textDecoration: 'none', padding: '12px 24px',
+                borderRadius: 8, fontWeight: 600, fontSize: 14,
+                border: '1px solid var(--border)',
+                transition: 'border-color 0.15s, color 0.15s',
+              }}>
+                OpenAPI 3.0 Spec
+              </Link>
+            </div>
+          </section>
+        </FadeInSection>
+
+        <hr className="section-divider" style={{ margin: '56px 0' }} />
 
         {/* ── FOR AI AGENTS ── */}
-        <section style={{ marginTop: 56 }}>
-          <div style={{
-            fontSize: 11,
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            color: 'var(--text-faint)',
-            marginBottom: 12,
-          }}>
-            For AI Agents
-          </div>
-          <h2 style={{
-            fontSize: 'clamp(22px, 4vw, 30px)',
-            fontWeight: 800,
-            color: 'var(--text)',
-            letterSpacing: '-0.3px',
-            marginBottom: 12,
-          }}>
-            Designed for programmatic access
-          </h2>
-          <p style={{
-            fontSize: 15,
-            color: 'var(--text-muted)',
-            lineHeight: 1.7,
-            maxWidth: 700,
-          }}>
-            Now available as an <strong>MCP server</strong> — the first and only freight MCP server for AI agents.
-            Install via <code style={{ background: 'var(--bg-card)', padding: '2px 6px', borderRadius: 4, fontSize: 13, whiteSpace: 'nowrap' }}>npx freightutils-mcp</code> or
-            connect via URL. Reliable JSON schemas, predictable endpoints, zero auth required.
-          </p>
-          <p style={{ marginTop: 12, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <Link href="/api-docs#mcp" style={{ color: '#e87722', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
-              MCP Server Setup &rarr;
-            </Link>
-            <Link href="/openapi.json" style={{ color: '#e87722', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
-              OpenAPI 3.0 Spec &rarr;
-            </Link>
-          </p>
-        </section>
+        <FadeInSection>
+          <section>
+            <div style={{
+              fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+            }}>
+              For AI Agents
+            </div>
+            <h2 style={{
+              fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 800,
+              color: 'var(--text)', letterSpacing: '-0.3px', marginBottom: 14,
+            }}>
+              Designed for programmatic access
+            </h2>
+            <p style={{
+              fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7,
+              maxWidth: 700,
+            }}>
+              Available as an <strong>MCP server</strong> — the first and only freight MCP server for AI agents.
+              Install via <code style={{ background: 'var(--bg-card)', padding: '2px 8px', borderRadius: 4, fontSize: 13, whiteSpace: 'nowrap', border: '1px solid var(--border)' }}>npx freightutils-mcp</code> or
+              connect via URL. Reliable JSON schemas, predictable endpoints, zero auth required.
+            </p>
+            <p style={{ marginTop: 14, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+              <Link href="/api-docs#mcp" style={{ color: 'var(--accent)', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+                MCP Server Setup &rarr;
+              </Link>
+              <Link href="/openapi.json" style={{ color: 'var(--accent)', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+                OpenAPI 3.0 Spec &rarr;
+              </Link>
+            </p>
+          </section>
+        </FadeInSection>
+
+        <hr className="section-divider" style={{ margin: '56px 0' }} />
 
         {/* ── DATA SOURCES ── */}
-        <section style={{ marginTop: 56 }}>
-          <div style={{
-            fontSize: 11,
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            color: 'var(--text-faint)',
-            marginBottom: 16,
-          }}>
-            Data Sources
-          </div>
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 10,
-            marginBottom: 12,
-          }}>
-            {dataSources.map(d => (
-              <div key={d.name} style={{
-                background: 'var(--bg-card)',
-                border: '1px solid var(--border)',
-                borderRadius: 8,
-                padding: '10px 16px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-              }}>
-                <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{d.name}</span>
-                <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>{d.detail}</span>
-              </div>
-            ))}
-          </div>
-          <p style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
-            All data audited against official publications. Pallet specifications verified against manufacturer standards.
-          </p>
-        </section>
+        <FadeInSection>
+          <section>
+            <div style={{
+              fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 16,
+            }}>
+              Data Sources
+            </div>
+            <div style={{
+              display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 12,
+            }}>
+              {dataSources.map(d => (
+                <div key={d.name} style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 8,
+                  padding: '12px 18px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                }}>
+                  <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{d.name}</span>
+                  <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>{d.detail}</span>
+                </div>
+              ))}
+            </div>
+            <p style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
+              All data audited against official publications. Pallet specifications verified against manufacturer standards.
+            </p>
+          </section>
+        </FadeInSection>
 
       </main>
     </>
