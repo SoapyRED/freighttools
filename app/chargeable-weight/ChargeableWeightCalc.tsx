@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import SegmentedControl from '@/app/components/SegmentedControl';
 import { calculateChargeableWeight, calculateSeaChargeableWeight, VOLUMETRIC_FACTORS } from '@/lib/calculations/chargeable-weight';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
 
@@ -160,20 +161,15 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
 
   const isVol = result?.basis === 'volumetric';
 
-  const modeBtnStyle = (m: 'air' | 'sea') => ({
-    padding: '8px 20px', fontSize: 13, fontWeight: freightMode === m ? 700 : 500,
-    color: freightMode === m ? '#fff' : 'var(--text-faint)',
-    background: freightMode === m ? '#e87722' : 'transparent',
-    border: freightMode === m ? '1px solid #e87722' : '1px solid var(--border)',
-    borderRadius: 6, cursor: 'pointer' as const, fontFamily: 'inherit',
-  });
-
   return (
     <div>
       {/* Mode toggle */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-        <button onClick={() => setFreightMode('air')} style={modeBtnStyle('air')}>Air Freight</button>
-        <button onClick={() => setFreightMode('sea')} style={modeBtnStyle('sea')}>Sea Freight (W/M)</button>
+      <div style={{ marginBottom: 16 }}>
+        <SegmentedControl
+          options={[{ label: 'Air Freight', value: 'air' }, { label: 'Sea Freight (W/M)', value: 'sea' }]}
+          activeValue={freightMode}
+          onChange={(v) => setFreightMode(v as 'air' | 'sea')}
+        />
       </div>
 
       {/* Input card */}

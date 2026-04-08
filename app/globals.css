@@ -660,6 +660,11 @@ button:active:not(:disabled) { transform: scale(0.98); }
   box-shadow: 0 4px 16px var(--glow-accent);
 }
 
+/* ─── Mode badges (INCOTERMS) ───────────────────────────────────── */
+.mode-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 12px; display: inline-block; font-weight: 600; }
+.mode-badge--any { background: rgba(239,159,39,0.1); border: 1px solid rgba(239,159,39,0.3); color: var(--accent); }
+.mode-badge--sea { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); color: #60a5fa; }
+
 /* ─── Footer gradient border ────────────────────────────────────── */
 .footer-gradient-border {
   height: 2px;

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import SegmentedControl from '@/app/components/SegmentedControl';
 import { calculateConsignment, ConsignmentItemInput, ConsignmentResult, ConsignmentMode } from '@/lib/calculations/consignment';
 
 // ─── Types ──────────────────────────────────────────────────────
@@ -100,21 +101,15 @@ export default function ConsignmentCalc() {
     cursor: 'pointer', fontSize: 18, padding: '4px 8px', lineHeight: 1,
   };
 
-  const modeBtn = (m: ConsignmentMode, label: string) => ({
-    padding: '8px 20px', fontSize: 13, fontWeight: mode === m ? 700 : 500,
-    color: mode === m ? '#fff' : 'var(--text-faint)',
-    background: mode === m ? '#e87722' : 'transparent',
-    border: mode === m ? '1px solid #e87722' : '1px solid var(--border)',
-    borderRadius: 6, cursor: 'pointer' as const, fontFamily: 'inherit',
-  });
-
   return (
     <>
       {/* ── Mode Selector ── */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-        <button onClick={() => setMode('road')} style={modeBtn('road', 'Road')}>Road</button>
-        <button onClick={() => setMode('air')} style={modeBtn('air', 'Air')}>Air</button>
-        <button onClick={() => setMode('sea')} style={modeBtn('sea', 'Sea')}>Sea</button>
+      <div style={{ marginBottom: 16 }}>
+        <SegmentedControl
+          options={[{ label: 'Road', value: 'road' }, { label: 'Air', value: 'air' }, { label: 'Sea', value: 'sea' }]}
+          activeValue={mode}
+          onChange={(v) => setMode(v as 'road' | 'air' | 'sea')}
+        />
       </div>
 
       {/* ── Item Rows ── */}

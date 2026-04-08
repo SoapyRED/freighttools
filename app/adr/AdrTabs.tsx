@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import SegmentedControl from '@/app/components/SegmentedControl';
 import type { AdrEntrySlim, AdrCalcEntry } from '@/lib/calculations/adr';
 import AdrSearch from './AdrSearch';
 import AdrExemptionCalc from '../adr-calculator/AdrExemptionCalc';
@@ -19,30 +20,15 @@ export default function AdrTabs({ searchIndex, calcIndex }: Props) {
     if (params.get('tab') === 'exemption') setTab('exemption');
   }, []);
 
-  const btnStyle = (active: boolean): React.CSSProperties => ({
-    padding: '10px 20px',
-    borderRadius: 8,
-    fontSize: 14,
-    fontWeight: 700,
-    fontFamily: "'Outfit', sans-serif",
-    cursor: 'pointer',
-    border: 'none',
-    background: active ? '#EF9F27' : 'var(--bg-card, #fff)',
-    color: active ? '#1a1a1a' : 'var(--text-secondary, #5a6478)',
-    boxShadow: active ? '0 2px 8px rgba(239,159,39,0.2)' : 'none',
-    transition: 'background 0.1s, color 0.1s',
-  });
-
   return (
     <div>
       {/* Tab buttons */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-        <button onClick={() => setTab('lookup')} style={btnStyle(tab === 'lookup')}>
-          Lookup
-        </button>
-        <button onClick={() => setTab('exemption')} style={btnStyle(tab === 'exemption')}>
-          1.1.3.6 Exemption Calculator
-        </button>
+      <div style={{ marginBottom: 20 }}>
+        <SegmentedControl
+          options={[{ label: 'Lookup', value: 'lookup' }, { label: '1.1.3.6 Exemption', value: 'exemption' }]}
+          activeValue={tab}
+          onChange={(v) => setTab(v as 'lookup' | 'exemption')}
+        />
       </div>
 
       {/* Tab content */}
