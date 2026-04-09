@@ -10,8 +10,8 @@ import { getAllContainerSpecs, CONTAINER_COUNT } from '@/lib/calculations/contai
 const ogUrl = '/api/og?title=Shipping+Container+Dimensions&desc=All+10+container+types+with+specs&api=GET+/api/containers';
 
 export const metadata: Metadata = {
-  title: 'Shipping Container Dimensions & Capacity Reference | FreightUtils',
-  description: 'Free shipping container size guide — internal dimensions, weights, door openings, and pallet capacity for all 10 standard container types. ISO 668 specifications with free REST API.',
+  title: 'Shipping Container Sizes — Dimensions & Capacity',
+  description: 'Internal dimensions, weights, door openings, and pallet capacity for all 10 standard shipping containers. 20ft, 40ft, 40ft HC, reefer, open top, and more. ISO 668 specs. Free.',
   alternates: { canonical: 'https://www.freightutils.com/containers' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Shipping Container Dimensions — FreightUtils' }],

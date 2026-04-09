@@ -12,8 +12,8 @@ import ApiCallout from '@/app/components/ApiCallout';
 const ogUrl = '/api/og?title=CBM+Calculator&desc=Cubic+metres+for+sea+and+air+freight+shipments&api=GET+/api/cbm';
 
 export const metadata: Metadata = {
-  title: 'CBM Calculator — Cubic Metres Volume Calculator | FreightUtils',
-  description: 'Free CBM calculator for shipping and logistics. Calculate cubic metres for sea freight, air freight, and container loading. Includes container capacity reference, W/M pricing rules, and comparison with LDM. Free REST API available.',
+  title: 'CBM Calculator — Cubic Metres for Shipping',
+  description: 'Calculate cubic metres (CBM) for sea freight, air freight, and container loading. W/M pricing rules, container capacity reference, and LDM comparison. Instant results, free.',
   alternates: { canonical: 'https://www.freightutils.com/cbm' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'CBM Calculator — FreightUtils' }],

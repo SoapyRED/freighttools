@@ -27,8 +27,8 @@ const toolGroups = [
   {
     label: 'Dangerous Goods',
     tools: [
-      { href: '/adr', label: '/api/adr', title: 'ADR Dangerous Goods', desc: `${SITE_STATS.adrEntries.toLocaleString()} entries from ${SITE_STATS.adrEdition} — lookup by UN number and 1.1.3.6 exemption calculator`, icon: '⚠️' },
-      { href: '/adr?tab=exemption', label: '/api/adr-calculator', title: 'ADR Exemption Calculator', desc: '1.1.3.6 small load exemption check for mixed hazardous loads', icon: '🧮' },
+      { href: '/adr', label: '/api/adr', title: 'ADR Dangerous Goods', desc: `${SITE_STATS.adrEntries.toLocaleString()} entries from ${SITE_STATS.adrEdition} — lookup by UN number, class, and hazard data`, icon: '⚠️' },
+      { href: '/adr-calculator', label: '/api/adr-calculator', title: 'ADR Exemption Calculator', desc: '1.1.3.6 small load exemption check for mixed hazardous loads', icon: '🧮' },
       { href: '/adr/lq-eq-checker', label: '/api/adr/lq-check', title: 'LQ/EQ Checker', desc: 'Check Limited & Excepted Quantity eligibility for mixed DG consignments', icon: '📦' },
     ],
   },

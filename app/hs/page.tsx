@@ -15,8 +15,8 @@ import { SITE_STATS } from '@/lib/constants/siteStats';
 const ogUrl = '/api/og?title=HS+Code+Lookup&desc=Search+6%2C940+Harmonized+System+codes&api=GET+/api/hs';
 
 export const metadata: Metadata = {
-  title: 'HS Code Lookup — Harmonized System Search | FreightUtils',
-  description: `Free HS code lookup — search and browse all ${SITE_STATS.hsCodeCount.toLocaleString()} Harmonized System codes across 21 sections and 97 chapters. HS 2022 data with free REST API.`,
+  title: 'HS Code Lookup — Search Harmonized System Codes',
+  description: `Search ${SITE_STATS.hsCodeCount.toLocaleString()} HS codes across 21 sections and 97 chapters. Find commodity codes by keyword or number. Free lookup, HS 2022 data, no signup required.`,
   alternates: { canonical: 'https://www.freightutils.com/hs' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'HS Code Lookup — FreightUtils' }],

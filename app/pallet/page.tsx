@@ -12,8 +12,8 @@ import ApiCallout from '@/app/components/ApiCallout';
 const ogUrl = '/api/og?title=Pallet+Fitting+Calculator&desc=How+many+boxes+fit+on+a+pallet%3F+Visual+layer+diagram.&api=GET+/api/pallet';
 
 export const metadata: Metadata = {
-  title: 'Pallet Fitting Calculator — How Many Boxes Fit on a Pallet?',
-  description: 'Free pallet fitting calculator — calculate how many boxes fit on a pallet. 15 pallet types including EUR/EPAL, GMA, and IATA air freight. Audited dimensions, loading best practices, and vehicle compatibility. Free REST API.',
+  title: 'Pallet Calculator — How Many Boxes Fit?',
+  description: 'Calculate how many boxes fit on a pallet. 15 pallet types: EUR/EPAL, GMA, IATA air freight. Visual layer diagram, loading best practices, and vehicle compatibility. Free.',
   alternates: { canonical: 'https://www.freightutils.com/pallet' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Pallet Fitting Calculator — FreightUtils' }],

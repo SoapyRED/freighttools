@@ -10,8 +10,8 @@ import { SITE_STATS } from '@/lib/constants/siteStats';
 const ogUrl = '/api/og?title=UN/LOCODE+Lookup&desc=116,000+transport+locations+worldwide&api=GET+/api/unlocode';
 
 export const metadata: Metadata = {
-  title: 'UN/LOCODE Lookup — FreightUtils',
-  description: `Search ${SITE_STATS.unlocodeCount.toLocaleString()}+ UN/LOCODE transport locations worldwide. Ports, airports, rail terminals, and inland depots. Free lookup with REST API.`,
+  title: 'UN/LOCODE Lookup — Search 116,000+ Locations',
+  description: `Search ${SITE_STATS.unlocodeCount.toLocaleString()}+ UN/LOCODE locations worldwide — seaports, airports, rail terminals, and inland depots. Find any transport location by name, code, or country. Free.`,
   alternates: { canonical: 'https://www.freightutils.com/unlocode' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'UN/LOCODE Lookup — FreightUtils' }],

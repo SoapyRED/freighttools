@@ -9,8 +9,8 @@ import LqEqChecker from './LqEqChecker';
 const ogUrl = '/api/og?title=ADR+LQ/EQ+Checker&desc=Check+Limited+and+Excepted+Quantity+eligibility&api=POST+/api/adr/lq-check';
 
 export const metadata: Metadata = {
-  title: 'ADR LQ/EQ Checker — Limited & Excepted Quantity | FreightUtils',
-  description: 'Check if your dangerous goods consignment qualifies for ADR Limited Quantity (LQ) or Excepted Quantity (EQ) exemptions. Multi-line checker for mixed DG loads. Free tool with REST API.',
+  title: 'ADR LQ/EQ Checker — Limited & Excepted Quantity',
+  description: 'Check if your dangerous goods qualify for ADR Limited Quantity (LQ) or Excepted Quantity (EQ) exemptions. Enter multiple UN numbers — instant batch eligibility check. Free, ADR 2025.',
   alternates: { canonical: 'https://www.freightutils.com/adr/lq-eq-checker' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'ADR LQ/EQ Checker — FreightUtils' }],

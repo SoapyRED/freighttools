@@ -9,8 +9,8 @@ import ApiCallout from '@/app/components/ApiCallout';
 const ogUrl = '/api/og?title=UK+Import+Duty+Calculator&desc=Estimate+duty+and+VAT+for+UK+imports&api=POST+/api/duty';
 
 export const metadata: Metadata = {
-  title: 'UK Import Duty & VAT Calculator — FreightUtils',
-  description: 'Estimate UK import duty and VAT for any commodity code. Uses GOV.UK Trade Tariff data. Free calculator with REST API.',
+  title: 'UK Import Duty & VAT Calculator — Free Estimate',
+  description: 'Estimate UK import duty and VAT for any commodity code. Uses live GOV.UK Trade Tariff data. Enter your HS code and goods value — instant duty and VAT breakdown. Free.',
   alternates: { canonical: 'https://www.freightutils.com/duty' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'UK Import Duty & VAT Calculator — FreightUtils' }],
