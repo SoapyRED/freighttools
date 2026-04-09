@@ -2,9 +2,9 @@
 // SINGLE SOURCE OF TRUTH — update here, all pages update automatically
 
 export const SITE_STATS = {
-  toolCount: 16,
-  apiEndpointCount: 17,
-  mcpToolCount: 17,
+  toolCount: 17,
+  apiEndpointCount: 18,
+  mcpToolCount: 18,
   adrEntries: 2939,
   hsCodeCount: 6940,
   airlineCount: 6352,

@@ -24,6 +24,7 @@ const entries: { month: string; items: Entry[] }[] = [
   {
     month: 'April 2026',
     items: [
+      { date: 'Apr 9', tag: 'New Tool', title: 'ADR LQ/EQ Multi-Line Checker', desc: 'Check Limited Quantity and Excepted Quantity eligibility for mixed dangerous goods consignments. Multi-item input with per-item breakdown, green/red/amber verdicts. POST /api/adr/lq-check.' },
       { date: 'Apr 5', tag: 'New Tool', title: 'Air Freight ULD Type Reference', desc: '15 unit load device types — AKE (LD3), PMC, PLA, and more. Dimensions, weights, volume, aircraft compatibility, and deck positions. Free REST API at /api/uld.' },
       { date: 'Apr 5', tag: 'New Tool', title: 'Vehicle & Trailer Type Reference', desc: '17 road freight vehicle and trailer types — curtainsiders, rigids, vans, US 53ft. Dimensions, payload limits, pallet capacity. Free REST API at /api/vehicles.' },
       { date: 'Apr 5', tag: 'API Change', title: 'Composite Shipment Summary Endpoint', desc: 'POST /api/shipment/summary chains CBM, LDM, chargeable weight, ADR compliance, and UK duty estimation into one response. Accepts road/air/sea/multimodal modes.' },

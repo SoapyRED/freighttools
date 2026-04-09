@@ -11,6 +11,7 @@ export const config = {
     '/api/duty/:path*',
     '/api/adr',
     '/api/adr-calculator/:path*',
+    '/api/adr/lq-check/:path*',
     '/api/airlines/:path*',
     '/api/containers/:path*',
     '/api/hs/:path*',

@@ -17,6 +17,7 @@ import { convert } from '@/lib/calculations/converter';
 import { PALLET_PRESET_MAP } from '@/lib/data/pallets';
 import { getAllULDs, getULD, getULDsByCategory, getULDsByDeck, ULD_COUNT } from '@/lib/calculations/uld';
 import { getAllVehicles, getVehicle, getVehiclesByCategory, getVehiclesByRegion, VEHICLE_REF_COUNT } from '@/lib/calculations/vehicle-ref';
+import { checkLqEq } from '@/lib/calculations/lq-eq';
 
 // ─────────────────────────────────────────────────────────────
 //  MCP Handler — Streamable HTTP transport for Vercel
@@ -450,6 +451,30 @@ const handler = createMcpHandler(
         if (category) results = getVehiclesByCategory(category);
         if (region) results = getVehiclesByRegion(region);
         return { content: [{ type: 'text' as const, text: JSON.stringify({ count: results.length, results }, null, 2) }] };
+      },
+    );
+
+    // ── ADR LQ/EQ Checker ──────────────────────────────────────
+    server.tool(
+      'adr_lq_eq_check',
+      `Check if dangerous goods qualify for ADR Limited Quantity (LQ) or Excepted Quantity (EQ) exemptions. LQ allows reduced requirements for small quantities per inner packaging (ADR 3.4). EQ applies to very small quantities (ADR 3.5, codes E1-E5). Checks multiple items at once.`,
+      {
+        mode: z.enum(['lq', 'eq']).describe('Check mode: lq (Limited Quantity) or eq (Excepted Quantity)'),
+        items: z.array(z.object({
+          un_number: z.string().describe('4-digit UN number'),
+          quantity: z.number().positive().describe('Quantity of substance'),
+          unit: z.enum(['ml', 'L', 'g', 'kg']).describe('Unit of measurement'),
+          inner_packaging_qty: z.number().int().positive().optional().describe('Number of inner packagings (EQ mode only)'),
+        })).describe('Items to check'),
+      },
+      async ({ mode, items }) => {
+        try {
+          const result = checkLqEq(mode, items as Parameters<typeof checkLqEq>[1]);
+          return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
+        } catch (err: unknown) {
+          const msg = err instanceof Error ? err.message : String(err);
+          return { content: [{ type: 'text' as const, text: `Error: ${msg}` }], isError: true };
+        }
       },
     );
 

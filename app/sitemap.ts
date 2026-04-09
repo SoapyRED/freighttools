@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/adr/tunnel-codes`,        changeFrequency: 'yearly',  priority: 0.7 },
     { url: `${BASE}/adr/limited-quantities`,  changeFrequency: 'yearly',  priority: 0.7 },
     { url: `${BASE}/adr/training-guide`,      changeFrequency: 'yearly',  priority: 0.7 },
+    { url: `${BASE}/adr/lq-eq-checker`,      changeFrequency: 'monthly', priority: 0.8 },
     // Customs & trade
     { url: `${BASE}/hs`,                      changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/incoterms`,               changeFrequency: 'monthly', priority: 0.8 },
