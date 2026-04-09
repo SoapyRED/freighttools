@@ -205,13 +205,33 @@ export default function ApiDocsPage() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-            <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: 0 }}>
-              View on{' '}
-              <a href="https://www.npmjs.com/package/freightutils-mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>npm</a>
-              {' '}&middot;{' '}
-              <a href="https://github.com/SoapyRED/freightutils-mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>GitHub</a>
-            </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+            <a
+              href="https://www.npmjs.com/package/freightutils-mcp"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                background: 'var(--accent)', color: '#fff', borderRadius: 8,
+                padding: '8px 18px', fontSize: 13, fontWeight: 700,
+                textDecoration: 'none', border: 'none',
+              }}
+            >
+              npm
+            </a>
+            <a
+              href="https://github.com/SoapyRED/freightutils-mcp"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                background: 'var(--accent)', color: '#fff', borderRadius: 8,
+                padding: '8px 18px', fontSize: 13, fontWeight: 700,
+                textDecoration: 'none', border: 'none',
+              }}
+            >
+              GitHub
+            </a>
             <PostmanButton />
           </div>
         </div>
