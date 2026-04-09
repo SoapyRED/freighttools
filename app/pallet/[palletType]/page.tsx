@@ -155,6 +155,7 @@ export default async function PalletTypePage(
         </p>
 
         <PalletFittingCalc
+          key={p.slug}
           defaultPL={String(p.lengthCm)}
           defaultPW={String(p.widthCm)}
           defaultPMH={String(p.maxHeightCm)}

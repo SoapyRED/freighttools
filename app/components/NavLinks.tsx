@@ -41,6 +41,7 @@ const nav: NavEntry[] = [
   {
     label: 'Guides',
     items: [
+      { href: '/adr/lq-eq-checker', label: 'LQ/EQ Checker' },
       { href: '/adr/changes-2025', label: 'ADR 2025 Changes' },
       { href: '/adr/tunnel-codes', label: 'ADR Tunnel Codes' },
       { href: '/adr/limited-quantities', label: 'ADR Limited Quantities' },

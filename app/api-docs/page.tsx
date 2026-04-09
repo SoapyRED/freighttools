@@ -75,7 +75,6 @@ export default function ApiDocsPage() {
         >
           &#128229; Download Postman Collection
         </a>
-        <PostmanButton />
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 32, lineHeight: 1.6, marginTop: -16 }}>
           Compatible with Swagger, Postman, and RapidAPI import
         </p>
@@ -206,12 +205,15 @@ export default function ApiDocsPage() {
             </div>
           </div>
 
-          <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-            View on npm:{' '}
-            <a href="https://www.npmjs.com/package/freightutils-mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>npmjs.com/package/freightutils-mcp</a>
-            {' '}&middot;{' '}
-            <a href="https://github.com/SoapyRED/freightutils-mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>GitHub</a>
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+            <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: 0 }}>
+              View on{' '}
+              <a href="https://www.npmjs.com/package/freightutils-mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>npm</a>
+              {' '}&middot;{' '}
+              <a href="https://github.com/SoapyRED/freightutils-mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>GitHub</a>
+            </p>
+            <PostmanButton />
+          </div>
         </div>
 
         {/* Quickstart */}
