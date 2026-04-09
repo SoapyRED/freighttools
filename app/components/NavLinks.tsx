@@ -29,6 +29,7 @@ const nav: NavEntry[] = [
     label: 'Reference',
     items: [
       { href: '/adr', label: 'ADR Dangerous Goods' },
+      { href: '/adr?tab=exemption', label: 'ADR Exemption Calculator' },
       { href: '/airlines', label: 'Airline Codes' },
       { href: '/incoterms', label: 'INCOTERMS 2020' },
       { href: '/hs', label: 'HS Code Lookup' },
