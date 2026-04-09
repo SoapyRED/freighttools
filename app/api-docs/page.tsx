@@ -998,6 +998,91 @@ Content-Type: application/json
           </div>
         </div>
 
+        {/* ── LQ/EQ Checker Endpoint ── */}
+        <div id="lq-check" style={s.card}>
+          <div style={s.endpointHeader}>
+            <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
+            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr/lq-check</span>
+            <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>ADR Limited &amp; Excepted Quantity Checker</span>
+          </div>
+          <div style={{ padding: 24 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
+              Check whether dangerous goods qualify for ADR Limited Quantity (Chapter 3.4) or
+              Excepted Quantity (Chapter 3.5) concessions. Accepts up to 20 items per request and
+              returns per-item pass/fail status against ADR Table A limits.
+            </p>
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Request Body</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 24 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>mode</code></td><td>string</td><td>No</td><td><code>lq</code> (default) or <code>eq</code></td></tr>
+                  <tr><td><code>items</code></td><td>array</td><td>Yes</td><td>1–20 items to check</td></tr>
+                  <tr><td><code>items[].un_number</code></td><td>string</td><td>Yes</td><td>UN number (e.g. <code>1203</code>)</td></tr>
+                  <tr><td><code>items[].quantity</code></td><td>number</td><td>Yes</td><td>Quantity per inner packaging</td></tr>
+                  <tr><td><code>items[].unit</code></td><td>string</td><td>No</td><td><code>ml</code>, <code>L</code> (default), <code>g</code>, or <code>kg</code></td></tr>
+                  <tr><td><code>items[].inner_packaging_qty</code></td><td>number</td><td>No</td><td>Number of inner packagings per outer (EQ mode only)</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 6 }}>Example — check LQ for 0.5 L of petrol:</p>
+            <CopyableCode code={`curl -X POST https://www.freightutils.com/api/adr/lq-check \\
+  -H "Content-Type: application/json" \\
+  -d '{"mode":"lq","items":[{"un_number":"1203","quantity":0.5,"unit":"L"}]}'`} style={{ marginBottom: 4 }} />
+            <JsonBlock json={`{
+  "mode": "lq",
+  "overall_status": "qualifies",
+  "items": [
+    {
+      "un_number": "1203",
+      "substance": "MOTOR SPIRIT or GASOLINE or PETROL",
+      "class": "3",
+      "packing_group": "II",
+      "lq_limit": "1 L",
+      "lq_limit_value": 1,
+      "lq_limit_unit": "L",
+      "eq_code": "E2",
+      "quantity_entered": 0.5,
+      "unit_entered": "L",
+      "status": "within_limit",
+      "reason": "0.5 L is within the LQ limit of 1 L per inner packaging"
+    }
+  ],
+  "summary": {
+    "total_items": 1,
+    "qualifying": 1,
+    "exceeding": 0,
+    "not_permitted": 0
+  },
+  "references": {
+    "adr_chapter": "3.4",
+    "table": "3.2 Column 7a"
+  }
+}`} style={{ marginBottom: 24 }} />
+
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Response Fields</h3>
+            <div className="ref-table-wrap" style={{ marginBottom: 16 }}>
+              <table className="ref-table">
+                <thead>
+                  <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>mode</code></td><td>string</td><td><code>lq</code> or <code>eq</code></td></tr>
+                  <tr><td><code>overall_status</code></td><td>string</td><td><code>qualifies</code>, <code>does_not_qualify</code>, or <code>partial</code></td></tr>
+                  <tr><td><code>items[]</code></td><td>array</td><td>Per-item results with substance info, limits, and pass/fail</td></tr>
+                  <tr><td><code>items[].status</code></td><td>string</td><td><code>within_limit</code>, <code>exceeds_limit</code>, or <code>not_permitted</code></td></tr>
+                  <tr><td><code>summary</code></td><td>object</td><td>Counts of qualifying, exceeding, and not-permitted items</td></tr>
+                  <tr><td><code>references</code></td><td>object</td><td>ADR chapter and table references</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         {/* Airlines Endpoint */}
         <div id="airlines" style={s.card}>
           <div style={s.endpointHeader}>
@@ -1678,7 +1763,7 @@ Content-Type: application/json
               <tr><td className="highlight">200</td><td>Success — calculation result returned as JSON</td></tr>
               <tr><td>400</td><td>Bad Request — missing or invalid parameters. Check the error message in the response.</td></tr>
               <tr><td>404</td><td>Not Found — no results for the given query (airlines and ADR endpoints)</td></tr>
-              <tr><td>405</td><td>Method Not Allowed — only GET (or POST for /api/adr-calculator) is supported</td></tr>
+              <tr><td>405</td><td>Method Not Allowed — only GET (or POST for /api/adr-calculator, /api/adr/lq-check, /api/shipment/summary) is supported</td></tr>
               <tr><td>500</td><td>Internal Server Error — unexpected error, please report via GitHub</td></tr>
             </tbody>
           </table>
