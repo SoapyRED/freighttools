@@ -108,6 +108,7 @@ export default function AboutPage() {
               { name: 'Consignment Calculator', href: '/consignment-calculator' },
               { name: 'ADR Dangerous Goods', href: '/adr' },
               { name: 'ADR Exemption Calculator', href: '/adr-calculator' },
+              { name: 'LQ/EQ Checker', href: '/adr/lq-eq-checker' },
               { name: 'HS Code Lookup', href: '/hs' },
               { name: 'INCOTERMS 2020', href: '/incoterms' },
               { name: 'UK Import Duty & VAT', href: '/duty' },
@@ -116,7 +117,7 @@ export default function AboutPage() {
               { name: 'ULD Types', href: '/uld' },
               { name: 'Vehicle & Trailer Types', href: '/vehicles' },
             ].map(t => (
-              <Link key={t.href} href={t.href} style={{
+              <Link key={t.href} href={t.href} className="about-tool-btn" style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
                 borderRadius: 8, padding: '8px 14px', textDecoration: 'none',
                 fontSize: 13, fontWeight: 600, color: 'var(--text)',
@@ -165,7 +166,7 @@ export default function AboutPage() {
               { name: 'IATA', detail: 'Air freight / ULD' },
               { name: 'WCO', detail: 'HS 2022' },
             ].map(d => (
-              <div key={d.name} style={{
+              <div key={d.name} className="about-tool-btn" style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
                 borderRadius: 8, padding: '8px 14px',
               }}>

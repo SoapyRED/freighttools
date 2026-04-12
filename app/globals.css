@@ -799,3 +799,24 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .mode-badge--any { background: rgba(239,159,39,0.1); border: 1px solid rgba(239,159,39,0.3); color: var(--accent); }
 .mode-badge--sea { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); color: #60a5fa; }
 [data-theme="dark"] .mode-badge--sea { color: #93c5fd; }
+
+/* ─── About page tool buttons + data source cards ───────────────── */
+@media (hover: hover) {
+  .about-tool-btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+  .about-tool-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 12px var(--glow-accent), 0 0 24px rgba(239, 159, 39, 0.08);
+    border-color: var(--accent) !important;
+  }
+}
+
+/* ─── Footer link hover ─────────────────────────────────────────── */
+.footer-link {
+  transition: color 0.15s ease;
+}
+.footer-link:hover {
+  color: var(--accent) !important;
+}

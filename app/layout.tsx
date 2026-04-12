@@ -201,7 +201,7 @@ export default function RootLayout({
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                     {col.links.map(l => (
-                      <Link key={l.href} href={l.href} style={{
+                      <Link key={l.href} href={l.href} className="footer-link" style={{
                         color: 'var(--text-faint)', textDecoration: 'none', fontSize: 13,
                       }}>
                         {l.label}
