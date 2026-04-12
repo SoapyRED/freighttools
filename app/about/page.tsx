@@ -262,12 +262,16 @@ export default function AboutPage() {
             <span style={{ color: 'var(--text-faint)' }}># Reference data &amp; compliance</span><br />
             GET /api/adr?un=1203<br />
             GET /api/adr-calculator?un=1203&amp;qty=200<br />
+            POST /api/adr/lq-check<br />
+            <span style={{ color: 'var(--text-faint)' }}>&nbsp;&nbsp;{`{ "mode": "lq", "items": [{ "un_number": "1203", "quantity": 0.5, "unit": "L" }] }`}</span><br />
             GET /api/hs?q=coffee<br />
             GET /api/incoterms?code=FOB<br />
             POST /api/duty<br />
             <span style={{ color: 'var(--text-faint)' }}>&nbsp;&nbsp;{`{ "commodityCode": "847989", "originCountry": "CN", "customsValue": 10000 }`}</span><br />
             GET /api/airlines?prefix=176<br />
-            GET /api/unlocode?q=rotterdam
+            GET /api/unlocode?q=rotterdam<br />
+            GET /api/uld?type=AKE<br />
+            GET /api/vehicles?category=van
           </div>
         </Section>
 
