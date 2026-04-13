@@ -22,7 +22,7 @@ export async function generateMetadata(
   const ogUrl = `/api/og?title=${encodeURIComponent(`HS ${formatHsCode(subheadingCode)}`)}&desc=${encodeURIComponent(details.description)}&badge=HS`;
 
   return {
-    title: `HS ${formatHsCode(subheadingCode)} — ${details.description} | FreightUtils`,
+    title: `HS ${formatHsCode(subheadingCode)} — ${details.description}`,
     description: `HS code ${formatHsCode(subheadingCode)}: ${details.description}. Part of heading ${formatHsCode(details.parent)}. Free HS code lookup with REST API.`,
     alternates: { canonical: `https://www.freightutils.com/hs/code/${subheadingCode}` },
     openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS ${formatHsCode(subheadingCode)} — FreightUtils` }] },

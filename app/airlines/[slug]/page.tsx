@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const ogUrl = `/api/og?title=${encodeURIComponent(airline.airline_name)}&desc=${encodeURIComponent(codes)}&badge=Airline+Codes`;
 
   return {
-    title: `${airline.airline_name} — IATA Code, ICAO Code & AWB Prefix | FreightUtils`,
+    title: `${airline.airline_name} — IATA Code, ICAO Code & AWB Prefix`,
     description: `${airline.airline_name} airline codes: ${codes}. ${airline.country ? `Based in ${airline.country}.` : ''} Free airline code lookup at FreightUtils.`,
     alternates: { canonical: `https://www.freightutils.com/airlines/${slug}` },
     openGraph: {

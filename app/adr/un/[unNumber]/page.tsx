@@ -37,7 +37,7 @@ export async function generateMetadata(
   const ogUrl = `/api/og?badge=UN${entry.un_number}&title=${encodeURIComponent(shortName)}&desc=${encodeURIComponent(`Class ${entry.class}${pg} — ADR 2025`)}&api=GET+/api/adr%3Fun%3D${entry.un_number}`;
 
   return {
-    title: `UN ${entry.un_number} — ${shortName}${variantNote} | ADR 2025 | FreightUtils`,
+    title: `UN ${entry.un_number} — ${shortName}${variantNote} | ADR 2025`,
     description: `ADR 2025 dangerous goods data for UN ${entry.un_number} ${entry.proper_shipping_name}. Class ${entry.class}${pg}. Free lookup at FreightUtils.`,
     alternates: {
       canonical: `https://www.freightutils.com/adr/un/${entry.un_number}`,

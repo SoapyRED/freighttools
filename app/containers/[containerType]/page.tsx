@@ -25,7 +25,7 @@ export async function generateMetadata(
   const ogUrl = `/api/og?title=${encodeURIComponent(spec.name + ' Container')}&desc=${encodeURIComponent(`${spec.internalLengthCm}\u00d7${spec.internalWidthCm}\u00d7${spec.internalHeightCm}cm \u2022 ${spec.capacityCbm} CBM \u2022 ${spec.maxPayloadKg.toLocaleString()} kg`)}&badge=Containers`;
 
   return {
-    title: `${spec.name} Container Dimensions, Weight & Capacity | FreightUtils`,
+    title: `${spec.name} Container Dimensions, Weight & Capacity`,
     description: `${spec.name} container specs \u2014 internal dimensions ${spec.internalLengthCm}\u00d7${spec.internalWidthCm}\u00d7${spec.internalHeightCm} cm, ${spec.capacityCbm} CBM capacity, ${spec.maxPayloadKg.toLocaleString()} kg max payload, ${spec.euroPallets} euro pallets. Free reference at FreightUtils.`,
     alternates: {
       canonical: `https://www.freightutils.com/containers/${spec.slug}`,

@@ -24,7 +24,7 @@ export async function generateMetadata(
   if (!data) return { title: 'Airline Not Found | FreightUtils' };
 
   return {
-    title: `${data.name} Chargeable Weight Calculator | FreightUtils`,
+    title: `${data.name} Chargeable Weight Calculator`,
     description: `Calculate air freight chargeable weight for ${data.name} (${data.iata}). Volumetric factor: ${data.factor.toLocaleString()}. Free calculator at FreightUtils.`,
     alternates: {
       canonical: `https://www.freightutils.com/chargeable-weight/${data.slug}`,

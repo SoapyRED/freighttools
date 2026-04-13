@@ -24,7 +24,7 @@ export async function generateMetadata(
   if (!c) return { title: 'Container Not Found | FreightUtils' };
 
   return {
-    title: `${c.name} CBM Calculator — Volume & Dimensions | FreightUtils`,
+    title: `${c.name} CBM Calculator — Volume & Dimensions`,
     description: `Calculate CBM for ${c.name}. Internal dimensions: ${c.lengthCm}×${c.widthCm}×${c.heightCm} cm. Max capacity: ${c.capacityCbm} CBM. Free calculator at FreightUtils.`,
     alternates: { canonical: `https://www.freightutils.com/cbm/${c.slug}` },
   };

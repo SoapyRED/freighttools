@@ -25,7 +25,7 @@ export async function generateMetadata(
   const ogUrl = `/api/og?title=${encodeURIComponent(term.code + ' — ' + term.name)}&desc=INCOTERMS+2020&badge=INCOTERMS`;
 
   return {
-    title: `${term.code} (${term.name}) — INCOTERMS 2020 | FreightUtils`,
+    title: `${term.code} (${term.name}) — INCOTERMS 2020`,
     description: `${term.code} (${term.name}) — ${term.summary} Free INCOTERMS 2020 reference at FreightUtils.`,
     alternates: {
       canonical: `https://www.freightutils.com/incoterms/${term.slug}`,

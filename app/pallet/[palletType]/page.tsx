@@ -24,7 +24,7 @@ export async function generateMetadata(
   if (!p) return { title: 'Pallet Not Found | FreightUtils' };
 
   return {
-    title: `${p.name} Fitting Calculator — How Many Boxes Fit? | FreightUtils`,
+    title: `${p.name} Fitting Calculator — How Many Boxes Fit?`,
     description: `Calculate how many boxes fit on a ${p.name}. Dimensions: ${p.lengthCm}×${p.widthCm} cm, max height ${p.maxHeightCm} cm, max weight ${p.maxWeightKg} kg. Free tool with SVG layer diagram.`,
     alternates: { canonical: `https://www.freightutils.com/pallet/${p.slug}` },
   };
