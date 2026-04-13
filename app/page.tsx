@@ -59,45 +59,8 @@ const dataSources = [
 ];
 
 export default function HomePage() {
-  const jsonLdGraph = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'WebSite',
-        name: 'FreightUtils',
-        url: 'https://www.freightutils.com',
-        description: 'Free freight calculators and dangerous goods reference data with open REST APIs',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: 'https://www.freightutils.com/adr?q={search_term_string}',
-          'query-input': 'required name=search_term_string',
-        },
-      },
-      {
-        '@type': 'Organization',
-        name: 'FreightUtils',
-        url: 'https://www.freightutils.com',
-        email: 'contact@freightutils.com',
-        sameAs: [
-          'https://x.com/FreightUtils',
-          'https://www.linkedin.com/company/freightutils',
-        ],
-        contactPoint: {
-          '@type': 'ContactPoint',
-          email: 'contact@freightutils.com',
-          contactType: 'customer support',
-        },
-      },
-    ],
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
-      />
-
       {/* ── HERO ── */}
       <section style={{
         background: 'var(--navy)',

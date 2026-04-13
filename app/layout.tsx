@@ -96,7 +96,12 @@ export default function RootLayout({
       "@type": "WebSite",
       "name": "FreightUtils",
       "url": "https://www.freightutils.com",
-      "description": "Free freight calculators and dangerous goods reference data with open REST APIs"
+      "description": "Free freight calculators and dangerous goods reference data with open REST APIs",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.freightutils.com/adr?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@type": "Organization",
@@ -106,7 +111,12 @@ export default function RootLayout({
       "sameAs": [
         "https://x.com/FreightUtils",
         "https://www.linkedin.com/company/freightutils"
-      ]
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "contact@freightutils.com",
+        "contactType": "customer support"
+      }
     }
   ]
 }`
