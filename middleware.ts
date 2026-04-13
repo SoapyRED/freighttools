@@ -31,9 +31,9 @@ interface KeyRecord {
 }
 
 const LIMITS = {
-  anonymous: { perDay: 100 },
-  free: { perDay: 200 },
-  pro: { perMonth: 10000 },
+  anonymous: { perDay: 25 },
+  free: { perDay: 100 },
+  pro: { perMonth: 50000 },
 } as const;
 
 function todayKey() { return new Date().toISOString().slice(0, 10); }
@@ -99,7 +99,7 @@ export async function middleware(req: NextRequest) {
         error: 'Rate limit exceeded',
         message: apiKey
           ? `Your ${window}ly limit of ${limit} requests has been reached. Upgrade at https://www.freightutils.com/dashboard`
-          : `Free tier allows 100 requests per day. Get an API key at https://www.freightutils.com/login for 200/day, or upgrade to Pro for 10,000/month.`,
+          : `Anonymous limit: 25 requests per day. Get a free API key at https://www.freightutils.com/login for 100/day, or upgrade to Pro for 50,000/month.`,
       },
       {
         status: 429,

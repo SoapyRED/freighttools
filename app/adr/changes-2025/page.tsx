@@ -185,7 +185,7 @@ export default function AdrChanges2025Page() {
             This summary is compiled from the official UNECE ADR 2025 publication (ECE/TRANS/352), the Health
             and Safety Authority (Ireland) ADR 2025 overview, and BENS Consulting ADR 2025 technical briefings.
             For the full legal text, refer to the{' '}
-            <a href="https://unece.org/transport/dangerous-goods/adr-2025" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>
+            <a href="https://unece.org/transport/dangerous-goods/about-adr" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>
               UNECE ADR 2025 publication
             </a>.
           </p>

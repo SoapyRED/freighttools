@@ -140,7 +140,7 @@ export default function ApiDocsPage() {
                 Open Access Tier
               </div>
               <div style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                No authentication required. Courtesy rate limit of 100 requests per day per IP.
+                No authentication required for casual use. Rate limit: 25 requests per day per IP. Free API keys available for 100/day.
               </div>
             </div>
             <div>
@@ -1782,7 +1782,7 @@ Content-Type: application/json
         {/* Rate limiting */}
         <h2 style={s.sectionTitle}>Rate Limiting</h2>
         <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
-          The API is currently free with a courtesy limit of 100 requests per day per IP address. Excessive usage may result in temporary blocking.
+          The API is free to use. Anonymous rate limit: 25 requests per day per IP. Free API key: 100 requests per day. Pro: 50,000 requests per month.
         </p>
 
         {/* Error Responses */}

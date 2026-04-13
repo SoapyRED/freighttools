@@ -239,7 +239,7 @@ export default function AboutPage() {
 
         <Section label="Developers" title="For Developers">
           <p style={{ marginBottom: 14 }}>
-            {SITE_STATS.toolCount} tools across {SITE_STATS.apiEndpointCount} REST API endpoints. No signup required for casual use &mdash; 50 requests/day with no API key. Register a free key for 200 requests/day, or contact us for Pro access (10,000 requests/day). Includes a composite Shipment Summary endpoint that chains CBM, chargeable weight, ADR compliance, and UK duty estimation into one call.
+            {SITE_STATS.toolCount} tools across {SITE_STATS.apiEndpointCount} REST API endpoints. No signup required for casual use &mdash; 25 requests/day with no API key. Register a free key for 100 requests/day, or contact us for Pro access (50,000 requests/month). Includes a composite Shipment Summary endpoint that chains CBM, chargeable weight, ADR compliance, and UK duty estimation into one call.
             JSON responses. Full documentation at{' '}
             <Link href="/api-docs" style={{ color: '#EF9F27', textDecoration: 'underline' }}>/api-docs</Link>.
             Build freight calculations into your TMS, WMS, booking platform, or any system

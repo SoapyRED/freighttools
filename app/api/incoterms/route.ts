@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllIncoterms, lookupByCode, getAnyMode, getSeaOnly } from '@/lib/calculations/incoterms';
 
-const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'X-RateLimit-Limit': '100', 'X-RateLimit-Window': '86400' };
+const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'X-RateLimit-Limit': '25', 'X-RateLimit-Window': '86400' };
 const CACHE = { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' };
 
 export function OPTIONS() { return new NextResponse(null, { status: 204, headers: CORS }); }

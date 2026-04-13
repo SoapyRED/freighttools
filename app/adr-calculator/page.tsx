@@ -37,7 +37,7 @@ export default function AdrCalculatorPage() {
         </p>
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 4, lineHeight: 1.6 }}>
           For operational use, always verify against the{' '}
-          <a href="https://unece.org/transport/dangerous-goods/adr-2025" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-faint)', textDecoration: 'underline' }}>
+          <a href="https://unece.org/transport/dangerous-goods/about-adr" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-faint)', textDecoration: 'underline' }}>
             current ADR in force
           </a>.
         </p>

@@ -5,7 +5,7 @@ const CORS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'X-RateLimit-Limit': '100',
+  'X-RateLimit-Limit': '25',
   'X-RateLimit-Window': '86400',
 };
 
