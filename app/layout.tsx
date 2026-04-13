@@ -134,6 +134,7 @@ export default function RootLayout({
           }}>
             Interactive features require JavaScript. If calculators aren&apos;t responding, please check your browser settings or try a different network.
           </div>
+          <style dangerouslySetInnerHTML={{ __html: '.fade-in-section { opacity: 1 !important; transform: none !important; }' }} />
         </noscript>
 
         {/* ── ANNOUNCEMENT BANNER ── */}

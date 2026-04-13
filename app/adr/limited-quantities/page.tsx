@@ -5,7 +5,7 @@ import EmailCapture from '@/app/components/EmailCapture';
 const ogUrl = '/api/og?title=ADR+Limited+Quantities&desc=LQ+rules,+packaging+and+exemptions+explained';
 
 export const metadata: Metadata = {
-  title: 'ADR Limited Quantities (LQ) — Rules, Packaging & Exemptions | FreightUtils',
+  title: 'ADR Limited Quantities (LQ) — Rules, Packaging & Exemptions',
   description:
     'Complete guide to ADR limited quantities. LQ packaging requirements, the LQ diamond marking, exemptions from orange plates and Tremcards, and the July 2025 mandatory training change.',
   alternates: { canonical: 'https://www.freightutils.com/adr/limited-quantities' },

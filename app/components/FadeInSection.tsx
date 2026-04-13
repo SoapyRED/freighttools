@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 /**
  * Wraps children in a container that fades in + slides up
  * when it enters the viewport. Uses IntersectionObserver.
- * Respects prefers-reduced-motion.
+ * Respects prefers-reduced-motion. Falls back to visible after 500ms.
  */
 export default function FadeInSection({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -18,11 +18,15 @@ export default function FadeInSection({ children }: { children: ReactNode }) {
     }
 
     const el = ref.current;
-    if (!el) return;
+    if (!el) { setVisible(true); return; }
+
+    // Fallback: force visible after 500ms if observer hasn't fired
+    const fallback = setTimeout(() => setVisible(true), 500);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          clearTimeout(fallback);
           setVisible(true);
           observer.unobserve(el);
         }
@@ -31,7 +35,7 @@ export default function FadeInSection({ children }: { children: ReactNode }) {
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => { observer.disconnect(); clearTimeout(fallback); };
   }, []);
 
   return (

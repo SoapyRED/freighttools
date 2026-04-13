@@ -13,7 +13,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { sectionNumeral } = await params;
   const section = getSectionByNumeral(sectionNumeral);
-  if (!section) return { title: 'Section Not Found | FreightUtils' };
+  if (!section) return { title: 'Section Not Found' };
 
   const chapters = getChaptersBySection(sectionNumeral);
   const first = chapters[0]?.hscode ?? '';
@@ -26,6 +26,7 @@ export async function generateMetadata(
     alternates: { canonical: `https://www.freightutils.com/hs/section/${section.numeral}` },
     openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS Section ${section.numeral.toUpperCase()} — FreightUtils` }] },
     twitter: { card: 'summary_large_image', images: [ogUrl] },
+    other: { 'article:modified_time': '2026-04-01T00:00:00Z' },
   };
 }
 

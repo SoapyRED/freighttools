@@ -11,7 +11,7 @@ import NewsletterCapture from '@/app/components/NewsletterCapture';
 const ogUrl = '/api/og?title=INCOTERMS+2020+Reference&desc=All+11+trade+terms+explained&api=GET+/api/incoterms';
 
 export const metadata: Metadata = {
-  title: 'INCOTERMS 2020 Reference — All 11 Trade Terms Explained | FreightUtils',
+  title: 'INCOTERMS 2020 Reference — All 11 Trade Terms Explained',
   description: 'Free INCOTERMS 2020 reference — all 11 trade terms explained with buyer/seller responsibilities, risk transfer points, and practical guidance. Includes comparison table. Free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/incoterms' },
   openGraph: {

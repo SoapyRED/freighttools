@@ -14,7 +14,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { chapterCode } = await params;
   const details = getCodeDetails(chapterCode);
-  if (!details) return { title: 'Chapter Not Found | FreightUtils' };
+  if (!details) return { title: 'Chapter Not Found' };
 
   const ogUrl = `/api/og?title=${encodeURIComponent(`HS Chapter ${chapterCode}`)}&desc=${encodeURIComponent(details.description)}&badge=HS`;
 
@@ -24,6 +24,7 @@ export async function generateMetadata(
     alternates: { canonical: `https://www.freightutils.com/hs/chapter/${chapterCode}` },
     openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS Chapter ${chapterCode} — FreightUtils` }] },
     twitter: { card: 'summary_large_image', images: [ogUrl] },
+    other: { 'article:modified_time': '2026-04-01T00:00:00Z' },
   };
 }
 

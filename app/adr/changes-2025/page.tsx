@@ -5,7 +5,7 @@ import EmailCapture from '@/app/components/EmailCapture';
 const ogUrl = '/api/og?title=ADR+2025+Changes&desc=Complete+summary+of+what+changed+in+ADR+2025';
 
 export const metadata: Metadata = {
-  title: 'ADR 2025: What Changed — Key Changes Summary | FreightUtils',
+  title: 'ADR 2025: What Changed — Key Changes Summary',
   description:
     'Full summary of ADR 2025 changes effective 1 January 2025. New UN numbers for sodium-ion batteries, updated waste transport provisions, mandatory LQ training from July 2025, and documentation changes.',
   alternates: { canonical: 'https://www.freightutils.com/adr/changes-2025' },

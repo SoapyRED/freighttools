@@ -575,6 +575,9 @@ button:active:not(:disabled) { transform: scale(0.98); }
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .fade-in-section.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-section { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
 
 /* ─── Category label with accent border ─────────────────────────── */
 .category-label {
@@ -800,6 +803,21 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .mode-badge--any { background: rgba(239,159,39,0.1); border: 1px solid rgba(239,159,39,0.3); color: var(--accent); }
 .mode-badge--sea { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); color: #60a5fa; }
 [data-theme="dark"] .mode-badge--sea { color: #93c5fd; }
+
+/* ─── Pricing card hover ────────────────────────────────────────── */
+.pricing-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+.pricing-card:hover, .pricing-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--glow-accent), 0 4px 8px rgba(0,0,0,0.08);
+  border-color: var(--accent) !important;
+  outline: none;
+}
+.pricing-card--recommended:hover, .pricing-card--recommended:focus-visible {
+  box-shadow: 0 8px 32px var(--glow-accent), 0 0 16px var(--glow-accent);
+}
 
 /* ─── About page tool buttons + data source cards ───────────────── */
 @media (hover: hover) {

@@ -21,7 +21,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { palletType } = await params;
   const p = palletsData.find(x => x.slug === palletType);
-  if (!p) return { title: 'Pallet Not Found | FreightUtils' };
+  if (!p) return { title: 'Pallet Not Found' };
 
   return {
     title: `${p.name} Fitting Calculator — How Many Boxes Fit?`,

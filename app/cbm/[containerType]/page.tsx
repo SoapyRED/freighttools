@@ -21,7 +21,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { containerType } = await params;
   const c = containersData.find(x => x.slug === containerType);
-  if (!c) return { title: 'Container Not Found | FreightUtils' };
+  if (!c) return { title: 'Container Not Found' };
 
   return {
     title: `${c.name} CBM Calculator — Volume & Dimensions`,

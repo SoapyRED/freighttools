@@ -20,7 +20,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await params;
   const term = lookupBySlug(slug);
-  if (!term) return { title: 'INCOTERM Not Found | FreightUtils' };
+  if (!term) return { title: 'INCOTERM Not Found' };
 
   const ogUrl = `/api/og?title=${encodeURIComponent(term.code + ' — ' + term.name)}&desc=INCOTERMS+2020&badge=INCOTERMS`;
 

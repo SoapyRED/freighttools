@@ -14,7 +14,7 @@ import NewsletterCapture from '@/app/components/NewsletterCapture';
 const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+numbers+from+ADR+2025&api=GET+/api/adr';
 
 export const metadata: Metadata = {
-  title: 'ADR Dangerous Goods — Lookup & 1.1.3.6 Exemption Calculator | FreightUtils',
+  title: 'ADR Dangerous Goods — Lookup & 1.1.3.6 Exemption Calculator',
   description: `Free ADR 2025 dangerous goods lookup — search ${SITE_STATS.adrEntries.toLocaleString()} entries by UN number and calculate 1.1.3.6 exemption points. Official UNECE data with class, packing group, labels, tunnel codes, and transport category. Free REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/adr' },
   openGraph: {

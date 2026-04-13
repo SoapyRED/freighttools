@@ -5,7 +5,7 @@ import EmailCapture from '@/app/components/EmailCapture';
 const ogUrl = '/api/og?title=ADR+Training+Requirements&desc=Who+needs+ADR+training+and+what+it+covers';
 
 export const metadata: Metadata = {
-  title: 'ADR Training Requirements — Who Needs It & What It Covers | FreightUtils',
+  title: 'ADR Training Requirements — Who Needs It & What It Covers',
   description:
     'Complete guide to ADR training in the UK. Driver training certificates, Chapter 1.3 awareness training, DGSA qualifications, course structures, and typical costs. Use FreightUtils as a free revision tool.',
   alternates: { canonical: 'https://www.freightutils.com/adr/training-guide' },

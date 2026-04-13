@@ -13,7 +13,7 @@ import NewsletterCapture from '@/app/components/NewsletterCapture';
 const ogUrl = '/api/og?title=Chargeable+Weight+Calculator&desc=Air+freight+volumetric+vs+actual+weight&api=GET+/api/chargeable-weight';
 
 export const metadata: Metadata = {
-  title: 'Air Freight Chargeable Weight Calculator | FreightUtils',
+  title: 'Air Freight Chargeable Weight Calculator',
   description: 'Free air freight chargeable weight calculator. Compare actual vs volumetric weight using IATA standard divisor 6,000. Includes carrier divisor variations, worked examples, and tips to reduce chargeable weight.',
   alternates: { canonical: 'https://www.freightutils.com/chargeable-weight' },
   openGraph: {
@@ -29,6 +29,7 @@ const expressAirlines  = airlinesData.filter(a => a.express);
 export default function ChargeableWeightPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Chargeable Weight Calculator","description":"Free Chargeable Weight Calculator. Compare actual vs volumetric weight for air and sea freight using IATA standard divisors. REST API available.","url":"https://www.freightutils.com/chargeable-weight","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What divisor do most airlines use?","acceptedAnswer":{"@type":"Answer","text":"The IATA standard divisor is 6,000. Most international carriers use this. Express couriers (DHL, FedEx, UPS) typically use 5,000, giving higher volumetric weight."}},{"@type":"Question","name":"What is the pivot weight or density break-even?","acceptedAnswer":{"@type":"Answer","text":"The break-even density for IATA 6,000 divisor is approximately 167 kg per cubic metre. Above this, actual weight applies; below it, volumetric weight applies."}},{"@type":"Question","name":"How does chargeable weight differ for sea freight?","acceptedAnswer":{"@type":"Answer","text":"Sea freight uses the W/M rule: 1 CBM = 1,000 kg. The carrier charges whichever is greater. This is much more generous than air freight's 1 CBM = 167 kg."}},{"@type":"Question","name":"Does chargeable weight include pallet weight?","acceptedAnswer":{"@type":"Answer","text":"Yes. Actual gross weight includes all packaging, pallets, and wrapping. Airlines weigh the complete shipment as tendered."}}]}) }} />
       <PageHero title="Chargeable Weight" titleAccent="Calculator" subtitle="Compare actual vs volumetric weight for air and sea freight" />
 

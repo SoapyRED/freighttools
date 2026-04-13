@@ -25,7 +25,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { unNumber } = await params;
   const entries = lookupByUnNumber(unNumber);
-  if (entries.length === 0) return { title: 'UN Number Not Found | FreightUtils' };
+  if (entries.length === 0) return { title: 'UN Number Not Found' };
 
   const entry = entries[0];
   const pg = entry.packing_group ? `, Packing Group ${entry.packing_group}` : '';

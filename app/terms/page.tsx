@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | FreightUtils',
+  title: 'Terms of Service',
   description: 'FreightUtils terms of service — tools and data provided for informational purposes only.',
   alternates: { canonical: 'https://www.freightutils.com/terms' },
   robots: 'noindex, follow',

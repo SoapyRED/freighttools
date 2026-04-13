@@ -5,7 +5,7 @@ import EmailCapture from '@/app/components/EmailCapture';
 const ogUrl = '/api/og?title=ADR+Tunnel+Codes+Explained&desc=Restriction+categories+A+to+E+for+dangerous+goods+road+transport';
 
 export const metadata: Metadata = {
-  title: 'ADR Tunnel Codes Explained — Restriction Categories A to E | FreightUtils',
+  title: 'ADR Tunnel Codes Explained — Restriction Categories A to E',
   description:
     'Complete guide to ADR tunnel restriction codes A through E. Which dangerous goods classes are restricted, UK-specific tunnel rules (Dartford, Channel Tunnel, Tyne), and how to check tunnel codes using FreightUtils.',
   alternates: { canonical: 'https://www.freightutils.com/adr/tunnel-codes' },

@@ -17,7 +17,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { headingCode } = await params;
   const details = getCodeDetails(headingCode);
-  if (!details) return { title: 'Heading Not Found | FreightUtils' };
+  if (!details) return { title: 'Heading Not Found' };
 
   const ogUrl = `/api/og?title=${encodeURIComponent(`HS ${formatHsCode(headingCode)}`)}&desc=${encodeURIComponent(details.description)}&badge=HS`;
 
@@ -27,6 +27,7 @@ export async function generateMetadata(
     alternates: { canonical: `https://www.freightutils.com/hs/heading/${headingCode}` },
     openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS ${formatHsCode(headingCode)} — FreightUtils` }] },
     twitter: { card: 'summary_large_image', images: [ogUrl] },
+    other: { 'article:modified_time': '2026-04-01T00:00:00Z' },
   };
 }
 

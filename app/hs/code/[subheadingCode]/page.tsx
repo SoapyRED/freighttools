@@ -17,7 +17,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { subheadingCode } = await params;
   const details = getCodeDetails(subheadingCode);
-  if (!details) return { title: 'HS Code Not Found | FreightUtils' };
+  if (!details) return { title: 'HS Code Not Found' };
 
   const ogUrl = `/api/og?title=${encodeURIComponent(`HS ${formatHsCode(subheadingCode)}`)}&desc=${encodeURIComponent(details.description)}&badge=HS`;
 
@@ -27,6 +27,7 @@ export async function generateMetadata(
     alternates: { canonical: `https://www.freightutils.com/hs/code/${subheadingCode}` },
     openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS ${formatHsCode(subheadingCode)} — FreightUtils` }] },
     twitter: { card: 'summary_large_image', images: [ogUrl] },
+    other: { 'article:modified_time': '2026-04-01T00:00:00Z' },
   };
 }
 

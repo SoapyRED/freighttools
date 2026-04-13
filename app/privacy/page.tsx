@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | FreightUtils',
+  title: 'Privacy Policy',
   description: 'FreightUtils privacy policy — no accounts, no personal data collection. Learn how we handle your data.',
   alternates: { canonical: 'https://www.freightutils.com/privacy' },
   robots: 'noindex, follow',

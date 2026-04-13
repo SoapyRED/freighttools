@@ -21,7 +21,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { airline } = await params;
   const data = airlinesData.find(a => a.slug === airline);
-  if (!data) return { title: 'Airline Not Found | FreightUtils' };
+  if (!data) return { title: 'Airline Not Found' };
 
   return {
     title: `${data.name} Chargeable Weight Calculator`,

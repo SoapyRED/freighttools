@@ -20,7 +20,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { containerType } = await params;
   const spec = getContainerSpec(containerType);
-  if (!spec) return { title: 'Container Not Found | FreightUtils' };
+  if (!spec) return { title: 'Container Not Found' };
 
   const ogUrl = `/api/og?title=${encodeURIComponent(spec.name + ' Container')}&desc=${encodeURIComponent(`${spec.internalLengthCm}\u00d7${spec.internalWidthCm}\u00d7${spec.internalHeightCm}cm \u2022 ${spec.capacityCbm} CBM \u2022 ${spec.maxPayloadKg.toLocaleString()} kg`)}&badge=Containers`;
 
