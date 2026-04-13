@@ -812,7 +812,7 @@ button:active:not(:disabled) { transform: scale(0.98); }
 }
 .pricing-card--recommended {
   border: 2px solid var(--accent) !important;
-  box-shadow: 0 4px 24px var(--glow-accent);
+  box-shadow: var(--shadow-card);
 }
 .pricing-card:hover, .pricing-card:focus-visible {
   transform: translateY(-4px);
@@ -821,15 +821,11 @@ button:active:not(:disabled) { transform: scale(0.98); }
   outline: none;
 }
 .pricing-card--recommended:hover, .pricing-card--recommended:focus-visible {
-  box-shadow: 0 8px 32px var(--glow-accent), 0 0 16px var(--glow-accent);
+  box-shadow: 0 0 30px rgba(255, 165, 0, 0.4);
 }
 .pricing-card:active {
   transform: scale(0.97);
   transition: transform 0.1s ease;
-}
-.pricing-grid:hover .pricing-card--recommended:not(:hover):not(:focus-visible) {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-  transform: none;
 }
 .pricing-card__cta { position: static !important; }
 .pricing-card__cta::after {
