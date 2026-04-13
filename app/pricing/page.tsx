@@ -128,13 +128,12 @@ export default function PricingPage() {
               tabIndex={0}
               style={{
                 background: 'var(--bg-card)',
-                border: tier.highlight ? '2px solid var(--accent)' : '1px solid var(--border)',
+                border: '1px solid var(--border)',
                 borderRadius: 16,
                 padding: '32px 28px',
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative',
-                boxShadow: tier.highlight ? '0 4px 24px var(--glow-accent)' : 'var(--shadow-card)',
               }}
             >
               {tier.badge && (
