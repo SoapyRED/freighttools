@@ -14,7 +14,7 @@ const ogUrl = '/api/og?title=Airline+Codes+%26+AWB+Prefix+Lookup&desc=Search+6,3
 
 export const metadata: Metadata = {
   title: 'Airline Codes & AWB Prefix Lookup',
-  description: 'Free airline code and AWB prefix lookup. Search 6,350+ airlines by name, IATA code, ICAO code, or three-digit AWB prefix. Includes 390+ cargo airlines with AWB prefixes. Free REST API.',
+  description: 'Free airline code lookup — search 6,350+ airlines by IATA, ICAO, or AWB prefix. 390+ cargo airlines included. No signup, free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/airlines' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Airline Codes & AWB Prefix Lookup — FreightUtils' }],

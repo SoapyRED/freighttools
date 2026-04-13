@@ -17,7 +17,7 @@ const ogUrl = '/api/og?title=HS+Code+Lookup&desc=Search+6%2C940+Harmonized+Syste
 
 export const metadata: Metadata = {
   title: 'HS Code Lookup — Harmonized System Search',
-  description: `Free HS code lookup — search and browse all ${SITE_STATS.hsCodeCount.toLocaleString()} Harmonized System codes across 21 sections and 97 chapters. HS 2022 data with free REST API.`,
+  description: `Look up HS codes across ${SITE_STATS.hsCodeCount.toLocaleString()} entries — browse by section, chapter, or search by product. Free tool with REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/hs' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'HS Code Lookup — FreightUtils' }],

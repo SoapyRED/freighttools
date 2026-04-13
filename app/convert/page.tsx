@@ -11,7 +11,7 @@ const ogUrl = '/api/og?title=Freight+Unit+Converter&desc=Chargeable+weight,+frei
 
 export const metadata: Metadata = {
   title: 'Freight Unit Converter — Chargeable Weight, Freight Tonnes & More',
-  description: 'Free freight unit converter — CBM to chargeable weight (IATA 6000), CBM to freight tonnes (W/M rule), plus kg/lbs, CBM/cubic feet, cm/inches and more. Free REST API.',
+  description: 'Free freight unit converter — CBM to chargeable weight, freight tonnes, kg/lbs, cm/inches and more. Instant results with free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/convert' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Freight Unit Converter — FreightUtils' }],

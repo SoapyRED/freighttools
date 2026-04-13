@@ -14,7 +14,7 @@ const ogUrl = '/api/og?title=Air+Freight+ULD+Types&desc=15%2B+unit+load+device+s
 export const metadata: Metadata = {
   title: 'Air Freight ULD Types — Unit Load Devices',
   description:
-    'Free ULD reference with 15+ air cargo unit load device types. Dimensions, weights, volumes, and compatible aircraft for every IATA ULD code. Free REST API.',
+    'Free ULD reference — 15+ air cargo unit load device types with dimensions, weights, volumes, and aircraft compatibility. Free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/uld' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Air Freight ULD Types — FreightUtils' }],

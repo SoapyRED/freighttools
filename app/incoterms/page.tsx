@@ -12,7 +12,7 @@ const ogUrl = '/api/og?title=INCOTERMS+2020+Reference&desc=All+11+trade+terms+ex
 
 export const metadata: Metadata = {
   title: 'INCOTERMS 2020 Reference — All 11 Trade Terms Explained',
-  description: 'Free INCOTERMS 2020 reference — all 11 trade terms explained with buyer/seller responsibilities, risk transfer points, and practical guidance. Includes comparison table. Free REST API.',
+  description: 'Free INCOTERMS 2020 guide — all 11 trade terms with buyer/seller responsibilities, risk transfer, and comparison table. Free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/incoterms' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'INCOTERMS 2020 Reference — FreightUtils' }],

@@ -12,7 +12,7 @@ const ogUrl = '/api/og?title=Shipping+Container+Dimensions&desc=All+10+container
 
 export const metadata: Metadata = {
   title: 'Shipping Container Dimensions & Capacity Reference',
-  description: 'Free shipping container size guide — internal dimensions, weights, door openings, and pallet capacity for all 10 standard container types. ISO 668 specifications with free REST API.',
+  description: 'Free container size guide — dimensions, weights, door openings and pallet capacity for 10 standard types. ISO 668 specs with REST API.',
   alternates: { canonical: 'https://www.freightutils.com/containers' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Shipping Container Dimensions — FreightUtils' }],

@@ -13,7 +13,7 @@ const ogUrl = '/api/og?title=Vehicle+%26+Trailer+Types&desc=17+vehicle+specs+wit
 
 export const metadata: Metadata = {
   title: 'Road Freight Vehicle & Trailer Types — FreightUtils',
-  description: `Free reference for ${VEHICLE_REF_COUNT} road freight vehicle and trailer types — internal dimensions, payload, pallet capacity, and door openings. EU and US specifications with free REST API.`,
+  description: `Free reference for ${VEHICLE_REF_COUNT} road freight vehicles and trailers — dimensions, payload, pallet capacity. EU and US specs with REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/vehicles' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Vehicle & Trailer Types — FreightUtils' }],

@@ -14,7 +14,7 @@ const ogUrl = '/api/og?title=Pallet+Fitting+Calculator&desc=How+many+boxes+fit+o
 
 export const metadata: Metadata = {
   title: 'Pallet Fitting Calculator — How Many Boxes Fit on a Pallet?',
-  description: 'Free pallet fitting calculator — calculate how many boxes fit on a pallet. 15 pallet types including EUR/EPAL, GMA, and IATA air freight. Audited dimensions, loading best practices, and vehicle compatibility. Free REST API.',
+  description: 'Free pallet calculator — how many boxes fit on a pallet? 15 types including EUR, GMA, IATA. Visual layer diagrams. No signup, free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/pallet' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Pallet Fitting Calculator — FreightUtils' }],

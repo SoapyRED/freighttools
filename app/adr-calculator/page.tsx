@@ -13,7 +13,7 @@ const ogUrl = '/api/og?title=ADR+Points+Calculator&desc=Free+1.1.3.6+exemption+c
 
 export const metadata: Metadata = {
   title: 'ADR Points Calculator — Free 1.1.3.6 Exemption Check',
-  description: 'Calculate ADR 1.1.3.6 exemption points for mixed dangerous goods loads. Enter UN numbers and quantities — instant pass/fail result. Free tool, no signup, ADR 2025 data.',
+  description: 'Calculate ADR 1.1.3.6 exemption points for mixed DG loads. Enter UN numbers — instant pass/fail result. Free, no signup, ADR 2025 data.',
   alternates: { canonical: 'https://www.freightutils.com/adr-calculator' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'ADR Points Calculator — FreightUtils' }],
