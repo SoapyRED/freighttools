@@ -70,7 +70,10 @@ export default function AboutPage() {
           maxWidth: 620, margin: '0 auto', lineHeight: 1.6,
         }}>
           FreightUtils is a free utility toolkit and API platform for the freight and logistics
-          industry. Built and maintained by Marius C, a UK freight transport planner with hands-on
+          industry. Built and maintained by{' '}
+          <a href="https://www.linkedin.com/in/marius-cristoiu-a853812a2/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
+            Marius Cristoiu
+          </a>, a UK freight transport planner with hands-on
           ADR certification and operational experience at Heathrow air cargo facilities. Every
           dataset is sourced from official standards and verified against real-world freight operations.
         </p>

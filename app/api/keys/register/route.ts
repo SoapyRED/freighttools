@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const email = (body?.email ?? '').trim().toLowerCase();
+    const useCase = String(body?.use_case ?? '').trim().slice(0, 200);
 
     if (!email || !EMAIL_RE.test(email)) {
       return NextResponse.json({ error: 'Valid email address required' }, { status: 400, headers: h });
@@ -70,7 +71,7 @@ export async function POST(req: NextRequest) {
 
     // Generate new key
     const apiKey = generateApiKey();
-    const record = { email, plan: 'free' as const, created: new Date().toISOString() };
+    const record = { email, plan: 'free' as const, created: new Date().toISOString(), ...(useCase ? { use_case: useCase } : {}) };
 
     // Store in KV: key → record, email → key (for lookup/re-send)
     await kv.set(`key:${apiKey}`, record);
@@ -79,7 +80,7 @@ export async function POST(req: NextRequest) {
     // Send email with the key
     const resend = getResend();
     if (resend) {
-      await sendKeyEmail(resend, email, apiKey).catch((err) => {
+      await sendKeyEmail(resend, email, apiKey, useCase).catch((err) => {
         console.error('[API Key] Email send failed:', err);
       });
 
@@ -90,7 +91,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    console.log(`[API Key] New key issued for ${email}`);
+    console.log(`[API Key] New key issued for ${email}${useCase ? ` — use case: ${useCase}` : ''}`);
 
     return NextResponse.json(
       { success: true, message: 'API key sent to your email. Check your inbox.' },
@@ -105,7 +106,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-async function sendKeyEmail(resend: Resend, email: string, apiKey: string) {
+async function sendKeyEmail(resend: Resend, email: string, apiKey: string, useCase?: string) {
   await resend.emails.send({
     from: 'FreightUtils <noreply@freightutils.com>',
     to: email,

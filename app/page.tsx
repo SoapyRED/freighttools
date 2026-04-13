@@ -155,6 +155,69 @@ export default function HomePage() {
             {SITE_COPY.statsLine}
           </div>
 
+          {/* Two audience CTAs */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: 16,
+            maxWidth: 640,
+            margin: '0 auto 32px',
+          }} className="hero-cta-grid">
+            <div style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 12,
+              padding: '20px 20px 16px',
+              textAlign: 'left',
+            }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
+                Freight Tools
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.5, marginBottom: 14 }}>
+                Free calculators for LDM, CBM, chargeable weight, ADR compliance, and more
+              </div>
+              <Link href="/ldm" style={{
+                display: 'inline-block',
+                background: 'var(--accent)',
+                color: '#fff',
+                padding: '8px 18px',
+                borderRadius: 6,
+                fontSize: 13,
+                fontWeight: 700,
+                textDecoration: 'none',
+              }}>
+                Use Tools &rarr;
+              </Link>
+            </div>
+            <div style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 12,
+              padding: '20px 20px 16px',
+              textAlign: 'left',
+            }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
+                Developer API
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.5, marginBottom: 14 }}>
+                {SITE_STATS.apiEndpointCount} REST endpoints, MCP server, OpenAPI spec. No signup required.
+              </div>
+              <Link href="/api-docs" style={{
+                display: 'inline-block',
+                background: 'transparent',
+                color: '#fff',
+                padding: '8px 18px',
+                borderRadius: 6,
+                fontSize: 13,
+                fontWeight: 700,
+                textDecoration: 'none',
+                border: '1px solid rgba(255,255,255,0.2)',
+              }}>
+                View API Docs &rarr;
+              </Link>
+            </div>
+          </div>
+
           {/* Terminal demo */}
           <div style={{ marginTop: 8 }}>
             <TerminalDemo />

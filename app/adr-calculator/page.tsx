@@ -6,6 +6,7 @@ import { SITE_STATS } from '@/lib/constants/siteStats';
 import AdrExemptionCalc from './AdrExemptionCalc';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 import ApiCtaBanner from '@/app/components/ApiCtaBanner';
 
 const ogUrl = '/api/og?title=ADR+Points+Calculator&desc=Free+1.1.3.6+exemption+check+for+mixed+DG+loads&api=GET+/api/adr-calculator';
@@ -114,6 +115,7 @@ export default function AdrCalculatorPage() {
           </p>
         </div>
 
+        <NewsletterCapture />
         <ApiCtaBanner />
 
       </main>

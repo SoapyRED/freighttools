@@ -218,7 +218,10 @@ export default function RootLayout({
               borderTop: '1px solid var(--navy-border)', paddingTop: 16,
               marginBottom: 8, fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6,
             }}>
-              Built by Marius C, ADR-certified freight transport planner.{' '}
+              Built by{' '}
+              <a href="https://www.linkedin.com/in/marius-cristoiu-a853812a2/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
+                Marius Cristoiu
+              </a>, ADR-certified freight transport planner.{' '}
               <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
                 contact@freightutils.com
               </a>

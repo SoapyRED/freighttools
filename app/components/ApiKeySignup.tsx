@@ -4,6 +4,7 @@ import { useState, type FormEvent } from 'react';
 
 export default function ApiKeySignup() {
   const [email, setEmail] = useState('');
+  const [useCase, setUseCase] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
@@ -16,7 +17,7 @@ export default function ApiKeySignup() {
       const res = await fetch('/api/keys/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, ...(useCase ? { use_case: useCase } : {}) }),
       });
       const data = await res.json();
 
@@ -74,27 +75,28 @@ export default function ApiKeySignup() {
         Enter your email and we&apos;ll send you an API key instantly.
       </div>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-        <input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          placeholder="you@company.com"
-          required
-          style={{
-            flex: 1,
-            minWidth: 240,
-            padding: '10px 16px',
-            borderRadius: 8,
-            border: '1.5px solid var(--border)',
-            background: 'var(--bg)',
-            color: 'var(--text)',
-            fontSize: 14,
-            fontFamily: "'Outfit', sans-serif",
-            outline: 'none',
-          }}
-        />
-        <button
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <input
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            placeholder="you@company.com"
+            required
+            style={{
+              flex: 1,
+              minWidth: 240,
+              padding: '10px 16px',
+              borderRadius: 8,
+              border: '1.5px solid var(--border)',
+              background: 'var(--bg)',
+              color: 'var(--text)',
+              fontSize: 14,
+              fontFamily: "'Outfit', sans-serif",
+              outline: 'none',
+            }}
+          />
+          <button
           type="submit"
           disabled={status === 'loading'}
           style={{
@@ -113,6 +115,25 @@ export default function ApiKeySignup() {
         >
           {status === 'loading' ? 'Sending...' : 'Get API Key'}
         </button>
+        </div>
+        <input
+          type="text"
+          value={useCase}
+          onChange={e => setUseCase(e.target.value)}
+          placeholder="What are you building? (optional) e.g. TMS integration, freight quoting tool..."
+          maxLength={200}
+          style={{
+            width: '100%',
+            padding: '10px 16px',
+            borderRadius: 8,
+            border: '1.5px solid var(--border)',
+            background: 'var(--bg)',
+            color: 'var(--text)',
+            fontSize: 13,
+            fontFamily: "'Outfit', sans-serif",
+            outline: 'none',
+          }}
+        />
       </form>
 
       {status === 'error' && (
