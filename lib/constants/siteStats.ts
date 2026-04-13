@@ -3,7 +3,7 @@
 
 export const SITE_STATS = {
   toolCount: 17,
-  apiEndpointCount: 18,
+  apiEndpointCount: 19,
   mcpToolCount: 18,
   adrEntries: 2939,
   hsCodeCount: 6940,
