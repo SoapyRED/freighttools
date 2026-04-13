@@ -7,6 +7,7 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=Air+Freight+ULD+Types&desc=15%2B+unit+load+device+specs,+dimensions+%26+weights&api=GET+/api/uld';
 
@@ -32,6 +33,8 @@ export default function UldPage() {
 
         {/* Search + Cards */}
         <ErrorBoundary><UldSearch data={data} /></ErrorBoundary>
+
+        <NewsletterCapture />
 
         <ApiCallout endpoint="/api/uld" />
 

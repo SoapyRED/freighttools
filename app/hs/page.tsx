@@ -6,7 +6,7 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
-import ApiCtaBanner from '@/app/components/ApiCtaBanner';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 import HsSearch from './HsSearch';
 import CommonHsCodes from './CommonHsCodes';
 import { HsSectionCard } from './HsLinkCard';
@@ -16,8 +16,8 @@ import { SITE_STATS } from '@/lib/constants/siteStats';
 const ogUrl = '/api/og?title=HS+Code+Lookup&desc=Search+6%2C940+Harmonized+System+codes&api=GET+/api/hs';
 
 export const metadata: Metadata = {
-  title: 'HS Code Lookup — Search Harmonized System Codes',
-  description: `Search ${SITE_STATS.hsCodeCount.toLocaleString()} HS codes across 21 sections and 97 chapters. Find commodity codes by keyword or number. Free lookup, HS 2022 data, no signup required.`,
+  title: 'HS Code Lookup — Harmonized System Search | FreightUtils',
+  description: `Free HS code lookup — search and browse all ${SITE_STATS.hsCodeCount.toLocaleString()} Harmonized System codes across 21 sections and 97 chapters. HS 2022 data with free REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/hs' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'HS Code Lookup — FreightUtils' }],
@@ -31,31 +31,6 @@ export default function HsPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is an HS code?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "A Harmonized System (HS) code is a standardised 6-digit number used internationally to classify traded goods. The first 2 digits identify the chapter, the next 2 the heading, and the final 2 the subheading. Countries add further digits for national tariff classification."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How many HS codes are there?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The WCO Harmonized System 2022 contains approximately 5,600 6-digit subheadings across 97 chapters and 21 sections. FreightUtils indexes 6,940 codes including chapters, headings, and subheadings."
-              }
-            }
-          ]
-        }) }}
-      />
       <PageHero title="HS Code" titleAccent="Lookup" subtitle="Search and browse Harmonized System commodity codes across 21 sections" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
@@ -80,6 +55,8 @@ export default function HsPage() {
             <HsSectionCard key={s.numeral} href={`/hs/section/${s.numeral}`} numeral={s.numeral} name={s.name} />
           ))}
         </div>
+
+        <NewsletterCapture />
 
         {/* ── Authority Content ── */}
         <div style={{ marginTop: 16 }}>
@@ -201,13 +178,13 @@ export default function HsPage() {
 
         <DataTimestamp text="HS 2022 data from UN Comtrade, last updated April 2026" />
         <ToolDisclaimer text="HS code reference only. For customs declarations, verify with your national tariff authority." />
-        <ApiCtaBanner />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },
           { href: '/incoterms', label: 'Check INCOTERMS for this shipment' },
           { href: '/adr', label: 'Is this a dangerous good? Check ADR' },
         ]} />
 
+        {/* Ad unit */}
         <div style={{ marginTop: 32 }}>
         </div>
 

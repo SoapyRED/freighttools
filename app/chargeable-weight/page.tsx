@@ -8,12 +8,13 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=Chargeable+Weight+Calculator&desc=Air+freight+volumetric+vs+actual+weight&api=GET+/api/chargeable-weight';
 
 export const metadata: Metadata = {
-  title: 'Chargeable Weight Calculator — Air Freight',
-  description: 'Compare actual vs volumetric weight for air freight. IATA 6000 divisor, carrier variations, worked examples, and tips to reduce your chargeable weight. Free, instant.',
+  title: 'Air Freight Chargeable Weight Calculator | FreightUtils',
+  description: 'Free air freight chargeable weight calculator. Compare actual vs volumetric weight using IATA standard divisor 6,000. Includes carrier divisor variations, worked examples, and tips to reduce chargeable weight.',
   alternates: { canonical: 'https://www.freightutils.com/chargeable-weight' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Chargeable Weight Calculator — FreightUtils' }],
@@ -28,60 +29,13 @@ const expressAirlines  = airlinesData.filter(a => a.express);
 export default function ChargeableWeightPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What divisor do most airlines use?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The IATA standard divisor is 6,000 (cm/kg). Most international air freight carriers follow this. Express couriers like DHL, FedEx, and UPS typically use 5,000, which results in a higher volumetric weight for the same dimensions."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can I negotiate the volumetric divisor?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Large-volume shippers can sometimes negotiate custom divisors with carriers based on their cargo profile. If you consistently ship high-density goods, a higher divisor (or waived volumetric charges) may be negotiable."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is the \"pivot weight\" or density break-even?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The break-even density for the IATA 6,000 divisor is approximately 167 kg per cubic metre. If your cargo density exceeds this, you'll be charged on actual weight. Below it, volumetric weight applies. Knowing your typical cargo density helps predict which weight will apply."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How does chargeable weight differ for sea freight?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Sea freight (LCL) uses the \"W/M\" rule: 1 CBM = 1,000 kg. The carrier charges whichever is greater — the volume in CBM or the weight in tonnes. This is a much more generous ratio than air freight, which is why bulky goods are typically shipped by sea."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Does chargeable weight include pallet weight?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Actual gross weight includes all packaging, pallets, crates, and wrapping. Airlines weigh the complete shipment as tendered. For dimensions, measure the outermost points including any protrusions, handles, or irregular shapes."
-              }
-            }
-          ]
-        }) }}
-      />
       <PageHero title="Chargeable Weight" titleAccent="Calculator" subtitle="Compare actual vs volumetric weight for air and sea freight" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         <ErrorBoundary><ChargeableWeightCalc /></ErrorBoundary>
+
+        <NewsletterCapture />
 
         {/* What is chargeable weight */}
         <div style={{ marginTop: 56 }}>

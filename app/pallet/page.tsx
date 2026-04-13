@@ -8,12 +8,13 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=Pallet+Fitting+Calculator&desc=How+many+boxes+fit+on+a+pallet%3F+Visual+layer+diagram.&api=GET+/api/pallet';
 
 export const metadata: Metadata = {
-  title: 'Pallet Calculator — How Many Boxes Fit?',
-  description: 'Calculate how many boxes fit on a pallet. 15 pallet types: EUR/EPAL, GMA, IATA air freight. Visual layer diagram, loading best practices, and vehicle compatibility. Free.',
+  title: 'Pallet Fitting Calculator — How Many Boxes Fit on a Pallet?',
+  description: 'Free pallet fitting calculator — calculate how many boxes fit on a pallet. 15 pallet types including EUR/EPAL, GMA, and IATA air freight. Audited dimensions, loading best practices, and vehicle compatibility. Free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/pallet' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Pallet Fitting Calculator — FreightUtils' }],
@@ -24,60 +25,13 @@ export const metadata: Metadata = {
 export default function PalletPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "How many Euro pallets fit in a 13.6m trailer?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "33 EUR 1 pallets (1200x800mm) fit in a single floor layer in a standard 13.6m European articulated trailer. If double-stacked, up to 66 can be carried subject to height and weight limits. For EUR 2 pallets (1200x1000mm), 26 fit in a single layer."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is the maximum pallet height for road freight?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "There is no single universal standard. The practical maximum loaded height for European road freight is approximately 220cm (pallet + cargo) based on a standard trailer internal height of 2.65-2.70m. Some carriers specify lower limits. Always confirm with your carrier."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can boxes overhang the pallet edge?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Overhang is strongly discouraged. It causes damage during handling and prevents pallets from fitting into standard racking systems. Most warehouses and carriers require flush-loaded pallets. If overhang is unavoidable, it should be no more than 25mm per side."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is the difference between SWL and max gross weight?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Safe Working Load (SWL) is the maximum weight a pallet is designed to carry in normal use. Max gross weight includes the pallet's own weight (tare) plus the cargo. For an EPAL 1 pallet with a tare weight of approximately 25kg and SWL of 1,500kg, the max gross weight is 1,525kg."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Which pallet type should I use for air freight?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Air freight uses ULD (Unit Load Device) pallets defined by IATA, not standard road pallets. The most common is the PMC (P1P) at 3175x2438mm for main deck loading on wide-body aircraft. Standard EUR pallets are used for road transport to and from the airport but are not loaded directly onto aircraft."
-              }
-            }
-          ]
-        }) }}
-      />
       <PageHero title="Pallet Fitting" titleAccent="Calculator" subtitle="Calculate how many boxes fit on a pallet with layer-by-layer stacking" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         <ErrorBoundary><PalletFittingCalc /></ErrorBoundary>
+
+        <NewsletterCapture />
 
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>
@@ -275,6 +229,7 @@ export default function PalletPage() {
           { href: '/containers', label: 'Check container capacity for palletised cargo' },
         ]} />
 
+        {/* Ad unit */}
 
       </main>
     </>

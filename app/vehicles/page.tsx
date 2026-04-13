@@ -5,6 +5,7 @@ import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 import VehicleSearch from './VehicleSearch';
 import { getAllVehicles, VEHICLE_REF_COUNT } from '@/lib/calculations/vehicle-ref';
 
@@ -68,6 +69,8 @@ export default function VehiclesPage() {
             Pallet standards also differ. European operations use the 1200&times;800 mm EUR pallet and the 1200&times;1000 mm UK pallet, while North American logistics centres are built around the 48&times;40 inch GMA pallet. These dimensional differences mean pallet counts are not directly comparable between EU and US trailers. When planning cross-border shipments, always confirm which pallet type will be used at both origin and destination.
           </p>
         </div>
+
+        <NewsletterCapture />
 
         <ApiCallout endpoint="/api/vehicles" />
 

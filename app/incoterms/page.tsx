@@ -6,6 +6,7 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=INCOTERMS+2020+Reference&desc=All+11+trade+terms+explained&api=GET+/api/incoterms';
 
@@ -25,55 +26,6 @@ export default function IncotermsPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is the difference between FOB and CIF?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Under FOB (Free on Board), the seller delivers goods on board the vessel and the buyer arranges and pays for sea freight and insurance. Under CIF (Cost, Insurance and Freight), the seller pays for both freight and insurance to the destination port. In both cases, risk transfers when goods are loaded on board at the origin port."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Which INCOTERM should I use for containerised cargo?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The ICC recommends FCA (Free Carrier) instead of FOB for containerised cargo. With containers, the seller typically delivers goods to a container terminal — not directly on board the vessel. FCA aligns the risk transfer point with the actual handover at the terminal."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Are INCOTERMS legally binding?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "INCOTERMS are not law — they are contractual terms that become binding only when both parties agree to incorporate them into their sales contract. The contract should reference the specific term and edition (e.g. \"FCA [named place] INCOTERMS 2020\"). They are widely recognised by courts and arbitration bodies."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is the difference between CIP and CIF?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "CIP (Carriage and Insurance Paid To) applies to any mode of transport, while CIF (Cost, Insurance and Freight) is for sea and inland waterway only. Since INCOTERMS 2020, CIP requires all-risks insurance (ICC Clause A), whereas CIF only requires basic cover (ICC Clause C). CIP is recommended for multimodal and containerised shipments."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What does DDP mean for VAT and import duties?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Under DDP (Delivered Duty Paid), the seller is responsible for all costs including import customs clearance, duties, and taxes (such as VAT/GST) in the destination country. The seller may need to register for VAT in the buyer's country. DDP offers maximum convenience for the buyer but places significant obligations on the seller."
-              }
-            }
-          ]
-        }) }}
-      />
       <PageHero title="INCOTERMS" titleAccent="2020" subtitle="International commercial terms — who pays, who bears risk, where responsibility transfers" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
@@ -97,15 +49,15 @@ export default function IncotermsPage() {
             <Link
               key={term.code}
               href={`/incoterms/${term.slug}`}
-              className="incoterm-card"
               style={{
                 borderRadius: 12,
                 border: '1px solid var(--border)',
                 padding: 16,
                 textDecoration: 'none',
                 display: 'block',
-                background: 'var(--bg-card)',
+                transition: 'border-color 0.15s',
               }}
+              onMouseEnter={undefined}
             >
               <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 4 }}>
                 {term.code}
@@ -116,7 +68,18 @@ export default function IncotermsPage() {
               <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: 10 }}>
                 {term.summary}
               </div>
-              <span className="mode-badge mode-badge--any">Any mode</span>
+              <span style={{
+                display: 'inline-block',
+                background: '#fff7ed',
+                color: '#9a3412',
+                border: '1px solid #fdba74',
+                fontSize: 11,
+                fontWeight: 700,
+                padding: '2px 8px',
+                borderRadius: 20,
+              }}>
+                Any mode
+              </span>
             </Link>
           ))}
         </div>
@@ -135,14 +98,13 @@ export default function IncotermsPage() {
             <Link
               key={term.code}
               href={`/incoterms/${term.slug}`}
-              className="incoterm-card"
               style={{
                 borderRadius: 12,
                 border: '1px solid var(--border)',
                 padding: 16,
                 textDecoration: 'none',
                 display: 'block',
-                background: 'var(--bg-card)',
+                transition: 'border-color 0.15s',
               }}
             >
               <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 4 }}>
@@ -154,7 +116,18 @@ export default function IncotermsPage() {
               <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: 10 }}>
                 {term.summary}
               </div>
-              <span className="mode-badge mode-badge--sea">Sea &amp; Inland Waterway</span>
+              <span style={{
+                display: 'inline-block',
+                background: '#dbeafe',
+                color: '#1e40af',
+                border: '1px solid #93c5fd',
+                fontSize: 11,
+                fontWeight: 700,
+                padding: '2px 8px',
+                borderRadius: 20,
+              }}>
+                Sea &amp; Inland Waterway
+              </span>
             </Link>
           ))}
         </div>
@@ -201,6 +174,8 @@ export default function IncotermsPage() {
             </tbody>
           </table>
         </div>
+
+        <NewsletterCapture />
 
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>
@@ -292,6 +267,7 @@ export default function IncotermsPage() {
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },
         ]} />
 
+        {/* Ad unit */}
         <div style={{ marginTop: 32 }}>
         </div>
 

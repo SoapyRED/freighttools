@@ -9,13 +9,13 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
-import ApiCtaBanner from '@/app/components/ApiCtaBanner';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+numbers+from+ADR+2025&api=GET+/api/adr';
 
 export const metadata: Metadata = {
-  title: 'ADR Dangerous Goods Lookup — UN Number Search',
-  description: `Search ${SITE_STATS.adrEntries.toLocaleString()} ADR 2025 dangerous goods by UN number. Instant results: class, packing group, labels, tunnel codes, transport category, and special provisions. Free, no signup. UNECE official data.`,
+  title: 'ADR Dangerous Goods — Lookup & 1.1.3.6 Exemption Calculator | FreightUtils',
+  description: `Free ADR 2025 dangerous goods lookup — search ${SITE_STATS.adrEntries.toLocaleString()} entries by UN number and calculate 1.1.3.6 exemption points. Official UNECE data with class, packing group, labels, tunnel codes, and transport category. Free REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/adr' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'ADR Dangerous Goods Lookup — FreightUtils' }],
@@ -29,31 +29,6 @@ export default function AdrPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is a UN number in ADR?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "A UN number is a four-digit identifier assigned to dangerous goods by the United Nations. It is used internationally to identify hazardous substances during transport. For example, UN 1203 is petrol/gasoline."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is ADR?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "ADR is the European Agreement concerning the International Carriage of Dangerous Goods by Road. It sets out the rules for classifying, packaging, labelling, and transporting hazardous materials across European countries."
-              }
-            }
-          ]
-        }) }}
-      />
       <PageHero title="ADR Dangerous Goods" titleAccent="Lookup" subtitle="Search dangerous goods by UN number, substance name, or hazard class" badge="ADR 2025" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
@@ -71,6 +46,8 @@ export default function AdrPage() {
             current ADR in force
           </a>.
         </p>
+
+        <NewsletterCapture />
 
         <ApiCallout endpoint="/api/adr" />
 
@@ -365,7 +342,6 @@ export default function AdrPage() {
         </div>
 
         <DataTimestamp text="ADR 2025 data, last updated April 2026" />
-        <ApiCtaBanner />
         <ToolDisclaimer text="ADR reference data only. Classification is the consignor's legal responsibility. Consult a DGSA for compliance decisions." />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Calculate loading metres for DG shipments' },
@@ -374,6 +350,7 @@ export default function AdrPage() {
           { href: '/incoterms', label: 'INCOTERMS for dangerous goods shipping' },
         ]} />
 
+        {/* Ad unit (bottom) */}
 
       </main>
     </>

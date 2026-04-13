@@ -5,13 +5,14 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 import { getAllContainerSpecs, CONTAINER_COUNT } from '@/lib/calculations/container-capacity';
 
 const ogUrl = '/api/og?title=Shipping+Container+Dimensions&desc=All+10+container+types+with+specs&api=GET+/api/containers';
 
 export const metadata: Metadata = {
-  title: 'Shipping Container Sizes — Dimensions & Capacity',
-  description: 'Internal dimensions, weights, door openings, and pallet capacity for all 10 standard shipping containers. 20ft, 40ft, 40ft HC, reefer, open top, and more. ISO 668 specs. Free.',
+  title: 'Shipping Container Dimensions & Capacity Reference | FreightUtils',
+  description: 'Free shipping container size guide — internal dimensions, weights, door openings, and pallet capacity for all 10 standard container types. ISO 668 specifications with free REST API.',
   alternates: { canonical: 'https://www.freightutils.com/containers' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Shipping Container Dimensions — FreightUtils' }],
@@ -24,47 +25,6 @@ export default function ContainersPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is the difference between a 40ft standard and 40ft high cube?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "A 40ft high cube is 30cm (1 foot) taller internally than a standard 40ft container, giving it approximately 76 m3 of capacity versus 68 m3. The floor dimensions are identical, so both fit the same number of pallets. The high cube has a slightly lower max payload due to the heavier frame."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How much does an empty shipping container weigh?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Tare weights vary by container type. A 20ft standard weighs approximately 2,300 kg, a 40ft standard around 3,750 kg, and a 40ft flat rack up to 5,000 kg. Reefer containers are heavier than dry containers of the same size due to insulation and the cooling unit."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can I load a container to its maximum capacity?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The ISO maximum gross weight is 30,480 kg for all standard containers, but the practical maximum is often lower. Road weight limits, port terminal limits, and individual carrier restrictions frequently reduce the amount you can actually load. Always verify with your shipping line."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is a reefer container?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "A reefer (refrigerated container) is a temperature-controlled container with an integrated cooling unit. Reefers maintain temperatures typically between -30\u00b0C and +30\u00b0C, making them essential for perishable goods such as food, pharmaceuticals, and chemicals."
-              }
-            }
-          ]
-        }) }}
-      />
       <PageHero title="Container" titleAccent="Specs" subtitle="Shipping container dimensions, weights, door openings, and pallet capacity" />
 
       <main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 80px' }}>
@@ -241,6 +201,8 @@ export default function ContainersPage() {
 
         </div>
 
+        <NewsletterCapture />
+
         <ApiCallout endpoint="/api/containers" />
         <DataTimestamp text="ISO container specifications, last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
@@ -250,6 +212,7 @@ export default function ContainersPage() {
           { href: '/ldm', label: 'Loading metres for road freight' },
         ]} />
 
+        {/* Ad unit */}
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>

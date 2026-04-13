@@ -5,13 +5,13 @@ import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
-import ApiCtaBanner from '@/app/components/ApiCtaBanner';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=UK+Import+Duty+Calculator&desc=Estimate+duty+and+VAT+for+UK+imports&api=POST+/api/duty';
 
 export const metadata: Metadata = {
-  title: 'UK Import Duty & VAT Calculator — Free Estimate',
-  description: 'Estimate UK import duty and VAT for any commodity code. Uses live GOV.UK Trade Tariff data. Enter your HS code and goods value — instant duty and VAT breakdown. Free.',
+  title: 'UK Import Duty & VAT Calculator — FreightUtils',
+  description: 'Estimate UK import duty and VAT for any commodity code. Uses GOV.UK Trade Tariff data. Free calculator with REST API.',
   alternates: { canonical: 'https://www.freightutils.com/duty' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'UK Import Duty & VAT Calculator — FreightUtils' }],
@@ -96,6 +96,10 @@ export default function DutyPage() {
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
+          <NewsletterCapture />
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
           <ApiCallout method="POST" endpoint="/api/duty" />
         </div>
 
@@ -108,7 +112,6 @@ export default function DutyPage() {
         </div>
 
         <div style={{ maxWidth: 700, margin: '24px auto 0' }}>
-          <ApiCtaBanner />
           <ToolDisclaimer text="Estimate only. Not for customs declaration purposes. Duty rates from GOV.UK Trade Tariff API. Verify with HMRC or a licensed customs broker before import. Does not include anti-dumping duties, quotas, or seasonal rates." />
         </div>
       </div>

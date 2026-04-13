@@ -6,6 +6,7 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=Consignment+Calculator&desc=Multi-item+CBM,+weight,+LDM+and+chargeable+weight&api=POST+/api/consignment';
 
@@ -90,6 +91,10 @@ export default function ConsignmentPage() {
               </pre>
             </div>
           </details>
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
+          <NewsletterCapture />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
