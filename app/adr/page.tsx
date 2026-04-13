@@ -29,6 +29,7 @@ export default function AdrPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a UN number in ADR?","acceptedAnswer":{"@type":"Answer","text":"A UN number is a four-digit identifier assigned to dangerous goods by the United Nations, used internationally to identify hazardous substances during transport. For example, UN 1203 is petrol/gasoline."}},{"@type":"Question","name":"What is ADR?","acceptedAnswer":{"@type":"Answer","text":"ADR is the European Agreement concerning the International Carriage of Dangerous Goods by Road. It sets out rules for classifying, packaging, labelling, and transporting hazardous materials."}}]}) }} />
       <PageHero title="ADR Dangerous Goods" titleAccent="Lookup" subtitle="Search dangerous goods by UN number, substance name, or hazard class" badge="ADR 2025" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>

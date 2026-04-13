@@ -31,6 +31,7 @@ export default function HsPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an HS code?","acceptedAnswer":{"@type":"Answer","text":"A Harmonized System code is a standardised 6-digit number used internationally to classify traded goods. The first 2 digits = chapter, next 2 = heading, final 2 = subheading."}},{"@type":"Question","name":"How many HS codes are there?","acceptedAnswer":{"@type":"Answer","text":"The WCO HS 2022 contains approximately 5,600 6-digit subheadings across 97 chapters and 21 sections. FreightUtils indexes 6,940 codes including all levels."}}]}) }} />
       <PageHero title="HS Code" titleAccent="Lookup" subtitle="Search and browse Harmonized System commodity codes across 21 sections" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>

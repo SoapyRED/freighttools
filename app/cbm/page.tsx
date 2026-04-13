@@ -28,6 +28,7 @@ const airUlds       = containersData.filter(c => c.category === 'air');
 export default function CbmPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many CBM fit in a 20ft container?","acceptedAnswer":{"@type":"Answer","text":"A 20ft standard container has approximately 33.2 CBM of internal capacity. In practice, you'll use 25–28 CBM due to packaging gaps and stacking constraints."}},{"@type":"Question","name":"How is CBM used in air freight?","acceptedAnswer":{"@type":"Answer","text":"In air freight, CBM is used to calculate volumetric weight: multiply L × W × H (cm) and divide by 6,000 to get kg. Airlines charge the higher of actual vs volumetric weight."}},{"@type":"Question","name":"What is the difference between CBM and cubic feet?","acceptedAnswer":{"@type":"Answer","text":"1 CBM = 35.3147 cubic feet. CBM is the international standard; cubic feet is used mainly in US domestic freight."}},{"@type":"Question","name":"What does revenue tonne mean?","acceptedAnswer":{"@type":"Answer","text":"In sea freight, a revenue tonne equals 1 CBM or 1,000 kg, whichever is greater. This is the billing unit for ocean freight."}}]}) }} />
       <PageHero title="CBM" titleAccent="Calculator" subtitle="Calculate cubic metres for sea freight, air freight, and container loading" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
