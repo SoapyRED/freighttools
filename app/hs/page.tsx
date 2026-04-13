@@ -6,6 +6,7 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import ApiCtaBanner from '@/app/components/ApiCtaBanner';
 import HsSearch from './HsSearch';
 import CommonHsCodes from './CommonHsCodes';
 import { HsSectionCard } from './HsLinkCard';
@@ -30,6 +31,31 @@ export default function HsPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an HS code?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A Harmonized System (HS) code is a standardised 6-digit number used internationally to classify traded goods. The first 2 digits identify the chapter, the next 2 the heading, and the final 2 the subheading. Countries add further digits for national tariff classification."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How many HS codes are there?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The WCO Harmonized System 2022 contains approximately 5,600 6-digit subheadings across 97 chapters and 21 sections. FreightUtils indexes 6,940 codes including chapters, headings, and subheadings."
+              }
+            }
+          ]
+        }) }}
+      />
       <PageHero title="HS Code" titleAccent="Lookup" subtitle="Search and browse Harmonized System commodity codes across 21 sections" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
@@ -175,6 +201,7 @@ export default function HsPage() {
 
         <DataTimestamp text="HS 2022 data from UN Comtrade, last updated April 2026" />
         <ToolDisclaimer text="HS code reference only. For customs declarations, verify with your national tariff authority." />
+        <ApiCtaBanner />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },
           { href: '/incoterms', label: 'Check INCOTERMS for this shipment' },

@@ -4,6 +4,7 @@ import ApiCallout from '@/app/components/ApiCallout';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import ApiCtaBanner from '@/app/components/ApiCtaBanner';
 import LqEqChecker from './LqEqChecker';
 
 const ogUrl = '/api/og?title=ADR+LQ/EQ+Checker&desc=Check+Limited+and+Excepted+Quantity+eligibility&api=POST+/api/adr/lq-check';
@@ -72,6 +73,7 @@ export default function LqEqCheckerPage() {
           ]} />
         </div>
 
+        <ApiCtaBanner />
         <ToolDisclaimer text="This tool is for reference only. Always verify dangerous goods classifications with a certified DGSA for operational transport." />
       </main>
     </>

@@ -6,6 +6,7 @@ import { SITE_STATS } from '@/lib/constants/siteStats';
 import AdrExemptionCalc from './AdrExemptionCalc';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import ApiCtaBanner from '@/app/components/ApiCtaBanner';
 
 const ogUrl = '/api/og?title=ADR+Points+Calculator&desc=Free+1.1.3.6+exemption+check+for+mixed+DG+loads&api=GET+/api/adr-calculator';
 
@@ -24,6 +25,31 @@ export default function AdrCalculatorPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is ADR 1.1.3.6 exemption?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ADR 1.1.3.6 is a small load exemption that allows transport of limited quantities of dangerous goods with fewer regulatory requirements. If the total points value of your load is 1000 or below, reduced ADR rules apply."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do you calculate ADR 1.1.3.6 points?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Multiply the quantity of each dangerous good by its transport category factor: Category 1 \u00d7 50, Category 2 \u00d7 3, Category 3 \u00d7 1. If the total is 1000 or below, the small load exemption applies. Category 0 substances are never exempt."
+              }
+            }
+          ]
+        }) }}
+      />
       <PageHero title="ADR 1.1.3.6" titleAccent="Exemption Calculator" subtitle="Check if your mixed dangerous goods load qualifies for the small load exemption" badge="ADR 2025" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
@@ -87,6 +113,8 @@ export default function AdrCalculatorPage() {
             <Link href="/adr/tunnel-codes" style={{ color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}>ADR Tunnel Codes</Link>
           </p>
         </div>
+
+        <ApiCtaBanner />
 
       </main>
     </>

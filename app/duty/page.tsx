@@ -5,6 +5,7 @@ import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import ApiCtaBanner from '@/app/components/ApiCtaBanner';
 
 const ogUrl = '/api/og?title=UK+Import+Duty+Calculator&desc=Estimate+duty+and+VAT+for+UK+imports&api=POST+/api/duty';
 
@@ -107,6 +108,7 @@ export default function DutyPage() {
         </div>
 
         <div style={{ maxWidth: 700, margin: '24px auto 0' }}>
+          <ApiCtaBanner />
           <ToolDisclaimer text="Estimate only. Not for customs declaration purposes. Duty rates from GOV.UK Trade Tariff API. Verify with HMRC or a licensed customs broker before import. Does not include anti-dumping duties, quotas, or seasonal rates." />
         </div>
       </div>
