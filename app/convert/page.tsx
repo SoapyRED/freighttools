@@ -21,6 +21,47 @@ export const metadata: Metadata = {
 export default function ConvertPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How do I calculate chargeable weight for air freight?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Multiply L x W x H (in cm) and divide by 6,000 to get the volumetric weight in kg. Compare this to the actual gross weight — the higher figure is chargeable. For express carriers (DHL, FedEx, UPS), use a divisor of 5,000 instead."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is a freight tonne?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "In sea freight, a freight tonne (also revenue tonne) equals 1 CBM or 1,000 kg, whichever is greater. This is the billing unit for ocean freight. If your cargo weighs 800 kg but occupies 1.5 CBM, you pay for 1.5 freight tonnes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is a short ton vs a long ton?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A short ton (US) = 2,000 lbs (907.185 kg). A long ton (UK/imperial) = 2,240 lbs (1,016.05 kg). A metric tonne = 2,204.62 lbs (1,000 kg). Always clarify which \"ton\" is meant in freight quotes — the difference is roughly 10%."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I convert CBM to cubic feet?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Multiply CBM by 35.3147. For example, 2 CBM = 70.63 cubic feet. This conversion is needed when moving between international (CBM) and US domestic (cubic feet) freight quotes."
+              }
+            }
+          ]
+        }) }}
+      />
       <PageHero title="Unit" titleAccent="Converter" subtitle="Convert freight weights, volumes, and dimensions between metric and imperial" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>

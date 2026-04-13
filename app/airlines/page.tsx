@@ -26,6 +26,47 @@ export default function AirlinesPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an AWB prefix?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An Air Waybill prefix is a three-digit number assigned by IATA to airlines with cargo operations. It forms the first three digits of every AWB number (e.g., 176-12345678 is an Emirates shipment). The prefix uniquely identifies the issuing carrier and is essential for cargo tracking and documentation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I find an airline's AWB prefix?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use the search tool — enter the airline name, IATA code, or ICAO code and the AWB prefix will be shown if the airline has cargo operations. You can also search by prefix (e.g., enter \"176\" to find Emirates). The FreightUtils API also supports programmatic lookups."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the difference between IATA and ICAO codes?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "IATA codes are two-letter codes used commercially (on tickets, timetables, and booking systems). ICAO codes are three-letter codes used by air traffic control and in flight plans. For example, Emirates is EK (IATA) and UAE (ICAO). Most freight operations use IATA codes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do all airlines have AWB prefixes?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Only airlines with cargo operations have AWB prefixes assigned by IATA. Passenger-only carriers, regional operators, and defunct airlines typically do not have cargo prefixes."
+              }
+            }
+          ]
+        }) }}
+      />
       <PageHero title="Airline Codes &" titleAccent="AWB Prefixes" subtitle="Search airlines by name, IATA code, ICAO code, or AWB prefix" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>

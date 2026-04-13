@@ -24,6 +24,47 @@ export default function ContainersPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the difference between a 40ft standard and 40ft high cube?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A 40ft high cube is 30cm (1 foot) taller internally than a standard 40ft container, giving it approximately 76 m3 of capacity versus 68 m3. The floor dimensions are identical, so both fit the same number of pallets. The high cube has a slightly lower max payload due to the heavier frame."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much does an empty shipping container weigh?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Tare weights vary by container type. A 20ft standard weighs approximately 2,300 kg, a 40ft standard around 3,750 kg, and a 40ft flat rack up to 5,000 kg. Reefer containers are heavier than dry containers of the same size due to insulation and the cooling unit."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I load a container to its maximum capacity?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The ISO maximum gross weight is 30,480 kg for all standard containers, but the practical maximum is often lower. Road weight limits, port terminal limits, and individual carrier restrictions frequently reduce the amount you can actually load. Always verify with your shipping line."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is a reefer container?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A reefer (refrigerated container) is a temperature-controlled container with an integrated cooling unit. Reefers maintain temperatures typically between -30\u00b0C and +30\u00b0C, making them essential for perishable goods such as food, pharmaceuticals, and chemicals."
+              }
+            }
+          ]
+        }) }}
+      />
       <PageHero title="Container" titleAccent="Specs" subtitle="Shipping container dimensions, weights, door openings, and pallet capacity" />
 
       <main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 80px' }}>

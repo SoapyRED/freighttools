@@ -27,6 +27,55 @@ const airUlds       = containersData.filter(c => c.category === 'air');
 export default function CbmPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How many CBM fit in a 20ft container?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A standard 20ft container has a maximum internal capacity of approximately 33.2 CBM. In practice, expect to load 25-28 CBM due to pallet gaps, door clearance, and cargo shape. For FCL shipments, plan for 80-85% space utilisation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is CBM used in air freight?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "In air freight, CBM is converted to volumetric weight using the formula: 1 CBM = 167 kg (based on the IATA divisor of 6,000). The carrier charges whichever is higher — actual weight or volumetric weight."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the difference between CBM and cubic feet?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "1 CBM = 35.315 cubic feet. CBM is the international standard used in shipping. Cubic feet is more common in US domestic freight and warehousing."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I measure internal or external package dimensions?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Always measure external dimensions of the packaged goods as they will be presented to the carrier. Include any protrusions, handles, or irregular shapes. The carrier will measure from the outermost points."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does \"revenue tonne\" or \"freight tonne\" mean?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A freight tonne (also called revenue tonne or W/M tonne) is the billing unit in sea freight: 1 freight tonne = 1 CBM or 1,000 kg, whichever is greater. This ensures carriers are compensated for both space and weight."
+              }
+            }
+          ]
+        }) }}
+      />
       <PageHero title="CBM" titleAccent="Calculator" subtitle="Calculate cubic metres for sea freight, air freight, and container loading" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>

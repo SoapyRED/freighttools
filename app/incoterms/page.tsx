@@ -25,6 +25,55 @@ export default function IncotermsPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the difference between FOB and CIF?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Under FOB (Free on Board), the seller delivers goods on board the vessel and the buyer arranges and pays for sea freight and insurance. Under CIF (Cost, Insurance and Freight), the seller pays for both freight and insurance to the destination port. In both cases, risk transfers when goods are loaded on board at the origin port."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which INCOTERM should I use for containerised cargo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The ICC recommends FCA (Free Carrier) instead of FOB for containerised cargo. With containers, the seller typically delivers goods to a container terminal — not directly on board the vessel. FCA aligns the risk transfer point with the actual handover at the terminal."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are INCOTERMS legally binding?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "INCOTERMS are not law — they are contractual terms that become binding only when both parties agree to incorporate them into their sales contract. The contract should reference the specific term and edition (e.g. \"FCA [named place] INCOTERMS 2020\"). They are widely recognised by courts and arbitration bodies."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the difference between CIP and CIF?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "CIP (Carriage and Insurance Paid To) applies to any mode of transport, while CIF (Cost, Insurance and Freight) is for sea and inland waterway only. Since INCOTERMS 2020, CIP requires all-risks insurance (ICC Clause A), whereas CIF only requires basic cover (ICC Clause C). CIP is recommended for multimodal and containerised shipments."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does DDP mean for VAT and import duties?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Under DDP (Delivered Duty Paid), the seller is responsible for all costs including import customs clearance, duties, and taxes (such as VAT/GST) in the destination country. The seller may need to register for VAT in the buyer's country. DDP offers maximum convenience for the buyer but places significant obligations on the seller."
+              }
+            }
+          ]
+        }) }}
+      />
       <PageHero title="INCOTERMS" titleAccent="2020" subtitle="International commercial terms — who pays, who bears risk, where responsibility transfers" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
