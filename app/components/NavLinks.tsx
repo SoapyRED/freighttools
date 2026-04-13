@@ -50,6 +50,7 @@ const nav: NavEntry[] = [
     ],
   },
   { href: '/api-docs', label: 'API Docs' },
+  { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },
 ];
 

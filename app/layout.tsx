@@ -68,6 +68,7 @@ const footerColumns = {
   ],
   developers: [
     { href: '/api-docs', label: 'API Docs' },
+    { href: '/pricing', label: 'Pricing' },
     { href: '/changelog', label: 'Changelog' },
     { href: '/about', label: 'About' },
   ],
