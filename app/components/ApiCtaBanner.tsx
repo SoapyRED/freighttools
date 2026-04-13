@@ -17,8 +17,8 @@ export default function ApiCtaBanner() {
       textAlign: 'center',
     }}>
       Using this tool in your own software?{' '}
-      <Link href="/api-docs#signup" style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>
-        Get a free API key &rarr;
+      <Link href="/pricing" style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>
+        See API plans &rarr;
       </Link>
     </div>
   );

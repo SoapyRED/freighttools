@@ -128,7 +128,8 @@ export async function middleware(req: NextRequest) {
           ? { message: `Your ${window}ly limit of ${limit} requests has been reached. Contact contact@freightutils.com for Pro access.` }
           : {
               upgrade: 'Get a free API key for 100 requests/day at https://www.freightutils.com/api-docs#signup',
-              pro: 'Need more? Pro tier: 50,000 requests/month. Contact contact@freightutils.com',
+              upgrade_url: 'https://www.freightutils.com/pricing',
+              pro: 'Need more? Pro tier: 50,000 requests/month. See https://www.freightutils.com/pricing',
             }),
       },
       {

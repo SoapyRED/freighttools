@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import CopyableCode from '@/app/components/CopyableCode';
 import JsonBlock from '@/app/components/JsonBlock';
 import QuickstartTabs from '@/app/components/QuickstartTabs';
@@ -160,6 +161,12 @@ export default function ApiDocsPage() {
         {/* API Key Signup */}
         <div style={{ marginBottom: 40 }}>
           <ApiKeySignup />
+          <div style={{ marginTop: 12, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
+            Need higher limits?{' '}
+            <Link href="/pricing" style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>
+              See our plans &rarr;
+            </Link>
+          </div>
         </div>
 
         {/* MCP Server */}
