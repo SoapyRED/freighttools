@@ -7,7 +7,7 @@ const ogUrl = '/api/og?title=About+FreightUtils&desc=Free+freight+calculators+an
 export const metadata: Metadata = {
   title: 'About FreightUtils — Free Freight Tools & API Platform',
   description:
-    `FreightUtils provides ${SITE_STATS.toolCount} free freight calculators and open APIs for transport planners, freight forwarders, developers, and AI agents. LDM, CBM, chargeable weight, pallet fitting, ADR dangerous goods, ADR exemption calculator, airline codes, INCOTERMS reference, container capacity, unit converter, HS code lookup, UK duty & VAT, UN/LOCODE, and consignment calculator.`,
+    `${SITE_STATS.toolCount} free freight calculators and open REST APIs for logistics professionals, developers, and AI agents. LDM, CBM, ADR, HS codes and more.`,
   alternates: { canonical: 'https://www.freightutils.com/about' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'About FreightUtils' }],

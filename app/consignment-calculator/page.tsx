@@ -12,7 +12,7 @@ const ogUrl = '/api/og?title=Consignment+Calculator&desc=Multi-item+CBM,+weight,
 
 export const metadata: Metadata = {
   title: 'Multi-Item Consignment Calculator — FreightUtils',
-  description: 'Calculate total CBM, weight, loading metres and chargeable weight for mixed consignments. Free freight calculator with REST API.',
+  description: 'Multi-item freight calculator — total CBM, weight, LDM and chargeable weight for mixed consignments. Add unlimited lines. Free, no signup, REST API.',
   alternates: { canonical: 'https://www.freightutils.com/consignment-calculator' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Multi-Item Consignment Calculator — FreightUtils' }],

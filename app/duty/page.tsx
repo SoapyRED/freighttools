@@ -11,7 +11,7 @@ const ogUrl = '/api/og?title=UK+Import+Duty+Calculator&desc=Estimate+duty+and+VA
 
 export const metadata: Metadata = {
   title: 'UK Import Duty & VAT Calculator — FreightUtils',
-  description: 'Estimate UK import duty and VAT for any commodity code. Uses GOV.UK Trade Tariff data. Free calculator with REST API.',
+  description: 'Estimate UK import duty, VAT and total landed cost for any commodity code. Live GOV.UK tariff data, preference rates. Free tool with REST API.',
   alternates: { canonical: 'https://www.freightutils.com/duty' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'UK Import Duty & VAT Calculator — FreightUtils' }],

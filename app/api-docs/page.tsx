@@ -9,7 +9,7 @@ import ApiKeySignup from '@/app/components/ApiKeySignup';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
-  description: `FreightUtils public API reference — ${SITE_STATS.apiEndpointCount} free endpoints. Loading metres, CBM, chargeable weight, pallet fitting, consignment calculator, ADR lookup, ADR exemption calculator, airline codes, INCOTERMS 2020, container capacity, unit converter, HS code lookup, UK duty & VAT, UN/LOCODE, ULD types, vehicle types, and shipment summary. No auth required.`,
+  description: `FreightUtils API docs — ${SITE_STATS.apiEndpointCount} free REST endpoints for LDM, CBM, ADR, HS codes, duty and more. JSON responses, CORS enabled, no auth required.`,
 };
 
 const s = {
