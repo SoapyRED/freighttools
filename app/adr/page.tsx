@@ -29,7 +29,18 @@ export default function AdrPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a UN number in ADR?","acceptedAnswer":{"@type":"Answer","text":"A UN number is a four-digit identifier assigned to dangerous goods by the United Nations, used internationally to identify hazardous substances during transport. For example, UN 1203 is petrol/gasoline."}},{"@type":"Question","name":"What is ADR?","acceptedAnswer":{"@type":"Answer","text":"ADR is the European Agreement concerning the International Carriage of Dangerous Goods by Road. It sets out rules for classifying, packaging, labelling, and transporting hazardous materials."}}]}) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"How often is ADR updated?","acceptedAnswer":{"@type":"Answer","text":"ADR is revised on a two-year cycle. The current edition (ADR 2025) is valid from 1 January 2025. The next edition (ADR 2027) will enter into force on 1 January 2027. Each new edition includes a six-month transitional period during which the previous edition may still be applied."}},
+          {"@type":"Question","name":"What are the 11 new UN numbers in ADR 2025?","acceptedAnswer":{"@type":"Answer","text":"ADR 2025 added 11 new entries not present in ADR 2023: UN0514 (fire suppressant devices), UN3551–3552 (sodium ion batteries), UN3553 (disilane), UN3554 (gallium articles), UN3555 (trifluoromethyltetrazole), UN3556–3558 (battery-powered vehicles — lithium ion, lithium metal, and sodium ion), UN3559 (fire suppressant devices, Class 9), and UN3560 (tetramethylammonium hydroxide solution)."}},
+          {"@type":"Question","name":"What is a Dangerous Goods Safety Adviser (DGSA)?","acceptedAnswer":{"@type":"Answer","text":"Most undertakings involved in the carriage, packing, loading, filling, or unloading of dangerous goods are required to appoint a DGSA under ADR Chapter 1.8.3, subject to exemptions for small quantities and certain ancillary activities. The adviser must hold a valid DGSA certificate obtained by passing the relevant examination."}},
+          {"@type":"Question","name":"Does ADR apply in the UK after Brexit?","acceptedAnswer":{"@type":"Answer","text":"Yes. The UK remains a contracting party to ADR. The Carriage of Dangerous Goods and Use of Transportable Pressure Equipment Regulations 2009 (as amended) implement ADR into UK domestic law. The UK applies ADR 2025 with certain national derogations published by the Department for Transport."}},
+          {"@type":"Question","name":"What is the 1.1.3.6 exemption?","acceptedAnswer":{"@type":"Answer","text":"ADR section 1.1.3.6 provides exemptions from certain requirements (such as vehicle marking and driver training) when the total quantity of dangerous goods carried does not exceed the thresholds set by transport category. Each substance is assigned a transport category (0–4) with a corresponding maximum quantity. Category 0 has no exemption; category 4 allows unlimited quantities under the exemption."}},
+          {"@type":"Question","name":"Can I use this data via API?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every UN number is accessible via the free REST API at /api/adr. No authentication required. Query by UN number (?un=1203) or search by name (?q=petrol). Full documentation at /api-docs."}}
+        ]
+      }) }} />
       <PageHero title="ADR Dangerous Goods" titleAccent="Lookup" subtitle="Search dangerous goods by UN number, substance name, or hazard class" badge="ADR 2025" />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
