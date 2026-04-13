@@ -19,7 +19,7 @@ export async function generateMetadata(
   const ogUrl = `/api/og?title=${encodeURIComponent(`HS Chapter ${chapterCode}`)}&desc=${encodeURIComponent(details.description)}&badge=HS`;
 
   return {
-    title: `HS Chapter ${chapterCode} — ${details.description}`,
+    title: `HS Chapter ${chapterCode} — ${details.description.length > 40 ? details.description.slice(0, 37) + '…' : details.description} | FreightUtils.com`,
     description: `HS Chapter ${chapterCode}: ${details.description}. Browse all headings and subheadings. Free HS code lookup with REST API.`,
     alternates: { canonical: `https://www.freightutils.com/hs/chapter/${chapterCode}` },
     openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS Chapter ${chapterCode} — FreightUtils` }] },

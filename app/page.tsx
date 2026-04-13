@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { SITE_STATS, SITE_COPY } from '@/lib/constants/siteStats';
 import TerminalDemo from './components/TerminalDemo';
 import FadeInSection from './components/FadeInSection';
+import NewsletterCapture from './components/NewsletterCapture';
 
 export const metadata: Metadata = {
-  title: 'FreightUtils — Free Freight Calculators & APIs | LDM, CBM, ADR Lookup',
+  title: 'FreightUtils — Free Freight Calculators & APIs',
   description:
     'Free freight calculators with open REST APIs. Loading metres, CBM, chargeable weight, pallet fitting, and ADR dangerous goods lookup. No signup required. Built for transport planners, developers, and AI agents.',
   alternates: { canonical: 'https://www.freightutils.com' },
@@ -494,6 +495,42 @@ export default function HomePage() {
             </p>
           </section>
         </FadeInSection>
+
+        <hr className="section-divider" style={{ margin: '56px 0' }} />
+
+        {/* ── WHY FREIGHTUTILS ── */}
+        <FadeInSection>
+          <section>
+            <h2 style={{ fontSize: 'clamp(22px, 4vw, 28px)', fontWeight: 800, color: 'var(--text)', marginBottom: 8, letterSpacing: '-0.3px' }}>
+              Why <span style={{ color: 'var(--accent)' }}>FreightUtils</span>?
+            </h2>
+            <p style={{ fontSize: 15, color: 'var(--text-muted)', marginBottom: 28, maxWidth: 600, lineHeight: 1.6 }}>
+              What makes us different from other freight tools.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 16 }}>
+              {[
+                { title: 'Free & Open', text: `No signup, no paywall, no vendor lock-in. ${SITE_STATS.toolCount} tools and ${SITE_STATS.apiEndpointCount} API endpoints, all free. Pay only if you need 50,000+ requests/month.` },
+                { title: 'Built by a Freight Planner', text: 'Created by an ADR-certified transport planner working at Heathrow. Every formula, every dataset, verified against real operations.' },
+                { title: 'API-First & Agent-Ready', text: 'REST API with OpenAPI spec, Postman collection, and the only freight MCP server for AI agents. Integrate in minutes.' },
+              ].map(card => (
+                <div key={card.title} style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 12,
+                  padding: '24px 20px',
+                }}>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{card.title}</div>
+                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{card.text}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </FadeInSection>
+
+        <hr className="section-divider" style={{ margin: '56px 0' }} />
+
+        {/* ── NEWSLETTER ── */}
+        <NewsletterCapture />
 
       </main>
     </>
