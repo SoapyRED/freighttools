@@ -4,6 +4,7 @@ import JsonBlock from '@/app/components/JsonBlock';
 import QuickstartTabs from '@/app/components/QuickstartTabs';
 import { SITE_STATS } from '@/lib/constants/siteStats';
 import PostmanButton from '@/app/components/PostmanButton';
+import ApiKeySignup from '@/app/components/ApiKeySignup';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
@@ -154,6 +155,11 @@ export default function ApiDocsPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* API Key Signup */}
+        <div style={{ marginBottom: 40 }}>
+          <ApiKeySignup />
         </div>
 
         {/* MCP Server */}

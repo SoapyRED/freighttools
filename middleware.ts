@@ -43,11 +43,15 @@ export async function middleware(req: NextRequest) {
   // Skip OPTIONS (CORS preflight)
   if (req.method === 'OPTIONS') return NextResponse.next();
 
-  // Extract API key from Authorization header or query param
+  // Extract API key from headers or query params
   const authHeader = req.headers.get('authorization');
-  const apiKey = authHeader?.startsWith('Bearer fu_live_')
-    ? authHeader.slice(7)
-    : req.nextUrl.searchParams.get('api_key') ?? null;
+  const xApiKey = req.headers.get('x-api-key');
+  const apiKey =
+    (authHeader?.startsWith('Bearer fu_') ? authHeader.slice(7) : null)
+    ?? (xApiKey?.startsWith('fu_') ? xApiKey : null)
+    ?? req.nextUrl.searchParams.get('apiKey')
+    ?? req.nextUrl.searchParams.get('api_key')
+    ?? null;
 
   let limit: number;
   let usageKey: string;
@@ -97,9 +101,13 @@ export async function middleware(req: NextRequest) {
     return NextResponse.json(
       {
         error: 'Rate limit exceeded',
-        message: apiKey
-          ? `Your ${window}ly limit of ${limit} requests has been reached. Upgrade at https://www.freightutils.com/dashboard`
-          : `Anonymous limit: 25 requests per day. Get a free API key at https://www.freightutils.com/login for 100/day, or upgrade to Pro for 50,000/month.`,
+        limit: apiKey ? `${limit} requests/${window}` : '25 requests/day (anonymous)',
+        ...(apiKey
+          ? { message: `Your ${window}ly limit of ${limit} requests has been reached. Contact contact@freightutils.com for Pro access.` }
+          : {
+              upgrade: 'Get a free API key for 100 requests/day at https://www.freightutils.com/api-docs#signup',
+              pro: 'Need more? Pro tier: 50,000 requests/month. Contact contact@freightutils.com',
+            }),
       },
       {
         status: 429,
