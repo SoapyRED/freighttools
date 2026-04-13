@@ -125,6 +125,7 @@ export default function PricingPage() {
             <div
               key={tier.name + tier.subtitle}
               className={`pricing-card${tier.highlight ? ' pricing-card--recommended' : ''}`}
+              tabIndex={0}
               style={{
                 background: 'var(--bg-card)',
                 border: tier.highlight ? '2px solid var(--accent)' : '1px solid var(--border)',

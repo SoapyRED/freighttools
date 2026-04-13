@@ -818,6 +818,13 @@ button:active:not(:disabled) { transform: scale(0.98); }
 .pricing-card--recommended:hover, .pricing-card--recommended:focus-visible {
   box-shadow: 0 8px 32px var(--glow-accent), 0 0 16px var(--glow-accent);
 }
+.pricing-card:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
+}
+.pricing-grid:hover .pricing-card--recommended:not(:hover) {
+  box-shadow: var(--shadow-card);
+}
 
 /* ─── About page tool buttons + data source cards ───────────────── */
 @media (hover: hover) {
