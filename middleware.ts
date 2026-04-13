@@ -43,6 +43,12 @@ export async function middleware(req: NextRequest) {
   // Skip OPTIONS (CORS preflight)
   if (req.method === 'OPTIONS') return NextResponse.next();
 
+  // If KV is not configured, log a warning and pass through
+  if (!process.env.KV_REST_API_URL) {
+    console.warn('[RateLimit] KV_REST_API_URL not set — rate limiting disabled');
+    return NextResponse.next();
+  }
+
   // Extract API key from headers or query params
   const authHeader = req.headers.get('authorization');
   const xApiKey = req.headers.get('x-api-key');
@@ -88,10 +94,18 @@ export async function middleware(req: NextRequest) {
   }
 
   // Increment and check
-  currentUsage = await kv.incr(usageKey);
-  if (currentUsage === 1) {
-    await kv.expire(usageKey, window === 'day' ? 172800 : 2764800); // 48h or 32d
+  try {
+    currentUsage = await kv.incr(usageKey);
+    if (currentUsage === 1) {
+      await kv.expire(usageKey, window === 'day' ? 172800 : 2764800); // 48h or 32d
+    }
+  } catch (err) {
+    console.error('[RateLimit] KV error:', err instanceof Error ? err.message : err);
+    // KV failed — allow request but log the failure
+    return NextResponse.next();
   }
+
+  console.log(`[RateLimit] ${usageKey} = ${currentUsage}/${limit}`);
 
   if (currentUsage > limit) {
     const resetSeconds = window === 'day'
