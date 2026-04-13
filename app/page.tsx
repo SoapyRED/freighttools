@@ -8,7 +8,7 @@ import NewsletterCapture from './components/NewsletterCapture';
 export const metadata: Metadata = {
   title: 'FreightUtils — Free Freight Calculators & APIs',
   description:
-    'Free freight calculators with open REST APIs. Loading metres, CBM, chargeable weight, pallet fitting, and ADR dangerous goods lookup. No signup required. Built for transport planners, developers, and AI agents.',
+    'Free freight calculators and REST APIs — LDM, CBM, chargeable weight, ADR lookup, HS codes and more. No signup. Built for logistics and AI agents.',
   alternates: { canonical: 'https://www.freightutils.com' },
 };
 
