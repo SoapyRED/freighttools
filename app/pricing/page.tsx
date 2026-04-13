@@ -188,7 +188,7 @@ export default function PricingPage() {
               </ul>
 
               {tier.ctaHref.startsWith('mailto:') ? (
-                <a href={tier.ctaHref} style={{
+                <a href={tier.ctaHref} className="pricing-card__cta" style={{
                   display: 'block',
                   textAlign: 'center',
                   padding: '12px 20px',
@@ -205,7 +205,7 @@ export default function PricingPage() {
                   {tier.cta}
                 </a>
               ) : (
-                <Link href={tier.ctaHref} style={{
+                <Link href={tier.ctaHref} className="pricing-card__cta" style={{
                   display: 'block',
                   textAlign: 'center',
                   padding: '12px 20px',
