@@ -107,6 +107,14 @@ export async function middleware(req: NextRequest) {
 
   console.log(`[RateLimit] ${usageKey} = ${currentUsage}/${limit}`);
 
+  // Track request source (MCP vs browser vs direct API) — fire-and-forget
+  const ua = (req.headers.get('user-agent') ?? '').toLowerCase();
+  const source = ua.includes('freightutils-mcp') || ua.includes('mcp') ? 'mcp'
+    : ua.includes('node') || ua.includes('axios') || ua.includes('python') ? 'api'
+    : ua.includes('mozilla') || ua.includes('chrome') || ua.includes('safari') ? 'browser'
+    : 'other';
+  kv.incr(`source:${source}:${todayKey()}`).catch(() => {});
+
   if (currentUsage > limit) {
     const resetSeconds = window === 'day'
       ? Math.ceil((new Date(todayKey() + 'T00:00:00Z').getTime() + 86400000 - Date.now()) / 1000)
