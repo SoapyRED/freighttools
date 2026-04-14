@@ -247,11 +247,10 @@ export default function CbmPage() {
 
         </div>
 
-        <NewsletterCapture />
-
         <ApiCallout endpoint="/api/cbm" />
         <DataTimestamp text="Conversion factors are standard mathematical constants" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
+        <NewsletterCapture />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Need loading metres instead?' },
           { href: '/chargeable-weight', label: 'Calculate air freight chargeable weight' },

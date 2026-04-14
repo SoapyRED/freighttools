@@ -97,11 +97,15 @@ export default function DutyPage() {
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
-          <NewsletterCapture />
+          <ApiCallout method="POST" endpoint="/api/duty" />
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '24px auto 0' }}>
+          <ToolDisclaimer text="Estimate only. Not for customs declaration purposes. Duty rates from GOV.UK Trade Tariff API. Verify with HMRC or a licensed customs broker before import. Does not include anti-dumping duties, quotas, or seasonal rates." />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
-          <ApiCallout method="POST" endpoint="/api/duty" />
+          <NewsletterCapture />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
@@ -110,10 +114,6 @@ export default function DutyPage() {
             { href: '/incoterms', label: 'INCOTERMS 2020' },
             { href: '/chargeable-weight', label: 'Chargeable Weight' },
           ]} />
-        </div>
-
-        <div style={{ maxWidth: 700, margin: '24px auto 0' }}>
-          <ToolDisclaimer text="Estimate only. Not for customs declaration purposes. Duty rates from GOV.UK Trade Tariff API. Verify with HMRC or a licensed customs broker before import. Does not include anti-dumping duties, quotas, or seasonal rates." />
         </div>
       </div>
     </>

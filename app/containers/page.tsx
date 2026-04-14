@@ -203,11 +203,10 @@ export default function ContainersPage() {
 
         </div>
 
-        <NewsletterCapture />
-
         <ApiCallout endpoint="/api/containers" />
         <DataTimestamp text="ISO container specifications, last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
+        <NewsletterCapture />
         <RelatedTools tools={[
           { href: '/cbm', label: 'Calculate CBM per item' },
           { href: '/pallet', label: 'How many pallets fit?' },

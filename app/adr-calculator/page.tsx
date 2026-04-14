@@ -116,8 +116,8 @@ export default function AdrCalculatorPage() {
           </p>
         </div>
 
-        <NewsletterCapture />
         <ApiCtaBanner />
+        <NewsletterCapture />
 
       </main>
     </>

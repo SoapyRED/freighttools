@@ -105,11 +105,15 @@ curl "https://www.freightutils.com/api/unlocode?country=GB&function=port&limit=5
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
-          <NewsletterCapture />
+          <ApiCallout endpoint="/api/unlocode" />
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '24px auto 0' }}>
+          <ToolDisclaimer text="UN/LOCODE data from UNECE 2024-2 edition (PDDL). Coordinates are approximate. For official data, consult the UNECE Trade Facilitation website." />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
-          <ApiCallout endpoint="/api/unlocode" />
+          <NewsletterCapture />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
@@ -118,10 +122,6 @@ curl "https://www.freightutils.com/api/unlocode?country=GB&function=port&limit=5
             { href: '/hs', label: 'HS Code Lookup' },
             { href: '/adr', label: 'ADR Dangerous Goods' },
           ]} />
-        </div>
-
-        <div style={{ maxWidth: 700, margin: '24px auto 0' }}>
-          <ToolDisclaimer text="UN/LOCODE data from UNECE 2024-2 edition (PDDL). Coordinates are approximate. For official data, consult the UNECE Trade Facilitation website." />
         </div>
       </div>
     </>

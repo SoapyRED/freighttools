@@ -35,8 +35,6 @@ export default function AirlinesPage() {
         {/* Search */}
         <ErrorBoundary><AirlineSearch index={index} /></ErrorBoundary>
 
-        <NewsletterCapture />
-
         <ApiCallout endpoint="/api/airlines" />
 
         {/* ── AUTHORITY CONTENT ── */}
@@ -129,6 +127,7 @@ export default function AirlinesPage() {
 
         <DataTimestamp text="Airline data last verified April 2026" />
         <ToolDisclaimer text="Airline data compiled from public IATA/ICAO sources. Verify current codes with your carrier or IATA." />
+        <NewsletterCapture />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate chargeable weight for air freight' },
           { href: '/hs', label: 'Need HS codes for customs?' },

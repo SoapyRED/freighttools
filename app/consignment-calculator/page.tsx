@@ -95,11 +95,15 @@ export default function ConsignmentPage() {
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
-          <NewsletterCapture />
+          <ApiCallout method="POST" endpoint="/api/consignment" />
+        </div>
+
+        <div style={{ maxWidth: 700, margin: '24px auto 0' }}>
+          <ToolDisclaimer text="Built by Marius C. Calculations are estimates — always verify with your carrier. Not a substitute for professional freight planning." />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
-          <ApiCallout method="POST" endpoint="/api/consignment" />
+          <NewsletterCapture />
         </div>
 
         <div style={{ maxWidth: 700, margin: '32px auto 0' }}>
@@ -108,10 +112,6 @@ export default function ConsignmentPage() {
             { href: '/cbm', label: 'CBM Calculator' },
             { href: '/chargeable-weight', label: 'Chargeable Weight' },
           ]} />
-        </div>
-
-        <div style={{ maxWidth: 700, margin: '24px auto 0' }}>
-          <ToolDisclaimer text="Built by Marius C. Calculations are estimates — always verify with your carrier. Not a substitute for professional freight planning." />
         </div>
       </div>
     </>

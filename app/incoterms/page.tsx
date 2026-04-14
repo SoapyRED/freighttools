@@ -176,8 +176,6 @@ export default function IncotermsPage() {
           </table>
         </div>
 
-        <NewsletterCapture />
-
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>
 
@@ -263,6 +261,7 @@ export default function IncotermsPage() {
 
         <DataTimestamp text="INCOTERMS 2020, current as of April 2026" />
         <ToolDisclaimer text="INCOTERMS 2020 reference based on ICC official rules. For contractual use, consult the full ICC publication." />
+        <NewsletterCapture />
         <RelatedTools tools={[
           { href: '/hs', label: 'Look up HS codes for customs' },
           { href: '/chargeable-weight', label: 'Calculate chargeable weight' },

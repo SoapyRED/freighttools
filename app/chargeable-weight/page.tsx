@@ -38,8 +38,6 @@ export default function ChargeableWeightPage() {
 
         <ErrorBoundary><ChargeableWeightCalc /></ErrorBoundary>
 
-        <NewsletterCapture />
-
         {/* What is chargeable weight */}
         <div style={{ marginTop: 56 }}>
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
@@ -162,6 +160,7 @@ export default function ChargeableWeightPage() {
         <ApiCallout endpoint="/api/chargeable-weight" />
         <DataTimestamp text="IATA standards, last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
+        <NewsletterCapture />
         <RelatedTools tools={[
           { href: '/airlines', label: "Find your airline's AWB prefix" },
           { href: '/cbm', label: 'Calculate CBM for volume' },

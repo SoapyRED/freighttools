@@ -328,8 +328,6 @@ export default function AdrPage() {
 
         </div>
 
-        <NewsletterCapture />
-
         {/* Learn More */}
         <div style={{ marginTop: 48 }}>
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>
@@ -355,6 +353,7 @@ export default function AdrPage() {
 
         <DataTimestamp text="ADR 2025 data, last updated April 2026" />
         <ToolDisclaimer text="ADR reference data only. Classification is the consignor's legal responsibility. Consult a DGSA for compliance decisions." />
+        <NewsletterCapture />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Calculate loading metres for DG shipments' },
           { href: '/containers', label: 'Check container capacity for hazmat cargo' },

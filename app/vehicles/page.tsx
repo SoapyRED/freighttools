@@ -70,10 +70,9 @@ export default function VehiclesPage() {
           </p>
         </div>
 
-        <NewsletterCapture />
-
         <ApiCallout endpoint="/api/vehicles" />
-
+        <ToolDisclaimer text="Specifications are typical industry values and may vary by manufacturer, configuration, and age. Always confirm with your carrier or operator." />
+        <NewsletterCapture />
         {/* Cross-links */}
         <RelatedTools tools={[
           { href: '/ldm', label: 'LDM Calculator' },
@@ -81,8 +80,6 @@ export default function VehiclesPage() {
           { href: '/containers', label: 'Container Dimensions' },
           { href: '/pallet', label: 'Pallet Fitting' },
         ]} />
-
-        <ToolDisclaimer text="Specifications are typical industry values and may vary by manufacturer, configuration, and age. Always confirm with your carrier or operator." />
 
       </main>
     </>

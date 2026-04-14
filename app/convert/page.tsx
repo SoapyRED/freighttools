@@ -266,9 +266,9 @@ export default function ConvertPage() {
 
         </div>
 
-        <NewsletterCapture />
-
         <ApiCallout endpoint="/api/convert" />
+
+        <NewsletterCapture />
 
         <RelatedTools tools={[
           { href: '/cbm', label: 'Calculate CBM' },

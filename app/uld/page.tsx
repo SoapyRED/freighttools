@@ -34,8 +34,6 @@ export default function UldPage() {
         {/* Search + Cards */}
         <ErrorBoundary><UldSearch data={data} /></ErrorBoundary>
 
-        <NewsletterCapture />
-
         <ApiCallout endpoint="/api/uld" />
 
         {/* ── AUTHORITY CONTENT ── */}
@@ -78,6 +76,7 @@ export default function UldPage() {
 
         <DataTimestamp text="ULD specifications last verified April 2026" />
         <ToolDisclaimer text="ULD data based on IATA ULD Technical Manual specifications. Always confirm exact dimensions and weight limits with the operating airline, as individual airline variants may differ." />
+        <NewsletterCapture />
         <RelatedTools tools={[
           { href: '/chargeable-weight', label: 'Calculate chargeable weight for air freight' },
           { href: '/airlines', label: 'Airline codes & AWB prefix lookup' },

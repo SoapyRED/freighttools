@@ -33,8 +33,6 @@ export default function PalletPage() {
 
         <ErrorBoundary><PalletFittingCalc /></ErrorBoundary>
 
-        <NewsletterCapture />
-
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>
 
@@ -226,6 +224,7 @@ export default function PalletPage() {
         <ApiCallout endpoint="/api/pallet" />
         <DataTimestamp text="Pallet specifications per EPAL/ISO 6780, last verified April 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
+        <NewsletterCapture />
         <RelatedTools tools={[
           { href: '/ldm', label: 'Calculate loading metres' },
           { href: '/containers', label: 'Check container capacity for palletised cargo' },
