@@ -383,7 +383,7 @@ export default function AdrPage() {
               { href: '/adr/training-guide', title: 'ADR Training Guide', desc: 'Who needs training, course types, and UK costs' },
             ].map(g => (
               <Link key={g.href} href={g.href} style={{
-                background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
+                background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
                 padding: '16px 18px', textDecoration: 'none', display: 'block',
               }}>
                 <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>{g.title}</div>
