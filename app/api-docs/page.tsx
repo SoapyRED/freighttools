@@ -10,6 +10,7 @@ import ApiKeySignup from '@/app/components/ApiKeySignup';
 export const metadata: Metadata = {
   title: 'API Documentation',
   description: `FreightUtils API docs — ${SITE_STATS.apiEndpointCount} free REST endpoints for LDM, CBM, ADR, HS codes, duty and more. JSON responses, CORS enabled, no auth required.`,
+  alternates: { canonical: 'https://www.freightutils.com/api-docs' },
 };
 
 const s = {
