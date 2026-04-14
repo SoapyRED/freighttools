@@ -36,6 +36,25 @@
   --border-input: #c0c6cf;
   --radius: 8px;
   --radius-lg: 12px;
+
+  /* Semantic colours */
+  --color-reference: #0D9488;
+  --color-api: #2563EB;
+  --color-success: #16A34A;
+  --color-warning: #D97706;
+
+  /* Text hierarchy */
+  --text-hero: rgba(0,0,0,0.85);
+  --text-secondary: rgba(0,0,0,0.7);
+  --text-label: rgba(0,0,0,0.55);
+  --nav-inactive: rgba(0,0,0,0.7);
+  --nav-active: #EF9F27;
+
+  /* Category colours */
+  --cat-freight: #EF9F27;
+  --cat-dg: #D97706;
+  --cat-trade: #0D9488;
+  --cat-reference: #2563EB;
 }
 
 /* ─── Dark theme ────────────────────────────────────────────────── */
@@ -66,6 +85,25 @@
   --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
   --bg-input: #0d1117;
   --border-input: #484f58;
+
+  /* Semantic colours */
+  --color-reference: #2DD4BF;
+  --color-api: #60A5FA;
+  --color-success: #4ADE80;
+  --color-warning: #FBBF24;
+
+  /* Text hierarchy */
+  --text-hero: rgba(255,255,255,0.85);
+  --text-secondary: rgba(255,255,255,0.7);
+  --text-label: rgba(255,255,255,0.55);
+  --nav-inactive: rgba(255,255,255,0.7);
+  --nav-active: #EF9F27;
+
+  /* Category colours */
+  --cat-freight: #EF9F27;
+  --cat-dg: #FBBF24;
+  --cat-trade: #2DD4BF;
+  --cat-reference: #60A5FA;
 }
 
 html { scroll-behavior: smooth; }

@@ -53,7 +53,7 @@ export default function PageHero({ title, titleAccent, subtitle, badge, differen
         </h1>
         <p style={{
           fontSize: 16,
-          color: 'var(--text-faint)',
+          color: 'var(--text-hero)',
           maxWidth: 580,
           margin: '0 auto',
           lineHeight: 1.6,
@@ -63,7 +63,7 @@ export default function PageHero({ title, titleAccent, subtitle, badge, differen
         {differentiators && differentiators.length > 0 && (
           <p style={{
             fontSize: 13,
-            color: 'rgba(255,255,255,0.45)',
+            color: 'var(--text-secondary)',
             marginTop: 10,
             letterSpacing: '0.2px',
           }}>

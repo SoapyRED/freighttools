@@ -213,30 +213,32 @@ export default function AboutPage() {
         <Section label="Methodology" title="Data Sources &amp; Methodology">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {[
-              { name: 'ADR 2025', badge: 'UNECE', entries: `${SITE_STATS.adrEntries.toLocaleString()} entries`, desc: 'Licensed from Labeline.com (ECE/TRANS/352). Next edition: ADR 2027.' },
-              { name: 'HS Codes', badge: 'WCO', entries: `${SITE_STATS.hsCodeCount.toLocaleString()} codes`, desc: 'UN Comtrade HS 2022 (PDDL). 21 sections, 97 chapters.' },
-              { name: 'Airlines', badge: 'IATA/ICAO', entries: `${SITE_STATS.airlineCount.toLocaleString()} airlines`, desc: 'Public sources, cross-referenced. 390 verified cargo AWB prefixes.' },
-              { name: 'INCOTERMS', badge: 'ICC', entries: `${SITE_STATS.incotermsCount} terms`, desc: 'ICC INCOTERMS 2020 rules with full responsibility breakdowns.' },
-              { name: 'UN/LOCODE', badge: 'UNECE', entries: `${SITE_STATS.unlocodeCount.toLocaleString()} locations`, desc: 'Ports, airports, rail terminals, inland depots. UNECE 2024-2 (PDDL).' },
-              { name: 'UK Duty Rates', badge: 'GOV.UK', entries: 'Live API', desc: 'GOV.UK Trade Tariff API. Open Government Licence v3.' },
-              { name: 'Containers', badge: 'ISO', entries: '10 types', desc: 'ISO 668 + ISO 1496 standard dimensions and capacities.' },
-              { name: 'Pallets', badge: 'EPAL/ISO', entries: '6 types', desc: 'EPAL EUR pallets, ISO 6780 international, IATA ULD specs.' },
+              { name: 'ADR 2025', badge: 'UNECE', entries: `${SITE_STATS.adrEntries.toLocaleString()} entries`, desc: 'Licensed from Labeline.com (ECE/TRANS/352). Next edition: ADR 2027.', href: '/adr', color: 'var(--color-warning)' },
+              { name: 'HS Codes', badge: 'WCO', entries: `${SITE_STATS.hsCodeCount.toLocaleString()} codes`, desc: 'UN Comtrade HS 2022 (PDDL). 21 sections, 97 chapters.', href: '/hs', color: 'var(--color-reference)' },
+              { name: 'Airlines', badge: 'IATA/ICAO', entries: `${SITE_STATS.airlineCount.toLocaleString()} airlines`, desc: 'Public sources, cross-referenced. 390 verified cargo AWB prefixes.', href: '/airlines', color: 'var(--color-api)' },
+              { name: 'INCOTERMS', badge: 'ICC', entries: `${SITE_STATS.incotermsCount} terms`, desc: 'ICC INCOTERMS 2020 rules with full responsibility breakdowns.', href: '/incoterms', color: 'var(--color-reference)' },
+              { name: 'UN/LOCODE', badge: 'UNECE', entries: `${SITE_STATS.unlocodeCount.toLocaleString()} locations`, desc: 'Ports, airports, rail terminals, inland depots. UNECE 2024-2 (PDDL).', href: '/unlocode', color: 'var(--color-api)' },
+              { name: 'UK Duty Rates', badge: 'GOV.UK', entries: 'Live API', desc: 'GOV.UK Trade Tariff API. Open Government Licence v3.', href: '/duty', color: 'var(--color-reference)' },
+              { name: 'Containers', badge: 'ISO', entries: '10 types', desc: 'ISO 668 + ISO 1496 standard dimensions and capacities.', href: '/containers', color: 'var(--color-api)' },
+              { name: 'Pallets', badge: 'EPAL/ISO', entries: '6 types', desc: 'EPAL EUR pallets, ISO 6780 international, IATA ULD specs.', href: '/pallet', color: 'var(--color-api)' },
             ].map(s => (
-              <div key={s.name} style={{
+              <Link key={s.name} href={s.href} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
-                borderRadius: 10, padding: '16px 18px',
+                borderLeft: `3px solid ${s.color}`,
+                borderRadius: 10, padding: '16px 18px', textDecoration: 'none',
+                display: 'block', transition: 'border-color 0.2s',
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                   <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>{s.name}</span>
                   <span style={{
-                    fontSize: 10, fontWeight: 700, color: '#e87722',
+                    fontSize: 10, fontWeight: 700, color: s.color,
                     background: 'rgba(232,119,34,0.1)', padding: '2px 8px', borderRadius: 10,
                     textTransform: 'uppercase', letterSpacing: '0.5px',
                   }}>{s.badge}</span>
                 </div>
                 <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>{s.entries}</div>
-                <p style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.5, margin: 0 }}>{s.desc}</p>
-              </div>
+                <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>{s.desc}</p>
+              </Link>
             ))}
           </div>
         </Section>

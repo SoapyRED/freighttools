@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 const toolGroups = [
   {
     label: 'Freight Operations',
+    color: 'var(--cat-freight)',
     tools: [
       { href: '/ldm', label: '/api/ldm', title: 'Loading Metres', desc: 'Floor space for UK/EU road freight trailers', icon: '📐' },
       { href: '/cbm', label: '/api/cbm', title: 'CBM Calculator', desc: 'Cubic metres for sea and air shipments', icon: '📦' },
@@ -27,6 +28,7 @@ const toolGroups = [
   },
   {
     label: 'Dangerous Goods',
+    color: 'var(--cat-dg)',
     tools: [
       { href: '/adr', label: '/api/adr', title: 'ADR Dangerous Goods', desc: `${SITE_STATS.adrEntries.toLocaleString()} entries from ${SITE_STATS.adrEdition} — lookup by UN number, class, and hazard data`, icon: '⚠️' },
       { href: '/adr-calculator', label: '/api/adr-calculator', title: 'ADR Exemption Calculator', desc: '1.1.3.6 small load exemption check for mixed hazardous loads', icon: '🧮' },
@@ -35,6 +37,7 @@ const toolGroups = [
   },
   {
     label: 'Customs & Trade',
+    color: 'var(--cat-trade)',
     tools: [
       { href: '/hs', label: '/api/hs', title: 'HS Code Lookup', desc: `Search and browse ${SITE_STATS.hsCodeCount.toLocaleString()} Harmonized System commodity codes across 21 sections`, icon: '🏷️' },
       { href: '/incoterms', label: '/api/incoterms', title: 'INCOTERMS 2020', desc: `All ${SITE_STATS.incotermsCount} trade terms — who pays, who bears risk, where responsibility transfers`, icon: '📋' },
@@ -43,6 +46,7 @@ const toolGroups = [
   },
   {
     label: 'Reference Data',
+    color: 'var(--cat-reference)',
     tools: [
       { href: '/airlines', label: '/api/airlines', title: 'Airline Codes & AWB Prefixes', desc: 'Search airlines by name, IATA/ICAO code, or AWB prefix', icon: '✈️' },
       { href: '/unlocode', label: '/api/unlocode', title: 'UN/LOCODE Lookup', desc: `${SITE_STATS.unlocodeCount.toLocaleString()}+ transport locations — seaports, airports, rail terminals, inland depots`, icon: '🌍' },
@@ -230,7 +234,7 @@ export default function HomePage() {
           const useWide = group.tools.length === 2;
           return (
             <div key={group.label} style={{ marginTop: 20 }}>
-              <div className="category-label">
+              <div className="category-label" style={{ color: group.color }}>
                 {group.label}
               </div>
               <div className="tool-grid" style={{
@@ -255,7 +259,7 @@ export default function HomePage() {
                       <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
                       <span style={{ color: 'var(--text-faint)', fontSize: 14 }}>&rarr;</span>
                     </div>
-                    <span style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.45 }}>{t.desc}</span>
+                    <span style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.45 }}>{t.desc}</span>
                     <code className="api-badge" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>
                       {t.label}
                     </code>
@@ -509,18 +513,19 @@ export default function HomePage() {
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 16 }}>
               {[
-                { title: 'Free & Open', text: `No signup, no paywall, no vendor lock-in. ${SITE_STATS.toolCount} tools and ${SITE_STATS.apiEndpointCount} API endpoints, all free. Pay only if you need 50,000+ requests/month.` },
-                { title: 'Built by a Freight Planner', text: 'Created by an ADR-certified transport planner working at Heathrow. Every formula, every dataset, verified against real operations.' },
-                { title: 'API-First & Agent-Ready', text: 'REST API with OpenAPI spec, Postman collection, and the only freight MCP server for AI agents. Integrate in minutes.' },
+                { title: 'Free & Open', text: `No signup, no paywall, no vendor lock-in. ${SITE_STATS.toolCount} tools and ${SITE_STATS.apiEndpointCount} API endpoints, all free. Pay only if you need 50,000+ requests/month.`, accent: 'var(--color-success)' },
+                { title: 'Built by a Freight Planner', text: 'Created by an ADR-certified transport planner working at Heathrow. Every formula, every dataset, verified against real operations.', accent: 'var(--color-warning)' },
+                { title: 'API-First & Agent-Ready', text: 'REST API with OpenAPI spec, Postman collection, and the only freight MCP server for AI agents. Integrate in minutes.', accent: 'var(--color-api)' },
               ].map(card => (
                 <div key={card.title} style={{
                   background: 'var(--bg-card)',
                   border: '1px solid var(--border)',
+                  borderLeft: `3px solid ${card.accent}`,
                   borderRadius: 12,
                   padding: '24px 20px',
                 }}>
                   <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{card.title}</div>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{card.text}</p>
+                  <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{card.text}</p>
                 </div>
               ))}
             </div>

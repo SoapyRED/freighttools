@@ -136,14 +136,15 @@ export default function NavLinks() {
   }, [pathname]);
 
   const topLinkStyle = (isActive: boolean): React.CSSProperties => ({
-    color: isActive ? '#EF9F27' : 'var(--text-faint)',
+    color: isActive ? 'var(--nav-active)' : 'var(--nav-inactive)',
     textDecoration: 'none',
     fontSize: 13,
     fontWeight: isActive ? 600 : 500,
     padding: '6px 10px',
     borderRadius: 6,
     whiteSpace: 'nowrap',
-    borderBottom: isActive ? '2px solid #EF9F27' : '2px solid transparent',
+    borderBottom: isActive ? '2px solid var(--nav-active)' : '2px solid transparent',
+    transition: 'color 0.15s',
   });
 
   return (
