@@ -31,6 +31,7 @@ export default function AdrPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'ADR Dangerous Goods Lookup', path: '/adr' }]) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"Dataset","name":"ADR 2025 Dangerous Goods List","description":"Complete ADR 2025 Table A with 2,939 entries covering all hazard classes, transport categories, tunnel codes, and packing groups","url":"https://www.freightutils.com/adr","license":"https://www.freightutils.com/terms","creator":{"@type":"Organization","name":"FreightUtils"},"distribution":{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://www.freightutils.com/api/adr?class=3"},"temporalCoverage":"2025/2026","variableMeasured":"Dangerous goods classifications"}) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context":"https://schema.org",
         "@type":"FAQPage",
