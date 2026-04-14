@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_STATS, SITE_COPY } from '@/lib/constants/siteStats';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=About+FreightUtils&desc=Free+freight+calculators+and+open+APIs+for+the+logistics+industry';
 
@@ -349,6 +350,8 @@ export default function AboutPage() {
             </a>
           </div>
         </section>
+
+        <NewsletterCapture />
 
       </main>
     </>

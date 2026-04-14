@@ -5,6 +5,7 @@ import ErrorBoundary from '@/app/components/ErrorBoundary';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import ApiCtaBanner from '@/app/components/ApiCtaBanner';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 import LqEqChecker from './LqEqChecker';
 
 const ogUrl = '/api/og?title=ADR+LQ/EQ+Checker&desc=Check+Limited+and+Excepted+Quantity+eligibility&api=POST+/api/adr/lq-check';
@@ -125,6 +126,8 @@ export default function LqEqCheckerPage() {
             Table A Column 7a/7b. Always verify classifications with a certified DGSA for operational use.
           </p>
         </div>
+
+        <NewsletterCapture />
 
         <ApiCallout method="POST" endpoint="/api/adr/lq-check" example='POST /api/adr/lq-check { "mode": "lq", "items": [{ "un_number": "1203", "quantity": 0.5, "unit": "L" }] }' />
 

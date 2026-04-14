@@ -59,8 +59,6 @@ export default function AdrPage() {
           </a>.
         </p>
 
-        <NewsletterCapture />
-
         <ApiCallout endpoint="/api/adr" />
 
         {/* ── AUTHORITY CONTENT ── */}
@@ -329,6 +327,8 @@ export default function AdrPage() {
           </div>
 
         </div>
+
+        <NewsletterCapture />
 
         {/* Learn More */}
         <div style={{ marginTop: 48 }}>

@@ -37,8 +37,6 @@ export default function CbmPage() {
 
         <ErrorBoundary><CbmCalc /></ErrorBoundary>
 
-        <NewsletterCapture />
-
         {/* ── AUTHORITY CONTENT ── */}
         <div style={{ marginTop: 56 }}>
 
@@ -248,6 +246,8 @@ export default function CbmPage() {
           </div>
 
         </div>
+
+        <NewsletterCapture />
 
         <ApiCallout endpoint="/api/cbm" />
         <DataTimestamp text="Conversion factors are standard mathematical constants" />
