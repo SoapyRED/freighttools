@@ -833,7 +833,7 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
   box-shadow: var(--shadow-card);
 }
 .pricing-card--recommended {
-  border: 2px solid var(--accent) !important;
+  border: 1px solid var(--border);
   box-shadow: var(--shadow-card);
 }
 .pricing-card:hover, .pricing-card:focus-visible {
@@ -845,6 +845,11 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
 .pricing-card:active {
   transform: scale(0.97);
   transition: transform 0.1s ease;
+}
+.pricing-card .pricing-card__cta:hover {
+  background: var(--accent) !important;
+  color: #000 !important;
+  border-color: var(--accent) !important;
 }
 .pricing-card__cta { position: static !important; }
 .pricing-card__cta::after {

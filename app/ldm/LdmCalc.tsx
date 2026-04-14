@@ -9,6 +9,7 @@ import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
 import { calculateLdm, type LdmResult } from '@/lib/calculations/ldm';
 import TrailerViz from './TrailerViz';
 import { useUrlSync, getUrlParams } from '@/app/hooks/useUrlState';
@@ -479,6 +480,8 @@ export default function LdmCalc() {
           </div>
 
         </div>
+
+        <NewsletterCapture />
 
         <DataTimestamp text="Vehicle specifications per EN 283/ISO standards, last verified April 2026" />
         <ApiCallout endpoint="/api/ldm" />

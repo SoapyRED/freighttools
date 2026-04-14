@@ -169,13 +169,13 @@ export default function HomePage() {
               <Link href="/api-docs" style={{
                 display: 'inline-block',
                 background: 'transparent',
-                color: '#fff',
+                color: 'var(--accent)',
                 padding: '8px 18px',
                 borderRadius: 6,
                 fontSize: 13,
                 fontWeight: 700,
                 textDecoration: 'none',
-                border: '1px solid rgba(255,255,255,0.2)',
+                border: '2px solid var(--accent)',
               }}>
                 View API Docs &rarr;
               </Link>
