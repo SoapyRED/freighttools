@@ -369,7 +369,7 @@ export default function ApiDocsPage() {
   }
 }`} />
             <p style={{ color: '#e87722', fontSize: 13, fontWeight: 600, marginTop: 16, padding: '10px 14px', background: 'rgba(232,119,34,0.08)', borderRadius: 8, border: '1px solid rgba(232,119,34,0.2)' }}>
-              Pro tier endpoint. Free tier: 10 calls/day. Subscribe for higher limits.
+              Pro tier endpoint. Free tier: 25 calls/day. Subscribe for higher limits.
             </p>
           </div>
         </div>
