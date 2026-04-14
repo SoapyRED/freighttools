@@ -17,7 +17,7 @@ const s = {
   hero: { background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' as const },
   h1: { fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 800, color: '#fff', marginBottom: 12 },
   sectionTitle: { fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.3px', marginTop: 40 } as React.CSSProperties,
-  card: { background: '#fff', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden', marginBottom: 32, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as React.CSSProperties,
+  card: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden', marginBottom: 32, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as React.CSSProperties,
   endpointHeader: { background: '#1a2332', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 12 } as React.CSSProperties,
 };
 
@@ -1785,11 +1785,11 @@ Content-Type: application/json
         {/* Field naming */}
         <h2 style={s.sectionTitle}>Field Naming</h2>
         <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>
-          Most endpoints use <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>snake_case</code> field names.
-          <strong> Note:</strong> The <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>/api/containers</code> endpoint
-          uses <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>camelCase</code> field names
-          (e.g. <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>internalLengthCm</code>,{' '}
-          <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>maxGrossKg</code>).
+          Most endpoints use <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>snake_case</code> field names.
+          <strong> Note:</strong> The <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>/api/containers</code> endpoint
+          uses <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>camelCase</code> field names
+          (e.g. <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>internalLengthCm</code>,{' '}
+          <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>maxGrossKg</code>).
         </p>
 
         {/* Rate limiting */}
