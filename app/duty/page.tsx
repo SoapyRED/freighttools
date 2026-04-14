@@ -1,5 +1,6 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import DutyCalc from './DutyCalc';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 export default function DutyPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'UK Import Duty & VAT', path: '/duty' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"UK Import Duty & VAT Calculator","description":"Free UK Import Duty & VAT Calculator. Estimate duty and VAT for any commodity code using GOV.UK Trade Tariff data. REST API available.","url":"https://www.freightutils.com/duty","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
       <PageHero title="UK Import Duty &" titleAccent="VAT" subtitle="Estimate import duty and VAT for any commodity code using live GOV.UK Trade Tariff data" differentiators={['Live GOV.UK tariff data', 'Preferential rates', 'Free API']}>
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>

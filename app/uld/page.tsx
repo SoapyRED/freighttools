@@ -1,5 +1,6 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import { getAllULDs, ULD_COUNT } from '@/lib/calculations/uld';
 import UldSearch from './UldSearch';
 import RelatedTools from '@/app/components/RelatedTools';
@@ -27,6 +28,7 @@ export default function UldPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'ULD Types', path: '/uld' }]) }} />
       <PageHero title="ULD" titleAccent="Types" subtitle="Air cargo unit load device specifications — containers, pallets, and special units" differentiators={['15 ULD types', 'Aircraft compatibility', 'Free API']} />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>

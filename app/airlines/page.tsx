@@ -1,6 +1,7 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import { getSlimIndex, AIRLINE_COUNT, CARGO_AIRLINE_COUNT } from '@/lib/calculations/airlines';
 import AirlineSearch from './AirlineSearch';
 import RelatedTools from '@/app/components/RelatedTools';
@@ -27,6 +28,7 @@ export default function AirlinesPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'Airline Codes & AWB Prefixes', path: '/airlines' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an AWB prefix?","acceptedAnswer":{"@type":"Answer","text":"An AWB (Air Waybill) prefix is a 3-digit code identifying the issuing airline. For example, 176 = Emirates, 020 = Lufthansa. It appears as the first 3 digits of an 11-digit air waybill number."}},{"@type":"Question","name":"What is the difference between IATA and ICAO codes?","acceptedAnswer":{"@type":"Answer","text":"IATA codes are 2-letter designators used commercially (e.g., EK for Emirates). ICAO codes are 3-letter codes used by air traffic control (e.g., UAE for Emirates)."}},{"@type":"Question","name":"Do all airlines have AWB prefixes?","acceptedAnswer":{"@type":"Answer","text":"No. Only airlines with cargo operations have AWB prefixes. Many passenger-only regional carriers don't have them. FreightUtils identifies 390 airlines with verified cargo AWB prefixes."}}]}) }} />
       <PageHero title="Airline Codes &" titleAccent="AWB Prefixes" subtitle="Search airlines by name, IATA code, ICAO code, or AWB prefix" differentiators={['6,352 airlines', 'AWB prefix search', 'Free API']} />
 

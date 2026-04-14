@@ -1,6 +1,7 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import PageHero from '@/app/components/PageHero';
@@ -26,6 +27,7 @@ export default function VehiclesPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'Vehicle & Trailer Types', path: '/vehicles' }]) }} />
       <PageHero title="Vehicle & Trailer" titleAccent="Types" subtitle="Road freight vehicle dimensions, payload limits, and pallet capacity" differentiators={['17 vehicle types', 'EU & US specs', 'Free API']} />
 
       <main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 80px' }}>

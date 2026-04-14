@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import { getAllIncoterms, getAnyMode, getSeaOnly, INCOTERM_COUNT } from '@/lib/calculations/incoterms';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
@@ -26,6 +27,7 @@ export default function IncotermsPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'INCOTERMS 2020', path: '/incoterms' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between FOB and CIF?","acceptedAnswer":{"@type":"Answer","text":"Under FOB, the seller delivers goods on board the vessel and the buyer arranges freight and insurance. Under CIF, the seller pays for both freight and insurance to the destination port."}},{"@type":"Question","name":"Which INCOTERM should I use for containerised cargo?","acceptedAnswer":{"@type":"Answer","text":"The ICC recommends FCA instead of FOB for containerised cargo. FCA aligns the risk transfer point with the actual handover at the terminal."}},{"@type":"Question","name":"Are INCOTERMS legally binding?","acceptedAnswer":{"@type":"Answer","text":"INCOTERMS are not law — they become binding only when both parties incorporate them into their contract. They are widely recognised by courts and arbitration bodies."}},{"@type":"Question","name":"What does DDP mean for VAT and import duties?","acceptedAnswer":{"@type":"Answer","text":"Under DDP, the seller is responsible for all costs including import clearance, duties, and VAT in the destination country."}}]}) }} />
       <PageHero title="INCOTERMS" titleAccent="2020" subtitle="International commercial terms — who pays, who bears risk, where responsibility transfers" differentiators={['All 11 rules', 'Buyer vs seller breakdown', 'Free API']} />
 

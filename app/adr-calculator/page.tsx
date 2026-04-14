@@ -1,6 +1,7 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import { getCalcIndex } from '@/lib/calculations/adr';
 import { SITE_STATS } from '@/lib/constants/siteStats';
 import AdrExemptionCalc from './AdrExemptionCalc';
@@ -26,6 +27,7 @@ export default function AdrCalculatorPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'ADR Exemption Calculator', path: '/adr-calculator' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"ADR 1.1.3.6 Exemption Calculator","description":"Free ADR 1.1.3.6 Exemption Calculator. Calculate exemption points for mixed dangerous goods loads with instant pass/fail results. REST API available.","url":"https://www.freightutils.com/adr-calculator","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
       <script
         type="application/ld+json"

@@ -1,6 +1,7 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import { getSlimIndex, getCalcIndex, ENTRY_COUNT } from '@/lib/calculations/adr';
 import { SITE_STATS } from '@/lib/constants/siteStats';
 import AdrTabs from './AdrTabs';
@@ -29,6 +30,7 @@ export default function AdrPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'ADR Dangerous Goods Lookup', path: '/adr' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context":"https://schema.org",
         "@type":"FAQPage",

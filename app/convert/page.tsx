@@ -1,6 +1,7 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import RelatedTools from '@/app/components/RelatedTools';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 export default function ConvertPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'Unit Converter', path: '/convert' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Freight Unit Converter","description":"Free Freight Unit Converter. Convert chargeable weight, freight tonnes, CBM, and standard weight/dimension units. REST API available.","url":"https://www.freightutils.com/convert","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate chargeable weight for air freight?","acceptedAnswer":{"@type":"Answer","text":"Multiply L × W × H (cm) and divide by 6,000 to get volumetric weight in kg. Compare to actual gross weight — the higher figure is chargeable. Express carriers use 5,000 divisor."}},{"@type":"Question","name":"What is a freight tonne?","acceptedAnswer":{"@type":"Answer","text":"In sea freight, a freight tonne equals 1 CBM or 1,000 kg, whichever is greater. This is the billing unit for ocean freight."}},{"@type":"Question","name":"What is a short ton vs a long ton?","acceptedAnswer":{"@type":"Answer","text":"Short ton (US) = 2,000 lbs (907 kg). Long ton (UK) = 2,240 lbs (1,016 kg). Metric tonne = 2,205 lbs (1,000 kg). The difference is roughly 10%."}},{"@type":"Question","name":"How do I convert CBM to cubic feet?","acceptedAnswer":{"@type":"Answer","text":"Multiply CBM by 35.3147. Example: 2 CBM = 70.63 cubic feet."}}]}) }} />
       <PageHero title="Unit" titleAccent="Converter" subtitle="Convert freight weights, volumes, and dimensions between metric and imperial" differentiators={['Weight, volume & length', 'Freight-specific units', 'Free API']} />

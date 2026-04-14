@@ -1,6 +1,7 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -31,6 +32,7 @@ export default function HsPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'HS Code Lookup', path: '/hs' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an HS code?","acceptedAnswer":{"@type":"Answer","text":"A Harmonized System code is a standardised 6-digit number used internationally to classify traded goods. The first 2 digits = chapter, next 2 = heading, final 2 = subheading."}},{"@type":"Question","name":"How many HS codes are there?","acceptedAnswer":{"@type":"Answer","text":"The WCO HS 2022 contains approximately 5,600 6-digit subheadings across 97 chapters and 21 sections. FreightUtils indexes 6,940 codes including all levels."}}]}) }} />
       <PageHero title="HS Code" titleAccent="Lookup" subtitle="Search and browse Harmonized System commodity codes across 21 sections" differentiators={['6,940 HS 2022 codes', 'Section browser', 'Free API']} />
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import PageHero from '@/app/components/PageHero';
 import ApiCallout from '@/app/components/ApiCallout';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
 export default function LqEqCheckerPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'ADR Dangerous Goods', path: '/adr' }, { name: 'LQ/EQ Checker', path: '/adr/lq-eq-checker' }]) }} />
       <PageHero
         title="LQ/EQ"
         titleAccent="Checker"

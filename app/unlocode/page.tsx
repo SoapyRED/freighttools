@@ -1,5 +1,6 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import UnlocodeSearch from './UnlocodeSearch';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
 export default function UnlocodePage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'UN/LOCODE Lookup', path: '/unlocode' }]) }} />
       <PageHero title="UN/LOCODE" titleAccent="Lookup" subtitle="Search transport locations worldwide — seaports, airports, rail terminals, and inland depots" differentiators={['116,129 locations', '6 facility types', 'Free API']}>
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
           Source: UNECE UN/LOCODE 2024-2 (PDDL)

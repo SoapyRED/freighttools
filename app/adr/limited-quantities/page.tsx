@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import EmailCapture from '@/app/components/EmailCapture';
 
 const ogUrl = '/api/og?title=ADR+Limited+Quantities&desc=LQ+rules,+packaging+and+exemptions+explained';
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 export default function AdrLimitedQuantitiesPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'ADR Dangerous Goods', path: '/adr' }, { name: 'Limited Quantities Guide', path: '/adr/limited-quantities' }]) }} />
       {/* Hero */}
       <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>

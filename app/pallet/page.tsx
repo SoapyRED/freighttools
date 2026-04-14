@@ -2,6 +2,7 @@ import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PalletFittingCalc from './PalletFittingCalc';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import palletsData from '@/lib/data/pallets.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 export default function PalletPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'Pallet Fitting Calculator', path: '/pallet' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Pallet Fitting Calculator","description":"Free Pallet Fitting Calculator. Calculate how many boxes fit on a pallet with layer-by-layer stacking for 15 pallet types. REST API available.","url":"https://www.freightutils.com/pallet","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many Euro pallets fit in a 13.6m trailer?","acceptedAnswer":{"@type":"Answer","text":"33 Euro pallets in a single floor layer. Double-stacked: up to 66, subject to height (max 2.7m internal) and weight limits (24,000 kg payload)."}},{"@type":"Question","name":"What is the maximum pallet height for road freight?","acceptedAnswer":{"@type":"Answer","text":"Standard trailers have 2.65–2.70m internal height. Mega/jumbo trailers offer up to 3.0m. After deducting pallet deck height (~15 cm), usable stacking height is typically 2.50–2.55m."}},{"@type":"Question","name":"Can boxes overhang the pallet edge?","acceptedAnswer":{"@type":"Answer","text":"Minor overhang (1–2 cm) is common but reduces stacking stability. Significant overhang risks damage during transport and may not fit standard racking."}},{"@type":"Question","name":"Which pallet type should I use for air freight?","acceptedAnswer":{"@type":"Answer","text":"Air freight uses IATA ULD pallets (e.g., PMC P6P at 318×244 cm) rather than standard Euro or UK pallets. These are designed to fit aircraft cargo holds."}}]}) }} />
       <PageHero title="Pallet Fitting" titleAccent="Calculator" subtitle="Calculate how many boxes fit on a pallet with layer-by-layer stacking" differentiators={['Layer-by-layer stacking', 'Rotation optimisation', 'Free API']} />

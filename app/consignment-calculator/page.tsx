@@ -1,5 +1,6 @@
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import ConsignmentCalc from './ConsignmentCalc';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
 export default function ConsignmentPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'Consignment Calculator', path: '/consignment-calculator' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Consignment Calculator","description":"Free Consignment Calculator. Calculate total CBM, weight, loading metres and chargeable weight for mixed consignments. REST API available.","url":"https://www.freightutils.com/consignment-calculator","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
       <PageHero title="Multi-Item Consignment" titleAccent="Calculator" subtitle="Calculate total CBM, weight, loading metres and chargeable weight for mixed consignments" differentiators={['Mixed items & pallet types', 'Vehicle suggestions', 'Free API']} />
       <div style={{ textAlign: 'center', marginTop: -24, marginBottom: 8 }}>

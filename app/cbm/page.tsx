@@ -2,6 +2,7 @@ import ErrorBoundary from '@/app/components/ErrorBoundary';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import CbmCalc from './CbmCalc';
+import { breadcrumbSchema } from '@/lib/schema/breadcrumbs';
 import containersData from '@/lib/data/containers.json';
 import RelatedTools from '@/app/components/RelatedTools';
 import DataTimestamp from '@/app/components/DataTimestamp';
@@ -28,6 +29,7 @@ const airUlds       = containersData.filter(c => c.category === 'air');
 export default function CbmPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'CBM Calculator', path: '/cbm' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"CBM Calculator","description":"Free CBM Calculator. Calculate cubic metres for sea freight, air freight, and container loading. REST API available.","url":"https://www.freightutils.com/cbm","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many CBM fit in a 20ft container?","acceptedAnswer":{"@type":"Answer","text":"A 20ft standard container has approximately 33.2 CBM of internal capacity. In practice, you'll use 25–28 CBM due to packaging gaps and stacking constraints."}},{"@type":"Question","name":"How is CBM used in air freight?","acceptedAnswer":{"@type":"Answer","text":"In air freight, CBM is used to calculate volumetric weight: multiply L × W × H (cm) and divide by 6,000 to get kg. Airlines charge the higher of actual vs volumetric weight."}},{"@type":"Question","name":"What is the difference between CBM and cubic feet?","acceptedAnswer":{"@type":"Answer","text":"1 CBM = 35.3147 cubic feet. CBM is the international standard; cubic feet is used mainly in US domestic freight."}},{"@type":"Question","name":"What does revenue tonne mean?","acceptedAnswer":{"@type":"Answer","text":"In sea freight, a revenue tonne equals 1 CBM or 1,000 kg, whichever is greater. This is the billing unit for ocean freight."}}]}) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate CBM","step":[{"@type":"HowToStep","name":"Enter dimensions","text":"Enter the length, width, and height of one piece in centimetres"},{"@type":"HowToStep","name":"Enter quantity","text":"Enter the number of identical pieces"},{"@type":"HowToStep","name":"Read results","text":"Read the total CBM and equivalent volumes"}]}) }} />
