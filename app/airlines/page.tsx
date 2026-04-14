@@ -125,6 +125,48 @@ export default function AirlinesPage() {
 
         </div>
 
+        {/* Common AWB Prefix Lookup */}
+        <div style={{ marginTop: 48, marginBottom: 32 }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 8, letterSpacing: '-0.3px' }}>
+            Common AWB Prefix Lookup
+          </h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: 14, marginBottom: 16, lineHeight: 1.5 }}>
+            Quick reference for the most frequently searched air waybill prefixes.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 10 }}>
+            {[
+              { prefix: '176', airline: 'Emirates', iata: 'EK' },
+              { prefix: '006', airline: 'Delta Air Lines', iata: 'DL' },
+              { prefix: '074', airline: 'KLM Royal Dutch Airlines', iata: 'KL' },
+              { prefix: '057', airline: 'Air France', iata: 'AF' },
+              { prefix: '020', airline: 'Lufthansa', iata: 'LH' },
+              { prefix: '125', airline: 'British Airways', iata: 'BA' },
+              { prefix: '160', airline: 'Cathay Pacific', iata: 'CX' },
+              { prefix: '235', airline: 'Turkish Airlines', iata: 'TK' },
+              { prefix: '618', airline: 'Singapore Airlines', iata: 'SQ' },
+              { prefix: '205', airline: 'Cargolux', iata: 'CV' },
+            ].map(a => (
+              <Link key={a.prefix} href={`/airlines?q=${a.prefix}`} style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
+                padding: '12px 14px', textDecoration: 'none',
+                transition: 'border-color 0.2s',
+              }} className="pricing-card">
+                <span style={{
+                  background: '#1a2332', color: '#e87722', fontWeight: 700, fontSize: 14,
+                  padding: '4px 10px', borderRadius: 6, fontFamily: 'monospace', flexShrink: 0,
+                }}>
+                  {a.prefix}
+                </span>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--text)', lineHeight: 1.3 }}>{a.airline}</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-faint)' }}>IATA: {a.iata}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         <DataTimestamp text="Airline data last verified April 2026" />
         <ToolDisclaimer text="Airline data compiled from public IATA/ICAO sources. Verify current codes with your carrier or IATA." />
         <NewsletterCapture />

@@ -328,6 +328,48 @@ export default function AdrPage() {
 
         </div>
 
+        {/* Most Searched Substances */}
+        <div style={{ marginTop: 48 }}>
+          <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 8, letterSpacing: '-0.3px' }}>
+            Most Searched Substances
+          </h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: 14, marginBottom: 16, lineHeight: 1.5 }}>
+            Quick access to the most commonly looked up UN numbers in ADR 2025.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 10 }}>
+            {[
+              { un: '1203', name: 'Petrol / Gasoline', cls: '3' },
+              { un: '1202', name: 'Diesel Fuel', cls: '3' },
+              { un: '1263', name: 'Paint', cls: '3' },
+              { un: '3481', name: 'Lithium Ion Batteries (in equipment)', cls: '9' },
+              { un: '1950', name: 'Aerosols', cls: '2' },
+              { un: '3082', name: 'Environmentally Hazardous Substance', cls: '9' },
+              { un: '1993', name: 'Flammable Liquid NOS', cls: '3' },
+              { un: '2794', name: 'Batteries, Wet (acid)', cls: '8' },
+              { un: '1090', name: 'Acetone', cls: '3' },
+              { un: '3480', name: 'Lithium Ion Batteries', cls: '9' },
+            ].map(s => (
+              <Link key={s.un} href={`/adr/un/${s.un}`} style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
+                padding: '12px 14px', textDecoration: 'none',
+                transition: 'border-color 0.2s',
+              }} className="pricing-card">
+                <span style={{
+                  background: '#1a2332', color: '#e87722', fontWeight: 700, fontSize: 13,
+                  padding: '4px 10px', borderRadius: 6, fontFamily: 'monospace', flexShrink: 0,
+                }}>
+                  {s.un}
+                </span>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--text)', lineHeight: 1.3 }}>{s.name}</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-faint)' }}>Class {s.cls}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Learn More */}
         <div style={{ marginTop: 48 }}>
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.3px' }}>

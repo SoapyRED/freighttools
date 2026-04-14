@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import {
   lookupByUnNumber,
   getAllUnNumbers,
+  filterByClass,
   type AdrEntry,
 } from '@/lib/calculations/adr';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
@@ -473,6 +474,86 @@ export default async function UnNumberPage(
             showHeader={hasVariants}
           />
         ))}
+
+        {/* Quick check CTA */}
+        <Link
+          href={`/adr-calculator?un=${primary.un_number}`}
+          style={{
+            display: 'block',
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border)',
+            borderRadius: 12,
+            padding: '16px 20px',
+            marginBottom: 24,
+            textDecoration: 'none',
+            transition: 'border-color 0.2s, box-shadow 0.2s',
+          }}
+          className="pricing-card"
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+            <div>
+              <div style={{ fontWeight: 700, color: 'var(--text)', fontSize: 15, marginBottom: 2 }}>
+                Check if UN {primary.un_number} qualifies for 1.1.3.6 exemption
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
+                Calculate small load points and check exemption thresholds
+              </div>
+            </div>
+            <span style={{ color: '#e87722', fontWeight: 700, fontSize: 14, flexShrink: 0 }}>
+              Open calculator →
+            </span>
+          </div>
+        </Link>
+
+        {/* Related substances in same hazard class */}
+        {(() => {
+          const classKey = primary.class.split('.')[0];
+          const className = CLASS_NAMES[classKey] ?? `Class ${primary.class}`;
+          const related = filterByClass(classKey, 30)
+            .filter(e => e.un_number !== primary.un_number && e.variant_index === 0)
+            .filter((e, i, arr) => arr.findIndex(x => x.un_number === e.un_number) === i)
+            .slice(0, 5);
+
+          if (related.length === 0) return null;
+
+          return (
+            <div style={{ marginBottom: 32 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
+                Other {className} (Class {classKey})
+              </h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10 }}>
+                {related.map(r => {
+                  const shortPSN = r.proper_shipping_name.length > 35
+                    ? r.proper_shipping_name.slice(0, 32) + '…'
+                    : r.proper_shipping_name;
+                  return (
+                    <Link
+                      key={r.un_number}
+                      href={`/adr/un/${r.un_number}`}
+                      style={{
+                        display: 'block',
+                        background: 'var(--bg-card)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 10,
+                        padding: '12px 14px',
+                        textDecoration: 'none',
+                        transition: 'border-color 0.2s',
+                      }}
+                      className="pricing-card"
+                    >
+                      <div style={{ fontWeight: 700, fontSize: 14, color: '#e87722', marginBottom: 2 }}>
+                        UN {r.un_number}
+                      </div>
+                      <div style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                        {shortPSN}
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* API callout */}
         <div style={{
