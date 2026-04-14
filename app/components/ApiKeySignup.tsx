@@ -101,7 +101,7 @@ export default function ApiKeySignup() {
           disabled={status === 'loading'}
           style={{
             background: 'var(--accent)',
-            color: '#fff',
+            color: '#000',
             border: 'none',
             borderRadius: 8,
             padding: '10px 24px',

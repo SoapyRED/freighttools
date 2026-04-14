@@ -20,8 +20,8 @@
   --grey-400: #8f9ab0;
   --grey-600: #5a6478;
   --text: #1e2535;
-  --text-muted: #5a6478;
-  --text-faint: #8f9ab0;
+  --text-muted: #4a5568;
+  --text-faint: #6b7280;
   --bg: #f7f8fa;
   --bg-card: #ffffff;
   --border: #d8dce6;
@@ -503,7 +503,7 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
 /* ─── Announcement banner ───────────────────────────────────────── */
 .announce-banner {
   background: linear-gradient(90deg, #e87722, #f0a050);
-  color: #fff;
+  color: #000;
   font-size: 13px;
   font-weight: 600;
   text-align: center;
@@ -513,7 +513,7 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
 }
 
 .announce-banner a {
-  color: #fff;
+  color: #000;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -533,7 +533,7 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
 }
 
 .announce-banner-close:hover {
-  color: #fff;
+  color: #000;
 }
 
 /* ─── Terminal animation ────────────────────────────────────────── */

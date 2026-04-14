@@ -368,7 +368,7 @@ export default function ApiDocsPage() {
     "duty": "GOV.UK Trade Tariff API"
   }
 }`} />
-            <p style={{ color: '#e87722', fontSize: 13, fontWeight: 600, marginTop: 16, padding: '10px 14px', background: 'rgba(232,119,34,0.08)', borderRadius: 8, border: '1px solid rgba(232,119,34,0.2)' }}>
+            <p style={{ color: 'var(--text)', fontSize: 13, fontWeight: 600, marginTop: 16, padding: '10px 14px', background: 'rgba(232,119,34,0.08)', borderRadius: 8, border: '1px solid rgba(232,119,34,0.2)' }}>
               Pro tier endpoint. Free tier: 25 calls/day. Subscribe for higher limits.
             </p>
           </div>
@@ -1812,7 +1812,7 @@ Content-Type: application/json
           ].map(err => (
             <div key={err.code} style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8, padding: '14px 18px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                <span style={{ background: err.code === '400' ? '#f59e0b' : err.code === '404' ? '#6b7280' : '#ef4444', color: '#fff', fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 4, fontFamily: 'monospace' }}>{err.code}</span>
+                <span style={{ background: err.code === '400' ? '#f59e0b' : err.code === '404' ? '#6b7280' : '#ef4444', color: err.code === '400' ? '#000' : '#fff', fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 4, fontFamily: 'monospace' }}>{err.code}</span>
                 <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{err.label}</span>
                 <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>— {err.desc}</span>
               </div>
