@@ -11,7 +11,7 @@ import NewsletterCapture from '@/app/components/NewsletterCapture';
 const ogUrl = '/api/og?title=Consignment+Calculator&desc=Multi-item+CBM,+weight,+LDM+and+chargeable+weight&api=POST+/api/consignment';
 
 export const metadata: Metadata = {
-  title: 'Multi-Item Consignment Calculator — FreightUtils',
+  title: 'Multi-Item Consignment Calculator',
   description: 'Multi-item freight calculator — total CBM, weight, LDM and chargeable weight for mixed consignments. Add unlimited lines. Free, no signup, REST API.',
   alternates: { canonical: 'https://www.freightutils.com/consignment-calculator' },
   openGraph: {

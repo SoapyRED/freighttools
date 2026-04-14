@@ -6,7 +6,7 @@ import NewsletterCapture from '@/app/components/NewsletterCapture';
 const ogUrl = '/api/og?title=About+FreightUtils&desc=Free+freight+calculators+and+open+APIs+for+the+logistics+industry';
 
 export const metadata: Metadata = {
-  title: 'About FreightUtils — Free Freight Tools & API Platform',
+  title: 'About — Free Freight Tools & API Platform',
   description:
     `${SITE_STATS.toolCount} free freight calculators and open REST APIs for logistics professionals, developers, and AI agents. LDM, CBM, ADR, HS codes and more.`,
   alternates: { canonical: 'https://www.freightutils.com/about' },

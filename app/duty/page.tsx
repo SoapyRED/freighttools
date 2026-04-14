@@ -10,7 +10,7 @@ import NewsletterCapture from '@/app/components/NewsletterCapture';
 const ogUrl = '/api/og?title=UK+Import+Duty+Calculator&desc=Estimate+duty+and+VAT+for+UK+imports&api=POST+/api/duty';
 
 export const metadata: Metadata = {
-  title: 'UK Import Duty & VAT Calculator — FreightUtils',
+  title: 'UK Import Duty & VAT Calculator',
   description: 'Estimate UK import duty, VAT and total landed cost for any commodity code. Live GOV.UK tariff data, preference rates. Free tool with REST API.',
   alternates: { canonical: 'https://www.freightutils.com/duty' },
   openGraph: {

@@ -11,7 +11,7 @@ import { SITE_STATS } from '@/lib/constants/siteStats';
 const ogUrl = '/api/og?title=UN/LOCODE+Lookup&desc=116,000+transport+locations+worldwide&api=GET+/api/unlocode';
 
 export const metadata: Metadata = {
-  title: 'UN/LOCODE Lookup — FreightUtils',
+  title: 'UN/LOCODE Lookup',
   description: `Search ${SITE_STATS.unlocodeCount.toLocaleString()}+ UN/LOCODE transport locations worldwide. Ports, airports, rail terminals, and inland depots. Free lookup with REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/unlocode' },
   openGraph: {

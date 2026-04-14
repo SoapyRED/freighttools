@@ -12,7 +12,7 @@ import { getAllVehicles, VEHICLE_REF_COUNT } from '@/lib/calculations/vehicle-re
 const ogUrl = '/api/og?title=Vehicle+%26+Trailer+Types&desc=17+vehicle+specs+with+dimensions+%26+payload&api=GET+/api/vehicles';
 
 export const metadata: Metadata = {
-  title: 'Road Freight Vehicle & Trailer Types — FreightUtils',
+  title: 'Road Freight Vehicle & Trailer Types',
   description: `Free reference for ${VEHICLE_REF_COUNT} road freight vehicles and trailers — dimensions, payload, pallet capacity. EU and US specs with REST API.`,
   alternates: { canonical: 'https://www.freightutils.com/vehicles' },
   openGraph: {

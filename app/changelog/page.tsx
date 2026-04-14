@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Changelog — FreightUtils',
+  title: 'Changelog',
   description: 'FreightUtils changelog — data updates, new tools, and API changes. Actively maintained freight data and APIs.',
   alternates: { canonical: 'https://www.freightutils.com/changelog' },
 };
