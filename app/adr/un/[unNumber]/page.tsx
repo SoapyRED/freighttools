@@ -8,6 +8,9 @@ import {
   type AdrEntry,
 } from '@/lib/calculations/adr';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import DataTimestamp from '@/app/components/DataTimestamp';
+import NewsletterCapture from '@/app/components/NewsletterCapture';
+import RelatedTools from '@/app/components/RelatedTools';
 
 // ─────────────────────────────────────────────────────────────────
 //  Static generation — one page per unique UN number
@@ -592,7 +595,14 @@ export default async function UnNumberPage(
           </Link>
         </div>
 
+        <DataTimestamp text="Data: UNECE ADR 2025, licensed from Labeline.com. Last verified April 2026" />
         <ToolDisclaimer text="ADR reference data only. Classification is the consignor's legal responsibility. Consult a DGSA for compliance decisions." />
+        <NewsletterCapture />
+        <RelatedTools tools={[
+          { href: '/adr-calculator', label: 'ADR 1.1.3.6 Exemption Calculator' },
+          { href: '/adr/lq-eq-checker', label: 'LQ/EQ Checker' },
+          { href: '/adr', label: 'ADR Dangerous Goods Lookup' },
+        ]} />
 
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 20, lineHeight: 1.6 }}>
           Found an error?{' '}
@@ -610,7 +620,7 @@ export default async function UnNumberPage(
         }}>
           {prev ? (
             <Link href={`/adr/un/${prev}`} style={{
-              background: '#fff',
+              background: 'var(--bg-card)',
               border: '1px solid var(--border)',
               borderRadius: 8,
               padding: '11px 16px',
@@ -641,7 +651,7 @@ export default async function UnNumberPage(
 
           {next ? (
             <Link href={`/adr/un/${next}`} style={{
-              background: '#fff',
+              background: 'var(--bg-card)',
               border: '1px solid var(--border)',
               borderRadius: 8,
               padding: '11px 16px',
