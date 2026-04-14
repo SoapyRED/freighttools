@@ -110,6 +110,7 @@ export default function UldSearch({ data }: Props) {
           onChange={e => { setQuery(e.target.value); }}
           placeholder="Search by code, name, or aircraft — e.g. AKE, LD3, B777"
           autoFocus
+          aria-label="Search ULD types by code, name, or aircraft"
           style={{
             width: '100%',
             padding: '14px 16px 14px 46px',

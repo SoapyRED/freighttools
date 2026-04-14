@@ -233,6 +233,7 @@ export default function AdrSearch({ index }: Props) {
           onChange={e => { setQuery(e.target.value); if (mode === 'browse') setMode('search'); }}
           placeholder="UN number or substance name — e.g. 1203 or gasoline"
           autoFocus
+          aria-label="Search by UN number or substance name"
           style={{
             width: '100%', padding: '14px 16px 14px 46px', fontSize: 16,
             fontFamily: "'Outfit', sans-serif", fontWeight: 500,

@@ -118,6 +118,7 @@ export default function VehicleSearch({ vehicles }: Props) {
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search vehicles — e.g. curtainsider, 7.5t, refrigerated..."
+          aria-label="Search vehicle and trailer types"
           style={{
             width: '100%', padding: '14px 16px', fontSize: 16,
             fontFamily: "'Outfit', sans-serif", fontWeight: 500,

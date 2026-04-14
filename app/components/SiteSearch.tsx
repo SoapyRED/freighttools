@@ -105,6 +105,7 @@ export default function SiteSearch() {
         onChange={e => { setQuery(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
         placeholder="Search tools, HS codes, UN numbers..."
+        aria-label="Search tools, HS codes, and UN numbers"
         style={{
           width: 200,
           padding: '6px 12px 6px 30px',

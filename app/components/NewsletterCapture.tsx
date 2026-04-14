@@ -84,6 +84,7 @@ export default function NewsletterCapture() {
           onChange={e => setEmail(e.target.value)}
           placeholder="you@company.com"
           required
+          aria-label="Email address for newsletter"
           style={{
             flex: 1,
             minWidth: 200,

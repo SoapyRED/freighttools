@@ -143,6 +143,7 @@ export default function AirlineSearch({ index }: Props) {
           onChange={e => setQuery(e.target.value)}
           placeholder="Search by name, code, or AWB prefix — e.g. Emirates, EK, or 176"
           autoFocus
+          aria-label="Search airlines by name, code, or AWB prefix"
           style={{
             width: '100%',
             padding: '14px 16px 14px 46px',

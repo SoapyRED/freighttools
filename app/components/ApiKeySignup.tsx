@@ -83,6 +83,7 @@ export default function ApiKeySignup() {
             onChange={e => setEmail(e.target.value)}
             placeholder="you@company.com"
             required
+            aria-label="Email address for API key"
             style={{
               flex: 1,
               minWidth: 240,
@@ -121,6 +122,7 @@ export default function ApiKeySignup() {
           value={useCase}
           onChange={e => setUseCase(e.target.value)}
           placeholder="What are you building? (optional) e.g. TMS integration, freight quoting tool..."
+          aria-label="What are you building (optional)"
           maxLength={200}
           style={{
             width: '100%',

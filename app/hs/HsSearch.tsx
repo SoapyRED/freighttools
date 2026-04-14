@@ -174,6 +174,7 @@ export default function HsSearch({ index }: Props) {
           onChange={e => { setQuery(e.target.value); setPage(0); }}
           placeholder="Search by product description or HS code — e.g. coffee, 0901, steel"
           autoFocus
+          aria-label="Search HS codes by product description"
           style={{
             width: '100%', padding: '14px 16px 14px 46px', fontSize: 16,
             fontFamily: "'Outfit', sans-serif", fontWeight: 500,

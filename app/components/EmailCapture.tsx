@@ -123,6 +123,7 @@ export default function EmailCapture() {
             onChange={e => setEmail(e.target.value)}
             placeholder="Enter your email"
             required
+            aria-label="Email address"
             style={{
               padding: '10px 16px', borderRadius: 8, border: '1px solid #374151',
               background: '#0f1724', color: '#fff', fontSize: 14, minWidth: 240,
