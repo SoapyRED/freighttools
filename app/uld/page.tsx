@@ -27,7 +27,7 @@ export default function UldPage() {
 
   return (
     <>
-      <PageHero title="ULD" titleAccent="Types" subtitle="Air cargo unit load device specifications — containers, pallets, and special units" />
+      <PageHero title="ULD" titleAccent="Types" subtitle="Air cargo unit load device specifications — containers, pallets, and special units" differentiators={['15 ULD types', 'Aircraft compatibility', 'Free API']} />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 

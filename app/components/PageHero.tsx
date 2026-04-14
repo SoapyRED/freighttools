@@ -5,6 +5,8 @@ interface PageHeroProps {
   titleAccent?: string;
   subtitle: string;
   badge?: string;
+  /** Short differentiator phrases shown as a dot-separated strip below the subtitle */
+  differentiators?: string[];
   children?: ReactNode;
 }
 
@@ -13,7 +15,7 @@ interface PageHeroProps {
  * Navy background with gradient glow, large title with optional
  * gradient accent word, subtitle, and optional badge pill.
  */
-export default function PageHero({ title, titleAccent, subtitle, badge, children }: PageHeroProps) {
+export default function PageHero({ title, titleAccent, subtitle, badge, differentiators, children }: PageHeroProps) {
   return (
     <div style={{
       background: 'var(--navy)',
@@ -58,6 +60,16 @@ export default function PageHero({ title, titleAccent, subtitle, badge, children
         }}>
           {subtitle}
         </p>
+        {differentiators && differentiators.length > 0 && (
+          <p style={{
+            fontSize: 13,
+            color: 'rgba(255,255,255,0.45)',
+            marginTop: 10,
+            letterSpacing: '0.2px',
+          }}>
+            {differentiators.join(' \u00B7 ')}
+          </p>
+        )}
         {badge && (
           <div style={{
             display: 'inline-block',

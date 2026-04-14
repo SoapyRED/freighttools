@@ -52,7 +52,7 @@ export default function AdrCalculatorPage() {
           ]
         }) }}
       />
-      <PageHero title="ADR 1.1.3.6" titleAccent="Exemption Calculator" subtitle="Check if your mixed dangerous goods load qualifies for the small load exemption" badge="ADR 2025" />
+      <PageHero title="ADR 1.1.3.6" titleAccent="Exemption Calculator" subtitle="Check if your mixed dangerous goods load qualifies for the small load exemption" badge="ADR 2025" differentiators={['Mixed load scoring', 'All transport categories', 'Free API']} />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 

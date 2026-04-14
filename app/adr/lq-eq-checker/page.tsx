@@ -29,6 +29,7 @@ export default function LqEqCheckerPage() {
         titleAccent="Checker"
         subtitle="Check Limited & Excepted Quantity eligibility for mixed dangerous goods consignments"
         badge="ADR 2025"
+        differentiators={['Batch multi-item check', 'LQ & EQ modes', 'Free API']}
       />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '24px 20px 80px' }}>

@@ -112,7 +112,7 @@ export default function LdmCalc() {
 
   return (
     <>
-      <PageHero title="Loading Metres" titleAccent="Calculator" subtitle="Calculate LDM for European and North American trailer standards" />
+      <PageHero title="Loading Metres" titleAccent="Calculator" subtitle="Calculate LDM for European and North American trailer standards" differentiators={['Euro, UK & US trailers', 'Stackability', 'Free API']} />
 
       <main style={s.main}>
         {/* ── INPUT CARD ── */}

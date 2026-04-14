@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function UnlocodePage() {
   return (
     <>
-      <PageHero title="UN/LOCODE" titleAccent="Lookup" subtitle="Search transport locations worldwide — seaports, airports, rail terminals, and inland depots">
+      <PageHero title="UN/LOCODE" titleAccent="Lookup" subtitle="Search transport locations worldwide — seaports, airports, rail terminals, and inland depots" differentiators={['116,129 locations', '6 facility types', 'Free API']}>
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
           Source: UNECE UN/LOCODE 2024-2 (PDDL)
         </div>

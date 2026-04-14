@@ -41,7 +41,7 @@ export default function AdrPage() {
           {"@type":"Question","name":"Can I use this data via API?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every UN number is accessible via the free REST API at /api/adr. No authentication required. Query by UN number (?un=1203) or search by name (?q=petrol). Full documentation at /api-docs."}}
         ]
       }) }} />
-      <PageHero title="ADR Dangerous Goods" titleAccent="Lookup" subtitle="Search dangerous goods by UN number, substance name, or hazard class" badge="ADR 2025" />
+      <PageHero title="ADR Dangerous Goods" titleAccent="Lookup" subtitle="Search dangerous goods by UN number, substance name, or hazard class" badge="ADR 2025" differentiators={['2,939 ADR 2025 entries', 'Free API', 'No signup required']} />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 

@@ -26,7 +26,7 @@ export default function VehiclesPage() {
 
   return (
     <>
-      <PageHero title="Vehicle & Trailer" titleAccent="Types" subtitle="Road freight vehicle dimensions, payload limits, and pallet capacity" />
+      <PageHero title="Vehicle & Trailer" titleAccent="Types" subtitle="Road freight vehicle dimensions, payload limits, and pallet capacity" differentiators={['17 vehicle types', 'EU & US specs', 'Free API']} />
 
       <main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 80px' }}>
 
