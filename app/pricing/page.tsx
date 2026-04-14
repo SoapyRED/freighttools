@@ -259,6 +259,37 @@ export default function PricingPage() {
           </div>
         </div>
 
+        {/* What people build */}
+        <div style={{ marginBottom: 48 }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 20 }}>
+            What people build with FreightUtils
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+            {[
+              {
+                title: 'TMS Integration',
+                desc: 'Freight forwarders embed LDM and chargeable weight calculations directly into their transport management systems. One API call replaces manual spreadsheet work.',
+              },
+              {
+                title: 'DG Compliance Checks',
+                desc: 'Logistics companies automate ADR 1.1.3.6 exemption checks before dispatch. The API validates mixed loads in seconds instead of minutes with the ADR book.',
+              },
+              {
+                title: 'AI Agent Workflows',
+                desc: 'Developers connect the MCP server to Claude, GPT, and other AI agents for freight planning automation. The only freight-native MCP server available.',
+              },
+            ].map(c => (
+              <div key={c.title} style={{
+                background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
+                padding: '24px 20px',
+              }}>
+                <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{c.title}</div>
+                <div style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* FAQ */}
         <div style={{ marginBottom: 48 }}>
           <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 20 }}>
