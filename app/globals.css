@@ -820,9 +820,6 @@ button:active:not(:disabled) { transform: scale(0.98); }
   border-color: var(--accent) !important;
   outline: none;
 }
-.pricing-card--recommended:hover, .pricing-card--recommended:focus-visible {
-  box-shadow: 0 0 30px rgba(255, 165, 0, 0.4);
-}
 .pricing-card:active {
   transform: scale(0.97);
   transition: transform 0.1s ease;
