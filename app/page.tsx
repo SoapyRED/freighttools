@@ -82,7 +82,7 @@ export default function HomePage() {
             fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: '2.5px',
-            color: 'var(--text-faint)',
+            color: 'var(--accent)',
             marginBottom: 20,
           }}>
             Freight Calculators &amp; APIs
@@ -107,7 +107,7 @@ export default function HomePage() {
           </h1>
           <p style={{
             fontSize: 'clamp(15px, 2.5vw, 18px)',
-            color: 'var(--text-faint)',
+            color: 'rgba(255,255,255,0.75)',
             maxWidth: 620,
             margin: '0 auto 28px',
             lineHeight: 1.65,
@@ -137,13 +137,13 @@ export default function HomePage() {
               <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
                 Freight Tools
               </div>
-              <div style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.5, marginBottom: 14 }}>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.5, marginBottom: 14 }}>
                 Free calculators for LDM, CBM, chargeable weight, ADR compliance, and more
               </div>
               <Link href="/ldm" style={{
                 display: 'inline-block',
                 background: 'var(--accent)',
-                color: '#fff',
+                color: '#000',
                 padding: '8px 18px',
                 borderRadius: 6,
                 fontSize: 13,
@@ -163,7 +163,7 @@ export default function HomePage() {
               <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
                 Developer API
               </div>
-              <div style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.5, marginBottom: 14 }}>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.5, marginBottom: 14 }}>
                 {SITE_STATS.apiEndpointCount} REST endpoints, MCP server, OpenAPI spec. No signup required.
               </div>
               <Link href="/api-docs" style={{
@@ -196,7 +196,7 @@ export default function HomePage() {
           gap: 24, flexWrap: 'wrap', padding: '14px 0',
           borderBottom: '1px solid var(--border-light)',
         }}>
-          <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)' }}>
+          <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-muted)' }}>
             Available on
           </span>
           {[
@@ -277,7 +277,7 @@ export default function HomePage() {
           <section>
             <div style={{
               fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+              letterSpacing: '2px', color: 'var(--text-muted)', marginBottom: 12,
             }}>
               For Freight Professionals
             </div>
@@ -320,7 +320,7 @@ export default function HomePage() {
           <section>
             <div style={{
               fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+              letterSpacing: '2px', color: 'var(--text-muted)', marginBottom: 12,
             }}>
               Common Freight Workflows
             </div>
@@ -383,7 +383,7 @@ export default function HomePage() {
           <section>
             <div style={{
               fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+              letterSpacing: '2px', color: 'var(--text-muted)', marginBottom: 12,
             }}>
               For Developers
             </div>
@@ -432,7 +432,7 @@ export default function HomePage() {
           <section>
             <div style={{
               fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 12,
+              letterSpacing: '2px', color: 'var(--text-muted)', marginBottom: 12,
             }}>
               For AI Agents
             </div>
@@ -468,7 +468,7 @@ export default function HomePage() {
           <section>
             <div style={{
               fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '2px', color: 'var(--text-faint)', marginBottom: 16,
+              letterSpacing: '2px', color: 'var(--text-muted)', marginBottom: 16,
             }}>
               Data Sources
             </div>
