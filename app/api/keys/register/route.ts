@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { kv } from '@vercel/kv';
 import { Resend } from 'resend';
+import { initWelcomeSequence } from '@/lib/email/welcome';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -84,6 +85,11 @@ export async function POST(req: NextRequest) {
         console.error('[API Key] Email send failed:', err);
       });
 
+      // Start welcome drip sequence (emails 2 & 3 sent by cron)
+      await initWelcomeSequence(email).catch((err) => {
+        console.error('[API Key] Welcome sequence init failed:', err);
+      });
+
       // Add to audience
       const audienceId = process.env.RESEND_AUDIENCE_ID;
       if (audienceId) {
@@ -137,6 +143,9 @@ async function sendKeyEmail(resend: Resend, email: string, apiKey: string, useCa
           <p style="font-size: 13px; color: #9ca3af; margin: 0;">
             Need higher limits? Pro tier (50,000/month) &mdash;
             <a href="mailto:contact@freightutils.com" style="color: #e87722;">contact@freightutils.com</a>
+          </p>
+          <p style="font-size: 13px; color: #9ca3af; margin: 12px 0 0;">
+            Over the next few days, we'll send you a couple of tips to get the most from FreightUtils. Reply anytime &mdash; we read every email.
           </p>
         </div>
       </div>
