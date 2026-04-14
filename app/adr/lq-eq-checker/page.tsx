@@ -4,6 +4,7 @@ import ApiCallout from '@/app/components/ApiCallout';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import RelatedTools from '@/app/components/RelatedTools';
 import ToolDisclaimer from '@/app/components/ToolDisclaimer';
+import DataTimestamp from '@/app/components/DataTimestamp';
 import ApiCtaBanner from '@/app/components/ApiCtaBanner';
 import NewsletterCapture from '@/app/components/NewsletterCapture';
 import LqEqChecker from './LqEqChecker';
@@ -127,10 +128,11 @@ export default function LqEqCheckerPage() {
           </p>
         </div>
 
-        <NewsletterCapture />
-
         <ApiCallout method="POST" endpoint="/api/adr/lq-check" example='POST /api/adr/lq-check { "mode": "lq", "items": [{ "un_number": "1203", "quantity": 0.5, "unit": "L" }] }' />
-
+        <ApiCtaBanner />
+        <DataTimestamp text="Data: UNECE ADR 2025, licensed from Labeline.com. Last verified April 2026" />
+        <ToolDisclaimer text="This tool is for reference only. Always verify dangerous goods classifications with a certified DGSA for operational transport." />
+        <NewsletterCapture />
         <div style={{ marginTop: 24 }}>
           <RelatedTools tools={[
             { href: '/adr', label: 'ADR Dangerous Goods Lookup' },
@@ -138,9 +140,6 @@ export default function LqEqCheckerPage() {
             { href: '/adr/limited-quantities', label: 'Limited Quantities Guide' },
           ]} />
         </div>
-
-        <ApiCtaBanner />
-        <ToolDisclaimer text="This tool is for reference only. Always verify dangerous goods classifications with a certified DGSA for operational transport." />
       </main>
     </>
   );
