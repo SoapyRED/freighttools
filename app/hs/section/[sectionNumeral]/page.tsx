@@ -21,7 +21,7 @@ export async function generateMetadata(
   const ogUrl = `/api/og?title=${encodeURIComponent(`HS Section ${section.numeral.toUpperCase()}`)}&desc=${encodeURIComponent(section.name)}&badge=HS`;
 
   return {
-    title: `HS Section ${section.numeral.toUpperCase()} — ${section.name.length > 40 ? section.name.slice(0, 37) + '…' : section.name} | FreightUtils.com`,
+    title: `HS Section ${section.numeral.toUpperCase()} — ${section.name.length > 40 ? section.name.slice(0, 37) + '…' : section.name}`,
     description: `Browse HS codes in Section ${section.numeral.toUpperCase()}: ${section.name}. Chapters ${first}–${last}. Free HS code lookup and REST API.`,
     alternates: { canonical: `https://www.freightutils.com/hs/section/${section.numeral}` },
     openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS Section ${section.numeral.toUpperCase()} — FreightUtils` }] },
