@@ -114,12 +114,12 @@ export default function LdmCalc() {
     <>
       <PageHero title="Loading Metres" titleAccent="Calculator" subtitle="Calculate LDM for European and North American trailer standards" category="ops" differentiators={['Euro, UK & US trailers', 'Stackability', 'Free API']} />
 
-      <main style={s.main}>
+      <main data-category="ops" style={s.main}>
         {/* ── INPUT CARD ── */}
         <section style={s.card} aria-label="LDM calculator inputs">
           <div style={s.cardHeader}>
             <h2 style={{ fontSize: 15, fontWeight: 600, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.3px', margin: 0 }}>Inputs</h2>
-            <span style={{ background: '#e87722', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Real-time</span>
+            <span style={{ background: 'var(--cat-ops-tint)', color: 'var(--cat-ops)', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Real-time</span>
           </div>
           <div style={s.cardBody}>
             <div style={s.formGrid}>
