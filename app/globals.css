@@ -634,8 +634,8 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
 
 /* ─── Terminal animation ────────────────────────────────────────── */
 .terminal-window {
-  background: #0d1117;
-  border: 1px solid var(--border);
+  background: var(--bg-code);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 8px 32px rgba(0,0,0,0.08);

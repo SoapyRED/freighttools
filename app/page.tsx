@@ -112,36 +112,38 @@ export default function HomePage() {
 
           {/* Two audience CTAs */}
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 16,
-            maxWidth: 640,
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 12,
+            flexWrap: 'wrap',
             margin: '0 auto 32px',
-          }} className="hero-cta-grid">
+          }}>
             <Link href="/ldm" style={{
-              display: 'inline-block',
+              display: 'inline-flex',
+              alignItems: 'center',
               background: 'var(--accent)',
               color: 'var(--text-on-orange)',
               padding: '10px 24px',
               borderRadius: 8,
               fontSize: 14,
-              fontWeight: 500,
+              fontWeight: 600,
               textDecoration: 'none',
             }}>
-              Freight Tools &rarr;
+              Use Tools &rarr;
             </Link>
             <Link href="/api-docs" style={{
-              display: 'inline-block',
+              display: 'inline-flex',
+              alignItems: 'center',
               background: 'var(--bg-hero)',
               color: 'var(--text-primary)',
               padding: '10px 24px',
               borderRadius: 8,
               fontSize: 14,
-              fontWeight: 500,
+              fontWeight: 600,
               textDecoration: 'none',
               border: '1px solid var(--border-strong)',
             }}>
-              API Docs &rarr;
+              View API Docs &rarr;
             </Link>
           </div>
 
