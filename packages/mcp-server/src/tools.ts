@@ -472,6 +472,116 @@ Requires: commodity code (6-10 digit UK tariff code), origin country (ISO 2-lett
     }),
 };
 
+// ─────────────────────────────────────────────────────────────
+//  15. ULD Lookup
+// ─────────────────────────────────────────────────────────────
+
+const uldLookup: ToolDef = {
+  name: 'uld_lookup',
+  description: `Look up air freight ULD (Unit Load Device) specifications.
+
+15 types including AKE (LD3), PMC, PLA, and special units. Returns dimensions, weights, volume, aircraft compatibility, and deck position.
+
+Use this tool when you need to:
+- Find ULD container or pallet specs for air freight
+- Check which ULD types fit specific aircraft
+- Compare lower deck vs main deck units
+- Get volume and weight limits for air cargo containers`,
+
+  schema: z.object({
+    type: z.string().optional().describe('ULD code (e.g. "AKE", "PMC"). Omit to list all.'),
+    category: z.enum(['container', 'pallet', 'special']).optional().describe('Filter by ULD category'),
+    deck: z.enum(['lower', 'main']).optional().describe('Filter by deck position'),
+  }),
+
+  handler: async (args) => {
+    const params: Record<string, string> = {};
+    if (args.type) params.type = args.type as string;
+    if (args.category) params.category = args.category as string;
+    if (args.deck) params.deck = args.deck as string;
+    return apiGet('uld', params);
+  },
+};
+
+// ─────────────────────────────────────────────────────────────
+//  16. Vehicle Lookup
+// ─────────────────────────────────────────────────────────────
+
+const vehicleLookup: ToolDef = {
+  name: 'vehicle_lookup',
+  description: `Look up road freight vehicle and trailer specifications.
+
+17 types: curtainsiders, rigids, vans, US trailers. Returns internal dimensions, payload limits, pallet capacity, and features.
+
+Use this tool when you need to:
+- Find trailer dimensions and payload limits
+- Compare vehicle types for a shipment
+- Check pallet capacity for different trailer sizes
+- Look up EU vs US trailer specifications`,
+
+  schema: z.object({
+    slug: z.string().optional().describe('Vehicle slug (e.g. "standard-curtainsider"). Omit to list all.'),
+    category: z.enum(['articulated', 'rigid', 'van']).optional().describe('Filter by vehicle category'),
+    region: z.enum(['EU', 'US']).optional().describe('Filter by region'),
+  }),
+
+  handler: async (args) => {
+    const params: Record<string, string> = {};
+    if (args.slug) params.slug = args.slug as string;
+    if (args.category) params.category = args.category as string;
+    if (args.region) params.region = args.region as string;
+    return apiGet('vehicles', params);
+  },
+};
+
+// ─────────────────────────────────────────────────────────────
+//  17. Shipment Summary
+// ─────────────────────────────────────────────────────────────
+
+const shipmentSummary: ToolDef = {
+  name: 'shipment_summary',
+  description: `Composite shipment summary — chains CBM, weight, LDM/volumetric/W&M, ADR compliance, and UK duty estimation into one response.
+
+Accepts multiple items with a transport mode (road/air/sea/multimodal). Returns per-mode calculations, DG compliance flags, and customs estimates.
+
+Use this tool when you need to:
+- Get a complete shipment breakdown in one call
+- Calculate CBM, weight, LDM, and chargeable weight together
+- Check ADR compliance for hazardous items in the shipment
+- Estimate customs duty for import shipments`,
+
+  schema: z.object({
+    mode: z.enum(['road', 'air', 'sea', 'multimodal']).describe('Transport mode'),
+    items: z.array(z.object({
+      length: z.number().positive().describe('Length in cm'),
+      width: z.number().positive().describe('Width in cm'),
+      height: z.number().positive().describe('Height in cm'),
+      weight: z.number().describe('Gross weight in kg per piece'),
+      quantity: z.number().int().positive().describe('Number of pieces'),
+      stackable: z.boolean().optional().describe('Whether items can be stacked'),
+      palletType: z.enum(['euro', 'uk', 'us', 'custom', 'none']).optional().describe('Pallet type'),
+      description: z.string().optional().describe('Item description'),
+      hsCode: z.string().optional().describe('HS code for customs'),
+      unNumber: z.string().optional().describe('UN number for dangerous goods'),
+      customsValue: z.number().optional().describe('Customs value for duty calculation'),
+    })).describe('Array of shipment items'),
+    origin: z.object({
+      country: z.string().describe('Origin country'),
+      locode: z.string().optional().describe('UN/LOCODE'),
+    }).optional(),
+    destination: z.object({
+      country: z.string().describe('Destination country'),
+      locode: z.string().optional().describe('UN/LOCODE'),
+    }).optional(),
+    incoterm: z.string().optional().describe('Incoterm (e.g. FOB, CIF)'),
+    freightCost: z.number().optional().describe('Freight cost'),
+    insuranceCost: z.number().optional().describe('Insurance cost'),
+  }),
+
+  handler: async (args) =>
+    apiPost('shipment/summary', args),
+};
+
 export const ALL_TOOLS: ToolDef[] = [
   cbmCalculator,
   chargeableWeightCalculator,
@@ -487,4 +597,7 @@ export const ALL_TOOLS: ToolDef[] = [
   consignmentCalculator,
   unlocodeLookup,
   ukDutyCalculator,
+  uldLookup,
+  vehicleLookup,
+  shipmentSummary,
 ];
