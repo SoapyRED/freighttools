@@ -1,11 +1,12 @@
 /**
  * Edge Middleware — two concerns:
  *
- * 1. SCRAPE PROTECTION (new)
- *    Routes: /hs/heading/*, /hs/code/*, /adr/un/*
- *    Limit:  30 requests per minute per IP (sliding window via @upstash/ratelimit)
- *    Why:    Sequential scrapers are crawling HS heading/code and ADR UN pages,
- *            burning Vercel credits. This returns 429 to repeat offenders.
+ * 1. SCRAPE PROTECTION
+ *    HS routes (/hs/heading/*, /hs/code/*, /hs/section/*, /hs/chapter/*):
+ *      10 requests per 5 minutes per IP — tight, scraper is slow-crawling
+ *    ADR routes (/adr/un/*):
+ *      30 requests per minute per IP — lighter pressure
+ *    Why: Sequential scrapers are crawling data pages, burning Vercel credits.
  *
  * 2. API RATE LIMITING (existing)
  *    Routes: /api/* calculation endpoints
@@ -19,29 +20,56 @@ import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 
 // ─────────────────────────────────────────────────────────────────
-//  Scrape protection — sliding window, 30 req/min per IP
+//  Scrape protection — two tiers, both sliding window
+//    HS pages: 10 req / 5 min (slow-crawl scraper)
+//    ADR pages: 30 req / 1 min (lighter pressure)
 // ─────────────────────────────────────────────────────────────────
 
-let scrapeRatelimit: Ratelimit | null = null;
+let hsRatelimit: Ratelimit | null = null;
+let adrRatelimit: Ratelimit | null = null;
 
-function getScrapeRatelimit(): Ratelimit | null {
-  if (scrapeRatelimit) return scrapeRatelimit;
+function getRedis(): Redis | null {
   const url = process.env.KV_REST_API_URL;
   const token = process.env.KV_REST_API_TOKEN;
   if (!url || !token) return null;
-  scrapeRatelimit = new Ratelimit({
-    redis: new Redis({ url, token }),
-    limiter: Ratelimit.slidingWindow(30, '1 m'),
-    prefix: 'scrape-rl',
-  });
-  return scrapeRatelimit;
+  return new Redis({ url, token });
 }
 
-/** Route prefixes that trigger scrape protection */
-const SCRAPE_PREFIXES = ['/hs/heading/', '/hs/code/', '/adr/un/'];
+function getHsRatelimit(): Ratelimit | null {
+  if (hsRatelimit) return hsRatelimit;
+  const redis = getRedis();
+  if (!redis) return null;
+  hsRatelimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(10, '5 m'),
+    prefix: 'scrape-rl-hs',
+  });
+  return hsRatelimit;
+}
+
+function getAdrRatelimit(): Ratelimit | null {
+  if (adrRatelimit) return adrRatelimit;
+  const redis = getRedis();
+  if (!redis) return null;
+  adrRatelimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(30, '1 m'),
+    prefix: 'scrape-rl-adr',
+  });
+  return adrRatelimit;
+}
+
+/** Check if this is an HS data route (not the bare /hs search page) */
+function isHsScrapeRoute(pathname: string): boolean {
+  return pathname.startsWith('/hs/') && pathname !== '/hs';
+}
+
+function isAdrScrapeRoute(pathname: string): boolean {
+  return pathname.startsWith('/adr/un/');
+}
 
 function isScrapeRoute(pathname: string): boolean {
-  return SCRAPE_PREFIXES.some(p => pathname.startsWith(p));
+  return isHsScrapeRoute(pathname) || isAdrScrapeRoute(pathname);
 }
 
 function getClientIp(req: NextRequest): string {
@@ -51,37 +79,35 @@ function getClientIp(req: NextRequest): string {
 }
 
 async function handleScrapeProtection(req: NextRequest): Promise<NextResponse> {
-  const rl = getScrapeRatelimit();
-  if (!rl) {
-    // KV not configured — pass through
-    return NextResponse.next();
-  }
+  const { pathname } = req.nextUrl;
+  const isHs = isHsScrapeRoute(pathname);
+  const rl = isHs ? getHsRatelimit() : getAdrRatelimit();
+
+  if (!rl) return NextResponse.next();
 
   const ip = getClientIp(req);
-  const { pathname } = req.nextUrl;
-
-  // Key includes route group to prevent collisions: "hs:<ip>" vs "adr:<ip>"
-  const group = pathname.startsWith('/adr/') ? 'adr' : 'hs';
-  const key = `${group}:${ip}`;
+  const group = isHs ? 'hs' : 'adr';
+  const limit = isHs ? 10 : 30;
+  const retryAfter = isHs ? 300 : 60; // 5 min vs 1 min
 
   try {
-    const { success, remaining, reset } = await rl.limit(key);
+    const { success, remaining, reset } = await rl.limit(ip);
 
     if (!success) {
       console.warn(
-        `[ScrapeGuard] 429 — IP: ${ip}, path: ${pathname}, group: ${group}, resets: ${new Date(reset).toISOString()}`
+        `[ScrapeGuard] 429 — IP: ${ip}, path: ${pathname}, group: ${group}, limit: ${limit}, resets: ${new Date(reset).toISOString()}`
       );
       return NextResponse.json(
         {
           error: 'Rate limit exceeded. Please slow down.',
-          retryAfter: 60,
+          retryAfter,
         },
         {
           status: 429,
           headers: {
             'Content-Type': 'application/json',
-            'Retry-After': '60',
-            'X-RateLimit-Limit': '30',
+            'Retry-After': String(retryAfter),
+            'X-RateLimit-Limit': String(limit),
             'X-RateLimit-Remaining': '0',
             'X-RateLimit-Reset': String(Math.ceil(reset / 1000)),
           },
@@ -89,9 +115,8 @@ async function handleScrapeProtection(req: NextRequest): Promise<NextResponse> {
       );
     }
 
-    // Allowed — pass through with rate limit headers
     const response = NextResponse.next();
-    response.headers.set('X-RateLimit-Limit', '30');
+    response.headers.set('X-RateLimit-Limit', String(limit));
     response.headers.set('X-RateLimit-Remaining', String(remaining));
     return response;
   } catch (err) {
@@ -251,8 +276,9 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     // Scrape protection — data-heavy page routes
-    '/hs/heading/:path*',
-    '/hs/code/:path*',
+    // HS: broad catch — covers /hs/heading/*, /hs/code/*, /hs/section/*, /hs/chapter/*
+    // The bare /hs page is matched but passed through (isHsScrapeRoute excludes it)
+    '/hs/:path+',
     '/adr/un/:path*',
 
     // API rate limiting — calculation endpoints (existing)
