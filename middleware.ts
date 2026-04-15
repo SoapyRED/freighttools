@@ -1,29 +1,108 @@
+/**
+ * Edge Middleware — two concerns:
+ *
+ * 1. SCRAPE PROTECTION (new)
+ *    Routes: /hs/heading/*, /hs/code/*, /adr/un/*
+ *    Limit:  30 requests per minute per IP (sliding window via @upstash/ratelimit)
+ *    Why:    Sequential scrapers are crawling HS heading/code and ADR UN pages,
+ *            burning Vercel credits. This returns 429 to repeat offenders.
+ *
+ * 2. API RATE LIMITING (existing)
+ *    Routes: /api/* calculation endpoints
+ *    Limit:  25/day anonymous, 100/day free key, 50k/month pro key
+ *    Uses:   @vercel/kv with manual counters
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 import { kv } from '@vercel/kv';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
 
-// Match only the 12 calculation API routes (not /api/auth, /api/stripe, /api/mcp, /api/subscribe)
-export const config = {
-  matcher: [
-    '/api/cbm/:path*',
-    '/api/chargeable-weight/:path*',
-    '/api/consignment/:path*',
-    '/api/convert/:path*',
-    '/api/duty/:path*',
-    '/api/adr',
-    '/api/adr-calculator/:path*',
-    '/api/adr/lq-check/:path*',
-    '/api/airlines/:path*',
-    '/api/containers/:path*',
-    '/api/hs/:path*',
-    '/api/incoterms/:path*',
-    '/api/ldm/:path*',
-    '/api/pallet/:path*',
-    '/api/unlocode/:path*',
-    '/api/uld/:path*',
-    '/api/vehicles/:path*',
-    '/api/shipment/:path*',
-  ],
-};
+// ─────────────────────────────────────────────────────────────────
+//  Scrape protection — sliding window, 30 req/min per IP
+// ─────────────────────────────────────────────────────────────────
+
+let scrapeRatelimit: Ratelimit | null = null;
+
+function getScrapeRatelimit(): Ratelimit | null {
+  if (scrapeRatelimit) return scrapeRatelimit;
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  if (!url || !token) return null;
+  scrapeRatelimit = new Ratelimit({
+    redis: new Redis({ url, token }),
+    limiter: Ratelimit.slidingWindow(30, '1 m'),
+    prefix: 'scrape-rl',
+  });
+  return scrapeRatelimit;
+}
+
+/** Route prefixes that trigger scrape protection */
+const SCRAPE_PREFIXES = ['/hs/heading/', '/hs/code/', '/adr/un/'];
+
+function isScrapeRoute(pathname: string): boolean {
+  return SCRAPE_PREFIXES.some(p => pathname.startsWith(p));
+}
+
+function getClientIp(req: NextRequest): string {
+  return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+    ?? req.headers.get('x-real-ip')
+    ?? 'unknown';
+}
+
+async function handleScrapeProtection(req: NextRequest): Promise<NextResponse> {
+  const rl = getScrapeRatelimit();
+  if (!rl) {
+    // KV not configured — pass through
+    return NextResponse.next();
+  }
+
+  const ip = getClientIp(req);
+  const { pathname } = req.nextUrl;
+
+  // Key includes route group to prevent collisions: "hs:<ip>" vs "adr:<ip>"
+  const group = pathname.startsWith('/adr/') ? 'adr' : 'hs';
+  const key = `${group}:${ip}`;
+
+  try {
+    const { success, remaining, reset } = await rl.limit(key);
+
+    if (!success) {
+      console.warn(
+        `[ScrapeGuard] 429 — IP: ${ip}, path: ${pathname}, group: ${group}, resets: ${new Date(reset).toISOString()}`
+      );
+      return NextResponse.json(
+        {
+          error: 'Rate limit exceeded. Please slow down.',
+          retryAfter: 60,
+        },
+        {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': '60',
+            'X-RateLimit-Limit': '30',
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': String(Math.ceil(reset / 1000)),
+          },
+        },
+      );
+    }
+
+    // Allowed — pass through with rate limit headers
+    const response = NextResponse.next();
+    response.headers.set('X-RateLimit-Limit', '30');
+    response.headers.set('X-RateLimit-Remaining', String(remaining));
+    return response;
+  } catch (err) {
+    console.error('[ScrapeGuard] Redis error:', err instanceof Error ? err.message : err);
+    return NextResponse.next();
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  API rate limiting (existing logic — unchanged)
+// ─────────────────────────────────────────────────────────────────
 
 interface KeyRecord {
   email: string;
@@ -39,7 +118,7 @@ const LIMITS = {
 function todayKey() { return new Date().toISOString().slice(0, 10); }
 function monthKey() { return new Date().toISOString().slice(0, 7); }
 
-export async function middleware(req: NextRequest) {
+async function handleApiRateLimit(req: NextRequest): Promise<NextResponse> {
   // Skip OPTIONS (CORS preflight)
   if (req.method === 'OPTIONS') return NextResponse.next();
 
@@ -85,9 +164,7 @@ export async function middleware(req: NextRequest) {
     }
   } else {
     // Anonymous — rate limit by IP
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-      ?? req.headers.get('x-real-ip')
-      ?? 'unknown';
+    const ip = getClientIp(req);
     limit = LIMITS.anonymous.perDay;
     usageKey = `usage:ip:${ip}:${todayKey()}`;
     window = 'day';
@@ -152,3 +229,50 @@ export async function middleware(req: NextRequest) {
   response.headers.set('X-RateLimit-Window', window === 'day' ? '86400' : '2592000');
   return response;
 }
+
+// ─────────────────────────────────────────────────────────────────
+//  Router — dispatch to the right handler
+// ─────────────────────────────────────────────────────────────────
+
+export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  if (isScrapeRoute(pathname)) {
+    return handleScrapeProtection(req);
+  }
+
+  return handleApiRateLimit(req);
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Matcher — only run on these routes
+// ─────────────────────────────────────────────────────────────────
+
+export const config = {
+  matcher: [
+    // Scrape protection — data-heavy page routes
+    '/hs/heading/:path*',
+    '/hs/code/:path*',
+    '/adr/un/:path*',
+
+    // API rate limiting — calculation endpoints (existing)
+    '/api/cbm/:path*',
+    '/api/chargeable-weight/:path*',
+    '/api/consignment/:path*',
+    '/api/convert/:path*',
+    '/api/duty/:path*',
+    '/api/adr',
+    '/api/adr-calculator/:path*',
+    '/api/adr/lq-check/:path*',
+    '/api/airlines/:path*',
+    '/api/containers/:path*',
+    '/api/hs/:path*',
+    '/api/incoterms/:path*',
+    '/api/ldm/:path*',
+    '/api/pallet/:path*',
+    '/api/unlocode/:path*',
+    '/api/uld/:path*',
+    '/api/vehicles/:path*',
+    '/api/shipment/:path*',
+  ],
+};
