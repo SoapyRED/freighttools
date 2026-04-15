@@ -266,7 +266,7 @@ export default function ConsignmentCalc() {
                     </div>
                     <div className="progress-track">
                       <div className={`progress-fill ${result.trailer.utilisationPercent > 100 ? 'danger' : result.trailer.utilisationPercent > 85 ? 'high' : ''}`}
-                        style={{ width: `${Math.min(100, result.trailer.utilisationPercent)}%` }} />
+                        style={{ transform: `scaleX(${Math.min(100, result.trailer.utilisationPercent) / 100})` }} />
                     </div>
                   </div>
                   <div style={{ marginBottom: 12 }}>
@@ -276,7 +276,7 @@ export default function ConsignmentCalc() {
                     </div>
                     <div className="progress-track">
                       <div className={`progress-fill ${result.trailer.weightUtilisationPercent > 100 ? 'danger' : result.trailer.weightUtilisationPercent > 85 ? 'high' : ''}`}
-                        style={{ width: `${Math.min(100, result.trailer.weightUtilisationPercent)}%` }} />
+                        style={{ transform: `scaleX(${Math.min(100, result.trailer.weightUtilisationPercent) / 100})` }} />
                     </div>
                   </div>
                   <div style={{ display: 'inline-block', padding: '8px 16px', borderRadius: 8, background: 'rgba(232,119,34,0.1)', border: '1px solid rgba(232,119,34,0.3)', fontSize: 14, fontWeight: 600, color: '#e87722' }}>

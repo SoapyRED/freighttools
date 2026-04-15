@@ -206,17 +206,19 @@ export default function CbmCalc({
                     <span style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-faint)', marginLeft: 4 }}>of {capacityCbm} m³</span>
                   </span>
                 </div>
-                <div style={{ width: '100%', height: 20, background: '#eef0f4', borderRadius: 10, overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: 20, background: 'var(--bg)', borderRadius: 10, overflow: 'hidden' }}>
                   <div style={{
                     height: '100%',
-                    width: `${utilisationPct}%`,
+                    width: '100%',
                     borderRadius: 10,
+                    transformOrigin: 'left',
+                    transform: `scaleX(${utilisationPct / 100})`,
                     background: utilisationPct > 95
-                      ? 'linear-gradient(90deg, #dc2626, #ef4444)'
+                      ? 'linear-gradient(90deg, var(--error), #ef4444)'
                       : utilisationPct > 80
-                        ? 'linear-gradient(90deg, #d97706, #f59e0b)'
-                        : 'linear-gradient(90deg, #e87722, #f9913a)',
-                    transition: 'width 0.35s cubic-bezier(0.4,0,0.2,1)',
+                        ? 'linear-gradient(90deg, var(--warning), #f59e0b)'
+                        : 'linear-gradient(90deg, var(--orange), var(--orange-light))',
+                    transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
                   }} />
                 </div>
                 <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 6 }}>

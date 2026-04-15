@@ -288,7 +288,7 @@ export default function LdmCalc() {
             <div className="progress-track">
               <div
                 className={`progress-fill ${progressClass}`}
-                style={{ width: `${utilPct}%` }}
+                style={{ transform: `scaleX(${utilPct / 100})` }}
               />
             </div>
           </div>

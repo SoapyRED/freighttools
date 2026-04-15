@@ -117,7 +117,7 @@ export default function SiteSearch() {
           border: '1px solid var(--border-strong)',
           borderRadius: 6,
           outline: 'none',
-          transition: 'border-color 0.15s, width 0.2s',
+          transition: 'border-color 0.15s',
           boxSizing: 'border-box',
         }}
         onFocus2-placeholder="true"

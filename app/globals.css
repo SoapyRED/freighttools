@@ -101,16 +101,21 @@
 
 /* ─── Dark theme ────────────────────────────────────────────────── */
 [data-theme="dark"] {
+  /* Dark mode depth hierarchy — 4 distinct levels:
+     Level 0 (Deep):     #0D1117 — page bg, recessed inputs
+     Level 1 (Mid):      #161B22 — hero, nav, footer
+     Level 2 (Surface):  #1C2128 — cards float above hero
+     Level 3 (Elevated): #21262D — info cards, hover, tooltips */
   --bg: #0D1117;
   --bg-hero: #161B22;
-  --bg-card: #161B22;
-  --bg-card-info: #1C2128;
-  --bg-card-hover: #1C2333;
+  --bg-card: #1C2128;
+  --bg-card-info: #21262D;
+  --bg-card-hover: #262C36;
   --bg-input: #0D1117;
   --bg-code: #1E293B;
   --bg-footer: #161B22;
   --bg-banner: #1E293B;
-  --bg-results: #1A1F2E;
+  --bg-results: #1C2128;
 
   --text: #E6EDF3;
   --text-primary: #E6EDF3;
@@ -133,9 +138,9 @@
   --navy: #0D1117;
   --navy-light: #161B22;
   --navy-border: #30363D;
-  --white: #161B22;
-  --grey-50: #0D1117;
-  --grey-100: #161B22;
+  --white: #1C2128;
+  --grey-50: #161B22;
+  --grey-100: #1C2128;
   --grey-200: #30363D;
   --grey-400: #8B949E;
   --grey-600: #C9D1D9;
@@ -175,8 +180,8 @@
 
   --glow-accent: rgba(239, 159, 39, 0.12);
   --gradient-hero: none;
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.2);
-  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.03);
+  --shadow-card-hover: 0 4px 16px rgba(0,0,0,0.4);
 }
 
 /* ─── Category cascade system ──────────────────────────────────── */
@@ -294,7 +299,8 @@ label {
   height: 100%;
   border-radius: 10px;
   background: linear-gradient(90deg, #e87722, #f9913a);
-  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.35s;
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.35s;
 }
 
 .progress-fill.high { background: linear-gradient(90deg, #d97706, #f59e0b); }

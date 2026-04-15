@@ -669,11 +669,13 @@ export default function AdrExemptionCalc({ index }: Props) {
                 marginBottom: 20,
               }}>
                 <div style={{
-                  width: `${progressPct}%`,
+                  width: '100%',
                   height: '100%',
                   background: progressColour,
                   borderRadius: 6,
-                  transition: 'width 0.3s ease, background 0.3s ease',
+                  transformOrigin: 'left',
+                  transform: `scaleX(${progressPct / 100})`,
+                  transition: 'transform 0.3s ease, background 0.3s ease',
                 }} />
               </div>
 

@@ -138,7 +138,7 @@ export default function DashboardClient({ email, plan, apiKey, usageToday, usage
           </div>
         </div>
         <div style={s.bar}>
-          <div style={{ height: '100%', width: `${usagePct}%`, background: usagePct > 80 ? '#dc2626' : '#e87722', borderRadius: 4, transition: 'width 0.3s' }} />
+          <div style={{ height: '100%', width: '100%', transformOrigin: 'left', transform: `scaleX(${usagePct / 100})`, background: usagePct > 80 ? 'var(--error)' : 'var(--accent)', borderRadius: 4, transition: 'transform 0.3s' }} />
         </div>
         <p style={{ fontSize: 12, color: '#9ca3af', marginTop: 8, textAlign: 'right' }}>
           {plan === 'pro'
