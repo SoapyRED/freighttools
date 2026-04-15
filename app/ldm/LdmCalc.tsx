@@ -97,7 +97,7 @@ export default function LdmCalc() {
   const s = {
     main: { maxWidth: 900, margin: '0 auto', padding: '32px 20px 60px' } as React.CSSProperties,
     card: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' } as React.CSSProperties,
-    cardHeader: { background: 'var(--page-cat, #1a2332)', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 10 } as React.CSSProperties,
+    cardHeader: { background: 'var(--bg-card)', borderBottom: '1px solid var(--border)', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 10 } as React.CSSProperties,
     cardBody: { padding: 24 } as React.CSSProperties,
     formGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 } as React.CSSProperties,
     formGroup: { display: 'flex', flexDirection: 'column' as const, gap: 6 },
@@ -118,7 +118,7 @@ export default function LdmCalc() {
         {/* ── INPUT CARD ── */}
         <section style={s.card} aria-label="LDM calculator inputs">
           <div style={s.cardHeader}>
-            <h2 style={{ fontSize: 15, fontWeight: 600, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.3px', margin: 0 }}>Inputs</h2>
+            <h2 style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.3px', margin: 0 }}>Inputs</h2>
             <span style={{ background: 'var(--cat-ops-tint)', color: 'var(--cat-ops)', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Real-time</span>
           </div>
           <div style={s.cardBody}>
@@ -262,8 +262,8 @@ export default function LdmCalc() {
 
         {/* ── RESULTS CARD ── */}
         <section style={{ ...s.card, marginTop: 20 }} aria-label="LDM calculation results" aria-live="polite">
-          <div style={{ ...s.cardHeader, background: '#243044' }}>
-            <h2 style={{ fontSize: 15, fontWeight: 600, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.3px', margin: 0 }}>Results</h2>
+          <div style={s.cardHeader}>
+            <h2 style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.3px', margin: 0 }}>Results</h2>
           </div>
 
           {/* LDM headline */}

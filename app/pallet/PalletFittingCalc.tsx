@@ -236,8 +236,8 @@ export default function PalletFittingCalc({
         background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 16,
       }}>
-        <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Pallet Dimensions</span>
+        <div style={{ background: 'var(--bg-card)', borderBottom: '1px solid var(--border)', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ fontWeight: 700, fontSize: 13, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Pallet Dimensions</span>
           {lockedDims && (
             <span style={{ background: '#2e3d55', color: 'var(--text-faint)', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Pre-filled</span>
           )}
@@ -263,8 +263,8 @@ export default function PalletFittingCalc({
         background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: 20,
       }}>
-        <div style={{ background: '#1a2332', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Box / Carton Dimensions</span>
+        <div style={{ background: 'var(--bg-card)', borderBottom: '1px solid var(--border)', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ fontWeight: 700, fontSize: 13, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Box / Carton Dimensions</span>
           <span style={{ background: '#e87722', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Real-time</span>
         </div>
         <div style={{ padding: 24 }}>
@@ -417,7 +417,7 @@ export default function PalletFittingCalc({
                 {result.remainingWeightCapacityKg != null && (
                   <div style={{ background: 'var(--bg-card)', padding: '16px 20px' }}>
                     <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4 }}>Remaining Capacity</div>
-                    <div style={{ fontSize: 18, fontWeight: 700, color: result.remainingWeightCapacityKg < 0 ? '#dc2626' : '#1a2332' }}>
+                    <div style={{ fontSize: 18, fontWeight: 700, color: result.remainingWeightCapacityKg < 0 ? '#dc2626' : 'var(--text-primary)' }}>
                       {result.remainingWeightCapacityKg.toLocaleString('en-GB')} kg
                     </div>
                     <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 2 }}>
