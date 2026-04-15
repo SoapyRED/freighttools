@@ -214,14 +214,14 @@ export default function AboutPage() {
         <Section label="Methodology" title="Data Sources &amp; Methodology">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {[
-              { name: 'ADR 2025', badge: 'UNECE', entries: `${SITE_STATS.adrEntries.toLocaleString()} entries`, desc: 'Licensed from Labeline.com (ECE/TRANS/352). Next edition: ADR 2027.', href: '/adr', color: 'var(--color-warning)' },
-              { name: 'HS Codes', badge: 'WCO', entries: `${SITE_STATS.hsCodeCount.toLocaleString()} codes`, desc: 'UN Comtrade HS 2022 (PDDL). 21 sections, 97 chapters.', href: '/hs', color: 'var(--color-reference)' },
-              { name: 'Airlines', badge: 'IATA/ICAO', entries: `${SITE_STATS.airlineCount.toLocaleString()} airlines`, desc: 'Public sources, cross-referenced. 390 verified cargo AWB prefixes.', href: '/airlines', color: 'var(--color-api)' },
-              { name: 'INCOTERMS', badge: 'ICC', entries: `${SITE_STATS.incotermsCount} terms`, desc: 'ICC INCOTERMS 2020 rules with full responsibility breakdowns.', href: '/incoterms', color: 'var(--color-reference)' },
-              { name: 'UN/LOCODE', badge: 'UNECE', entries: `${SITE_STATS.unlocodeCount.toLocaleString()} locations`, desc: 'Ports, airports, rail terminals, inland depots. UNECE 2024-2 (PDDL).', href: '/unlocode', color: 'var(--color-api)' },
-              { name: 'UK Duty Rates', badge: 'GOV.UK', entries: 'Live API', desc: 'GOV.UK Trade Tariff API. Open Government Licence v3.', href: '/duty', color: 'var(--color-reference)' },
-              { name: 'Containers', badge: 'ISO', entries: '10 types', desc: 'ISO 668 + ISO 1496 standard dimensions and capacities.', href: '/containers', color: 'var(--color-api)' },
-              { name: 'Pallets', badge: 'EPAL/ISO', entries: '6 types', desc: 'EPAL EUR pallets, ISO 6780 international, IATA ULD specs.', href: '/pallet', color: 'var(--color-api)' },
+              { name: 'ADR 2025', badge: 'UNECE', entries: `${SITE_STATS.adrEntries.toLocaleString()} entries`, desc: 'Licensed from Labeline.com (ECE/TRANS/352). Next edition: ADR 2027.', href: '/adr', color: 'var(--cat-dg)', tint: 'var(--cat-dg-tint)' },
+              { name: 'HS Codes', badge: 'WCO', entries: `${SITE_STATS.hsCodeCount.toLocaleString()} codes`, desc: 'UN Comtrade HS 2022 (PDDL). 21 sections, 97 chapters.', href: '/hs', color: 'var(--cat-customs)', tint: 'var(--cat-customs-tint)' },
+              { name: 'Airlines', badge: 'IATA/ICAO', entries: `${SITE_STATS.airlineCount.toLocaleString()} airlines`, desc: 'Public sources, cross-referenced. 390 verified cargo AWB prefixes.', href: '/airlines', color: 'var(--cat-ref)', tint: 'var(--cat-ref-tint)' },
+              { name: 'INCOTERMS', badge: 'ICC', entries: `${SITE_STATS.incotermsCount} terms`, desc: 'ICC INCOTERMS 2020 rules with full responsibility breakdowns.', href: '/incoterms', color: 'var(--cat-customs)', tint: 'var(--cat-customs-tint)' },
+              { name: 'UN/LOCODE', badge: 'UNECE', entries: `${SITE_STATS.unlocodeCount.toLocaleString()} locations`, desc: 'Ports, airports, rail terminals, inland depots. UNECE 2024-2 (PDDL).', href: '/unlocode', color: 'var(--cat-ref)', tint: 'var(--cat-ref-tint)' },
+              { name: 'UK Duty Rates', badge: 'GOV.UK', entries: 'Live API', desc: 'GOV.UK Trade Tariff API. Open Government Licence v3.', href: '/duty', color: 'var(--cat-customs)', tint: 'var(--cat-customs-tint)' },
+              { name: 'Containers', badge: 'ISO', entries: '10 types', desc: 'ISO 668 + ISO 1496 standard dimensions and capacities.', href: '/containers', color: 'var(--cat-ops)', tint: 'var(--cat-ops-tint)' },
+              { name: 'Pallets', badge: 'EPAL/ISO', entries: '6 types', desc: 'EPAL EUR pallets, ISO 6780 international, IATA ULD specs.', href: '/pallet', color: 'var(--cat-ops)', tint: 'var(--cat-ops-tint)' },
             ].map(s => (
               <Link key={s.name} href={s.href} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
@@ -233,7 +233,7 @@ export default function AboutPage() {
                   <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>{s.name}</span>
                   <span style={{
                     fontSize: 10, fontWeight: 700, color: s.color,
-                    background: 'rgba(232,119,34,0.1)', padding: '2px 8px', borderRadius: 10,
+                    background: s.tint, padding: '2px 8px', borderRadius: 10,
                     textTransform: 'uppercase', letterSpacing: '0.5px',
                   }}>{s.badge}</span>
                 </div>
@@ -296,15 +296,15 @@ export default function AboutPage() {
         <section style={{
           marginTop: 56,
           border: '1px solid var(--border)',
-          borderLeft: '4px solid #f59e0b',
+          borderLeft: '3px solid var(--cat-dg)',
           borderRadius: 10,
           padding: '24px 28px',
-          background: 'var(--bg-card)',
+          background: 'var(--cat-dg-tint)',
         }}>
-          <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span>&#9888;</span> Important Disclaimer
+          <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ color: 'var(--cat-dg)' }}>&#9888;</span> Important Disclaimer
           </h2>
-          <div style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7 }}>
+          <div style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.7 }}>
             <p style={{ marginBottom: 12 }}>
               FreightUtils is a reference and calculation tool only. It does not replace professional
               classification by a certified Dangerous Goods Safety Adviser (DGSA), licensed customs
