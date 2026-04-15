@@ -399,7 +399,7 @@ details.faq-item .faq-answer {
   font-size: 14px;
 }
 
-.ref-table thead { background: var(--navy); color: white; }
+.ref-table thead { background: var(--bg); color: var(--text-secondary); }
 
 .ref-table thead th {
   padding: 11px 16px;
@@ -422,7 +422,7 @@ details.faq-item .faq-answer {
 [data-theme="dark"] .ref-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.05); }
 [data-theme="dark"] .ref-table tbody tr:hover { background: rgba(239,159,39,0.08); }
 
-[data-theme="dark"] .ref-table thead { background: #010409; }
+[data-theme="dark"] .ref-table thead { background: var(--bg); }
 
 /* ─── All main tables: zebra + hover ────────────────────────── */
 main table tbody tr:nth-child(even) { background: var(--grey-50); }

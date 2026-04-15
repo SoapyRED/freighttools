@@ -26,7 +26,7 @@ export default function DutyPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'UK Import Duty & VAT', path: '/duty' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"UK Import Duty & VAT Calculator","description":"Free UK Import Duty & VAT Calculator. Estimate duty and VAT for any commodity code using GOV.UK Trade Tariff data. REST API available.","url":"https://www.freightutils.com/duty","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
       <PageHero title="UK Import Duty &" titleAccent="VAT" subtitle="Estimate import duty and VAT for any commodity code using live GOV.UK Trade Tariff data" differentiators={['Live GOV.UK tariff data', 'Preferential rates', 'Free API']} category="customs">
-        <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
+        <div style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 10 }}>
           Source: GOV.UK Trade Tariff API (Open Government Licence v3)
         </div>
       </PageHero>
@@ -78,7 +78,7 @@ export default function DutyPage() {
           </h3>
           <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
             This calculator gives you a reliable estimate for standard imports. Use it for budgeting, quoting landed costs to customers, or checking whether an import is commercially viable. For actual customs declarations, you should use a licensed customs broker or freight forwarder &mdash; they handle classification, preferential origin claims, trade remedies, and compliance requirements that go beyond a simple duty/VAT calculation. For complex goods (chemicals, dual-use items, food products), professional classification advice is essential. For official rates, check the{' '}
-            <a href="https://www.trade-tariff.service.gov.uk" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>GOV.UK Trade Tariff</a> directly.
+            <a href="https://www.trade-tariff.service.gov.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>GOV.UK Trade Tariff</a> directly.
           </p>
 
           <details style={{ marginTop: 24, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>

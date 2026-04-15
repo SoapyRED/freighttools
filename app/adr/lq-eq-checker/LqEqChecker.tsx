@@ -161,7 +161,24 @@ export default function LqEqChecker() {
       </div>
 
       {/* Items input */}
-      <SectionCard title={mode === 'lq' ? 'Check Items (LQ)' : 'Check Items (EQ)'}>
+      <div style={{
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border)',
+        borderRadius: 12,
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          background: 'var(--bg-card)',
+          borderLeft: '3px solid var(--page-cat, var(--cat-dg))',
+          borderBottom: '1px solid var(--border)',
+          color: 'var(--text-primary)',
+          padding: '12px 18px',
+          fontSize: 14,
+          fontWeight: 700,
+        }}>
+          {mode === 'lq' ? 'Check Items (LQ)' : 'Check Items (EQ)'}
+        </div>
+        <div style={{ padding: 24 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {items.map((item, i) => (
             <div key={i} style={{
@@ -278,7 +295,8 @@ export default function LqEqChecker() {
         </div>
 
         {error && <p style={{ color: '#ef4444', fontSize: 13, marginTop: 10 }}>{error}</p>}
-      </SectionCard>
+        </div>
+      </div>
 
       {/* Results */}
       {result && (

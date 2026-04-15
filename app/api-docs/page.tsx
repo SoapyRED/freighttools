@@ -38,11 +38,11 @@ export default function ApiDocsPage() {
         }}
       />
       <div style={s.hero}>
-        <h1 style={s.h1}>API <span style={{ color: '#e87722' }}>Documentation</span></h1>
+        <h1 style={s.h1}>API <span style={{ color: 'var(--accent)' }}>Documentation</span></h1>
         <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 500, margin: '0 auto' }}>
           All FreightUtils calculators are available as free, open REST API endpoints
         </p>
-        <p style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 10 }}>
           Last updated: {SITE_STATS.lastUpdated}
         </p>
       </div>
@@ -59,7 +59,7 @@ export default function ApiDocsPage() {
             textDecoration: 'none', marginBottom: 28,
             boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
             fontFamily: "'Outfit', sans-serif",
-            border: '1.5px solid #374151',
+            border: '1.5px solid var(--border-strong)',
           }}
         >
           &#128229; Download OpenAPI 3.0 Spec (JSON)
@@ -69,11 +69,11 @@ export default function ApiDocsPage() {
           download
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 10,
-            background: 'transparent', color: '#EF9F27', borderRadius: 10,
+            background: 'transparent', color: 'var(--accent)', borderRadius: 10,
             padding: '14px 28px', fontSize: 14, fontWeight: 700,
             textDecoration: 'none', marginBottom: 28, marginLeft: 12,
             fontFamily: "'Outfit', sans-serif",
-            border: '1.5px solid #EF9F27',
+            border: '1.5px solid var(--accent)',
           }}
         >
           &#128229; Download Postman Collection
@@ -152,8 +152,8 @@ export default function ApiDocsPage() {
               </div>
               <div style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.5 }}>
                 For production integrations with higher limits, subscribe via{' '}
-                <a href="https://rapidapi.com/freightutils" style={{ color: '#e87722', textDecoration: 'underline' }}>RapidAPI</a>{' '}
-                or <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact us directly</a>.
+                <a href="https://rapidapi.com/freightutils" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>RapidAPI</a>{' '}
+                or <a href="mailto:contact@freightutils.com" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>contact us directly</a>.
               </div>
             </div>
           </div>
@@ -191,7 +191,7 @@ export default function ApiDocsPage() {
 
           <div style={{ background: 'var(--bg-code)', borderRadius: 10, padding: 20, marginBottom: 20 }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 12 }}>Claude Desktop Configuration</div>
-            <div style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 8 }}>Add to your <code style={{ background: '#2a3442', padding: '2px 6px', borderRadius: 4, fontSize: 12 }}>claude_desktop_config.json</code>:</div>
+            <div style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 8 }}>Add to your <code style={{ background: 'var(--bg-code)', padding: '2px 6px', borderRadius: 4, fontSize: 12 }}>claude_desktop_config.json</code>:</div>
             <CopyableCode code={`{
   "mcpServers": {
     "freightutils": {
@@ -212,7 +212,7 @@ export default function ApiDocsPage() {
                 'Find the airline with AWB prefix 176',
                 'How many boxes 40\u00d730\u00d725cm fit on a Euro pallet?',
               ].map((q, i) => (
-                <div key={i} style={{ fontSize: 14, color: '#374151', lineHeight: 1.5, paddingLeft: 16, borderLeft: '3px solid #e87722' }}>
+                <div key={i} style={{ fontSize: 14, color: 'var(--text-primary)', lineHeight: 1.5, paddingLeft: 16, borderLeft: '3px solid var(--accent)' }}>
                   &ldquo;{q}&rdquo;
                 </div>
               ))}
@@ -226,7 +226,7 @@ export default function ApiDocsPage() {
               rel="noopener noreferrer"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 6,
-                background: 'var(--accent)', color: '#fff', borderRadius: 8,
+                background: 'var(--accent)', color: 'var(--text-on-orange)', borderRadius: 8,
                 padding: '8px 18px', fontSize: 13, fontWeight: 700,
                 textDecoration: 'none', border: 'none',
               }}
@@ -239,7 +239,7 @@ export default function ApiDocsPage() {
               rel="noopener noreferrer"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 6,
-                background: 'var(--accent)', color: '#fff', borderRadius: 8,
+                background: 'var(--accent)', color: 'var(--text-on-orange)', borderRadius: 8,
                 padding: '8px 18px', fontSize: 13, fontWeight: 700,
                 textDecoration: 'none', border: 'none',
               }}
@@ -259,12 +259,12 @@ export default function ApiDocsPage() {
         {/* ── Shipment Summary (Composite) ── */}
         <div id="shipment-summary" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/shipment/summary</span>
+            <span style={{ background: '#2563eb', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/shipment/summary</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Shipment Summary (Composite)</span>
           </div>
           <div style={{ padding: 24 }}>
-            <div style={{ display: 'inline-block', background: 'rgba(232,119,34,0.12)', color: '#e87722', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 6, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <div style={{ display: 'inline-block', background: 'rgba(232,119,34,0.12)', color: 'var(--accent)', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 6, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Flagship Endpoint
             </div>
             <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20, lineHeight: 1.7 }}>
@@ -377,8 +377,8 @@ export default function ApiDocsPage() {
         {/* LDM Endpoint */}
         <div style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/ldm</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/ldm</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Loading Metres Calculator</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -518,8 +518,8 @@ export default function ApiDocsPage() {
         {/* CBM Endpoint */}
         <div id="cbm" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/cbm</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/cbm</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Cubic Metres Calculator</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -599,8 +599,8 @@ export default function ApiDocsPage() {
         {/* Chargeable Weight Endpoint */}
         <div id="chargeable-weight" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/chargeable-weight</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/chargeable-weight</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Air Freight Chargeable Weight</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -698,8 +698,8 @@ export default function ApiDocsPage() {
         {/* Pallet Fitting Endpoint */}
         <div id="pallet" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/pallet</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/pallet</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Pallet Box Fitting Calculator</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -829,8 +829,8 @@ export default function ApiDocsPage() {
         {/* ADR Endpoint */}
         <div id="adr" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>ADR 2025 Dangerous Goods Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -921,9 +921,9 @@ export default function ApiDocsPage() {
         {/* ADR Exemption Calculator Endpoint */}
         <div id="adr-calculator" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace', marginLeft: -4 }}>POST</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr-calculator</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ background: '#2563eb', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace', marginLeft: -4 }}>POST</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr-calculator</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>ADR 1.1.3.6 Exemption Calculator</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1015,8 +1015,8 @@ Content-Type: application/json
         {/* ── LQ/EQ Checker Endpoint ── */}
         <div id="lq-check" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr/lq-check</span>
+            <span style={{ background: '#2563eb', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/adr/lq-check</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>ADR Limited &amp; Excepted Quantity Checker</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1100,8 +1100,8 @@ Content-Type: application/json
         {/* Airlines Endpoint */}
         <div id="airlines" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/airlines</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/airlines</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Airline Codes &amp; AWB Prefix Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1185,8 +1185,8 @@ Content-Type: application/json
         {/* INCOTERMS Endpoint */}
         <div id="incoterms" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/incoterms</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/incoterms</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>INCOTERMS 2020 Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1256,8 +1256,8 @@ Content-Type: application/json
         {/* Containers Endpoint */}
         <div id="containers" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/containers</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/containers</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Container Capacity Reference</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1348,8 +1348,8 @@ Content-Type: application/json
         {/* Convert Endpoint */}
         <div id="convert" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/convert</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/convert</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Unit Converter</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1434,8 +1434,8 @@ Content-Type: application/json
         {/* HS Codes Endpoint */}
         <div id="hs" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/hs</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/hs</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>HS Code Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1524,8 +1524,8 @@ Content-Type: application/json
         {/* Consignment Calculator Endpoint */}
         <div id="consignment" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/consignment</span>
+            <span style={{ background: '#2563eb', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/consignment</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Multi-Item Consignment Calculator</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1590,8 +1590,8 @@ Content-Type: application/json
         {/* UK Import Duty & VAT Endpoint */}
         <div id="duty" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#2563eb', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/duty</span>
+            <span style={{ background: '#2563eb', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>POST</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/duty</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>UK Import Duty &amp; VAT Estimator</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1642,8 +1642,8 @@ Content-Type: application/json
         {/* UN/LOCODE Endpoint */}
         <div id="unlocode" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/unlocode</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/unlocode</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>UN/LOCODE Lookup</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1703,8 +1703,8 @@ Content-Type: application/json
         {/* ULD Types Endpoint */}
         <div id="uld" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/uld</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/uld</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Air Freight ULD Types</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1736,8 +1736,8 @@ Content-Type: application/json
         {/* Vehicle & Trailer Types Endpoint */}
         <div id="vehicles" style={s.card}>
           <div style={s.endpointHeader}>
-            <span style={{ background: '#16a34a', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
-            <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/vehicles</span>
+            <span style={{ background: '#16a34a', color: 'var(--text-on-dark)', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace' }}>GET</span>
+            <span style={{ color: 'var(--text-on-dark)', fontFamily: 'monospace', fontSize: 15, fontWeight: 600 }}>/api/vehicles</span>
             <span style={{ color: 'var(--text-faint)', fontSize: 13, marginLeft: 'auto' }}>Vehicle &amp; Trailer Types</span>
           </div>
           <div style={{ padding: 24 }}>
@@ -1825,11 +1825,11 @@ Content-Type: application/json
         <h2 style={s.sectionTitle}>Source Code &amp; Issue Reporting</h2>
         <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
           FreightUtils is open source. Report bugs, request features, or contribute on GitHub:{' '}
-          <a href="https://github.com/SoapyRED/freighttools" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>
+          <a href="https://github.com/SoapyRED/freighttools" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
             github.com/SoapyRED/freighttools
           </a>.
           For data corrections or API support, email{' '}
-          <a href="mailto:contact@freightutils.com" style={{ color: '#e87722', textDecoration: 'underline' }}>contact@freightutils.com</a>.
+          <a href="mailto:contact@freightutils.com" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>contact@freightutils.com</a>.
         </p>
 
       </main>
