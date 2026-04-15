@@ -945,15 +945,7 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
 
 /* ─── About page tool buttons + data source cards ───────────────── */
 @media (hover: hover) {
-  .about-tool-btn {
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    cursor: pointer;
-  }
-  .about-tool-btn:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 12px var(--glow-accent), 0 0 24px rgba(239, 159, 39, 0.08);
-    border-color: var(--accent) !important;
-  }
+  /* about-tool-btn: informational only — no hover effects */
 }
 
 /* ─── Footer link hover ─────────────────────────────────────────── */

@@ -383,7 +383,7 @@ export default function HomePage() {
                 background: 'transparent', color: 'var(--text-muted)',
                 textDecoration: 'none', padding: '12px 24px',
                 borderRadius: 8, fontWeight: 600, fontSize: 14,
-                border: '1px solid var(--border)',
+                border: '1px solid var(--border-strong)',
                 transition: 'border-color 0.15s, color 0.15s',
               }}>
                 OpenAPI 3.0 Spec

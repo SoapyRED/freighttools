@@ -53,14 +53,15 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <div style={{
-        background: 'var(--navy)',
+        background: 'var(--bg-hero)',
+        borderBottom: '1px solid var(--border)',
         padding: '48px 20px 56px',
         textAlign: 'center',
       }}>
         <h1 style={{
           fontSize: 'clamp(26px, 5vw, 40px)',
           fontWeight: 800,
-          color: '#fff',
+          color: 'var(--text-primary)',
           letterSpacing: '-0.5px',
           marginBottom: 14,
         }}>
