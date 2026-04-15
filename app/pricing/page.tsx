@@ -143,7 +143,7 @@ export default function PricingPage() {
                   left: '50%',
                   transform: 'translateX(-50%)',
                   background: 'var(--accent)',
-                  color: '#000',
+                  color: 'var(--text-on-orange)',
                   fontSize: 11,
                   fontWeight: 700,
                   padding: '4px 16px',
@@ -198,7 +198,7 @@ export default function PricingPage() {
                   textDecoration: 'none',
                   transition: 'opacity 0.15s',
                   ...(tier.ctaStyle === 'filled'
-                    ? { background: 'var(--accent)', color: '#000', border: 'none' }
+                    ? { background: 'var(--accent)', color: 'var(--text-on-orange)', border: 'none' }
                     : { background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }),
                 }}>
                   {tier.cta}
@@ -215,7 +215,7 @@ export default function PricingPage() {
                   textDecoration: 'none',
                   transition: 'opacity 0.15s',
                   ...(tier.ctaStyle === 'filled'
-                    ? { background: 'var(--accent)', color: '#000', border: 'none' }
+                    ? { background: 'var(--accent)', color: 'var(--text-on-orange)', border: 'none' }
                     : { background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }),
                 }}>
                   {tier.cta}

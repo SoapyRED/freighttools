@@ -65,7 +65,7 @@ export default function AboutPage() {
           letterSpacing: '-0.5px',
           marginBottom: 14,
         }}>
-          About <span style={{ color: '#EF9F27' }}>FreightUtils</span>
+          About <span style={{ color: 'var(--accent)' }}>FreightUtils</span>
         </h1>
         <p style={{
           fontSize: 16, color: 'var(--text-faint)',
@@ -84,7 +84,7 @@ export default function AboutPage() {
           maxWidth: 620, margin: '12px auto 0', lineHeight: 1.6,
         }}>
           Questions, corrections, or integration help:{' '}
-          <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
+          <a href="mailto:contact@freightutils.com" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
             contact@freightutils.com
           </a>
           {' '}&mdash; typical response within 2 business days.
@@ -148,10 +148,10 @@ export default function AboutPage() {
           <p>
             FreightUtils is available as a <strong>Model Context Protocol (MCP) server</strong> &mdash; the
             first freight-specific tool server for AI agents, listed on the{' '}
-            <a href="https://registry.modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'underline' }}>Official MCP Registry</a>.
+            <a href="https://registry.modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Official MCP Registry</a>.
             All tools including the composite Shipment Summary, sea freight W/M, and mode selectors are accessible
-            via <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>npx freightutils-mcp</code> or{' '}
-            <a href="/api-docs#mcp" style={{ color: '#e87722', textDecoration: 'underline' }}>the remote endpoint</a>.
+            via <code style={{ background: 'var(--bg-code)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>npx freightutils-mcp</code> or{' '}
+            <a href="/api-docs#mcp" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>the remote endpoint</a>.
           </p>
         </Section>
 
@@ -202,7 +202,7 @@ export default function AboutPage() {
                   background: 'rgba(232,119,34,0.12)', marginTop: 1,
                 }}>
                   <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
-                    <path d="M1 5l3.5 3.5L11 1" stroke="#e87722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M1 5l3.5 3.5L11 1" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </span>
                 <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{point}</p>
@@ -248,7 +248,7 @@ export default function AboutPage() {
           <p style={{ marginBottom: 14 }}>
             {SITE_STATS.toolCount} tools across {SITE_STATS.apiEndpointCount} REST API endpoints. No signup required for casual use &mdash; 25 requests/day with no API key. Register a free key for 100 requests/day, or contact us for Pro access (50,000 requests/month). Includes a composite Shipment Summary endpoint that chains CBM, chargeable weight, ADR compliance, and UK duty estimation into one call.
             JSON responses. Full documentation at{' '}
-            <Link href="/api-docs" style={{ color: '#EF9F27', textDecoration: 'underline' }}>/api-docs</Link>.
+            <Link href="/api-docs" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>/api-docs</Link>.
             Build freight calculations into your TMS, WMS, booking platform, or any system
             that needs them.
           </p>
@@ -332,23 +332,23 @@ export default function AboutPage() {
           padding: '28px 28px',
           textAlign: 'center',
         }}>
-          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#fff', marginBottom: 10 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-on-dark)', marginBottom: 10 }}>
             Get in Touch
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text-faint)', lineHeight: 1.6 }}>
             Questions, corrections, or integration help:{' '}
             <a
               href="mailto:contact@freightutils.com"
-              style={{ color: '#EF9F27', textDecoration: 'underline' }}
+              style={{ color: 'var(--accent)', textDecoration: 'underline' }}
             >
               contact@freightutils.com
             </a>
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 14 }}>
-            <a href="https://x.com/FreightUtils" target="_blank" rel="noopener noreferrer" style={{ color: '#EF9F27', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+            <a href="https://x.com/FreightUtils" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
               @FreightUtils on X
             </a>
-            <a href="https://www.linkedin.com/company/freightutils" target="_blank" rel="noopener noreferrer" style={{ color: '#EF9F27', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+            <a href="https://www.linkedin.com/company/freightutils" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
               LinkedIn
             </a>
           </div>

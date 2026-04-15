@@ -34,7 +34,7 @@ export default function RelatedTools({ tools }: Props) {
             gap: 6,
             transition: 'border-color 0.12s',
           }}>
-            {t.label} <span style={{ color: '#e87722', fontSize: 14 }}>&rarr;</span>
+            {t.label} <span style={{ color: 'var(--accent)', fontSize: 14 }}>&rarr;</span>
           </Link>
         ))}
       </div>

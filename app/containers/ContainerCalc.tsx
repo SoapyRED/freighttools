@@ -54,8 +54,8 @@ function Field({
         placeholder={placeholder}
         style={inputStyle}
         onFocus={e => {
-          e.currentTarget.style.borderColor = '#e87722';
-          e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
+          e.currentTarget.style.borderColor = 'var(--page-cat, var(--accent))';
+          e.currentTarget.style.boxShadow = '0 0 0 3px var(--glow-accent)';
         }}
         onBlur={e => {
           e.currentTarget.style.borderColor = '';
@@ -77,9 +77,9 @@ function StatCell({ label, value, sub }: { label: string; value: string; sub?: s
 }
 
 function Badge({ text, color }: { text: string; color: 'amber' | 'red' | 'green' }) {
-  const bg = color === 'amber' ? '#fff7ed' : color === 'red' ? '#fef2f2' : '#f0fdf4';
-  const fg = color === 'amber' ? '#9a3412' : color === 'red' ? '#991b1b' : '#166534';
-  const border = color === 'amber' ? '#fdba74' : color === 'red' ? '#fca5a5' : '#86efac';
+  const bg = color === 'amber' ? 'var(--warning-tint)' : color === 'red' ? 'var(--error-tint)' : 'var(--success-tint)';
+  const fg = color === 'amber' ? 'var(--warning-dark)' : color === 'red' ? 'var(--error-dark)' : 'var(--success-light)';
+  const border = color === 'amber' ? 'var(--warning-border)' : color === 'red' ? 'var(--error-border)' : 'var(--success-border)';
   return (
     <span style={{
       display: 'inline-block',
@@ -170,8 +170,8 @@ export default function ContainerCalc() {
             type="button"
             onClick={handleCalculate}
             style={{
-              background: '#e87722',
-              color: '#fff',
+              background: 'var(--accent)',
+              color: 'var(--text-on-orange)',
               border: 'none',
               borderRadius: 8,
               padding: '12px 28px',
@@ -179,10 +179,10 @@ export default function ContainerCalc() {
               fontWeight: 700,
               cursor: 'pointer',
               fontFamily: "'Outfit', sans-serif",
-              transition: 'background 0.15s',
+              transition: 'opacity 0.15s',
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#d06a1e'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#e87722'; }}
+            onMouseEnter={e => { e.currentTarget.style.opacity = '0.85'; }}
+            onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
           >
             Calculate
           </button>
@@ -195,12 +195,12 @@ export default function ContainerCalc() {
           background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
           overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
         }}>
-          <div style={{ background: '#243044', padding: '14px 24px' }}>
-            <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Results &mdash; {result.container.name}</span>
+          <div style={{ background: 'var(--bg-card)', borderBottom: '1px solid var(--border)', borderLeft: '3px solid var(--page-cat, var(--cat-ops))', padding: '14px 24px' }}>
+            <span style={{ fontWeight: 700, fontSize: 13, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Results &mdash; {result.container.name}</span>
           </div>
 
           {/* Hero number */}
-          <div style={{ padding: '28px 24px 20px', textAlign: 'center', borderBottom: '1px solid #eef0f4' }}>
+          <div style={{ padding: '28px 24px 20px', textAlign: 'center', borderBottom: '1px solid var(--border)' }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: 8 }}>
               Total Items That Fit
             </div>
@@ -231,7 +231,7 @@ export default function ContainerCalc() {
           />
 
           {/* Stats grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#eef0f4' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: 'var(--border)' }}>
             <StatCell label="Items Per Layer" value={`${result.itemsPerLayer}`} sub={`${result.itemsPerRow} \u00d7 ${result.itemsPerCol} on floor`} />
             <StatCell label="Layers" value={`${result.layers}`} />
             <StatCell label="Volume Utilisation" value={`${result.volumeUtilisation}%`} sub={`${result.volumeUsedCbm} of ${result.container.capacityCbm} m\u00b3`} />
@@ -239,7 +239,7 @@ export default function ContainerCalc() {
           </div>
 
           {/* Limiting factor & warnings */}
-          <div style={{ padding: '18px 24px', borderTop: '1px solid #eef0f4' }}>
+          <div style={{ padding: '18px 24px', borderTop: '1px solid var(--border)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: result.warnings.length > 0 ? 12 : 0 }}>
               <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--text-faint)' }}>Limiting Factor:</span>
               {result.limitingFactor === 'volume' && <Badge text="Volume" color="amber" />}
@@ -248,13 +248,13 @@ export default function ContainerCalc() {
             </div>
             {result.warnings.length > 0 && (
               <div style={{
-                background: '#fef2f2',
-                border: '1px solid #fca5a5',
+                background: 'var(--error-tint)',
+                border: '1px solid var(--error-border)',
                 borderRadius: 8,
                 padding: '12px 16px',
               }}>
                 {result.warnings.map((w, i) => (
-                  <div key={i} style={{ fontSize: 13, color: '#991b1b', lineHeight: 1.5 }}>
+                  <div key={i} style={{ fontSize: 13, color: 'var(--error-dark)', lineHeight: 1.5 }}>
                     {w}
                   </div>
                 ))}

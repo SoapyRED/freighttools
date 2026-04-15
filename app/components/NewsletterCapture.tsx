@@ -119,7 +119,7 @@ export default function NewsletterCapture() {
         </button>
       </form>
       {status === 'error' && (
-        <div style={{ fontSize: 12, color: '#ef4444', marginTop: 8 }}>{message}</div>
+        <div style={{ fontSize: 12, color: 'var(--error)', marginTop: 8 }}>{message}</div>
       )}
     </div>
   );

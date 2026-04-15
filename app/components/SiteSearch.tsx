@@ -171,7 +171,7 @@ export default function SiteSearch() {
 
       <style>{`
         .site-search input:focus {
-          border-color: #EF9F27 !important;
+          border-color: var(--accent) !important;
           width: 280px !important;
         }
         @media (max-width: 768px) {

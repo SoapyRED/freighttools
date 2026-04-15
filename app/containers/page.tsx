@@ -48,9 +48,9 @@ export default function ContainersPage() {
             </thead>
             <tbody>
               {specs.map(c => (
-                <tr key={c.slug} style={{ borderBottom: '1px solid #eef0f4' }}>
+                <tr key={c.slug} style={{ borderBottom: '1px solid var(--border)' }}>
                   <td style={{ padding: '11px 16px', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                    <Link href={`/containers/${c.slug}`} style={{ color: '#e87722', textDecoration: 'none' }}>{c.name}</Link>
+                    <Link href={`/containers/${c.slug}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{c.name}</Link>
                   </td>
                   <td style={{ padding: '11px 16px', whiteSpace: 'nowrap' }}>{c.internalLengthCm} &times; {c.internalWidthCm} &times; {c.internalHeightCm}</td>
                   <td style={{ padding: '11px 16px' }}>{c.capacityCbm}</td>
@@ -79,7 +79,7 @@ export default function ContainersPage() {
             </thead>
             <tbody>
               {specs.map(c => (
-                <tr key={c.slug} style={{ borderBottom: '1px solid #eef0f4' }}>
+                <tr key={c.slug} style={{ borderBottom: '1px solid var(--border)' }}>
                   <td style={{ padding: '11px 16px', fontWeight: 600 }}>{c.name}</td>
                   <td style={{ padding: '11px 16px' }}>{c.euroPallets}</td>
                   <td style={{ padding: '11px 16px' }}>{c.gmaPallets}</td>
@@ -118,7 +118,7 @@ export default function ContainersPage() {
           </p>
           <div style={{
             background: 'var(--bg)',
-            border: '1px solid #eef0f4',
+            border: '1px solid var(--border)',
             borderRadius: 10,
             padding: '16px 20px',
             marginBottom: 14,

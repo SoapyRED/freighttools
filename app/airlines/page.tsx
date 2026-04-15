@@ -120,7 +120,7 @@ export default function AirlinesPage() {
             <details className="faq-item">
               <summary>Can I use this data via API?</summary>
               <div className="faq-answer">
-                Yes. The FreightUtils airline API is free, requires no authentication, and returns JSON. Use <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>GET /api/airlines?q=emirates</code> to search by name, <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>?iata=EK</code> for IATA code, <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>?icao=UAE</code> for ICAO code, or <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>?prefix=176</code> for AWB prefix lookup. Full documentation at <Link href="/api-docs" style={{ color: '#e87722', textDecoration: 'underline' }}>/api-docs</Link>.
+                Yes. The FreightUtils airline API is free, requires no authentication, and returns JSON. Use <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>GET /api/airlines?q=emirates</code> to search by name, <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>?iata=EK</code> for IATA code, <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>?icao=UAE</code> for ICAO code, or <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>?prefix=176</code> for AWB prefix lookup. Full documentation at <Link href="/api-docs" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>/api-docs</Link>.
               </div>
             </details>
           </div>
@@ -155,7 +155,7 @@ export default function AirlinesPage() {
                 transition: 'border-color 0.2s',
               }} className="pricing-card">
                 <span style={{
-                  background: 'var(--bg)', color: '#e87722', fontWeight: 700, fontSize: 14,
+                  background: 'var(--bg)', color: 'var(--page-cat, var(--cat-ref))', fontWeight: 700, fontSize: 14,
                   padding: '4px 10px', borderRadius: 6, fontFamily: 'monospace', flexShrink: 0,
                 }}>
                   {a.prefix}

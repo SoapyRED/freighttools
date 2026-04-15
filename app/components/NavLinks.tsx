@@ -71,10 +71,10 @@ function Dropdown({ group, pathname }: {
         className="nav-dropdown-trigger"
         style={{
           background: 'none', border: 'none', cursor: 'pointer',
-          color: hasActive ? '#EF9F27' : 'var(--text-faint)',
+          color: hasActive ? 'var(--nav-active)' : 'var(--text-faint)',
           fontSize: 13, fontWeight: hasActive ? 600 : 500,
           padding: '6px 10px 12px', borderRadius: 6, whiteSpace: 'nowrap',
-          borderBottom: hasActive ? '2px solid #EF9F27' : '2px solid transparent',
+          borderBottom: hasActive ? '2px solid var(--nav-active)' : '2px solid transparent',
           fontFamily: "'Outfit', sans-serif",
           display: 'flex', alignItems: 'center', gap: 4,
         }}
@@ -225,7 +225,7 @@ export default function NavLinks() {
           top: 100%;
           left: 0;
           background: var(--bg-card);
-          border: 1px solid var(--navy-border, #2e3d55);
+          border: 1px solid var(--border-strong);
           border-radius: 8px;
           padding: 6px 0;
           min-width: 210px;
@@ -270,7 +270,7 @@ export default function NavLinks() {
           display: block;
           padding: 9px 18px;
           /* Fixed light color — dropdown bg is always dark navy in both modes */
-          color: #c9cdd6;
+          color: var(--text-faint);
           text-decoration: none;
           font-size: 13px;
           font-weight: 400;
@@ -280,11 +280,11 @@ export default function NavLinks() {
 
         .nav-dropdown-item:hover {
           background: rgba(255,255,255,0.06);
-          color: #EF9F27;
+          color: var(--accent);
         }
 
         .nav-dropdown-item-active {
-          color: #EF9F27 !important;
+          color: var(--accent) !important;
           font-weight: 600;
           background: rgba(239,159,39,0.08);
         }

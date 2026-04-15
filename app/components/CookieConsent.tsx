@@ -68,7 +68,7 @@ export default function CookieConsent() {
         By continuing, you consent to our use of cookies.
       </p>
       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexShrink: 0, flexWrap: 'wrap' }}>
-        <button onClick={accept} style={{ ...btnBase, background: '#e87722', color: '#fff' }}>
+        <button onClick={accept} style={{ ...btnBase, background: 'var(--accent)', color: 'var(--text-on-orange)' }}>
           Accept All
         </button>
         <button onClick={rejectNonEssential} style={{

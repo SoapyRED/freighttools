@@ -11,7 +11,7 @@ export default function BrandLogo() {
   return (
     <Link href="/" className="brand-link" style={{
       display: 'flex', alignItems: 'center', gap: 10,
-      textDecoration: 'none', color: '#fff', flexShrink: 0,
+      textDecoration: 'none', color: 'var(--text-on-dark)', flexShrink: 0,
     }}
       onMouseEnter={handleMouseEnter}
     >
@@ -23,7 +23,7 @@ export default function BrandLogo() {
         /
       </div>
       <span style={{ fontWeight: 700, fontSize: 15 }}>
-        <span style={{ color: '#9CA3AF' }}>Freight</span><span style={{ color: '#EF9F27' }}>Utils</span>
+        <span style={{ color: 'var(--text-faint)' }}>Freight</span><span style={{ color: '#EF9F27' }}>Utils</span>
         <span style={{ color: 'var(--text-faint)', fontWeight: 400 }}>.com</span>
       </span>
     </Link>

@@ -56,7 +56,7 @@ function SpecRow({ label, value }: { label: string; value: string }) {
       display: 'flex',
       gap: 16,
       padding: '14px 18px',
-      borderBottom: '1px solid #eef0f4',
+      borderBottom: '1px solid var(--border)',
       flexWrap: 'wrap',
     }}>
       <div style={{
@@ -127,7 +127,7 @@ export default async function ContainerDetailPage(
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
             <Link href="/containers" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>Container Specs</Link>
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
-            <span style={{ color: '#e87722' }}>{spec.name}</span>
+            <span style={{ color: 'var(--accent)' }}>{spec.name}</span>
           </nav>
 
           <h1 style={{
@@ -146,7 +146,7 @@ export default async function ContainerDetailPage(
 
         {/* Spec card */}
         <div style={{
-          background: '#fff',
+          background: 'var(--bg-card)',
           border: '1px solid var(--border)',
           borderRadius: 10,
           overflow: 'hidden',
@@ -196,7 +196,7 @@ export default async function ContainerDetailPage(
           padding: '14px 18px',
           background: 'var(--bg)',
           borderRadius: 10,
-          border: '1px solid #eef0f4',
+          border: '1px solid var(--border)',
         }}>
           {spec.notes}
         </p>
@@ -207,12 +207,12 @@ export default async function ContainerDetailPage(
             display: 'inline-flex',
             alignItems: 'center',
             gap: 8,
-            background: '#fff7ed',
-            border: '1px solid #fdba74',
+            background: 'var(--cat-ops-tint)',
+            border: '1px solid var(--cat-ops)',
             borderRadius: 8,
             padding: '11px 18px',
             textDecoration: 'none',
-            color: '#9a3412',
+            color: 'var(--cat-ops)',
             fontSize: 14,
             fontWeight: 600,
           }}>
@@ -223,7 +223,7 @@ export default async function ContainerDetailPage(
         {/* Back link */}
         <div style={{ marginBottom: 24 }}>
           <Link href="/containers" style={{
-            color: '#e87722',
+            color: 'var(--accent)',
             textDecoration: 'none',
             fontSize: 14,
             fontWeight: 600,
@@ -242,7 +242,7 @@ export default async function ContainerDetailPage(
         }}>
           {prev ? (
             <Link href={`/containers/${prev.slug}`} style={{
-              background: '#fff',
+              background: 'var(--bg-card)',
               border: '1px solid var(--border)',
               borderRadius: 8,
               padding: '11px 16px',
@@ -259,7 +259,7 @@ export default async function ContainerDetailPage(
           ) : <div />}
 
           <Link href="/containers" style={{
-            background: '#fff',
+            background: 'var(--bg-card)',
             border: '1px solid var(--border)',
             borderRadius: 8,
             padding: '11px 16px',
@@ -273,7 +273,7 @@ export default async function ContainerDetailPage(
 
           {next ? (
             <Link href={`/containers/${next.slug}`} style={{
-              background: '#fff',
+              background: 'var(--bg-card)',
               border: '1px solid var(--border)',
               borderRadius: 8,
               padding: '11px 16px',

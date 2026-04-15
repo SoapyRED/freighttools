@@ -93,7 +93,7 @@ export default function CbmPage() {
                   ['40ft Standard',  '12.03 × 2.35 × 2.39 m', '67.7 m³', '55–58 m³', '26,480 kg'],
                   ['40ft High Cube', '12.03 × 2.35 × 2.69 m', '76.3 m³', '60–65 m³', '26,230 kg'],
                 ].map(([type, dims, max, usable, payload]) => (
-                  <tr key={type} style={{ borderBottom: '1px solid #eef0f4' }}>
+                  <tr key={type} style={{ borderBottom: '1px solid var(--border)' }}>
                     <td style={{ padding: '11px 16px', fontWeight: 600, whiteSpace: 'nowrap' }}>{type}</td>
                     <td style={{ padding: '11px 16px', fontFamily: 'monospace', fontSize: 13 }}>{dims}</td>
                     <td style={{ padding: '11px 16px', fontWeight: 700 }}>{max}</td>
@@ -123,7 +123,7 @@ export default function CbmPage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {seaContainers.map(c => (
                 <Link key={c.slug} href={`/cbm/${c.slug}`} style={{
-                  background: '#fff', border: '1px solid var(--border)', borderRadius: 8,
+                  background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8,
                   padding: '8px 14px', textDecoration: 'none',
                   display: 'flex', flexDirection: 'column', gap: 2,
                 }}>
@@ -141,7 +141,7 @@ export default function CbmPage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {airUlds.map(c => (
                 <Link key={c.slug} href={`/cbm/${c.slug}`} style={{
-                  background: '#fff', border: '1px solid #bfdbfe', borderRadius: 8,
+                  background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8,
                   padding: '8px 14px', textDecoration: 'none',
                   display: 'flex', flexDirection: 'column', gap: 2,
                 }}>
@@ -207,7 +207,7 @@ export default function CbmPage() {
             Road freight in Europe typically prices by LDM (floor space) rather than CBM because trailer height is usually not a constraint — most standard goods don&apos;t stack to the roof. Sea and air freight price by volume because container and aircraft space is three-dimensional.
           </p>
           <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
-            For a detailed LDM calculation, use our <Link href="/ldm" style={{ color: '#e87722', textDecoration: 'underline' }}>Loading Metres Calculator</Link>.
+            For a detailed LDM calculation, use our <Link href="/ldm" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Loading Metres Calculator</Link>.
           </p>
 
           {/* Section 6: FAQ */}
@@ -224,7 +224,7 @@ export default function CbmPage() {
             <details className="faq-item">
               <summary>How is CBM used in air freight?</summary>
               <div className="faq-answer">
-                In air freight, CBM is converted to volumetric weight using the formula: 1 CBM = 167 kg (based on the IATA divisor of 6,000). The carrier charges whichever is higher — actual weight or volumetric weight. Use our <Link href="/chargeable-weight" style={{ color: '#e87722', textDecoration: 'underline' }}>Chargeable Weight Calculator</Link> for air freight pricing.
+                In air freight, CBM is converted to volumetric weight using the formula: 1 CBM = 167 kg (based on the IATA divisor of 6,000). The carrier charges whichever is higher — actual weight or volumetric weight. Use our <Link href="/chargeable-weight" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Chargeable Weight Calculator</Link> for air freight pricing.
               </div>
             </details>
             <details className="faq-item">

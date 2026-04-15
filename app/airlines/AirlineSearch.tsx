@@ -30,7 +30,7 @@ function PaginationBar({ currentPage, totalPages, setPage }: {
     border: '1.5px solid var(--border-strong)', background: 'var(--bg, #fff)',
     color: 'var(--text, #1e2535)', transition: 'all 0.1s',
   };
-  const active: React.CSSProperties = { ...base, background: '#EF9F27', color: '#1a1a1a', border: '1.5px solid #EF9F27', cursor: 'default' };
+  const active: React.CSSProperties = { ...base, background: 'var(--page-cat, var(--cat-ref))', color: '#FFFFFF', border: '1.5px solid var(--page-cat, var(--cat-ref))', cursor: 'default' };
   const disabled: React.CSSProperties = { ...base, color: 'var(--text-faint)', cursor: 'not-allowed', background: 'var(--grey-50, #f8f9fb)' };
 
   // Build page numbers: first, last, and 2 around current
@@ -159,8 +159,8 @@ export default function AirlineSearch({ index }: Props) {
             boxSizing: 'border-box',
           }}
           onFocus={e => {
-            e.currentTarget.style.borderColor = '#e87722';
-            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
+            e.currentTarget.style.borderColor = 'var(--page-cat, var(--cat-ref))';
+            e.currentTarget.style.boxShadow = '0 0 0 3px var(--glow-accent)';
           }}
           onBlur={e => {
             e.currentTarget.style.borderColor = 'var(--border-strong)';
@@ -183,9 +183,9 @@ export default function AirlineSearch({ index }: Props) {
               style={{
                 padding: '8px 18px', borderRadius: 20, fontSize: 13, fontWeight: 600,
                 fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
-                border: active ? '1.5px solid #EF9F27' : '1.5px solid var(--border-strong)',
-                background: active ? '#EF9F27' : 'var(--bg, #fff)',
-                color: active ? '#1a1a1a' : 'var(--text-secondary, #5a6478)',
+                border: active ? '1.5px solid var(--page-cat, var(--cat-ref))' : '1.5px solid var(--border-strong)',
+                background: active ? 'var(--page-cat, var(--cat-ref))' : 'var(--bg, #fff)',
+                color: active ? '#FFFFFF' : 'var(--text-secondary, #5a6478)',
                 transition: 'all 0.15s',
               }}
             >
@@ -220,8 +220,8 @@ export default function AirlineSearch({ index }: Props) {
           style={{
             padding: '8px 16px', borderRadius: 20, fontSize: 13, fontWeight: 600,
             fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
-            border: '1.5px solid #EF9F27', background: 'transparent',
-            color: '#EF9F27', transition: 'all 0.15s', marginLeft: 'auto',
+            border: '1.5px solid var(--page-cat, var(--cat-ref))', background: 'transparent',
+            color: 'var(--page-cat, var(--cat-ref))', transition: 'all 0.15s', marginLeft: 'auto',
           }}
         >
           &#128229; Download CSV ({totalItems.toLocaleString()})
@@ -231,7 +231,7 @@ export default function AirlineSearch({ index }: Props) {
       {/* Community contribution messaging */}
       <p style={{ fontSize: 12, color: 'var(--text-faint)', marginBottom: 16, textAlign: 'center' }}>
         This database is built and maintained with help from the freight community. Missing an airline or spotted an error? Let us know at{' '}
-        <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
+        <a href="mailto:contact@freightutils.com" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
           contact@freightutils.com
         </a>
       </p>
@@ -320,19 +320,19 @@ export default function AirlineSearch({ index }: Props) {
                         {airline.iata_code}
                       </span>
                     ) : (
-                      <span style={{ color: '#c4c9d4' }}>&mdash;</span>
+                      <span style={{ color: 'var(--text-faint)' }}>&mdash;</span>
                     )}
                   </td>
                   <td style={{ padding: '11px 16px', fontFamily: 'monospace', fontSize: 13 }}>
-                    {airline.icao_code || <span style={{ color: '#c4c9d4' }}>&mdash;</span>}
+                    {airline.icao_code || <span style={{ color: 'var(--text-faint)' }}>&mdash;</span>}
                   </td>
                   <td style={{ padding: '11px 16px' }}>
                     {airline.awb_prefix && airline.awb_prefix.length > 0 ? (
                       <span style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
                         {airline.awb_prefix.map(p => (
                           <span key={p} style={{
-                            background: '#fef3c7',
-                            color: '#92400e',
+                            background: 'var(--warning-tint)',
+                            color: 'var(--warning-dark)',
                             fontFamily: 'monospace',
                             fontSize: 12,
                             fontWeight: 700,
@@ -347,17 +347,17 @@ export default function AirlineSearch({ index }: Props) {
                         )}
                       </span>
                     ) : (
-                      <span style={{ color: '#c4c9d4' }}>&mdash;</span>
+                      <span style={{ color: 'var(--text-faint)' }}>&mdash;</span>
                     )}
                   </td>
                   <td style={{ padding: '11px 16px', fontSize: 13 }}>
-                    {airline.country || <span style={{ color: '#c4c9d4' }}>&mdash;</span>}
+                    {airline.country || <span style={{ color: 'var(--text-faint)' }}>&mdash;</span>}
                   </td>
                   <td style={{ padding: '11px 16px', textAlign: 'center' }}>
                     {airline.has_cargo ? (
                       <span style={{
-                        background: '#fef3c7',
-                        color: '#92400e',
+                        background: 'var(--warning-tint)',
+                        color: 'var(--warning-dark)',
                         fontSize: 11,
                         fontWeight: 700,
                         padding: '3px 10px',
@@ -368,7 +368,7 @@ export default function AirlineSearch({ index }: Props) {
                         Cargo
                       </span>
                     ) : (
-                      <span style={{ color: '#c4c9d4', fontSize: 12 }}>Pax</span>
+                      <span style={{ color: 'var(--text-faint)', fontSize: 12 }}>Pax</span>
                     )}
                   </td>
                 </tr>
