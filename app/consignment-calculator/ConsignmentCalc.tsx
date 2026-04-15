@@ -66,8 +66,10 @@ export default function ConsignmentCalc() {
     borderRadius: 12, overflow: 'hidden', marginBottom: 20,
   };
   const cardHead: React.CSSProperties = {
-    background: 'var(--navy)', padding: '12px 18px',
-    fontSize: 14, fontWeight: 700, color: '#fff',
+    background: 'var(--bg-card)', padding: '12px 18px',
+    borderBottom: '1px solid var(--border)',
+    borderLeft: '3px solid var(--page-cat, var(--cat-ops))',
+    fontSize: 14, fontWeight: 700, color: 'var(--text-primary)',
     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
   };
   const inp: React.CSSProperties = {

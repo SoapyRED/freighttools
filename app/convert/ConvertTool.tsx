@@ -244,8 +244,8 @@ export default function ConvertTool({ defaultFrom = 'kg', defaultTo = 'lbs' }: P
         background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
         overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
       }}>
-        <div style={{ background: '#243044', padding: '14px 24px' }}>
-          <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Result</span>
+        <div style={{ background: 'var(--bg-card)', borderBottom: '1px solid var(--border)', borderLeft: '3px solid var(--page-cat, var(--cat-ops))', padding: '14px 24px' }}>
+          <span style={{ fontWeight: 700, fontSize: 13, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Result</span>
         </div>
 
         {!result ? (
