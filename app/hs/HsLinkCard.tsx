@@ -13,23 +13,34 @@ export default function HsLinkCard({ href, code, description, arrow = true }: Pr
   return (
     <Link href={href} style={{ textDecoration: 'none' }}>
       <div style={{
-        background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
         padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 14,
-        transition: 'border-color 0.12s',
+        transition: 'border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease',
+        cursor: 'pointer',
       }}
-        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = '#e87722'; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = '#d8dce6'; }}
+        onMouseEnter={e => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.borderColor = 'var(--page-cat, var(--cat-customs))';
+          el.style.transform = 'translateY(-2px)';
+          el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+        }}
+        onMouseLeave={e => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.borderColor = 'var(--border)';
+          el.style.transform = 'none';
+          el.style.boxShadow = 'none';
+        }}
       >
         <div style={{
-          background: '#1a2332', color: '#fff', fontFamily: 'monospace',
+          background: 'var(--cat-customs-tint)', color: 'var(--cat-customs)', fontFamily: 'monospace',
           fontSize: 14, fontWeight: 700, padding: '4px 12px', borderRadius: 6, flexShrink: 0,
         }}>
           {code}
         </div>
-        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', flex: 1 }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', flex: 1 }}>
           {description}
         </div>
-        {arrow && <div style={{ color: '#d8dce6', fontSize: 16, flexShrink: 0 }}>&rarr;</div>}
+        {arrow && <div style={{ color: 'var(--text-faint)', fontSize: 16, flexShrink: 0 }}>&rarr;</div>}
       </div>
     </Link>
   );
@@ -45,24 +56,28 @@ export function HsSectionCard({ href, numeral, name }: SectionCardProps) {
   return (
     <Link href={href} style={{ textDecoration: 'none' }}>
       <div style={{
-        background: 'var(--bg-card, #fff)', border: '1px solid var(--border, #d8dce6)', borderRadius: 10,
-        padding: '14px 18px', transition: 'border-color 0.12s, box-shadow 0.12s',
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
+        padding: '14px 18px', transition: 'border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease',
         cursor: 'pointer', minHeight: 80, display: 'flex', flexDirection: 'column',
       }}
         onMouseEnter={e => {
-          (e.currentTarget as HTMLElement).style.borderColor = '#e87722';
-          (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 8px rgba(232,119,34,0.1)';
+          const el = e.currentTarget as HTMLElement;
+          el.style.borderColor = 'var(--page-cat, var(--cat-customs))';
+          el.style.transform = 'translateY(-2px)';
+          el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
         }}
         onMouseLeave={e => {
-          (e.currentTarget as HTMLElement).style.borderColor = 'var(--border, #d8dce6)';
-          (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+          const el = e.currentTarget as HTMLElement;
+          el.style.borderColor = 'var(--border)';
+          el.style.transform = 'none';
+          el.style.boxShadow = 'none';
         }}
       >
-        <div style={{ fontSize: 12, fontWeight: 700, color: '#e87722', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 4 }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--cat-customs)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 4 }}>
           Section {numeral.toUpperCase()}
         </div>
         <div className="line-clamp-2" style={{
-          fontSize: 14, fontWeight: 600, color: 'var(--text, #1a2332)', lineHeight: 1.4,
+          fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.4,
         }}>
           {name}
         </div>
@@ -81,23 +96,34 @@ export function HsSmallCard({ href, code, description }: SmallCardProps) {
   return (
     <Link href={href} style={{ textDecoration: 'none' }}>
       <div style={{
-        background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
+        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
         padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12,
-        transition: 'border-color 0.12s',
+        transition: 'border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease',
+        cursor: 'pointer',
       }}
-        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = '#e87722'; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = '#d8dce6'; }}
+        onMouseEnter={e => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.borderColor = 'var(--page-cat, var(--cat-customs))';
+          el.style.transform = 'translateY(-2px)';
+          el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+        }}
+        onMouseLeave={e => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.borderColor = 'var(--border)';
+          el.style.transform = 'none';
+          el.style.boxShadow = 'none';
+        }}
       >
         <div style={{
-          background: '#1a2332', color: '#fff', fontFamily: 'monospace',
+          background: 'var(--cat-customs-tint)', color: 'var(--cat-customs)', fontFamily: 'monospace',
           fontSize: 13, fontWeight: 700, padding: '3px 10px', borderRadius: 6, flexShrink: 0,
         }}>
           {code}
         </div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', flex: 1 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)', flex: 1 }}>
           {description}
         </div>
-        <div style={{ color: '#d8dce6', fontSize: 14, flexShrink: 0 }}>&rarr;</div>
+        <div style={{ color: 'var(--text-faint)', fontSize: 14, flexShrink: 0 }}>&rarr;</div>
       </div>
     </Link>
   );

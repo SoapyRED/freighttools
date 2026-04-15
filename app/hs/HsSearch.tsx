@@ -37,7 +37,7 @@ function PaginationBar({ currentPage, totalPages, setPage }: {
   const base: React.CSSProperties = {
     padding: '6px 10px', borderRadius: 6, fontSize: 13, fontWeight: 600,
     fontFamily: "'Outfit', sans-serif", cursor: 'pointer', minWidth: 34, textAlign: 'center',
-    border: '1.5px solid var(--grey-100, #d8dce6)', background: 'var(--bg, #fff)',
+    border: '1.5px solid var(--border-strong)', background: 'var(--bg, #fff)',
     color: 'var(--text, #1e2535)', transition: 'all 0.1s',
   };
   const active: React.CSSProperties = { ...base, background: '#EF9F27', color: '#1a1a1a', border: '1.5px solid #EF9F27', cursor: 'default' };
@@ -80,7 +80,7 @@ function EntryCard({ entry }: { entry: HsSlimEntry }) {
     <Link href={codeUrl(entry.hscode, entry.level)} style={{ textDecoration: 'none' }}>
       <div style={{
         background: 'var(--bg, #fff)',
-        border: '1px solid var(--grey-100, #d8dce6)',
+        border: '1px solid var(--border-strong)',
         borderRadius: 10,
         padding: '14px 18px',
         display: 'flex',
@@ -94,7 +94,7 @@ function EntryCard({ entry }: { entry: HsSlimEntry }) {
           (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 8px rgba(232,119,34,0.1)';
         }}
         onMouseLeave={e => {
-          (e.currentTarget as HTMLElement).style.borderColor = 'var(--grey-100, #d8dce6)';
+          (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-strong)';
           (e.currentTarget as HTMLElement).style.boxShadow = 'none';
         }}
       >
@@ -119,7 +119,7 @@ function EntryCard({ entry }: { entry: HsSlimEntry }) {
         }}>
           {badge.label}
         </div>
-        <div style={{ color: 'var(--grey-100, #d8dce6)', fontSize: 16, flexShrink: 0 }}>&rarr;</div>
+        <div style={{ color: 'var(--border-strong)', fontSize: 16, flexShrink: 0 }}>&rarr;</div>
       </div>
     </Link>
   );
@@ -179,7 +179,7 @@ export default function HsSearch({ index }: Props) {
             width: '100%', padding: '14px 16px 14px 46px', fontSize: 16,
             fontFamily: "'Outfit', sans-serif", fontWeight: 500,
             color: 'var(--text, #1e2535)', background: 'var(--bg, #fff)',
-            border: '2px solid var(--grey-100, #d8dce6)', borderRadius: 10,
+            border: '2px solid var(--border-strong)', borderRadius: 10,
             outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s',
             boxSizing: 'border-box',
           }}
@@ -188,7 +188,7 @@ export default function HsSearch({ index }: Props) {
             e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
           }}
           onBlur={e => {
-            e.currentTarget.style.borderColor = 'var(--grey-100, #d8dce6)';
+            e.currentTarget.style.borderColor = 'var(--border-strong)';
             e.currentTarget.style.boxShadow = 'none';
           }}
         />
@@ -202,7 +202,7 @@ export default function HsSearch({ index }: Props) {
 
       {isEmpty && (
         <div style={{
-          background: 'var(--bg, #fff)', border: '1px solid var(--grey-100, #d8dce6)',
+          background: 'var(--bg, #fff)', border: '1px solid var(--border-strong)',
           borderRadius: 10, padding: '24px', textAlign: 'center',
         }}>
           <p style={{ color: 'var(--text-muted)', marginBottom: 8 }}>

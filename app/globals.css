@@ -808,11 +808,13 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
 
 /* ─── Incoterm card hover ───────────────────────────────────────── */
 .incoterm-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  cursor: pointer;
 }
 .incoterm-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px var(--glow-accent);
+  border-color: var(--page-cat, var(--cat-customs)) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 /* ─── Mode badges (INCOTERMS) ───────────────────────────────────── */
@@ -933,14 +935,7 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
 .data-table tbody tr:hover td { background: var(--bg-card-hover); }
 .data-table tbody tr:last-child td { border-bottom: none; }
 
-/* ─── Incoterm card hover ───────────────────────────────────────── */
-.incoterm-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.incoterm-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px var(--glow-accent);
-}
+/* duplicate incoterm-card removed — defined above */
 
 /* ─── Mode badges ───────────────────────────────────────────────── */
 .mode-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 12px; display: inline-block; font-weight: 600; }

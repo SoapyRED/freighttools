@@ -27,7 +27,7 @@ function PaginationBar({ currentPage, totalPages, setPage }: {
   const base: React.CSSProperties = {
     padding: '6px 10px', borderRadius: 6, fontSize: 13, fontWeight: 600,
     fontFamily: "'Outfit', sans-serif", cursor: 'pointer', minWidth: 34, textAlign: 'center',
-    border: '1.5px solid var(--grey-100, #d8dce6)', background: 'var(--bg, #fff)',
+    border: '1.5px solid var(--border-strong)', background: 'var(--bg, #fff)',
     color: 'var(--text, #1e2535)', transition: 'all 0.1s',
   };
   const active: React.CSSProperties = { ...base, background: '#EF9F27', color: '#1a1a1a', border: '1.5px solid #EF9F27', cursor: 'default' };
@@ -163,7 +163,7 @@ export default function AirlineSearch({ index }: Props) {
             e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
           }}
           onBlur={e => {
-            e.currentTarget.style.borderColor = '#d8dce6';
+            e.currentTarget.style.borderColor = 'var(--border-strong)';
             e.currentTarget.style.boxShadow = 'none';
           }}
         />
@@ -183,7 +183,7 @@ export default function AirlineSearch({ index }: Props) {
               style={{
                 padding: '8px 18px', borderRadius: 20, fontSize: 13, fontWeight: 600,
                 fontFamily: "'Outfit', sans-serif", cursor: 'pointer',
-                border: active ? '1.5px solid #EF9F27' : '1.5px solid var(--grey-100, #d8dce6)',
+                border: active ? '1.5px solid #EF9F27' : '1.5px solid var(--border-strong)',
                 background: active ? '#EF9F27' : 'var(--bg, #fff)',
                 color: active ? '#1a1a1a' : 'var(--text-secondary, #5a6478)',
                 transition: 'all 0.15s',

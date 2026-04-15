@@ -206,20 +206,22 @@ export default function AdrExemptionCalc({ index }: Props) {
 
   // Shared styles
   const cardStyle: React.CSSProperties = {
-    borderRadius: 12,
-    border: '1px solid var(--grey-100, #d8dce6)',
+    borderRadius: 8,
+    border: '1px solid var(--border)',
+    borderLeft: '3px solid var(--page-cat, var(--cat-dg))',
     overflow: 'hidden',
     marginBottom: 24,
   };
   const cardHeaderStyle: React.CSSProperties = {
-    background: '#1a2332',
-    color: '#fff',
+    background: 'var(--bg-card)',
+    color: 'var(--text-primary)',
     padding: '12px 16px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     fontSize: 14,
     fontWeight: 700,
+    borderBottom: '1px solid var(--border)',
   };
   const cardBodyStyle: React.CSSProperties = {
     padding: '20px 16px',
@@ -331,8 +333,8 @@ export default function AdrExemptionCalc({ index }: Props) {
                       fontFamily: 'monospace',
                       fontWeight: 700,
                       fontSize: 13,
-                      background: '#1a2332',
-                      color: '#e87722',
+                      background: 'var(--cat-dg-tint)',
+                      color: 'var(--cat-dg)',
                       padding: '2px 8px',
                       borderRadius: 4,
                       flexShrink: 0,
@@ -375,8 +377,8 @@ export default function AdrExemptionCalc({ index }: Props) {
                   fontFamily: 'monospace',
                   fontWeight: 700,
                   fontSize: 14,
-                  background: '#1a2332',
-                  color: '#e87722',
+                  background: 'var(--cat-dg-tint)',
+                  color: 'var(--cat-dg)',
                   padding: '3px 10px',
                   borderRadius: 5,
                 }}>
@@ -388,7 +390,7 @@ export default function AdrExemptionCalc({ index }: Props) {
                 <span style={{
                   fontSize: 12,
                   fontWeight: 700,
-                  color: selectedEntry.transport_category === '0' ? '#dc2626' : '#1a2332',
+                  color: selectedEntry.transport_category === '0' ? 'var(--error)' : 'var(--text-primary)',
                   background: selectedEntry.transport_category === '0' ? '#fee2e2' : 'rgba(232,119,34,0.12)',
                   padding: '2px 8px',
                   borderRadius: 4,
@@ -514,8 +516,8 @@ export default function AdrExemptionCalc({ index }: Props) {
                       fontFamily: 'monospace',
                       fontWeight: 700,
                       fontSize: 12,
-                      background: '#1a2332',
-                      color: '#e87722',
+                      background: 'var(--cat-dg-tint)',
+                      color: 'var(--cat-dg)',
                       padding: '2px 7px',
                       borderRadius: 4,
                       flexShrink: 0,
