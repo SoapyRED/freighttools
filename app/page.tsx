@@ -68,58 +68,45 @@ export default function HomePage() {
     <>
       {/* ── HERO ── */}
       <section style={{
-        background: 'var(--navy)',
-        padding: '64px 20px 72px',
+        background: 'var(--bg-hero)',
+        padding: '56px 20px 48px',
         textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden',
       }}>
-        {/* Subtle background glow */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'var(--gradient-hero)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{ maxWidth: 1080, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
           <div style={{
-            fontSize: 11,
-            fontWeight: 700,
+            fontSize: 12,
+            fontWeight: 500,
             textTransform: 'uppercase',
-            letterSpacing: '2.5px',
+            letterSpacing: '2px',
             color: 'var(--accent)',
-            marginBottom: 20,
+            marginBottom: 16,
           }}>
             Freight Calculators &amp; APIs
           </div>
           <h1 style={{
-            fontSize: 'clamp(32px, 6vw, 56px)',
-            fontWeight: 800,
-            lineHeight: 1.1,
-            letterSpacing: '-1px',
-            marginBottom: 20,
-            color: '#fff',
+            fontSize: 'clamp(28px, 5vw, 36px)',
+            fontWeight: 600,
+            lineHeight: 1.15,
+            letterSpacing: '-0.5px',
+            marginBottom: 16,
+            color: 'var(--text-primary)',
           }}>
-            Free Freight Tools{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #EF9F27, #f9913a, #EF9F27)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              for Everyone
+            Free freight tools{' '}
+            <span style={{ color: 'var(--accent)' }}>
+              for everyone
             </span>
           </h1>
           <p style={{
-            fontSize: 'clamp(15px, 2.5vw, 18px)',
-            color: 'rgba(255,255,255,0.75)',
-            maxWidth: 620,
-            margin: '0 auto 28px',
+            fontSize: 16,
+            color: 'var(--text-muted)',
+            maxWidth: 520,
+            margin: '0 auto 20px',
             lineHeight: 1.65,
           }}>
             Calculators, reference data, and open REST APIs for freight professionals,
             developers, and AI agents. No signup required.
           </p>
-          <div className="stats-pill" style={{ marginBottom: 32 }}>
+          <div className="stats-pill" style={{ marginBottom: 28 }}>
             {SITE_COPY.statsLine}
           </div>
 
@@ -131,59 +118,31 @@ export default function HomePage() {
             maxWidth: 640,
             margin: '0 auto 32px',
           }} className="hero-cta-grid">
-            <div style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 12,
-              padding: '20px 20px 16px',
-              textAlign: 'left',
+            <Link href="/ldm" style={{
+              display: 'inline-block',
+              background: 'var(--accent)',
+              color: 'var(--text-on-orange)',
+              padding: '10px 24px',
+              borderRadius: 8,
+              fontSize: 14,
+              fontWeight: 500,
+              textDecoration: 'none',
             }}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
-                Freight Tools
-              </div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.5, marginBottom: 14 }}>
-                Free calculators for LDM, CBM, chargeable weight, ADR compliance, and more
-              </div>
-              <Link href="/ldm" style={{
-                display: 'inline-block',
-                background: 'var(--accent)',
-                color: '#000',
-                padding: '8px 18px',
-                borderRadius: 6,
-                fontSize: 13,
-                fontWeight: 700,
-                textDecoration: 'none',
-              }}>
-                Use Tools &rarr;
-              </Link>
-            </div>
-            <div style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 12,
-              padding: '20px 20px 16px',
-              textAlign: 'left',
+              Freight Tools &rarr;
+            </Link>
+            <Link href="/api-docs" style={{
+              display: 'inline-block',
+              background: 'var(--bg-hero)',
+              color: 'var(--text-primary)',
+              padding: '10px 24px',
+              borderRadius: 8,
+              fontSize: 14,
+              fontWeight: 500,
+              textDecoration: 'none',
+              border: '1px solid var(--border-strong)',
             }}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
-                Developer API
-              </div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.5, marginBottom: 14 }}>
-                {SITE_STATS.apiEndpointCount} REST endpoints, MCP server, OpenAPI spec. No signup required.
-              </div>
-              <Link href="/api-docs" style={{
-                display: 'inline-block',
-                background: 'transparent',
-                color: 'var(--accent)',
-                padding: '8px 18px',
-                borderRadius: 6,
-                fontSize: 13,
-                fontWeight: 700,
-                textDecoration: 'none',
-                border: '2px solid var(--accent)',
-              }}>
-                View API Docs &rarr;
-              </Link>
-            </div>
+              API Docs &rarr;
+            </Link>
           </div>
 
           {/* Terminal demo */}
@@ -216,10 +175,10 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="ecosystem-badge"
               style={{
-                fontSize: 13, fontWeight: 600, color: 'var(--text-faint)',
-                textDecoration: 'none', padding: '6px 14px',
-                border: '1px solid var(--border)', borderRadius: 6,
-                transition: 'color 0.15s, border-color 0.15s',
+                fontSize: 12, fontWeight: 500, color: 'var(--text-muted)',
+                textDecoration: 'none', padding: '4px 12px',
+                background: 'var(--bg)',
+                border: '1px solid var(--border)', borderRadius: 20,
               }}
             >
               {p.label}
@@ -246,20 +205,21 @@ export default function HomePage() {
                   <Link key={t.href} href={t.href} className="tool-card" style={{
                     background: 'var(--bg-card)',
                     border: '1px solid var(--border)',
-                    borderRadius: 10,
-                    padding: '18px 16px',
+                    borderLeft: `3px solid ${group.color}`,
+                    borderRadius: 8,
+                    padding: '14px 16px',
                     textDecoration: 'none',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 6,
+                    boxShadow: 'var(--shadow-card)',
                     gridColumn: useWide ? 'span 2' : undefined,
                   }}>
-                    <div style={{ fontSize: 22 }}>{t.icon}</div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{t.title}</span>
+                      <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{t.title}</span>
                       <span style={{ color: 'var(--text-faint)', fontSize: 14 }}>&rarr;</span>
                     </div>
-                    <span style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.45 }}>{t.desc}</span>
+                    <span style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.45 }}>{t.desc}</span>
                     <code className="api-badge" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>
                       {t.label}
                     </code>
@@ -513,18 +473,18 @@ export default function HomePage() {
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 16 }}>
               {[
-                { title: 'Free & Open', text: `No signup, no paywall, no vendor lock-in. ${SITE_STATS.toolCount} tools and ${SITE_STATS.apiEndpointCount} API endpoints, all free. Pay only if you need 50,000+ requests/month.`, accent: 'var(--color-success)' },
-                { title: 'Built by a Freight Planner', text: 'Created by an ADR-certified transport planner working at Heathrow. Every formula, every dataset, verified against real operations.', accent: 'var(--color-warning)' },
-                { title: 'API-First & Agent-Ready', text: 'REST API with OpenAPI spec, Postman collection, and the only freight MCP server for AI agents. Integrate in minutes.', accent: 'var(--color-api)' },
+                { title: 'Free & Open', text: `No signup, no paywall, no vendor lock-in. ${SITE_STATS.toolCount} tools and ${SITE_STATS.apiEndpointCount} API endpoints, all free. Pay only if you need 50,000+ requests/month.`, accent: 'var(--cat-ops)', tint: 'var(--cat-ops-light)' },
+                { title: 'Built by a Freight Planner', text: 'Created by an ADR-certified transport planner working at Heathrow. Every formula, every dataset, verified against real operations.', accent: 'var(--accent)', tint: 'transparent' },
+                { title: 'API-First & Agent-Ready', text: 'REST API with OpenAPI spec, Postman collection, and the only freight MCP server for AI agents. Integrate in minutes.', accent: 'var(--cat-customs)', tint: 'var(--cat-customs-light)' },
               ].map(card => (
                 <div key={card.title} style={{
-                  background: 'var(--bg-card)',
+                  background: card.tint,
                   border: '1px solid var(--border)',
                   borderLeft: `3px solid ${card.accent}`,
-                  borderRadius: 12,
+                  borderRadius: 8,
                   padding: '24px 20px',
                 }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{card.title}</div>
+                  <div style={{ fontSize: 16, fontWeight: 500, color: 'var(--text-primary)', marginBottom: 8 }}>{card.title}</div>
                   <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{card.text}</p>
                 </div>
               ))}

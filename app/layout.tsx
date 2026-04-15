@@ -152,8 +152,8 @@ export default function RootLayout({
 
         {/* ── HEADER ── */}
         <header style={{
-          background: 'var(--navy)',
-          borderBottom: '2px solid #EF9F27',
+          background: 'var(--bg-hero)',
+          borderBottom: '1px solid var(--border)',
           position: 'sticky',
           top: 0,
           zIndex: 100,
@@ -184,11 +184,12 @@ export default function RootLayout({
         {children}
 
         {/* ── FOOTER ── */}
-        <div className="footer-gradient-border" style={{ marginTop: 60 }} />
         <footer style={{
-          background: 'var(--navy)',
-          color: 'var(--text-faint)',
-          padding: '40px 20px 32px',
+          background: 'var(--bg-footer)',
+          borderTop: '1px solid var(--border)',
+          color: 'var(--text-muted)',
+          padding: '32px 20px 24px',
+          marginTop: 60,
         }}>
           <div style={{ maxWidth: 1080, margin: '0 auto' }}>
             {/* Column grid */}

@@ -12,48 +12,36 @@ interface PageHeroProps {
 
 /**
  * Consistent hero/header for all tool pages.
- * Navy background with gradient glow, large title with optional
- * gradient accent word, subtitle, and optional badge pill.
+ * White/card background, large title with optional accent word,
+ * subtitle, differentiator strip, and optional badge pill.
  */
 export default function PageHero({ title, titleAccent, subtitle, badge, differentiators, children }: PageHeroProps) {
   return (
     <div style={{
-      background: 'var(--navy)',
+      background: 'var(--bg-hero)',
       padding: '40px 20px 48px',
       textAlign: 'center',
-      position: 'relative',
-      overflow: 'hidden',
+      borderBottom: '1px solid var(--border)',
     }}>
-      {/* Subtle background glow */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'var(--gradient-hero)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: 900, margin: '0 auto' }}>
+      <div style={{ maxWidth: 900, margin: '0 auto' }}>
         <h1 style={{
           fontSize: 'clamp(22px, 5vw, 36px)',
-          fontWeight: 800,
-          color: '#fff',
+          fontWeight: 600,
+          color: 'var(--text-primary)',
           marginBottom: 12,
           letterSpacing: '-0.5px',
           lineHeight: 1.2,
         }}>
           {title}{' '}
           {titleAccent && (
-            <span style={{
-              background: 'linear-gradient(135deg, #EF9F27, #f9913a, #EF9F27)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span style={{ color: 'var(--accent)' }}>
               {titleAccent}
             </span>
           )}
         </h1>
         <p style={{
           fontSize: 16,
-          color: 'var(--text-hero)',
+          color: 'var(--text-muted)',
           maxWidth: 580,
           margin: '0 auto',
           lineHeight: 1.6,
@@ -63,7 +51,7 @@ export default function PageHero({ title, titleAccent, subtitle, badge, differen
         {differentiators && differentiators.length > 0 && (
           <p style={{
             fontSize: 13,
-            color: 'var(--text-secondary)',
+            color: 'var(--text-faint)',
             marginTop: 10,
             letterSpacing: '0.2px',
           }}>

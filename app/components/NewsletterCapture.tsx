@@ -71,7 +71,7 @@ export default function NewsletterCapture() {
       padding: '20px 24px',
       marginTop: 32,
     }}>
-      <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
+      <div style={{ fontSize: 15, fontWeight: 500, color: 'var(--text-primary)', marginBottom: 4 }}>
         Stay updated
       </div>
       <div style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 14, lineHeight: 1.5 }}>
@@ -90,8 +90,8 @@ export default function NewsletterCapture() {
             minWidth: 200,
             padding: '10px 14px',
             borderRadius: 8,
-            border: '1.5px solid var(--border)',
-            background: 'var(--bg)',
+            border: '1.5px solid var(--border-strong)',
+            background: 'var(--bg-input)',
             color: 'var(--text)',
             fontSize: 14,
             fontFamily: "'Outfit', sans-serif",
@@ -103,9 +103,9 @@ export default function NewsletterCapture() {
           disabled={status === 'loading'}
           style={{
             background: 'var(--accent)',
-            color: '#fff',
+            color: 'var(--text-on-orange)',
             border: 'none',
-            borderRadius: 8,
+            borderRadius: 6,
             padding: '10px 20px',
             fontSize: 14,
             fontWeight: 700,
