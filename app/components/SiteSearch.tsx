@@ -112,9 +112,9 @@ export default function SiteSearch() {
           fontSize: 12,
           fontFamily: "'Outfit', sans-serif",
           fontWeight: 500,
-          color: '#fff',
-          background: 'rgba(255,255,255,0.08)',
-          border: '1px solid rgba(255,255,255,0.15)',
+          color: 'var(--text-primary)',
+          background: 'var(--bg)',
+          border: '1px solid var(--border-strong)',
           borderRadius: 6,
           outline: 'none',
           transition: 'border-color 0.15s, width 0.2s',
@@ -124,7 +124,7 @@ export default function SiteSearch() {
       />
       <span style={{
         position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)',
-        fontSize: 12, color: 'rgba(255,255,255,0.4)', pointerEvents: 'none',
+        fontSize: 12, color: 'var(--text-faint)', pointerEvents: 'none',
       }}>
         &#128269;
       </span>
@@ -133,9 +133,9 @@ export default function SiteSearch() {
         <div style={{
           position: 'absolute', top: 'calc(100% + 4px)', left: 0, right: 0,
           minWidth: 320,
-          background: '#1a2332', border: '1px solid var(--navy-border)',
+          background: 'var(--bg-card)', border: '1px solid var(--border)',
           borderRadius: 8, padding: '6px 0',
-          zIndex: 200, boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+          zIndex: 200, boxShadow: 'var(--shadow-card-hover)',
           maxHeight: 400, overflowY: 'auto',
         }}>
           {allResults.map((r, i) => (
@@ -147,7 +147,7 @@ export default function SiteSearch() {
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 padding: '8px 14px', textDecoration: 'none', gap: 8,
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)'; }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-card-hover)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
             >
               <span style={{
@@ -158,7 +158,7 @@ export default function SiteSearch() {
               </span>
               <span style={{
                 fontSize: 10, fontWeight: 700, color: 'var(--text-faint)',
-                background: 'rgba(255,255,255,0.06)', padding: '2px 6px',
+                background: 'var(--bg-card-hover)', padding: '2px 6px',
                 borderRadius: 4, flexShrink: 0, textTransform: 'uppercase',
                 letterSpacing: '0.5px',
               }}>

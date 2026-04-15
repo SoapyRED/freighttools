@@ -461,17 +461,16 @@ a { transition: color 0.15s ease; text-underline-offset: 3px; }
 
 /* ─── Tool card hover ──────────────────────────────────────────── */
 .tool-card {
-  transition: box-shadow var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  transition: box-shadow 150ms ease, border-color 150ms ease, transform 150ms ease;
+  cursor: pointer;
 }
 .tool-card:hover {
+  border-color: var(--card-cat, var(--accent)) !important;
   box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
 }
 .tool-card:active {
   transform: translateY(0);
-}
-[data-theme="dark"] .tool-card:hover {
-  box-shadow: 0 4px 24px var(--glow-accent), 0 1px 6px rgba(0,0,0,0.3);
 }
 
 /* ─── DG badge ─────────────────────────────────────────────────── */

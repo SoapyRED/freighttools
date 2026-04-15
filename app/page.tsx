@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const toolGroups = [
   {
     label: 'Freight Operations',
-    color: 'var(--cat-freight)',
+    color: 'var(--cat-ops)',
     tools: [
       { href: '/ldm', label: '/api/ldm', title: 'Loading Metres', desc: 'Floor space for UK/EU road freight trailers', icon: '📐' },
       { href: '/cbm', label: '/api/cbm', title: 'CBM Calculator', desc: 'Cubic metres for sea and air shipments', icon: '📦' },
@@ -37,7 +37,7 @@ const toolGroups = [
   },
   {
     label: 'Customs & Trade',
-    color: 'var(--cat-trade)',
+    color: 'var(--cat-customs)',
     tools: [
       { href: '/hs', label: '/api/hs', title: 'HS Code Lookup', desc: `Search and browse ${SITE_STATS.hsCodeCount.toLocaleString()} Harmonized System commodity codes across 21 sections`, icon: '🏷️' },
       { href: '/incoterms', label: '/api/incoterms', title: 'INCOTERMS 2020', desc: `All ${SITE_STATS.incotermsCount} trade terms — who pays, who bears risk, where responsibility transfers`, icon: '📋' },
@@ -46,7 +46,7 @@ const toolGroups = [
   },
   {
     label: 'Reference Data',
-    color: 'var(--cat-reference)',
+    color: 'var(--cat-ref)',
     tools: [
       { href: '/airlines', label: '/api/airlines', title: 'Airline Codes & AWB Prefixes', desc: 'Search airlines by name, IATA/ICAO code, or AWB prefix', icon: '✈️' },
       { href: '/unlocode', label: '/api/unlocode', title: 'UN/LOCODE Lookup', desc: `${SITE_STATS.unlocodeCount.toLocaleString()}+ transport locations — seaports, airports, rail terminals, inland depots`, icon: '🌍' },
@@ -180,7 +180,7 @@ export default function HomePage() {
                 fontSize: 12, fontWeight: 500, color: 'var(--text-muted)',
                 textDecoration: 'none', padding: '4px 12px',
                 background: 'var(--bg)',
-                border: '1px solid var(--border)', borderRadius: 20,
+                border: '1px solid var(--border-strong)', borderRadius: 20,
               }}
             >
               {p.label}
@@ -205,9 +205,10 @@ export default function HomePage() {
               }}>
                 {group.tools.map(t => (
                   <Link key={t.href} href={t.href} className="tool-card" style={{
+                    '--card-cat': group.color,
                     background: 'var(--bg-card)',
                     border: '1px solid var(--border)',
-                    borderLeft: `3px solid ${group.color}`,
+                    borderLeft: '3px solid var(--card-cat)',
                     borderRadius: 8,
                     padding: '14px 16px',
                     textDecoration: 'none',
@@ -216,7 +217,7 @@ export default function HomePage() {
                     gap: 6,
                     boxShadow: 'var(--shadow-card)',
                     gridColumn: useWide ? 'span 2' : undefined,
-                  }}>
+                  } as React.CSSProperties}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                       <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{t.title}</span>
                       <span style={{ color: 'var(--text-faint)', fontSize: 14 }}>&rarr;</span>
@@ -451,8 +452,8 @@ export default function HomePage() {
                   flexDirection: 'column',
                   gap: 2,
                 }}>
-                  <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{d.name}</span>
-                  <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>{d.detail}</span>
+                  <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{d.name}</span>
+                  <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>{d.detail}</span>
                 </div>
               ))}
             </div>
