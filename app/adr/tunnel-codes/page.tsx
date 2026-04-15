@@ -21,8 +21,8 @@ export default function AdrTunnelCodesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'ADR Dangerous Goods', path: '/adr' }, { name: 'Tunnel Codes Guide', path: '/adr/tunnel-codes' }]) }} />
       {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '40px 20px 48px', textAlign: 'center' }}>
+        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 12, letterSpacing: '-0.5px' }}>
           ADR Tunnel Codes Explained — <span style={{ color: '#e87722' }}>Categories A to E</span>
         </h1>
         <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 600, margin: '0 auto' }}>
@@ -212,10 +212,10 @@ export default function AdrTunnelCodesPage() {
               Related Tools
             </h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-              <Link href="/adr" style={{ background: '#1a2332', color: '#EF9F27', padding: '8px 16px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 700 }}>
+              <Link href="/adr" style={{ background: 'var(--accent)', color: 'var(--text-on-orange)', padding: '8px 16px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 700 }}>
                 ADR Lookup →
               </Link>
-              <Link href="/adr-calculator" style={{ background: '#1a2332', color: '#EF9F27', padding: '8px 16px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 700 }}>
+              <Link href="/adr-calculator" style={{ background: 'var(--accent)', color: 'var(--text-on-orange)', padding: '8px 16px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 700 }}>
                 1.1.3.6 Calculator →
               </Link>
               <Link href="/adr/changes-2025" style={{ background: 'var(--bg-card)', color: 'var(--text)', border: '1px solid var(--border)', padding: '8px 16px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 600 }}>

@@ -60,7 +60,7 @@ export default function AirlinesPage() {
           <div className="ref-table-wrap" style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table className="ref-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Code Type</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Format</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Example</th>
@@ -155,7 +155,7 @@ export default function AirlinesPage() {
                 transition: 'border-color 0.2s',
               }} className="pricing-card">
                 <span style={{
-                  background: '#1a2332', color: '#e87722', fontWeight: 700, fontSize: 14,
+                  background: 'var(--bg)', color: '#e87722', fontWeight: 700, fontSize: 14,
                   padding: '4px 10px', borderRadius: 6, fontFamily: 'monospace', flexShrink: 0,
                 }}>
                   {a.prefix}

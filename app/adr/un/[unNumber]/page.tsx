@@ -258,7 +258,7 @@ function VariantCard({ entry, showHeader }: { entry: AdrEntry; showHeader: boole
           <SectionBox title="Hazard Labels Required">
             <div>
               {entry.labels.split(/[+,]+/).map(l => l.trim()).filter(Boolean).map(label => (
-                <Tag key={label} value={`Label ${label}`} colour="#1a2332" />
+                <Tag key={label} value={`Label ${label}`} colour="var(--bg)" />
               ))}
             </div>
             <p style={{ fontSize: 13, color: 'var(--text-faint)', marginTop: 10 }}>
@@ -373,7 +373,7 @@ export default async function UnNumberPage(
       />
 
       {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
           <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
@@ -402,7 +402,7 @@ export default async function UnNumberPage(
               <h1 style={{
                 fontSize: 'clamp(18px, 4vw, 28px)',
                 fontWeight: 800,
-                color: '#fff',
+                color: 'var(--text-primary)',
                 lineHeight: 1.25,
                 letterSpacing: '-0.3px',
               }}>
@@ -560,7 +560,7 @@ export default async function UnNumberPage(
 
         {/* API callout */}
         <div style={{
-          background: '#1a2332',
+          background: 'var(--bg-code)',
           borderRadius: 12,
           padding: '20px 24px',
           marginBottom: 32,

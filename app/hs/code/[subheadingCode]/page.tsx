@@ -59,7 +59,7 @@ export default async function SubheadingPage(
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
             <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
@@ -117,7 +117,7 @@ export default async function SubheadingPage(
           background: '#fff', border: '1px solid var(--border)', borderRadius: 10,
           overflow: 'hidden', marginBottom: 32,
         }}>
-          <div style={{ background: '#1a2332', padding: '14px 18px', fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#fff' }}>
+          <div style={{ background: 'var(--bg-card)', padding: '14px 18px', fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-primary)', borderBottom: '1px solid var(--border)' }}>
             Classification Hierarchy
           </div>
           <div>

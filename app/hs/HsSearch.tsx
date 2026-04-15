@@ -99,7 +99,7 @@ function EntryCard({ entry }: { entry: HsSlimEntry }) {
         }}
       >
         <div style={{
-          background: '#1a2332', color: '#fff', fontFamily: 'monospace',
+          background: 'var(--bg)', color: 'var(--text-secondary)', fontFamily: 'monospace',
           fontSize: 13, fontWeight: 700, padding: '4px 10px', borderRadius: 6,
           flexShrink: 0, letterSpacing: 0.5,
         }}>

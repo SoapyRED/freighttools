@@ -53,7 +53,7 @@ function StatCard({ label, value, sub, highlight }: { label: string; value: stri
       <div style={{
         fontSize: 22,
         fontWeight: 700,
-        color: highlight ? '#EF9F27' : '#1a2332',
+        color: highlight ? '#EF9F27' : 'var(--text)',
         lineHeight: 1.2,
         fontFamily: 'monospace',
       }}>
@@ -108,7 +108,7 @@ export default async function AirlineDetailPage({ params }: PageProps) {
       />
 
       {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
           <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
@@ -124,7 +124,7 @@ export default async function AirlineDetailPage({ params }: PageProps) {
               <h1 style={{
                 fontSize: 'clamp(20px, 4vw, 32px)',
                 fontWeight: 800,
-                color: '#fff',
+                color: 'var(--text-primary)',
                 lineHeight: 1.25,
                 letterSpacing: '-0.3px',
                 marginBottom: 10,
@@ -358,11 +358,11 @@ export default async function AirlineDetailPage({ params }: PageProps) {
             ← All Airlines
           </Link>
           <Link href="/chargeable-weight" style={{
-            background: '#1a2332',
+            background: 'var(--accent)',
             borderRadius: 8,
             padding: '10px 18px',
             textDecoration: 'none',
-            color: '#e87722',
+            color: 'var(--text-on-orange)',
             fontSize: 13,
             fontWeight: 600,
           }}>

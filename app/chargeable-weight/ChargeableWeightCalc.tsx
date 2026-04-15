@@ -363,7 +363,7 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
       {/* API callout */}
       <div style={{
         marginTop: 32,
-        background: '#1a2332',
+        background: 'var(--bg-code)',
         borderRadius: 12,
         padding: '18px 24px',
         display: 'flex',

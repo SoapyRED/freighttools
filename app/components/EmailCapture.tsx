@@ -33,7 +33,7 @@ export default function EmailCapture() {
 
   return (
     <div style={{
-      background: '#1a2332', borderRadius: 12, padding: '28px 28px 24px',
+      background: 'var(--bg-card)', borderRadius: 12, padding: '28px 28px 24px',
       marginTop: 40,
     }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 16 }}>

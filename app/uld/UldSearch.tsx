@@ -224,7 +224,7 @@ export default function UldSearch({ data }: Props) {
               <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
                 {/* Code block */}
                 <div style={{
-                  background: '#1a2332', color: '#e87722',
+                  background: 'var(--bg)', color: '#e87722',
                   fontWeight: 800, fontSize: 18, fontFamily: 'monospace',
                   padding: '8px 14px', borderRadius: 8, letterSpacing: '1px',
                   flexShrink: 0, textAlign: 'center', minWidth: 60,

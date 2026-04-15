@@ -91,7 +91,7 @@ export default function AdrPage() {
           <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Field</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>What it means</th>
                 </tr>
@@ -123,7 +123,7 @@ export default function AdrPage() {
           <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Class</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Description</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Examples</th>
@@ -165,7 +165,7 @@ export default function AdrPage() {
           <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Category</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Points Multiplier</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Max Quantity Under Exemption</th>
@@ -238,7 +238,7 @@ export default function AdrPage() {
           <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 12 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Code</th>
                   <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Meaning</th>
                 </tr>
@@ -359,7 +359,7 @@ export default function AdrPage() {
                 transition: 'border-color 0.2s',
               }} className="pricing-card">
                 <span style={{
-                  background: '#1a2332', color: '#e87722', fontWeight: 700, fontSize: 13,
+                  background: 'var(--bg)', color: '#e87722', fontWeight: 700, fontSize: 13,
                   padding: '4px 10px', borderRadius: 6, fontFamily: 'monospace', flexShrink: 0,
                 }}>
                   {s.un}

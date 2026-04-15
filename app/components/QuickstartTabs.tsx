@@ -77,7 +77,7 @@ export default function QuickstartTabs() {
               borderBottom: 'none',
               borderRadius: '8px 8px 0 0',
               borderColor: active === i ? 'var(--border, #d8dce6)' : 'transparent',
-              background: active === i ? '#1a2332' : 'transparent',
+              background: active === i ? 'var(--bg-code)' : 'transparent',
               color: active === i ? '#EF9F27' : 'var(--text-muted, #5a6478)',
               transition: 'all 0.15s',
             }}

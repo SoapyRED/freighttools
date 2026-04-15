@@ -58,8 +58,8 @@ export default function ChangelogPage() {
   return (
     <>
       {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.5px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '40px 20px 48px', textAlign: 'center' }}>
+        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 12, letterSpacing: '-0.5px' }}>
           Change<span style={{ color: '#e87722' }}>log</span>
         </h1>
         <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 520, margin: '0 auto' }}>

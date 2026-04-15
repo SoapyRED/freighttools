@@ -280,7 +280,7 @@ export default function AirlineSearch({ index }: Props) {
         <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', minHeight: 600 }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
             <thead>
-              <tr style={{ background: '#1a2332', color: '#fff' }}>
+              <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                 <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Airline</th>
                 <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>IATA</th>
                 <th style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>ICAO</th>
@@ -308,8 +308,8 @@ export default function AirlineSearch({ index }: Props) {
                   <td style={{ padding: '11px 16px' }}>
                     {airline.iata_code ? (
                       <span style={{
-                        background: '#1a2332',
-                        color: '#fff',
+                        background: 'var(--bg)',
+                        color: 'var(--text-secondary)',
                         fontFamily: 'monospace',
                         fontSize: 12,
                         fontWeight: 700,

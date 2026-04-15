@@ -224,7 +224,7 @@ export default function NavLinks() {
           position: absolute;
           top: 100%;
           left: 0;
-          background: var(--navy, #1a2332);
+          background: var(--bg-card);
           border: 1px solid var(--navy-border, #2e3d55);
           border-radius: 8px;
           padding: 6px 0;

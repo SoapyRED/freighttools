@@ -62,7 +62,7 @@ export default function PalletPage() {
           <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             <strong>Step 2 — Stack height:</strong> The number of layers is calculated as <code style={{ background: '#f0f2f5', padding: '1px 5px', borderRadius: 4 }}>floor(usable height ÷ box height)</code> where usable height = max stack height − pallet board height. If box weight and max pallet weight are provided, the result is further capped so total weight never exceeds the pallet rating.
           </p>
-          <div style={{ background: '#1a2332', borderRadius: 12, padding: '20px 24px', margin: '20px 0' }}>
+          <div style={{ background: 'var(--bg-code)', borderRadius: 12, padding: '20px 24px', margin: '20px 0' }}>
             <code style={{ display: 'block', fontFamily: "'Courier New', monospace", fontSize: 13, color: '#f59e0b', lineHeight: 2 }}>
               Boxes per layer = floor(pallet L ÷ box L) × floor(pallet W ÷ box W)<br />
               <span style={{ color: 'var(--text-faint)' }}>— repeated for rotated orientation, best wins</span><br />
@@ -83,7 +83,7 @@ export default function PalletPage() {
           <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 12 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                   {['Pallet', 'Dimensions (L×W)', 'Max Load', 'Standard', 'Common Use'].map(h => (
                     <th key={h} style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px', whiteSpace: 'nowrap' }}>{h}</th>
                   ))}
@@ -156,7 +156,7 @@ export default function PalletPage() {
           <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 12 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                   {['Vehicle / Container', 'Internal Width', 'Internal Height', 'EUR 1 per row', 'EUR 2 per row'].map(h => (
                     <th key={h} style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px', whiteSpace: 'nowrap' }}>{h}</th>
                   ))}

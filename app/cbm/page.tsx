@@ -57,7 +57,7 @@ export default function CbmPage() {
           <h2 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 800, color: 'var(--text)', margin: '40px 0 16px', letterSpacing: '-0.3px' }}>
             How to Calculate CBM
           </h2>
-          <div style={{ background: '#1a2332', borderRadius: 12, padding: '20px 24px', marginBottom: 16 }}>
+          <div style={{ background: 'var(--bg-code)', borderRadius: 12, padding: '20px 24px', marginBottom: 16 }}>
             <code style={{ display: 'block', fontFamily: "'Courier New', monospace", fontSize: 14, color: '#f59e0b', lineHeight: 2 }}>
               CBM = Length (m) × Width (m) × Height (m)<br/>
               <span style={{ color: 'var(--text-faint)' }}>If measuring in centimetres:</span><br/>
@@ -81,7 +81,7 @@ export default function CbmPage() {
           <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 12 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                   {['Container Type', 'Internal Dimensions', 'Max CBM', 'Typical Usable', 'Max Payload'].map(h => (
                     <th key={h} style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px', whiteSpace: 'nowrap' }}>{h}</th>
                   ))}
@@ -159,7 +159,7 @@ export default function CbmPage() {
           <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 14 }}>
             In LCL (Less than Container Load) sea freight, carriers apply the &ldquo;Weight or Measure&rdquo; rule:
           </p>
-          <div style={{ background: '#1a2332', borderRadius: 12, padding: '16px 24px', marginBottom: 16 }}>
+          <div style={{ background: 'var(--bg-code)', borderRadius: 12, padding: '16px 24px', marginBottom: 16 }}>
             <code style={{ fontFamily: "'Courier New', monospace", fontSize: 15, color: '#f59e0b', fontWeight: 700 }}>
               1 CBM = 1,000 kg (1 freight tonne)
             </code>
@@ -182,7 +182,7 @@ export default function CbmPage() {
           <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)', marginBottom: 16 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
-                <tr style={{ background: '#1a2332', color: '#fff' }}>
+                <tr style={{ background: 'var(--bg)', color: 'var(--text-secondary)' }}>
                   {['Measurement', 'Used For', 'Unit', 'When to Use'].map(h => (
                     <th key={h} style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.4px' }}>{h}</th>
                   ))}

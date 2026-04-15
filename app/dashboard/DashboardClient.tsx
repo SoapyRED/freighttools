@@ -111,7 +111,7 @@ export default function DashboardClient({ email, plan, apiKey, usageToday, usage
           <button onClick={() => setRevealed(!revealed)} style={s.btn('#374151')}>
             {revealed ? 'Hide' : 'Reveal'}
           </button>
-          <button onClick={copyKey} style={s.btn('#1a2332')}>
+          <button onClick={copyKey} style={s.btn('var(--bg-code)')}>
             {copied ? 'Copied!' : 'Copy'}
           </button>
         </div>
@@ -150,7 +150,7 @@ export default function DashboardClient({ email, plan, apiKey, usageToday, usage
       {/* Quick Start */}
       <div style={s.card}>
         <div style={s.label}>Quick Start</div>
-        <pre style={{ background: '#1a2332', color: 'var(--text-muted)', padding: 16, borderRadius: 8, fontSize: 13, overflow: 'auto', margin: 0 }}>
+        <pre style={{ background: 'var(--bg-code)', color: 'var(--text-muted)', padding: 16, borderRadius: 8, fontSize: 13, overflow: 'auto', margin: 0 }}>
 {`curl "https://www.freightutils.com/api/ldm?pallet=euro&qty=12" \\
   -H "Authorization: Bearer ${apiKey.slice(0, 10)}..."`}
         </pre>

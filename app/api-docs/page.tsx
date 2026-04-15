@@ -19,7 +19,7 @@ const s = {
   h1: { fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 12 },
   sectionTitle: { fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.3px', marginTop: 40 } as React.CSSProperties,
   card: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden', marginBottom: 32, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } as React.CSSProperties,
-  endpointHeader: { background: '#1a2332', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 12 } as React.CSSProperties,
+  endpointHeader: { background: 'var(--bg-code)', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 12 } as React.CSSProperties,
 };
 
 export default function ApiDocsPage() {
@@ -54,7 +54,7 @@ export default function ApiDocsPage() {
           href="/openapi.json"
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 10,
-            background: '#1a2332', color: '#fff', borderRadius: 10,
+            background: 'var(--accent)', color: 'var(--text-on-orange)', borderRadius: 10,
             padding: '14px 28px', fontSize: 16, fontWeight: 700,
             textDecoration: 'none', marginBottom: 28,
             boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
@@ -98,7 +98,7 @@ export default function ApiDocsPage() {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               marginTop: 16, padding: '10px 20px', borderRadius: 8,
-              background: '#1a2332', color: '#EF9F27', textDecoration: 'none',
+              background: 'var(--accent)', color: 'var(--text-on-orange)', textDecoration: 'none',
               fontSize: 13, fontWeight: 700, fontFamily: "'Outfit', sans-serif",
             }}
           >
@@ -135,7 +135,7 @@ export default function ApiDocsPage() {
             ))}
           </div>
           <div style={{
-            background: '#1a2332', borderRadius: 10, padding: '16px 20px',
+            background: 'var(--bg-code)', borderRadius: 10, padding: '16px 20px',
             display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16,
           }}>
             <div>
@@ -189,7 +189,7 @@ export default function ApiDocsPage() {
             </div>
           </div>
 
-          <div style={{ background: '#1a2332', borderRadius: 10, padding: 20, marginBottom: 20 }}>
+          <div style={{ background: 'var(--bg-code)', borderRadius: 10, padding: 20, marginBottom: 20 }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 12 }}>Claude Desktop Configuration</div>
             <div style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 8 }}>Add to your <code style={{ background: '#2a3442', padding: '2px 6px', borderRadius: 4, fontSize: 12 }}>claude_desktop_config.json</code>:</div>
             <CopyableCode code={`{

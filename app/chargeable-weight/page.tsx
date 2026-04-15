@@ -59,7 +59,7 @@ export default function ChargeableWeightPage() {
           </p>
 
           {/* Formula box */}
-          <div style={{ background: '#1a2332', borderRadius: 12, padding: '20px 24px', margin: '20px 0' }}>
+          <div style={{ background: 'var(--bg-code)', borderRadius: 12, padding: '20px 24px', margin: '20px 0' }}>
             <code style={{ display: 'block', fontFamily: "'Courier New', monospace", fontSize: 14, color: '#f59e0b', lineHeight: 1.8 }}>
               Volumetric Weight (kg) = (L × W × H in cm) ÷ Factor<br/>
               <span style={{ color: 'var(--text-faint)' }}>— Factor = 6,000 (IATA standard) or 5,000 (express)</span><br/>

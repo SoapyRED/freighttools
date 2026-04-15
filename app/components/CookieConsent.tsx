@@ -47,7 +47,7 @@ export default function CookieConsent() {
       left: 0,
       right: 0,
       zIndex: 9999,
-      background: 'var(--navy, #1a2332)',
+      background: 'var(--bg-code)',
       borderTop: '1px solid var(--navy-border, #2e3d55)',
       padding: '14px 20px',
       display: 'flex',

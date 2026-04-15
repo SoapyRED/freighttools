@@ -51,7 +51,7 @@ function formatWeight(kg: number): string {
 
 function CategoryBadge({ category }: { category: string }) {
   const colors: Record<string, { bg: string; color: string }> = {
-    articulated: { bg: '#1a2332', color: '#fff' },
+    articulated: { bg: 'var(--bg)', color: 'var(--text-secondary)' },
     rigid: { bg: '#e87722', color: '#fff' },
     van: { bg: '#2563eb', color: '#fff' },
   };

@@ -13,8 +13,8 @@ const p = { color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBot
 export default function PrivacyPage() {
   return (
     <>
-      <div style={{ background: '#1a2332', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.5px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '40px 20px 48px', textAlign: 'center' }}>
+        <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.5px' }}>
           Privacy Policy
         </h1>
         <p style={{ fontSize: 14, color: 'var(--text-faint)', marginTop: 8 }}>Last updated: April 2026</p>

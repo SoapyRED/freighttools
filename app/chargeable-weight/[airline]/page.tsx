@@ -78,7 +78,7 @@ export default async function AirlinePage(
       />
 
       {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
           <nav style={{ marginBottom: 16, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
@@ -98,7 +98,7 @@ export default async function AirlinePage(
               {data.iata}
             </div>
             <div>
-              <h1 style={{ fontSize: 'clamp(20px, 4vw, 30px)', fontWeight: 800, color: '#fff', lineHeight: 1.2, letterSpacing: '-0.3px' }}>
+              <h1 style={{ fontSize: 'clamp(20px, 4vw, 30px)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.2, letterSpacing: '-0.3px' }}>
                 {data.name} — Chargeable Weight Calculator
               </h1>
               <div style={{ marginTop: 10, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -159,7 +159,7 @@ export default async function AirlinePage(
             {data.name} ({data.iata}) uses a volumetric factor of <strong>{data.factor.toLocaleString()}</strong> to calculate
             dimensional weight. The formula is:
           </p>
-          <div style={{ background: '#1a2332', borderRadius: 10, padding: '16px 20px', marginBottom: 16 }}>
+          <div style={{ background: 'var(--bg-code)', borderRadius: 10, padding: '16px 20px', marginBottom: 16 }}>
             <code style={{ fontFamily: "'Courier New', monospace", fontSize: 14, color: '#f59e0b', lineHeight: 1.8, display: 'block' }}>
               Volumetric Weight (kg) = (L × W × H in cm) ÷ {data.factor.toLocaleString()}<br/>
               Chargeable Weight = MAX(Actual Gross Weight, Volumetric Weight)
@@ -187,8 +187,8 @@ export default async function AirlinePage(
             ← All Airlines
           </Link>
           <Link href="/api-docs#chargeable-weight" style={{
-            background: '#1a2332', borderRadius: 8, padding: '10px 18px',
-            textDecoration: 'none', color: '#e87722', fontSize: 13, fontWeight: 600,
+            background: 'var(--accent)', borderRadius: 8, padding: '10px 18px',
+            textDecoration: 'none', color: 'var(--text-on-orange)', fontSize: 13, fontWeight: 600,
           }}>
             Use the API →
           </Link>

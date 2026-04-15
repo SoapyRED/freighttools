@@ -455,7 +455,7 @@ export default function PalletFittingCalc({
 
       {/* ── API callout ── */}
       <div style={{
-        marginTop: 16, background: '#1a2332', borderRadius: 12, padding: '18px 24px',
+        marginTop: 16, background: 'var(--bg-code)', borderRadius: 12, padding: '18px 24px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16,
       }}>
         <div>

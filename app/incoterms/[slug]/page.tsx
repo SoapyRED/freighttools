@@ -125,7 +125,7 @@ export default async function IncotermDetailPage(
       />
 
       {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
           <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
@@ -154,7 +154,7 @@ export default async function IncotermDetailPage(
               <h1 style={{
                 fontSize: 'clamp(18px, 4vw, 28px)',
                 fontWeight: 800,
-                color: '#fff',
+                color: 'var(--text-primary)',
                 lineHeight: 1.25,
                 letterSpacing: '-0.3px',
               }}>
@@ -217,13 +217,14 @@ export default async function IncotermDetailPage(
           marginBottom: 24,
         }}>
           <div style={{
-            background: '#1a2332',
+            background: 'var(--bg-card)',
             padding: '14px 18px',
             fontSize: 13,
             fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
-            color: '#fff',
+            color: 'var(--text-primary)',
+            borderBottom: '1px solid var(--border)',
           }}>
             {term.code} — Responsibilities &amp; Risk
           </div>

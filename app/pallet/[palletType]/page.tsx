@@ -76,7 +76,7 @@ export default async function PalletTypePage(
       />
 
       {/* Hero */}
-      <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* Breadcrumb */}
           <nav style={{ marginBottom: 16, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
@@ -88,7 +88,7 @@ export default async function PalletTypePage(
           </nav>
 
           <div>
-            <h1 style={{ fontSize: 'clamp(20px, 4vw, 32px)', fontWeight: 800, color: '#fff', lineHeight: 1.2, letterSpacing: '-0.3px', marginBottom: 14 }}>
+            <h1 style={{ fontSize: 'clamp(20px, 4vw, 32px)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.2, letterSpacing: '-0.3px', marginBottom: 14 }}>
               {p.name} — Pallet Fitting Calculator
             </h1>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -195,8 +195,8 @@ export default async function PalletTypePage(
             ← All Pallet Types
           </Link>
           <Link href="/api-docs#pallet" style={{
-            background: '#1a2332', borderRadius: 8, padding: '10px 18px',
-            textDecoration: 'none', color: '#e87722', fontSize: 13, fontWeight: 600,
+            background: 'var(--accent)', borderRadius: 8, padding: '10px 18px',
+            textDecoration: 'none', color: 'var(--text-on-orange)', fontSize: 13, fontWeight: 600,
           }}>
             Use the API →
           </Link>

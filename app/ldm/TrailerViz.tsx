@@ -83,10 +83,10 @@ export default function TrailerViz({ lengthMm, widthMm, qty, stackable, stackFac
       }}>
         {/* Header */}
         <div style={{
-          background: '#1a2332', padding: '10px 20px',
+          background: 'var(--bg-card)', padding: '10px 20px', borderBottom: '1px solid var(--border)',
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         }}>
-          <span style={{ fontSize: 13, fontWeight: 600, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
+          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
             Trailer Layout
           </span>
           <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>

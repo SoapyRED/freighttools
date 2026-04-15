@@ -57,7 +57,7 @@ export default async function HeadingPage(
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div style={{ background: '#1a2332', padding: '32px 20px 40px' }}>
+      <div style={{ background: 'var(--bg-hero)', padding: '32px 20px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <nav style={{ marginBottom: 20, fontSize: 13, color: 'var(--text-faint)' }} aria-label="Breadcrumb">
             <Link href="/" style={{ color: 'var(--text-faint)', textDecoration: 'none' }}>FreightUtils</Link>
@@ -70,7 +70,7 @@ export default async function HeadingPage(
             <span style={{ margin: '0 8px' }}>&rsaquo;</span>
             <span style={{ color: '#e87722' }}>{formatHsCode(headingCode)}</span>
           </nav>
-          <h1 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.3px' }}>
+          <h1 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
             HS {formatHsCode(headingCode)} &mdash; <span style={{ color: '#e87722' }}>{details.description}</span>
           </h1>
           <p style={{ fontSize: 15, color: 'var(--text-faint)', marginTop: 8 }}>
