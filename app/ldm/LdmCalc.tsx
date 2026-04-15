@@ -101,12 +101,12 @@ export default function LdmCalc() {
     cardBody: { padding: 24 } as React.CSSProperties,
     formGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 } as React.CSSProperties,
     formGroup: { display: 'flex', flexDirection: 'column' as const, gap: 6 },
-    divider: { gridColumn: '1 / -1', border: 'none', borderTop: '1px solid #eef0f4', margin: '4px 0' } as React.CSSProperties,
+    divider: { gridColumn: '1 / -1', border: 'none', borderTop: '1px solid var(--border)', margin: '4px 0' } as React.CSSProperties,
     toggleRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'var(--bg)', border: '1.5px solid var(--border)', borderRadius: 8 } as React.CSSProperties,
-    ldmDisplay: { textAlign: 'center' as const, padding: '32px 24px 24px', borderBottom: '1px solid #eef0f4', background: 'rgba(232,119,34,0.03)' },
+    ldmDisplay: { textAlign: 'center' as const, padding: '32px 24px 24px', borderBottom: '1px solid var(--border)', background: 'rgba(232,119,34,0.03)' },
     ldmNumber: { fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: 'var(--page-cat, #e87722)', lineHeight: 1, letterSpacing: -2 } as React.CSSProperties,
-    utilSection: { padding: '20px 24px', borderBottom: '1px solid #eef0f4' } as React.CSSProperties,
-    statsGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: '#eef0f4' } as React.CSSProperties,
+    utilSection: { padding: '20px 24px', borderBottom: '1px solid var(--border)' } as React.CSSProperties,
+    statsGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)' } as React.CSSProperties,
     statCell: { background: 'var(--bg-card)', padding: '16px 20px' } as React.CSSProperties,
   };
 
@@ -194,7 +194,7 @@ export default function LdmCalc() {
                     />
                     <span style={{
                       position: 'absolute', inset: 0,
-                      background: stackable ? '#e87722' : 'var(--border)',
+                      background: stackable ? 'var(--accent)' : 'var(--border)',
                       borderRadius: 12,
                       transition: 'background 0.2s',
                     }}>
@@ -203,7 +203,7 @@ export default function LdmCalc() {
                         width: 18, height: 18,
                         left: stackable ? 23 : 3,
                         top: 3,
-                        background: '#fff',
+                        background: 'var(--bg-card)',
                         borderRadius: '50%',
                         transition: 'left 0.2s',
                         boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
