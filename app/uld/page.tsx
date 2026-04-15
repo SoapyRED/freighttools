@@ -29,9 +29,9 @@ export default function UldPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'ULD Types', path: '/uld' }]) }} />
-      <PageHero title="ULD" titleAccent="Types" subtitle="Air cargo unit load device specifications — containers, pallets, and special units" differentiators={['15 ULD types', 'Aircraft compatibility', 'Free API']} />
+      <PageHero title="ULD" titleAccent="Types" subtitle="Air cargo unit load device specifications — containers, pallets, and special units" differentiators={['15 ULD types', 'Aircraft compatibility', 'Free API']} category="ref" />
 
-      <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
+      <main data-category="ref" style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* Search + Cards */}
         <ErrorBoundary><UldSearch data={data} /></ErrorBoundary>

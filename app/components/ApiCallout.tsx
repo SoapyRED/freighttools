@@ -17,7 +17,7 @@ export default function ApiCallout({ method = 'GET', endpoint, example }: ApiCal
     <div className="section-card" style={{
       background: 'var(--bg-card)',
       border: '1px solid var(--border)',
-      borderLeft: '3px solid var(--accent)',
+      borderLeft: '3px solid var(--page-cat, var(--accent))',
       borderRadius: 12,
       padding: '20px 24px',
       marginTop: 32,

@@ -161,6 +161,45 @@
   --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.3);
 }
 
+/* ─── Category cascade system ──────────────────────────────────── */
+[data-category="ops"]     { --page-cat: var(--cat-ops);     --page-cat-tint: var(--cat-ops-tint); }
+[data-category="dg"]      { --page-cat: var(--cat-dg);      --page-cat-tint: var(--cat-dg-tint); }
+[data-category="customs"] { --page-cat: var(--cat-customs);  --page-cat-tint: var(--cat-customs-tint); }
+[data-category="ref"]     { --page-cat: var(--cat-ref);      --page-cat-tint: var(--cat-ref-tint); }
+
+/* Category-aware input focus */
+[data-category] input:focus,
+[data-category] select:focus,
+[data-category] textarea:focus {
+  border-color: var(--page-cat, var(--accent)) !important;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.08) !important;
+}
+[data-theme="dark"] [data-category] input:focus,
+[data-theme="dark"] [data-category] select:focus {
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.08) !important;
+}
+
+/* Category-aware FAQ */
+[data-category] details.faq-item[open] { border-left-color: var(--page-cat, var(--accent)); }
+[data-category] details.faq-item:hover { border-color: var(--page-cat, var(--accent)); }
+[data-category] details.faq-item summary::after { color: var(--page-cat, var(--accent)); }
+
+/* Result flash animation */
+@keyframes result-flash {
+  0% { background-color: var(--page-cat-tint, var(--bg-card)); }
+  100% { background-color: var(--bg-card); }
+}
+@keyframes result-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+.result-flash { animation: result-flash 300ms ease-out; }
+.result-pop { animation: result-pop 200ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .result-flash, .result-pop { animation: none; }
+}
+
 html { scroll-behavior: smooth; }
 [id] { scroll-margin-top: 72px; }
 

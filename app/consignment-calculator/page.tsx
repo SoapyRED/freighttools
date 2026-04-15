@@ -26,13 +26,13 @@ export default function ConsignmentPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'Consignment Calculator', path: '/consignment-calculator' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Consignment Calculator","description":"Free Consignment Calculator. Calculate total CBM, weight, loading metres and chargeable weight for mixed consignments. REST API available.","url":"https://www.freightutils.com/consignment-calculator","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
-      <PageHero title="Multi-Item Consignment" titleAccent="Calculator" subtitle="Calculate total CBM, weight, loading metres and chargeable weight for mixed consignments" differentiators={['Mixed items & pallet types', 'Vehicle suggestions', 'Free API']} />
+      <PageHero title="Multi-Item Consignment" titleAccent="Calculator" subtitle="Calculate total CBM, weight, loading metres and chargeable weight for mixed consignments" differentiators={['Mixed items & pallet types', 'Vehicle suggestions', 'Free API']} category="ops" />
       <div style={{ textAlign: 'center', marginTop: -24, marginBottom: 8 }}>
         <DataTimestamp text="Calculation engine verified April 2026" />
       </div>
 
       {/* Calculator */}
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 16px 48px' }}>
+      <div data-category="ops" style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 16px 48px' }}>
         <ErrorBoundary><ConsignmentCalc /></ErrorBoundary>
 
         {/* SEO Content */}

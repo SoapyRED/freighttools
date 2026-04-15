@@ -25,13 +25,13 @@ export default function DutyPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'UK Import Duty & VAT', path: '/duty' }]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"UK Import Duty & VAT Calculator","description":"Free UK Import Duty & VAT Calculator. Estimate duty and VAT for any commodity code using GOV.UK Trade Tariff data. REST API available.","url":"https://www.freightutils.com/duty","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
-      <PageHero title="UK Import Duty &" titleAccent="VAT" subtitle="Estimate import duty and VAT for any commodity code using live GOV.UK Trade Tariff data" differentiators={['Live GOV.UK tariff data', 'Preferential rates', 'Free API']}>
+      <PageHero title="UK Import Duty &" titleAccent="VAT" subtitle="Estimate import duty and VAT for any commodity code using live GOV.UK Trade Tariff data" differentiators={['Live GOV.UK tariff data', 'Preferential rates', 'Free API']} category="customs">
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
           Source: GOV.UK Trade Tariff API (Open Government Licence v3)
         </div>
       </PageHero>
 
-      <div style={{ maxWidth: 800, margin: '0 auto', padding: '24px 16px 48px' }}>
+      <div data-category="customs" style={{ maxWidth: 800, margin: '0 auto', padding: '24px 16px 48px' }}>
         <ErrorBoundary><DutyCalc /></ErrorBoundary>
 
         <div style={{ maxWidth: 700, margin: '48px auto 0' }}>

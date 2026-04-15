@@ -35,7 +35,7 @@ export default function SegmentedControl({ options, activeValue, onChange }: Seg
               fontSize: 13,
               fontWeight: active ? 600 : 500,
               fontFamily: "'Outfit', sans-serif",
-              background: active ? 'var(--accent)' : 'transparent',
+              background: active ? 'var(--page-cat, var(--accent))' : 'transparent',
               color: active ? '#fff' : 'var(--text-muted)',
               transition: 'background 0.2s, color 0.2s',
             }}

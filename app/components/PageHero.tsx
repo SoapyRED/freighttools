@@ -1,10 +1,13 @@
 import type { ReactNode } from 'react';
 
+type Category = 'ops' | 'dg' | 'customs' | 'ref';
+
 interface PageHeroProps {
   title: string;
   titleAccent?: string;
   subtitle: string;
   badge?: string;
+  category?: Category;
   /** Short differentiator phrases shown as a dot-separated strip below the subtitle */
   differentiators?: string[];
   children?: ReactNode;
@@ -14,8 +17,9 @@ interface PageHeroProps {
  * Consistent hero/header for all tool pages.
  * White/card background, large title with optional accent word,
  * subtitle, differentiator strip, and optional badge pill.
+ * Category prop enables category-coloured badge.
  */
-export default function PageHero({ title, titleAccent, subtitle, badge, differentiators, children }: PageHeroProps) {
+export default function PageHero({ title, titleAccent, subtitle, badge, category, differentiators, children }: PageHeroProps) {
   return (
     <div style={{
       background: 'var(--bg-hero)',
@@ -34,7 +38,7 @@ export default function PageHero({ title, titleAccent, subtitle, badge, differen
         }}>
           {title}{' '}
           {titleAccent && (
-            <span style={{ color: 'var(--accent)' }}>
+            <span style={{ color: category ? `var(--page-cat, var(--accent))` : 'var(--accent)' }}>
               {titleAccent}
             </span>
           )}
@@ -64,11 +68,10 @@ export default function PageHero({ title, titleAccent, subtitle, badge, differen
             marginTop: 12,
             fontSize: 11,
             fontWeight: 700,
-            color: 'var(--accent)',
-            background: 'rgba(239, 159, 39, 0.1)',
-            border: '1px solid rgba(239, 159, 39, 0.2)',
-            padding: '4px 14px',
-            borderRadius: 100,
+            color: '#fff',
+            background: category ? 'var(--page-cat, var(--accent))' : 'var(--accent)',
+            padding: '3px 10px',
+            borderRadius: 12,
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
           }}>

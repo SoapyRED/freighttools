@@ -97,14 +97,14 @@ export default function LdmCalc() {
   const s = {
     main: { maxWidth: 900, margin: '0 auto', padding: '32px 20px 60px' } as React.CSSProperties,
     card: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' } as React.CSSProperties,
-    cardHeader: { background: '#1a2332', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 10 } as React.CSSProperties,
+    cardHeader: { background: 'var(--page-cat, #1a2332)', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 10 } as React.CSSProperties,
     cardBody: { padding: 24 } as React.CSSProperties,
     formGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 } as React.CSSProperties,
     formGroup: { display: 'flex', flexDirection: 'column' as const, gap: 6 },
     divider: { gridColumn: '1 / -1', border: 'none', borderTop: '1px solid #eef0f4', margin: '4px 0' } as React.CSSProperties,
     toggleRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'var(--bg)', border: '1.5px solid var(--border)', borderRadius: 8 } as React.CSSProperties,
     ldmDisplay: { textAlign: 'center' as const, padding: '32px 24px 24px', borderBottom: '1px solid #eef0f4', background: 'rgba(232,119,34,0.03)' },
-    ldmNumber: { fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: '#e87722', lineHeight: 1, letterSpacing: -2 } as React.CSSProperties,
+    ldmNumber: { fontSize: 'clamp(52px, 12vw, 72px)', fontWeight: 800, color: 'var(--page-cat, #e87722)', lineHeight: 1, letterSpacing: -2 } as React.CSSProperties,
     utilSection: { padding: '20px 24px', borderBottom: '1px solid #eef0f4' } as React.CSSProperties,
     statsGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: '#eef0f4' } as React.CSSProperties,
     statCell: { background: 'var(--bg-card)', padding: '16px 20px' } as React.CSSProperties,
@@ -112,7 +112,7 @@ export default function LdmCalc() {
 
   return (
     <>
-      <PageHero title="Loading Metres" titleAccent="Calculator" subtitle="Calculate LDM for European and North American trailer standards" differentiators={['Euro, UK & US trailers', 'Stackability', 'Free API']} />
+      <PageHero title="Loading Metres" titleAccent="Calculator" subtitle="Calculate LDM for European and North American trailer standards" category="ops" differentiators={['Euro, UK & US trailers', 'Stackability', 'Free API']} />
 
       <main style={s.main}>
         {/* ── INPUT CARD ── */}

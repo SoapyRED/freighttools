@@ -28,9 +28,9 @@ export default function VehiclesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'Vehicle & Trailer Types', path: '/vehicles' }]) }} />
-      <PageHero title="Vehicle & Trailer" titleAccent="Types" subtitle="Road freight vehicle dimensions, payload limits, and pallet capacity" differentiators={['17 vehicle types', 'EU & US specs', 'Free API']} />
+      <PageHero title="Vehicle & Trailer" titleAccent="Types" subtitle="Road freight vehicle dimensions, payload limits, and pallet capacity" differentiators={['17 vehicle types', 'EU & US specs', 'Free API']} category="ref" />
 
-      <main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 80px' }}>
+      <main data-category="ref" style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 80px' }}>
 
         {/* Interactive search */}
         <ErrorBoundary><VehicleSearch vehicles={vehicles} /></ErrorBoundary>

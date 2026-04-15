@@ -25,13 +25,13 @@ export default function UnlocodePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema([{ name: 'UN/LOCODE Lookup', path: '/unlocode' }]) }} />
-      <PageHero title="UN/LOCODE" titleAccent="Lookup" subtitle="Search transport locations worldwide — seaports, airports, rail terminals, and inland depots" differentiators={['116,129 locations', '6 facility types', 'Free API']}>
+      <PageHero title="UN/LOCODE" titleAccent="Lookup" subtitle="Search transport locations worldwide — seaports, airports, rail terminals, and inland depots" differentiators={['116,129 locations', '6 facility types', 'Free API']} category="ref">
         <div style={{ fontSize: 12, color: '#6b7280', marginTop: 10 }}>
           Source: UNECE UN/LOCODE 2024-2 (PDDL)
         </div>
       </PageHero>
 
-      <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px 16px 48px' }}>
+      <div data-category="ref" style={{ maxWidth: 900, margin: '0 auto', padding: '24px 16px 48px' }}>
         <ErrorBoundary><UnlocodeSearch /></ErrorBoundary>
 
         <div style={{ maxWidth: 700, margin: '48px auto 0' }}>
