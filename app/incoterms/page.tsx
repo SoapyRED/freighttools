@@ -58,9 +58,21 @@ export default function IncotermsPage() {
                 padding: 16,
                 textDecoration: 'none',
                 display: 'block',
-                transition: 'border-color 0.15s',
+                transition: 'border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease',
+                cursor: 'pointer',
               }}
-              onMouseEnter={undefined}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = 'var(--page-cat, var(--cat-customs))';
+                el.style.transform = 'translateY(-2px)';
+                el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = 'var(--border)';
+                el.style.transform = 'none';
+                el.style.boxShadow = 'none';
+              }}
             >
               <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 4 }}>
                 {term.code}
@@ -107,7 +119,20 @@ export default function IncotermsPage() {
                 padding: 16,
                 textDecoration: 'none',
                 display: 'block',
-                transition: 'border-color 0.15s',
+                transition: 'border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = 'var(--page-cat, var(--cat-customs))';
+                el.style.transform = 'translateY(-2px)';
+                el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = 'var(--border)';
+                el.style.transform = 'none';
+                el.style.boxShadow = 'none';
               }}
             >
               <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 4 }}>
