@@ -269,8 +269,7 @@ export default function NavLinks() {
         .nav-dropdown-item {
           display: block;
           padding: 9px 18px;
-          /* Fixed light color — dropdown bg is always dark navy in both modes */
-          color: var(--text-faint);
+          color: var(--text-primary);
           text-decoration: none;
           font-size: 13px;
           font-weight: 400;
@@ -279,7 +278,7 @@ export default function NavLinks() {
         }
 
         .nav-dropdown-item:hover {
-          background: rgba(255,255,255,0.06);
+          background: var(--bg);
           color: var(--accent);
         }
 

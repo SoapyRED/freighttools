@@ -208,7 +208,7 @@ export default function RootLayout({
                 <div key={col.title}>
                   <div style={{
                     fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
-                    letterSpacing: '1px', color: '#6b7280', marginBottom: 10,
+                    letterSpacing: '1px', color: 'var(--text-secondary)', marginBottom: 10,
                   }}>
                     {col.title}
                   </div>

@@ -371,7 +371,7 @@ export default function HomePage() {
             <div style={{ marginTop: 24, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <Link href="/api-docs" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 6,
-                background: 'var(--accent)', color: '#fff',
+                background: 'var(--accent)', color: 'var(--text-on-orange)',
                 textDecoration: 'none', padding: '12px 24px',
                 borderRadius: 8, fontWeight: 700, fontSize: 14,
                 transition: 'opacity 0.15s',
