@@ -142,7 +142,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const subject = `[FreightUtils Feedback] ${TYPE_LABELS[type]}: ${message.slice(0, 40)}${message.length > 40 ? '...' : ''}`;
+    const subjectPreview = message
+      .replace(/\s+/g, ' ')  // collapse all whitespace (including newlines) to single spaces
+      .trim()
+      .slice(0, 60);
+    const subject = `[FreightUtils Feedback] ${TYPE_LABELS[type]}: ${subjectPreview}${message.length > 60 ? '...' : ''}`;
 
     const htmlBody = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; color: #1E293B;">
