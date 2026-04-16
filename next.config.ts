@@ -23,6 +23,18 @@ const nextConfig: NextConfig = {
       { source: '/guides/adr-tunnel-codes', destination: '/adr/tunnel-codes', permanent: true },
       { source: '/guides/adr-limited-quantities', destination: '/adr/limited-quantities', permanent: true },
       { source: '/guides/adr-training-guide', destination: '/adr/training-guide', permanent: true },
+
+      // Legacy ULD slugs that were under /containers/ — now live at /uld
+      { source: '/containers/ld3-ake', destination: '/uld', permanent: true },
+      { source: '/containers/ld9-aag', destination: '/uld', permanent: true },
+      { source: '/containers/m1-aaf', destination: '/uld', permanent: true },
+      { source: '/containers/pmc-pallet', destination: '/uld', permanent: true },
+      { source: '/containers/p1p-pallet', destination: '/uld', permanent: true },
+      { source: '/containers/ld2-dpe', destination: '/uld', permanent: true },
+      { source: '/containers/ld7-aap', destination: '/uld', permanent: true },
+      { source: '/containers/ld1-akc', destination: '/uld', permanent: true },
+      { source: '/containers/ld11-alp', destination: '/uld', permanent: true },
+      { source: '/containers/p6p-pallet', destination: '/uld', permanent: true },
     ];
   },
 

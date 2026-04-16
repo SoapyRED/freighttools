@@ -58,11 +58,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const containerRoutes: MetadataRoute.Sitemap = containersData.map(c => ({
-    url: `${BASE}/containers/${c.slug}`,
-    changeFrequency: 'yearly' as const,
-    priority: 0.6,
-  }));
+  // Only sea freight containers — air/ULD items moved to /uld/ with different slugs
+  const containerRoutes: MetadataRoute.Sitemap = containersData
+    .filter(c => c.category === 'sea')
+    .map(c => ({
+      url: `${BASE}/containers/${c.slug}`,
+      changeFrequency: 'yearly' as const,
+      priority: 0.6,
+    }));
 
   const palletRoutes: MetadataRoute.Sitemap = palletsData.map(p => ({
     url: `${BASE}/pallet/${p.slug}`,
