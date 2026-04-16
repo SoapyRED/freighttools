@@ -166,8 +166,8 @@ ${escapeHtml(message)}
       </div>
     `;
 
-    const { error: sendError } = await resend.emails.send({
-      from: 'FreightUtils <noreply@freightutils.com>',
+    const { data: sendData, error: sendError } = await resend.emails.send({
+      from: 'FreightUtils Feedback <feedback@freightutils.com>',
       to: 'contact@freightutils.com',
       ...(email ? { replyTo: email } : {}),
       subject,
@@ -175,18 +175,22 @@ ${escapeHtml(message)}
     });
 
     if (sendError) {
-      console.error('[Feedback] Resend error:', sendError);
+      console.error('[Feedback] Resend error:', JSON.stringify(sendError, null, 2));
       return NextResponse.json(
         { error: 'Failed to send. Please try again.' },
         { status: 500, headers: h },
       );
     }
 
+    if (!sendData?.id) {
+      console.error('[Feedback] Resend returned no ID — possible silent failure');
+    }
+
     console.log(`[Feedback] Sent: type=${type}, page=${url}, length=${message.length}`);
     return NextResponse.json({ ok: true }, { headers: h });
 
   } catch (err) {
-    console.error('[Feedback] Unexpected error:', err);
+    console.error('[Feedback] Unexpected error:', err instanceof Error ? err.message : JSON.stringify(err));
     return NextResponse.json(
       { error: 'Failed to send. Please try again.' },
       { status: 500, headers: h },
