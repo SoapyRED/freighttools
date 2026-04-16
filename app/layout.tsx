@@ -7,6 +7,7 @@ import SiteSearch from './components/SiteSearch';
 import AnnounceBanner from './components/AnnounceBanner';
 import BrandLogo from './components/BrandLogo';
 import CookieConsent from './components/CookieConsent';
+import FeedbackWidget from './components/FeedbackWidget';
 import ScrollToTop from './components/ScrollToTop';
 import HydrationCheck from './components/HydrationCheck';
 import { Analytics } from '@vercel/analytics/react';
@@ -270,6 +271,7 @@ export default function RootLayout({
 
         {/* Cookie consent — GDPR compliance */}
         <CookieConsent />
+        <FeedbackWidget />
       </body>
     </html>
   );
