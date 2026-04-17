@@ -88,6 +88,23 @@ interface TariffResponse {
   included: TariffIncluded[];
 }
 
+/**
+ * Structured error thrown when a commodity code lookup fails.
+ * Carries an optional hint and suggestion URL that the API route surfaces to clients.
+ */
+export class CommodityCodeNotFoundError extends Error {
+  readonly code: string;
+  readonly hint?: string;
+  readonly suggestionUrl?: string;
+  constructor(args: { code: string; message: string; hint?: string; suggestionUrl?: string }) {
+    super(args.message);
+    this.name = 'CommodityCodeNotFoundError';
+    this.code = args.code;
+    this.hint = args.hint;
+    this.suggestionUrl = args.suggestionUrl;
+  }
+}
+
 export async function fetchDutyRates(commodityCode: string, originCountry: string): Promise<{
   description: string;
   dutyRatePercent: number;
@@ -96,14 +113,32 @@ export async function fetchDutyRates(commodityCode: string, originCountry: strin
   warnings: DutyWarning[];
   hasPreference: boolean;
 }> {
-  const code = commodityCode.replace(/\s/g, '').padEnd(10, '0');
+  const rawCode = commodityCode.replace(/\s/g, '');
+  const code = rawCode.padEnd(10, '0');
   const res = await fetch(`${TARIFF_API}/commodities/${code}`, {
     headers: { 'Accept': 'application/json' },
     next: { revalidate: 86400 }, // Cache for 24h
   });
 
   if (!res.ok) {
-    throw new Error(`Commodity code "${code}" not found in UK Trade Tariff`);
+    // If the user entered fewer than 10 digits, the padded code is often wrong —
+    // the real 10-digit variant typically ends with e.g. "10" or "90", not "00".
+    // Surface a helpful hint pointing them to the HS lookup.
+    if (rawCode.length > 0 && rawCode.length < 10) {
+      const parent8 = code.slice(0, 8);
+      throw new CommodityCodeNotFoundError({
+        code,
+        message: `Commodity code '${code}' not found.`,
+        hint: `UK import codes require the full 10-digit code with a specific product suffix. Parent code ${parent8} may have multiple 10-digit variants (e.g. ${parent8}10, ${parent8}90). Use the HS Code Lookup tool to find the correct 10-digit code for your product.`,
+        suggestionUrl: `/hs?code=${parent8}`,
+      });
+    }
+    throw new CommodityCodeNotFoundError({
+      code,
+      message: `Commodity code '${code}' not found in UK Trade Tariff.`,
+      hint: 'Verify the code against the GOV.UK Trade Tariff or use the HS Code Lookup tool.',
+      suggestionUrl: `/hs?code=${code.slice(0, 8)}`,
+    });
   }
 
   const data = (await res.json()) as TariffResponse;

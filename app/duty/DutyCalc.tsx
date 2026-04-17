@@ -55,12 +55,16 @@ export default function DutyCalc() {
   const [result, setResult] = useState<DutyResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [errorHint, setErrorHint] = useState<string>('');
+  const [errorSuggestionUrl, setErrorSuggestionUrl] = useState<string>('');
 
   const handleCalculate = async () => {
-    if (!code || code.length < 6) { setError('Enter a commodity code (minimum 6 digits)'); return; }
-    if (!customsValue || Number(customsValue) <= 0) { setError('Enter a customs value'); return; }
+    if (!code || code.length < 6) { setError('Enter a commodity code (minimum 6 digits)'); setErrorHint(''); setErrorSuggestionUrl(''); return; }
+    if (!customsValue || Number(customsValue) <= 0) { setError('Enter a customs value'); setErrorHint(''); setErrorSuggestionUrl(''); return; }
 
     setError('');
+    setErrorHint('');
+    setErrorSuggestionUrl('');
     setLoading(true);
     setResult(null);
 
@@ -79,7 +83,12 @@ export default function DutyCalc() {
       });
 
       const data = await res.json();
-      if (!res.ok) { setError(data.error ?? 'Calculation failed'); return; }
+      if (!res.ok) {
+        setError(data.error ?? 'Calculation failed');
+        setErrorHint(data.hint ?? '');
+        setErrorSuggestionUrl(data.suggestion_url ?? '');
+        return;
+      }
       setResult(data);
     } catch {
       setError('Network error. Please try again.');
@@ -169,7 +178,28 @@ export default function DutyCalc() {
 
           {error && (
             <div style={{ marginTop: 12, padding: '10px 14px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, color: '#991b1b', fontSize: 14 }}>
-              {error}
+              <div style={{ fontWeight: 600 }}>{error}</div>
+              {errorHint && (
+                <div style={{ fontSize: 13, marginTop: 6, color: '#7f1d1d', lineHeight: 1.5 }}>
+                  {errorHint}
+                </div>
+              )}
+              {errorSuggestionUrl && (
+                <div style={{ marginTop: 10 }}>
+                  <Link
+                    href={errorSuggestionUrl}
+                    style={{
+                      display: 'inline-block',
+                      background: '#e87722', color: '#fff',
+                      padding: '7px 14px', borderRadius: 6,
+                      fontSize: 13, fontWeight: 700,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Use HS Code Lookup →
+                  </Link>
+                </div>
+              )}
             </div>
           )}
         </div>

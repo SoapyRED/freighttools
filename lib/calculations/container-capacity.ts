@@ -175,7 +175,7 @@ export interface LoadingResult {
   volumeUsedCbm: number;
   volumeUtilisation: number;
   weightUtilisation: number;
-  limitingFactor: 'volume' | 'weight' | 'none';
+  limitingFactor: 'volume' | 'weight' | 'dimensions' | 'none';
   warnings: string[];
 }
 
@@ -225,7 +225,7 @@ export function calculateContainerLoading(
   const volumeUtilisation = container.capacityCbm > 0 ? (volumeUsedCbm / container.capacityCbm) * 100 : 0;
   const weightUtilisation = container.maxPayloadKg > 0 ? (totalWeightKg / container.maxPayloadKg) * 100 : 0;
 
-  let limitingFactor: 'volume' | 'weight' | 'none' = 'none';
+  let limitingFactor: 'volume' | 'weight' | 'dimensions' | 'none' = 'none';
   if (maxByVolume <= maxByWeight) limitingFactor = 'volume';
   else limitingFactor = 'weight';
   if (totalItemsFit >= quantity) limitingFactor = 'none';
@@ -236,6 +236,59 @@ export function calculateContainerLoading(
   }
   if (!allFit) {
     warnings.push(`Only ${totalItemsFit} of ${quantity} items fit in this container`);
+  }
+
+  // ── When nothing fits, zero out the supplementary counters and identify
+  //    which specific dimension caused the failure. Reporting "limitingFactor: volume"
+  //    with layers/itemsPerCol > 0 is misleading when totalItemsFit === 0.
+  if (totalItemsFit === 0) {
+    // Height is simpler — it has no rotation consideration.
+    let failedDim: 'length' | 'width' | 'height' | null = null;
+    let itemDim = 0;
+    let containerDim = 0;
+
+    if (itemHeightCm > cH) {
+      failedDim = 'height';
+      itemDim = itemHeightCm;
+      containerDim = cH;
+    } else {
+      // Footprint check: smaller of (L, W) must fit the smaller container dim,
+      // and larger of (L, W) must fit the larger container dim.
+      const itemMin = Math.min(itemLengthCm, itemWidthCm);
+      const itemMax = Math.max(itemLengthCm, itemWidthCm);
+      const contMin = Math.min(cL, cW);
+      const contMax = Math.max(cL, cW);
+      if (itemMax > contMax) {
+        failedDim = 'length';
+        itemDim = itemMax;
+        containerDim = contMax;
+      } else if (itemMin > contMin) {
+        failedDim = 'width';
+        itemDim = itemMin;
+        containerDim = contMin;
+      }
+    }
+
+    const dimsWarning = failedDim
+      ? `Item ${failedDim} (${itemDim}cm) exceeds container internal ${failedDim} (${containerDim}cm). Item cannot fit in this container.`
+      : 'Item cannot fit in this container.';
+
+    return {
+      container,
+      itemsPerRow: 0,
+      itemsPerCol: 0,
+      itemsPerLayer: 0,
+      layers: 0,
+      totalItemsFit: 0,
+      itemsRequested: quantity,
+      allFit: false,
+      totalWeightKg: 0,
+      volumeUsedCbm: 0,
+      volumeUtilisation: 0,
+      weightUtilisation: 0,
+      limitingFactor: failedDim ? 'dimensions' : 'volume',
+      warnings: [dimsWarning],
+    };
   }
 
   return {

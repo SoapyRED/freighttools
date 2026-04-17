@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { calculateDuty } from '@/lib/calculations/duty';
+import { calculateDuty, CommodityCodeNotFoundError } from '@/lib/calculations/duty';
+import { ISO_3166_ALPHA2 } from '@/lib/data/iso-countries';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -33,6 +34,12 @@ export async function POST(req: NextRequest) {
     if (!originCountry || originCountry.length !== 2) {
       return NextResponse.json({ error: 'origin_country is required (ISO 2-letter code)' }, { status: 400, headers: h });
     }
+    if (!ISO_3166_ALPHA2.has(originCountry)) {
+      return NextResponse.json({
+        error: `Invalid country code '${originCountry}'.`,
+        hint: "originCountry must be a valid ISO 3166-1 alpha-2 code (e.g. 'CN', 'US', 'DE'). See https://www.iso.org/obp/ui/",
+      }, { status: 400, headers: h });
+    }
     if (customsValue <= 0) {
       return NextResponse.json({ error: 'customs_value must be a positive number' }, { status: 400, headers: h });
     }
@@ -48,6 +55,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(result, { headers: h });
   } catch (err) {
+    if (err instanceof CommodityCodeNotFoundError) {
+      return NextResponse.json({
+        error: err.message,
+        hint: err.hint,
+        suggestion_url: err.suggestionUrl,
+      }, { status: 404, headers: h });
+    }
     const message = err instanceof Error ? err.message : 'Invalid request';
     return NextResponse.json({ error: message }, { status: 400, headers: h });
   }

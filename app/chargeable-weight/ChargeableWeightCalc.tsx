@@ -42,11 +42,21 @@ const labelStyle: React.CSSProperties = {
   display: 'block',
 };
 
+const errorStyle: React.CSSProperties = {
+  fontSize: 12,
+  fontWeight: 500,
+  color: 'var(--error, #dc2626)',
+  marginTop: 4,
+  lineHeight: 1.4,
+};
+
 function Field({
-  label, id, value, onChange, placeholder, unit,
+  label, id, value, onChange, placeholder, unit, error, onBlurCorrect,
 }: {
   label: string; id: string; value: string;
   onChange: (v: string) => void; placeholder?: string; unit?: string;
+  error?: string | null;
+  onBlurCorrect?: (v: string) => string | null;
 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -60,22 +70,35 @@ function Field({
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        style={inputStyle}
+        aria-invalid={!!error || undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
+        style={{
+          ...inputStyle,
+          borderColor: error ? 'var(--error, #dc2626)' : undefined,
+        }}
         onFocus={e => {
-          e.currentTarget.style.borderColor = '#e87722';
-          e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
+          e.currentTarget.style.borderColor = error ? 'var(--error, #dc2626)' : '#e87722';
+          e.currentTarget.style.boxShadow = error
+            ? '0 0 0 3px rgba(220,38,38,0.12)'
+            : '0 0 0 3px rgba(232,119,34,0.12)';
         }}
         onBlur={e => {
-          e.currentTarget.style.borderColor = '';
+          e.currentTarget.style.borderColor = error ? 'var(--error, #dc2626)' : '';
           e.currentTarget.style.boxShadow = 'none';
           const v = e.target.value;
           if (v) {
+            if (onBlurCorrect) {
+              const corrected = onBlurCorrect(v);
+              if (corrected !== null) { onChange(corrected); return; }
+            }
             const n = parseFloat(v);
-            if (n < 0) onChange('0');
-            else if (v !== String(n) && !isNaN(n)) onChange(String(n));
+            if (!isNaN(n) && v !== String(n)) onChange(String(n));
           }
         }}
       />
+      {error && (
+        <span id={`${id}-error`} style={errorStyle}>{error}</span>
+      )}
     </div>
   );
 }
@@ -130,6 +153,37 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
     pcs: pcs !== '1' ? pcs : undefined,
     factor: factor !== '6000' ? factor : undefined,
   });
+
+  // Inline per-field validation errors (only shown when user has entered a value that's invalid)
+  const errors = useMemo(() => {
+    const check = (v: string, label: string): string | null => {
+      if (v === '') return null;
+      const n = parseFloat(v);
+      if (isNaN(n)) return null;
+      if (n <= 0) return `${label} must be greater than 0`;
+      return null;
+    };
+    return {
+      length: check(length, 'Length'),
+      width: check(width, 'Width'),
+      height: check(height, 'Height'),
+      gw: check(gw, 'Gross weight'),
+      pcs: (() => {
+        if (pcs === '') return null;
+        const n = parseInt(pcs, 10);
+        if (isNaN(n)) return null;
+        if (n < 1) return 'Pieces must be at least 1';
+        return null;
+      })(),
+    };
+  }, [length, width, height, gw, pcs]);
+
+  const piecesBlurCorrect = (v: string): string | null => {
+    if (v === '') return null;
+    const n = parseInt(v, 10);
+    if (isNaN(n) || n < 1) return '1';
+    return null;
+  };
 
   const result = useMemo(() => {
     const l  = parseFloat(length);
@@ -197,9 +251,9 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
             gap: 16,
             marginBottom: 16,
           }}>
-            <Field label="Length" id="cw-length" value={length} onChange={setLength} placeholder="e.g. 120" unit="cm" />
-            <Field label="Width"  id="cw-width"  value={width}  onChange={setWidth}  placeholder="e.g. 80"  unit="cm" />
-            <Field label="Height" id="cw-height" value={height} onChange={setHeight} placeholder="e.g. 100" unit="cm" />
+            <Field label="Length" id="cw-length" value={length} onChange={setLength} placeholder="e.g. 120" unit="cm" error={errors.length} />
+            <Field label="Width"  id="cw-width"  value={width}  onChange={setWidth}  placeholder="e.g. 80"  unit="cm" error={errors.width} />
+            <Field label="Height" id="cw-height" value={height} onChange={setHeight} placeholder="e.g. 100" unit="cm" error={errors.height} />
           </div>
 
           <div style={{
@@ -208,8 +262,8 @@ export default function ChargeableWeightCalc({ defaultFactor = 6000 }: Props) {
             gap: 16,
             marginBottom: 16,
           }}>
-            <Field label="Gross Weight" id="cw-gw"  value={gw}  onChange={setGw}  placeholder="e.g. 500" unit="kg" />
-            <Field label="Pieces"       id="cw-pcs" value={pcs} onChange={setPcs} placeholder="1" />
+            <Field label="Gross Weight" id="cw-gw"  value={gw}  onChange={setGw}  placeholder="e.g. 500" unit="kg" error={errors.gw} />
+            <Field label="Pieces"       id="cw-pcs" value={pcs} onChange={setPcs} placeholder="1" error={errors.pcs} onBlurCorrect={piecesBlurCorrect} />
           </div>
 
           {freightMode === 'air' && <div style={{ display: 'flex', flexDirection: 'column' }}>

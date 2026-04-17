@@ -32,12 +32,22 @@ const labelStyle: React.CSSProperties = {
   display: 'block',
 };
 
+const errorStyle: React.CSSProperties = {
+  fontSize: 12,
+  fontWeight: 500,
+  color: 'var(--error, #dc2626)',
+  marginTop: 4,
+  lineHeight: 1.4,
+};
+
 function Field({
-  label, id, value, onChange, placeholder, unit, readOnly,
+  label, id, value, onChange, placeholder, unit, readOnly, error, onBlurCorrect,
 }: {
   label: string; id: string; value: string;
   onChange: (v: string) => void; placeholder?: string; unit?: string;
   readOnly?: boolean;
+  error?: string | null;
+  onBlurCorrect?: (v: string) => string | null;
 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -55,29 +65,40 @@ function Field({
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         readOnly={readOnly}
+        aria-invalid={!!error || undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
         style={{
           ...inputStyle,
           background: readOnly ? 'var(--bg)' : 'var(--bg-card)',
           cursor: readOnly ? 'default' : 'text',
+          borderColor: error ? 'var(--error, #dc2626)' : undefined,
         }}
         onFocus={e => {
           if (!readOnly) {
-            e.currentTarget.style.borderColor = '#e87722';
-            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
+            e.currentTarget.style.borderColor = error ? 'var(--error, #dc2626)' : '#e87722';
+            e.currentTarget.style.boxShadow = error
+              ? '0 0 0 3px rgba(220,38,38,0.12)'
+              : '0 0 0 3px rgba(232,119,34,0.12)';
           }
         }}
         onBlur={e => {
-          e.currentTarget.style.borderColor = '';
+          e.currentTarget.style.borderColor = error ? 'var(--error, #dc2626)' : '';
           e.currentTarget.style.boxShadow = 'none';
-          // Strip leading zeros and clamp negatives
+          // Strip leading zeros and auto-correct via caller if provided
           const v = e.target.value;
           if (v && !readOnly) {
+            if (onBlurCorrect) {
+              const corrected = onBlurCorrect(v);
+              if (corrected !== null) { onChange(corrected); return; }
+            }
             const n = parseFloat(v);
-            if (n < 0) onChange('0');
-            else if (v !== String(n) && !isNaN(n)) onChange(String(n));
+            if (!isNaN(n) && v !== String(n)) onChange(String(n));
           }
         }}
       />
+      {error && (
+        <span id={`${id}-error`} style={errorStyle}>{error}</span>
+      )}
     </div>
   );
 }
@@ -128,6 +149,36 @@ export default function CbmCalc({
     pcs: pcs !== '1' ? pcs : undefined,
   }, !lockedDims);
 
+  // Inline per-field validation errors (only shown when user has entered a value that's invalid)
+  const errors = useMemo(() => {
+    const check = (v: string, label: string): string | null => {
+      if (v === '' || v === undefined) return null;
+      const n = parseFloat(v);
+      if (isNaN(n)) return null;
+      if (n <= 0) return `${label} must be greater than 0`;
+      return null;
+    };
+    return {
+      length: check(length, 'Length'),
+      width: check(width, 'Width'),
+      height: check(height, 'Height'),
+      pcs: (() => {
+        if (pcs === '') return null;
+        const n = parseInt(pcs, 10);
+        if (isNaN(n)) return null;
+        if (n < 1) return 'Pieces must be at least 1';
+        return null;
+      })(),
+    };
+  }, [length, width, height, pcs]);
+
+  const piecesBlurCorrect = (v: string): string | null => {
+    if (v === '') return null;
+    const n = parseInt(v, 10);
+    if (isNaN(n) || n < 1) return '1';
+    return null;
+  };
+
   const result = useMemo(() => {
     const l = parseFloat(length);
     const w = parseFloat(width);
@@ -154,10 +205,10 @@ export default function CbmCalc({
         </div>
         <div style={{ padding: 24 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 16, marginBottom: 16 }}>
-            <Field label="Length" id="cbm-l" value={length} onChange={setLength} placeholder="e.g. 120" unit="cm" readOnly={lockedDims} />
-            <Field label="Width"  id="cbm-w" value={width}  onChange={setWidth}  placeholder="e.g. 80"  unit="cm" readOnly={lockedDims} />
-            <Field label="Height" id="cbm-h" value={height} onChange={setHeight} placeholder="e.g. 100" unit="cm" readOnly={lockedDims} />
-            <Field label="Pieces" id="cbm-p" value={pcs}    onChange={setPcs}    placeholder="1" />
+            <Field label="Length" id="cbm-l" value={length} onChange={setLength} placeholder="e.g. 120" unit="cm" readOnly={lockedDims} error={errors.length} />
+            <Field label="Width"  id="cbm-w" value={width}  onChange={setWidth}  placeholder="e.g. 80"  unit="cm" readOnly={lockedDims} error={errors.width} />
+            <Field label="Height" id="cbm-h" value={height} onChange={setHeight} placeholder="e.g. 100" unit="cm" readOnly={lockedDims} error={errors.height} />
+            <Field label="Pieces" id="cbm-p" value={pcs}    onChange={setPcs}    placeholder="1" error={errors.pcs} onBlurCorrect={piecesBlurCorrect} />
           </div>
           {lockedDims && (
             <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: 0 }}>

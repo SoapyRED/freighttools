@@ -244,6 +244,7 @@ export default function ContainerCalc() {
               <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--text-faint)' }}>Limiting Factor:</span>
               {result.limitingFactor === 'volume' && <Badge text="Volume" color="amber" />}
               {result.limitingFactor === 'weight' && <Badge text="Weight" color="red" />}
+              {result.limitingFactor === 'dimensions' && <Badge text="Dimensions" color="red" />}
               {result.limitingFactor === 'none' && <Badge text="All items fit" color="green" />}
             </div>
             {result.warnings.length > 0 && (

@@ -96,7 +96,12 @@ export default function UnlocodeSearch() {
             style={inp}
             placeholder="Search by name, code, or IATA code (e.g. Rotterdam, GBLHR, LHR)"
             value={query}
-            onChange={e => setQuery(e.target.value)}
+            onChange={e => {
+              setQuery(e.target.value);
+              // When the user starts a new search, collapse any open detail panel
+              // so they see the list view with updated results.
+              if (selected) setSelected(null);
+            }}
           />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 12 }}>
             <div>
@@ -105,13 +110,19 @@ export default function UnlocodeSearch() {
                 style={{ ...inp, fontSize: 14, padding: '10px 14px' }}
                 placeholder="e.g. GB, NL, DE"
                 value={country}
-                onChange={e => setCountry(e.target.value.toUpperCase().slice(0, 2))}
+                onChange={e => {
+                  setCountry(e.target.value.toUpperCase().slice(0, 2));
+                  if (selected) setSelected(null);
+                }}
                 maxLength={2}
               />
             </div>
             <div>
               <label style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4, display: 'block' }}>Function</label>
-              <select style={{ ...inp, fontSize: 14, padding: '10px 14px' }} value={func} onChange={e => setFunc(e.target.value)}>
+              <select style={{ ...inp, fontSize: 14, padding: '10px 14px' }} value={func} onChange={e => {
+                setFunc(e.target.value);
+                if (selected) setSelected(null);
+              }}>
                 {FUNC_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
             </div>

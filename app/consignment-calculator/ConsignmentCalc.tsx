@@ -43,6 +43,27 @@ export default function ConsignmentCalc() {
     setRows(prev => prev.length > 1 ? prev.filter(r => r.id !== id) : prev);
   };
 
+  // Inline per-field validation for each row
+  const fieldErr = (v: string, label: string): string | null => {
+    if (v === '') return null;
+    const n = parseFloat(v);
+    if (isNaN(n)) return null;
+    if (n <= 0) return `${label} must be greater than 0`;
+    return null;
+  };
+  const qtyErr = (v: string): string | null => {
+    if (v === '') return null;
+    const n = parseInt(v, 10);
+    if (isNaN(n)) return null;
+    if (n < 1) return 'Qty must be at least 1';
+    return null;
+  };
+  const qtyBlurCorrect = (id: number, v: string) => {
+    if (v === '') return;
+    const n = parseInt(v, 10);
+    if (isNaN(n) || n < 1) updateRow(id, 'quantity', '1');
+  };
+
   // Build valid inputs and calculate
   const validInputs: ConsignmentItemInput[] = rows
     .filter(r => Number(r.lengthCm) > 0 && Number(r.widthCm) > 0 && Number(r.heightCm) > 0)
@@ -82,6 +103,11 @@ export default function ConsignmentCalc() {
     fontSize: 10, fontWeight: 700, textTransform: 'uppercase',
     letterSpacing: '0.5px', color: 'var(--text-faint)', marginBottom: 4,
   };
+  const err: React.CSSProperties = {
+    fontSize: 11, fontWeight: 500, color: 'var(--error, #dc2626)',
+    marginTop: 3, lineHeight: 1.3,
+  };
+  const errBorder = '1px solid var(--error, #dc2626)';
   const statBox: React.CSSProperties = {
     textAlign: 'center', padding: '16px 8px',
     background: 'var(--bg)', borderRadius: 8,
@@ -121,14 +147,22 @@ export default function ConsignmentCalc() {
           <span style={{ fontSize: 12, fontWeight: 400, color: 'var(--text-faint)' }}>{rows.length} item{rows.length !== 1 ? 's' : ''}</span>
         </div>
         <div style={{ padding: 16 }}>
-          {rows.map((row, idx) => (
+          {rows.map((row, idx) => {
+            const rowErrors = {
+              l: fieldErr(row.lengthCm, 'Length'),
+              w: fieldErr(row.widthCm, 'Width'),
+              h: fieldErr(row.heightCm, 'Height'),
+              q: qtyErr(row.quantity),
+              wt: fieldErr(row.grossWeightKg, 'Weight'),
+            };
+            return (
             <div key={row.id} style={{
               marginBottom: 16, paddingBottom: 16,
               borderBottom: idx < rows.length - 1 ? '1px solid var(--border-light)' : 'none',
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-faint)' }}>Item {idx + 1}</span>
-                <button style={removeBtn} onClick={() => removeRow(row.id)} title="Remove item">&times;</button>
+                <button type="button" style={removeBtn} onClick={() => removeRow(row.id)} title="Remove item">&times;</button>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 8, marginBottom: 8 }}>
                 <div>
@@ -137,29 +171,42 @@ export default function ConsignmentCalc() {
                 </div>
                 <div>
                   <div style={lbl}>L (cm)</div>
-                  <input style={inp} type="number" placeholder="120" value={row.lengthCm} onChange={e => updateRow(row.id, 'lengthCm', e.target.value)} />
+                  <input style={{ ...inp, border: rowErrors.l ? errBorder : inp.border }} type="number" placeholder="120" value={row.lengthCm} onChange={e => updateRow(row.id, 'lengthCm', e.target.value)} aria-invalid={!!rowErrors.l || undefined} />
+                  {rowErrors.l && <div style={err}>{rowErrors.l}</div>}
                 </div>
                 <div>
                   <div style={lbl}>W (cm)</div>
-                  <input style={inp} type="number" placeholder="80" value={row.widthCm} onChange={e => updateRow(row.id, 'widthCm', e.target.value)} />
+                  <input style={{ ...inp, border: rowErrors.w ? errBorder : inp.border }} type="number" placeholder="80" value={row.widthCm} onChange={e => updateRow(row.id, 'widthCm', e.target.value)} aria-invalid={!!rowErrors.w || undefined} />
+                  {rowErrors.w && <div style={err}>{rowErrors.w}</div>}
                 </div>
                 <div>
                   <div style={lbl}>H (cm)</div>
-                  <input style={inp} type="number" placeholder="150" value={row.heightCm} onChange={e => updateRow(row.id, 'heightCm', e.target.value)} />
+                  <input style={{ ...inp, border: rowErrors.h ? errBorder : inp.border }} type="number" placeholder="150" value={row.heightCm} onChange={e => updateRow(row.id, 'heightCm', e.target.value)} aria-invalid={!!rowErrors.h || undefined} />
+                  {rowErrors.h && <div style={err}>{rowErrors.h}</div>}
                 </div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8 }}>
                 <div>
                   <div style={lbl}>Qty</div>
-                  <input style={inp} type="number" placeholder="1" min="1" value={row.quantity} onChange={e => updateRow(row.id, 'quantity', e.target.value)} />
+                  <input
+                    style={{ ...inp, border: rowErrors.q ? errBorder : inp.border }}
+                    type="number" placeholder="1" min="1"
+                    value={row.quantity}
+                    onChange={e => updateRow(row.id, 'quantity', e.target.value)}
+                    onBlur={e => qtyBlurCorrect(row.id, e.target.value)}
+                    aria-invalid={!!rowErrors.q || undefined}
+                  />
+                  {rowErrors.q && <div style={err}>{rowErrors.q}</div>}
                 </div>
                 <div>
                   <div style={lbl}>Weight (kg)</div>
-                  <input style={inp} type="number" placeholder="450" value={row.grossWeightKg} onChange={e => updateRow(row.id, 'grossWeightKg', e.target.value)} />
+                  <input style={{ ...inp, border: rowErrors.wt ? errBorder : inp.border }} type="number" placeholder="450" value={row.grossWeightKg} onChange={e => updateRow(row.id, 'grossWeightKg', e.target.value)} aria-invalid={!!rowErrors.wt || undefined} />
+                  {rowErrors.wt && <div style={err}>{rowErrors.wt}</div>}
                 </div>
                 <div>
                   <div style={lbl}>Stackable</div>
                   <button
+                    type="button"
                     onClick={() => updateRow(row.id, 'stackable', !row.stackable)}
                     style={{
                       ...inp, cursor: 'pointer', textAlign: 'center', fontSize: 13, fontWeight: 600,
@@ -182,8 +229,9 @@ export default function ConsignmentCalc() {
                 </div>
               </div>
             </div>
-          ))}
-          <button onClick={addRow} style={btn}>+ Add Item</button>
+            );
+          })}
+          <button type="button" onClick={addRow} style={btn}>+ Add Item</button>
         </div>
       </div>
 

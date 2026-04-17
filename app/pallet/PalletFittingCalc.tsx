@@ -32,12 +32,21 @@ const labelStyle: React.CSSProperties = {
   display: 'block',
 };
 
+const errorStyle: React.CSSProperties = {
+  fontSize: 12,
+  fontWeight: 500,
+  color: 'var(--error, #dc2626)',
+  marginTop: 4,
+  lineHeight: 1.4,
+};
+
 function Field({
-  label, id, value, onChange, placeholder, unit, readOnly,
+  label, id, value, onChange, placeholder, unit, readOnly, error,
 }: {
   label: string; id: string; value: string;
   onChange: (v: string) => void; placeholder?: string; unit?: string;
   readOnly?: boolean;
+  error?: string | null;
 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -55,28 +64,35 @@ function Field({
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         readOnly={readOnly}
+        aria-invalid={!!error || undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
         style={{
           ...inputStyle,
           background: readOnly ? 'var(--bg)' : 'var(--bg-card)',
           cursor: readOnly ? 'default' : 'text',
+          borderColor: error ? 'var(--error, #dc2626)' : undefined,
         }}
         onFocus={e => {
           if (!readOnly) {
-            e.currentTarget.style.borderColor = '#e87722';
-            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(232,119,34,0.12)';
+            e.currentTarget.style.borderColor = error ? 'var(--error, #dc2626)' : '#e87722';
+            e.currentTarget.style.boxShadow = error
+              ? '0 0 0 3px rgba(220,38,38,0.12)'
+              : '0 0 0 3px rgba(232,119,34,0.12)';
           }
         }}
         onBlur={e => {
-          e.currentTarget.style.borderColor = '';
+          e.currentTarget.style.borderColor = error ? 'var(--error, #dc2626)' : '';
           e.currentTarget.style.boxShadow = 'none';
           const v = e.target.value;
           if (v && !readOnly) {
             const n = parseFloat(v);
-            if (n < 0) onChange('0');
-            else if (v !== String(n) && !isNaN(n)) onChange(String(n));
+            if (!isNaN(n) && v !== String(n)) onChange(String(n));
           }
         }}
       />
+      {error && (
+        <span id={`${id}-error`} style={errorStyle}>{error}</span>
+      )}
     </div>
   );
 }
@@ -200,6 +216,25 @@ export default function PalletFittingCalc({
     rotate: !rotate ? '0' : undefined,
   }, !lockedDims);
 
+  // Inline per-field validation errors (only shown when user has entered a value that's invalid)
+  const errors = useMemo(() => {
+    const check = (v: string, label: string): string | null => {
+      if (v === '') return null;
+      const n = parseFloat(v);
+      if (isNaN(n)) return null;
+      if (n <= 0) return `${label} must be greater than 0`;
+      return null;
+    };
+    return {
+      palletL: check(palletL, 'Length'),
+      palletW: check(palletW, 'Width'),
+      palletMH: check(palletMH, 'Max loaded height'),
+      boxL: check(boxL, 'Length'),
+      boxW: check(boxW, 'Width'),
+      boxH: check(boxH, 'Height'),
+    };
+  }, [palletL, palletW, palletMH, boxL, boxW, boxH]);
+
   const result = useMemo(() => {
     const pl  = parseFloat(palletL);
     const pw  = parseFloat(palletW);
@@ -244,9 +279,9 @@ export default function PalletFittingCalc({
         </div>
         <div style={{ padding: 24 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 16, marginBottom: lockedDims ? 12 : 0 }}>
-            <Field label="Length"     id="pl-l"  value={palletL}   onChange={setPalletL}  placeholder="e.g. 120" unit="cm" readOnly={lockedDims} />
-            <Field label="Width"      id="pl-w"  value={palletW}   onChange={setPalletW}  placeholder="e.g. 80"  unit="cm" readOnly={lockedDims} />
-            <Field label="Typical max loaded height — road freight" id="pl-mh" value={palletMH}  onChange={setPalletMH} placeholder="e.g. 220" unit="cm" readOnly={lockedDims} />
+            <Field label="Length"     id="pl-l"  value={palletL}   onChange={setPalletL}  placeholder="e.g. 120" unit="cm" readOnly={lockedDims} error={errors.palletL} />
+            <Field label="Width"      id="pl-w"  value={palletW}   onChange={setPalletW}  placeholder="e.g. 80"  unit="cm" readOnly={lockedDims} error={errors.palletW} />
+            <Field label="Typical max loaded height — road freight" id="pl-mh" value={palletMH}  onChange={setPalletMH} placeholder="e.g. 220" unit="cm" readOnly={lockedDims} error={errors.palletMH} />
             <Field label="Board Ht"   id="pl-h"  value={palletH}   onChange={setPalletH}  placeholder="15"       unit="cm" readOnly={lockedDims} />
             <Field label="Max Weight" id="pl-mw" value={maxWeight} onChange={setMaxWeight} placeholder="optional" unit="kg" readOnly={lockedDims} />
           </div>
@@ -269,9 +304,9 @@ export default function PalletFittingCalc({
         </div>
         <div style={{ padding: 24 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 16, marginBottom: 16 }}>
-            <Field label="Length"     id="bx-l"  value={boxL}  onChange={setBoxL}  placeholder="e.g. 40" unit="cm" />
-            <Field label="Width"      id="bx-w"  value={boxW}  onChange={setBoxW}  placeholder="e.g. 30" unit="cm" />
-            <Field label="Height"     id="bx-h"  value={boxH}  onChange={setBoxH}  placeholder="e.g. 25" unit="cm" />
+            <Field label="Length"     id="bx-l"  value={boxL}  onChange={setBoxL}  placeholder="e.g. 40" unit="cm" error={errors.boxL} />
+            <Field label="Width"      id="bx-w"  value={boxW}  onChange={setBoxW}  placeholder="e.g. 30" unit="cm" error={errors.boxW} />
+            <Field label="Height"     id="bx-h"  value={boxH}  onChange={setBoxH}  placeholder="e.g. 25" unit="cm" error={errors.boxH} />
             <Field label="Wt / box"   id="bx-wt" value={boxWt} onChange={setBoxWt} placeholder="optional" unit="kg" />
           </div>
           {/* Rotation toggle */}
