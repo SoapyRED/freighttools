@@ -2,7 +2,7 @@
 // SINGLE SOURCE OF TRUTH — update here, all pages update automatically
 
 export const SITE_STATS = {
-  toolCount: 17,
+  toolCount: 18,
   apiEndpointCount: 19,
   mcpToolCount: 18,
   adrEntries: 2939,
@@ -16,7 +16,7 @@ export const SITE_STATS = {
   lastUpdated: 'April 2026',
   adrEdition: 'UNECE ADR 2025',
   hsEdition: 'WCO HS 2022',
-  mcpVersion: '1.0.1',
+  mcpVersion: '1.0.5',
 } as const;
 
 export const SITE_COPY = {
