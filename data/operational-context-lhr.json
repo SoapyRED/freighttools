@@ -1,0 +1,621 @@
+{
+  "_meta": {
+    "source": "FreightUtils internal operational data, maintained by Marius Cristoiu (ADR-certified freight transport planner, CEVA Heathrow → WFS Heathrow from 7 May 2026)",
+    "sheds_md_version": "v4",
+    "last_verified": "2026-04-21",
+    "primary_airport": "LHR",
+    "hmrc_cross_reference": {
+      "performed": true,
+      "date": "2026-04-21",
+      "sources": [
+        "HMRC CDS Appendix 16D (ITSF list) dated 2026-04-09",
+        "HMRC CDS Appendix 16F (ETSF list) dated 2026-04-09"
+      ],
+      "summary": "10 of Soap's guaranteed shed codes confirmed against HMRC. 2 operational-only (HMRC-deregistered or industry-internal). 1 new addition identified (DAX = Dunwoody 875 BARC). Details per-shed below in 'hmrc' field."
+    },
+    "notes_for_users": "This is operational truth (what's used on-shift for prealert emails), cross-referenced with HMRC's regulated ITSF/ETSF lists where possible. Where HMRC registration exists, it is shown. Where it doesn't, the shed is clearly labelled 'Industry-maintained'."
+  },
+
+  "critical_rules": {
+    "horseshoe_default": {
+      "sheds_covered": ["549", "550A", "550B", "551", "552"],
+      "subject_code": "LHRWXS",
+      "prealert_email": "549.spxra.alerts@wfs.aero",
+      "description": "WFS Horseshoe default — all Horseshoe sheds use the same email and subject EXCEPT American Airlines.",
+      "hmrc_registration": "GBAULHRLHRWXS — Worldwide Flight Services Limited, Building 549/550/551, Shoreham Road East"
+    },
+    "horseshoe_aa_exception": {
+      "airline": "American Airlines",
+      "awb_prefix": "001",
+      "physical_shed": "550B",
+      "subject_code": "LHRAAS",
+      "prealert_email": "552.spxra.alerts@wfs.aero",
+      "description": "AA moved 552 → 550B physically, but CEVA never updated AA's prealert subject/email. The ONLY exception to the Horseshoe default rule.",
+      "hmrc_registration": "GBAULHRLHRAAS was REMOVED from HMRC on 12 Nov 2024. Operationally still in active use by CEVA and other forwarders — confirmed 21 Apr 2026."
+    },
+    "grey_area_gf_ul_vn_2c_sv": {
+      "note": "CEVA PDF originally routed GF/UL/VN/2C/SV to LHRAAS + 552. Current operational rule treats AA as the SOLE exception. If one of these airlines appears on a slip for 552, use default (LHRWXS + 549 email) unless slip explicitly states otherwise."
+    }
+  },
+
+  "airline_prefix_overrides": {
+    "001": {
+      "airline_code": "AA",
+      "airline_name": "American Airlines",
+      "shed_common_name": "WFS Horseshoe (550B)",
+      "shed_code": "AAS",
+      "subject_code": "LHRAAS",
+      "prealert_email": "552.spxra.alerts@wfs.aero",
+      "note": "Horseshoe exception"
+    },
+    "071": {
+      "airline_code": "ET",
+      "airline_name": "Ethiopian Airlines",
+      "shed_common_name": "Dnata Cargopoint & Westpoint",
+      "shed_code": "CPS",
+      "subject_code": "LHRCPS",
+      "prealert_email": "CPWP.SPX@dnata.co.uk"
+    },
+    "072": {
+      "airline_code": "GF",
+      "airline_name": "Gulf Air",
+      "shed_common_name": "WFS Sandringham Rd 578",
+      "shed_code": "LFS",
+      "subject_code": "LHRLFS",
+      "prealert_email": "lhr578.spxraalerts@wfs.aero"
+    },
+    "074": {
+      "airline_code": "KL",
+      "airline_name": "KLM",
+      "shed_common_name": "Swissport Horton Rd (FRX) OR Swissport 558 (AFS)",
+      "shed_code": "per_slip",
+      "subject_code": "per_slip",
+      "prealert_email": "per_slip",
+      "note": "Route depends on slip — NOT SLS by default"
+    },
+    "125": {
+      "airline_code": "BA",
+      "airline_name": "British Airways (Dunwoody 875 BARC)",
+      "shed_common_name": "WFS BARC (Building 875, Dunwoody operator)",
+      "shed_code": "DAX",
+      "subject_code": "LHRDAX",
+      "prealert_email": "bbs.spxra.alerts@wfs.aero",
+      "note": "Per Soap 20 Apr 2026 + Simon (veteran planner) + Paul Weller (WFS DM): BARC handles BA 125 prefixes in addition to MK (Air Mauritius). Confirm subject code when on-site at WFS."
+    }
+  },
+
+  "sheds": {
+    "ACS": {
+      "shed_code": "ACS",
+      "handler_legal_name": "Air Canada",
+      "handler_common_name": "Air Canada",
+      "subject_code": "LHRACS",
+      "prealert_email": "lhrreception@aircanada.ca",
+      "airlines": [{"code": "AC", "name": "Air Canada"}],
+      "awb_prefixes": ["014"],
+      "routing_notes": null,
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAULHRLHRACS",
+        "status": "registered",
+        "legal_name": "Air Canada",
+        "address": "Building 553, Shoreham Road East, Heathrow Airport, Hounslow, Middlesex. TW6 3RG"
+      }
+    },
+    "ANS": {
+      "shed_code": "ANS",
+      "handler_legal_name": "Airworld Handling Ltd",
+      "handler_common_name": "Airworld",
+      "subject_code": "LHRANS",
+      "prealert_email": "prealert@airworld.aero",
+      "airlines": [
+        {"code": "NH", "name": "ANA"},
+        {"code": "JL", "name": "Japan Airlines"}
+      ],
+      "awb_prefixes": [],
+      "routing_notes": "Located at X2, Hatton Cross Centre",
+      "last_verified": "2026-04-21",
+      "hmrc": {"status": "not_found_in_current_data", "note": "Not in current ITSF/ETSF lists. May be registered under a related entity."}
+    },
+    "XCY": {
+      "shed_code": "XCY",
+      "handler_legal_name": "Swissport GB Limited",
+      "handler_common_name": "ASC — Radius Park",
+      "subject_code": "LHRXCY",
+      "prealert_email": "rp.spxpre-notification@swissport.com",
+      "airlines": [{"code": "CV", "name": "Cargolux"}],
+      "awb_prefixes": [],
+      "routing_notes": "ASC (Radius Park location) — Swissport operator",
+      "last_verified": "2026-04-21",
+      "hmrc": {"status": "not_found_in_current_data", "note": "Radius Park has multiple ETSF entries. XCY specifically not found."}
+    },
+    "ZCS": {
+      "shed_code": "ZCS",
+      "handler_legal_name": "Swissport GB Limited",
+      "handler_common_name": "Swissport at Sandringham Rd (formerly ASC)",
+      "subject_code": "LHRZCS",
+      "prealert_email": "b582.spxpre-notification@swissport.com",
+      "airlines": [
+        {"code": "7L", "name": "Silk Way West"},
+        {"code": "KM", "name": "KM Malta Airlines"},
+        {"code": "ZP", "name": "Silk Way Airlines"},
+        {"code": "JU", "name": "Air Serbia"}
+      ],
+      "awb_prefixes": [],
+      "routing_notes": "Renamed from ASC when Swissport formally registered the location with HMRC on 20 Jan 2026. Building 582 is also home to ASC's own ITSF registration (JZS suffix) — shared-building location.",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAUSWLLHRZCS",
+        "status": "registered",
+        "legal_name": "Swissport GB Limited",
+        "address": "582 Sandringham Road, London Heathrow Airport, Hounslow",
+        "registered_date": "2026-01-20"
+      }
+    },
+    "JZS_ASC": {
+      "shed_code": "JZS",
+      "handler_legal_name": "Aviation Servicing Company Limited T/A ASC Cargo Handling",
+      "handler_common_name": "ASC Cargo Handling (Bldg 582)",
+      "subject_code": null,
+      "prealert_email": null,
+      "airlines": [],
+      "awb_prefixes": [],
+      "routing_notes": "Shares Building 582 with Swissport (ZCS). ASC Cargo Handling is the long-standing occupant; Swissport's ZCS registration was added Jan 2026. Subject code and prealert email not currently in our operational data — verify if ASC is still routed to separately.",
+      "last_verified": "2026-04-21",
+      "status": "hmrc_registered_operational_data_missing",
+      "hmrc": {
+        "code": "GBAULHRLHRJZS",
+        "status": "registered",
+        "legal_name": "Aviation Servicing Company Limited T/A ASC Cargo Handling",
+        "address": "Building 582, Sandringham Road, Heathrow Airport, Hounslow"
+      }
+    },
+    "CFL": {
+      "shed_code": "CFL",
+      "handler_legal_name": "Courier Facilities Limited",
+      "handler_common_name": "CFL",
+      "subject_code": null,
+      "prealert_email": "spx@cfl.aero",
+      "airlines": [],
+      "awb_prefixes": [],
+      "routing_notes": "Subject code TBC. HMRC-registered as ITSF.",
+      "last_verified": "2026-04-21",
+      "status": "partial",
+      "hmrc": {
+        "code": "GBAULHRLHRCFL1",
+        "status": "registered",
+        "legal_name": "Courier Facilities Limited",
+        "address": "580/581 Sandringham Road, London Heathrow Airport. TW6 3SN"
+      }
+    },
+    "NAS": {
+      "shed_code": "NAS",
+      "handler_legal_name": "dnata Limited",
+      "handler_common_name": "Dnata City Unit 1 (DC1)",
+      "subject_code": "LHRNAS",
+      "prealert_email": "DC.SPX@dnata.co.uk",
+      "airlines": [
+        {"code": "EK", "name": "Emirates"},
+        {"code": "BR", "name": "EVA Air"},
+        {"code": "OZ", "name": "Asiana Airlines"},
+        {"code": "UK", "name": "Vistara"},
+        {"code": "QF", "name": "Qantas"}
+      ],
+      "awb_prefixes": [],
+      "routing_notes": null,
+      "last_verified": "2026-04-21",
+      "hmrc": {"status": "not_found_in_current_data", "note": "Dnata DC1 not found under NAS suffix in current HMRC data. Dnata has multiple HMRC registrations for different units; DC1 may be registered under a different suffix we haven't yet mapped."}
+    },
+    "NBS": {
+      "shed_code": "NBS",
+      "handler_legal_name": "dnata Limited",
+      "handler_common_name": "Dnata City Unit 2 (DC2)",
+      "subject_code": "LHRNBS",
+      "prealert_email": "DC.SPX@dnata.co.uk",
+      "airlines": [{"code": "TK", "name": "Turkish Airlines"}],
+      "awb_prefixes": [],
+      "routing_notes": null,
+      "last_verified": "2026-04-21",
+      "hmrc": {"status": "not_found_in_current_data"}
+    },
+    "NCS": {
+      "shed_code": "NCS",
+      "handler_legal_name": "dnata Limited",
+      "handler_common_name": "Dnata City Unit 3 (DC3)",
+      "subject_code": "LHRNCS",
+      "prealert_email": "DC.SPX@dnata.co.uk",
+      "airlines": [
+        {"code": "TP", "name": "TAP Air Portugal"},
+        {"code": "WS", "name": "WestJet"},
+        {"code": "6E", "name": "IndiGo"},
+        {"code": "QY", "name": "European Air Transport"},
+        {"code": "TS", "name": "Air Transat"},
+        {"code": "Q7", "name": "SkyBahamas"}
+      ],
+      "awb_prefixes": [],
+      "routing_notes": null,
+      "last_verified": "2026-04-21",
+      "hmrc": {"status": "not_found_in_current_data"}
+    },
+    "CPS": {
+      "shed_code": "CPS",
+      "handler_legal_name": "dnata Limited",
+      "handler_common_name": "Dnata Cargopoint & Westpoint",
+      "subject_code": "LHRCPS",
+      "prealert_email": "CPWP.SPX@dnata.co.uk",
+      "airlines": [
+        {"code": "LY", "name": "El Al"},
+        {"code": "PH", "name": "Polynesian Airlines", "verify": "Soap to confirm"},
+        {"code": "CI", "name": "China Airlines"},
+        {"code": "ET", "name": "Ethiopian Airlines", "awb_prefix": "071"},
+        {"code": "IR", "name": "Iran Air"},
+        {"code": "AM", "name": "Aeromexico"},
+        {"code": "LA", "name": "LATAM"},
+        {"code": "GA", "name": "Garuda Indonesia"},
+        {"code": "RU", "name": "AirBridgeCargo"},
+        {"code": "JD", "name": "Beijing Capital Airlines"},
+        {"code": "HU", "name": "Hainan Airlines"},
+        {"code": "GS", "name": "Tianjin Airlines"}
+      ],
+      "awb_prefixes": ["071"],
+      "routing_notes": "Ethiopian (ET, prefix 071) confirmed here per Soap's 20 Apr 2026 override",
+      "last_verified": "2026-04-21",
+      "hmrc": {"status": "not_found_in_current_data"}
+    },
+    "PHS": {
+      "shed_code": "PHS",
+      "handler_legal_name": "dnata Limited",
+      "handler_common_name": "Dnata City East",
+      "subject_code": "LHRPHS",
+      "prealert_email": "DCE.SPX@dnata.co.uk",
+      "airlines": [
+        {"code": "VS", "name": "Virgin Atlantic"},
+        {"code": "DL", "name": "Delta Air Lines"},
+        {"code": "NZ", "name": "Air New Zealand"}
+      ],
+      "awb_prefixes": [],
+      "routing_notes": "Virgin Atlantic main handler at LHR",
+      "last_verified": "2026-04-21",
+      "hmrc": {"status": "not_found_in_current_data"}
+    },
+    "NDS": {
+      "shed_code": "NDS",
+      "handler_legal_name": "dnata Limited",
+      "handler_common_name": "Dnata B521a (Cathay)",
+      "subject_code": "LHRNDS",
+      "prealert_email": "B521a.SPX@dnata.co.uk",
+      "airlines": [{"code": "CX", "name": "Cathay Pacific"}],
+      "awb_prefixes": [],
+      "routing_notes": "Dedicated Cathay Pacific facility",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAULHRLHRNDS",
+        "status": "registered",
+        "legal_name": "Dnata Limited",
+        "address": "Unit 521a, Stirling Road, London Heathrow Airport"
+      }
+    },
+    "BAC_MAIN": {
+      "shed_code": "BAC",
+      "handler_legal_name": "British Airways PLC",
+      "handler_common_name": "IAG Ascentis (BA Main / M class)",
+      "subject_code": "LHRBAC",
+      "prealert_email": "Ascentis.Deliveries@iagcargo.com",
+      "airlines": [{"code": "BA", "name": "British Airways", "variant": "MAIN / general cargo"}],
+      "awb_prefixes": [],
+      "routing_notes": "BA MAIN general cargo. HMRC registers 'British Airways PLC' (not IAG Cargo) as the named entity — confirms Soap's observation. Differentiate from BAC_EXPRESS via slip 'MAIN' marker. If ambiguous, fall back to IAG track-trace.",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAULHRLHRBAC",
+        "status": "registered",
+        "legal_name": "British Airways PLC",
+        "address": "Ascentis, Building 1233, Sealand Road, Heathrow Airport"
+      }
+    },
+    "BAC_EXPRESS": {
+      "shed_code": "BAC",
+      "handler_legal_name": "British Airways PLC",
+      "handler_common_name": "IAG Premia (BA Express / F class)",
+      "subject_code": "LHRBAC",
+      "prealert_email": "Premia.Deliveries@iagcargo.com",
+      "airlines": [
+        {"code": "BA", "name": "British Airways", "variant": "EXPRESS / Premia / F class"},
+        {"code": "MH", "name": "Malaysia Airlines"}
+      ],
+      "awb_prefixes": [],
+      "routing_notes": "BA EXPRESS / Premia — differentiate from BAC_MAIN via slip 'EXPRESS' or 'Premia' marker. Shares subject code LHRBAC with Ascentis — EMAIL is the differentiator. HMRC may register this as BAS (GBAULHRLHRBAS, same address) — SOAP TO VERIFY on shift.",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAULHRLHRBAS (likely — verify)",
+        "status": "registered_uncertain_mapping",
+        "legal_name": "British Airways PLC",
+        "address": "Ascentis, Building 1233, Sealand Road, Heathrow Airport",
+        "note": "BA has TWO codes: BAC and BAS, both at same address. Soap to confirm which is Premia vs Ascentis."
+      }
+    },
+    "BA_125_BARC": {
+      "shed_code": "DAX",
+      "handler_legal_name": "Dunwoody Airline Services Limited T/A Worldwide Flight Services",
+      "handler_common_name": "WFS BARC (Building 875)",
+      "subject_code": null,
+      "prealert_email": "bbs.spxra.alerts@wfs.aero",
+      "airlines": [
+        {"code": "BA", "name": "British Airways", "awb_prefix": "125", "variant": "BARC handling"},
+        {"code": "MK", "name": "Air Mauritius"}
+      ],
+      "awb_prefixes": ["125"],
+      "routing_notes": "Third BA handler at Heathrow (per Soap 20 Apr 2026 + Simon + Paul Weller WFS DM interview). BARC = BA Regional Cargo. Soap's new workplace from 7 May 2026. Subject code TBC — verify on first shift. Likely LHRDAX or LHRBBS based on email pattern.",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAUFEMLHRDAX",
+        "status": "registered",
+        "legal_name": "Dunwoody Airline Services Limited T/A Worldwide Flight Services",
+        "address": "Building 875, Scylla Road, Hounslow, Middlesex. TW6 3YH"
+      }
+    },
+    "CIS_MENZIES": {
+      "shed_code": "CIS",
+      "handler_legal_name": "Menzies World Cargo Limited",
+      "handler_common_name": "Menzies Shoreham Rd (MW1)",
+      "subject_code": "LHRCIS",
+      "prealert_email": "mw1.csd@menziesaviation.com",
+      "airlines": [
+        {"code": "QR", "name": "Qatar Airways"},
+        {"code": "TG", "name": "Thai Airways"},
+        {"code": "RJ", "name": "Royal Jordanian"},
+        {"code": "MS", "name": "EgyptAir"},
+        {"code": "AT", "name": "Royal Air Maroc"},
+        {"code": "ME", "name": "Middle East Airlines"},
+        {"code": "KU", "name": "Kuwait Airways"},
+        {"code": "SK", "name": "SAS"},
+        {"code": "AV", "name": "Avianca"},
+        {"code": "6E", "name": "IndiGo"}
+      ],
+      "awb_prefixes": [],
+      "routing_notes": "HMRC-registered at Building 557 (MW1 building name matches Soap's email convention). Shared subject LHRCIS with AMI — EMAIL is the differentiator.",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAULHRLHRCIS",
+        "status": "registered",
+        "legal_name": "Menzies World Cargo Limited",
+        "address": "MW1 Building 557, Shoreham Road West, London Heathrow Airport"
+      }
+    },
+    "CIS_AMI": {
+      "shed_code": "CIS",
+      "handler_legal_name": "Air Menzies International Limited",
+      "handler_common_name": "Air Menzies Intl LHR",
+      "subject_code": "LHRCIS",
+      "prealert_email": "ami.lhrcsd@airmenzies.com",
+      "airlines": [
+        {"code": "LX", "name": "Swiss International Air Lines"},
+        {"code": "LH", "name": "Lufthansa"},
+        {"code": "MU", "name": "China Eastern"},
+        {"code": "AY", "name": "Finnair"},
+        {"code": "LO", "name": "LOT Polish Airlines"},
+        {"code": "MB", "name": "MNG Airlines"},
+        {"code": "BI", "name": "Royal Brunei Airlines"}
+      ],
+      "awb_prefixes": [],
+      "routing_notes": "Registered as ETSF at Polar Park (WRX suffix) — operationally shares CIS code with Menzies Shoreham Rd. Email is the differentiator.",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAUHMWLHRWRX",
+        "status": "registered_as_etsf",
+        "legal_name": "Air Menzies International Limited",
+        "address": "Unit 2B, Polar Park, Bath Road, Heathrow. UB7 0DG",
+        "note": "Registered under WRX suffix for legal purposes; CIS is the operational shared-code with Menzies Shoreham Rd."
+      }
+    },
+    "AFS": {
+      "shed_code": "AFS",
+      "handler_legal_name": "Heathrow Cargo Handling Limited (operational: Swissport)",
+      "handler_common_name": "Swissport 558 (Shoreham Rd West)",
+      "subject_code": "LHRAFS",
+      "prealert_email": "LHR.558CSD@swissport.com",
+      "airlines": [
+        {"code": "WY", "name": "Oman Air"},
+        {"code": "KE", "name": "Korean Air"},
+        {"code": "UA", "name": "United Airlines"},
+        {"code": "KQ", "name": "Kenya Airways"},
+        {"code": "3V", "name": "TNT Airways"},
+        {"code": "KL", "name": "KLM", "awb_prefix": "074"},
+        {"code": "LO", "name": "LOT Polish Airlines", "awb_prefix": "080"},
+        {"code": "AF", "name": "Air France", "awb_prefix": "057"},
+        {"code": "LH", "name": "Lufthansa", "awb_prefix": "020"}
+      ],
+      "awb_prefixes": ["074", "080", "057", "020"],
+      "routing_notes": "HMRC operator is 'Heathrow Cargo Handling Limited' (HCH), not Swissport GB directly. Operationally Swissport staff — likely HCH is a Swissport subsidiary/trading name. Swissport reshuffles airline allocations periodically — ALWAYS trust slip header.",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAULHRLHRAFS",
+        "status": "registered",
+        "legal_name": "Heathrow Cargo Handling Limited",
+        "address": "Building 558, Shoreham Road West, London Heathrow Airport"
+      }
+    },
+    "SLS": {
+      "shed_code": "SLS",
+      "handler_legal_name": "Swissport GB Limited",
+      "handler_common_name": "Swissport 521 (Stansted Rd, Bldg 521B)",
+      "subject_code": "LHRSLS",
+      "prealert_email": "LHR.521CSD@swissport.com",
+      "airlines": [
+        {"code": "AF", "name": "Air France"},
+        {"code": "5C", "name": "CAL Cargo Airlines"},
+        {"code": "Q7", "name": "SkyBahamas"},
+        {"code": "M6", "name": "Amerijet International"},
+        {"code": "RH", "name": "Hong Kong Air Cargo"},
+        {"code": "4W", "name": "Warbelow's Air"},
+        {"code": "UA", "name": "United Airlines", "awb_prefix": "016"}
+      ],
+      "awb_prefixes": ["016"],
+      "routing_notes": "KL is NOT routed here by default (corrected 20 Apr 2026)",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAULHRLHRSLS",
+        "status": "registered",
+        "legal_name": "Swissport GB Limited",
+        "address": "Building 521B, Stansted Road, London Heathrow Airport"
+      }
+    },
+    "FRX": {
+      "shed_code": "FRX",
+      "handler_legal_name": "Heathrow Cargo Handling Limited (operational: Swissport)",
+      "handler_common_name": "Swissport Horton Rd",
+      "subject_code": "LHRFRX",
+      "prealert_email": "LHR.HRDCSD@swissport.com",
+      "airlines": [
+        {"code": "CZ", "name": "China Southern"},
+        {"code": "KL", "name": "KLM", "awb_prefix": "074"}
+      ],
+      "awb_prefixes": ["074"],
+      "routing_notes": "HMRC operator is 'Heathrow Cargo Handling Limited' (HCH), not Swissport GB. Operationally Swissport staff. Registered as ETSF, not ITSF. KLM (074) may route here OR to Swissport 558 (AFS) — trust slip header.",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAUCBRLHRFRX",
+        "status": "registered_as_etsf",
+        "legal_name": "Heathrow Cargo Handling Limited",
+        "address": "HCH House, Horton Road, Colnbrook, Slough. SL3 0AT"
+      }
+    },
+    "POS": {
+      "shed_code": "POS",
+      "handler_legal_name": "Swissport GB Limited",
+      "handler_common_name": "Swissport Portal Scylla Rd",
+      "subject_code": "LHRPOS",
+      "prealert_email": "lhr.poscsd@swissport.com",
+      "airlines": [
+        {"code": "CA", "name": "Air China"},
+        {"code": "HM", "name": "Air Seychelles"},
+        {"code": "EY", "name": "Etihad Airways"},
+        {"code": "AI", "name": "Air India"},
+        {"code": "ZH", "name": "Shenzhen Airlines"},
+        {"code": "7C", "name": "Jeju Air"}
+      ],
+      "awb_prefixes": [],
+      "routing_notes": null,
+      "last_verified": "2026-04-21",
+      "hmrc": {"status": "not_found_in_current_data"}
+    },
+    "WXS": {
+      "shed_code": "WXS",
+      "handler_legal_name": "Worldwide Flight Services Limited",
+      "handler_common_name": "WFS Horseshoe DEFAULT (549/550A/550B/551/552)",
+      "subject_code": "LHRWXS",
+      "prealert_email": "549.spxra.alerts@wfs.aero",
+      "airlines": [{"code": "*", "name": "All Horseshoe airlines EXCEPT American Airlines"}],
+      "awb_prefixes": [],
+      "routing_notes": "Horseshoe default. Covers sheds 549, 550A, 550B, 551, 552. AA (prefix 001) is the SOLE exception — see AAS entry.",
+      "last_verified": "2026-04-21",
+      "is_critical_rule": true,
+      "hmrc": {
+        "code": "GBAULHRLHRWXS",
+        "status": "registered",
+        "legal_name": "Worldwide Flight Services Limited",
+        "address": "Building 549/550/551, Shoreham Road East, London Heathrow Airport"
+      }
+    },
+    "AAS": {
+      "shed_code": "AAS",
+      "handler_legal_name": "Worldwide Flight Services (operational)",
+      "handler_common_name": "WFS Horseshoe AA EXCEPTION (550B physical)",
+      "subject_code": "LHRAAS",
+      "prealert_email": "552.spxra.alerts@wfs.aero",
+      "airlines": [{"code": "AA", "name": "American Airlines", "awb_prefix": "001"}],
+      "awb_prefixes": ["001"],
+      "routing_notes": "AA moved 552 → 550B physically. CEVA never updated AA's prealert subject/email. The ONLY exception to Horseshoe default. The 552 email is correct DESPITE physical location being 550B.",
+      "last_verified": "2026-04-21",
+      "is_critical_rule": true,
+      "hmrc": {
+        "status": "industry_only_hmrc_deregistered",
+        "deregistered_date": "2024-11-12",
+        "note": "GBAULHRLHRAAS was REMOVED from HMRC's ITSF list on 12 Nov 2024. The code remains in active operational use at CEVA and industry-wide for AA prealerts. This is the clearest example of 'operational truth vs regulated truth' divergence."
+      }
+    },
+    "XBQ": {
+      "shed_code": "XBQ",
+      "handler_legal_name": "Worldwide Flight Services",
+      "handler_common_name": "WFS Scylla Rd (legacy BARC code)",
+      "subject_code": "LHRXBQ",
+      "prealert_email": "bbs.spxra.alerts@wfs.aero",
+      "airlines": [{"code": "MK", "name": "Air Mauritius"}],
+      "awb_prefixes": [],
+      "routing_notes": "SHARES email address (bbs.spxra.alerts@wfs.aero) with DAX (Building 875 BARC). May be a legacy code superseded by DAX, OR a separate building still in use. VERIFY when at WFS.",
+      "last_verified": "2026-04-21",
+      "status": "verify_on_shift",
+      "hmrc": {"status": "not_found_in_current_data", "note": "Not in current HMRC list. DAX (Dunwoody 875) is the current HMRC-registered BARC handler."}
+    },
+    "LFS": {
+      "shed_code": "LFS",
+      "handler_legal_name": "Worldwide Flight Services Ltd.",
+      "handler_common_name": "WFS Sandringham Rd 578",
+      "subject_code": "LHRLFS",
+      "prealert_email": "lhr578.spxraalerts@wfs.aero",
+      "airlines": [
+        {"code": "SV", "name": "Saudia", "awb_prefix": "065"},
+        {"code": "GF", "name": "Gulf Air", "awb_prefix": "072"}
+      ],
+      "awb_prefixes": ["065", "072"],
+      "routing_notes": "Gulf Air (072) confirmed here per Soap's 20 Apr 2026 override.",
+      "last_verified": "2026-04-21",
+      "hmrc": {
+        "code": "GBAUTMRLHRLFS",
+        "status": "registered",
+        "legal_name": "Worldwide Flight Services Ltd.",
+        "address": "578 Sandringham Road, London Heathrow Airport, Hounslow"
+      }
+    },
+    "GPS": {
+      "shed_code": "GPS",
+      "handler_legal_name": "Glasgow Prestwick Airport Ltd",
+      "handler_common_name": "Prestwick (Glasgow)",
+      "subject_code": "PIKGPS",
+      "prealert_email": "cargoservices@glasgowprestwick.com",
+      "airlines": [],
+      "awb_prefixes": [],
+      "routing_notes": "NOT at Heathrow — Glasgow Prestwick Airport",
+      "last_verified": "2026-04-21",
+      "airport": "PIK",
+      "status": "partial",
+      "hmrc": {"note": "Verify against separate airport location codes list"}
+    },
+    "LGW_WFS": {
+      "shed_code": "LGW",
+      "handler_legal_name": "Worldwide Flight Services (WFS)",
+      "handler_common_name": "WFS Gatwick",
+      "subject_code": "LGW",
+      "prealert_email": "LGW.spxra.alerts@wfs.aero",
+      "airlines": [],
+      "awb_prefixes": [],
+      "routing_notes": "NOT at Heathrow — London Gatwick",
+      "last_verified": "2026-04-21",
+      "airport": "LGW",
+      "status": "partial",
+      "hmrc": {"note": "Verify against LGW-specific entries"}
+    },
+    "BHX_DNATA": {
+      "shed_code": "BHX",
+      "handler_legal_name": "dnata Limited",
+      "handler_common_name": "Dnata BHX (Birmingham)",
+      "subject_code": "BHX",
+      "prealert_email": "BHX.SPX@dnata.co.uk",
+      "airlines": [],
+      "awb_prefixes": [],
+      "routing_notes": "NOT at Heathrow — Birmingham",
+      "last_verified": "2026-04-21",
+      "airport": "BHX",
+      "status": "partial",
+      "hmrc": {"note": "Verify against BHX-specific entries"}
+    }
+  },
+
+  "questions_for_soap_on_shift": [
+    "BA has TWO HMRC codes at same address: BAC and BAS. Which is Ascentis (Main)? Which is Premia (Express)?",
+    "XBQ vs DAX — is XBQ still actively used, or has DAX (Bldg 875, Dunwoody) replaced it for BARC prealerts?",
+    "BARC subject code for BA 125 prefix slips — what's used operationally? (Expecting LHRDAX or LHRBBS)",
+    "ASC (Aviation Servicing Company at Bldg 582, JZS code) — is ASC still routed to separately, or has Swissport (ZCS) absorbed all operations there?",
+    "CFL — any subject code used operationally? Email is spx@cfl.aero.",
+    "Swissport vs Heathrow Cargo Handling — does HCH brand show up anywhere operationally, or is it purely the legal ITSF holder while Swissport is what everyone knows it as?"
+  ]
+}
