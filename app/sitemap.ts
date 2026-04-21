@@ -44,8 +44,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/unlocode`,                changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/uld`,                     changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/vehicles`,                changeFrequency: 'monthly', priority: 0.8 },
-    // Airports
-    { url: `${BASE}/airports/lhr/sheds`,      changeFrequency: 'weekly',  priority: 0.8 },
   ];
 
   const adrRoutes: MetadataRoute.Sitemap = unNumbers.map(un => ({

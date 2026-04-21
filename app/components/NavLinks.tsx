@@ -31,7 +31,6 @@ const nav: NavEntry[] = [
       { href: '/adr', label: 'ADR Dangerous Goods' },
       { href: '/adr-calculator', label: 'ADR Exemption Calculator' },
       { href: '/airlines', label: 'Airline Codes' },
-      { href: '/airports/lhr/sheds', label: 'Heathrow Shed Codes' },
       { href: '/incoterms', label: 'INCOTERMS 2020' },
       { href: '/hs', label: 'HS Code Lookup' },
       { href: '/duty', label: 'UK Import Duty & VAT' },
