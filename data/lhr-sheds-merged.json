@@ -27,7 +27,7 @@
       "hmrc_only": 197
     },
     "licence": "Operational data © FreightUtils (CC BY 4.0). HMRC data: Open Government Licence v3.0, source HM Revenue & Customs.",
-    "corrections_email": "mcristoiu@gmail.com"
+    "corrections_email": "contact@freightutils.com"
   },
   "critical_rules": {
     "horseshoe_default": {
@@ -49,11 +49,11 @@
       "physical_shed": "550B",
       "subject_code": "LHRAAS",
       "prealert_email": "552.spxra.alerts@wfs.aero",
-      "description": "AA moved 552 → 550B physically, but CEVA never updated AA's prealert subject/email. The ONLY exception to the Horseshoe default rule.",
-      "hmrc_registration": "GBAULHRLHRAAS was REMOVED from HMRC on 12 Nov 2024. Operationally still in active use by CEVA and other forwarders — confirmed 21 Apr 2026."
+      "description": "AA moved 552 → 550B physically, but AA's prealert subject/email were never updated to reflect the relocation. The ONLY exception to the Horseshoe default rule.",
+      "hmrc_registration": "GBAULHRLHRAAS was REMOVED from HMRC on 12 Nov 2024. Operationally still in active use industry-wide — confirmed 21 Apr 2026."
     },
     "grey_area_gf_ul_vn_2c_sv": {
-      "note": "CEVA PDF originally routed GF/UL/VN/2C/SV to LHRAAS + 552. Current operational rule treats AA as the SOLE exception. If one of these airlines appears on a slip for 552, use default (LHRWXS + 549 email) unless slip explicitly states otherwise."
+      "note": "Historical handler routing documentation originally assigned GF/UL/VN/2C/SV to LHRAAS + 552. Current operational rule treats AA as the SOLE exception. If one of these airlines appears on a slip for 552, use default (LHRWXS + 549 email) unless slip explicitly states otherwise."
     }
   },
   "airline_prefix_overrides": {
@@ -1098,13 +1098,13 @@
       "awb_prefixes": [
         "001"
       ],
-      "routing_notes": "AA moved 552 → 550B physically. CEVA never updated AA's prealert subject/email. The ONLY exception to Horseshoe default. The 552 email is correct DESPITE physical location being 550B.",
+      "routing_notes": "AA moved 552 → 550B physically but AA's prealert subject/email were never updated. The ONLY exception to Horseshoe default. The 552 email is correct DESPITE physical location being 550B.",
       "is_critical_rule": true,
       "operational_status": null,
       "hmrc": {
         "code": null,
         "status": "industry_only_hmrc_deregistered",
-        "note": "GBAULHRLHRAAS was REMOVED from HMRC's ITSF list on 12 Nov 2024. The code remains in active operational use at CEVA and industry-wide for AA prealerts. This is the clearest example of 'operational truth vs regulated truth' divergence.",
+        "note": "GBAULHRLHRAAS was REMOVED from HMRC's ITSF list on 12 Nov 2024. The code remains in active operational use industry-wide for AA prealerts. This is the clearest example of 'operational truth vs regulated truth' divergence.",
         "deregistered_date": "2024-11-12"
       },
       "confidence": "operational_only",
