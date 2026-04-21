@@ -1,0 +1,1078 @@
+{
+  "meta": {
+    "fetched_at": "2026-04-21T09:30:29.331Z",
+    "sources": {
+      "itsf": "https://www.gov.uk/government/publications/internal-temporary-storage-facilities-itsfs-codes-for-data-element-523-of-the-customs-declaration-service",
+      "etsf": "https://www.gov.uk/government/publications/external-temporary-storage-facilities-codes-for-data-element-523-of-the-customs-declaration-service"
+    },
+    "licence": "Open Government Licence v3.0. Source: HM Revenue & Customs.",
+    "total_entries": 213
+  },
+  "entries": [
+    {
+      "date": "2026-04-21",
+      "source": "etsf",
+      "summary": "The address for Trans Global Freight Management Limited (Code GBAUSBYLHRTRX) has been updated."
+    },
+    {
+      "date": "2026-04-13",
+      "source": "itsf",
+      "summary": "Code GBAULHRLHRUAS for United Airlines Inc in Hounslow has been removed."
+    },
+    {
+      "date": "2026-04-13",
+      "source": "etsf",
+      "summary": "Code GBAUSTWFXTSRE for Freightstore Limited in Old Newton has been removed."
+    },
+    {
+      "date": "2026-04-09",
+      "source": "etsf",
+      "summary": "Code GBAUOYLLHRDRS for RST Direct Ltd in Poyle has been added. Code GBAUASDLHRZGX for Fuxin Express UK Intl Ltd in Ashford has been added. Code GBAUSVIDOGRSL for Regency Shipping Ltd in Ashford has been added. Code GBAUWDRLHRZIX for Hub E-Com Logistics in Drayton has been added. Code GBAUWELEMADFE for DFDS Logistics Ltd in Kettering has been added. The address for St Mark Services Limited (Code GB"
+    },
+    {
+      "date": "2026-04-02",
+      "source": "etsf",
+      "summary": "Code GBAUFXTFXTSEE for Sea Fast Cold Chain Logistics PLC in Felixstowe has been removed. Code GBAURUHBHXBDE for W.H. Bowker International Limited in Droitwich has been removed. Code GBAUHSEHULBWE for W H Bowker International Ltd in Hull has been removed. Code GBAUIPSFXTEWB for Wanb Express UK Ltd in Ipswich has been removed. The address for Cosmotrans International Ltd (Code GBAUFEMLHRCTX) has bee"
+    },
+    {
+      "date": "2026-03-24",
+      "source": "itsf",
+      "summary": "Code GBAUBHDBHDBWS for Dunwoody Airline Services Limited T/A Worldwide Freight Services FIX in Belfast has been removed."
+    },
+    {
+      "date": "2026-03-20",
+      "source": "etsf",
+      "summary": "Code GBAUROYLSACBE for Cambridge Removals & Storage Limited in Royston has been removed. Code GBAUBELBFSRXX for DSV Road Limited in Newtownabbey, Co Antrim has been removed."
+    },
+    {
+      "date": "2026-03-18",
+      "source": "etsf",
+      "summary": "Code GBAUNCTFXTHJZ for Jiezhong (UK) Int Co. Ltd in Ipswich has been removed. Code GBAUFEMLHRJZX for Aviation Servicing Company Limited T/A ASC Cargo Handling in Feltham has been removed. Code GBAUCBYEMADDL for DFDS Logistics Limited in Corby has been removed. Code GBAUSWLLHRWJX for Worldwide Flight Services Ltd in Stanwell has been removed."
+    },
+    {
+      "date": "2026-03-06",
+      "source": "etsf",
+      "summary": "Code GBAUWALBHXCIX has been added for Impex Logistic Service Limited in Walsall. Code GBAUNHPLTNERE for E.M Rogers in Northampton has been removed. Code GBAUWIHLSASGE for Simarco International Limited in Witham has been removed."
+    },
+    {
+      "date": "2026-02-27",
+      "source": "itsf",
+      "summary": "Code GBAUMNCMANSLS for Swissport GB Limited at Manchester International Airport has been removed."
+    },
+    {
+      "date": "2026-02-27",
+      "source": "etsf",
+      "summary": "Code GBAUTILLONOQX for CEVA Freight UK Ltd in Tilbury has been removed."
+    },
+    {
+      "date": "2026-02-23",
+      "source": "etsf",
+      "summary": "Code GBAUNTNBHXBXX for DSV Road Limited in Nuneaton has been removed."
+    },
+    {
+      "date": "2026-02-09",
+      "source": "etsf",
+      "summary": "Code GBAUBASTILRXX for DSV Road Ltd in Laindon has been removed."
+    },
+    {
+      "date": "2026-02-02",
+      "source": "etsf",
+      "summary": "Code GBAUDRDBHXYPX for IMC Pro Logistics in Birmingham has been added. Code GBAUBHMBHXRTT for RTT Group Holding Ltd in Birmingham has been added. Code GBAULWMLBARXX for DSV Road Limited in Bradford has been removed. Code GBAUJSHLHROYX for Goldstar Heathrow Ltd in Sunbury on Thames has been removed. Code GBAUHMWLHRGJX for Global Freight Systems Ltd has been removed."
+    },
+    {
+      "date": "2026-01-27",
+      "source": "etsf",
+      "summary": "Error to Location Code for Kanns Logistics Ltd in Manchester has been updated."
+    },
+    {
+      "date": "2026-01-23",
+      "source": "etsf",
+      "summary": "Code GBAUGAIFXTECM for Ecommerce Supply Chain Ltd in Ipswich has been removed. Code GBAUGRBFXTECO for Ecommerce Supply Chain Ltd in Ipswich has been removed. Code GBAUEAEBHXLOX for Flying Logistics Air Cargo Ltd in Wolverhampton has been removed. The address for Flying Logistics Air Cargo Ltd (Code GBAUEAEBHXBUE) has been updated."
+    },
+    {
+      "date": "2026-01-20",
+      "source": "itsf",
+      "summary": "Code GBAUSWLLHRZCS has been added for Swissport GB Limited in Hounslow."
+    },
+    {
+      "date": "2026-01-20",
+      "source": "etsf",
+      "summary": "Code GBAUNTNBHXDSW has been added for DSV Road Limited in Nuneaton."
+    },
+    {
+      "date": "2026-01-20",
+      "source": "etsf",
+      "summary": "Code GBAUNHPLTNYYX for Ecom Handling Limited in Northampton has been added. Code GBAUESXBHXDST for DSV Road Limited in Laindon has been added. Code GBAUWIWMANYZX for Evri Limited in Warrington has been added. Code GBAUBHMBHXZDX for Swissport GB Limited in Birmingham has been added. Code GBAUNRWFXTUNN1 for Uniserve Limited in Norwich has been added. Code GBAUAMFFXTCVE for Cargo Move Ltd in Ipswich "
+    },
+    {
+      "date": "2026-01-16",
+      "source": "itsf",
+      "summary": "Code GBAUAMSBDNMOD has been added for MOD Boscombe Down in Salisbury. Code GBAUBZZBZNRAF has been added for RAF Brize Norton in Carterton. Code GBAUFFOFFDFFO has been added for RAF Fairford in Fairford. Code GBAULSSLOSLSS has been added for RAF Lossiemouth in Lossiemouth. Code GBAUNHTNHTRAF has been added for RAF Northolt in Ruislip. Code GBAUODMODIRAF has been added for RAF Odiham in Hook. Code G"
+    },
+    {
+      "date": "2026-01-13",
+      "source": "itsf",
+      "summary": "Code GBAUEMAEMAUPS4 has been added for UPS Limited at East Midlands Airport."
+    },
+    {
+      "date": "2026-01-13",
+      "source": "etsf",
+      "summary": "Code GBAUTFKMANSKX for DSV Air and Sea Limited in Manchester has been removed."
+    },
+    {
+      "date": "2026-01-09",
+      "source": "itsf",
+      "summary": "A significant number of codes have been amended or removed."
+    },
+    {
+      "date": "2026-01-09",
+      "source": "etsf",
+      "summary": "Code GBAUGLWGLAFDS has been added for Federal Express Europe Inc in Paisley. Code GBAUMANMANFXM1 has been added for Fedex Express UK Ltd in Manchester. Code GBAUPAYGLAFXG1 has been added for Fedex Express UK Ltd in Paisley. Code GBAULONLONCTE has been added for Crown Fine Arts in London. The address for Anchor Freight Limited (Code GBAUIPSFXTANH) has been updated."
+    },
+    {
+      "date": "2025-12-19",
+      "source": "itsf",
+      "summary": "Code GBAUMNCMANYWS for Swissport GB Limited at Manchester Airport has been added."
+    },
+    {
+      "date": "2025-12-19",
+      "source": "etsf",
+      "summary": "Code GBAUYXLBHXYXX was added for Linkwin Co Ltd in Coseley."
+    },
+    {
+      "date": "2025-12-17",
+      "source": "etsf",
+      "summary": "Code GBAUBHMBHXIMP has been added for IMC Pro Logistics (UK) Ltd in Birmingham. The code for EOS Warehousing Limited in Banbridge has also been updated to GBAUBBGBELEOS1."
+    },
+    {
+      "date": "2025-12-12",
+      "source": "etsf",
+      "summary": "Code GBAUMHTFXTEWE for EWB Logistics Limited in Ipswich has been removed."
+    },
+    {
+      "date": "2025-12-08",
+      "source": "etsf",
+      "summary": "Code GBAUSTSLHRJBX for Jersey Post Global Logistics UK Ltd in Staines-upon-Thames has been removed."
+    },
+    {
+      "date": "2025-11-24",
+      "source": "etsf",
+      "summary": "Code GBAUBRILSALVX for Linkwin Co Ltd in Braintree has been removed."
+    },
+    {
+      "date": "2025-11-14",
+      "source": "etsf",
+      "summary": "Code GBAUBRISTNYOX for Yun Express UK Ltd in Great Notley, Braintree has been added."
+    },
+    {
+      "date": "2025-11-10",
+      "source": "etsf",
+      "summary": "The address for PFE Express Limited (Code GBAUWIHFXTPQX) has been updated. The address for PFE Express Limited (Code GBAUWIHFXTPFE) has been updated. Code GBAUGRBFXTLOE for Loading Center Logistics Ltd in Great Blakenham, Ipswich has been added."
+    },
+    {
+      "date": "2025-11-04",
+      "source": "etsf",
+      "summary": "The address for Bakro International Transport Limited (Code GBAUMIKLTNBKE) has been updated."
+    },
+    {
+      "date": "2025-10-28",
+      "source": "itsf",
+      "summary": "Code GBAURS8CWLYVS for Swissport GB Limited at Cardiff Airport, Barry has been added. Code GBAUBESLHRMOD for the Ministry of Defence in Wallingford, Oxfordshire has been added."
+    },
+    {
+      "date": "2025-10-28",
+      "source": "etsf",
+      "summary": "Code GBAUCTQLTNYMX for Ideal International Logistics UK Ltd in Luton has been added. Code GBAUCBRLHRYQX for Regency Shipping Limited in Colnbrook has been added. Code GBAUIPSFXTECG for Ecommerce Supply Chain Ltd in Ipswich has been added."
+    },
+    {
+      "date": "2025-10-20",
+      "source": "itsf",
+      "summary": "Code GBAUCCHBOHJYS for Bournemouth International Airport Limited in Christchurch, Dorset has been removed."
+    },
+    {
+      "date": "2025-10-13",
+      "source": "itsf",
+      "summary": "Code GBAUEMAEMASLS for Swissport GB Limited in Nottingham East Midlands Airport, Castle Donnington has been removed."
+    },
+    {
+      "date": "2025-10-13",
+      "source": "etsf",
+      "summary": "Code GBAUNHPLTNMAE for Maritime Transport Limited in Milton Milsor has been added."
+    },
+    {
+      "date": "2025-10-06",
+      "source": "etsf",
+      "summary": "Code GBAUBFSBFSPBE for Royal Mail Group Limited T/A Parcelforce Worldwide in Belfast has been removed."
+    },
+    {
+      "date": "2025-10-02",
+      "source": "etsf",
+      "summary": "Code GBAUTRKLONCJF has been added for Jager Freight Ltd in Grays, Thurrock. Code GBAUCBYEMADDL has been added for DFDS Logistics Ltd in Corby. Code GBAUAVOBRSDBE has been added for DSV Road Limited in Bristol. Code GBAUHDCLTNTGW has been added for Tonga Express in Wellingborough."
+    },
+    {
+      "date": "2025-10-01",
+      "source": "itsf",
+      "summary": "The address for Jenkins Shipping Company Limited (Code GBAULIVLIVJKE) has been updated."
+    },
+    {
+      "date": "2025-09-19",
+      "source": "etsf",
+      "summary": "The address for G.B.A. Services Limited (Code GBAULUTLTNKDX) has been updated."
+    },
+    {
+      "date": "2025-09-12",
+      "source": "etsf",
+      "summary": "The address for Mark 3 International Ltd (Code GBAUCBRLHRKBX) has been updated."
+    },
+    {
+      "date": "2025-09-09",
+      "source": "etsf",
+      "summary": "Code GBAUDOVDOVCLF for Clear Fr8 Limited in Dover has been removed. The address for Linkwin Co Ltd (Code GBAUWYHMANNYX ) has been updated. The name and address for Code GBAUBASTILRXX has changed. Code GBAUFEMLHRSKX is now allocated to DSV Air and Sea Limited at Heathrow Airport. Code GBAUPOOBOHBXX is now allocated to DSV Air and Sea Limited in Poole. Code GBAUTFKMANSKX is now allocated to DSV Air "
+    },
+    {
+      "date": "2025-08-18",
+      "source": "etsf",
+      "summary": "Code GBAUNHPLTNTGE for Tongda Distribution Ltd in Northampton, code GBAUPAYGLADHX for DHL International (UK) Limited in Paisley and code GBAUTBLLTNDHX for DHL International (UK) Limited in St Albans have been removed. The address for Globexair Limited (Code GBAUHMWLHRGYX) has been updated. Code GBAUCBYBHXSTP for Stephen Sanderson Transport Ltd in Corby has been added."
+    },
+    {
+      "date": "2025-08-08",
+      "source": "itsf",
+      "summary": "Format issues have been rectified. No technical content has been changed."
+    },
+    {
+      "date": "2025-08-08",
+      "source": "etsf",
+      "summary": "Codes GBAUCBRLHRYNX for PS Forwarding Co Limited in Colnbrook, GBAUHOULHRYMX for Airport Link Services Ltd in Hounslow, GBAUBRILSAYKX and GBAUBRILSACLK for Linkwin Co Ltd in Braintree, GBAUPMEPTMDFD1 for DFDS in Portsmouth, GBAUPOOPOODFD2 for DFDS in Poole, BAUWYHMANYEX for Kanns Logistics Ltd in Manchester and GBAUGLWGLWSNG for S Norton & Co Ltd in Glasgow have been added."
+    },
+    {
+      "date": "2025-08-01",
+      "source": "etsf",
+      "summary": "Code GBAUGRBFXTCHE for Charles Kendall Freight Limited in Great Blakenham has been removed. Code GBAUTFKMANCWE in Manchester has been allocated to Countrywide Freight Group."
+    },
+    {
+      "date": "2025-07-14",
+      "source": "etsf",
+      "summary": "Code GBAUWYHMANNPX for Nippon Express (UK) Ltd in Altrincham, code GBAUAPTWDNEDW for Eddie Stobart Limited in Warrington and code GBAUNBYSTNUKF1 for UK Freight Masters Limited in Newbury have been removed."
+    },
+    {
+      "date": "2025-07-04",
+      "source": "itsf",
+      "summary": "Code GBAUFXTFXTHEE for Hemisphere Freight Services Limited in Felixstowe has been removed."
+    },
+    {
+      "date": "2025-07-02",
+      "source": "itsf",
+      "summary": "The address for FedEx Express UK Limited (Code GBAUMANMANFXM1) has been updated."
+    },
+    {
+      "date": "2025-07-02",
+      "source": "etsf",
+      "summary": "Codes GBAUNCTFXTHJZ for Jiezhong UK Co Ltd in Ipswich, GBAULOFLHRNVC and GBAUOYLLHRYFX for NV Cargo Ltd in Slough, GBAUWIHLSAYHX for Mercium Ltd in Witham, GBAUMIDMIDLVT for LV Shipping Ltd in Middlesbrough and GBAUDRDBHXCIC for IMC Pro Logistics (UK) Ltd in Tamworth have been added."
+    },
+    {
+      "date": "2025-07-01",
+      "source": "etsf",
+      "summary": "Code GBAUBEENWIVDX for Xenor UK Ltd in Norwich has been removed. The address for UCH Logistics (Manchester) Limited (Code GBAUMNCMANUMX) has been updated."
+    },
+    {
+      "date": "2025-06-26",
+      "source": "etsf",
+      "summary": "Code GBAUWBDLHRYCX for Metagistics Freight Ltd in London has been added."
+    },
+    {
+      "date": "2025-06-09",
+      "source": "itsf",
+      "summary": "Code 'GBAUABDABDSEI' for Sea Cargo Aberdeen Limited in Aberdeen has been removed."
+    },
+    {
+      "date": "2025-06-09",
+      "source": "etsf",
+      "summary": "Code 'GBAUSDIEMAAPV', for Pivotal Impartment Limited in Derby has been removed. The addresses for Dynamic International Freight Services Limited (code GBAUCBRLHRQYX) and Santa Fe Relocation Services Ltd (code GBAUPYALHRNFX) have changed."
+    },
+    {
+      "date": "2025-06-04",
+      "source": "etsf",
+      "summary": "Codes GBAUFEMLHRKRX for Kerry Logistics (UK) Ltd in Feltham and GBAUIPSFXTBSE for FXT Cargo Ltd in Ipswich have been removed. The company name and address for KLN Freight (UK) Limited (code GBAUWYHMANTDX) has changed. The company name for KLN Freight (UK) Limited (code GBAUTFKMANMTI1) has been amended to KLN Freight (UK) Limited."
+    },
+    {
+      "date": "2025-05-27",
+      "source": "etsf",
+      "summary": "Codes GBAULUTLTNEGE and GBAULUTLTNGFE for Graysons Freight Services Limited in Luton have been removed. Code GBAUHHELTNTHX for Gills Transport Heathrow Ltd in Hemel Hempstead has also been removed."
+    },
+    {
+      "date": "2025-05-14",
+      "source": "etsf",
+      "summary": "Code GBAUWONBHXRTE for RTT Logistics Solutions Ltd in Birmingham has been removed."
+    },
+    {
+      "date": "2025-05-02",
+      "source": "etsf",
+      "summary": "Codes GBAUZAHABZGMX, GBAUCEHMANPPX, GBAUCEHMANMPW1 and GBAUFEMLHRPPX for Panalpina World Transport Limited in Aberdeen, Cheadle Heath and Feltham have been removed."
+    },
+    {
+      "date": "2025-04-28",
+      "source": "etsf",
+      "summary": "Code GBAUCOAEMAOIE for Oakland International ltd in Coalville has been removed."
+    },
+    {
+      "date": "2025-04-23",
+      "source": "itsf",
+      "summary": "Code GBAUABDABDSCA for Sea Cargo Aberdeen Limited in Aberdeen has been removed."
+    },
+    {
+      "date": "2025-04-23",
+      "source": "etsf",
+      "summary": "Code GBAUSUCBHXTFY for Toys4You Ltd in Sutton Coldfield has been removed. The company name for Code GBAUWLPFXTBCT in Bury St Edmonds has changed to Bacton Logistics Limited."
+    },
+    {
+      "date": "2025-04-14",
+      "source": "itsf",
+      "summary": "Code GBAUSWLLHRYDS has been added for Swissport GB Limited at Heathrow Airport, Hounslow. Code GBAUHRYLGWOUS has been added for Swissport GB Limited at London Gatwick Airport. Code GBAUCADEMAYBS has been added for Swissport GB Limited at East Midlands Airport, Castle Donnington."
+    },
+    {
+      "date": "2025-04-14",
+      "source": "etsf",
+      "summary": "Code ‘GBAULTTBHXSXL’ has been added for Skyline Express Ltd in Lutterworth. Code ‘GBAURAHLONFFR1’ has been added for Forest Freight Limited in Rainham. Code ‘GBAULONLONTEX’, for Temis Luxury UK Ltd in London has been removed. Code ‘GBAUDRDBHXIPL1’, for IMC Pro Logistics (UK) Ltd in Tamworth has been removed."
+    },
+    {
+      "date": "2025-04-07",
+      "source": "etsf",
+      "summary": "Code GBAUGATNCLFZX for UPS SCS (UK) Ltd in Gateshead has been removed."
+    },
+    {
+      "date": "2025-03-31",
+      "source": "etsf",
+      "summary": "The address for Pivotal Impartment Ltd (code GBAUDSIEMAAPV) has changed."
+    },
+    {
+      "date": "2025-03-04",
+      "source": "etsf",
+      "summary": "Code GBAUCLLBHXIFE for International Forwarding Limited in Birmingham has been removed."
+    },
+    {
+      "date": "2025-02-25",
+      "source": "etsf",
+      "summary": "Company name, NTEX Logistics Limited has been amended to, NTEX Limited for code GBAUKSUIMMITE in Immingham."
+    },
+    {
+      "date": "2025-02-24",
+      "source": "itsf",
+      "summary": "Code GBAUSTNLSAFXL1 has been added for Fedex Express UK Ltd at Stansted Airport, Stansted."
+    },
+    {
+      "date": "2025-02-17",
+      "source": "etsf",
+      "summary": "Code GBAUMIKLTNOLX has been added for, Tylos Logistics Limited in Milton Keynes. Code GBAUFDYBHXONX has been added for, Gerlach Customs Services UK Limited in Lichfield. Code GBAUEGDLGWOMX has been added for, Diplomatic Transhipment Services Limited in East Grinstead. Code GBAUTILLONOQX has been added for, Ceva Freight (UK) Limited in Tilbury. Code GBAUHOULHRYAX has been added for, S K Freight Ser"
+    },
+    {
+      "date": "2025-02-14",
+      "source": "itsf",
+      "summary": "Code GBAUDRLMIDMME1 has been added for, Fedex Express UK Limited at Teeside International Airport, Darlington. Code GBAUSOUSOUDDL1 has been added for, Dependable Distribution Ltd in Southampton. Code GBAUPIKPIKOGS has been added for, Glasgow Prestwick Airport Ltd in Glasgow Prestwick Airport."
+    },
+    {
+      "date": "2025-02-03",
+      "source": "etsf",
+      "summary": "Code GBAUPHMFXTHBF for Harbour Freight Logistics Ltd in Parham has been removed."
+    },
+    {
+      "date": "2025-01-31",
+      "source": "itsf",
+      "summary": "The format of the table for 'Internal temporary storage facilities codes for Data Element 5/23 of the Customs Declaration Service' has been updated, including a new column to indicate whether or not the location is in Northern Ireland."
+    },
+    {
+      "date": "2025-01-31",
+      "source": "etsf",
+      "summary": "The format of the table within 'External temporary storage facilities codes for Data Element 5/23 of the Customs Declaration Service' has been updated, including a new column to indicate whether or not the location is in Northern Ireland."
+    },
+    {
+      "date": "2025-01-16",
+      "source": "etsf",
+      "summary": "Amendments have been made for code GBAUCBRLHRHEX in Slough, code GBAUHESLHRMHX in Hounslow, code GBAUSLGIMMPTS in Grimsby, code GBAUFEMLHRNSX in Feltham, code GBAUPAYGLAQGX in Paisley, code GBAUEWLFXTCAG in Bury St Edmunds, code GBAUSMEBHXIDX in Smethwick, code GBAUWFEDOGNLE in Dover, code GBAUAYSTHPHZN1 in Aylesford, code AUCBRLHRSNX in Slough, code GBAUKSUIMMITE in Immingham, code GBAUCBRLHRUWX "
+    },
+    {
+      "date": "2024-12-11",
+      "source": "etsf",
+      "summary": "Code GBAUCNKBHXCNE for Pentalver Cannock Ltd has been removed."
+    },
+    {
+      "date": "2024-11-25",
+      "source": "etsf",
+      "summary": "Code GBAUHSEHULHLD1 has been removed from Hull Seaway Logistics, Hull."
+    },
+    {
+      "date": "2024-11-15",
+      "source": "itsf",
+      "summary": "Postcodes have been added to entries where they were previously missing."
+    },
+    {
+      "date": "2024-11-12",
+      "source": "itsf",
+      "summary": "GBAULHRLHRNHS and GBAULHRLHRAAS for American Airlines in Hounslow have been removed. GBAULHRLHRWAS for Worldwide Flight Services Limited has been removed. GBAUSWLLHRHPS for Swissport GB Limited in Hounslow has been added. GBAUCAWLGWOKS for Worldwide Flight Services Limited in Gatwick has been added."
+    },
+    {
+      "date": "2024-11-12",
+      "source": "etsf",
+      "summary": "GBAUBITLBAFUT1 for Future Forwarding Company Ltd in Birstall has been removed. GBAUGYSLONTWL1 for Twinwheel Logistics Limited in Grays has been added. GBAUBAGBHXTGM for Trans Global Freight Management Limited in Coventry has been added. GBAUCAYLHRITX for Immediate Transportation Company Ltd in Camberley has been added. GBAUSFDMANHIE for Harbour International Freight Limited in Manchester has been "
+    },
+    {
+      "date": "2024-10-31",
+      "source": "etsf",
+      "summary": "Code GBAUIVELHRITX for Immediate Transportation Company Ltd in Iver has been removed."
+    },
+    {
+      "date": "2024-10-18",
+      "source": "etsf",
+      "summary": "The address for Rhodes Freight Services Ltd (Code GBAUIVELHRTJX) has been amended."
+    },
+    {
+      "date": "2024-10-07",
+      "source": "etsf",
+      "summary": "Code GBAUNHVNHVNHP1 has been added for Newhaven Port & Properties Ltd, Newhaven."
+    },
+    {
+      "date": "2024-09-23",
+      "source": "etsf",
+      "summary": "Code GBAUCFDFXTWIE for Woodland Global Limited in Chelmsford has been removed. Code GBAUECSMANHSE for Harbour International Freight Limited in Eccles has been removed."
+    },
+    {
+      "date": "2024-09-16",
+      "source": "etsf",
+      "summary": "Code GBAUWDRLHRNIX has been removed for Nissin (UK) Ltd. Code GBAUHOULHRLVX has been removed for Linkwin Co Ltd. Company name for code GBAUSLHLGPSYN1 has been changed from Syncreon Technology Ltd to DP World Logisitcs UK Ltd."
+    },
+    {
+      "date": "2024-09-09",
+      "source": "itsf",
+      "summary": "Code GBAULHRLHRAPH and code GBAULHRLHRAHL have been removed for Airport Perishable Handling Limited at Heathrow."
+    },
+    {
+      "date": "2024-09-09",
+      "source": "etsf",
+      "summary": "Code GBAUWIHLSAMER has been added for Mercium Ltd in Witham. Code GBAUWYHMANNYX has been added for Linkwin Co Ltd in Wythenshawe. Code GBAUSLPLHRNJX has been removed for NG Terminal Ltd in Feltham. Code GBAUWAVBHXCAX has been removed for Compania Auxiliar Al Cargo Express in Northampton."
+    },
+    {
+      "date": "2024-09-01",
+      "source": "etsf",
+      "summary": "Code GBAUPFTLONYTL1 for FP Young Holdings Ltd in Purfleet and Code GBAUDAGTILPXP1 for Keuhne & Nagel Ltd in Dagenham have been removed."
+    },
+    {
+      "date": "2024-08-27",
+      "source": "itsf",
+      "summary": "Code GBAUYEOBRSMOD has been added for Ministry of Defence, Ilchester. Code GBAUEMAEMAUZS has been removed for UPS Limited, Castle Donington."
+    },
+    {
+      "date": "2024-08-23",
+      "source": "etsf",
+      "summary": "Code GBAUJSHLHROYX has been added for Goldstar Heathrow Ltd, Sunbury on Thames. Code GBAUDAGTILPXP1 has been added for Kuehne and Nagel Ltd, Dagenham. Code GBAUTLQSOUTAL1 has been added for Tabs Logistics Limited, Marchwood. Code GBAUNBYSTNUKF1 has been added for UK Freight Masters Limited, Thatcham. Code GBAUHOULHROZX has been added for Rowsy International Limited, Hounslow. Code GBAUHMWLHRSEH1 h"
+    },
+    {
+      "date": "2024-08-16",
+      "source": "etsf",
+      "summary": "Code GBAUHDHLTNDXE has been added for Mobile People Powered Logistics (South) Ltd, Haddenham. Code GBAUDRDBHXIPL1 has been added for IMC Pro Logistics (UK) Ltd, Dordon. Code GBAUSFDMANCKX has been removed for Charles Kendall Freight Limited, Stretford."
+    },
+    {
+      "date": "2024-08-12",
+      "source": "etsf",
+      "summary": "Code GBAUCOGLSAEWG for Woodland Global Limited, Coggeshall has been added. Code GBAUMALLSARUX for Rhenus Logistics Limited, Maldon and Code GBAUEWLFXTHHE for S.J. Hudson, M.C. Hudson & K Hudson t/a Hudson Haulage, Elmswell have been removed."
+    },
+    {
+      "date": "2024-08-06",
+      "source": "etsf",
+      "summary": "Code GBAUBHWMIDCOI and Containerships (UK) Ltd, Billingham has been removed from this site."
+    },
+    {
+      "date": "2024-08-01",
+      "source": "etsf",
+      "summary": "Code GBAUHOULHROXX has been added for Wanb Express UK ltd, Hounslow. Code GBAUCOLHRHDSN has been added for Direct Shipping International Limited, Colchester. Code GBAUSLHLGPCSC has been added for Cosco Shipping Crystal Logistics (UK) Ltd, Stanford Le Hope. Code GBAUIPSFXTTOD has been added for Tongda Distribution Ltd, Ipswich. Code GBAUSLOLHRNZX has been added for CY UK Ltd, Slough. Code GBAUSLOLH"
+    },
+    {
+      "date": "2024-07-22",
+      "source": "etsf",
+      "summary": "Code GBAUJSGLHRKMX for Keuhne & Nagel Ltd in Sunbury on Thames has been removed."
+    },
+    {
+      "date": "2024-07-16",
+      "source": "etsf",
+      "summary": "Code GBAUBLBMANNXX has been added for Speed Drop Global Ltd, Blackburn. Code GBAUSLLLHREAX has been added for Easylogix Ltd, Southall."
+    },
+    {
+      "date": "2024-07-08",
+      "source": "etsf",
+      "summary": "The address for C.H Robinson Worldwide (UK) Limited in Colnbrook has been updated."
+    },
+    {
+      "date": "2024-07-01",
+      "source": "etsf",
+      "summary": "Codes GBAUCBRLHRTOX for Turnstone Worldwide Logistics Limited and GBAUTWCLHRTEX for Temis Luxury (UK) Ltd have been removed. Code GBAUFEMLHRHJX has been allocated to EVRI LTD in Feltham."
+    },
+    {
+      "date": "2024-06-25",
+      "source": "etsf",
+      "summary": "Code GBAUOYLLHRNWX has been added for MYA Limited at Colnbrook and code GBAURAHLONPZI1 has been allocated to Delamode Anglia Ltd in Rainham."
+    },
+    {
+      "date": "2024-05-28",
+      "source": "itsf",
+      "summary": "Code GBAUNCLNCLFXN1 for FedEx Express UK Limited at Newcastle Airport has been removed."
+    },
+    {
+      "date": "2024-05-22",
+      "source": "etsf",
+      "summary": "Code GBAUSUCBHXTFY has been added for Toys4You Ltd in Sutton Coldfield."
+    },
+    {
+      "date": "2024-05-21",
+      "source": "itsf",
+      "summary": "Code GBAUWRTWARBAE has been allocated to BAE Systems Corporate Air Travel Limited at Warton Aerodrome. GBAUELLELLEPT for Quality Freight (UK) Limited at Ellesmere Port has been removed. GBAUBBGBELEOS1 has been added for EOS Warehousing Limited in Bandridge. GBAUBELBELBCT1 has replaced the previous code for Belfast Container Terminal (BCT) Limited in Belfast and GBAUBELBELVLQ1 for TCB (NI) Limited "
+    },
+    {
+      "date": "2024-05-21",
+      "source": "etsf",
+      "summary": "The address for Code GBAUCBRLHRKBX (Mark 3 International Ltd) has changed, GBAUCBRLHRXYZ for Mark 3 International Ltd in Colnbrook has been removed, GBAUSLLLHRKHX has been added for Easylogix Ltd in Southall and GBAUSLGIMMUGB has been added for GB Customs Clearance Ltd in Stallingborough. GBAUIPSNWIBGX has been added for Shuttle Bridge Logistics Ltd in Ipswich. GBAUWRNMANUPL has been added for PPL"
+    },
+    {
+      "date": "2024-05-13",
+      "source": "etsf",
+      "summary": "Code GBAUPYALHRCTE for Cadogan Tate Ltd has been removed and the address for GBAUCBRLHRXYZ (Mark 3 International Ltd) at Colnbrook has been amended."
+    },
+    {
+      "date": "2024-05-07",
+      "source": "etsf",
+      "summary": "Code GBAUFDYBHXHEX for Hellman Worldwide Logistics has been removed. Code GBAUSLLLHRQIX for St Marks Freight Services Ltd in Southall has been added."
+    },
+    {
+      "date": "2024-04-25",
+      "source": "itsf",
+      "summary": "2 new codes have been added, for Dependable Logistics in Southampton and American Airlines in Manchester Airport."
+    },
+    {
+      "date": "2024-04-25",
+      "source": "etsf",
+      "summary": "Multiple codes have been added for Pentagon Freight Services PLC in Aberdeen, XPand Logistics Limited in Altrincham, Blue Water Shipping UK Ltd in Manchester, FP Young Holdings Limited in Purfleet, PPL (PP Logistics) Ltd in West Thurrock, Cargo Gallery International Logistics Co Ltd in Boston, World Cargo Logistics Limited in Luton, Trilogy Freight Limited in Wythenshawe, Bullet Express Limited in"
+    },
+    {
+      "date": "2024-04-22",
+      "source": "etsf",
+      "summary": "GBAUFXTFXTIRE and GBAUAPTMNCYTE for Youngs Transportation & Logistics Limited in Felixstowe and Appleton have been removed."
+    },
+    {
+      "date": "2024-04-12",
+      "source": "etsf",
+      "summary": "Code GBAUEGHLHRYUX for Yusen Logistics (UK) Ltd, GBAUBIHBHXFXI1 for FedEx Express (UK) Ltd and GBAUMNCMANDHX for DHL International UK Limited have been removed."
+    },
+    {
+      "date": "2024-04-02",
+      "source": "etsf",
+      "summary": "Codes GBAUPYELHREZX for EFL Global UK (PVT) Ltd, GBAUMDTDOVCHN for Chain Logistics Services Limited, GBAUTFKMANSKX for Schenker, GBAUASFLHRRUX for Rhenus Logistics Ltd, GBAUFMEBRSKCX for Kingscote Rojay and GBAUBKNLHRNUX for INTL Network Logistics Ltd have been added."
+    },
+    {
+      "date": "2024-03-26",
+      "source": "etsf",
+      "summary": "Code GBAUPESLGWRLW1 for Relo-Worldwide in Pevensey has been removed."
+    },
+    {
+      "date": "2024-03-07",
+      "source": "etsf",
+      "summary": "Addresses for codes GBAUCBRLHRCNO2 and GBAUCBRLHRNKX have been updated."
+    },
+    {
+      "date": "2024-02-26",
+      "source": "etsf",
+      "summary": "Code GBAUTILLONPYD1 has been added, and code GBAUTILLONPYD2 has been removed for Uniserve Ltd in Tilbury. Code GBAUFEMLHRCTG2 has been added for Toll Global Forwarding Ltd in Feltham. The address has been updated for Code GBAULGXLGPZIE1 and Zeigler UK Limited in Standford-le-Hope. Code GBAUBELBFSCIX for Ceva Freight (UK) Ltd in Belfast has been removed."
+    },
+    {
+      "date": "2024-02-19",
+      "source": "etsf",
+      "summary": "Code GBAUGRBFXTCKE for Charles Kendall Freight Limited in Great Blakenham has been removed."
+    },
+    {
+      "date": "2024-02-12",
+      "source": "etsf",
+      "summary": "Codes for Eastlines Ltd in Harrow and Dependable Logistics Ltd in Southampton have been removed. Code GBAUIPSFXTBSE is now allocated to FXT Cargo Ltd in Ipswich."
+    },
+    {
+      "date": "2024-02-05",
+      "source": "itsf",
+      "summary": "GBAUDNGEMAFXD1 has been added for Fedex Express UK Ltd in Castle Donington and GBAUFEMLHRCFD2 has been added for Fedex Express UK Ltd in Feltham."
+    },
+    {
+      "date": "2024-02-05",
+      "source": "etsf",
+      "summary": "Code GBAUHMWLHRETX for Circle Express Ltd has been removed."
+    },
+    {
+      "date": "2024-01-31",
+      "source": "itsf",
+      "summary": "GBAUULNMMETVS has been added for Teeside International Airport."
+    },
+    {
+      "date": "2024-01-31",
+      "source": "etsf",
+      "summary": "GBAUNCVHULOJE has updated for UK & IE Flora Group Limited in Newport, GBAUKNMDOVAGO1 has been removed for A Gomez Ltd in Canterbury, GBAUCGSLHRLTX has been removed for Temis Luxury (UK) Ltd in Chessington, GBAUCGSLGWLTX has been added for Temis Luxury (UK) Ltd in Chessington, GBAUBEENWIVDX has been added for Xenor UK Ltd in Norwich, GBAULDFSTNSCP1 has been added for Schepens International Limited "
+    },
+    {
+      "date": "2024-01-22",
+      "source": "etsf",
+      "summary": "Code GBAUCVTBHXNTE for Network International Cargo UK Limited in Coventry has been removed."
+    },
+    {
+      "date": "2024-01-15",
+      "source": "etsf",
+      "summary": "Two new external temporary storage facility (ETSF) codes for Worldwide Flight Services Ltd in Stanwell and Pivotal Impartment Ltd (GBAUSDIEMAAPV) in Nottingham have been added. ETSF code Worldnet International Limited (GBAUCBRLHRXAZ) in Colnbrook has been removed."
+    },
+    {
+      "date": "2024-01-08",
+      "source": "etsf",
+      "summary": "Code GBAUCBRLHRHSX for Goldstar Heathrow Ltd in Colnbrook has been removed."
+    },
+    {
+      "date": "2023-12-18",
+      "source": "etsf",
+      "summary": "The external temporary storage facility (ETSF) code for UFS Limited (GBAUTFDDOGUFS) in Thetford has been removed."
+    },
+    {
+      "date": "2023-12-14",
+      "source": "etsf",
+      "summary": "The following codes have been added: GBAUWEDBHXOCN for Ocean Int in Wednesbury, GBAUIPSFXTANH for Anchor Freight in Ipswich, GBAULONLHRCWN for Crown Fine Art in London, GBAUCGSLHRLTX for Temis Luxury in Chessington, GBAUSLHLGPPEN1 for Pentalver Transport in Standford Le Hope, GBAUPFTTILMCX for DHL in Purfleet Bypass, GBAUHMILHRNRX for Forwarding Line in Hayes, GBAUGLFEMAIXX for A Plus Internationa"
+    },
+    {
+      "date": "2023-12-01",
+      "source": "etsf",
+      "summary": "ETSF code for Kingscote Rojay (GBAUBHMBHXKEX) in Birmingham has been removed. Address change for Magnum Logistics Limited (GBAUBASLONMAG1) from Basildon to London Gateway Park."
+    },
+    {
+      "date": "2023-11-27",
+      "source": "etsf",
+      "summary": "ETSF codes for Ups (SCS) Ltd (GBAUDWYLBAUZX) in Dewsbury and PRS Distribution Ltd (GBAULHRLHRRRX) in Heathrow have been removed."
+    },
+    {
+      "date": "2023-11-14",
+      "source": "etsf",
+      "summary": "ETSF code for Heinloth UK Ltd (GBAUBASLONHNL) in Basildon has been removed."
+    },
+    {
+      "date": "2023-10-12",
+      "source": "itsf",
+      "summary": "ITSF code for Pets On The Move (GBAUNCLNCLPET) in Newcastle Airport has been added."
+    },
+    {
+      "date": "2023-10-02",
+      "source": "etsf",
+      "summary": "ETSF codes for CY UK LTD in Minworth (GBAUMINBHXCYM), TransGlobal Freight Management Ltd in Wellingborough (GBAUWELLTNTRA), Mercium Ltd CSP in Barking (GBAULBKLONNQX),Textile Logistics Limited in Tilbury (GBAUTILLONTXE), AJ Worldwide Services Ltd in West Drayton (GBAUWDRLHRJOX), Harbour Freight Logistics Ltd in Woodbridge (GBAUPHMFXTHBF), Transmec UK Limited in Stanford Le Hope (GBAUSLHLGPTML1) an"
+    },
+    {
+      "date": "2023-09-20",
+      "source": "itsf",
+      "summary": "ITSF code for Speedlink (NI) Ltd (GBAUCMLBFSLXS) in Belfast Airport has been added."
+    },
+    {
+      "date": "2023-09-20",
+      "source": "etsf",
+      "summary": "ETSF code for Perishable Movements Limited (GBAUPBKEMAPDX) in Spalding has been removed. ETSF codes for Woodland Global Limited (GBAUDONIMMEWO) in Doncaster and Lemkes Limited (GBAUNPTHULMLK) in Newport have been added."
+    },
+    {
+      "date": "2023-09-01",
+      "source": "etsf",
+      "summary": "Code GBAUMNCMANDTX for Davies Turner Air Cargo Ltd at Manchester Airport and GBAUDYCABZKNX for Kuehne & Nagel Limited in Aberdeen, have been removed."
+    },
+    {
+      "date": "2023-08-29",
+      "source": "etsf",
+      "summary": "Code GBAUPBKEMADPX for Perishable Movements in Spalding, GBAUWYHMANJEX for Bollore Logistics UK Ltd in Manchester, GBAUBHMBHXTFX forTrilogy Freight at Birmingham Airport and GBAUAVOBRSGWX for GEFCO Forwarding UK Limited in Avonmouth have been removed."
+    },
+    {
+      "date": "2023-08-18",
+      "source": "etsf",
+      "summary": "The ETSF code for Linktrans Logistics (UK) Ltd in Ipswich has been added."
+    },
+    {
+      "date": "2023-08-16",
+      "source": "etsf",
+      "summary": "ETSF codes have been added for North Kent Distribution Ltd in Swanscombe, Linkwin Co Ltd in Hounslow, Leman International Transport in Normanton and Schenker Limited in Hillington. ETSF codes for Geodis Wilson UK Ltd in Wythenshawe and Fedex Trade Networks Transport & Brokerage (UK) Ltd in Feltham have been removed. Address change for NTG Ebex UK Ltd from Unit 91 Empire Ind Park at WS9 8UY to Unit"
+    },
+    {
+      "date": "2023-08-10",
+      "source": "etsf",
+      "summary": "GBAUAVOBRSCFX code for Concordia International Ltd in Avonmouth has been removed."
+    },
+    {
+      "date": "2023-08-07",
+      "source": "itsf",
+      "summary": "One internal temporary storage facilities code (GBAUBELBFSHWS) is no longer in use. One duplicate code (GBAUCVTBHXPME) has also been removed."
+    },
+    {
+      "date": "2023-08-07",
+      "source": "etsf",
+      "summary": "Two external temporary storage facilities codes (GBAUFXTFXTGBE and GBAUCBRLHRKTX) are no longer in use. Three duplicate codes (GBAUJSHLHRKMX, GBAUWMHLTNUPX and GBAUMAWSTNSGL1) have also been removed."
+    },
+    {
+      "date": "2023-07-07",
+      "source": "etsf",
+      "summary": "ETSF code for Hermes Parcelnet Ltd T/a Evri in Feltham has been added. Address change for DHL Global Forwarding (UK) Ltd from Unit 1 Victoria Road, BS11 9DB to Unit 9 Madison Way, BS35 4ER. ETSF codes removed for Schenker Limited in Manchester, All 4 Logistics ltd in Fareham, Woodland Global Ltd in Doncaster and Crown Fine Arts Limited in London."
+    },
+    {
+      "date": "2023-06-30",
+      "source": "etsf",
+      "summary": "Codes for Ceva Freight UK Ltd in Manchester, DPD Group UK Ltd in Hinckley and Oldbury, and F.S. Mackenzie Ltd in Colnbrook have been removed. New codes have been added for Twinwheel Logistics Ltd in Grays, Expeditors International (UK) Ltd in Wootton, Charles Kendall Freight Ltd in Chandler’s Ford, Temis Luxury UK Ltd in London, Ideal International Logistics UK Ltd in Hounslow, Orbit Cargo Service"
+    },
+    {
+      "date": "2023-06-19",
+      "source": "etsf",
+      "summary": "Locker Freight Ltd at Huyton (GBAUHYNLIVLLF) has been removed from the list."
+    },
+    {
+      "date": "2023-06-02",
+      "source": "etsf",
+      "summary": "The address for codes GBAUGLWGLAPET and GBAUBLVMEDATE have been updated. The code GBAUAVOBRSDBE has been removed."
+    },
+    {
+      "date": "2023-05-30",
+      "source": "etsf",
+      "summary": "The address for code GBAUTILLONASE has changed."
+    },
+    {
+      "date": "2023-05-15",
+      "source": "itsf",
+      "summary": "Updated to remove the code for DHL Global Match Ltd in Christchurch."
+    },
+    {
+      "date": "2023-05-15",
+      "source": "etsf",
+      "summary": "The codes for Grampian Continental Ltd at Aberdeen, DSV Road Ltd at Tamworth and Agility Logistics Ltd at both Linwood and Birmingham have been removed."
+    },
+    {
+      "date": "2023-05-05",
+      "source": "etsf",
+      "summary": "The page has been updated with address changes for codes GBAUEAEBHXBUE and GBAUEAEBHXLOX. The codes GBAUCBRLHRJMX, GBAUCBRLHRQUX, GBAUHESLHRTQX, GBAUFEMLHRFDX and GBAUHESLHRTNX have been removed."
+    },
+    {
+      "date": "2023-04-24",
+      "source": "itsf",
+      "summary": "Updated to remove the details for London Southend Airport Company Ltd (GBAUSAASENLZS)."
+    },
+    {
+      "date": "2023-04-24",
+      "source": "etsf",
+      "summary": "Updated to remove the details for RIX Shipping Company Ltd (GBAUSEDHULRXE) and P&O Ferrymasters Ltd (GBAULGPLGPPFS1)."
+    },
+    {
+      "date": "2023-04-17",
+      "source": "etsf",
+      "summary": "Details for G3 Worldwide Mail (UK) Ltd in Southall, Formation Freight Services Ltd in Nursling and Riva South Ltd in West End Southampton have been removed. The address for ECMS Express UK Ltd has been updated to reflect a new address in Feltham."
+    },
+    {
+      "date": "2023-04-06",
+      "source": "etsf",
+      "summary": "The address for UCH Logistics Limited has been updated."
+    },
+    {
+      "date": "2023-03-31",
+      "source": "itsf",
+      "summary": "Updated to remove the codes GBAUDONDSARQS for Anglo World Cargo Ltd and GBAUBOHBOHLMS for DHL Global Match Ltd."
+    },
+    {
+      "date": "2023-03-31",
+      "source": "etsf",
+      "summary": "Updated to remove the ETSF codes for Heathrow Import Clearance Services Ltd in Stanwell and Roy Bowles Transport in Colnbrook."
+    },
+    {
+      "date": "2023-03-02",
+      "source": "itsf",
+      "summary": "ITSF codes have been added for Uniserve Ltd at Norwich Airport and London Southend Airport Company Ltd at Southend Airport."
+    },
+    {
+      "date": "2023-03-01",
+      "source": "etsf",
+      "summary": "Codes have been added for Neil & Browne Ltd in Hessle, DCG Logistics UK Ltd in Coventry, Euroturk Freight Lit in Hythe, Graysons Freight Services Ltd in Kuton, TABS Logistics Ltd in Southampton and Eddie Stobart Ltd in Warrington. Existing information for the code GBAUWACTILWCW1 has also been corrected."
+    },
+    {
+      "date": "2023-02-24",
+      "source": "etsf",
+      "summary": "The ETSF Code GBAULYOLHRMNX has been removed."
+    },
+    {
+      "date": "2023-02-10",
+      "source": "etsf",
+      "summary": "A name change has been applied to ETSF Goods Location Code GBAUFXTFXTIRE."
+    },
+    {
+      "date": "2023-02-03",
+      "source": "etsf",
+      "summary": "Cadogan Tate London Ltd has been removed from the list."
+    },
+    {
+      "date": "2023-01-20",
+      "source": "itsf",
+      "summary": "Addition to ITSF location code for Animal Aircare Ltd at Hounslow."
+    },
+    {
+      "date": "2023-01-19",
+      "source": "etsf",
+      "summary": "The list has been updated with additions to ETSF location codes for So Good Logistics Ltd at Manchester, Bacton Transport Services Ltd at Bury St Edmunds, XGO Logistics Ltd at Salisbury, Air Menzies at Manchester Airport, Gills Transport Heathrow Ltd at Hemel Hempstead, Worldwide Book Services Ltd at Wickford, Laser Transport International Ltd at Hythe and Eland Cable Limited at Doncaster. There a"
+    },
+    {
+      "date": "2023-01-13",
+      "source": "etsf",
+      "summary": "Details for code GBAUWFEDOGNLE have been amended."
+    },
+    {
+      "date": "2022-12-30",
+      "source": "etsf",
+      "summary": "A new facility for JAS Forwarding (UK) Ltd has been added at Slough."
+    },
+    {
+      "date": "2022-12-22",
+      "source": "itsf",
+      "summary": "Details for Fedex Express UK Ltd at Manchester Airport have been added."
+    },
+    {
+      "date": "2022-12-22",
+      "source": "etsf",
+      "summary": "This page has been updated with additions or amendments for Charles Kendall Freight Ltd, Compania Auxiliar Al Cargo Express, LV Shipping Ltd, Nagel Langdons, Peters and May, Port Clearance Solutions Ltd, White and Company, White and Company PLC, White and Company PLC (Winchester) and Twinwheel Logistics Ltd."
+    },
+    {
+      "date": "2022-12-13",
+      "source": "etsf",
+      "summary": "The code for Robinsons Relocation Limited in Redditch has been corrected."
+    },
+    {
+      "date": "2022-12-02",
+      "source": "etsf",
+      "summary": "The list has been corrected to restore details for UPS SCS (UK) Ltd at Coventry and Gateshead, and to remove another UPS SCS (UK) Ltd facility formerly listed at Manchester Airport."
+    },
+    {
+      "date": "2022-11-29",
+      "source": "itsf",
+      "summary": "Codes have been added for Oceanair Handling at Southampton Airport, Crown Fine Art in London and for Worldwide Flight Services Ltd in Hounslow."
+    },
+    {
+      "date": "2022-11-29",
+      "source": "etsf",
+      "summary": "Codes have been added for DHL Global Forwarding Ltd at Lichfield, Shuttle Bridge Logistics Ltd at Southall, Manca Amit (UK) Ltd at Heston, Fedex Express UK Ltd at Birmingham and Belfast airports, PRS Distributions Ltd Heathrow, Tongda Distribution Ltd at Isleworth and for Pets On The Move Ltd at Glasgow."
+    },
+    {
+      "date": "2022-11-15",
+      "source": "itsf",
+      "summary": "A facility has been added for North West Leicestershire District Council at Castle Donington and another facility has been relisted for Swissport at London Heathrow Airport."
+    },
+    {
+      "date": "2022-11-15",
+      "source": "etsf",
+      "summary": "Facilities have been added at Hounslow, Spalding, Feltham, Sunbury on Thames, Lichfield, Liverpool, Colnbrook and Daventry."
+    },
+    {
+      "date": "2022-11-11",
+      "source": "etsf",
+      "summary": "A facility for Portrack Seafreight Ltd has been re-listed in its capacity as a wharf."
+    },
+    {
+      "date": "2022-11-02",
+      "source": "etsf",
+      "summary": "Code details for Perishable Movements Limited in Lympne have been corrected."
+    },
+    {
+      "date": "2022-10-31",
+      "source": "itsf",
+      "summary": "New details have been added for British Airways at London Heathrow Airport."
+    },
+    {
+      "date": "2022-10-20",
+      "source": "itsf",
+      "summary": "This page has been updated with additions for Bournemouth International Airport Ltd, Soton Cargo Handling and YA Autotrade."
+    },
+    {
+      "date": "2022-10-20",
+      "source": "etsf",
+      "summary": "This page has been updated with an address change for DPD Group UK Limited from Oldbury to Hinckley, and additions for Belfast, Billingham, Dordon, Gravesend, Hull, Immingham, Marchwood, Newport, Portsmouth, Speke, Southampton, Staines-upon-Thames, Sunbury-on-Thames, Tilbury."
+    },
+    {
+      "date": "2022-09-28",
+      "source": "itsf",
+      "summary": "Additions and amendments have been made at Birmingham Airport, Bournemouth Airport, Coventry, Dover, Edinburgh Airport, London Gatwick and London Heathrow."
+    },
+    {
+      "date": "2022-09-28",
+      "source": "etsf",
+      "summary": "This page has been updated with additions or amendments for Aberdeen, Ashford, Armadale, Avonmouth, Basildon, Belfast, Birmingham, Bolton, Bradford, Botley, Camberley, Canterbury, Chertsey, Coleshill, Colnbrook, Coventry, Crawley, Cumbernauld, Dartford, Dunstable, Dover, Eastleigh, East Midlands Airport, Felixstowe, Feltham, Glasgow, Grays, Harrow, Hayes, Hemel Hempstead, Heston, Holbeach, Hull, I"
+    },
+    {
+      "date": "2022-08-25",
+      "source": "etsf",
+      "summary": "New codes for Cardinal at Sharston and Davies Turner at Trafford Park have been added."
+    },
+    {
+      "date": "2022-08-05",
+      "source": "etsf",
+      "summary": "This page has been updated to include details for AMG at North Weald, Bakro Intl Transport at Milton Keynes, Taxitruck Removals at Tolleshunt D'Arcy, JZ Flowers International Ltd at North Cave, Uniserve Ltd at Felixstowe, UPS Limited at London Gateway Port, UPS Limited at Kentish Town West, UPS Limited at Mallusk and Newtownabbey and UK Postings Ltd trading as UKP Worldwide at Worminghall."
+    },
+    {
+      "date": "2022-07-13",
+      "source": "etsf",
+      "summary": "This page has been updated to include details for Woodland Global Limited at Altrincham, YSD Logistics Ltd at Chineham, Fuxin Express UK International Ltd at Hemel Hempstead, Rhenus Logistics Limited at Maldon, Procar International Ltd at Stanwell, RIF Worldwide PLC at Sunbury-on-Thames, LP Customs Clearance Limited at Sunbury-on-Thames and a location code change for DSV Road Limited at Purfleet."
+    },
+    {
+      "date": "2022-06-01",
+      "source": "etsf",
+      "summary": "This page has been updated, removing Amazon UK Services Ltd, Rochester."
+    },
+    {
+      "date": "2022-05-12",
+      "source": "etsf",
+      "summary": "This page has been updated to include details for Rhodes Freight Services Ltd at Iver, CG Conex at Colnbrook, Miles Shipping Ltd at Heston, Royal Mail t/a Parcelforce Worldwide at Coventry and Air Business Ltd at Hatfield. Fraser Freight Ltd has changed their name to Jersey Port Global Logistics UK Ltd at Staines-upon-Thames."
+    },
+    {
+      "date": "2022-05-04",
+      "source": "itsf",
+      "summary": "Minor outdated guidance has been removed."
+    },
+    {
+      "date": "2022-05-04",
+      "source": "etsf",
+      "summary": "Minor outdated guidance has been removed."
+    },
+    {
+      "date": "2022-04-21",
+      "source": "itsf",
+      "summary": "This page has been updated to include details for: World Flight Services t/a Dunwoody Airline Services Ltd at George Best Belfast City Airport, Sea Cargo Aberdeen Limited at Aberdeen Harbour, and, DHL Global Match UK Ltd at Bournemouth. Menzies World Cargo Limited at George Best Belfast City Airport has been removed."
+    },
+    {
+      "date": "2022-04-20",
+      "source": "etsf",
+      "summary": "This page has been updated to include details for Magnus Group Ltd at Felixstowe and the address details for Transmanor Ltd at Tamworth have been amended."
+    },
+    {
+      "date": "2022-04-13",
+      "source": "etsf",
+      "summary": "This page has been updated to reflect changes for external temporary storage facilities."
+    },
+    {
+      "date": "2022-04-05",
+      "source": "etsf",
+      "summary": "This page has been updated to include details for Sea Fast Cold Chain Logistics PLC at Felixstowe."
+    },
+    {
+      "date": "2022-02-18",
+      "source": "itsf",
+      "summary": "Updated to include an additional internal temporary storage facility at Felixstowe for Hemisphere Freight Services Limited."
+    },
+    {
+      "date": "2022-02-18",
+      "source": "etsf",
+      "summary": "Changes to external temporary storage facilities in the following locations: Aberdeen, Appleton Thorn, Aylesbury, Basildon, Belfast, Birmingham, Coventry, Cramington, Dewsbury, Eccles, Evercreech, Felixstowe, Fradley, Great Blakenham, Great Yarmouth, Harlesden, Harmondsworth, Hull, Huntingdon, Ipswich, London Thamesport, Lympne, Martlesham Heath, Northampton, Poyle, Royston, Rushock, South Killing"
+    },
+    {
+      "date": "2022-01-19",
+      "source": "etsf",
+      "summary": "This page has been updated adding branches for Interlink Ireland Limited trading as DPD Ireland, plus Hannon Transport Ltd and EOS Warehousing Limited."
+    },
+    {
+      "date": "2021-12-02",
+      "source": "itsf",
+      "summary": "This page has been updated to add facilities for FedEx Express UK Transportation Limited at Belfast Airport."
+    },
+    {
+      "date": "2021-11-17",
+      "source": "etsf",
+      "summary": "This page has been updated to add facilities for: Oakland International Ltd at Coalville, Worldnet at Colnbrook, P L Transport T/A We Move Bikes (WMB Logistics) at Gloucester and Global Trade Point at Slough."
+    },
+    {
+      "date": "2021-09-01",
+      "source": "etsf",
+      "summary": "This page has been updated, removing UK Postings Limited T/A UKP Worldwide, Harmondsworth."
+    },
+    {
+      "date": "2021-08-19",
+      "source": "etsf",
+      "summary": "This page has been updated to add new facilities for NTG EBREX UK Limited at Aldridge, Viamaster International Limited at Castleford, Haulystic Ltd at Chertsey, FS Mackenzie Limited at Colnbrook, Eastlines Limited at Harrow and for Yourway Transport Limited at Hounslow."
+    },
+    {
+      "date": "2021-07-15",
+      "source": "etsf",
+      "summary": "This page has been updated with details for CYUK Limited at Milton Keynes and UK Postings Ltd T/A UKP Worldwide at Worminghall."
+    },
+    {
+      "date": "2021-06-18",
+      "source": "etsf",
+      "summary": "This page has been updated to include details for Kingscote Rojay Limited in Birmingham and RST Direct Ltd in Slough."
+    },
+    {
+      "date": "2021-06-10",
+      "source": "etsf",
+      "summary": "This page has been updated regarding Schenker in Belfast."
+    },
+    {
+      "date": "2021-05-19",
+      "source": "etsf",
+      "summary": "This page has been updated to include new details for LP Customs Clearance Ltd at Heathrow."
+    },
+    {
+      "date": "2021-05-12",
+      "source": "etsf",
+      "summary": "This page has been updated to include new facilities for Mark 3 International Ltd at Colnbrook, and Twinwheel Logistics Ltd at Grays."
+    },
+    {
+      "date": "2021-04-28",
+      "source": "etsf",
+      "summary": "This page has been updated to include an external temporary storage facility in Rochester."
+    },
+    {
+      "date": "2021-04-27",
+      "source": "etsf",
+      "summary": "This page has been updated to reflect the addition of external temporary storage facilities in Coalville Bardon, Dartford, Feltham, Luton Airport and Rochester."
+    },
+    {
+      "date": "2021-03-05",
+      "source": "etsf",
+      "summary": "This page has been updated to include a new external temporary storage facility for WD Meats in Coleraine and Perishable Movements Limited in Spalding."
+    },
+    {
+      "date": "2021-03-04",
+      "source": "etsf",
+      "summary": "This page has been updated to include a new external temporary storage facility for DHL International UK Limited in Londonderry."
+    },
+    {
+      "date": "2021-02-12",
+      "source": "etsf",
+      "summary": "An additional external temporary storage facility location at Enniskillen for A1 Global Logistics has been added."
+    },
+    {
+      "date": "2021-02-11",
+      "source": "itsf",
+      "summary": "Updated to include an additional internal temporary storage facility at Luton Airport for DHL."
+    },
+    {
+      "date": "2021-01-08",
+      "source": "etsf",
+      "summary": "This page has been updated to reflect changes for External Temporary Storage Facilities within the Carrickfergus and Crumlin locations."
+    },
+    {
+      "date": "2021-01-06",
+      "source": "itsf",
+      "summary": "This page has been updated to reflect changes for internal temporary storage facilities within the Belfast Airport, East Midland Airport, London Heathrow Airport and Manchester Airport locations."
+    },
+    {
+      "date": "2021-01-06",
+      "source": "etsf",
+      "summary": "This page has been updated to reflect changes for external temporary storage facilities within the Aberdeen, Belfast, Birmingham, Colnbrook, Eccles, Egham, Feltham, Harmondsworth, Heston, Hounslow, Low Moor, Manchester Airport, Newport Pagnell, Park Royal, Poyle, Ruislip, Slough, Stanwell and Sunbury locations."
+    },
+    {
+      "date": "2020-11-17",
+      "source": "etsf",
+      "summary": "This page has been updated to reflect code changes, specifically an amendment to Stansted DHL International (UK) Limited."
+    },
+    {
+      "date": "2020-10-30",
+      "source": "etsf",
+      "summary": "This page has been updated to reflect amended location details, specifically changes related to Belfast DHL, Reading DHL and Stansted DHL."
+    },
+    {
+      "date": "2018-12-10",
+      "source": "itsf",
+      "summary": "First published."
+    },
+    {
+      "date": "2018-12-10",
+      "source": "etsf",
+      "summary": "First published."
+    }
+  ]
+}

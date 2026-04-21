@@ -1,0 +1,1631 @@
+{
+  "meta": {
+    "source_key": "itsf",
+    "label": "Internal Temporary Storage Facilities (Appendix 16D)",
+    "landing_url": "https://www.gov.uk/government/publications/internal-temporary-storage-facilities-itsfs-codes-for-data-element-523-of-the-customs-declaration-service",
+    "ods_url": "https://assets.publishing.service.gov.uk/media/69dcbc1eeb7e7bc56517028c/20260409_cds_de_5-23_appendix16D_internal_temporary_storage_facilities.ods",
+    "fetched_at": "2026-04-21T09:30:29.177Z",
+    "total_records": 101,
+    "lhr_related_count": 21,
+    "malformed_count": 0,
+    "licence": "Open Government Licence v3.0. Source: HM Revenue & Customs."
+  },
+  "records": [
+    {
+      "name": "Air Canada",
+      "address": "Building 553, Shoreham Road East, Heathrow Airport, Hounslow, Middlesex. TW6 3RG",
+      "location_code": "GBAULHRLHRACS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "ACS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "American Airlines",
+      "address": "c/o British Airways, North of England Cargo Centre, Building 300, Manchester Airport, Altringham. WA15 8UX",
+      "location_code": "GBAUMNCMANAAS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "MNC",
+        "airport": "MAN",
+        "suffix": "AAS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Anglia Cargo International Ltd",
+      "address": "Humberside International Airport, Kirmington, N. Lincolnshire. DN39 6YH",
+      "location_code": "GBAUKMGHUYNGS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "KMG",
+        "airport": "HUY",
+        "suffix": "NGS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Animal Aircare Company Limited",
+      "address": "Unit 6, Cargo Forecourt Road, Gatwick Airport, West Sussex. RH6 0SQ",
+      "location_code": "GBAULGWLGWBCP",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LGW",
+        "airport": "LGW",
+        "suffix": "BCP",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Animal Aircare Company Limited",
+      "address": "Unit 579, Sandringham Road, Hounslow. TW6 3SF",
+      "location_code": "GBAUSWLLHRBCP",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SWL",
+        "airport": "LHR",
+        "suffix": "BCP",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Aviation Servicing Company Limited T/A ASC Cargo Handling",
+      "address": "Building 582, Sandringham Road, Heathrow Airport, Hounslow, Middlesex. TW6 3SN",
+      "location_code": "GBAULHRLHRJZS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "JZS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "BAE Systems Corporate Air Travel Limited",
+      "address": "4 Hangar, Warton Aerodrome, Preston, Lancashire. PR4 1AX",
+      "location_code": "GBAUWRTWARBAE",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "WRT",
+        "airport": "WAR",
+        "suffix": "BAE",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Belfast Container Terminal (BCT) Limited",
+      "address": "The Belfast Container Terminal, Herdman Channel Road, Belfast Harbour, Belfast. BT3 9AP",
+      "location_code": "GBAUBELBELBCT1",
+      "northern_ireland": true,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "BEL",
+        "airport": "BEL",
+        "suffix": "BCT1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Bournemouth International Airport",
+      "address": "Hangar 401, Bournemouth Airport, Christchurch, Dorset. BH23 6SE",
+      "location_code": "GBAUCCHBOHJWS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "CCH",
+        "airport": "BOH",
+        "suffix": "JWS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "British Airways PLC",
+      "address": "Ascentis, Building 1233, Sealand Road, Heathrow Airport, Hounslow, Middlesex. TW6 2JS",
+      "location_code": "GBAULHRLHRBAS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "BAS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "British Airways PLC",
+      "address": "Ascentis, Building 1233, Sealand Road, Heathrow Airport, Hounslow, Middlesex. TW6 2JS",
+      "location_code": "GBAULHRLHRBAC",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "BAC",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Carousel Logistics Limited",
+      "address": "Unit 2, West Midlands Freeport, Cargo Centre, Birmingham Airport, Birmingham. B26 3QD.",
+      "location_code": "GBAUBHMBHXLES",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "BHM",
+        "airport": "BHX",
+        "suffix": "LES",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Courier Facilities Limited",
+      "address": "580/581 Sandringham Road, London Heathrow Airport. TW6 3SN",
+      "location_code": "GBAULHRLHRCFL1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "CFL1",
+        "suffix_length": 4
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Dependable Distribution Ltd",
+      "address": "Chamber E, 104 Berth, Herbert Walker Avenue, Western Docks, Southampton. SO15 1HJ",
+      "location_code": "GBAUSOUSOUDDL1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SOU",
+        "airport": "SOU",
+        "suffix": "DDL1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dependable Logistics",
+      "address": "Chamber E, 104 Berth, Herbert Walker Avenue, Western Docks, Southampton. SO15 1HJ",
+      "location_code": "GBAUSOUSOUDEP2",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SOU",
+        "airport": "SOU",
+        "suffix": "DEP2",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "DHL Aviation (UK) Limited",
+      "address": "Buildings 559-560, Shoreham Road West, Cargo Terminal, Heathrow Airport, Hounslow, Middlesex. TW6 3SJ",
+      "location_code": "GBAULHRLHRDHS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "DHS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "DHL Aviation UK Limited",
+      "address": "Building 121, Cargo West, East Midlands Airport, Castle Donington, Derby. DE74 2TR",
+      "location_code": "GBAUEMAEMADHS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "EMA",
+        "airport": "EMA",
+        "suffix": "DHS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "DHL Aviation UK Limited",
+      "address": "President Way, Luton Airport, Bedfordshire. LU2 9NL",
+      "location_code": "GBAULUTLTNDHS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LUT",
+        "airport": "LTN",
+        "suffix": "DHS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dnata Limited",
+      "address": "The Argosy Building, Birmingham Airport, Birmingham. B26 3QN",
+      "location_code": "GBAUBHMBHXPLS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "BHM",
+        "airport": "BHX",
+        "suffix": "PLS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dnata Limited",
+      "address": "Units 2A - 4, Gatwick Cargo Centre, Cargo Road, West Sussex. RH6 0SQ",
+      "location_code": "GBAULGWLGWPZS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LGW",
+        "airport": "LGW",
+        "suffix": "PZS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dnata Limited",
+      "address": "Building 39, Unit 6, 7 & 8 Nevis Way, Glasgow Airport. PA3 2SS",
+      "location_code": "GBAUGLWGLAPZS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "GLW",
+        "airport": "GLA",
+        "suffix": "PZS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dnata Limited",
+      "address": "Unit 521a, Stirling Road, London Heathrow Airport, Middlesex. TW6 3JJ",
+      "location_code": "GBAULHRLHRNDS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "NDS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Dnata Limited",
+      "address": "Pinfold Lane, Manchester. M90 5XR",
+      "location_code": "GBAUMNCMANNCS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "MNC",
+        "airport": "MAN",
+        "suffix": "NCS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dnata Limited",
+      "address": "Unit 1, Transit Building 1, Airport Freightway, Woolsington, Newcastle upon Tyne. NE13 8BH",
+      "location_code": "GBAUPNLNCLPZS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "PNL",
+        "airport": "NCL",
+        "suffix": "PZS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dnata Ltd (3rd shed)",
+      "address": "Unit 3, Building 300, World Freight Terminal, Manchester Airport, Manchester. M90 5UY",
+      "location_code": "GBAUMNCMANNBS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "MNC",
+        "airport": "MAN",
+        "suffix": "NBS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dunwoody Airline Services Limited T/A Worldwide Flight Services",
+      "address": "Turnhouse Centre, Edinburgh Airport Cargo Village, Turnhouse Road, Edinburgh. EH12 0AL",
+      "location_code": "GBAUEDIEDIBAC",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "EDI",
+        "airport": "EDI",
+        "suffix": "BAC",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dunwoody Airline Services Limited T/A Worldwide Flight Services",
+      "address": "ITSF Annex, Turnhouse Centre, Edinburgh Airport Cargo Village, Turnhouse Road, Edinburgh. EH12 0AL",
+      "location_code": "GBAUEDIEDIBWS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "EDI",
+        "airport": "EDI",
+        "suffix": "BWS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dunwoody Airline Services Limited t/a Worldwide Flight Services",
+      "address": "Campsie Drive, Glasgow Airport, Abbotsinch, Paisley, PA3 2SG",
+      "location_code": "GBAUGLWGLABWS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "GLW",
+        "airport": "GLA",
+        "suffix": "BWS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dunwoody Airline Services Limited T/A Worldwide Flight Services",
+      "address": "Cargo Shed 1, Leeds Bradford Airport, Yeadon Leeds. LS19 7TU",
+      "location_code": "GBAUYDNLBABWS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "YDN",
+        "airport": "LBA",
+        "suffix": "BWS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dunwoody Airline Services Limited t/a Worldwide Flight Services",
+      "address": "Building 300, World Freight Terminal, Manchester Airport, Manchester. M90 5UY",
+      "location_code": "GBAUMNCMANBWS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "MNC",
+        "airport": "MAN",
+        "suffix": "BWS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Dunwoody Airline Services Limited T/A Worldwide Flight Services",
+      "address": "Airport Freightway, Freight Village, Newcastle International Airport, Woolsington, Newcastle Upon Tyne. NE13 8BH",
+      "location_code": "GBAUPNLNCLBAC",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "PNL",
+        "airport": "NCL",
+        "suffix": "BAC",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "EUROBIP Limited",
+      "address": "Building 550, Shoreham Road East, London Heathrow Airport, Hounslow, Middlesex. TW6 3UA",
+      "location_code": "GBAULHRLHREUB",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "EUB",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Federal Express Europe Inc",
+      "address": "Cargo Area South, Pincey Road, London Stansted Airport, Stansted. CM24 1FE",
+      "location_code": "GBAUSTNLSAFDS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "STN",
+        "airport": "LSA",
+        "suffix": "FDS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "FedEx Express UK Limited",
+      "address": "The Cargo Village, Belfast International Airport, Belfast. BT29 4GB",
+      "location_code": "GBAUBELBFSFDS",
+      "northern_ireland": true,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "BEL",
+        "airport": "BFS",
+        "suffix": "FDS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "FedEx Express UK Limited",
+      "address": "Cargo Terminal, Pincey Road, London Stansted Airport, Stansted, Essex. CM24 1QJ",
+      "location_code": "GBAUSTNLSAFHS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "STN",
+        "airport": "LSA",
+        "suffix": "FHS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "FedEx Express UK Limited",
+      "address": "Airport Freightway, Freight Village, Newcastle International Airport, Woolsington, Newcastle Upon Tyne. NE13 8BH",
+      "location_code": "GBAUPNLNCLFDS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "PNL",
+        "airport": "NCL",
+        "suffix": "FDS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "FedEx Express UK Limited",
+      "address": "171 Turnhouse Road, Edinburgh Airport (cargo), Edinburgh. EH12 0AL",
+      "location_code": "GBAUEDIEDIFXE1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "EDI",
+        "airport": "EDI",
+        "suffix": "FXE1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "FedEx Express UK Limited",
+      "address": "Hanger No 3, Teeside International Airport, Darlington. DL21NJ",
+      "location_code": "GBAUDRLMIDMME1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "DRL",
+        "airport": "MID",
+        "suffix": "MME1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Fedex Express UK Ltd",
+      "address": "Cargo 4, Beverley Road, East Midlands Airport, Castle Donington. DE74 5SA",
+      "location_code": "GBAUDNGEMAFXD1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "DNG",
+        "airport": "EMA",
+        "suffix": "FXD1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Fedex Express UK Ltd",
+      "address": "Cargo Area South, Pincey Road, London Stansted Airport, Stansted. CM24 1FE",
+      "location_code": "GBAUSTNLSAFXL1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "STN",
+        "airport": "LSA",
+        "suffix": "FXL1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Fedex Express UK Ltd",
+      "address": "Unit 2, Skyline, Great South West Road. TW14 8NT",
+      "location_code": "GBAUFEMLHRCFD2",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "FEM",
+        "airport": "LHR",
+        "suffix": "CFD2",
+        "suffix_length": 4
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Geest Line Limited",
+      "address": "Flathouse & Albert Johnson Quay, Portsmouth, Hants. PO2 7SP",
+      "location_code": "GBAUPMEPTMPOR2",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "PME",
+        "airport": "PTM",
+        "suffix": "POR2",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Glasgow Prestwick Airport Limited",
+      "address": "Buildings 1a, 2a & 1c, The Bravo Freight Centre, Monkton Road, Glasgow Prestwick Airport, Prestwick. KA9 2PH",
+      "location_code": "GBAUGLWGLAGPS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "GLW",
+        "airport": "GLA",
+        "suffix": "GPS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Glasgow Prestwick Airport Limited",
+      "address": "Transit House, Glasgow Prestwick Airport, Alpha Freight Area. KA9 2PQ",
+      "location_code": "GBAUPIKPIKOGS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "PIK",
+        "airport": "PIK",
+        "suffix": "OGS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Glasgow Prestwick Airport Limited",
+      "address": "Building 373 (BIP), Alpha Freight Centre, Monkton Road, Glasgow Prestwick Airport. KA9 2PL",
+      "location_code": "GBAUGLWGLABIP",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "GLW",
+        "airport": "GLA",
+        "suffix": "BIP",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Heathrow Animal Reception Centre",
+      "address": "Heathrow Animal Reception Centre, Beacon Road, Hounslow, Middlesex. TW6 3JF",
+      "location_code": "GBAULHRLHRARC",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "ARC",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Heathrow Cargo Handling Limited",
+      "address": "Building 558, Shoreham Road West, London Heathrow Airport, Hounslow, Middlesex. TW6 3RN",
+      "location_code": "GBAULHRLHRAFS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "AFS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Heavyweight Air Express Ltd",
+      "address": "Building 96, East Midlands Airport, Castle Donington, Derby. DE74 2SA",
+      "location_code": "GBAUEMAEMAHWS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "EMA",
+        "airport": "EMA",
+        "suffix": "HWS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "J&A Marshall Limited",
+      "address": "209 Berth, Western Docks, Southampton, Hampshire. SO15 0AL",
+      "location_code": "GBAUSOUSTNJAM1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SOU",
+        "airport": "STN",
+        "suffix": "JAM1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Jenkins Shipping Company Limited",
+      "address": "Unit 4, Regents Road, Liverpool Free Port. L20 1HA",
+      "location_code": "GBAULIVLIVJKE",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LIV",
+        "airport": "LIV",
+        "suffix": "JKE",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "London Luton Airport Operations Limited",
+      "address": "Cargo Terminal, President Way, London Luton Airport, Luton. LU2 9LY",
+      "location_code": "GBAULUTLTNLCS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LUT",
+        "airport": "LTN",
+        "suffix": "LCS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Menzies World Cargo Limited",
+      "address": "MW1 Building 557, Shoreham Road West, London Heathrow Airport, Hounslow, Middlesex. TW6 3RJ",
+      "location_code": "GBAULHRLHRCIS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "CIS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Ministry of Defence",
+      "address": "RAF Benson, Wallingford, Oxfordshire. OX10 6AA",
+      "location_code": "GBAUBESLHRMOD",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "BES",
+        "airport": "LHR",
+        "suffix": "MOD",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Ministry of Defence",
+      "address": "RNAS Yeovilton, Ilchester, Somerset. BA22 8HT",
+      "location_code": "GBAUYEOBRSMOD",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "YEO",
+        "airport": "BRS",
+        "suffix": "MOD",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "MOD Boscombe Down",
+      "address": "Amesbury, Salisbury, Wiltshire. SP4 0JE",
+      "location_code": "GBAUAMSBDNMOD",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "AMS",
+        "airport": "BDN",
+        "suffix": "MOD",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Motis Ireland Limited",
+      "address": "Freight Clearance Centre, Lord Warden House, Western Docks, Dover. CT17 9DN",
+      "location_code": "GBAUDVRDOGFSA",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "DVR",
+        "airport": "DOG",
+        "suffix": "FSA",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "North West Leicestershire District Council",
+      "address": "Border Inspection Post, Building 20, East Midlands Airport, Castle Donington. DE74 2SA",
+      "location_code": "GBAUCADEMABPI",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "CAD",
+        "airport": "EMA",
+        "suffix": "BPI",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Oceanair Handling",
+      "address": "Unit 2, Cargo Center, Southampton Airport, Southampton. SO18 2HG",
+      "location_code": "GBAUSOUSTNSVIB",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SOU",
+        "airport": "STN",
+        "suffix": "SVIB",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Oceanair Handling",
+      "address": "209 Berth, Western Docks, Southampton, Hampshire. SO15 0AL",
+      "location_code": "GBAUSOUSTNOCE1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SOU",
+        "airport": "STN",
+        "suffix": "OCE1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Pentalver Transport Limited",
+      "address": "Dock Gate 10 Compound, Wes Bay Road, Western Docks, Port of Southampton, Southampton. SO15 1AW",
+      "location_code": "GBAUSOUSTNPNT1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SOU",
+        "airport": "STN",
+        "suffix": "PNT1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Pets On The Move",
+      "address": "Compound 2, Southside, Newcastle International Airport. NE13 8BZ",
+      "location_code": "GBAUNCLNCLPET",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "NCL",
+        "airport": "NCL",
+        "suffix": "PET",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "PING Handing Ltd",
+      "address": "Transit Shed 4, Cargo Terminal, Belfast International Airport, Belfast. BT29 4AB",
+      "location_code": "GBAUBELBFSHYS",
+      "northern_ireland": true,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "BEL",
+        "airport": "BFS",
+        "suffix": "HYS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Port of Dover Cargo Limited",
+      "address": "Dover Cargo Terminal, Western Docks, Union Street, Dover, Kent. CT17 9FJ",
+      "location_code": "GBAUDVRDOVDCT1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "DVR",
+        "airport": "DOV",
+        "suffix": "DCT1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "RAF Brize Norton",
+      "address": "Carterton, Oxfordshire. OX18 3LX",
+      "location_code": "GBAUBZZBZNRAF",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "BZZ",
+        "airport": "BZN",
+        "suffix": "RAF",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "RAF Fairford",
+      "address": "Ohio Ave, Fairford. GL7 4DG",
+      "location_code": "GBAUFFOFFDFFO",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "FFO",
+        "airport": "FFD",
+        "suffix": "FFO",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "RAF Lossiemouth",
+      "address": "Station Headquarters, Lossiemouth, Moray. IV31 6SD",
+      "location_code": "GBAULSSLOSLSS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LSS",
+        "airport": "LOS",
+        "suffix": "LSS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "RAF Northolt",
+      "address": "West End Road, Ruislip, Middlesex. HA4 6NG",
+      "location_code": "GBAUNHTNHTRAF",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "NHT",
+        "airport": "NHT",
+        "suffix": "RAF",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "RAF Odiham",
+      "address": "Odiham, Hook, Hampshire. RG29 1QT",
+      "location_code": "GBAUODMODIRAF",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "ODM",
+        "airport": "ODI",
+        "suffix": "RAF",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "RAF Waddington",
+      "address": "Waddington, Lincoln. LN5 9NB",
+      "location_code": "GBAUWDDWADWDD",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "WDD",
+        "airport": "WAD",
+        "suffix": "WDD",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Raven Express Logistics Limited",
+      "address": "Units 1 & 2, Cargo Terminal, Cardiff Airport, Rhoose, Vale of Glamorgan. CF62 3BD",
+      "location_code": "GBAURS8CWLRVS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "RS8",
+        "airport": "CWL",
+        "suffix": "RVS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Regional Freight Services Limited",
+      "address": "Regional House, Norwich Airport, Cargo Terminal, Liberator Road, Norwich. NR6 6EU",
+      "location_code": "GBAUNRWNWIRFS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "NRW",
+        "airport": "NWI",
+        "suffix": "RFS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Royal Mail Group Limited",
+      "address": "London Air Mails Unit (LAMU), Building 585, Short Road, London Heathrow Airport, Hounslow, Middlesex. TW6 3PR",
+      "location_code": "GBAULHRLHRRMG",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "RMG",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Sea Cargo Aberdeen Limited",
+      "address": "Matthews Quay, Aberdeen Harbour, Aberdeen. AB11 5PG",
+      "location_code": "GBAUABDABDABM",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "ABD",
+        "airport": "ABD",
+        "suffix": "ABM",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Soton Cargo Handling",
+      "address": "20 Berth, Eastern Docks, Southampton. SO14 3AH",
+      "location_code": "GBAUSOUSTNSCH1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SOU",
+        "airport": "STN",
+        "suffix": "SCH1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Southampton Container Terminals Limited T/A DP World Southampton",
+      "address": "204-207 Berth, Western Docks, Southampton. SO15 1DA",
+      "location_code": "GBAUSOUSTNSCT1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SOU",
+        "airport": "STN",
+        "suffix": "SCT1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Speedlink (NI) Ltd",
+      "address": "Unit 1, Building 19, New Freight Forwarders Village, Belfast International Airport, Crumlin. BT29 4JT",
+      "location_code": "GBAUCMLBFSLXS",
+      "northern_ireland": true,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "CML",
+        "airport": "BFS",
+        "suffix": "LXS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "582 Sandringham Road, London Heathrow Airport, Hounslow, Middlesex, United Kingdom. TW6 3SN",
+      "location_code": "GBAUSWLLHRZCS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SWL",
+        "airport": "LHR",
+        "suffix": "ZCS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "The Cargo Village, Belfast International Airport, Belfast. BT29 4GB",
+      "location_code": "GBAUBELBFSSLS",
+      "northern_ireland": true,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "BEL",
+        "airport": "BFS",
+        "suffix": "SLS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Building 96 & 96A, Cargo Terminal 3, East Midlands Airport, Castle Donnington Derby. DE74 2UZ",
+      "location_code": "GBAUCADEMAYBS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "CAD",
+        "airport": "EMA",
+        "suffix": "YBS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Unit 3 & 4, World Cargo Centre, London Gatwick Airport, Gatwick. RH6 0SQ",
+      "location_code": "GBAUHRYLGWOUS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "HRY",
+        "airport": "LGW",
+        "suffix": "OUS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Ground Floor, Building 588, Sandringham Road, Heathrow Airport, Hounslow. TW6 3SF",
+      "location_code": "GBAUSWLLHRYDS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SWL",
+        "airport": "LHR",
+        "suffix": "YDS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Eastern Warehouse, Cargo Centre, Birmingham International Airport, Birmingham. B26 3QN",
+      "location_code": "GBAUBHMBHXSLS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "BHM",
+        "airport": "BHX",
+        "suffix": "SLS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Unit 1, Cargo Handling Facility, Dunlin Road, Aberdeen Airport, Dyce. AB21 0PB",
+      "location_code": "GBAUDYCABZSLS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "DYC",
+        "airport": "ABZ",
+        "suffix": "SLS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Cargo Terminal, Nevis Way, Glasgow Airport, Paisley. PA3 2SS",
+      "location_code": "GBAUGLWGLASLS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "GLW",
+        "airport": "GLA",
+        "suffix": "SLS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Building 521B, Stansted Road, London Heathrow Airport, Hounslow, Middlesex. TW6 3LW",
+      "location_code": "GBAULHRLHRSLS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "SLS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Building 588, Sandringham Road, Heathrow Airport, Hounslow. TW6 3SF",
+      "location_code": "GBAUSWLLHRHPS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SWL",
+        "airport": "LHR",
+        "suffix": "HPS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Unit B/C2, The Cargo Terminal, Pincey Road, Stansted Airport, Essex. CM24 1QJ",
+      "location_code": "GBAUSTNLSASLS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "STN",
+        "airport": "LSA",
+        "suffix": "SLS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Hangar 4, Pinfold Lane, Manchester Airport, Manchester. M90 5YF",
+      "location_code": "GBAUMNCMANYWS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "MNC",
+        "airport": "MAN",
+        "suffix": "YWS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Limited",
+      "address": "Shed 3-5, Cargo Terminal, Cardiff Airport, Barry. CF62 3BD",
+      "location_code": "GBAURS8CWLYVS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "RS8",
+        "airport": "CWL",
+        "suffix": "YVS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Swissport GB Ltd (BIP)",
+      "address": "Manchester BCP 1,2 & 3 Facility, Building 307, World Freight Terminal, Manchester Airport, Manchester. M90 5QL",
+      "location_code": "GBAUMNCMANBIP",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "MNC",
+        "airport": "MAN",
+        "suffix": "BIP",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Teeside International Airport Limited",
+      "address": "Hangar 3, Teeside International Airport, Darlington. DL2 1LU",
+      "location_code": "GBAUULNMMETVS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "ULN",
+        "airport": "MME",
+        "suffix": "TVS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Uniserve Ltd",
+      "address": "Liberator Road, Norwich Airport Industrial Estate, Norwich. NR6 6EU",
+      "location_code": "GBAUNRWNWIUDS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "NRW",
+        "airport": "NWI",
+        "suffix": "UDS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "UPS Limited",
+      "address": "Building 19 (Cargo Terminal 2), East Midlands Airport, Castle Donington. DE74 2SA",
+      "location_code": "GBAUEMAEMAUPS4",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "EMA",
+        "airport": "EMA",
+        "suffix": "UPS4",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "UPS Limited",
+      "address": "UPS Stansted Hub, Unit A, New Cargo Area, Pincey Road, Stansted Airport, Essex. CM24 1QJ",
+      "location_code": "GBAUSTNLSAUPS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "STN",
+        "airport": "LSA",
+        "suffix": "UPS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Worldwide Flight Services Limited",
+      "address": "Units 8, 9 & 10, Cargo Terminal 1, London Gatwick Airport, West Sussex. RH6 0SQ",
+      "location_code": "GBAULGWLGWGWK1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LGW",
+        "airport": "LGW",
+        "suffix": "GWK1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Worldwide Flight Services Limited",
+      "address": "Units 8, 9 & 10, Cargo Terminal 1, London Gatwick Airport, West Sussex. RH6 0SQ",
+      "location_code": "GBAULGWLGWVWS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LGW",
+        "airport": "LGW",
+        "suffix": "VWS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Worldwide Flight Services Limited",
+      "address": "Unit 5, Gatwick Cargo Centre, Gatwick. RH6 0SQ",
+      "location_code": "GBAUCAWLGWOKS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "CAW",
+        "airport": "LGW",
+        "suffix": "OKS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "Worldwide Flight Services Limited",
+      "address": "Building 549/550/551, Shoreham Road East, London Heathrow Airport, Hounslow, Middlesex. TW6 3UA",
+      "location_code": "GBAULHRLHRWXS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "LHR",
+        "airport": "LHR",
+        "suffix": "WXS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Worldwide Flight Services Ltd.",
+      "address": "578 Sandringham Road, London Heathrow Airport, Hounslow, Middlesex. TW6 3SL",
+      "location_code": "GBAUTMRLHRLFS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "TMR",
+        "airport": "LHR",
+        "suffix": "LFS",
+        "suffix_length": 3
+      },
+      "lhr_related": true,
+      "malformed_code": false
+    },
+    {
+      "name": "Wynne Aviation Services Limited",
+      "address": "Transit Shed 1, Liverpool John Lennon Airport, Speke, Liverpool. L24 1YD",
+      "location_code": "GBAUSPKLPLWNS",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SPK",
+        "airport": "LPL",
+        "suffix": "WNS",
+        "suffix_length": 3
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    },
+    {
+      "name": "YA Autotrade",
+      "address": "Dock Gate 4, Eastern Docks, Southampton. SO14 3AH",
+      "location_code": "GBAUSOUSTNYUW1",
+      "northern_ireland": false,
+      "decomposed": {
+        "country": "GB",
+        "prefix": "AU",
+        "office": "SOU",
+        "airport": "STN",
+        "suffix": "YUW1",
+        "suffix_length": 4
+      },
+      "lhr_related": false,
+      "malformed_code": false
+    }
+  ]
+}
