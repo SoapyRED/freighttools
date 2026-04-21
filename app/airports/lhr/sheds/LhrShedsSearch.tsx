@@ -11,7 +11,7 @@ const CONFIDENCE_FILTERS: { value: Confidence | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'verified', label: 'Verified' },
   { value: 'community_contributed', label: 'Community' },
-  { value: 'pending_verification', label: 'Verify on shift' },
+  { value: 'pending_verification', label: 'Pending verification' },
   { value: 'operational_only', label: 'Operational only' },
   { value: 'hmrc_only', label: 'HMRC only' },
 ];
@@ -19,7 +19,7 @@ const CONFIDENCE_FILTERS: { value: Confidence | 'all'; label: string }[] = [
 const CONFIDENCE_STYLES: Record<Confidence, { bg: string; color: string; label: string }> = {
   verified:              { bg: 'rgba(34,197,94,0.12)',   color: '#15803D', label: 'Verified' },
   community_contributed: { bg: 'rgba(168,85,247,0.12)',  color: '#7C3AED', label: 'Community' },
-  pending_verification:  { bg: 'rgba(234,179,8,0.15)',   color: '#B45309', label: 'Verify on shift' },
+  pending_verification:  { bg: 'rgba(234,179,8,0.15)',   color: '#B45309', label: 'Pending verification' },
   operational_only:      { bg: 'rgba(59,130,246,0.12)',  color: '#1D4ED8', label: 'Operational only' },
   hmrc_only:             { bg: 'rgba(100,116,139,0.12)', color: '#475569', label: 'HMRC only' },
 };

@@ -107,6 +107,41 @@ export default function LhrShedsPage() {
         style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 80px' }}
         className="lhr-sheds-main"
       >
+        {/* ── Draft banner ── */}
+        <aside
+          role="note"
+          aria-label="Draft notice"
+          style={{
+            marginBottom: 24,
+            padding: '14px 18px',
+            background: 'var(--bg-card)',
+            borderLeft: '4px solid var(--accent)',
+            border: '1px solid var(--border)',
+            borderLeftWidth: 4,
+            borderRadius: 8,
+            color: 'var(--text-primary)',
+            lineHeight: 1.55,
+          }}
+          className="lhr-draft-banner"
+        >
+          <div style={{ fontSize: 12, fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>
+            DRAFT — under expert review
+          </div>
+          <p style={{ fontSize: 13, color: 'var(--text-primary)', margin: '0 0 6px' }}>
+            This document is under curation. Data is not yet consolidated across overlapping HMRC codes (some records may appear twice under old and new codes). Not for operational use. Expected publish: later April 2026.
+          </p>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0 }}>
+            Review comments welcome via{' '}
+            <a
+              href="mailto:contact@freightutils.com"
+              style={{ color: 'var(--page-cat, var(--accent))', fontWeight: 600 }}
+            >
+              contact@freightutils.com
+            </a>
+            .
+          </p>
+        </aside>
+
         {/* ── Critical rules panel ── */}
         <section aria-labelledby="critical-rules-heading" style={{ marginBottom: 28 }}>
           <h2
@@ -285,7 +320,7 @@ export default function LhrShedsPage() {
           </strong>
           <div><strong>Verified</strong> — operational record matches an active HMRC ITSF/ETSF registration.</div>
           <div><strong>Community</strong> — email or detail was contributed by an industry peer (not an official handler channel).</div>
-          <div><strong>Verify on shift</strong> — operational data flagged as partial, uncertain HMRC mapping, or pending on-site confirmation.</div>
+          <div><strong>Pending verification</strong> — operational data flagged as partial, uncertain HMRC mapping, or pending on-site confirmation.</div>
           <div><strong>Operational only</strong> — shed is in active operational use but has no current HMRC registration (includes HMRC-deregistered codes).</div>
           <div><strong>HMRC only</strong> — an HMRC-registered Heathrow location without an operational record in our dataset.</div>
         </div>
@@ -329,10 +364,14 @@ export default function LhrShedsPage() {
             Expert reviewers
           </h2>
           <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
-            This reference is reviewed on-shift by experienced Heathrow freight planners.
-          </p>
-          <p style={{ fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6, margin: '6px 0 0', fontStyle: 'italic' }}>
-            [Alex Banghea, Alex Smithers, Jas Dogfish, Simon ___]
+            Reviewer credits pending contributor confirmation. If you have reviewed or contributed data to this dataset and wish to be credited, please contact{' '}
+            <a
+              href="mailto:contact@freightutils.com"
+              style={{ color: 'var(--page-cat, var(--accent))', fontWeight: 600 }}
+            >
+              contact@freightutils.com
+            </a>{' '}
+            with your preferred attribution (display name, job title, and optional LinkedIn profile URL).
           </p>
         </section>
 

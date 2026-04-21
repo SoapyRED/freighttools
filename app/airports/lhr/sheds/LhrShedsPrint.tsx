@@ -18,7 +18,7 @@ const CONFIDENCE_ORDER: Confidence[] = [
 const CONFIDENCE_LABELS: Record<Confidence, string> = {
   verified: 'Verified',
   community_contributed: 'Community-contributed',
-  pending_verification: 'Verify on shift',
+  pending_verification: 'Pending verification',
   operational_only: 'Operational only',
   hmrc_only: 'HMRC-only',
 };
