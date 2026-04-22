@@ -1,6 +1,6 @@
 {
   "name": "freightutils-mcp",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "mcpName": "io.github.SoapyRED/freightutils",
   "description": "MCP server for FreightUtils — 18 freight calculation and reference tools for AI agents",
   "author": "FreightUtils <contact@freightutils.com>",
@@ -41,7 +41,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1",
+    "@modelcontextprotocol/sdk": "^1.26.0",
     "zod": "^3.24.4"
   },
   "devDependencies": {
