@@ -1,5 +1,9 @@
 import { z } from 'zod';
 import { createMcpHandler } from 'mcp-handler';
+import {
+  ListPromptsRequestSchema,
+  ListResourcesRequestSchema,
+} from '@modelcontextprotocol/sdk/types.js';
 import { calculateCbm } from '@/lib/calculations/cbm';
 import { calculateConsignment } from '@/lib/calculations/consignment';
 import { calculateShipmentSummary } from '@/lib/calculations/shipment-summary';
@@ -23,6 +27,16 @@ import { checkLqEq } from '@/lib/calculations/lq-eq';
 //  MCP Handler — Streamable HTTP transport for Vercel
 // ─────────────────────────────────────────────────────────────
 
+// Every FreightUtils tool is a read-only lookup or deterministic calculation;
+// nothing mutates external state. This helper keeps the annotations consistent.
+const ro = (title: string) => ({
+  title,
+  readOnlyHint: true as const,
+  destructiveHint: false as const,
+  idempotentHint: true as const,
+  openWorldHint: false as const,
+});
+
 const handler = createMcpHandler(
   (server) => {
 
@@ -36,6 +50,7 @@ const handler = createMcpHandler(
         height_cm: z.number().positive().describe('Height in centimetres'),
         pieces: z.number().int().positive().optional().describe('Number of identical pieces (default: 1)'),
       },
+      ro('CBM Calculator'),
       async ({ length_cm, width_cm, height_cm, pieces }) => ({
         content: [{ type: 'text' as const, text: JSON.stringify(
           calculateCbm({ lengthCm: length_cm, widthCm: width_cm, heightCm: height_cm, pieces: pieces ?? 1 }), null, 2
@@ -55,6 +70,7 @@ const handler = createMcpHandler(
         pieces: z.number().int().positive().optional().describe('Number of identical pieces (default: 1)'),
         factor: z.number().int().positive().optional().describe('Volumetric divisor (default: 6000)'),
       },
+      ro('Chargeable Weight Calculator'),
       async ({ length_cm, width_cm, height_cm, gross_weight_kg, pieces, factor }) => ({
         content: [{ type: 'text' as const, text: JSON.stringify(
           calculateChargeableWeight({
@@ -80,6 +96,7 @@ const handler = createMcpHandler(
         vehicle: z.enum(['artic', 'rigid10', 'rigid75', 'luton', 'custom']).optional().describe('Vehicle type'),
         vehicle_length_m: z.number().positive().optional().describe('Custom vehicle length in m'),
       },
+      ro('LDM Calculator'),
       async (args) => {
         const preset = args.pallet ? PALLET_PRESET_MAP[args.pallet] : undefined;
         const lengthMm = preset?.lengthMm ?? args.length_mm;
@@ -107,6 +124,7 @@ const handler = createMcpHandler(
         search: z.string().optional().describe('Search by substance name'),
         hazard_class: z.string().optional().describe('Filter by hazard class'),
       },
+      ro('ADR Dangerous Goods Lookup'),
       async ({ un_number, search, hazard_class }) => {
         let results;
         if (un_number) {
@@ -135,6 +153,7 @@ const handler = createMcpHandler(
           quantity: z.number().positive(),
         })).optional().describe('Array of items for mixed-load check'),
       },
+      ro('ADR 1.1.3.6 Exemption Calculator'),
       async ({ un_number, quantity, items }) => {
         // Build items list
         const itemList = items ?? (un_number && quantity ? [{ un_number, quantity }] : []);
@@ -183,6 +202,7 @@ const handler = createMcpHandler(
         prefix: z.string().optional().describe('AWB prefix (3 digits)'),
         country: z.string().optional().describe('Filter by country'),
       },
+      ro('Airline / AWB Prefix Lookup'),
       async ({ query, iata, icao, prefix, country }) => {
         let results;
         if (iata) results = filterByIata(iata);
@@ -202,6 +222,7 @@ const handler = createMcpHandler(
       {
         type: z.string().optional().describe('Container slug (e.g., "20ft-standard", "40ft-high-cube"). Omit to list all.'),
       },
+      ro('Container Lookup'),
       async ({ type }) => {
         if (type) {
           const spec = getContainerSpec(type);
@@ -221,6 +242,7 @@ const handler = createMcpHandler(
         code: z.string().optional().describe('Exact HS code (2-6 digits)'),
         section: z.string().optional().describe('Browse by section (Roman numeral)'),
       },
+      ro('HS Code Lookup'),
       async ({ query, code, section }) => {
         if (code) {
           const detail = getCodeDetails(code);
@@ -248,6 +270,7 @@ const handler = createMcpHandler(
         code: z.string().optional().describe('Incoterm code (e.g., "FOB", "CIF")'),
         category: z.enum(['any_mode', 'sea_only']).optional().describe('Filter by mode'),
       },
+      ro('Incoterms 2020 Lookup'),
       async ({ code, category }) => {
         if (code) {
           const term = lookupByCode(code.toUpperCase());
@@ -275,6 +298,7 @@ const handler = createMcpHandler(
         max_payload_kg: z.number().positive().optional().describe('Max pallet payload in kg'),
         allow_rotation: z.boolean().optional().describe('Allow 90-degree rotation (default: true)'),
       },
+      ro('Pallet Fitting Calculator'),
       async (args) => ({
         content: [{ type: 'text' as const, text: JSON.stringify(
           calculatePalletFitting({
@@ -297,6 +321,7 @@ const handler = createMcpHandler(
         from: z.string().describe('Source unit'),
         to: z.string().describe('Target unit'),
       },
+      ro('Unit Converter'),
       async ({ value, from, to }) => {
         const result = convert(value, from, to);
         if (!result) return { content: [{ type: 'text' as const, text: `Cannot convert from "${from}" to "${to}"` }], isError: true };
@@ -320,6 +345,7 @@ const handler = createMcpHandler(
           palletType: z.enum(['none', 'euro', 'uk', 'us']).optional().describe('Pallet type'),
         })).describe('Array of consignment items'),
       },
+      ro('Consignment Calculator'),
       async ({ items }) => ({
         content: [{ type: 'text' as const, text: JSON.stringify(calculateConsignment(items), null, 2) }],
       }),
@@ -336,6 +362,7 @@ const handler = createMcpHandler(
         function_type: z.enum(['port', 'airport', 'rail', 'road', 'icd', 'border']).optional().describe('Filter by location function'),
         limit: z.number().int().min(1).max(100).optional().describe('Max results (default 20)'),
       },
+      ro('UN/LOCODE Lookup'),
       async ({ query, code, country, function_type, limit }) => {
         if (code) {
           const entry = unlocodeLookup(code);
@@ -359,6 +386,7 @@ const handler = createMcpHandler(
         insuranceCost: z.number().optional().describe('Insurance cost in GBP (default 0)'),
         incoterm: z.enum(['EXW','FCA','FAS','FOB','CFR','CIF','CPT','CIP','DAP','DPU','DDP']).optional().describe('Incoterm basis'),
       },
+      ro('UK Duty & VAT Calculator'),
       async ({ commodityCode, originCountry, customsValue, freightCost, insuranceCost, incoterm }) => {
         try {
           const result = await calculateDuty({
@@ -387,18 +415,19 @@ const handler = createMcpHandler(
           height: z.number().positive().describe('Height cm'),
           weight: z.number().describe('Gross weight kg per item'),
           quantity: z.number().int().positive(),
-          stackable: z.boolean().optional(),
-          palletType: z.enum(['euro', 'uk', 'us', 'custom', 'none']).optional(),
+          stackable: z.boolean().optional().describe('Whether this item can be stacked (affects pallet fitting calc)'),
+          palletType: z.enum(['euro', 'uk', 'us', 'custom', 'none']).optional().describe('Pallet standard the item sits on, if any'),
           hsCode: z.string().optional(),
           unNumber: z.string().optional(),
           customsValue: z.number().optional(),
-        })),
-        origin: z.object({ country: z.string(), locode: z.string().optional() }).optional(),
-        destination: z.object({ country: z.string(), locode: z.string().optional() }).optional(),
-        incoterm: z.string().optional(),
-        freightCost: z.number().optional(),
-        insuranceCost: z.number().optional(),
+        })).describe('Array of shipment items with dimensions, weight, and optional HS/UN codes'),
+        origin: z.object({ country: z.string(), locode: z.string().optional() }).optional().describe('Origin location — ISO country code and optional UN/LOCODE'),
+        destination: z.object({ country: z.string(), locode: z.string().optional() }).optional().describe('Destination location — ISO country code and optional UN/LOCODE'),
+        incoterm: z.string().optional().describe("Incoterms 2020 three-letter code (e.g. 'DAP', 'EXW', 'FOB')"),
+        freightCost: z.number().optional().describe('Optional freight cost in GBP for duty calculation'),
+        insuranceCost: z.number().optional().describe('Optional insurance cost in GBP for duty calculation'),
       },
+      ro('Shipment Summary'),
       async (args) => {
         try {
           const result = await calculateShipmentSummary(args as Parameters<typeof calculateShipmentSummary>[0]);
@@ -419,6 +448,7 @@ const handler = createMcpHandler(
         category: z.enum(['container', 'pallet', 'special']).optional().describe('Filter by ULD category'),
         deck: z.enum(['lower', 'main']).optional().describe('Filter by deck position'),
       },
+      ro('Air Cargo ULD Lookup'),
       async ({ type, category, deck }) => {
         if (type) {
           const uld = getULD(type);
@@ -441,6 +471,7 @@ const handler = createMcpHandler(
         category: z.enum(['articulated', 'rigid', 'van']).optional().describe('Filter by category'),
         region: z.enum(['EU', 'US']).optional().describe('Filter by region'),
       },
+      ro('Vehicle Lookup'),
       async ({ slug, category, region }) => {
         if (slug) {
           const v = getVehicle(slug);
@@ -467,6 +498,7 @@ const handler = createMcpHandler(
           inner_packaging_qty: z.number().int().positive().optional().describe('Number of inner packagings (EQ mode only)'),
         })).describe('Items to check'),
       },
+      ro('ADR LQ / EQ Exemption Check'),
       async ({ mode, items }) => {
         try {
           const result = checkLqEq(mode, items as Parameters<typeof checkLqEq>[1]);
@@ -478,8 +510,18 @@ const handler = createMcpHandler(
       },
     );
 
+    // Stub empty prompts and resources lists so clients don't receive
+    // -32601 Method Not Found for list_prompts / list_resources probes.
+    server.server.setRequestHandler(ListPromptsRequestSchema, async () => ({ prompts: [] }));
+    server.server.setRequestHandler(ListResourcesRequestSchema, async () => ({ resources: [] }));
+
   },
-  {},
+  {
+    serverInfo: {
+      name: 'freightutils-mcp',
+      version: '1.0.7',
+    },
+  },
   { basePath: '/api/mcp' },
 );
 

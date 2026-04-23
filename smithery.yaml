@@ -1,0 +1,9 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+# Remote HTTP deployment — the live Vercel endpoint at /api/mcp/mcp
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    properties: {}
+    additionalProperties: false
+  exampleConfig: {}
