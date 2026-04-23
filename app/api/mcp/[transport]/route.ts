@@ -514,7 +514,7 @@ const handler = createMcpHandler(
   {
     serverInfo: {
       name: 'freightutils-mcp',
-      version: '1.0.7',
+      version: '1.0.8',
     },
   },
   { basePath: '/api/mcp' },
