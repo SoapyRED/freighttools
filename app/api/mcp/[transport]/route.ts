@@ -1,9 +1,5 @@
 import { z } from 'zod';
 import { createMcpHandler } from 'mcp-handler';
-import {
-  ListPromptsRequestSchema,
-  ListResourcesRequestSchema,
-} from '@modelcontextprotocol/sdk/types.js';
 import { calculateCbm } from '@/lib/calculations/cbm';
 import { calculateConsignment } from '@/lib/calculations/consignment';
 import { calculateShipmentSummary } from '@/lib/calculations/shipment-summary';
@@ -510,10 +506,9 @@ const handler = createMcpHandler(
       },
     );
 
-    // Stub empty prompts and resources lists so clients don't receive
-    // -32601 Method Not Found for list_prompts / list_resources probes.
-    server.server.setRequestHandler(ListPromptsRequestSchema, async () => ({ prompts: [] }));
-    server.server.setRequestHandler(ListResourcesRequestSchema, async () => ({ resources: [] }));
+    // NOTE: list_prompts / list_resources stubs were tried here but caused the
+    // Vercel serverless function to hang (60s timeout → 504). Reverted.
+    // Accepting -5 pt on Smithery prompts score until a safe pattern is found.
 
   },
   {
