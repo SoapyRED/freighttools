@@ -91,6 +91,101 @@ function field(obj, path) {
   return path.split('.').reduce((o, k) => o?.[k], obj);
 }
 
+async function testApexRedirect() {
+  const start = Date.now();
+  try {
+    const apexHost = BASE.replace(/^https?:\/\/www\./, 'https://');
+    if (apexHost === BASE) {
+      console.log(`  \x1b[33m⏭\x1b[0m apex redirect — skipped (BASE has no www)`);
+      return;
+    }
+    const apexUrl = apexHost + '/ldm';
+    const res = await fetch(apexUrl, { method: 'GET', redirect: 'manual' });
+    const ms = Date.now() - start;
+    const errors = [];
+    if (res.status < 300 || res.status >= 400) errors.push(`status ${res.status} — expected 301/308`);
+    if (res.status !== 301 && res.status !== 308) errors.push(`status ${res.status} — want 301 or 308, not temporary`);
+    const loc = res.headers.get('location') || '';
+    if (!loc.startsWith('https://www.')) errors.push(`location not www: ${loc}`);
+    if (errors.length === 0) {
+      console.log(`  \x1b[32m✅\x1b[0m apex redirect — ${res.status} → ${loc} (${ms}ms)`);
+      passed++;
+    } else {
+      console.log(`  \x1b[31m❌\x1b[0m apex redirect — ${errors.join(', ')} (${ms}ms)`);
+      failed++;
+    }
+  } catch (err) {
+    console.log(`  \x1b[31m❌\x1b[0m apex redirect — ERROR: ${err.message}`);
+    failed++;
+  }
+}
+
+async function testSitemapCanonical() {
+  const start = Date.now();
+  try {
+    const res = await fetch(`${BASE}/sitemap.xml`);
+    const ms = Date.now() - start;
+    const xml = await res.text();
+    const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+    const apexForm = locs.filter(u => /^https?:\/\/freightutils\.com/.test(u));
+    const wwwForm  = locs.filter(u => /^https?:\/\/www\.freightutils\.com/.test(u));
+    const errors = [];
+    if (res.status !== 200) errors.push(`status ${res.status} !== 200`);
+    if (locs.length === 0) errors.push('no <loc> entries found');
+    if (apexForm.length > 0) errors.push(`${apexForm.length} apex-form URLs (expected 0)`);
+    if (wwwForm.length === 0) errors.push('no www-form URLs');
+    if (errors.length === 0) {
+      console.log(`  \x1b[32m✅\x1b[0m sitemap canonical form — ${wwwForm.length} www URLs, 0 apex (${ms}ms)`);
+      passed++;
+    } else {
+      console.log(`  \x1b[31m❌\x1b[0m sitemap canonical form — ${errors.join(', ')} (${ms}ms)`);
+      failed++;
+    }
+  } catch (err) {
+    console.log(`  \x1b[31m❌\x1b[0m sitemap canonical form — ERROR: ${err.message}`);
+    failed++;
+  }
+}
+
+async function testDetailTitlesSingleSuffix() {
+  const urls = ['/adr/un/1203', '/hs/code/611241', '/incoterms/fob-free-on-board', '/pallet/euro-pallet', '/containers/40ft-high-cube'];
+  const start = Date.now();
+  let checkedCount = 0;
+  let singleSuffixCount = 0;
+  const failures = [];
+  for (const path of urls) {
+    try {
+      const res = await fetch(`${BASE}${path}`, { headers: { 'User-Agent': 'freightutils-smoke-test/1.0' } });
+      if (res.status !== 200) continue;
+      const html = await res.text();
+      const titleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
+      if (!titleMatch) continue;
+      const title = titleMatch[1];
+      const suffixCount = (title.match(/FreightUtils\.com/g) || []).length;
+      checkedCount++;
+      if (suffixCount === 1) {
+        singleSuffixCount++;
+      } else {
+        failures.push(`${path} — "${title}" (${suffixCount} suffixes)`);
+      }
+    } catch {
+      // skip
+    }
+  }
+  const ms = Date.now() - start;
+  const errors = [];
+  if (checkedCount < 3) errors.push(`only ${checkedCount} detail pages checked (need 3+)`);
+  if (singleSuffixCount < 3) errors.push(`only ${singleSuffixCount}/${checkedCount} titles have single suffix`);
+  if (errors.length === 0) {
+    console.log(`  \x1b[32m✅\x1b[0m detail titles single-suffix — ${singleSuffixCount}/${checkedCount} clean (${ms}ms)`);
+    passed++;
+  } else {
+    console.log(`  \x1b[31m❌\x1b[0m detail titles single-suffix — ${errors.join(', ')} (${ms}ms)`);
+    for (const f of failures) console.log(`      · ${f}`);
+    failed++;
+  }
+}
+
 async function testPage(name, url, expectedStatus = 200) {
   const start = Date.now();
   try {
@@ -220,6 +315,13 @@ async function run() {
   await testPage('/roadmap',           '/roadmap');
   await testPage('/docs/versioning',   '/docs/versioning');
   await testPage('/docs/deprecation',  '/docs/deprecation');
+
+  console.log('\n  SEO Hygiene');
+  console.log('  ───────────');
+
+  await testApexRedirect();
+  await testSitemapCanonical();
+  await testDetailTitlesSingleSuffix();
 
   // ─── Summary ──────────────────────────────────────────────────
 

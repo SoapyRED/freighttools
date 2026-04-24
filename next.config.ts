@@ -17,6 +17,18 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // Canonical host: apex freightutils.com → www.freightutils.com (308).
+      // Google treats 308 as equivalent to 301 for canonicalisation. Vercel's
+      // default auto-redirect on non-primary domains is 307 (temporary) which
+      // splits signals. If this rule doesn't take effect after deploy, the
+      // Vercel Project → Domains page may need the redirect type switched to
+      // permanent there.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'freightutils.com' }],
+        destination: 'https://www.freightutils.com/:path*',
+        permanent: true,
+      },
       { source: '/api', destination: '/api-docs', permanent: true },
       { source: '/mcp', destination: '/api-docs#mcp', permanent: true },
       { source: '/adr-exemption', destination: '/adr-calculator', permanent: true },
