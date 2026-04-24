@@ -17,6 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/about`,                   changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/pricing`,                 changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/changelog`,               changeFrequency: 'weekly',  priority: 0.5 },
+    { url: `${BASE}/status`,                  changeFrequency: 'hourly',  priority: 0.5 },
+    { url: `${BASE}/roadmap`,                 changeFrequency: 'weekly',  priority: 0.6 },
+    { url: `${BASE}/docs/versioning`,         changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/docs/deprecation`,        changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/privacy`,                 changeFrequency: 'yearly',  priority: 0.3 },
     { url: `${BASE}/terms`,                   changeFrequency: 'yearly',  priority: 0.3 },
     // Freight calculators

@@ -70,8 +70,14 @@ const footerColumns = {
   developers: [
     { href: '/api-docs', label: 'API Docs' },
     { href: '/pricing', label: 'Pricing' },
-    { href: '/changelog', label: 'Changelog' },
     { href: '/about', label: 'About' },
+  ],
+  platform: [
+    { href: '/changelog', label: 'Changelog' },
+    { href: '/status', label: 'Status' },
+    { href: '/roadmap', label: 'Roadmap' },
+    { href: '/docs/versioning', label: 'Versioning Policy' },
+    { href: '/docs/deprecation', label: 'Deprecation Policy' },
   ],
 };
 
@@ -196,8 +202,8 @@ export default function RootLayout({
             {/* Column grid */}
             <div className="footer-grid" style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: 32,
+              gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+              gap: 24,
               marginBottom: 28,
             }}>
               {([
@@ -205,6 +211,7 @@ export default function RootLayout({
                 { title: 'Reference', links: footerColumns.reference },
                 { title: 'Guides', links: footerColumns.guides },
                 { title: 'Developers', links: footerColumns.developers },
+                { title: 'Platform', links: footerColumns.platform },
               ] as const).map(col => (
                 <div key={col.title}>
                   <div style={{

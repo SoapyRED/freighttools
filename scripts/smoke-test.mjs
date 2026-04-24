@@ -91,6 +91,30 @@ function field(obj, path) {
   return path.split('.').reduce((o, k) => o?.[k], obj);
 }
 
+async function testPage(name, url, expectedStatus = 200) {
+  const start = Date.now();
+  try {
+    const res = await fetch(`${BASE}${url}`, { method: 'GET', headers: { 'Accept': 'text/html' }, redirect: 'manual' });
+    const ms = Date.now() - start;
+    const errors = [];
+    if (res.status !== expectedStatus) errors.push(`status ${res.status} !== ${expectedStatus}`);
+    if (ms > 5000) errors.push(`slow: ${ms}ms`);
+    if (errors.length === 0) {
+      console.log(`  \x1b[32m✅\x1b[0m ${name} — ${res.status} — OK (${ms}ms)`);
+      passed++;
+    } else {
+      console.log(`  \x1b[31m❌\x1b[0m ${name} — ${res.status} — ${errors.join(', ')} (${ms}ms)`);
+      failed++;
+    }
+    results.push({ name, status: res.status, ms, errors, ok: errors.length === 0 });
+  } catch (err) {
+    const ms = Date.now() - start;
+    console.log(`  \x1b[31m❌\x1b[0m ${name} — NETWORK ERROR: ${err.message} (${ms}ms)`);
+    failed++;
+    results.push({ name, status: 0, ms, errors: [err.message], ok: false });
+  }
+}
+
 // ─── Test Suite ──────────────────────────────────────────────────
 
 async function run() {
@@ -187,6 +211,15 @@ async function run() {
   await test('/api/tools', '/api/tools', {
     expect: { hasField: ['count', 'tools'], fieldGt: { count: 15 }, preview: 'count' },
   });
+
+  console.log('\n  Platform Pages');
+  console.log('  ──────────────');
+
+  await testPage('/changelog',         '/changelog');
+  await testPage('/status',            '/status');
+  await testPage('/roadmap',           '/roadmap');
+  await testPage('/docs/versioning',   '/docs/versioning');
+  await testPage('/docs/deprecation',  '/docs/deprecation');
 
   // ─── Summary ──────────────────────────────────────────────────
 

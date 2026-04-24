@@ -49,6 +49,16 @@ const nav: NavEntry[] = [
       { href: '/adr/training-guide', label: 'ADR Training Guide' },
     ],
   },
+  {
+    label: 'Platform',
+    items: [
+      { href: '/changelog', label: 'Changelog' },
+      { href: '/status', label: 'Status' },
+      { href: '/roadmap', label: 'Roadmap' },
+      { href: '/docs/versioning', label: 'Versioning Policy' },
+      { href: '/docs/deprecation', label: 'Deprecation Policy' },
+    ],
+  },
   { href: '/api-docs', label: 'API Docs' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },

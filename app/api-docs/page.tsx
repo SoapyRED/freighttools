@@ -1821,6 +1821,30 @@ Content-Type: application/json
           ))}
         </div>
 
+        {/* Platform Commitments */}
+        <h2 style={s.sectionTitle}>Platform Commitments</h2>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>
+          Five pages that spell out what you can rely on:
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginBottom: 24 }}>
+          {[
+            { href: '/changelog',          title: 'Changelog',          desc: 'Every release, with an RSS feed.' },
+            { href: '/status',             title: 'Status',             desc: 'Current health plus 24h and 7d uptime.' },
+            { href: '/roadmap',            title: 'Roadmap',            desc: 'Shipped, in progress, and what’s next.' },
+            { href: '/docs/versioning',    title: 'Versioning Policy',  desc: 'Breaking-change contract and semver.' },
+            { href: '/docs/deprecation',   title: 'Deprecation Policy', desc: '3-month minimum notice with migration guides.' },
+          ].map(item => (
+            <a key={item.href} href={item.href} style={{
+              display: 'block', padding: '12px 14px',
+              background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8,
+              textDecoration: 'none', transition: 'border-color 0.15s',
+            }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginBottom: 2 }}>{item.title}</div>
+              <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5 }}>{item.desc}</div>
+            </a>
+          ))}
+        </div>
+
         {/* Source & Issues */}
         <h2 style={s.sectionTitle}>Source Code &amp; Issue Reporting</h2>
         <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>

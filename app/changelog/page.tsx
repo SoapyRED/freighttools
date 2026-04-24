@@ -1,16 +1,23 @@
 import type { Metadata } from 'next';
+import PageHero from '@/app/components/PageHero';
+import { monthGroups, type Tag } from '@/lib/changelog-data';
+
+export const revalidate = 3600;
+
+const ogUrl = '/api/og?title=Changelog&desc=FreightUtils+data+updates%2C+new+tools%2C+and+API+changes&badge=UPDATES';
 
 export const metadata: Metadata = {
-  title: 'Changelog',
-  description: 'FreightUtils changelog — data updates, new tools, and API changes. Actively maintained freight data and APIs.',
-  alternates: { canonical: 'https://www.freightutils.com/changelog' },
+  title: 'Changelog — FreightUtils Updates & Releases',
+  description: 'Actively maintained freight data and APIs. Data updates, new tools, API changes, and MCP releases. Subscribe via RSS at /changelog.xml.',
+  alternates: {
+    canonical: 'https://www.freightutils.com/changelog',
+    types: { 'application/rss+xml': 'https://www.freightutils.com/changelog.xml' },
+  },
+  openGraph: {
+    images: [{ url: ogUrl, width: 1200, height: 630, alt: 'FreightUtils Changelog' }],
+  },
+  twitter: { card: 'summary_large_image', images: [ogUrl] },
 };
-
-// ─── Data ───────────────────────────────────────────────────────
-
-type Tag = 'New Tool' | 'Data Update' | 'API Change' | 'Bug Fix' | 'MCP Update';
-
-interface Entry { date: string; tag: Tag; title: string; desc: string }
 
 const TAG_COLORS: Record<Tag, { bg: string; text: string }> = {
   'New Tool':    { bg: '#dcfce7', text: '#166534' },
@@ -18,67 +25,42 @@ const TAG_COLORS: Record<Tag, { bg: string; text: string }> = {
   'API Change':  { bg: '#ffedd5', text: '#9a3412' },
   'Bug Fix':     { bg: '#f3f4f6', text: '#374151' },
   'MCP Update':  { bg: '#f3e8ff', text: '#6b21a8' },
+  'Security':    { bg: '#fee2e2', text: '#991b1b' },
 };
 
-const entries: { month: string; items: Entry[] }[] = [
-  {
-    month: 'April 2026',
-    items: [
-      { date: 'Apr 9', tag: 'New Tool', title: 'ADR LQ/EQ Multi-Line Checker', desc: 'Check Limited Quantity and Excepted Quantity eligibility for mixed dangerous goods consignments. Multi-item input with per-item breakdown, green/red/amber verdicts. POST /api/adr/lq-check.' },
-      { date: 'Apr 5', tag: 'New Tool', title: 'Air Freight ULD Type Reference', desc: '15 unit load device types — AKE (LD3), PMC, PLA, and more. Dimensions, weights, volume, aircraft compatibility, and deck positions. Free REST API at /api/uld.' },
-      { date: 'Apr 5', tag: 'New Tool', title: 'Vehicle & Trailer Type Reference', desc: '17 road freight vehicle and trailer types — curtainsiders, rigids, vans, US 53ft. Dimensions, payload limits, pallet capacity. Free REST API at /api/vehicles.' },
-      { date: 'Apr 5', tag: 'API Change', title: 'Composite Shipment Summary Endpoint', desc: 'POST /api/shipment/summary chains CBM, LDM, chargeable weight, ADR compliance, and UK duty estimation into one response. Accepts road/air/sea/multimodal modes.' },
-      { date: 'Apr 5', tag: 'API Change', title: 'Sea Freight W/M Added to Calculators', desc: 'Consignment calculator and chargeable weight calculator now support sea freight mode with W/M (Weight or Measure) at 1 CBM = 1 revenue tonne.' },
-      { date: 'Apr 5', tag: 'API Change', title: 'Shipment Object Schema v1', desc: 'Canonical FreightUtils Shipment schema defined — the foundational data model for all composite endpoints.' },
-      { date: 'Apr 4', tag: 'New Tool', title: 'UK Import Duty & VAT Estimator', desc: 'Estimate UK import duty and VAT for any commodity code using live GOV.UK Trade Tariff data. Supports Incoterm-adjusted CIF, preferential rate flagging, and cross-tool HS code workflow.' },
-      { date: 'Apr 4', tag: 'New Tool', title: 'UN/LOCODE Lookup', desc: '116,000+ transport locations from UNECE UN/LOCODE 2024-2. Searchable by name, code, country, and function type (port, airport, rail, road, ICD, border).' },
-      { date: 'Apr 4', tag: 'New Tool', title: 'Multi-Item Consignment Calculator', desc: 'Calculate total CBM, weight, LDM, and chargeable weight across mixed items. Available as web tool, REST API, and MCP tool.' },
-      { date: 'Apr 3', tag: 'MCP Update', title: 'Published to Official MCP Registry', desc: 'FreightUtils MCP Server v1.0.1 now on registry.modelcontextprotocol.io. Also listed on Smithery.ai, mcp.so, and 5+ directories.' },
-      { date: 'Apr 3', tag: 'API Change', title: 'MCP Remote SSE Endpoint Live', desc: 'Connect AI agents to all FreightUtils tools at freightutils.com/api/mcp/mcp. Streamable HTTP transport via mcp-handler.' },
-      { date: 'Apr 2', tag: 'API Change', title: 'Rate Limits Updated to 100/day', desc: 'Courtesy rate limit changed from 1,000/hour to 100 requests per day per IP across all API endpoints. Real enforcement via Vercel KV middleware.' },
-      { date: 'Apr 1', tag: 'New Tool', title: 'ADR 1.1.3.6 Exemption Calculator', desc: 'Calculate ADR exemption thresholds for mixed hazardous loads. Supports multi-substance mixed-load calculation.' },
-      { date: 'Apr 1', tag: 'Data Update', title: 'ADR 2025 Dataset', desc: '2,939 dangerous goods entries from UNECE ADR 2025 edition (licensed from Labeline.com).' },
-      { date: 'Apr 1', tag: 'Data Update', title: 'HS Code Dataset', desc: '6,940 codes from WCO HS 2022 nomenclature with full section/chapter/heading hierarchy.' },
-      { date: 'Apr 1', tag: 'Data Update', title: 'Airline Codes', desc: '6,352 entries with IATA/ICAO codes and AWB prefixes. Cargo-only default view with 390 cargo airlines.' },
-    ],
-  },
-  {
-    month: 'March 2026',
-    items: [
-      { date: 'Mar 15', tag: 'New Tool', title: 'FreightUtils.com Launched', desc: '11 free freight tools with open REST APIs. LDM, CBM, chargeable weight, pallet fitting, container capacity, unit converter, ADR, airlines, INCOTERMS, HS codes.' },
-      { date: 'Mar 15', tag: 'API Change', title: 'OpenAPI 3.0.3 Specification Published', desc: 'Full OpenAPI spec covering all endpoints. Compatible with Swagger, Postman, and RapidAPI import.' },
-      { date: 'Mar 15', tag: 'Data Update', title: 'INCOTERMS 2020 Reference Data', desc: 'All 11 Incoterms with seller/buyer responsibilities, risk transfer, cost transfer, and insurance details.' },
-    ],
-  },
-];
-
-// ─── Page ───────────────────────────────────────────────────────
-
 export default function ChangelogPage() {
+  const groups = monthGroups();
+
   return (
     <>
-      {/* Hero */}
-      <div style={{ background: 'var(--bg-hero)', padding: '40px 20px 48px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(22px, 5vw, 36px)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 12, letterSpacing: '-0.5px' }}>
-          Change<span style={{ color: '#e87722' }}>log</span>
-        </h1>
-        <p style={{ fontSize: 16, color: 'var(--text-faint)', maxWidth: 520, margin: '0 auto' }}>
-          Data updates, new tools, and API changes. FreightUtils is actively maintained.
-        </p>
-      </div>
+      <PageHero
+        title="Change"
+        titleAccent="log"
+        subtitle="Data updates, new tools, and API changes. FreightUtils is actively maintained — source of truth at CHANGELOG.md in the repo."
+        category="ref"
+        differentiators={['RSS feed', 'Machine-readable source', 'Categorised entries']}
+      />
 
-      <div style={{ maxWidth: 740, margin: '0 auto', padding: '32px 16px 64px' }}>
-        {/* Data freshness */}
+      <main data-category="ref" style={{ maxWidth: 740, margin: '0 auto', padding: '32px 16px 64px' }}>
         <div style={{
           background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
           padding: '16px 20px', marginBottom: 32, fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6,
+          display: 'flex', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', alignItems: 'center',
         }}>
-          <strong style={{ color: 'var(--text)' }}>Data freshness:</strong>{' '}
-          ADR data: UNECE ADR 2025. HS codes: WCO HS 2022. Next scheduled updates: ADR 2027 (September 2026), HS 2027 (November 2026).
+          <div>
+            <strong style={{ color: 'var(--text)' }}>Data freshness:</strong>{' '}
+            ADR: UNECE ADR 2025. HS codes: WCO HS 2022. Next updates: ADR 2027 (Sep 2026), HS 2027 (Nov 2026).
+          </div>
+          <a href="/changelog.xml" style={{
+            fontSize: 12, fontWeight: 700, color: 'var(--page-cat, var(--accent))',
+            textDecoration: 'none', padding: '4px 10px', border: '1px solid currentColor',
+            borderRadius: 4, letterSpacing: '0.5px',
+          }}>
+            RSS →
+          </a>
         </div>
 
-        {/* Entries */}
-        {entries.map(group => (
+        {groups.map(group => (
           <div key={group.month} style={{ marginBottom: 40 }}>
             <h2 style={{
               fontSize: 18, fontWeight: 800, color: 'var(--text)',
@@ -91,7 +73,7 @@ export default function ChangelogPage() {
               {group.items.map((entry, i) => {
                 const tag = TAG_COLORS[entry.tag];
                 return (
-                  <div key={i} style={{
+                  <div key={`${entry.isoDate}-${i}`} style={{
                     display: 'grid', gridTemplateColumns: '60px 1fr', gap: 16, alignItems: 'start',
                     padding: '14px 0',
                     borderBottom: i < group.items.length - 1 ? '1px solid var(--border-light)' : 'none',
@@ -109,7 +91,11 @@ export default function ChangelogPage() {
                           {entry.tag}
                         </span>
                         <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>
-                          {entry.title}
+                          {entry.link ? (
+                            <a href={entry.link} style={{ color: 'inherit', textDecoration: 'none' }}>
+                              {entry.title}
+                            </a>
+                          ) : entry.title}
                         </span>
                       </div>
                       <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
@@ -123,13 +109,12 @@ export default function ChangelogPage() {
           </div>
         ))}
 
-        {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 32, lineHeight: 1.6 }}>
-          Dates are approximate. Data is sourced from official international standards bodies (UNECE, WCO, ICC, IATA).
-          ADR data licensed from Labeline.com. For corrections or data issues, contact{' '}
-          <a href="mailto:contact@freightutils.com" style={{ color: '#e87722' }}>contact@freightutils.com</a>.
+          Dates are approximate. Data sourced from UNECE, WCO, ICC, IATA. ADR data licensed from Labeline.com.
+          For corrections or data issues contact{' '}
+          <a href="mailto:contact@freightutils.com" style={{ color: 'var(--page-cat, var(--accent))' }}>contact@freightutils.com</a>.
         </p>
-      </div>
+      </main>
     </>
   );
 }
