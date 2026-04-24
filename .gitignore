@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# sentry (.env.sentry-build-plugin covered by .env* above)
+.sentryclirc
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
