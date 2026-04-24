@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHero from '@/app/components/PageHero';
-import { getUptimeRobotStats, type UptimeRobotData } from '@/lib/uptimerobot';
+import { getUptimeRobotStats, type UptimeRobotData, type UptimeRobotMonitor, type UptimeRobotState } from '@/lib/uptimerobot';
 import { getRecentSamples, computeStats, type StatusStats } from '@/lib/status';
 
 export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 const ogUrl = '/api/og?title=Status&desc=System+health+and+uptime+for+freightutils.com&badge=STATUS';
 
@@ -16,9 +17,7 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', images: [ogUrl] },
 };
 
-type State = 'ok' | 'degraded' | 'down' | 'unknown';
-
-function StateIndicator({ state }: { state: State }) {
+function StateIndicator({ state }: { state: UptimeRobotState }) {
   const spec = {
     ok:       { color: '#15803D', bg: '#dcfce7', label: 'All systems operational' },
     degraded: { color: '#B45309', bg: '#fef3c7', label: 'Degraded performance' },
@@ -65,6 +64,11 @@ function fmtUptime(n: number | null): string {
   return `${n.toFixed(2)}%`;
 }
 
+function fmtMs(n: number | null): string {
+  if (n === null) return '—';
+  return `${Math.round(n)}ms`;
+}
+
 function fmtRelative(t: number): string {
   const delta = Date.now() - t;
   const mins = Math.floor(delta / 60000);
@@ -82,33 +86,69 @@ function fmtDuration(seconds: number): string {
   return `${(seconds / 86400).toFixed(1)}d`;
 }
 
+function stateColor(s: UptimeRobotState): string {
+  return s === 'ok' ? '#15803D' : s === 'degraded' ? '#B45309' : s === 'down' ? '#B91C1C' : '#6B7280';
+}
+
+function MonitorRow({ m }: { m: UptimeRobotMonitor }) {
+  return (
+    <div style={{
+      display: 'grid', gridTemplateColumns: '14px 1fr auto auto', gap: 12, alignItems: 'center',
+      padding: '12px 14px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8,
+    }}>
+      <span style={{
+        width: 10, height: 10, borderRadius: '50%', background: stateColor(m.state),
+        boxShadow: `0 0 0 3px ${stateColor(m.state)}22`,
+      }} />
+      <div style={{ minWidth: 0 }}>
+        <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {m.name}
+        </div>
+        <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'monospace', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {m.url}
+        </div>
+      </div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', textAlign: 'right', whiteSpace: 'nowrap' }}>
+        {fmtUptime(m.uptime30d)} <span style={{ fontSize: 11, color: 'var(--text-faint)', fontWeight: 500 }}>30d</span>
+      </div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'right', whiteSpace: 'nowrap' }}>
+        {fmtMs(m.avgResponseMs)}
+      </div>
+    </div>
+  );
+}
+
 function UptimeRobotView({ ur }: { ur: UptimeRobotData }) {
   return (
     <>
-      <StateIndicator state={ur.state} />
+      <StateIndicator state={ur.aggregate.state} />
 
       <div className="status-grid" style={{
         display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginTop: 18,
       }}>
-        <MetricCard label="Uptime · 24h" value={fmtUptime(ur.uptime24h)} sub={ur.downSec24h ? `${fmtDuration(ur.downSec24h)} downtime` : 'No downtime'} />
-        <MetricCard label="Uptime · 7d"  value={fmtUptime(ur.uptime7d)}  sub={ur.downSec7d  ? `${fmtDuration(ur.downSec7d)} downtime`  : 'No downtime'} />
-        <MetricCard label="Uptime · 30d" value={fmtUptime(ur.uptime30d)} sub={ur.downSec30d ? `${fmtDuration(ur.downSec30d)} downtime` : 'No downtime'} />
-        <MetricCard
-          label="Avg response"
-          value={ur.avgResponseMs !== null ? `${Math.round(ur.avgResponseMs)}ms` : '—'}
-          sub="30-day mean"
-        />
+        <MetricCard label="Uptime · 24h" value={fmtUptime(ur.aggregate.uptime24h)} sub={ur.monitors.length > 1 ? `Across ${ur.monitors.length} monitors` : 'External probe'} />
+        <MetricCard label="Uptime · 7d"  value={fmtUptime(ur.aggregate.uptime7d)}  sub={ur.monitors.length > 1 ? `Across ${ur.monitors.length} monitors` : 'External probe'} />
+        <MetricCard label="Uptime · 30d" value={fmtUptime(ur.aggregate.uptime30d)} sub={ur.monitors.length > 1 ? `Across ${ur.monitors.length} monitors` : 'External probe'} />
+        <MetricCard label="Avg response" value={fmtMs(ur.aggregate.avgResponseMs)} sub="30-day mean" />
       </div>
 
       <div style={{ marginTop: 18, fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-        {ur.lastIncident ? (
+        {ur.aggregate.lastIncident ? (
           <>
-            Last incident: <strong style={{ color: 'var(--text)' }}>{fmtRelative(ur.lastIncident.at)}</strong>
-            {' '}— downtime lasted {fmtDuration(ur.lastIncident.durationSec)}{ur.lastIncident.reason ? ` (${ur.lastIncident.reason})` : ''}
+            Last incident: <strong style={{ color: 'var(--text)' }}>{fmtRelative(ur.aggregate.lastIncident.at)}</strong>
+            {' '}— lasted {fmtDuration(ur.aggregate.lastIncident.durationSec)}
+            {ur.aggregate.lastIncident.reason ? ` (${ur.aggregate.lastIncident.reason})` : ''}
           </>
         ) : (
-          <>No incidents recorded in monitoring history.</>
+          <>No incidents recorded in the last 10 events.</>
         )}
+      </div>
+
+      <h2 style={{ fontSize: 16, fontWeight: 800, color: 'var(--text)', margin: '28px 0 10px', letterSpacing: '-0.2px' }}>
+        Monitors
+      </h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {ur.monitors.map(m => <MonitorRow key={m.id} m={m} />)}
       </div>
 
       <div style={{
@@ -116,13 +156,17 @@ function UptimeRobotView({ ur }: { ur: UptimeRobotData }) {
         padding: '12px 16px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8,
       }}>
         <strong style={{ color: 'var(--text)' }}>Monitored by UptimeRobot.</strong>{' '}
-        External probe of <code style={{ background: 'var(--bg-card-hover)', padding: '1px 6px', borderRadius: 3, fontSize: 12, fontFamily: 'monospace' }}>{ur.monitorUrl}</code> every {ur.intervalSec ? `${Math.round(ur.intervalSec / 60)} min` : '5 min'} from multiple regions. Uptime % and incident logs are UptimeRobot&apos;s ground truth.
+        {ur.monitors.length === 1
+          ? <>External probe of <code style={{ background: 'var(--bg-card-hover)', padding: '1px 6px', borderRadius: 3, fontSize: 12, fontFamily: 'monospace' }}>{ur.monitors[0].url}</code> every {ur.monitors[0].intervalSec ? `${Math.round(ur.monitors[0].intervalSec / 60)} min` : '5 min'} from multiple regions.</>
+          : <>External probe across {ur.monitors.length} monitors from multiple regions.</>
+        }
+        {' '}Uptime % and incident logs are UptimeRobot&apos;s ground truth.
       </div>
     </>
   );
 }
 
-function SelfReportView({ stats, sampleCount }: { stats: StatusStats; sampleCount: number }) {
+function SelfReportView({ stats, sampleCount, reason }: { stats: StatusStats; sampleCount: number; reason: string | null }) {
   return (
     <>
       <div style={{
@@ -136,10 +180,10 @@ function SelfReportView({ stats, sampleCount }: { stats: StatusStats; sampleCoun
         color: 'var(--text-muted)',
         lineHeight: 1.6,
       }}>
-        <strong style={{ color: 'var(--text)' }}>Fallback source — UptimeRobot unreachable.</strong>{' '}
+        <strong style={{ color: 'var(--text)' }}>Fallback — {reason || 'UptimeRobot unreachable'}.</strong>{' '}
         External monitor is temporarily not responding; showing an internal self-report instead. Figures may lag and come from a single region.
       </div>
-      <StateIndicator state={stats.current} />
+      <StateIndicator state={stats.current === 'ok' ? 'ok' : stats.current === 'degraded' ? 'degraded' : stats.current === 'down' ? 'down' : 'unknown'} />
       <div className="status-grid" style={{
         display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginTop: 18,
       }}>
@@ -183,20 +227,20 @@ export default async function StatusPage() {
 
         {ur.available
           ? <UptimeRobotView ur={ur} />
-          : <SelfReportView stats={selfReportStats} sampleCount={selfReportSamples.length} />
+          : <SelfReportView stats={selfReportStats} sampleCount={selfReportSamples.length} reason={ur.reason} />
         }
 
         <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', margin: '36px 0 10px' }}>
           How this page works
         </h2>
         <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 10 }}>
-          Primary source is <a href="https://uptimerobot.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--page-cat, var(--accent))' }}>UptimeRobot</a>: an external HTTP probe of <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13, fontFamily: 'monospace' }}>www.freightutils.com/</code> every 5 minutes from multiple regions, running for 30+ days. That covers end-to-end path (DNS → CDN → edge → serverless → data) and is independent of our own infrastructure.
+          Primary source is <a href="https://uptimerobot.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--page-cat, var(--accent))' }}>UptimeRobot</a>: an external HTTP probe of <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13, fontFamily: 'monospace' }}>www.freightutils.com/</code> every 5 minutes from multiple regions. That covers end-to-end path (DNS → CDN → edge → serverless → data) and is independent of our own infrastructure.
         </p>
         <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 10 }}>
-          A fallback internal self-report (<code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13, fontFamily: 'monospace' }}>/api/cron/status-ping</code>) runs every 5 minutes and writes to Vercel KV with 30-day retention. It&apos;s only displayed if UptimeRobot&apos;s API is unreachable.
+          A fallback internal self-report (<code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13, fontFamily: 'monospace' }}>/api/cron/status-ping</code>) runs every 5 minutes and writes to Vercel KV with 30-day retention. It only renders if UptimeRobot&apos;s API is unreachable — the banner names the concrete reason so regressions aren&apos;t opaque.
         </p>
         <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7 }}>
-          Page cache is 60 seconds — stats refresh at least once per minute.
+          Page cache is 60 seconds.
         </p>
 
         <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', margin: '28px 0 10px' }}>
