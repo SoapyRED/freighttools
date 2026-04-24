@@ -235,4 +235,4 @@ async function run() {
   process.exit(failed > 0 ? 1 : 0);
 }
 
-run();
+await run();
