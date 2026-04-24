@@ -9,6 +9,12 @@
  */
 
 const BASE = process.argv[2] || 'https://www.freightutils.com';
+const SMOKE_API_KEY = process.env.SMOKE_API_KEY;
+const AUTH_HEADERS = SMOKE_API_KEY ? { 'X-API-Key': SMOKE_API_KEY } : {};
+if (!SMOKE_API_KEY) {
+  console.warn('  \x1b[33m⚠\x1b[0m SMOKE_API_KEY not set — running anonymously (25/day anon cap applies)');
+}
+
 const results = [];
 let passed = 0;
 let failed = 0;
@@ -18,7 +24,7 @@ async function test(name, url, opts = {}) {
   const start = Date.now();
 
   try {
-    const fetchOpts = { method, headers: { 'Accept': 'application/json' } };
+    const fetchOpts = { method, headers: { 'Accept': 'application/json', ...AUTH_HEADERS } };
     if (body) {
       fetchOpts.headers['Content-Type'] = 'application/json';
       fetchOpts.body = JSON.stringify(body);
@@ -189,7 +195,7 @@ async function testDetailTitlesSingleSuffix() {
 async function testPage(name, url, expectedStatus = 200) {
   const start = Date.now();
   try {
-    const res = await fetch(`${BASE}${url}`, { method: 'GET', headers: { 'Accept': 'text/html' }, redirect: 'manual' });
+    const res = await fetch(`${BASE}${url}`, { method: 'GET', headers: { 'Accept': 'text/html', ...AUTH_HEADERS }, redirect: 'manual' });
     const ms = Date.now() - start;
     const errors = [];
     if (res.status !== expectedStatus) errors.push(`status ${res.status} !== ${expectedStatus}`);
