@@ -5,14 +5,14 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 interface Entry {
   code: string;
   country: string;
-  locationCode: string;
+  location_code: string;
   name: string;
-  nameAscii: string;
+  name_ascii: string;
   subdivision: string | null;
   functions: string[];
   status: string | null;
   coordinates: { lat: number; lon: number } | null;
-  iataCode: string | null;
+  iata_code: string | null;
 }
 
 const FUNC_OPTIONS = [
@@ -194,11 +194,11 @@ export default function UnlocodeSearch() {
               {[
                 ['UN/LOCODE', selected.code],
                 ['Country', selected.country],
-                ['Location Code', selected.locationCode],
+                ['Location Code', selected.location_code],
                 ['Name', selected.name],
-                ['ASCII Name', selected.nameAscii],
+                ['ASCII Name', selected.name_ascii],
                 ['Subdivision', selected.subdivision ?? '—'],
-                ['IATA Code', selected.iataCode ?? '—'],
+                ['IATA Code', selected.iata_code ?? '—'],
                 ['Status', selected.status ?? '—'],
                 ['Coordinates', selected.coordinates ? `${selected.coordinates.lat}, ${selected.coordinates.lon}` : 'Not available'],
               ].map(([label, value]) => (

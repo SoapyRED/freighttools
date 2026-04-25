@@ -1,5 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { search, lookupByCode, TOTAL_ENTRIES } from '@/lib/calculations/unlocode';
+import { search, lookupByCode, TOTAL_ENTRIES, type UnlocodeEntry } from '@/lib/calculations/unlocode';
+
+// API response shape (snake_case). Internal UnlocodeEntry uses camelCase;
+// this boundary mapper produces the documented public response shape.
+function toApiResponse(e: UnlocodeEntry) {
+  return {
+    code: e.code,
+    country: e.country,
+    location_code: e.locationCode,
+    name: e.name,
+    name_ascii: e.nameAscii,
+    subdivision: e.subdivision,
+    functions: e.functions,
+    status: e.status,
+    coordinates: e.coordinates,
+    iata_code: e.iataCode,
+  };
+}
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -31,7 +48,7 @@ export function GET(req: NextRequest) {
     if (!entry) {
       return NextResponse.json({ error: `UN/LOCODE "${code}" not found` }, { status: 404, headers: h });
     }
-    return NextResponse.json(entry, { headers: h });
+    return NextResponse.json(toApiResponse(entry), { headers: h });
   }
 
   // Search
@@ -50,7 +67,7 @@ export function GET(req: NextRequest) {
     country: country || undefined,
     function: func || undefined,
     count: results.length,
-    results,
+    results: results.map(toApiResponse),
     meta: {
       source: 'UNECE UN/LOCODE 2024-2 (PDDL)',
       total_entries: TOTAL_ENTRIES,

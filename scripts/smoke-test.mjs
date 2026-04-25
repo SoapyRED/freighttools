@@ -192,6 +192,53 @@ async function testDetailTitlesSingleSuffix() {
   }
 }
 
+function collectCamelCaseKeys(obj, path = '', acc = []) {
+  if (Array.isArray(obj)) {
+    for (let i = 0; i < obj.length; i++) collectCamelCaseKeys(obj[i], `${path}[${i}]`, acc);
+  } else if (obj && typeof obj === 'object') {
+    for (const k of Object.keys(obj)) {
+      if (/[A-Z]/.test(k)) acc.push(path ? `${path}.${k}` : k);
+      collectCamelCaseKeys(obj[k], path ? `${path}.${k}` : k, acc);
+    }
+  }
+  return acc;
+}
+
+async function testSnakeCaseOnly(name, url, opts = {}) {
+  const start = Date.now();
+  try {
+    const fetchOpts = { method: opts.method || 'GET', headers: { 'Accept': 'application/json', ...AUTH_HEADERS } };
+    if (opts.body) {
+      fetchOpts.headers['Content-Type'] = 'application/json';
+      fetchOpts.body = JSON.stringify(opts.body);
+    }
+    const res = await fetch(`${BASE}${url}`, fetchOpts);
+    const ms = Date.now() - start;
+    const json = await res.json();
+    const camelKeys = collectCamelCaseKeys(json);
+    const errors = [];
+    if (res.status !== 200) errors.push(`status ${res.status} !== 200`);
+    if (camelKeys.length > 0) {
+      const sample = camelKeys.slice(0, 5).join(', ');
+      const more = camelKeys.length > 5 ? ` (+${camelKeys.length - 5} more)` : '';
+      errors.push(`camelCase keys: ${sample}${more}`);
+    }
+    if (errors.length === 0) {
+      console.log(`  \x1b[32m✅\x1b[0m ${name} — snake_case only — ${res.status} (${ms}ms)`);
+      passed++;
+    } else {
+      console.log(`  \x1b[31m❌\x1b[0m ${name} — ${errors.join(', ')} (${ms}ms)`);
+      failed++;
+    }
+    results.push({ name, status: res.status, ms, errors, ok: errors.length === 0 });
+  } catch (err) {
+    const ms = Date.now() - start;
+    console.log(`  \x1b[31m❌\x1b[0m ${name} — NETWORK ERROR: ${err.message} (${ms}ms)`);
+    failed++;
+    results.push({ name, status: 0, ms, errors: [err.message], ok: false });
+  }
+}
+
 async function testPage(name, url, expectedStatus = 200) {
   const start = Date.now();
   try {
@@ -282,8 +329,8 @@ async function run() {
 
   await test('/api/duty', '/api/duty', {
     method: 'POST',
-    body: { commodityCode: '090111', originCountry: 'BR', customsValue: 5000 },
-    expect: { hasField: 'commodityCode' },
+    body: { commodity_code: '090111', origin_country: 'BR', customs_value: 5000 },
+    expect: { hasField: 'commodity_code' },
   });
 
   await test('/api/airlines', '/api/airlines?prefix=176', {
@@ -311,6 +358,22 @@ async function run() {
 
   await test('/api/tools', '/api/tools', {
     expect: { hasField: ['count', 'tools'], fieldGt: { count: 15 }, preview: 'count' },
+  });
+
+  console.log('\n  API Casing — snake_case-only guard (post-migration)');
+  console.log('  ────────────────────────────────────────────────────');
+
+  await testSnakeCaseOnly('/api/unlocode',   '/api/unlocode?q=rotterdam');
+  await testSnakeCaseOnly('/api/uld',        '/api/uld?type=AKE');
+  await testSnakeCaseOnly('/api/containers', '/api/containers?type=40ft-high-cube');
+  await testSnakeCaseOnly('/api/vehicles',   '/api/vehicles?category=van');
+  await testSnakeCaseOnly('/api/consignment', '/api/consignment', {
+    method: 'POST',
+    body: { mode: 'air', items: [{ length: 60, width: 40, height: 30, grossWeight: 25, quantity: 2 }] },
+  });
+  await testSnakeCaseOnly('/api/duty', '/api/duty', {
+    method: 'POST',
+    body: { commodity_code: '090111', origin_country: 'BR', customs_value: 5000 },
   });
 
   console.log('\n  Platform Pages');

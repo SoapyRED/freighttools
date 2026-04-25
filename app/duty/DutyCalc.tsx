@@ -4,19 +4,19 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 interface DutyResult {
-  commodityCode: string;
-  commodityDescription: string;
-  originCountry: string;
-  originCountryName: string;
-  cifValue: number;
-  dutyRate: string;
-  dutyRatePercent: number;
-  dutyAmount: number;
-  vatRate: string;
-  vatRatePercent: number;
-  vatAmount: number;
-  totalImportTaxes: number;
-  totalLandedCost: number;
+  commodity_code: string;
+  commodity_description: string;
+  origin_country: string;
+  origin_country_name: string;
+  cif_value: number;
+  duty_rate: string;
+  duty_rate_percent: number;
+  duty_amount: number;
+  vat_rate: string;
+  vat_rate_percent: number;
+  vat_amount: number;
+  total_import_taxes: number;
+  total_landed_cost: number;
   warnings: { type: string; message: string }[];
   disclaimer: string;
 }
@@ -210,20 +210,20 @@ export default function DutyCalc() {
         <>
           <div style={card}>
             <div style={cardHead}>
-              Duty & VAT Estimate — {result.commodityCode}
+              Duty & VAT Estimate — {result.commodity_code}
             </div>
             <div style={{ padding: 20 }}>
               <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 16 }}>
-                {result.commodityDescription}
+                {result.commodity_description}
               </p>
 
               {/* Breakdown table */}
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, marginBottom: 16 }}>
                 <tbody>
                   {[
-                    { label: 'CIF Value', rate: '', amount: result.cifValue, note: `Customs value + freight + insurance (${incoterm} basis)` },
-                    { label: 'Import Duty', rate: result.dutyRate, amount: result.dutyAmount, note: 'Third-country duty rate' },
-                    { label: 'VAT', rate: result.vatRate, amount: result.vatAmount, note: `On CIF + duty (\u00a3${(result.cifValue + result.dutyAmount).toLocaleString('en-GB', { minimumFractionDigits: 2 })})` },
+                    { label: 'CIF Value', rate: '', amount: result.cif_value, note: `Customs value + freight + insurance (${incoterm} basis)` },
+                    { label: 'Import Duty', rate: result.duty_rate, amount: result.duty_amount, note: 'Third-country duty rate' },
+                    { label: 'VAT', rate: result.vat_rate, amount: result.vat_amount, note: `On CIF + duty (\u00a3${(result.cif_value + result.duty_amount).toLocaleString('en-GB', { minimumFractionDigits: 2 })})` },
                   ].map((row, i) => (
                     <tr key={i} style={{ borderBottom: '1px solid var(--border-light)' }}>
                       <td style={{ padding: '12px 0', fontWeight: 600, color: 'var(--text)' }}>{row.label}</td>
@@ -237,14 +237,14 @@ export default function DutyCalc() {
                     <td style={{ padding: '14px 0', fontWeight: 800, color: 'var(--text)', fontSize: 16 }}>Total Import Taxes</td>
                     <td></td>
                     <td style={{ padding: '14px 0', textAlign: 'right', fontWeight: 800, color: '#e87722', fontSize: 18, fontFamily: 'monospace' }}>
-                      &pound;{result.totalImportTaxes.toLocaleString('en-GB', { minimumFractionDigits: 2 })}
+                      &pound;{result.total_import_taxes.toLocaleString('en-GB', { minimumFractionDigits: 2 })}
                     </td>
                   </tr>
                   <tr>
                     <td style={{ padding: '10px 0', fontWeight: 600, color: 'var(--text-muted)' }}>Total Landed Cost</td>
                     <td></td>
                     <td style={{ padding: '10px 0', textAlign: 'right', fontWeight: 600, color: 'var(--text-muted)', fontFamily: 'monospace' }}>
-                      &pound;{result.totalLandedCost.toLocaleString('en-GB', { minimumFractionDigits: 2 })}
+                      &pound;{result.total_landed_cost.toLocaleString('en-GB', { minimumFractionDigits: 2 })}
                     </td>
                   </tr>
                 </tbody>
@@ -252,13 +252,13 @@ export default function DutyCalc() {
 
               {/* Links */}
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', fontSize: 13 }}>
-                <Link href={`/hs?code=${result.commodityCode.slice(0, 6)}`} style={{ color: '#e87722', textDecoration: 'none' }}>
+                <Link href={`/hs?code=${result.commodity_code.slice(0, 6)}`} style={{ color: '#e87722', textDecoration: 'none' }}>
                   Look up HS code &rarr;
                 </Link>
                 <Link href="/incoterms" style={{ color: '#e87722', textDecoration: 'none' }}>
                   Check Incoterms &rarr;
                 </Link>
-                <a href={`https://www.trade-tariff.service.gov.uk/commodities/${result.commodityCode}`}
+                <a href={`https://www.trade-tariff.service.gov.uk/commodities/${result.commodity_code}`}
                   target="_blank" rel="noopener noreferrer" style={{ color: '#e87722', textDecoration: 'none' }}>
                   View on GOV.UK Trade Tariff &rarr;
                 </a>

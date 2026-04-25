@@ -3,6 +3,28 @@
 FreightUtils data updates, new tools, API changes, and MCP updates.
 Subscribe via RSS: <https://www.freightutils.com/changelog.xml>
 
+## 2026-04-25
+
+- **API breaking change** — Six endpoints now return `snake_case` response fields, was `camelCase`. Affected: `/api/unlocode`, `/api/uld`, `/api/containers`, `/api/vehicles`, `/api/consignment`, `/api/duty`. Reason: site-wide consistency with the majority of endpoints (which already used `snake_case`) plus downstream client compatibility (Zapier and n8n both expect a single convention). The thirteen other endpoints are unchanged. Migration done now while traffic is near-zero. No deprecation/dual-output layer — clean break.
+
+  Per-endpoint old → new field map:
+
+  **`/api/unlocode`** (single-code lookup and search results) — `locationCode` → `location_code`, `nameAscii` → `name_ascii`, `iataCode` → `iata_code`. Unchanged: `code`, `country`, `name`, `subdivision`, `functions`, `status`, `coordinates`.
+
+  **`/api/uld`** (single ULD via `?type=`, plus `?category=`, `?deck=`, and no-param list modes) — `deckPosition` → `deck_position`, `externalDimensions` → `external_dimensions`, `internalDimensions` → `internal_dimensions`, `doorDimensions` → `door_dimensions`, `maxGrossWeight` → `max_gross_weight`, `tareWeight` → `tare_weight`, `usableVolume` → `usable_volume`, `compatibleAircraft` → `compatible_aircraft`. Inner dimension keys (`length`, `width`, `height`) unchanged.
+
+  **`/api/containers`** (spec lookup, list mode, plus loading-fit mode with `?l=&w=&h=`) — `internalLengthCm` → `internal_length_cm`, `internalWidthCm` → `internal_width_cm`, `internalHeightCm` → `internal_height_cm`, `capacityCbm` → `capacity_cbm`, `externalLengthCm` → `external_length_cm`, `externalWidthCm` → `external_width_cm`, `externalHeightCm` → `external_height_cm`, `doorWidthCm` → `door_width_cm`, `doorHeightCm` → `door_height_cm`, `tareWeightKg` → `tare_weight_kg`, `maxGrossKg` → `max_gross_kg`, `maxPayloadKg` → `max_payload_kg`, `euroPallets` → `euro_pallets`, `gmaPallets` → `gma_pallets`. Loading-fit-mode sub-object: `itemsPerRow` → `items_per_row`, `itemsPerCol` → `items_per_col`, `itemsPerLayer` → `items_per_layer`, `totalItemsFit` → `total_items_fit`, `itemsRequested` → `items_requested`, `allFit` → `all_fit`, `totalWeightKg` → `total_weight_kg`, `volumeUsedCbm` → `volume_used_cbm`, `volumeUtilisation` → `volume_utilisation`, `weightUtilisation` → `weight_utilisation`, `limitingFactor` → `limiting_factor`.
+
+  **`/api/vehicles`** (single via `?slug=`, plus `?category=`, `?region=`, and no-param list) — `internalDimensions` → `internal_dimensions`, `doorDimensions` → `door_dimensions`, `maxPayload` → `max_payload`, `grossVehicleWeight` → `gross_vehicle_weight`, `euroPallets` → `euro_pallets`, `ukPallets` → `uk_pallets`, `usPallets` → `us_pallets`, `axleConfig` → `axle_config`. Inner dimension keys (`length`, `width`, `height`) unchanged.
+
+  **`POST /api/consignment`** — items array: `dimensions.lengthCm/widthCm/heightCm` → `length_cm/width_cm/height_cm`, `grossWeightKg` → `gross_weight_kg`, `chargeableWeightAir/Road/Sea` → `chargeable_weight_air/road/sea`, `revenueTonnes` → `revenue_tonnes`, `palletSpaces` → `pallet_spaces`, `palletType` → `pallet_type`. Totals: same renames + `itemCount` → `item_count`, `pieceCount` → `piece_count`. Trailer block: `utilisationPercent` → `utilisation_percent`, `weightUtilisationPercent` → `weight_utilisation_percent`, `palletSpacesUsed/Available` → `pallet_spaces_used/available`. Sea: `suggestedContainer` → `suggested_container`, `containerCount` → `container_count`. Top-level: `billingBasis` → `billing_basis`, `suggestedVehicle` → `suggested_vehicle`. Request body input parser unchanged — still accepts `length`/`lengthCm`/`l`, `grossWeight`/`grossWeightKg`/`weight`/`gw`, etc. as aliases.
+
+  **`POST /api/duty`** — `commodityCode` → `commodity_code`, `commodityDescription` → `commodity_description`, `originCountry` → `origin_country`, `originCountryName` → `origin_country_name`, `cifValue` → `cif_value`, `dutyRate` → `duty_rate`, `dutyRatePercent` → `duty_rate_percent`, `dutyAmount` → `duty_amount`, `vatRate` → `vat_rate`, `vatRatePercent` → `vat_rate_percent`, `vatAmount` → `vat_amount`, `totalImportTaxes` → `total_import_taxes`, `totalLandedCost` → `total_landed_cost`. Unchanged: `warnings`, `source`, `disclaimer`. Request body still accepts both `commodityCode` and `commodity_code` (and the other camelCase/snake aliases from before) — `snake_case` is now the documented form.
+
+- **Docs**: OpenAPI spec at `/openapi.json` and the API docs page at `/api-docs` updated to the new shapes. The "Field Naming" section now reads "All endpoints use snake_case field names in responses."
+
+- **Smoke test**: `scripts/smoke-test.mjs` gained a "snake_case-only guard" section that recursively asserts no response key contains a capital letter on each of the six migrated endpoints. The existing duty assertion was updated from `commodityCode` to `commodity_code`.
+
 ## 2026-04-09
 
 - **New Tool**: ADR LQ/EQ Multi-Line Checker — Check Limited Quantity and Excepted Quantity eligibility for mixed dangerous goods consignments. Multi-item input with per-item breakdown, green/red/amber verdicts. POST /api/adr/lq-check.

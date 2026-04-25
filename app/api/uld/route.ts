@@ -5,7 +5,27 @@ import {
   getULDsByCategory,
   getULDsByDeck,
   ULD_COUNT,
+  type ULDSpec,
 } from '@/lib/calculations/uld';
+
+// API response shape (snake_case). Internal ULDSpec uses camelCase.
+function toApiResponse(u: ULDSpec) {
+  return {
+    code: u.code,
+    name: u.name,
+    slug: u.slug,
+    category: u.category,
+    deck_position: u.deckPosition,
+    external_dimensions: u.externalDimensions,
+    internal_dimensions: u.internalDimensions,
+    door_dimensions: u.doorDimensions,
+    max_gross_weight: u.maxGrossWeight,
+    tare_weight: u.tareWeight,
+    usable_volume: u.usableVolume,
+    compatible_aircraft: u.compatibleAircraft,
+    notes: u.notes,
+  };
+}
 
 // -----------------------------------------------------------------
 //  Headers
@@ -65,7 +85,7 @@ export function GET(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { result: uld, meta: ULD_META },
+      { result: toApiResponse(uld), meta: ULD_META },
       { status: 200, headers },
     );
   }
@@ -87,7 +107,7 @@ export function GET(req: NextRequest) {
     const results = getULDsByCategory(cat);
 
     return NextResponse.json(
-      { count: results.length, results, meta: ULD_META },
+      { count: results.length, results: results.map(toApiResponse), meta: ULD_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } },
     );
   }
@@ -109,7 +129,7 @@ export function GET(req: NextRequest) {
     const results = getULDsByDeck(deck);
 
     return NextResponse.json(
-      { count: results.length, results, meta: ULD_META },
+      { count: results.length, results: results.map(toApiResponse), meta: ULD_META },
       { status: 200, headers: { ...headers, 'X-Total-Count': String(results.length) } },
     );
   }
@@ -120,7 +140,7 @@ export function GET(req: NextRequest) {
   return NextResponse.json(
     {
       count: all.length,
-      results: all,
+      results: all.map(toApiResponse),
       meta: ULD_META,
       usage: {
         examples: [

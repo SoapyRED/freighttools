@@ -1,5 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllVehicles, getVehicle, getVehiclesByCategory, getVehiclesByRegion, VEHICLE_REF_COUNT } from '@/lib/calculations/vehicle-ref';
+import { getAllVehicles, getVehicle, getVehiclesByCategory, getVehiclesByRegion, VEHICLE_REF_COUNT, type VehicleSpec } from '@/lib/calculations/vehicle-ref';
+
+// API response shape (snake_case). Internal VehicleSpec uses camelCase.
+function toApiResponse(v: VehicleSpec) {
+  return {
+    slug: v.slug,
+    name: v.name,
+    category: v.category,
+    region: v.region,
+    internal_dimensions: v.internalDimensions,
+    door_dimensions: v.doorDimensions,
+    max_payload: v.maxPayload,
+    gross_vehicle_weight: v.grossVehicleWeight,
+    euro_pallets: v.euroPallets,
+    uk_pallets: v.ukPallets,
+    us_pallets: v.usPallets,
+    axle_config: v.axleConfig,
+    features: v.features,
+    notes: v.notes,
+  };
+}
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -33,7 +53,7 @@ export function GET(req: NextRequest) {
     }
     return NextResponse.json({
       meta: { source: 'Industry standard specifications', total: VEHICLE_REF_COUNT },
-      result: vehicle,
+      result: toApiResponse(vehicle),
     }, { headers: h });
   }
 
@@ -50,7 +70,7 @@ export function GET(req: NextRequest) {
     return NextResponse.json({
       meta: { source: 'Industry standard specifications', total: VEHICLE_REF_COUNT },
       count: results.length,
-      results,
+      results: results.map(toApiResponse),
     }, { headers: h });
   }
 
@@ -67,7 +87,7 @@ export function GET(req: NextRequest) {
     return NextResponse.json({
       meta: { source: 'Industry standard specifications', total: VEHICLE_REF_COUNT },
       count: results.length,
-      results,
+      results: results.map(toApiResponse),
     }, { headers: h });
   }
 
@@ -76,6 +96,6 @@ export function GET(req: NextRequest) {
   return NextResponse.json({
     meta: { source: 'Industry standard specifications', total: VEHICLE_REF_COUNT },
     count: results.length,
-    results,
+    results: results.map(toApiResponse),
   }, { headers: h });
 }

@@ -1,6 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { calculateDuty, CommodityCodeNotFoundError } from '@/lib/calculations/duty';
+import { calculateDuty, CommodityCodeNotFoundError, type DutyResult } from '@/lib/calculations/duty';
 import { ISO_3166_ALPHA2 } from '@/lib/data/iso-countries';
+
+// API response shape (snake_case). Internal DutyResult uses camelCase.
+function toApiResponse(r: DutyResult) {
+  return {
+    commodity_code: r.commodityCode,
+    commodity_description: r.commodityDescription,
+    origin_country: r.originCountry,
+    origin_country_name: r.originCountryName,
+    cif_value: r.cifValue,
+    duty_rate: r.dutyRate,
+    duty_rate_percent: r.dutyRatePercent,
+    duty_amount: r.dutyAmount,
+    vat_rate: r.vatRate,
+    vat_rate_percent: r.vatRatePercent,
+    vat_amount: r.vatAmount,
+    total_import_taxes: r.totalImportTaxes,
+    total_landed_cost: r.totalLandedCost,
+    warnings: r.warnings,
+    source: r.source,
+    disclaimer: r.disclaimer,
+  };
+}
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -53,7 +75,7 @@ export async function POST(req: NextRequest) {
       incoterm,
     });
 
-    return NextResponse.json(result, { headers: h });
+    return NextResponse.json(toApiResponse(result), { headers: h });
   } catch (err) {
     if (err instanceof CommodityCodeNotFoundError) {
       return NextResponse.json({

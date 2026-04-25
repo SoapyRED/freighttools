@@ -297,15 +297,15 @@ export default function ApiDocsPage() {
   "origin": { "country": "DE", "locode": "DEHAM" },
   "destination": { "country": "GB", "locode": "GBFXT" },
   "incoterm": "CIF",
-  "freightCost": 850,
-  "insuranceCost": 120,
+  "freight_cost": 850,
+  "insurance_cost": 120,
   "items": [
     {
       "description": "Machine parts on Euro pallets",
       "length": 120, "width": 80, "height": 110,
       "weight": 480, "quantity": 6,
-      "stackable": false, "palletType": "euro",
-      "hsCode": "847989", "customsValue": 12000
+      "stackable": false, "pallet_type": "euro",
+      "hsCode": "847989", "customs_value": 12000
     },
     {
       "description": "Cleaning solvent (DG)",
@@ -325,20 +325,20 @@ export default function ApiDocsPage() {
             <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Response</h3>
             <JsonBlock json={`{
   "mode": "road",
-  "itemCount": 3,
+  "item_count": 3,
   "totals": {
     "pieces": 20,
     "grossWeight": 3060,
     "volumeCBM": 7.28,
     "chargeableWeight": 3060,
-    "billingBasis": "weight"
+    "billing_basis": "weight"
   },
   "modeSpecific": {
     "loadingMetres": 4.0,
-    "palletSpaces": 10,
+    "pallet_spaces": 10,
     "trailerUtilisation": 29.41,
-    "suggestedVehicle": "13.6m Artic Trailer",
-    "chargeableWeightRoad": 7000
+    "suggested_vehicle": "13.6m Artic Trailer",
+    "chargeable_weight_road": 7000
   },
   "compliance": {
     "hasDangerousGoods": true,
@@ -352,11 +352,11 @@ export default function ApiDocsPage() {
     "hsCodesPresent": true,
     "canEstimateUkDuty": true,
     "dutyEstimate": {
-      "cifValue": 12970,
-      "dutyRate": "1.7%",
-      "dutyAmount": 220.49,
-      "vatRate": "20%",
-      "vatAmount": 2638.1,
+      "cif_value": 12970,
+      "duty_rate": "1.7%",
+      "duty_amount": 220.49,
+      "vat_rate": "20%",
+      "vat_amount": 2638.1,
       "totalTaxes": 2858.59
     }
   },
@@ -1560,7 +1560,7 @@ Content-Type: application/json
                   <tr><td><code>quantity</code></td><td>integer</td><td>No</td><td>Number of items (default: 1)</td></tr>
                   <tr><td><code>grossWeight</code></td><td>number</td><td>No</td><td>Gross weight per item in kg</td></tr>
                   <tr><td><code>stackable</code></td><td>boolean</td><td>No</td><td>Whether items can be stacked (default: false)</td></tr>
-                  <tr><td><code>palletType</code></td><td>string</td><td>No</td><td><code>euro</code>, <code>uk</code>, <code>us</code>, <code>custom</code>, <code>none</code></td></tr>
+                  <tr><td><code>pallet_type</code></td><td>string</td><td>No</td><td><code>euro</code>, <code>uk</code>, <code>us</code>, <code>custom</code>, <code>none</code></td></tr>
                   <tr><td><code>description</code></td><td>string</td><td>No</td><td>Item description</td></tr>
                 </tbody>
               </table>
@@ -1575,12 +1575,12 @@ Content-Type: application/json
   ]}'`} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
   "mode": "air",
-  "itemCount": 2,
+  "item_count": 2,
   "totalPieces": 14,
   "totalGrossWeight": 1350,
   "totalCBM": 5.04,
   "chargeableWeight": 1350,
-  "billingBasis": "weight",
+  "billing_basis": "weight",
   "volumetricWeight": 841.68,
   "items": [ ... ]
 }`} />
@@ -1607,11 +1607,11 @@ Content-Type: application/json
                   <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td><code>commodityCode</code></td><td>string</td><td>Yes</td><td>HS/tariff code (min 6 digits)</td></tr>
-                  <tr><td><code>originCountry</code></td><td>string</td><td>Yes</td><td>ISO 2-letter country code (e.g. <code>CN</code>, <code>DE</code>)</td></tr>
-                  <tr><td><code>customsValue</code></td><td>number</td><td>Yes</td><td>Goods value in GBP</td></tr>
-                  <tr><td><code>freightCost</code></td><td>number</td><td>No</td><td>Freight cost in GBP (added to CIF value)</td></tr>
-                  <tr><td><code>insuranceCost</code></td><td>number</td><td>No</td><td>Insurance cost in GBP (added to CIF value)</td></tr>
+                  <tr><td><code>commodity_code</code></td><td>string</td><td>Yes</td><td>HS/tariff code (min 6 digits)</td></tr>
+                  <tr><td><code>origin_country</code></td><td>string</td><td>Yes</td><td>ISO 2-letter country code (e.g. <code>CN</code>, <code>DE</code>)</td></tr>
+                  <tr><td><code>customs_value</code></td><td>number</td><td>Yes</td><td>Goods value in GBP</td></tr>
+                  <tr><td><code>freight_cost</code></td><td>number</td><td>No</td><td>Freight cost in GBP (added to CIF value)</td></tr>
+                  <tr><td><code>insurance_cost</code></td><td>number</td><td>No</td><td>Insurance cost in GBP (added to CIF value)</td></tr>
                   <tr><td><code>incoterm</code></td><td>string</td><td>No</td><td>INCOTERM (e.g. <code>FOB</code>, <code>CIF</code>, <code>EXW</code>)</td></tr>
                 </tbody>
               </table>
@@ -1620,15 +1620,15 @@ Content-Type: application/json
             <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>Example Request</h3>
             <CopyableCode code={`curl -X POST "https://www.freightutils.com/api/duty" \\
   -H "Content-Type: application/json" \\
-  -d '{ "commodityCode": "847989", "originCountry": "CN", "customsValue": 10000, "freightCost": 500, "insuranceCost": 50, "incoterm": "FOB" }'`} style={{ marginBottom: 4 }} />
+  -d '{ "commodity_code": "847989", "origin_country": "CN", "customs_value": 10000, "freight_cost": 500, "insurance_cost": 50, "incoterm": "FOB" }'`} style={{ marginBottom: 4 }} />
             <JsonBlock json={`{
-  "commodityCode": "847989",
-  "originCountry": "CN",
-  "cifValue": 10550,
-  "dutyRate": "1.7%",
-  "dutyAmount": 179.35,
-  "vatRate": "20%",
-  "vatAmount": 2145.87,
+  "commodity_code": "847989",
+  "origin_country": "CN",
+  "cif_value": 10550,
+  "duty_rate": "1.7%",
+  "duty_amount": 179.35,
+  "vat_rate": "20%",
+  "vat_amount": 2145.87,
   "totalTaxes": 2325.22,
   "preferentialRate": false,
   "meta": {
@@ -1786,11 +1786,12 @@ Content-Type: application/json
         {/* Field naming */}
         <h2 style={s.sectionTitle}>Field Naming</h2>
         <p style={{ color: 'var(--text-muted)', fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>
-          Most endpoints use <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>snake_case</code> field names.
-          <strong> Note:</strong> The <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>/api/containers</code> endpoint
-          uses <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>camelCase</code> field names
-          (e.g. <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>internalLengthCm</code>,{' '}
-          <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>maxGrossKg</code>).
+          All endpoints use <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>snake_case</code> field names in responses
+          (e.g. <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>internal_length_cm</code>,{' '}
+          <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>max_gross_kg</code>).
+          POST request bodies on <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>/api/duty</code> and{' '}
+          <code style={{ background: 'var(--bg-card-hover)', padding: '2px 6px', borderRadius: 4, fontSize: 13 }}>/api/consignment</code> accept either
+          casing for backwards compatibility — snake_case is the documented form.
         </p>
 
         {/* Rate limiting */}

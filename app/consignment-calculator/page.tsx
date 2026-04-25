@@ -88,8 +88,8 @@ export default function ConsignmentPage() {
 {`curl -X POST "https://www.freightutils.com/api/consignment" \\
   -H "Content-Type: application/json" \\
   -d '{"items": [
-    {"length": 120, "width": 80, "height": 150, "quantity": 8, "grossWeight": 450, "stackable": true, "palletType": "euro"},
-    {"length": 100, "width": 100, "height": 120, "quantity": 4, "grossWeight": 800}
+    {"length": 120, "width": 80, "height": 150, "quantity": 8, "gross_weight": 450, "stackable": true, "pallet_type": "euro"},
+    {"length": 100, "width": 100, "height": 120, "quantity": 4, "gross_weight": 800}
   ]}'`}
               </pre>
             </div>

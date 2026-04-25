@@ -11,6 +11,12 @@ export interface ChangelogEntry {
 
 export const entries: ChangelogEntry[] = [
   {
+    isoDate: '2026-04-25', date: 'Apr 25', tag: 'API Change',
+    title: 'Breaking — All endpoints now return snake_case fields',
+    desc: 'Six endpoints migrated from camelCase to snake_case response fields (/api/unlocode, /api/uld, /api/containers, /api/vehicles, /api/consignment, /api/duty). Site-wide consistency with the other thirteen endpoints. Clean break — no dual-output. Full field rename table in CHANGELOG.md.',
+    link: '/api-docs',
+  },
+  {
     isoDate: '2026-04-09', date: 'Apr 9', tag: 'New Tool',
     title: 'ADR LQ/EQ Multi-Line Checker',
     desc: 'Check Limited Quantity and Excepted Quantity eligibility for mixed dangerous goods consignments. Multi-item input with per-item breakdown, green/red/amber verdicts. POST /api/adr/lq-check.',

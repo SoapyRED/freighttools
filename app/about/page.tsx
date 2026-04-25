@@ -275,7 +275,7 @@ export default function AboutPage() {
             GET /api/hs?q=coffee<br />
             GET /api/incoterms?code=FOB<br />
             POST /api/duty<br />
-            <span style={{ color: 'var(--text-faint)' }}>&nbsp;&nbsp;{`{ "commodityCode": "847989", "originCountry": "CN", "customsValue": 10000 }`}</span><br />
+            <span style={{ color: 'var(--text-faint)' }}>&nbsp;&nbsp;{`{ "commodity_code": "847989", "origin_country": "CN", "customs_value": 10000 }`}</span><br />
             GET /api/airlines?prefix=176<br />
             GET /api/unlocode?q=rotterdam<br />
             GET /api/uld?type=AKE<br />

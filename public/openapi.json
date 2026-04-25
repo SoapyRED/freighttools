@@ -1195,7 +1195,7 @@
                         "stackable": {
                           "type": "boolean"
                         },
-                        "palletType": {
+                        "pallet_type": {
                           "type": "string",
                           "enum": [
                             "none",
@@ -1237,28 +1237,28 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "commodityCode",
-                  "originCountry",
-                  "customsValue"
+                  "commodity_code",
+                  "origin_country",
+                  "customs_value"
                 ],
                 "properties": {
-                  "commodityCode": {
+                  "commodity_code": {
                     "type": "string",
                     "example": "6204430000"
                   },
-                  "originCountry": {
+                  "origin_country": {
                     "type": "string",
                     "example": "CN"
                   },
-                  "customsValue": {
+                  "customs_value": {
                     "type": "number",
                     "example": 10000
                   },
-                  "freightCost": {
+                  "freight_cost": {
                     "type": "number",
                     "example": 500
                   },
-                  "insuranceCost": {
+                  "insurance_cost": {
                     "type": "number",
                     "example": 50
                   },
@@ -1624,7 +1624,7 @@
                         "unNumber": {
                           "type": "string"
                         },
-                        "customsValue": {
+                        "customs_value": {
                           "type": "number"
                         }
                       }
@@ -1655,10 +1655,10 @@
                   "incoterm": {
                     "type": "string"
                   },
-                  "freightCost": {
+                  "freight_cost": {
                     "type": "number"
                   },
-                  "insuranceCost": {
+                  "insurance_cost": {
                     "type": "number"
                   }
                 }
@@ -2634,74 +2634,74 @@
             "description": "URL-friendly identifier.",
             "example": "40ft-high-cube"
           },
-          "internalLengthCm": {
+          "internal_length_cm": {
             "type": "number",
             "description": "Internal length in cm.",
             "example": 1203
           },
-          "internalWidthCm": {
+          "internal_width_cm": {
             "type": "number",
             "description": "Internal width in cm.",
             "example": 235
           },
-          "internalHeightCm": {
+          "internal_height_cm": {
             "type": "number",
             "description": "Internal height in cm.",
             "example": 269
           },
-          "externalLengthCm": {
+          "external_length_cm": {
             "type": "number",
             "description": "External length in cm.",
             "example": 1219
           },
-          "externalWidthCm": {
+          "external_width_cm": {
             "type": "number",
             "description": "External width in cm.",
             "example": 244
           },
-          "externalHeightCm": {
+          "external_height_cm": {
             "type": "number",
             "description": "External height in cm.",
             "example": 290
           },
-          "doorWidthCm": {
+          "door_width_cm": {
             "type": "number",
             "nullable": true,
             "description": "Door opening width in cm.",
             "example": 234
           },
-          "doorHeightCm": {
+          "door_height_cm": {
             "type": "number",
             "nullable": true,
             "description": "Door opening height in cm.",
             "example": 263
           },
-          "capacityCbm": {
+          "capacity_cbm": {
             "type": "number",
             "description": "Internal volume in CBM.",
             "example": 76.2
           },
-          "tareWeightKg": {
+          "tare_weightKg": {
             "type": "number",
             "description": "Empty container weight in kg.",
             "example": 3900
           },
-          "maxGrossKg": {
+          "max_gross_kg": {
             "type": "number",
             "description": "Maximum gross weight in kg.",
             "example": 30480
           },
-          "maxPayloadKg": {
+          "max_payload_kg": {
             "type": "number",
             "description": "Maximum cargo weight in kg.",
             "example": 26580
           },
-          "euroPallets": {
+          "euro_pallets": {
             "type": "string",
             "description": "Number of EUR pallets (1200x800mm) that fit.",
             "example": "25"
           },
-          "gmaPallets": {
+          "gma_pallets": {
             "type": "string",
             "description": "Number of GMA pallets (48x40in) that fit.",
             "example": "20"
@@ -2718,15 +2718,15 @@
         "required": [
           "name",
           "slug",
-          "internalLengthCm",
-          "internalWidthCm",
-          "internalHeightCm",
-          "capacityCbm",
-          "tareWeightKg",
-          "maxGrossKg",
-          "maxPayloadKg",
-          "euroPallets",
-          "gmaPallets"
+          "internal_length_cm",
+          "internal_width_cm",
+          "internal_height_cm",
+          "capacity_cbm",
+          "tare_weightKg",
+          "max_gross_kg",
+          "max_payload_kg",
+          "euro_pallets",
+          "gma_pallets"
         ]
       },
       "ContainerListResponse": {

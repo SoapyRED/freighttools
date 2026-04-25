@@ -90,8 +90,8 @@ export default function DutyPage() {
               <pre style={{ background: 'var(--navy)', color: '#f9913a', padding: 14, borderRadius: 8, fontSize: 12, overflow: 'auto' }}>
 {`curl -X POST "https://www.freightutils.com/api/duty" \\
   -H "Content-Type: application/json" \\
-  -d '{"commodityCode": "6204430000", "originCountry": "CN",
-       "customsValue": 10000, "freightCost": 500, "insuranceCost": 50,
+  -d '{"commodity_code": "6204430000", "origin_country": "CN",
+       "customs_value": 10000, "freight_cost": 500, "insurance_cost": 50,
        "incoterm": "FOB"}'`}
               </pre>
             </div>

@@ -1,5 +1,47 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllContainerSpecs, getContainerSpec, calculateContainerLoading } from '@/lib/calculations/container-capacity';
+import { getAllContainerSpecs, getContainerSpec, calculateContainerLoading, type ContainerSpec, type LoadingResult } from '@/lib/calculations/container-capacity';
+
+// API response shape (snake_case). Internal ContainerSpec/LoadingResult use camelCase.
+function toContainerSpecResponse(c: ContainerSpec) {
+  return {
+    slug: c.slug,
+    name: c.name,
+    internal_length_cm: c.internalLengthCm,
+    internal_width_cm: c.internalWidthCm,
+    internal_height_cm: c.internalHeightCm,
+    capacity_cbm: c.capacityCbm,
+    external_length_cm: c.externalLengthCm,
+    external_width_cm: c.externalWidthCm,
+    external_height_cm: c.externalHeightCm,
+    door_width_cm: c.doorWidthCm,
+    door_height_cm: c.doorHeightCm,
+    tare_weight_kg: c.tareWeightKg,
+    max_gross_kg: c.maxGrossKg,
+    max_payload_kg: c.maxPayloadKg,
+    euro_pallets: c.euroPallets,
+    gma_pallets: c.gmaPallets,
+    description: c.description,
+    notes: c.notes,
+  };
+}
+
+function toLoadingResultResponse(l: Omit<LoadingResult, 'container'>) {
+  return {
+    items_per_row: l.itemsPerRow,
+    items_per_col: l.itemsPerCol,
+    items_per_layer: l.itemsPerLayer,
+    layers: l.layers,
+    total_items_fit: l.totalItemsFit,
+    items_requested: l.itemsRequested,
+    all_fit: l.allFit,
+    total_weight_kg: l.totalWeightKg,
+    volume_used_cbm: l.volumeUsedCbm,
+    volume_utilisation: l.volumeUtilisation,
+    weight_utilisation: l.weightUtilisation,
+    limiting_factor: l.limitingFactor,
+    warnings: l.warnings,
+  };
+}
 
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'X-RateLimit-Limit': '25', 'X-RateLimit-Window': '86400' };
 const CACHE = { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' };
@@ -14,7 +56,7 @@ export function GET(req: NextRequest) {
   // No type → return all specs
   if (!type) {
     const specs = getAllContainerSpecs();
-    return NextResponse.json({ count: specs.length, results: specs }, { headers: h });
+    return NextResponse.json({ count: specs.length, results: specs.map(toContainerSpecResponse) }, { headers: h });
   }
 
   const spec = getContainerSpec(type);
@@ -46,10 +88,13 @@ export function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Calculation failed.' }, { status: 500, headers: h });
     }
 
-    const { container, ...loading } = result;
-    return NextResponse.json({ container: spec, loading }, { headers: h });
+    const { container: _container, ...loading } = result;
+    return NextResponse.json(
+      { container: toContainerSpecResponse(spec), loading: toLoadingResultResponse(loading) },
+      { headers: h },
+    );
   }
 
   // Just return the spec
-  return NextResponse.json(spec, { headers: h });
+  return NextResponse.json(toContainerSpecResponse(spec), { headers: h });
 }

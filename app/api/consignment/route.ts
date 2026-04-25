@@ -1,5 +1,67 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { calculateConsignment, ConsignmentItemInput, ConsignmentMode } from '@/lib/calculations/consignment';
+import {
+  calculateConsignment,
+  type ConsignmentItemInput,
+  type ConsignmentItemResult,
+  type ConsignmentMode,
+  type ConsignmentResult,
+} from '@/lib/calculations/consignment';
+
+// API response shape (snake_case). Internal ConsignmentResult uses camelCase.
+function toItemResponse(item: ConsignmentItemResult) {
+  return {
+    description: item.description,
+    dimensions: {
+      length_cm: item.dimensions.lengthCm,
+      width_cm: item.dimensions.widthCm,
+      height_cm: item.dimensions.heightCm,
+    },
+    quantity: item.quantity,
+    cbm: item.cbm,
+    gross_weight_kg: item.grossWeightKg,
+    ldm: item.ldm,
+    chargeable_weight_air: item.chargeableWeightAir,
+    chargeable_weight_road: item.chargeableWeightRoad,
+    chargeable_weight_sea: item.chargeableWeightSea,
+    revenue_tonnes: item.revenueTonnes,
+    pallet_spaces: item.palletSpaces,
+    stackable: item.stackable,
+    pallet_type: item.palletType,
+  };
+}
+
+function toApiResponse(r: ConsignmentResult) {
+  return {
+    items: r.items.map(toItemResponse),
+    totals: {
+      cbm: r.totals.cbm,
+      gross_weight_kg: r.totals.grossWeightKg,
+      ldm: r.totals.ldm,
+      chargeable_weight_air: r.totals.chargeableWeightAir,
+      chargeable_weight_road: r.totals.chargeableWeightRoad,
+      chargeable_weight_sea: r.totals.chargeableWeightSea,
+      revenue_tonnes: r.totals.revenueTonnes,
+      pallet_spaces: r.totals.palletSpaces,
+      item_count: r.totals.itemCount,
+      piece_count: r.totals.pieceCount,
+    },
+    mode: r.mode,
+    billing_basis: r.billingBasis,
+    trailer: {
+      utilisation_percent: r.trailer.utilisationPercent,
+      weight_utilisation_percent: r.trailer.weightUtilisationPercent,
+      pallet_spaces_used: r.trailer.palletSpacesUsed,
+      pallet_spaces_available: r.trailer.palletSpacesAvailable,
+      fits: r.trailer.fits,
+    },
+    sea: {
+      suggested_container: r.sea.suggestedContainer,
+      container_count: r.sea.containerCount,
+    },
+    suggested_vehicle: r.suggestedVehicle,
+    warnings: r.warnings,
+  };
+}
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -64,7 +126,7 @@ export async function POST(req: NextRequest) {
     const mode: ConsignmentMode = (['road', 'air', 'sea'].includes(modeRaw) ? modeRaw : 'road') as ConsignmentMode;
     const result = calculateConsignment(items, mode);
 
-    return NextResponse.json(result, { headers: h });
+    return NextResponse.json(toApiResponse(result), { headers: h });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Invalid request body';
     return NextResponse.json({ error: message }, { status: 400, headers: h });
