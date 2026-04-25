@@ -16,7 +16,7 @@ export function GET() {
     count: TOOLS.length,
     tools: TOOLS,
     meta: {
-      baseUrl: 'https://www.freightutils.com',
+      base_url: 'https://www.freightutils.com',
       docs: 'https://www.freightutils.com/api-docs',
       openapi: 'https://www.freightutils.com/openapi.json',
       mcp: 'https://www.freightutils.com/api/mcp/mcp',
