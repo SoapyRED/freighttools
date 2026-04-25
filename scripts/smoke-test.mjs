@@ -239,6 +239,69 @@ async function testSnakeCaseOnly(name, url, opts = {}) {
   }
 }
 
+async function testWhoamiAuthOk() {
+  const start = Date.now();
+  try {
+    const res = await fetch(`${BASE}/api/auth/whoami`, {
+      headers: { 'Accept': 'application/json', ...AUTH_HEADERS },
+    });
+    const ms = Date.now() - start;
+    const text = await res.text();
+    const json = JSON.parse(text);
+    const errors = [];
+    if (res.status !== 200) errors.push(`status ${res.status} !== 200`);
+    if (json.authenticated !== true) errors.push(`authenticated !== true (got ${JSON.stringify(json.authenticated)})`);
+    if (typeof json.tier !== 'string' || !['free', 'pro'].includes(json.tier)) errors.push(`tier !== free|pro (got ${JSON.stringify(json.tier)})`);
+    if (typeof json.key_prefix !== 'string' || json.key_prefix.length !== 7) errors.push(`key_prefix !== 7-char string (got ${JSON.stringify(json.key_prefix)})`);
+    // Security: the full key must NEVER appear in the response body.
+    if (SMOKE_API_KEY && text.includes(SMOKE_API_KEY)) errors.push('FULL API KEY ECHOED IN RESPONSE BODY');
+    if (errors.length === 0) {
+      console.log(`  \x1b[32m✅\x1b[0m /api/auth/whoami (valid key) — 200, tier=${json.tier}, key_prefix len=${json.key_prefix.length} (${ms}ms)`);
+      passed++;
+    } else {
+      console.log(`  \x1b[31m❌\x1b[0m /api/auth/whoami (valid key) — ${errors.join(', ')} (${ms}ms)`);
+      failed++;
+    }
+    results.push({ name: '/api/auth/whoami (valid key)', status: res.status, ms, errors, ok: errors.length === 0 });
+  } catch (err) {
+    const ms = Date.now() - start;
+    console.log(`  \x1b[31m❌\x1b[0m /api/auth/whoami (valid key) — NETWORK ERROR: ${err.message} (${ms}ms)`);
+    failed++;
+    results.push({ name: '/api/auth/whoami (valid key)', status: 0, ms, errors: [err.message], ok: false });
+  }
+}
+
+async function testWhoamiAuthRejected() {
+  const start = Date.now();
+  try {
+    const res = await fetch(`${BASE}/api/auth/whoami`, {
+      headers: { 'Accept': 'application/json', 'X-API-Key': 'fu_definitelynotarealkey0000000000' },
+    });
+    const ms = Date.now() - start;
+    const text = await res.text();
+    const json = JSON.parse(text);
+    const errors = [];
+    if (res.status !== 401) errors.push(`status ${res.status} !== 401`);
+    if (json.error !== 'unauthenticated') errors.push(`error !== "unauthenticated" (got ${JSON.stringify(json.error)})`);
+    if (typeof json.message !== 'string') errors.push('message missing or not string');
+    if (typeof json.upgrade_url !== 'string') errors.push('upgrade_url missing or not string');
+    if (json.authenticated === true) errors.push('authenticated=true on 401 — auth bypass!');
+    if (errors.length === 0) {
+      console.log(`  \x1b[32m✅\x1b[0m /api/auth/whoami (bogus key) — 401, error=unauthenticated (${ms}ms)`);
+      passed++;
+    } else {
+      console.log(`  \x1b[31m❌\x1b[0m /api/auth/whoami (bogus key) — ${errors.join(', ')} (${ms}ms)`);
+      failed++;
+    }
+    results.push({ name: '/api/auth/whoami (bogus key)', status: res.status, ms, errors, ok: errors.length === 0 });
+  } catch (err) {
+    const ms = Date.now() - start;
+    console.log(`  \x1b[31m❌\x1b[0m /api/auth/whoami (bogus key) — NETWORK ERROR: ${err.message} (${ms}ms)`);
+    failed++;
+    results.push({ name: '/api/auth/whoami (bogus key)', status: 0, ms, errors: [err.message], ok: false });
+  }
+}
+
 async function testToolCountMatch() {
   const start = Date.now();
   try {
@@ -391,6 +454,12 @@ async function run() {
   });
 
   await testToolCountMatch();
+
+  console.log('\n  Auth');
+  console.log('  ────');
+
+  await testWhoamiAuthOk();
+  await testWhoamiAuthRejected();
 
   console.log('\n  API Casing — snake_case-only guard (post-migration)');
   console.log('  ────────────────────────────────────────────────────');
