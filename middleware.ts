@@ -127,17 +127,65 @@ function getClientIp(req: NextRequest): string {
 }
 
 // ─────────────────────────────────────────────────────────────────
-//  Conversion-oriented 429 — branded HTML for browsers, JSON for APIs
-//
-//  Turn rate-limited users into sign-ups instead of punishing them.
-//  Residential IPs hitting /hs/* are almost certainly building something;
-//  convert them to the free API tier.
+//  Structured 429 — single source of truth for the rate-limit body
+//  shape and headers. Every 429 emitted by this middleware goes
+//  through buildStructuredRateLimit429 so the JSON shape stays
+//  consistent for programmatic callers.
+// ─────────────────────────────────────────────────────────────────
+
+type RateLimitTier = 'anon' | 'free' | 'pro';
+type RateLimitWindow = '1m' | '5m' | 'day' | 'month';
+
+interface StructuredRateLimit429Opts {
+  tier: RateLimitTier;
+  limit: number;
+  window: RateLimitWindow;
+  resetEpochMs: number;
+  retryAfterSeconds: number;
+  message?: string;
+  /** Conversion-oriented affordances appended to the body for anonymous callers. */
+  extraBody?: Record<string, unknown>;
+}
+
+function buildStructuredRateLimit429(opts: StructuredRateLimit429Opts): {
+  body: Record<string, unknown>;
+  headers: Record<string, string>;
+} {
+  const { tier, limit, window, resetEpochMs, retryAfterSeconds, message, extraBody } = opts;
+  return {
+    body: {
+      error: 'rate_limited',
+      message: message ?? 'You have exceeded the rate limit for this endpoint.',
+      tier,
+      limit,
+      window,
+      reset_at: new Date(resetEpochMs).toISOString(),
+      upgrade_url: 'https://www.freightutils.com/pricing',
+      ...(extraBody ?? {}),
+    },
+    headers: {
+      'Retry-After': String(retryAfterSeconds),
+      'X-RateLimit-Limit': String(limit),
+      'X-RateLimit-Remaining': '0',
+      'X-RateLimit-Reset': String(Math.ceil(resetEpochMs / 1000)),
+      'Cache-Control': 'no-store',
+    },
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Conversion-oriented 429 — branded HTML for browsers, structured
+//  JSON (with conversion affordances) for APIs and curl/library
+//  callers. Residential IPs hitting /hs/* are almost certainly
+//  building something; convert them to the free API tier.
 // ─────────────────────────────────────────────────────────────────
 
 interface ConversionRateLimitOpts {
   retryAfterSeconds: number;
   limit: number;
   resetEpochMs: number;
+  tier: RateLimitTier;
+  window: RateLimitWindow;
 }
 
 function renderRateLimitHtml(): string {
@@ -196,7 +244,7 @@ function buildConversionRateLimitResponse(
   req: NextRequest,
   opts: ConversionRateLimitOpts,
 ): NextResponse {
-  const { retryAfterSeconds, limit, resetEpochMs } = opts;
+  const { retryAfterSeconds, limit, resetEpochMs, tier, window } = opts;
   const pathname = req.nextUrl.pathname;
   const accept = (req.headers.get('accept') ?? '').toLowerCase();
   const isApiRoute = pathname.startsWith('/api/');
@@ -206,34 +254,29 @@ function buildConversionRateLimitResponse(
   // - anything else (app/json, */*, missing) → structured JSON
   const wantsHtml = !isApiRoute && accept.includes('text/html');
 
-  const baseHeaders: Record<string, string> = {
-    'Retry-After': String(retryAfterSeconds),
-    'X-RateLimit-Limit': String(limit),
-    'X-RateLimit-Remaining': '0',
-    'X-RateLimit-Reset': String(Math.ceil(resetEpochMs / 1000)),
-    'Cache-Control': 'no-store',
-  };
+  const { body, headers } = buildStructuredRateLimit429({
+    tier,
+    limit,
+    window,
+    resetEpochMs,
+    retryAfterSeconds,
+    message:
+      "Looks like you're integrating FreightUtils data. Grab a free API key for 100 requests/day, no card required.",
+    extraBody: {
+      signup_url: 'https://www.freightutils.com/api-docs#signup',
+      docs_url: 'https://www.freightutils.com/api-docs',
+      retry_after_seconds: retryAfterSeconds,
+    },
+  });
 
   if (wantsHtml) {
     return new NextResponse(renderRateLimitHtml(), {
       status: 429,
-      headers: { ...baseHeaders, 'Content-Type': 'text/html; charset=utf-8' },
+      headers: { ...headers, 'Content-Type': 'text/html; charset=utf-8' },
     });
   }
 
-  return NextResponse.json(
-    {
-      error: 'rate_limit_exceeded',
-      message: "Looks like you're integrating FreightUtils data. Grab a free API key for 100 requests/day, no card required.",
-      free_tier: '100 requests/day',
-      pro_tier: '50,000 requests/month at £19/mo',
-      signup_url: 'https://www.freightutils.com/api-docs#signup',
-      pricing_url: 'https://www.freightutils.com/pricing',
-      docs_url: 'https://www.freightutils.com/api-docs',
-      retry_after_seconds: retryAfterSeconds,
-    },
-    { status: 429, headers: baseHeaders },
-  );
+  return NextResponse.json(body, { status: 429, headers });
 }
 
 /**
@@ -259,6 +302,8 @@ async function tryBulkRefScrape(req: NextRequest): Promise<NextResponse | null> 
         retryAfterSeconds: 300,
         limit: 10,
         resetEpochMs: reset,
+        tier: 'anon',
+        window: '5m',
       });
     }
     // Pass through — handleApiRateLimit will run next and emit its own headers.
@@ -282,6 +327,7 @@ async function handleScrapeProtection(req: NextRequest): Promise<NextResponse> {
   const group = isHs ? 'hs' : 'adr';
   const limit = isHs ? 10 : 30;
   const retryAfter = isHs ? 300 : 60; // 5 min vs 1 min
+  const window: RateLimitWindow = isHs ? '5m' : '1m';
 
   try {
     const { success, remaining, reset } = await rl.limit(ip);
@@ -294,12 +340,15 @@ async function handleScrapeProtection(req: NextRequest): Promise<NextResponse> {
         retryAfterSeconds: retryAfter,
         limit,
         resetEpochMs: reset,
+        tier: 'anon',
+        window,
       });
     }
 
     const response = NextResponse.next();
     response.headers.set('X-RateLimit-Limit', String(limit));
     response.headers.set('X-RateLimit-Remaining', String(remaining));
+    response.headers.set('X-RateLimit-Reset', String(Math.ceil(reset / 1000)));
     return response;
   } catch (err) {
     console.error('[ScrapeGuard] Redis error:', err instanceof Error ? err.message : err);
@@ -345,6 +394,7 @@ async function handleApiRateLimit(req: NextRequest): Promise<NextResponse> {
     ?? req.nextUrl.searchParams.get('api_key')
     ?? null;
 
+  let tier: RateLimitTier;
   let limit: number;
   let usageKey: string;
   let currentUsage: number;
@@ -361,10 +411,12 @@ async function handleApiRateLimit(req: NextRequest): Promise<NextResponse> {
     }
 
     if (record.plan === 'pro') {
+      tier = 'pro';
       limit = LIMITS.pro.perMonth;
       usageKey = `usage:${apiKey}:${monthKey()}`;
       window = 'month';
     } else {
+      tier = 'free';
       limit = LIMITS.free.perDay;
       usageKey = `usage:${apiKey}:${todayKey()}`;
       window = 'day';
@@ -372,6 +424,7 @@ async function handleApiRateLimit(req: NextRequest): Promise<NextResponse> {
   } else {
     // Anonymous — rate limit by IP
     const ip = getClientIp(req);
+    tier = 'anon';
     limit = LIMITS.anonymous.perDay;
     usageKey = `usage:ip:${ip}:${todayKey()}`;
     window = 'day';
@@ -391,6 +444,12 @@ async function handleApiRateLimit(req: NextRequest): Promise<NextResponse> {
 
   console.log(`[RateLimit] ${usageKey} = ${currentUsage}/${limit}`);
 
+  // Reset is computed for both 2xx (advisory header) and 429 (binding) paths.
+  const resetSeconds = window === 'day'
+    ? Math.ceil((new Date(todayKey() + 'T00:00:00Z').getTime() + 86400000 - Date.now()) / 1000)
+    : Math.ceil((new Date(monthKey() + '-01T00:00:00Z').getTime() + 2764800000 - Date.now()) / 1000);
+  const resetEpochMs = Date.now() + resetSeconds * 1000;
+
   // Track request source (MCP vs browser vs direct API) — fire-and-forget
   const ua = (req.headers.get('user-agent') ?? '').toLowerCase();
   const source = ua.includes('freightutils-mcp') || ua.includes('mcp') ? 'mcp'
@@ -400,44 +459,34 @@ async function handleApiRateLimit(req: NextRequest): Promise<NextResponse> {
   kv.incr(`source:${source}:${todayKey()}`).catch(() => {});
 
   if (currentUsage > limit) {
-    const resetSeconds = window === 'day'
-      ? Math.ceil((new Date(todayKey() + 'T00:00:00Z').getTime() + 86400000 - Date.now()) / 1000)
-      : Math.ceil((new Date(monthKey() + '-01T00:00:00Z').getTime() + 2764800000 - Date.now()) / 1000);
-    const resetEpochMs = Date.now() + resetSeconds * 1000;
-
-    // Anonymous users → conversion-oriented 429 (HTML or JSON by Accept)
-    // Authenticated users → existing JSON (they already have a key; conversion doesn't apply)
+    // Anonymous → conversion-oriented 429 (HTML or JSON by Accept; JSON body
+    // carries the structured fields plus the conversion affordances).
+    // Authenticated → structured 429 only (key-holders already converted).
     if (!apiKey) {
       return buildConversionRateLimitResponse(req, {
         retryAfterSeconds: resetSeconds,
         limit,
         resetEpochMs,
+        tier,
+        window,
       });
     }
 
-    return NextResponse.json(
-      {
-        error: 'Rate limit exceeded',
-        limit: `${limit} requests/${window}`,
-        message: `Your ${window}ly limit of ${limit} requests has been reached. Contact contact@freightutils.com for Pro access.`,
-      },
-      {
-        status: 429,
-        headers: {
-          'Content-Type': 'application/json',
-          'Retry-After': String(resetSeconds),
-          'X-RateLimit-Limit': String(limit),
-          'X-RateLimit-Remaining': '0',
-          'X-RateLimit-Reset': String(Math.ceil(resetEpochMs / 1000)),
-        },
-      },
-    );
+    const { body, headers } = buildStructuredRateLimit429({
+      tier,
+      limit,
+      window,
+      resetEpochMs,
+      retryAfterSeconds: resetSeconds,
+    });
+    return NextResponse.json(body, { status: 429, headers });
   }
 
   // Proceed with rate limit headers
   const response = NextResponse.next();
   response.headers.set('X-RateLimit-Limit', String(limit));
   response.headers.set('X-RateLimit-Remaining', String(Math.max(0, limit - currentUsage)));
+  response.headers.set('X-RateLimit-Reset', String(Math.ceil(resetEpochMs / 1000)));
   response.headers.set('X-RateLimit-Window', window === 'day' ? '86400' : '2592000');
   return response;
 }
