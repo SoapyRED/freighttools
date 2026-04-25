@@ -239,6 +239,36 @@ async function testSnakeCaseOnly(name, url, opts = {}) {
   }
 }
 
+async function testToolCountMatch() {
+  const start = Date.now();
+  try {
+    const [healthRes, toolsRes] = await Promise.all([
+      fetch(`${BASE}/api/health`, { headers: { 'Accept': 'application/json', ...AUTH_HEADERS } }),
+      fetch(`${BASE}/api/tools`, { headers: { 'Accept': 'application/json', ...AUTH_HEADERS } }),
+    ]);
+    const ms = Date.now() - start;
+    const health = await healthRes.json();
+    const tools = await toolsRes.json();
+    const errors = [];
+    if (typeof health.tools !== 'number') errors.push(`health.tools is not a number: ${typeof health.tools}`);
+    if (typeof tools.count !== 'number') errors.push(`tools.count is not a number: ${typeof tools.count}`);
+    if (health.tools !== tools.count) errors.push(`/health.tools (${health.tools}) !== /tools.count (${tools.count})`);
+    if (errors.length === 0) {
+      console.log(`  \x1b[32m✅\x1b[0m health.tools === tools.count — ${health.tools} === ${tools.count} (${ms}ms)`);
+      passed++;
+    } else {
+      console.log(`  \x1b[31m❌\x1b[0m health.tools === tools.count — ${errors.join(', ')} (${ms}ms)`);
+      failed++;
+    }
+    results.push({ name: 'health.tools === tools.count', status: 200, ms, errors, ok: errors.length === 0 });
+  } catch (err) {
+    const ms = Date.now() - start;
+    console.log(`  \x1b[31m❌\x1b[0m health.tools === tools.count — NETWORK ERROR: ${err.message} (${ms}ms)`);
+    failed++;
+    results.push({ name: 'health.tools === tools.count', status: 0, ms, errors: [err.message], ok: false });
+  }
+}
+
 async function testPage(name, url, expectedStatus = 200) {
   const start = Date.now();
   try {
@@ -359,6 +389,8 @@ async function run() {
   await test('/api/tools', '/api/tools', {
     expect: { hasField: ['count', 'tools'], fieldGt: { count: 15 }, preview: 'count' },
   });
+
+  await testToolCountMatch();
 
   console.log('\n  API Casing — snake_case-only guard (post-migration)');
   console.log('  ────────────────────────────────────────────────────');
