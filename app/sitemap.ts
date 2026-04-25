@@ -4,11 +4,19 @@ import { getAllSectionNumerals, getAllChapterCodes, getAllHeadingCodes, getAllSu
 import airlinesData from '@/lib/data/airlines.json';
 import containersData from '@/lib/data/containers.json';
 import palletsData from '@/lib/data/pallets.json';
+import { listGuideMeta } from '@/lib/guides';
 
 const BASE = 'https://www.freightutils.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const unNumbers = getAllUnNumbers();
+  const publishedGuides = await listGuideMeta({ includeDrafts: false });
+  const guideRoutes: MetadataRoute.Sitemap = publishedGuides.map((g) => ({
+    url: `${BASE}/guides/${g.slug}`,
+    lastModified: new Date(g.updated_date || g.published_date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
 
   const staticRoutes: MetadataRoute.Sitemap = [
     // Core pages
@@ -17,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/about`,                   changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/pricing`,                 changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/changelog`,               changeFrequency: 'weekly',  priority: 0.5 },
+    { url: `${BASE}/guides`,                  changeFrequency: 'weekly',  priority: 0.7 },
     { url: `${BASE}/status`,                  changeFrequency: 'hourly',  priority: 0.5 },
     { url: `${BASE}/roadmap`,                 changeFrequency: 'weekly',  priority: 0.6 },
     { url: `${BASE}/docs/versioning`,         changeFrequency: 'monthly', priority: 0.5 },
@@ -104,6 +113,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
+    ...guideRoutes,
     ...adrRoutes,
     ...airlineRoutes,
     ...containerRoutes,
