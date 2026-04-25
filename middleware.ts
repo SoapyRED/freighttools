@@ -1,15 +1,27 @@
 /**
- * Edge Middleware — two concerns:
+ * Edge Middleware — three concerns:
  *
- * 1. SCRAPE PROTECTION
+ * 1. SCRAPE PROTECTION (page routes)
  *    HS routes (/hs/heading/*, /hs/code/*, /hs/section/*, /hs/chapter/*):
  *      10 requests per 5 minutes per IP — tight, scraper is slow-crawling
  *    ADR routes (/adr/un/*):
  *      30 requests per minute per IP — lighter pressure
  *    Why: Sequential scrapers are crawling data pages, burning Vercel credits.
  *
- * 2. API RATE LIMITING (existing)
- *    Routes: /api/* calculation endpoints
+ * 2. SCRAPE PROTECTION (bulk-reference API endpoints)
+ *    Routes: /api/airlines, /api/unlocode, /api/hs, /api/adr (and sub-paths
+ *            of the first three; /api/adr-calculator + /api/adr/lq-check are
+ *            calculators and explicitly excluded)
+ *    Limit:  10 requests per 5 minutes per IP, anonymous only
+ *    Why:    Post-2026-04-24 incident — see docs/incidents/2026-04-24-api-
+ *            airlines-spike.md. The daily API limiter caught the scraper after
+ *            25 requests; a tighter short-window check stops bursts before
+ *            Cloudflare's L7 rule has to engage.
+ *    Skip:   When an API key is present, fall through to (3) — Pro keys at
+ *            50k/month don't get clamped to 10/5min.
+ *
+ * 3. API RATE LIMITING (existing)
+ *    Routes: /api/* calculator + reference endpoints
  *    Limit:  25/day anonymous, 100/day free key, 50k/month pro key
  *    Uses:   @vercel/kv with manual counters
  */
@@ -27,6 +39,7 @@ import { Redis } from '@upstash/redis';
 
 let hsRatelimit: Ratelimit | null = null;
 let adrRatelimit: Ratelimit | null = null;
+let bulkRefRatelimit: Ratelimit | null = null;
 
 function getRedis(): Redis | null {
   const url = process.env.KV_REST_API_URL;
@@ -59,6 +72,18 @@ function getAdrRatelimit(): Ratelimit | null {
   return adrRatelimit;
 }
 
+function getBulkRefRatelimit(): Ratelimit | null {
+  if (bulkRefRatelimit) return bulkRefRatelimit;
+  const redis = getRedis();
+  if (!redis) return null;
+  bulkRefRatelimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(10, '5 m'),
+    prefix: 'scrape-rl-bulkref',
+  });
+  return bulkRefRatelimit;
+}
+
 /** Check if this is an HS data route (not the bare /hs search page) */
 function isHsScrapeRoute(pathname: string): boolean {
   return pathname.startsWith('/hs/') && pathname !== '/hs';
@@ -68,8 +93,31 @@ function isAdrScrapeRoute(pathname: string): boolean {
   return pathname.startsWith('/adr/un/');
 }
 
+/** Bulk-reference API endpoints that match the 2026-04-24 incident profile.
+ *  Excludes calculators (/api/adr-calculator, /api/adr/lq-check) and small
+ *  reference sets (/api/uld, /api/containers, /api/vehicles, /api/incoterms). */
+function isBulkRefApiRoute(pathname: string): boolean {
+  if (pathname === '/api/adr') return true;
+  if (pathname === '/api/airlines' || pathname.startsWith('/api/airlines/')) return true;
+  if (pathname === '/api/unlocode' || pathname.startsWith('/api/unlocode/')) return true;
+  if (pathname === '/api/hs' || pathname.startsWith('/api/hs/')) return true;
+  return false;
+}
+
 function isScrapeRoute(pathname: string): boolean {
   return isHsScrapeRoute(pathname) || isAdrScrapeRoute(pathname);
+}
+
+/** Extracts an API key from any of the four supported sources. Mirrors
+ *  handleApiRateLimit's logic. Returns null if no key is presented. */
+function extractApiKey(req: NextRequest): string | null {
+  const authHeader = req.headers.get('authorization');
+  const xApiKey = req.headers.get('x-api-key');
+  return (authHeader?.startsWith('Bearer fu_') ? authHeader.slice(7) : null)
+    ?? (xApiKey?.startsWith('fu_') ? xApiKey : null)
+    ?? req.nextUrl.searchParams.get('apiKey')
+    ?? req.nextUrl.searchParams.get('api_key')
+    ?? null;
 }
 
 function getClientIp(req: NextRequest): string {
@@ -186,6 +234,41 @@ function buildConversionRateLimitResponse(
     },
     { status: 429, headers: baseHeaders },
   );
+}
+
+/**
+ * Bulk-reference API scrape check. Anonymous-only — if a valid API key is
+ * presented, returns null so the request falls through to the daily/monthly
+ * limiter in handleApiRateLimit. Returns a 429 NextResponse when the 10/5-min
+ * sliding window is exceeded for an anonymous IP.
+ */
+async function tryBulkRefScrape(req: NextRequest): Promise<NextResponse | null> {
+  if (extractApiKey(req)) return null;
+
+  const rl = getBulkRefRatelimit();
+  if (!rl) return null;
+
+  const ip = getClientIp(req);
+  try {
+    const { success, remaining, reset } = await rl.limit(ip);
+    if (!success) {
+      console.warn(
+        `[ScrapeGuard] 429 — IP: ${ip}, path: ${req.nextUrl.pathname}, group: bulkref, limit: 10, resets: ${new Date(reset).toISOString()}`,
+      );
+      return buildConversionRateLimitResponse(req, {
+        retryAfterSeconds: 300,
+        limit: 10,
+        resetEpochMs: reset,
+      });
+    }
+    // Pass through — handleApiRateLimit will run next and emit its own headers.
+    // Surface the bulk-ref budget alongside the daily one via response headers.
+    void remaining;
+    return null;
+  } catch (err) {
+    console.error('[ScrapeGuard bulkref] Redis error:', err instanceof Error ? err.message : err);
+    return null;
+  }
 }
 
 async function handleScrapeProtection(req: NextRequest): Promise<NextResponse> {
@@ -366,10 +449,19 @@ async function handleApiRateLimit(req: NextRequest): Promise<NextResponse> {
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // (1) PAGE route scrape protection — /hs/* + /adr/un/*
   if (isScrapeRoute(pathname)) {
     return handleScrapeProtection(req);
   }
 
+  // (2) Bulk-reference API scrape protection — anonymous-only, falls through
+  //     to (3) when an API key is presented or the request is under budget.
+  if (isBulkRefApiRoute(pathname)) {
+    const blocked = await tryBulkRefScrape(req);
+    if (blocked) return blocked;
+  }
+
+  // (3) Existing daily/key-based API rate limiter
   return handleApiRateLimit(req);
 }
 

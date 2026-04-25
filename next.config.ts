@@ -3,6 +3,20 @@ import { withSentryConfig } from '@sentry/nextjs';
 
 const nextConfig: NextConfig = {
   async headers() {
+    // Bulk-reference endpoints — aggressive CDN caching so a scraper hits the
+    // edge cache, not the origin function, on repeat queries within the
+    // s-maxage window. Browser cache window kept short so legitimate users
+    // see fresh data. /api/hs already has more aggressive headers in its
+    // route handler, and /api/adr returns its own — both left alone.
+    const bulkRefCacheControl = 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400';
+    const bulkRefCachedPaths = [
+      '/api/airlines/:path*',
+      '/api/unlocode/:path*',
+      '/api/uld/:path*',
+      '/api/containers/:path*',
+      '/api/vehicles/:path*',
+    ];
+
     return [
       {
         source: '/api/:path*',
@@ -12,6 +26,10 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
         ],
       },
+      ...bulkRefCachedPaths.map((source) => ({
+        source,
+        headers: [{ key: 'Cache-Control', value: bulkRefCacheControl }],
+      })),
     ];
   },
 

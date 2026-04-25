@@ -40,6 +40,9 @@ yarn-error.log*
 # sentry (.env.sentry-build-plugin covered by .env* above)
 .sentryclirc
 
+# incident raw-logs — keep aggregated post-mortem committed, raw IPs gitignored
+docs/incidents/*-raw-logs.txt
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
