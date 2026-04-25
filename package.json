@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "npm run lint:eslint && npm run lint:api-casing",
+    "lint:eslint": "eslint",
+    "lint:api-casing": "node scripts/lint-api-casing.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",

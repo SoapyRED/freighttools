@@ -12,6 +12,17 @@ export interface ChangelogEntry {
 export const entries: ChangelogEntry[] = [
   {
     isoDate: '2026-04-25', date: 'Apr 25', tag: 'API Change',
+    title: '/api/auth/whoami — credential verification endpoint',
+    desc: 'New endpoint that validates an API key against the registry and returns tier (free/pro) plus the key prefix (never the full key). Replaces /api/health as the credential-test target for n8n and Zapier integrations — fixes B028, where /health returned 200 to any caller and silently green-ticked invalid keys.',
+    link: '/api-docs',
+  },
+  {
+    isoDate: '2026-04-25', date: 'Apr 25', tag: 'Bug Fix',
+    title: 'Tool count consistency — /api/health and /api/tools',
+    desc: 'Fixes B003: /api/health reported 18 tools while /api/tools listed 17. Both endpoints now derive from a single registry; the missing entry (ADR LQ/EQ Check, shipped 2026-04-09) was added back. Adding a new tool propagates to both endpoints automatically.',
+  },
+  {
+    isoDate: '2026-04-25', date: 'Apr 25', tag: 'API Change',
     title: 'Breaking — All endpoints now return snake_case fields',
     desc: 'Six endpoints migrated from camelCase to snake_case response fields (/api/unlocode, /api/uld, /api/containers, /api/vehicles, /api/consignment, /api/duty). Site-wide consistency with the other thirteen endpoints. Clean break — no dual-output. Full field rename table in CHANGELOG.md.',
     link: '/api-docs',

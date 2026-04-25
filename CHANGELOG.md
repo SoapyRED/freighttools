@@ -3,6 +3,14 @@
 FreightUtils data updates, new tools, API changes, and MCP updates.
 Subscribe via RSS: <https://www.freightutils.com/changelog.xml>
 
+## 2026-04-25 (later — hygiene rollup)
+
+- **API Change**: New endpoint `/api/auth/whoami` for credential verification (B028). Requires a valid API key in `X-API-Key` (or `Authorization: Bearer fu_…`, `?apiKey=`, `?api_key=`); returns `200 {authenticated: true, tier: free|pro, key_prefix}` (full key never echoed) or `401 {error: "unauthenticated", message, upgrade_url, signup_url}`. n8n and Zapier credential-test endpoints will retarget here in their next versions; current versions still hit `/api/health` (which keeps working but will green-tick any string).
+- **API Fix**: `/api/health` `tools` field and `/api/tools` `count` field now match (B003 — was 18 vs 17). Both now derive from `lib/api-tools-registry.ts`, which is the single source of truth for the public REST tool registry. The missing tool was `ADR LQ/EQ Check` (added on 2026-04-09 but never added to the inline `/api/tools` array). Adding/removing a tool now propagates to both endpoints automatically.
+- **API Fix**: `/api/tools` returns `meta.base_url` (was `meta.baseUrl`) — straggler from the snake_case migration earlier today.
+- **Tooling**: `npm run lint:api-casing` (chained into `npm run lint`) walks every `app/api/**/route.ts` and fails the build if any `NextResponse.json` body contains a camelCase key. Pairs with the runtime smoke-test guard, which now enforces snake_case on every 2xx response site-wide (was only the six migrated endpoints). New endpoints can't ship with camelCase fields without one of the two layers catching it.
+- **Docs**: `docs/api-casing-audit.md` snapshots the casing posture of every endpoint, the boundary-mapper pattern used for the migration, the four endpoints intentionally exempt (MCP transport, OG image, magic-link verify, internal admin/cron routes), and the enforcement architecture.
+
 ## 2026-04-25
 
 - **API breaking change** — Six endpoints now return `snake_case` response fields, was `camelCase`. Affected: `/api/unlocode`, `/api/uld`, `/api/containers`, `/api/vehicles`, `/api/consignment`, `/api/duty`. Reason: site-wide consistency with the majority of endpoints (which already used `snake_case`) plus downstream client compatibility (Zapier and n8n both expect a single convention). The thirteen other endpoints are unchanged. Migration done now while traffic is near-zero. No deprecation/dual-output layer — clean break.
