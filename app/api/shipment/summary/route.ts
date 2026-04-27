@@ -45,10 +45,13 @@ export async function POST(req: NextRequest) {
 
     const items: ShipmentItem[] = rawItems.map((r: unknown, i: number) => {
       const item = r as Record<string, unknown>;
+      // Polyglot input — accept both casings on every item-level field.
+      // Canonical form is snake_case (matches v0.2.0 downstream clients);
+      // camelCase aliases preserved for backwards compat.
       const length = Number(item.length ?? item.l ?? 0);
       const width = Number(item.width ?? item.w ?? 0);
       const height = Number(item.height ?? item.h ?? 0);
-      const weight = Number(item.weight ?? item.grossWeight ?? item.gw ?? 0);
+      const weight = Number(item.weight ?? item.gross_weight ?? item.grossWeight ?? item.gw ?? 0);
       const quantity = Math.max(1, Math.round(Number(item.quantity ?? item.qty ?? 1)));
 
       if (length <= 0 || width <= 0 || height <= 0) {
@@ -59,10 +62,10 @@ export async function POST(req: NextRequest) {
         description: item.description ? String(item.description) : undefined,
         length, width, height, weight, quantity,
         stackable: item.stackable !== false,
-        palletType: (item.palletType ?? item.pallet ?? 'none') as ShipmentItem['palletType'],
-        hsCode: item.hsCode ? String(item.hsCode) : undefined,
-        unNumber: item.unNumber ? String(item.unNumber) : undefined,
-        customsValue: item.customsValue ? Number(item.customsValue) : undefined,
+        palletType: ((item.pallet_type ?? item.palletType ?? item.pallet) ?? 'none') as ShipmentItem['palletType'],
+        hsCode: (item.hs_code ?? item.hsCode) ? String(item.hs_code ?? item.hsCode) : undefined,
+        unNumber: (item.un_number ?? item.unNumber) ? String(item.un_number ?? item.unNumber) : undefined,
+        customsValue: (item.customs_value ?? item.customsValue) ? Number(item.customs_value ?? item.customsValue) : undefined,
       };
     });
 
@@ -70,8 +73,8 @@ export async function POST(req: NextRequest) {
     const origin = raw.origin as { locode?: string; country: string } | undefined;
     const destination = raw.destination as { locode?: string; country: string } | undefined;
     const incoterm = raw.incoterm ? String(raw.incoterm) : undefined;
-    const freightCost = Number(raw.freightCost ?? 0);
-    const insuranceCost = Number(raw.insuranceCost ?? 0);
+    const freightCost = Number(raw.freight_cost ?? raw.freightCost ?? 0);
+    const insuranceCost = Number(raw.insurance_cost ?? raw.insuranceCost ?? 0);
     const options = raw.options as ShipmentRequest['options'];
 
     const result = await calculateShipmentSummary({

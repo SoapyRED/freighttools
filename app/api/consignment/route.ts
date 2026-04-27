@@ -100,11 +100,15 @@ export async function POST(req: NextRequest) {
 
     const items: ConsignmentItemInput[] = rawItems.map((rawItem: unknown, i: number) => {
       const raw = rawItem as Record<string, unknown>;
-      const lengthCm = Number(raw.length ?? raw.lengthCm ?? raw.l);
-      const widthCm = Number(raw.width ?? raw.widthCm ?? raw.w);
-      const heightCm = Number(raw.height ?? raw.heightCm ?? raw.h);
+      // Polyglot input — accept both casings on every item-level field.
+      // Canonical form is snake_case (matches v0.2.0 downstream clients);
+      // camelCase aliases preserved for backwards compat with v0.1.x clients
+      // and the n8n consignment routing.body remap (which sends camelCase).
+      const lengthCm = Number(raw.length ?? raw.length_cm ?? raw.lengthCm ?? raw.l);
+      const widthCm = Number(raw.width ?? raw.width_cm ?? raw.widthCm ?? raw.w);
+      const heightCm = Number(raw.height ?? raw.height_cm ?? raw.heightCm ?? raw.h);
       const quantity = Math.max(1, Math.round(Number(raw.quantity ?? raw.qty ?? 1)));
-      const grossWeightKg = Number(raw.grossWeight ?? raw.grossWeightKg ?? raw.weight ?? raw.gw ?? 0);
+      const grossWeightKg = Number(raw.gross_weight ?? raw.gross_weight_kg ?? raw.grossWeight ?? raw.grossWeightKg ?? raw.weight ?? raw.gw ?? 0);
 
       if (!lengthCm || !widthCm || !heightCm || lengthCm <= 0 || widthCm <= 0 || heightCm <= 0) {
         throw new Error(`Item ${i + 1}: length, width, and height are required and must be positive`);
@@ -118,7 +122,7 @@ export async function POST(req: NextRequest) {
         quantity,
         grossWeightKg,
         stackable: raw.stackable === true || raw.stackable === 'true',
-        palletType: String(raw.palletType ?? raw.pallet ?? 'none'),
+        palletType: String(raw.pallet_type ?? raw.palletType ?? raw.pallet ?? 'none'),
       };
     });
 

@@ -1189,7 +1189,7 @@
                           "type": "integer",
                           "default": 1
                         },
-                        "grossWeight": {
+                        "gross_weight": {
                           "type": "number"
                         },
                         "stackable": {
@@ -1618,10 +1618,10 @@
                         "stackable": {
                           "type": "boolean"
                         },
-                        "hsCode": {
+                        "hs_code": {
                           "type": "string"
                         },
-                        "unNumber": {
+                        "un_number": {
                           "type": "string"
                         },
                         "customs_value": {
