@@ -363,7 +363,7 @@ export default function LhrShedsPage() {
           >
             Expert reviewers
           </h2>
-          <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: '0 0 16px' }}>
             Reviewer credits pending contributor confirmation. If you have reviewed or contributed data to this dataset and wish to be credited, please contact{' '}
             <a
               href="mailto:contact@freightutils.com"
@@ -373,6 +373,33 @@ export default function LhrShedsPage() {
             </a>{' '}
             with your preferred attribution (display name, job title, and optional LinkedIn profile URL).
           </p>
+
+          {/* Reviewer credit slot — populate after on-shift confirmation. */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12, marginTop: 12 }}>
+            <article style={{ padding: 14, border: '1px dashed var(--border)', borderRadius: 8, background: 'var(--bg-card)' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-faint)', textTransform: 'uppercase', letterSpacing: '0.6px', marginBottom: 8 }}>
+                Reviewer slot 1
+              </div>
+              <dl style={{ margin: 0, fontSize: 13, lineHeight: 1.6 }}>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <dt style={{ minWidth: 110, fontWeight: 600, color: 'var(--text-muted)' }}>Name:</dt>
+                  <dd style={{ margin: 0, color: 'var(--text-faint)', fontStyle: 'italic' }}>&lt;pending&gt;</dd>
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <dt style={{ minWidth: 110, fontWeight: 600, color: 'var(--text-muted)' }}>Role:</dt>
+                  <dd style={{ margin: 0, color: 'var(--text-faint)', fontStyle: 'italic' }}>&lt;pending&gt;</dd>
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <dt style={{ minWidth: 110, fontWeight: 600, color: 'var(--text-muted)' }}>Years freight ops:</dt>
+                  <dd style={{ margin: 0, color: 'var(--text-faint)', fontStyle: 'italic' }}>&lt;pending&gt;</dd>
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <dt style={{ minWidth: 110, fontWeight: 600, color: 'var(--text-muted)' }}>Verified sections:</dt>
+                  <dd style={{ margin: 0, color: 'var(--text-faint)', fontStyle: 'italic' }}>&lt;pending&gt;</dd>
+                </div>
+              </dl>
+            </article>
+          </div>
         </section>
 
         {/* ── Corrections / licence ── */}

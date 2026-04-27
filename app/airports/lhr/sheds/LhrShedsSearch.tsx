@@ -9,14 +9,22 @@ interface Props {
 
 const CONFIDENCE_FILTERS: { value: Confidence | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
+  { value: 'operationally_verified', label: 'Operationally verified' },
+  { value: 'publicly_verified', label: 'Publicly verified' },
   { value: 'verified', label: 'Verified' },
   { value: 'community_contributed', label: 'Community' },
   { value: 'pending_verification', label: 'Pending verification' },
+  { value: 'needs_review', label: 'Needs review' },
   { value: 'operational_only', label: 'Operational only' },
   { value: 'hmrc_only', label: 'HMRC only' },
 ];
 
 const CONFIDENCE_STYLES: Record<Confidence, { bg: string; color: string; label: string }> = {
+  // v2 (2026-04-27)
+  operationally_verified: { bg: 'rgba(34,197,94,0.18)',   color: '#14532D', label: 'Operationally verified' },
+  publicly_verified:      { bg: 'rgba(59,130,246,0.18)',  color: '#1E3A8A', label: 'Publicly verified' },
+  needs_review:           { bg: 'rgba(234,179,8,0.18)',   color: '#92400E', label: 'Needs review' },
+  // v1 (legacy values, kept for any unmigrated entries)
   verified:              { bg: 'rgba(34,197,94,0.12)',   color: '#15803D', label: 'Verified' },
   community_contributed: { bg: 'rgba(168,85,247,0.12)',  color: '#7C3AED', label: 'Community' },
   pending_verification:  { bg: 'rgba(234,179,8,0.15)',   color: '#B45309', label: 'Pending verification' },
@@ -426,6 +434,47 @@ function ShedRow({
                   </div>
                 </div>
               )}
+              {shed.legal_vs_operational && (
+                <div style={{ gridColumn: '1 / -1', padding: 10, background: 'rgba(59,130,246,0.08)', borderLeft: '3px solid #1D4ED8', borderRadius: 4 }}>
+                  <div style={labelStyle}>Legal vs operational</div>
+                  <div style={{ fontSize: 13, marginTop: 6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
+                    <div><strong>Legal holder (HMRC):</strong> {shed.legal_vs_operational.legal_holder}</div>
+                    <div><strong>Operational brand:</strong> {shed.legal_vs_operational.operational_brand} ({shed.legal_vs_operational.relationship} since {shed.legal_vs_operational.since})</div>
+                  </div>
+                </div>
+              )}
+              {shed.former_operator && (
+                <div style={{ gridColumn: '1 / -1', padding: 10, background: 'rgba(168,85,247,0.08)', borderLeft: '3px solid #7C3AED', borderRadius: 4 }}>
+                  <div style={labelStyle}>Operator history</div>
+                  <div style={{ fontSize: 13, marginTop: 6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
+                    <div><strong>Former operator:</strong> {shed.former_operator.common_name || shed.former_operator.legal_name}{shed.former_operator.operated_until && ` — until ${shed.former_operator.operated_until}`}</div>
+                    {shed.former_operator.absorbed_by && (
+                      <div><strong>Absorbed by:</strong> {shed.former_operator.absorbed_by}</div>
+                    )}
+                  </div>
+                </div>
+              )}
+              {shed.absorbed_by && (
+                <div style={{ gridColumn: '1 / -1', padding: 10, background: 'rgba(168,85,247,0.08)', borderLeft: '3px solid #7C3AED', borderRadius: 4 }}>
+                  <div style={labelStyle}>Operator history</div>
+                  <div style={{ fontSize: 13, marginTop: 6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
+                    <div><strong>Absorbed by:</strong> {shed.absorbed_by.legal_name} ({shed.absorbed_by.absorbed_date})</div>
+                    <div><strong>Operational shed code now:</strong> {shed.absorbed_by.operational_shed_code}</div>
+                  </div>
+                </div>
+              )}
+              {shed.email_routing && (
+                <div style={{ gridColumn: '1 / -1', padding: 10, background: 'rgba(234,179,8,0.10)', borderLeft: '3px solid #B45309', borderRadius: 4 }}>
+                  <div style={labelStyle}>Email / code divergence</div>
+                  <div style={{ fontSize: 13, marginTop: 6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
+                    <div><strong>Prealert email:</strong> <span style={{ fontFamily: 'monospace' }}>{shed.email_routing.prealert_email}</span></div>
+                    {shed.email_routing.routing_code_on_email && (
+                      <div><strong>Email envelope routing code:</strong> {shed.email_routing.routing_code_on_email}</div>
+                    )}
+                    <div style={{ marginTop: 4, color: 'var(--text-muted)' }}>{shed.email_routing.note}</div>
+                  </div>
+                </div>
+              )}
               {shed.routing_notes && (
                 <div style={{ gridColumn: '1 / -1' }}>
                   <div style={labelStyle}>Routing notes</div>
@@ -440,6 +489,20 @@ function ShedRow({
                   <p style={{ margin: '4px 0 0', fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.55 }}>
                     {shed.hmrc.note}
                   </p>
+                </div>
+              )}
+              {shed.citations && shed.citations.length > 0 && (
+                <div style={{ gridColumn: '1 / -1' }}>
+                  <div style={labelStyle}>Sources / citations</div>
+                  <ul style={{ margin: '4px 0 0', paddingLeft: 18, fontSize: 13, lineHeight: 1.6 }}>
+                    {shed.citations.map((c, i) => (
+                      <li key={i} style={{ margin: '4px 0' }}>
+                        <a href={c.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', wordBreak: 'break-word' }}>
+                          {c.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
               {shed.last_verified && (

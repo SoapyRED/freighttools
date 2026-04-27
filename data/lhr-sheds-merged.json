@@ -4,7 +4,7 @@
     "primary_airport": "LHR",
     "total_sheds": 222,
     "operational_source_version": "v4",
-    "operational_last_verified": "2026-04-21",
+    "operational_last_verified": "2026-04-27",
     "hmrc_sources": {
       "itsf": {
         "fetched_at": "2026-04-21T09:30:29.177Z",
@@ -27,7 +27,28 @@
       "hmrc_only": 197
     },
     "licence": "Operational data © FreightUtils (CC BY 4.0). HMRC data: Open Government Licence v3.0, source HM Revenue & Customs.",
-    "corrections_email": "contact@freightutils.com"
+    "corrections_email": "contact@freightutils.com",
+    "last_verified": "2026-04-27",
+    "confidence_schema_v2": {
+      "values": [
+        "operationally_verified",
+        "publicly_verified",
+        "needs_review",
+        "verified",
+        "pending_verification"
+      ],
+      "notes": "v2 values introduced 2026-04-27 alongside prior values. Backwards compatible.",
+      "applied_to_keys_2026_04_27": [
+        "BAC_EXPRESS",
+        "XBQ",
+        "BA_125_BARC",
+        "ZCS",
+        "JZS_ASC",
+        "CFL",
+        "AFS",
+        "FRX"
+      ]
+    }
   },
   "critical_rules": {
     "horseshoe_default": {
@@ -222,7 +243,7 @@
         }
       ],
       "awb_prefixes": [],
-      "routing_notes": "Renamed from ASC when Swissport formally registered the location with HMRC on 20 Jan 2026. Building 582 is also home to ASC's own ITSF registration (JZS suffix) — shared-building location.",
+      "routing_notes": "Swissport at Building 582 Sandringham Rd. Soap confirmed 2026-04-27: Swissport acquired ASC (Aviation Servicing Company) in July 2025 and absorbed all former ASC operations. ZCS is now the operational shed code post-absorption; all former ASC prealert emails route to @swissport.com. ASC's HMRC registration JZS still exists at the same building but has no operational routing — see JZS entry for the legal-vs-operational pattern.",
       "is_critical_rule": false,
       "operational_status": null,
       "hmrc": {
@@ -241,9 +262,25 @@
         },
         "registered_date": "2026-01-20"
       },
-      "confidence": "verified",
-      "last_verified": "2026-04-21",
-      "source": "operational"
+      "confidence": "operationally_verified",
+      "last_verified": "2026-04-27",
+      "source": "operational",
+      "former_operator": {
+        "legal_name": "Aviation Servicing Company Limited",
+        "common_name": "ASC Cargo Handling",
+        "operated_until": "2025-07",
+        "absorbed_by": "Swissport GB Limited"
+      },
+      "citations": [
+        {
+          "label": "Swissport press release: Swissport acquires ASC, strengthening its position in London (2025)",
+          "url": "https://www.swissport.com/en/news/current-news/2025/swissport-acquires-asc-strengthening-its-position-in-london"
+        },
+        {
+          "label": "HMRC ITSF Appendix 16D — ZCS registration 20 Jan 2026",
+          "url": "https://assets.publishing.service.gov.uk/media/69dcbc1eeb7e7bc56517028c/20260409_cds_de_5-23_appendix16D_internal_temporary_storage_facilities.ods"
+        }
+      ]
     },
     {
       "key": "JZS_ASC",
@@ -254,9 +291,9 @@
       "prealert_email": null,
       "airlines": [],
       "awb_prefixes": [],
-      "routing_notes": "Shares Building 582 with Swissport (ZCS). ASC Cargo Handling is the long-standing occupant; Swissport's ZCS registration was added Jan 2026. Subject code and prealert email not currently in our operational data — verify if ASC is still routed to separately.",
+      "routing_notes": "Legal HMRC ITSF registration only — no operational routing as of 2026-04-27. Aviation Servicing Company was acquired by Swissport in July 2025; all former ASC operations now route via ZCS (Swissport at the same Building 582 address). JZS remains on the HMRC list as a registered ITSF facility, but anyone sending a prealert to ASC should redirect to ZCS / Swissport. Concrete example of the legal-vs-operational truth gap.",
       "is_critical_rule": false,
-      "operational_status": "hmrc_registered_operational_data_missing",
+      "operational_status": "legal_entity_preserved_operations_via_ZCS",
       "hmrc": {
         "code": "GBAULHRLHRJZS",
         "status": "registered",
@@ -272,9 +309,20 @@
           "suffix_length": 3
         }
       },
-      "confidence": "pending_verification",
-      "last_verified": "2026-04-21",
-      "source": "operational"
+      "confidence": "operationally_verified",
+      "last_verified": "2026-04-27",
+      "source": "operational",
+      "absorbed_by": {
+        "legal_name": "Swissport GB Limited",
+        "operational_shed_code": "ZCS",
+        "absorbed_date": "2025-07"
+      },
+      "citations": [
+        {
+          "label": "Swissport press release: Swissport acquires ASC (2025)",
+          "url": "https://www.swissport.com/en/news/current-news/2025/swissport-acquires-asc-strengthening-its-position-in-london"
+        }
+      ]
     },
     {
       "key": "CFL",
@@ -285,7 +333,7 @@
       "prealert_email": "spx@cfl.aero",
       "airlines": [],
       "awb_prefixes": [],
-      "routing_notes": "Subject code TBC. HMRC-registered as ITSF.",
+      "routing_notes": "Data sourced from public records (HMRC ITSF list + CFL company website) and not operationally validated by FreightUtils. Subject code unknown. Prealert email spx@cfl.aero per CFL's published contact details. Treat as a starting reference rather than an operational truth — verify on shift before relying.",
       "is_critical_rule": false,
       "operational_status": "partial",
       "hmrc": {
@@ -301,11 +349,22 @@
           "airport": "LHR",
           "suffix": "CFL1",
           "suffix_length": 4
-        }
+        },
+        "note": "Registered as ITSF; operational details not validated by FreightUtils."
       },
-      "confidence": "pending_verification",
-      "last_verified": "2026-04-21",
-      "source": "operational"
+      "confidence": "needs_review",
+      "last_verified": "2026-04-27",
+      "source": "operational",
+      "citations": [
+        {
+          "label": "CFL website (operator self-publication)",
+          "url": "https://www.cfl.aero/"
+        },
+        {
+          "label": "HMRC ITSF Appendix 16D registration",
+          "url": "https://assets.publishing.service.gov.uk/media/69dcbc1eeb7e7bc56517028c/20260409_cds_de_5-23_appendix16D_internal_temporary_storage_facilities.ods"
+        }
+      ]
     },
     {
       "key": "NAS",
@@ -617,12 +676,12 @@
         }
       ],
       "awb_prefixes": [],
-      "routing_notes": "BA EXPRESS / Premia — differentiate from BAC_MAIN via slip 'EXPRESS' or 'Premia' marker. Shares subject code LHRBAC with Ascentis — EMAIL is the differentiator. HMRC may register this as BAS (GBAULHRLHRBAS, same address) — SOAP TO VERIFY on shift.",
+      "routing_notes": "BA EXPRESS / Premia — same shed_code BAC as Ascentis (BAC_MAIN); EMAIL is the differentiator. Soap confirmed 2026-04-27: only BAC is sent operationally for BOTH Ascentis (Main) and Premia (Express). HMRC's BAS registration exists at the same address but no operational use observed at LHR — prealerts always sent to BAC.",
       "is_critical_rule": false,
       "operational_status": null,
       "hmrc": {
         "code": "GBAULHRLHRBAS",
-        "status": "registered_uncertain_mapping",
+        "status": "registered_unused_operationally",
         "source": "itsf",
         "legal_name": "British Airways PLC",
         "address": "Ascentis, Building 1233, Sealand Road, Heathrow Airport, Hounslow, Middlesex. TW6 2JS",
@@ -634,16 +693,16 @@
           "suffix": "BAS",
           "suffix_length": 3
         },
-        "note": "BA has TWO codes: BAC and BAS, both at same address. Soap to confirm which is Premia vs Ascentis."
+        "note": "Registered with HMRC as GBAULHRLHRBAS but no operational use observed at LHR; prealerts always sent to BAC. Verified by Soap on shift 2026-04-27."
       },
-      "confidence": "pending_verification",
-      "last_verified": "2026-04-21",
+      "confidence": "operationally_verified",
+      "last_verified": "2026-04-27",
       "source": "operational"
     },
     {
       "key": "BA_125_BARC",
       "shed_code": "DAX",
-      "subject_code": null,
+      "subject_code": "LHRDAX",
       "handler_legal_name": "Dunwoody Airline Services Limited T/A Worldwide Flight Services",
       "handler_common_name": "WFS BARC (Building 875)",
       "prealert_email": "bbs.spxra.alerts@wfs.aero",
@@ -662,7 +721,7 @@
       "awb_prefixes": [
         "125"
       ],
-      "routing_notes": "Third BA handler at Heathrow (per Soap 20 Apr 2026 + Simon + Paul Weller WFS DM interview). BARC = BA Regional Cargo. Soap's new workplace from 7 May 2026. Subject code TBC — verify on first shift. Likely LHRDAX or LHRBBS based on email pattern.",
+      "routing_notes": "Current BARC handler at LHR (BA Regional Cargo). Soap confirmed 2026-04-27 from on-shift observation: shed_code on prealert is DAX, but the prealert email routes via BBS (bbs.spxra.alerts@wfs.aero). EMAIL/CODE DIVERGENCE — slip header reads DAX, email envelope reads BBS. Address paperwork to DAX; route the email to bbs.spxra.alerts@wfs.aero.",
       "is_critical_rule": false,
       "operational_status": null,
       "hmrc": {
@@ -680,9 +739,14 @@
           "suffix_length": 3
         }
       },
-      "confidence": "verified",
-      "last_verified": "2026-04-21",
-      "source": "operational"
+      "confidence": "operationally_verified",
+      "last_verified": "2026-04-27",
+      "source": "operational",
+      "email_routing": {
+        "prealert_email": "bbs.spxra.alerts@wfs.aero",
+        "note": "Email routes via BBS even though shed_code is DAX — confirmed divergence as of 2026-04-27.",
+        "routing_code_on_email": "BBS"
+      }
     },
     {
       "key": "CIS_MENZIES",
@@ -872,7 +936,7 @@
         "057",
         "020"
       ],
-      "routing_notes": "HMRC operator is 'Heathrow Cargo Handling Limited' (HCH), not Swissport GB directly. Operationally Swissport staff — likely HCH is a Swissport subsidiary/trading name. Swissport reshuffles airline allocations periodically — ALWAYS trust slip header.",
+      "routing_notes": "Concrete example of operational vs regulated truth. HMRC ITSF holder is 'Heathrow Cargo Handling Limited' (HCH) — a Swissport subsidiary since 2019. Legal entity preserved post-acquisition; operations are Swissport-branded. Soap confirmed 2026-04-27: prealert email routes to LHR.558CSD@swissport.com; staff are Swissport. Always trust the slip header — Swissport reshuffles airline allocations periodically.",
       "is_critical_rule": false,
       "operational_status": null,
       "hmrc": {
@@ -890,9 +954,26 @@
           "suffix_length": 3
         }
       },
-      "confidence": "verified",
-      "last_verified": "2026-04-21",
-      "source": "operational"
+      "confidence": "operationally_verified",
+      "last_verified": "2026-04-27",
+      "source": "operational",
+      "legal_vs_operational": {
+        "legal_holder": "Heathrow Cargo Handling Limited",
+        "operational_brand": "Swissport",
+        "relationship": "subsidiary",
+        "since": "2019",
+        "pattern": "legal_entity_preserved_post_acquisition"
+      },
+      "citations": [
+        {
+          "label": "Companies House — Heathrow Cargo Handling Limited (03076274)",
+          "url": "https://find-and-update.company-information.service.gov.uk/company/03076274"
+        },
+        {
+          "label": "BIFA member directory (HCH listed 2025)",
+          "url": "https://www.bifa.org/find-a-member"
+        }
+      ]
     },
     {
       "key": "SLS",
@@ -978,7 +1059,7 @@
       "awb_prefixes": [
         "074"
       ],
-      "routing_notes": "HMRC operator is 'Heathrow Cargo Handling Limited' (HCH), not Swissport GB. Operationally Swissport staff. Registered as ETSF, not ITSF. KLM (074) may route here OR to Swissport 558 (AFS) — trust slip header.",
+      "routing_notes": "Same legal-vs-operational pattern as AFS (Bldg 558): HMRC ETSF holder is Heathrow Cargo Handling Limited (HCH), operations Swissport-branded since 2019. Email routes to LHR.HRDCSD@swissport.com; staff are Swissport. Registered as ETSF, not ITSF. KLM (074) may route here OR to Swissport 558 (AFS) — always trust slip header.",
       "is_critical_rule": false,
       "operational_status": null,
       "hmrc": {
@@ -996,9 +1077,21 @@
           "suffix_length": 3
         }
       },
-      "confidence": "verified",
-      "last_verified": "2026-04-21",
-      "source": "operational"
+      "confidence": "operationally_verified",
+      "last_verified": "2026-04-27",
+      "source": "operational",
+      "legal_vs_operational": {
+        "legal_holder": "Heathrow Cargo Handling Limited",
+        "operational_brand": "Swissport",
+        "relationship": "subsidiary",
+        "since": "2019"
+      },
+      "citations": [
+        {
+          "label": "Companies House — Heathrow Cargo Handling Limited (03076274)",
+          "url": "https://find-and-update.company-information.service.gov.uk/company/03076274"
+        }
+      ]
     },
     {
       "key": "POS",
@@ -1125,16 +1218,16 @@
         }
       ],
       "awb_prefixes": [],
-      "routing_notes": "SHARES email address (bbs.spxra.alerts@wfs.aero) with DAX (Building 875 BARC). May be a legacy code superseded by DAX, OR a separate building still in use. VERIFY when at WFS.",
+      "routing_notes": "Historical / deprecated. Soap confirmed 2026-04-27: XBQ is no longer operationally used; DAX (Building 875, Dunwoody) has replaced it for BARC prealerts. Slips referencing XBQ should be redirected to DAX.",
       "is_critical_rule": false,
-      "operational_status": "verify_on_shift",
+      "operational_status": "deprecated_historical",
       "hmrc": {
         "code": null,
         "status": "not_found_in_current_data",
-        "note": "Not in current HMRC list. DAX (Dunwoody 875) is the current HMRC-registered BARC handler."
+        "note": "Not in current HMRC ITSF list; superseded by DAX (Dunwoody / WFS Building 875) per Soap on shift 2026-04-27."
       },
-      "confidence": "pending_verification",
-      "last_verified": "2026-04-21",
+      "confidence": "operationally_verified",
+      "last_verified": "2026-04-27",
       "source": "operational"
     },
     {
@@ -7325,12 +7418,19 @@
       "last_verified": "2026-04-21"
     }
   ],
-  "questions_for_soap_on_shift": [
-    "BA has TWO HMRC codes at same address: BAC and BAS. Which is Ascentis (Main)? Which is Premia (Express)?",
-    "XBQ vs DAX — is XBQ still actively used, or has DAX (Bldg 875, Dunwoody) replaced it for BARC prealerts?",
-    "BARC subject code for BA 125 prefix slips — what's used operationally? (Expecting LHRDAX or LHRBBS)",
-    "ASC (Aviation Servicing Company at Bldg 582, JZS code) — is ASC still routed to separately, or has Swissport (ZCS) absorbed all operations there?",
-    "CFL — any subject code used operationally? Email is spx@cfl.aero.",
-    "Swissport vs Heathrow Cargo Handling — does HCH brand show up anywhere operationally, or is it purely the legal ITSF holder while Swissport is what everyone knows it as?"
-  ]
+  "questions_for_soap_on_shift": [],
+  "questions_resolved": {
+    "closed_at": "2026-04-27T00:00:00Z",
+    "resolved_by": "Soap (on-shift verification + public source citations)",
+    "count": 6,
+    "summary": "All 6 questions resolved. See routing_notes on BAC_EXPRESS / XBQ / BA_125_BARC (DAX) / ZCS / JZS_ASC / CFL / AFS / FRX.",
+    "prior_questions": [
+      "BA has TWO HMRC codes at same address: BAC and BAS. Which is Ascentis (Main)? Which is Premia (Express)?",
+      "XBQ vs DAX — is XBQ still actively used, or has DAX (Bldg 875, Dunwoody) replaced it for BARC prealerts?",
+      "BARC subject code for BA 125 prefix slips — what's used operationally? (Expecting LHRDAX or LHRBBS)",
+      "ASC (Aviation Servicing Company at Bldg 582, JZS code) — is ASC still routed to separately, or has Swissport (ZCS) absorbed all operations there?",
+      "CFL — any subject code used operationally? Email is spx@cfl.aero.",
+      "Swissport vs Heathrow Cargo Handling — does HCH brand show up anywhere operationally, or is it purely the legal ITSF holder while Swissport is what everyone knows it as?"
+    ]
+  }
 }

@@ -8,17 +8,23 @@ interface Props {
 }
 
 const CONFIDENCE_ORDER: Confidence[] = [
+  'operationally_verified',
+  'publicly_verified',
   'verified',
   'community_contributed',
   'pending_verification',
+  'needs_review',
   'operational_only',
   'hmrc_only',
 ];
 
 const CONFIDENCE_LABELS: Record<Confidence, string> = {
+  operationally_verified: 'Operationally verified',
+  publicly_verified: 'Publicly verified',
   verified: 'Verified',
   community_contributed: 'Community-contributed',
   pending_verification: 'Pending verification',
+  needs_review: 'Needs review',
   operational_only: 'Operational only',
   hmrc_only: 'HMRC-only',
 };
@@ -32,9 +38,12 @@ const CONFIDENCE_LABELS: Record<Confidence, string> = {
 export default function LhrShedsPrint({ sheds, criticalRules, lastVerified, correctionsEmail }: Props) {
   // Group operational sheds by confidence; put HMRC-only in a trailing table.
   const grouped: Record<Confidence, MergedShed[]> = {
+    operationally_verified: [],
+    publicly_verified: [],
     verified: [],
     community_contributed: [],
     pending_verification: [],
+    needs_review: [],
     operational_only: [],
     hmrc_only: [],
   };

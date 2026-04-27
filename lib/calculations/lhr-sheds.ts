@@ -24,7 +24,43 @@ export type Confidence =
   | 'community_contributed'
   | 'pending_verification'
   | 'operational_only'
-  | 'hmrc_only';
+  | 'hmrc_only'
+  // v2 confidence values introduced 2026-04-27 alongside the prior set.
+  | 'operationally_verified'
+  | 'publicly_verified'
+  | 'needs_review';
+
+export interface FormerOperator {
+  legal_name?: string;
+  common_name?: string;
+  operated_until?: string;
+  absorbed_by?: string;
+}
+
+export interface AbsorbedBy {
+  legal_name: string;
+  operational_shed_code: string;
+  absorbed_date: string;
+}
+
+export interface LegalVsOperational {
+  legal_holder: string;
+  operational_brand: string;
+  relationship: string;
+  since: string;
+  pattern?: string;
+}
+
+export interface EmailRouting {
+  prealert_email: string;
+  note: string;
+  routing_code_on_email?: string;
+}
+
+export interface Citation {
+  label: string;
+  url: string;
+}
 
 export interface AirlineRef {
   code: string;
@@ -69,6 +105,12 @@ export interface MergedShed {
   confidence: Confidence;
   last_verified: string | null;
   source: 'operational' | 'hmrc';
+  // v2 fields introduced 2026-04-27 for ZCS/JZS/AFS/FRX/DAX clarity.
+  former_operator?: FormerOperator;
+  absorbed_by?: AbsorbedBy;
+  legal_vs_operational?: LegalVsOperational;
+  email_routing?: EmailRouting;
+  citations?: Citation[];
 }
 
 export interface CriticalRules {
