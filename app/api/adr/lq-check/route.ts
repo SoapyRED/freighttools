@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { checkLqEq, type LqEqItem } from '@/lib/calculations/lq-eq';
 
 const CORS = {
@@ -13,7 +14,7 @@ export function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
-export function GET() {
+async function _handleGET() {
   return NextResponse.json({
     error: 'Use POST with a JSON body',
     usage: {
@@ -26,7 +27,7 @@ export function GET() {
   }, { status: 405, headers: { ...CORS, Allow: 'POST, OPTIONS' } });
 }
 
-export async function POST(req: NextRequest) {
+async function _handlePOST(req: NextRequest) {
   const h = { ...CORS, 'Content-Type': 'application/json' };
 
   try {
@@ -81,3 +82,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: message }, { status: 400, headers: h });
   }
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);
+export const POST = withAuditRest(_handlePOST);

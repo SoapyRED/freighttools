@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { convert, UNITS, FREIGHT_CONVERSIONS } from '@/lib/calculations/converter';
 
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'X-RateLimit-Limit': '25', 'X-RateLimit-Window': '86400' };
@@ -6,7 +7,7 @@ const CACHE = { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate
 
 export function OPTIONS() { return new NextResponse(null, { status: 204, headers: CORS }); }
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const h = { ...CORS, ...CACHE };
   const { searchParams } = req.nextUrl;
   const valueStr = searchParams.get('value');
@@ -35,3 +36,6 @@ export function GET(req: NextRequest) {
 
   return NextResponse.json(result, { headers: h });
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

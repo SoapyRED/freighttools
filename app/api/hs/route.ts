@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import {
   searchCodes,
   getCodeDetails,
@@ -19,7 +20,7 @@ const HS_META = {
 
 export function OPTIONS() { return new NextResponse(null, { status: 204, headers: CORS }); }
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const h = { ...CORS, ...CACHE };
   const { searchParams } = req.nextUrl;
   const q = searchParams.get('q');
@@ -68,3 +69,6 @@ export function GET(req: NextRequest) {
     total_codes: TOTAL_CODES,
   }, { status: 400, headers: h });
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

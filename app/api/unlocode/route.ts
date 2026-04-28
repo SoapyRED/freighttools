@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { search, lookupByCode, TOTAL_ENTRIES, type UnlocodeEntry } from '@/lib/calculations/unlocode';
 
 // API response shape (snake_case). Internal UnlocodeEntry uses camelCase;
@@ -32,7 +33,7 @@ export function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const h = { ...CORS, ...CACHE, 'Content-Type': 'application/json' };
   const sp = req.nextUrl.searchParams;
 
@@ -74,3 +75,6 @@ export function GET(req: NextRequest) {
     },
   }, { headers: h });
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

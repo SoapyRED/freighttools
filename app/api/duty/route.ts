@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { calculateDuty, CommodityCodeNotFoundError, type DutyResult } from '@/lib/calculations/duty';
 import { ISO_3166_ALPHA2 } from '@/lib/data/iso-countries';
 
@@ -36,7 +37,7 @@ export function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
-export async function POST(req: NextRequest) {
+async function _handlePOST(req: NextRequest) {
   const h = { ...CORS, 'Content-Type': 'application/json' };
 
   try {
@@ -88,3 +89,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: message }, { status: 400, headers: h });
   }
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const POST = withAuditRest(_handlePOST);

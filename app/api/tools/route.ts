@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { TOOLS } from '@/lib/api-tools-registry';
 
 const CORS = {
@@ -11,7 +12,7 @@ export function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
-export function GET() {
+async function _handleGET() {
   return NextResponse.json({
     count: TOOLS.length,
     tools: TOOLS,
@@ -23,3 +24,6 @@ export function GET() {
     },
   }, { headers: CORS });
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);
