@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import {
   searchAirlines,
   filterByIata,
@@ -41,7 +42,7 @@ export function OPTIONS() {
 //  GET /api/airlines
 // -----------------------------------------------------------------
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const qParam       = searchParams.get('q');
   const iataParam    = searchParams.get('iata');
@@ -199,3 +200,6 @@ export function GET(req: NextRequest) {
     );
   }
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

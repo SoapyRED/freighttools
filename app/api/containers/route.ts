@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { getAllContainerSpecs, getContainerSpec, calculateContainerLoading, type ContainerSpec, type LoadingResult } from '@/lib/calculations/container-capacity';
 
 // API response shape (snake_case). Internal ContainerSpec/LoadingResult use camelCase.
@@ -48,7 +49,7 @@ const CACHE = { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate
 
 export function OPTIONS() { return new NextResponse(null, { status: 204, headers: CORS }); }
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const h = { ...CORS, ...CACHE };
   const { searchParams } = req.nextUrl;
   const type = searchParams.get('type');
@@ -98,3 +99,6 @@ export function GET(req: NextRequest) {
   // Just return the spec
   return NextResponse.json(toContainerSpecResponse(spec), { headers: h });
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

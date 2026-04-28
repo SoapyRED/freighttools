@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { calculateChargeableWeight, calculateSeaChargeableWeight, DEFAULT_FACTOR } from '@/lib/calculations/chargeable-weight';
 
 const CORS_HEADERS = {
@@ -13,7 +14,7 @@ export function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
 }
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const p = req.nextUrl.searchParams;
   const errors: string[] = [];
 
@@ -127,3 +128,6 @@ export function GET(req: NextRequest) {
     }
   );
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

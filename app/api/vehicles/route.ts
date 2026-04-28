@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { getAllVehicles, getVehicle, getVehiclesByCategory, getVehiclesByRegion, VEHICLE_REF_COUNT, type VehicleSpec } from '@/lib/calculations/vehicle-ref';
 
 // API response shape (snake_case). Internal VehicleSpec uses camelCase.
@@ -34,7 +35,7 @@ export function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const h = { ...CORS, ...CACHE };
   const { searchParams } = req.nextUrl;
 
@@ -99,3 +100,6 @@ export function GET(req: NextRequest) {
     results: results.map(toApiResponse),
   }, { headers: h });
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

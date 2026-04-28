@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import {
   lookupByUnNumber,
   searchByName,
@@ -50,7 +51,7 @@ function stripMeta(entry: Record<string, unknown>) {
 //  GET /api/adr
 // ─────────────────────────────────────────────────────────────────
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const unParam     = searchParams.get('un');
   const searchParam = searchParams.get('search') || searchParams.get('q');
@@ -157,3 +158,6 @@ export function GET(req: NextRequest) {
     );
   }
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

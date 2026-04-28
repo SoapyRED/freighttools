@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import {
   getAllULDs,
   getULD,
@@ -61,7 +62,7 @@ export function OPTIONS() {
 //  GET /api/uld
 // -----------------------------------------------------------------
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const typeParam     = searchParams.get('type');
   const categoryParam = searchParams.get('category');
@@ -158,3 +159,6 @@ export function GET(req: NextRequest) {
     { status: 200, headers: { ...headers, 'X-Total-Count': String(all.length) } },
   );
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

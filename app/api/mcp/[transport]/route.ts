@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { createMcpHandler } from 'mcp-handler';
+import { withAuditMcp } from '@/lib/observability/audit';
 import { calculateCbm } from '@/lib/calculations/cbm';
 import { calculateConsignment } from '@/lib/calculations/consignment';
 import { calculateShipmentSummary } from '@/lib/calculations/shipment-summary';
@@ -524,53 +525,17 @@ const handler = createMcpHandler(
 //  Request logging wrapper for debugging MCP client issues
 // ─────────────────────────────────────────────────────────────
 
-function withLogging(method: string, fn: (req: Request) => Promise<Response>) {
-  return async (req: Request) => {
-    const ua = req.headers.get('user-agent') ?? 'unknown';
-    const ct = req.headers.get('content-type') ?? 'none';
-    const url = new URL(req.url);
-    console.log(`[MCP] ${method} ${url.pathname}${url.search} | UA: ${ua} | CT: ${ct}`);
-
-    // For POST, read body into text, then create a new request with that body
-    // This ensures we can both log AND pass to handler without stream issues
-    let bodyPreview = '';
-    if (method === 'POST') {
-      try {
-        const bodyText = await req.text();
-        bodyPreview = bodyText.substring(0, 500);
-        console.log(`[MCP] ${method} body: ${bodyPreview}`);
-        // Reconstruct request with the body so handler can read it
-        req = new Request(req.url, {
-          method: req.method,
-          headers: req.headers,
-          body: bodyText,
-        });
-      } catch { /* body already consumed or empty */ }
-    }
-
-    try {
-      const res = await fn(req);
-      if (res.status >= 400) {
-        // Log error responses with body preview for debugging
-        let errorBody = '';
-        try {
-          const resClone = res.clone();
-          errorBody = (await resClone.text()).substring(0, 300);
-        } catch { /* */ }
-        console.error(`[MCP] ${method} → ${res.status} | Error: ${errorBody} | Request body: ${bodyPreview}`);
-      } else {
-        console.log(`[MCP] ${method} → ${res.status}`);
-      }
-      return res;
-    } catch (err) {
-      console.error(`[MCP] ${method} ERROR:`, err instanceof Error ? err.message : err);
-      throw err;
-    }
-  };
-}
-
 // ─────────────────────────────────────────────────────────────
 //  Route exports
+//
+//  Audit wrapping happens at lib/observability/audit.ts → withAuditMcp.
+//  The wrapper reads the JSON-RPC body once to extract the tool name
+//  (params.name on tools/call; otherwise the bare method like initialize
+//  / tools/list), reconstructs the request for the handler, and emits a
+//  single `[fu-audit]` JSON line per request including status, duration,
+//  client bucket, country/region, and has_api_key boolean. NO bodies,
+//  NO API key values, NO IPs, NO emails — see lib/observability/audit.ts
+//  for the full privacy contract.
 // ─────────────────────────────────────────────────────────────
 
 const CORS_HEADERS = {
@@ -599,7 +564,7 @@ export async function OPTIONS() {
   });
 }
 
-// Wrap MCP handler with logging
-export const GET = withLogging('GET', handler);
-export const POST = withLogging('POST', handler);
-export const DELETE = withLogging('DELETE', handler);
+// Wrap MCP handler with audit logging
+export const GET = withAuditMcp('GET', handler);
+export const POST = withAuditMcp('POST', handler);
+export const DELETE = withAuditMcp('DELETE', handler);

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { calculateShipmentSummary } from '@/lib/calculations/shipment-summary';
 import type { ShipmentRequest, ShipmentItem } from '@/lib/types/shipment';
 
@@ -14,14 +15,14 @@ export function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
-export function GET() {
+async function _handleGET() {
   return NextResponse.json(
     { error: 'Method not allowed. Use POST with a JSON body.', usage: 'POST /api/shipment/summary with { mode, items: [...] }' },
     { status: 405, headers: { ...CORS, Allow: 'POST, OPTIONS' } },
   );
 }
 
-export async function POST(req: NextRequest) {
+async function _handlePOST(req: NextRequest) {
   const h = { ...CORS, 'Content-Type': 'application/json' };
 
   try {
@@ -87,3 +88,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: message }, { status: 400, headers: h });
   }
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);
+export const POST = withAuditRest(_handlePOST);

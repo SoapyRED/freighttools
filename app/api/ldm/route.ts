@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import { calculateLdm } from '@/lib/calculations/ldm';
 import { PALLET_PRESET_MAP } from '@/lib/data/pallets';
 
@@ -14,7 +15,7 @@ export async function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
 }
 
-export async function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
 
   // ── Parse & validate ──
@@ -132,3 +133,6 @@ export async function GET(req: NextRequest) {
     },
   });
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);

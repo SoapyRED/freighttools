@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withAuditRest } from '@/lib/observability/audit';
 import {
   lookupByUnNumber,
   normaliseUnNumber,
@@ -175,7 +176,7 @@ function calculate(items: RequestItem[], headers: Record<string, string>) {
 //  GET /api/adr-calculator?un=1203&qty=200
 // -----------------------------------------------------------------
 
-export function GET(req: NextRequest) {
+async function _handleGET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const unParam  = searchParams.get('un');
   const qtyParam = searchParams.get('qty');
@@ -208,7 +209,7 @@ export function GET(req: NextRequest) {
 //  POST /api/adr-calculator  { items: [{ un_number, quantity }] }
 // -----------------------------------------------------------------
 
-export async function POST(req: NextRequest) {
+async function _handlePOST(req: NextRequest) {
   const headers = { ...CORS_HEADERS, ...CACHE_HEADERS };
 
   let body: unknown;
@@ -244,3 +245,7 @@ export async function POST(req: NextRequest) {
 
   return calculate(items as RequestItem[], headers);
 }
+
+// Audit-wrapped handler exports — see lib/observability/audit.ts.
+export const GET = withAuditRest(_handleGET);
+export const POST = withAuditRest(_handlePOST);
