@@ -165,11 +165,16 @@ async function testSitemapCanonical() {
   }
 }
 
-async function testDetailTitlesSingleSuffix() {
+async function testDetailTitlesNoDoubleSuffix() {
+  // Detail-page templates may render either with the parent template
+  // suffix " | FreightUtils.com" (legacy path) or without it
+  // (next/metadata `title.absolute`, used by the SEO-CTR rewrite for
+  // HS / ADR / airlines / containers). Both are valid SEO patterns;
+  // only a DOUBLE-suffix is a real regression — that's the bug this
+  // assertion guards against.
   const urls = ['/adr/un/1203', '/hs/code/611241', '/incoterms/fob-free-on-board', '/pallet/euro-pallet', '/containers/40ft-high-cube'];
   const start = Date.now();
   let checkedCount = 0;
-  let singleSuffixCount = 0;
   const failures = [];
   for (const path of urls) {
     try {
@@ -179,12 +184,12 @@ async function testDetailTitlesSingleSuffix() {
       const titleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
       if (!titleMatch) continue;
       const title = titleMatch[1];
-      const suffixCount = (title.match(/FreightUtils\.com/g) || []).length;
+      // Count " | FreightUtils.com" suffix occurrences. 0 or 1 acceptable;
+      // 2+ flags a Next.js title-template double-application regression.
+      const suffixCount = (title.match(/\| FreightUtils\.com/g) || []).length;
       checkedCount++;
-      if (suffixCount === 1) {
-        singleSuffixCount++;
-      } else {
-        failures.push(`${path} — "${title}" (${suffixCount} suffixes)`);
+      if (suffixCount > 1) {
+        failures.push(`${path} — "${title}" (${suffixCount} brand suffixes)`);
       }
     } catch {
       // skip
@@ -193,12 +198,12 @@ async function testDetailTitlesSingleSuffix() {
   const ms = Date.now() - start;
   const errors = [];
   if (checkedCount < 3) errors.push(`only ${checkedCount} detail pages checked (need 3+)`);
-  if (singleSuffixCount < 3) errors.push(`only ${singleSuffixCount}/${checkedCount} titles have single suffix`);
+  if (failures.length > 0) errors.push(`${failures.length} title(s) with 2+ brand suffixes`);
   if (errors.length === 0) {
-    console.log(`  \x1b[32m✅\x1b[0m detail titles single-suffix — ${singleSuffixCount}/${checkedCount} clean (${ms}ms)`);
+    console.log(`  \x1b[32m✅\x1b[0m detail titles — ${checkedCount} pages, no double-suffix regression (${ms}ms)`);
     passed++;
   } else {
-    console.log(`  \x1b[31m❌\x1b[0m detail titles single-suffix — ${errors.join(', ')} (${ms}ms)`);
+    console.log(`  \x1b[31m❌\x1b[0m detail titles — ${errors.join(', ')} (${ms}ms)`);
     for (const f of failures) console.log(`      · ${f}`);
     failed++;
   }
@@ -452,7 +457,7 @@ async function run() {
 
   await testApexRedirect();
   await testSitemapCanonical();
-  await testDetailTitlesSingleSuffix();
+  await testDetailTitlesNoDoubleSuffix();
 
   // ─── Summary ──────────────────────────────────────────────────
 
