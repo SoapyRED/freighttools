@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { lookupBySlug, getAllCargoSlugs, type Airline } from '@/lib/calculations/airlines';
+import { buildAirlineMetadata } from '@/lib/seo/page-metadata';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -14,25 +15,16 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const airline = lookupBySlug(slug);
-  if (!airline) return {};
+  if (!airline) return { title: 'Airline Not Found' };
 
-  const codes = [
-    airline.iata_code && `IATA ${airline.iata_code}`,
-    airline.icao_code && `ICAO ${airline.icao_code}`,
-    airline.awb_prefix && `AWB ${airline.awb_prefix.join('/')}`,
-  ].filter(Boolean).join(', ');
-
-  const ogUrl = `/api/og?title=${encodeURIComponent(airline.airline_name)}&desc=${encodeURIComponent(codes)}&badge=Airline+Codes`;
-
-  return {
-    title: `${airline.airline_name} — IATA Code, ICAO Code & AWB Prefix`,
-    description: `${airline.airline_name} airline codes: ${codes}. ${airline.country ? `Based in ${airline.country}.` : ''} Free airline code lookup at FreightUtils.`,
-    alternates: { canonical: `https://www.freightutils.com/airlines/${slug}` },
-    openGraph: {
-      images: [{ url: ogUrl, width: 1200, height: 630, alt: `${airline.airline_name} — FreightUtils` }],
-    },
-    twitter: { card: 'summary_large_image', images: [ogUrl] },
-  };
+  return buildAirlineMetadata({
+    slug,
+    airlineName: airline.airline_name,
+    iataCode: airline.iata_code,
+    icaoCode: airline.icao_code,
+    awbPrefix: airline.awb_prefix,
+    country: airline.country,
+  });
 }
 
 // ─────────────────────────────────────────────────────────────────

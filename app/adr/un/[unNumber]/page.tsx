@@ -11,6 +11,7 @@ import ToolDisclaimer from '@/app/components/ToolDisclaimer';
 import DataTimestamp from '@/app/components/DataTimestamp';
 import NewsletterCapture from '@/app/components/NewsletterCapture';
 import RelatedTools from '@/app/components/RelatedTools';
+import { buildAdrUnMetadata } from '@/lib/seo/page-metadata';
 
 // ─────────────────────────────────────────────────────────────────
 //  Static generation — one page per unique UN number
@@ -32,26 +33,15 @@ export async function generateMetadata(
   if (entries.length === 0) return { title: 'UN Number Not Found' };
 
   const entry = entries[0];
-  const pg = entry.packing_group ? `, Packing Group ${entry.packing_group}` : '';
-  const shortName = entry.proper_shipping_name.length > 35
-    ? entry.proper_shipping_name.slice(0, 32) + '…'
-    : entry.proper_shipping_name;
-  const variantNote = entries.length > 1 ? ` (${entries.length} variants)` : '';
-
-  const ogUrl = `/api/og?badge=UN${entry.un_number}&title=${encodeURIComponent(shortName)}&desc=${encodeURIComponent(`Class ${entry.class}${pg} — ADR 2025`)}&api=GET+/api/adr%3Fun%3D${entry.un_number}`;
-
-  return {
-    title: `UN ${entry.un_number} — ${shortName}${variantNote} | ADR 2025`,
-    description: `ADR 2025 dangerous goods data for UN ${entry.un_number} ${entry.proper_shipping_name}. Class ${entry.class}${pg}. Free lookup at FreightUtils.`,
-    alternates: {
-      canonical: `https://www.freightutils.com/adr/un/${entry.un_number}`,
-    },
-    openGraph: {
-      images: [{ url: ogUrl, width: 1200, height: 630, alt: `UN ${entry.un_number} — ${shortName}` }],
-    },
-    twitter: { card: 'summary_large_image', images: [ogUrl] },
-    other: { 'article:modified_time': '2026-04-01T00:00:00Z' },
-  };
+  return buildAdrUnMetadata({
+    unNumber: entry.un_number,
+    properShippingName: entry.proper_shipping_name,
+    class: entry.class,
+    packingGroup: entry.packing_group,
+    tunnelCode: entry.tunnel_restriction_code,
+    transportCategory: entry.transport_category,
+    variantCount: entries.length,
+  });
 }
 
 // ─────────────────────────────────────────────────────────────────

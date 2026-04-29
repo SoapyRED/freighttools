@@ -13,12 +13,16 @@ import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=Airline+Codes+%26+AWB+Prefix+Lookup&desc=Search+6,350%2B+airlines+by+name,+code,+or+AWB+prefix&api=GET+/api/airlines';
 
+// Title: keyword "Airline Code" + dataset size in first 50 chars.
+// Meta: "free" + "no login"; ≤155; names IATA/ICAO/AWB explicitly.
 export const metadata: Metadata = {
-  title: 'Airline Codes & AWB Prefix Lookup',
-  description: 'Free airline code lookup — search 6,350+ airlines by IATA, ICAO, or AWB prefix. 390+ cargo airlines included. No signup, free REST API.',
+  title: { absolute: `Free Airline Code Lookup — ${AIRLINE_COUNT.toLocaleString()} IATA, ICAO & AWB Prefixes` },
+  description: `Free airline code lookup — ${AIRLINE_COUNT.toLocaleString()} airlines by IATA, ICAO, AWB prefix. ${CARGO_AIRLINE_COUNT}+ cargo carriers with verified prefixes. REST API, no login.`,
   alternates: { canonical: 'https://www.freightutils.com/airlines' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Airline Codes & AWB Prefix Lookup — FreightUtils' }],
+    title: `Free Airline Code Lookup — ${AIRLINE_COUNT.toLocaleString()} IATA, ICAO & AWB Prefixes`,
+    description: `Free airline code lookup — ${AIRLINE_COUNT.toLocaleString()} airlines by IATA, ICAO, AWB prefix. ${CARGO_AIRLINE_COUNT}+ cargo carriers. REST API, no login.`,
   },
   twitter: { card: 'summary_large_image', images: [ogUrl] },
 };

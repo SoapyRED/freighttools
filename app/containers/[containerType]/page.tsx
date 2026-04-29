@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllContainerSlugs, getContainerSpec, getAllContainerSpecs, type ContainerSpec } from '@/lib/calculations/container-capacity';
+import { buildContainerMetadata } from '@/lib/seo/page-metadata';
 
 // ─────────────────────────────────────────────────────────────────
 //  Static generation — one page per container type
@@ -22,19 +23,16 @@ export async function generateMetadata(
   const spec = getContainerSpec(containerType);
   if (!spec) return { title: 'Container Not Found' };
 
-  const ogUrl = `/api/og?title=${encodeURIComponent(spec.name + ' Container')}&desc=${encodeURIComponent(`${spec.internalLengthCm}\u00d7${spec.internalWidthCm}\u00d7${spec.internalHeightCm}cm \u2022 ${spec.capacityCbm} CBM \u2022 ${spec.maxPayloadKg.toLocaleString()} kg`)}&badge=Containers`;
-
-  return {
-    title: `${spec.name} Container Dimensions, Weight & Capacity`,
-    description: `${spec.name} container specs \u2014 internal dimensions ${spec.internalLengthCm}\u00d7${spec.internalWidthCm}\u00d7${spec.internalHeightCm} cm, ${spec.capacityCbm} CBM capacity, ${spec.maxPayloadKg.toLocaleString()} kg max payload, ${spec.euroPallets} euro pallets. Free reference at FreightUtils.`,
-    alternates: {
-      canonical: `https://www.freightutils.com/containers/${spec.slug}`,
-    },
-    openGraph: {
-      images: [{ url: ogUrl, width: 1200, height: 630, alt: `${spec.name} Container \u2014 FreightUtils` }],
-    },
-    twitter: { card: 'summary_large_image', images: [ogUrl] },
-  };
+  return buildContainerMetadata({
+    slug: spec.slug,
+    name: spec.name,
+    internalLengthCm: spec.internalLengthCm,
+    internalWidthCm: spec.internalWidthCm,
+    internalHeightCm: spec.internalHeightCm,
+    capacityCbm: spec.capacityCbm,
+    maxPayloadKg: spec.maxPayloadKg,
+    euroPallets: spec.euroPallets,
+  });
 }
 
 // ─────────────────────────────────────────────────────────────────

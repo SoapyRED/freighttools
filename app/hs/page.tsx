@@ -16,12 +16,16 @@ import { SITE_STATS } from '@/lib/constants/siteStats';
 
 const ogUrl = '/api/og?title=HS+Code+Lookup&desc=Search+6%2C940+Harmonized+System+codes&api=GET+/api/hs';
 
+// Title: keyword "HS Code Lookup" in first 14 chars; dataset size signals depth.
+// Meta: "free" + "no login" both included; ≤ 155 chars; mentions tariff/duty.
 export const metadata: Metadata = {
-  title: 'HS Code Lookup — Harmonized System Search',
-  description: `Look up HS codes across ${SITE_STATS.hsCodeCount.toLocaleString()} entries — browse by section, chapter, or search by product. Free tool with REST API.`,
+  title: { absolute: `Free HS Code Lookup — ${SITE_STATS.hsCodeCount.toLocaleString()} Tariff Codes & Duty Rates` },
+  description: `Free HS code lookup across ${SITE_STATS.hsCodeCount.toLocaleString()} Harmonized System codes. Browse by section, chapter, heading. Tariff descriptions, duty rates. REST API, no login.`,
   alternates: { canonical: 'https://www.freightutils.com/hs' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'HS Code Lookup — FreightUtils' }],
+    title: `Free HS Code Lookup — ${SITE_STATS.hsCodeCount.toLocaleString()} Tariff Codes & Duty Rates`,
+    description: `Free HS code lookup across ${SITE_STATS.hsCodeCount.toLocaleString()} Harmonized System codes. Tariff descriptions, duty rates, REST API. No login.`,
   },
   twitter: { card: 'summary_large_image', images: [ogUrl] },
 };
