@@ -14,12 +14,16 @@ import NewsletterCapture from '@/app/components/NewsletterCapture';
 
 const ogUrl = '/api/og?title=ADR+Dangerous+Goods+Lookup&desc=Search+2%2C939+UN+numbers+from+ADR+2025&api=GET+/api/adr';
 
+// Title: keyword "ADR" + dataset size + freshness signal in first 50 chars.
+// Meta: "free" + "no login"; ≤ 155 chars; names what's on the page.
 export const metadata: Metadata = {
-  title: 'ADR Dangerous Goods — Lookup & 1.1.3.6 Exemption Calculator',
-  description: `Search ${SITE_STATS.adrEntries.toLocaleString()} ADR 2025 dangerous goods by UN number. Check 1.1.3.6 exemption, tunnel codes, and LQ limits. Free, instant, API-ready.`,
+  title: { absolute: `Free ADR 2025 Lookup — ${SITE_STATS.adrEntries.toLocaleString()} UN Numbers, Tunnel Codes, Exemptions` },
+  description: `Free ADR 2025 dangerous goods lookup — ${SITE_STATS.adrEntries.toLocaleString()} UN numbers, tunnel codes, packing groups, 1.1.3.6 exemption calculator. REST API, no login.`,
   alternates: { canonical: 'https://www.freightutils.com/adr' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'ADR Dangerous Goods Lookup — FreightUtils' }],
+    title: `Free ADR 2025 Lookup — ${SITE_STATS.adrEntries.toLocaleString()} UN Numbers, Tunnel Codes, Exemptions`,
+    description: `Free ADR 2025 dangerous goods lookup — ${SITE_STATS.adrEntries.toLocaleString()} UN numbers, tunnel codes, packing groups, exemption calculator. REST API, no login.`,
   },
   twitter: { card: 'summary_large_image', images: [ogUrl] },
 };

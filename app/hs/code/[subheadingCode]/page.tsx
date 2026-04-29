@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getCodeDetails, getSubheadingsByHeading, formatHsCode } from '@/lib/calculations/hs';
 import { HsSmallCard } from '@/app/hs/HsLinkCard';
 import { getHsDgWarning, HS_DG_DISCLAIMER } from '@/lib/data/hs-dg-warnings';
+import { buildHsCodeMetadata } from '@/lib/seo/page-metadata';
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -19,16 +20,12 @@ export async function generateMetadata(
   const details = getCodeDetails(subheadingCode);
   if (!details) return { title: 'HS Code Not Found' };
 
-  const ogUrl = `/api/og?title=${encodeURIComponent(`HS ${formatHsCode(subheadingCode)}`)}&desc=${encodeURIComponent(details.description)}&badge=HS`;
-
-  return {
-    title: `HS ${formatHsCode(subheadingCode)} — ${details.description.length > 40 ? details.description.slice(0, 37) + '…' : details.description}`,
-    description: `HS code ${formatHsCode(subheadingCode)}: ${details.description}. Part of heading ${formatHsCode(details.parent)}. Free HS code lookup with REST API.`,
-    alternates: { canonical: `https://www.freightutils.com/hs/code/${subheadingCode}` },
-    openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS ${formatHsCode(subheadingCode)} — FreightUtils` }] },
-    twitter: { card: 'summary_large_image', images: [ogUrl] },
-    other: { 'article:modified_time': '2026-04-01T00:00:00Z' },
-  };
+  return buildHsCodeMetadata({
+    code: subheadingCode,
+    formattedCode: formatHsCode(subheadingCode),
+    description: details.description,
+    parentFormatted: details.parent ? formatHsCode(details.parent) : undefined,
+  });
 }
 
 export default async function SubheadingPage(

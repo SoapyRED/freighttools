@@ -11,12 +11,16 @@ import { getAllContainerSpecs, CONTAINER_COUNT } from '@/lib/calculations/contai
 
 const ogUrl = '/api/og?title=Shipping+Container+Dimensions&desc=All+10+container+types+with+specs&api=GET+/api/containers';
 
+// Title: keyword "Shipping Container Dimensions" in first 30 chars.
+// Meta: "free" + "no login"; ≤155; names what's on the page.
 export const metadata: Metadata = {
-  title: 'Shipping Container Dimensions & Capacity Reference',
-  description: 'Free container size guide — dimensions, weights, door openings and pallet capacity for 10 standard types. ISO 668 specs with REST API.',
+  title: { absolute: `Free Shipping Container Dimensions — ${CONTAINER_COUNT} ISO Container Specs` },
+  description: `Free shipping container reference — dimensions, weights, payload, door openings, pallet capacity for ${CONTAINER_COUNT} ISO 668 types. REST API, no login.`,
   alternates: { canonical: 'https://www.freightutils.com/containers' },
   openGraph: {
     images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Shipping Container Dimensions — FreightUtils' }],
+    title: `Free Shipping Container Dimensions — ${CONTAINER_COUNT} ISO Container Specs`,
+    description: `Free shipping container reference — dimensions, weights, payload, door openings, pallet capacity for ${CONTAINER_COUNT} ISO 668 types. REST API, no login.`,
   },
   twitter: { card: 'summary_large_image', images: [ogUrl] },
 };
