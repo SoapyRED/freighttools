@@ -333,19 +333,33 @@ const handler = createMcpHandler(
       {
         items: z.array(z.object({
           description: z.string().optional().describe('Item label'),
-          lengthCm: z.number().positive().describe('Length in cm'),
-          widthCm: z.number().positive().describe('Width in cm'),
-          heightCm: z.number().positive().describe('Height in cm'),
+          length: z.number().positive().describe('Length in cm'),
+          width: z.number().positive().describe('Width in cm'),
+          height: z.number().positive().describe('Height in cm'),
           quantity: z.number().int().positive().describe('Number of pieces'),
-          grossWeightKg: z.number().describe('Weight per piece in kg'),
+          gross_weight: z.number().describe('Weight per piece in kg'),
           stackable: z.boolean().optional().describe('Can items be stacked?'),
-          palletType: z.enum(['none', 'euro', 'uk', 'us']).optional().describe('Pallet type'),
+          pallet_type: z.enum(['none', 'euro', 'uk', 'us']).optional().describe('Pallet type'),
         })).describe('Array of consignment items'),
       },
       ro('Consignment Calculator'),
-      async ({ items }) => ({
-        content: [{ type: 'text' as const, text: JSON.stringify(calculateConsignment(items), null, 2) }],
-      }),
+      async ({ items }) => {
+        // Boundary mapper: snake_case (canonical schema, matches freightutils-mcp@2.0.0)
+        // → camelCase (internal calculateConsignment signature). Internal helper unchanged.
+        const mapped = items.map((i) => ({
+          description: i.description,
+          lengthCm: i.length,
+          widthCm: i.width,
+          heightCm: i.height,
+          quantity: i.quantity,
+          grossWeightKg: i.gross_weight,
+          stackable: i.stackable,
+          palletType: i.pallet_type,
+        }));
+        return {
+          content: [{ type: 'text' as const, text: JSON.stringify(calculateConsignment(mapped), null, 2) }],
+        };
+      },
     );
 
     // ── UN/LOCODE Lookup ────────────────────────────────────
@@ -376,19 +390,24 @@ const handler = createMcpHandler(
       'uk_duty_calculator',
       `Estimate UK import duty and VAT for a commodity code and origin country. Uses live GOV.UK Trade Tariff data. Returns CIF value, duty rate/amount, VAT rate/amount, total import taxes, and total landed cost. Flags preferential rates and import restrictions.`,
       {
-        commodityCode: z.string().describe('UK tariff commodity code (6-10 digits)'),
-        originCountry: z.string().describe('ISO 2-letter country of origin (e.g. "CN", "US")'),
-        customsValue: z.number().positive().describe('Customs value in GBP'),
-        freightCost: z.number().optional().describe('Freight cost in GBP (default 0)'),
-        insuranceCost: z.number().optional().describe('Insurance cost in GBP (default 0)'),
+        commodity_code: z.string().describe('UK tariff commodity code (6-10 digits)'),
+        origin_country: z.string().describe('ISO 2-letter country of origin (e.g. "CN", "US")'),
+        customs_value: z.number().positive().describe('Customs value in GBP'),
+        freight_cost: z.number().optional().describe('Freight cost in GBP (default 0)'),
+        insurance_cost: z.number().optional().describe('Insurance cost in GBP (default 0)'),
         incoterm: z.enum(['EXW','FCA','FAS','FOB','CFR','CIF','CPT','CIP','DAP','DPU','DDP']).optional().describe('Incoterm basis'),
       },
       ro('UK Duty & VAT Calculator'),
-      async ({ commodityCode, originCountry, customsValue, freightCost, insuranceCost, incoterm }) => {
+      async ({ commodity_code, origin_country, customs_value, freight_cost, insurance_cost, incoterm }) => {
         try {
+          // Boundary mapper: snake_case (canonical schema, matches freightutils-mcp@2.0.0)
+          // → camelCase DutyInput (internal calculateDuty signature). Internal helper unchanged.
           const result = await calculateDuty({
-            commodityCode, originCountry, customsValue,
-            freightCost: freightCost ?? 0, insuranceCost: insuranceCost ?? 0,
+            commodityCode: commodity_code,
+            originCountry: origin_country,
+            customsValue: customs_value,
+            freightCost: freight_cost ?? 0,
+            insuranceCost: insurance_cost ?? 0,
             incoterm,
           });
           return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
@@ -413,21 +432,45 @@ const handler = createMcpHandler(
           weight: z.number().describe('Gross weight kg per item'),
           quantity: z.number().int().positive(),
           stackable: z.boolean().optional().describe('Whether this item can be stacked (affects pallet fitting calc)'),
-          palletType: z.enum(['euro', 'uk', 'us', 'custom', 'none']).optional().describe('Pallet standard the item sits on, if any'),
-          hsCode: z.string().optional(),
-          unNumber: z.string().optional(),
-          customsValue: z.number().optional(),
+          pallet_type: z.enum(['euro', 'uk', 'us', 'custom', 'none']).optional().describe('Pallet standard the item sits on, if any'),
+          hs_code: z.string().optional(),
+          un_number: z.string().optional(),
+          customs_value: z.number().optional(),
         })).describe('Array of shipment items with dimensions, weight, and optional HS/UN codes'),
         origin: z.object({ country: z.string(), locode: z.string().optional() }).optional().describe('Origin location — ISO country code and optional UN/LOCODE'),
         destination: z.object({ country: z.string(), locode: z.string().optional() }).optional().describe('Destination location — ISO country code and optional UN/LOCODE'),
         incoterm: z.string().optional().describe("Incoterms 2020 three-letter code (e.g. 'DAP', 'EXW', 'FOB')"),
-        freightCost: z.number().optional().describe('Optional freight cost in GBP for duty calculation'),
-        insuranceCost: z.number().optional().describe('Optional insurance cost in GBP for duty calculation'),
+        freight_cost: z.number().optional().describe('Optional freight cost in GBP for duty calculation'),
+        insurance_cost: z.number().optional().describe('Optional insurance cost in GBP for duty calculation'),
       },
       ro('Shipment Summary'),
       async (args) => {
         try {
-          const result = await calculateShipmentSummary(args as Parameters<typeof calculateShipmentSummary>[0]);
+          // Boundary mapper: snake_case (canonical schema, matches freightutils-mcp@2.0.0)
+          // → camelCase ShipmentRequest (internal calculateShipmentSummary signature).
+          // Internal helper + ShipmentItem / ShipmentRequest types unchanged.
+          const mapped: Parameters<typeof calculateShipmentSummary>[0] = {
+            mode: args.mode,
+            items: args.items.map((i) => ({
+              description: i.description,
+              length: i.length,
+              width: i.width,
+              height: i.height,
+              weight: i.weight,
+              quantity: i.quantity,
+              stackable: i.stackable,
+              palletType: i.pallet_type,
+              hsCode: i.hs_code,
+              unNumber: i.un_number,
+              customsValue: i.customs_value,
+            })),
+            origin: args.origin,
+            destination: args.destination,
+            incoterm: args.incoterm,
+            freightCost: args.freight_cost,
+            insuranceCost: args.insurance_cost,
+          };
+          const result = await calculateShipmentSummary(mapped);
           return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
         } catch (err: unknown) {
           const msg = err instanceof Error ? err.message : String(err);
