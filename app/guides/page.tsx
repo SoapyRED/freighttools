@@ -51,7 +51,7 @@ export default async function GuidesHubPage() {
 							Guides coming soon
 						</div>
 						<p style={{ fontSize: 14, color: 'var(--text-muted)', maxWidth: 520, margin: '0 auto 16px', lineHeight: 1.7 }}>
-							First articles publish in April 2026. Authority-citation pieces on Heathrow shed codes, ADR exemptions, AWB prefix routing, and HS code edge cases. Subscribe to know when they land.
+							First articles publish in April 2026. Authority-citation pieces on ADR exemptions, AWB prefix routing, and HS code edge cases. Subscribe to know when they land.
 						</p>
 						<a href="/guides/rss.xml" style={{
 							display: 'inline-block', fontSize: 13, fontWeight: 700, letterSpacing: '0.5px',
