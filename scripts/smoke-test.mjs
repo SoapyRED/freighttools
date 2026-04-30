@@ -284,6 +284,36 @@ async function testWhoamiAuthRejected() {
   }
 }
 
+async function testEmptyApiKeyRejected() {
+  // Empty-string X-API-Key must 401 (not silently fall through to anonymous).
+  // Symmetry with junk fu_-prefix keys, which already 401 on KV miss.
+  // See middleware.ts handleApiRateLimit early-out branch.
+  const start = Date.now();
+  try {
+    const res = await fetch(`${BASE}/api/shipment/summary`, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-Key': '' },
+      body: JSON.stringify({ mode: 'road', items: [{ length: 10, width: 10, height: 10, weight: 1, quantity: 1 }] }),
+    });
+    const ms = Date.now() - start;
+    const errors = [];
+    if (res.status !== 401) errors.push(`status ${res.status} !== 401 (empty X-API-Key should be invalid, not anonymous)`);
+    if (errors.length === 0) {
+      console.log(`  \x1b[32m✅\x1b[0m /api/shipment/summary (empty X-API-Key) — 401 (${ms}ms)`);
+      passed++;
+    } else {
+      console.log(`  \x1b[31m❌\x1b[0m /api/shipment/summary (empty X-API-Key) — ${errors.join(', ')} (${ms}ms)`);
+      failed++;
+    }
+    results.push({ name: '/api/shipment/summary (empty X-API-Key)', status: res.status, ms, errors, ok: errors.length === 0 });
+  } catch (err) {
+    const ms = Date.now() - start;
+    console.log(`  \x1b[31m❌\x1b[0m /api/shipment/summary (empty X-API-Key) — NETWORK ERROR: ${err.message} (${ms}ms)`);
+    failed++;
+    results.push({ name: '/api/shipment/summary (empty X-API-Key)', status: 0, ms, errors: [err.message], ok: false });
+  }
+}
+
 async function testToolCountMatch() {
   const start = Date.now();
   try {
@@ -442,6 +472,7 @@ async function run() {
 
   await testWhoamiAuthOk();
   await testWhoamiAuthRejected();
+  await testEmptyApiKeyRejected();
 
   console.log('\n  Platform Pages');
   console.log('  ──────────────');

@@ -387,6 +387,20 @@ async function handleApiRateLimit(req: NextRequest): Promise<NextResponse> {
   // Extract API key from headers or query params
   const authHeader = req.headers.get('authorization');
   const xApiKey = req.headers.get('x-api-key');
+
+  // Explicit empty-string X-API-Key is invalid — distinct from "header
+  // absent" which legitimately falls through to the anonymous tier.
+  // Symmetry with junk fu_-prefix keys (which already 401 on KV miss):
+  // a downstream caller that *meant* to send a key but sent "" should
+  // see a clear auth error rather than be silently bucketed anonymous.
+  // Same treatment for `Authorization: Bearer ` with empty value.
+  if (xApiKey === '' || authHeader === 'Bearer ' || authHeader === 'Bearer') {
+    return NextResponse.json(
+      { error: 'Invalid API key' },
+      { status: 401, headers: { 'Content-Type': 'application/json' } },
+    );
+  }
+
   const apiKey =
     (authHeader?.startsWith('Bearer fu_') ? authHeader.slice(7) : null)
     ?? (xApiKey?.startsWith('fu_') ? xApiKey : null)
