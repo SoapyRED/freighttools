@@ -36,8 +36,6 @@ const EXCLUDED_PATHS = [
   /^stripe\//,
   /^og\//,
   /^mcp\/route\.ts$/,
-  // Sentry hardening sprint diagnostic — temporary, removed in follow-up commit.
-  /^sentry-test\//,
 ];
 
 const MCP_TRANSPORT = /^mcp\/\[transport\]\/route\.ts$/;
