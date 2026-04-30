@@ -160,7 +160,7 @@ export default function ChargeableWeightPage() {
         </div>
 
         <ApiCallout endpoint="/api/chargeable-weight" />
-        <DataTimestamp text="IATA standards, last verified April 2026" />
+        <DataTimestamp text="IATA standards, last verified May 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <NewsletterCapture />
         <RelatedTools tools={[

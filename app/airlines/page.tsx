@@ -173,7 +173,7 @@ export default function AirlinesPage() {
           </div>
         </div>
 
-        <DataTimestamp text="Airline data last verified April 2026" />
+        <DataTimestamp text="Airline data last verified May 2026" />
         <ToolDisclaimer text="Airline data compiled from public IATA/ICAO sources. Verify current codes with your carrier or IATA." />
         <NewsletterCapture />
         <RelatedTools tools={[
@@ -185,7 +185,7 @@ export default function AirlinesPage() {
 
         {/* Disclaimer */}
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>
-          Data compiled from public aviation sources. Airline codes and AWB prefixes may change — always verify with the carrier for critical shipments. Last updated April 2026.
+          Data compiled from public aviation sources. Airline codes and AWB prefixes may change — always verify with the carrier for critical shipments. Last updated May 2026.
         </p>
 
       </main>

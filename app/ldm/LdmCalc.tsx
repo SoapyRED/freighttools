@@ -481,7 +481,7 @@ export default function LdmCalc() {
 
         </div>
 
-        <DataTimestamp text="Vehicle specifications per EN 283/ISO standards, last verified April 2026" />
+        <DataTimestamp text="Vehicle specifications per EN 283/ISO standards, last verified May 2026" />
         <ApiCallout endpoint="/api/ldm" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <NewsletterCapture />

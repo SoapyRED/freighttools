@@ -400,7 +400,7 @@ export default function AdrPage() {
           </div>
         </div>
 
-        <DataTimestamp text="ADR 2025 data, last updated April 2026" />
+        <DataTimestamp text="ADR 2025 data, last updated May 2026" />
         <ToolDisclaimer text="ADR reference data only. Classification is the consignor's legal responsibility. Consult a DGSA for compliance decisions." />
         <NewsletterCapture />
         <RelatedTools tools={[

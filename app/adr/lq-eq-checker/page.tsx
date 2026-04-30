@@ -136,7 +136,7 @@ export default function LqEqCheckerPage() {
 
         <ApiCallout method="POST" endpoint="/api/adr/lq-check" example='POST /api/adr/lq-check { "mode": "lq", "items": [{ "un_number": "1203", "quantity": 0.5, "unit": "L" }] }' />
         <ApiCtaBanner />
-        <DataTimestamp text="Data: UNECE ADR 2025, licensed from Labeline.com. Last verified April 2026" />
+        <DataTimestamp text="Data: UNECE ADR 2025, licensed from Labeline.com. Last verified May 2026" />
         <ToolDisclaimer text="This tool is for reference only. Always verify dangerous goods classifications with a certified DGSA for operational transport." />
         <NewsletterCapture />
         <div style={{ marginTop: 24 }}>

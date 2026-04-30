@@ -23,7 +23,7 @@ const CORS_HEADERS = {
 const AIRLINES_META = {
   source: 'Public IATA/ICAO data, cross-referenced',
   airlines: 6352,
-  last_verified: 'April 2026',
+  last_verified: 'May 2026',
 };
 
 const CACHE_HEADERS = {

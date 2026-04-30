@@ -13,7 +13,7 @@ export const SITE_STATS = {
   incotermsCount: 11,
   cargoAirlines: 390,
   openApiVersion: '3.0.3',
-  lastUpdated: 'April 2026',
+  lastUpdated: 'May 2026',
   adrEdition: 'UNECE ADR 2025',
   hsEdition: 'WCO HS 2022',
   mcpVersion: '1.0.5',

@@ -43,7 +43,7 @@ const CORS_HEADERS = {
 const ULD_META = {
   source: 'IATA ULD Technical Manual',
   total: ULD_COUNT,
-  last_verified: 'April 2026',
+  last_verified: 'May 2026',
 };
 
 const CACHE_HEADERS = {

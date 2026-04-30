@@ -28,7 +28,7 @@ export default function ConsignmentPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Consignment Calculator","description":"Free Consignment Calculator. Calculate total CBM, weight, loading metres and chargeable weight for mixed consignments. REST API available.","url":"https://www.freightutils.com/consignment-calculator","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"author":{"@type":"Person","name":"Marius Cristoiu","url":"https://www.linkedin.com/in/marius-cristoiu-a853812a2/"}}) }} />
       <PageHero title="Multi-Item Consignment" titleAccent="Calculator" subtitle="Calculate total CBM, weight, loading metres and chargeable weight for mixed consignments" differentiators={['Mixed items & pallet types', 'Vehicle suggestions', 'Free API']} category="ops" />
       <div style={{ textAlign: 'center', marginTop: -24, marginBottom: 8 }}>
-        <DataTimestamp text="Calculation engine verified April 2026" />
+        <DataTimestamp text="Calculation engine verified May 2026" />
       </div>
 
       {/* Calculator */}

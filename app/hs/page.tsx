@@ -181,7 +181,7 @@ export default function HsPage() {
 
         <ApiCallout endpoint="/api/hs" />
 
-        <DataTimestamp text="HS 2022 data from UN Comtrade, last updated April 2026" />
+        <DataTimestamp text="HS 2022 data from UN Comtrade, last updated May 2026" />
         <ToolDisclaimer text="HS code reference only. For customs declarations, verify with your national tariff authority." />
         <NewsletterCapture />
         <RelatedTools tools={[

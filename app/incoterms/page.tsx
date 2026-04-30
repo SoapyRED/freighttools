@@ -260,7 +260,7 @@ export default function IncotermsPage() {
 
         <ApiCallout endpoint="/api/incoterms" />
 
-        <DataTimestamp text="INCOTERMS 2020, current as of April 2026" />
+        <DataTimestamp text="INCOTERMS 2020, current as of May 2026" />
         <ToolDisclaimer text="INCOTERMS 2020 reference based on ICC official rules. For contractual use, consult the full ICC publication." />
         <NewsletterCapture />
         <RelatedTools tools={[

@@ -76,7 +76,7 @@ export default function UldPage() {
 
         </div>
 
-        <DataTimestamp text="ULD specifications last verified April 2026" />
+        <DataTimestamp text="ULD specifications last verified May 2026" />
         <ToolDisclaimer text="ULD data based on IATA ULD Technical Manual specifications. Always confirm exact dimensions and weight limits with the operating airline, as individual airline variants may differ." />
         <NewsletterCapture />
         <RelatedTools tools={[
@@ -86,7 +86,7 @@ export default function UldPage() {
         ]} />
 
         <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 12, lineHeight: 1.6 }}>
-          ULD specifications compiled from IATA standards. Individual airline ULD variants may have slightly different dimensions or weight limits. Last updated April 2026.
+          ULD specifications compiled from IATA standards. Individual airline ULD variants may have slightly different dimensions or weight limits. Last updated May 2026.
         </p>
 
       </main>

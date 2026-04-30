@@ -224,7 +224,7 @@ export default function PalletPage() {
         </div>
 
         <ApiCallout endpoint="/api/pallet" />
-        <DataTimestamp text="Pallet specifications per EPAL/ISO 6780, last verified April 2026" />
+        <DataTimestamp text="Pallet specifications per EPAL/ISO 6780, last verified May 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <NewsletterCapture />
         <RelatedTools tools={[

@@ -210,7 +210,7 @@ export default function ContainersPage() {
         </div>
 
         <ApiCallout endpoint="/api/containers" />
-        <DataTimestamp text="ISO container specifications, last verified April 2026" />
+        <DataTimestamp text="ISO container specifications, last verified May 2026" />
         <ToolDisclaimer text="Calculations based on standard formulas. Always verify with your carrier for operational specifications." />
         <NewsletterCapture />
         <RelatedTools tools={[

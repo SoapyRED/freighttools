@@ -585,7 +585,7 @@ export default async function UnNumberPage(
           </Link>
         </div>
 
-        <DataTimestamp text="Data: UNECE ADR 2025, licensed from Labeline.com. Last verified April 2026" />
+        <DataTimestamp text="Data: UNECE ADR 2025, licensed from Labeline.com. Last verified May 2026" />
         <ToolDisclaimer text="ADR reference data only. Classification is the consignor's legal responsibility. Consult a DGSA for compliance decisions." />
         <NewsletterCapture />
         <RelatedTools tools={[
