@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHero from '@/app/components/PageHero';
+import PricingSignupForm from './PricingSignupForm';
 
 export const metadata: Metadata = {
   title: 'Pricing — Free & Pro API Plans',
@@ -8,7 +9,21 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.freightutils.com/pricing' },
 };
 
-const tiers = [
+type Tier = {
+  name: string;
+  subtitle: string;
+  price: string;
+  period: string;
+  highlight: boolean;
+  badge?: string;
+  features: string[];
+  cta: string;
+  ctaHref?: string;
+  ctaStyle: 'outline' | 'filled';
+  formVariant?: 'free' | 'pro';
+};
+
+const tiers: Tier[] = [
   {
     name: 'Free',
     subtitle: 'Anonymous',
@@ -24,7 +39,7 @@ const tiers = [
     ],
     cta: 'Start Using →',
     ctaHref: '/api-docs',
-    ctaStyle: 'outline' as const,
+    ctaStyle: 'outline',
   },
   {
     name: 'Free',
@@ -40,9 +55,9 @@ const tiers = [
       'Usage tracking',
       'MCP server access',
     ],
-    cta: 'Get Free Key →',
-    ctaHref: '/api-docs#signup',
-    ctaStyle: 'filled' as const,
+    cta: 'Get free API key',
+    ctaStyle: 'filled',
+    formVariant: 'free',
   },
   {
     name: 'Pro',
@@ -57,10 +72,9 @@ const tiers = [
       'Higher rate limits',
       'No contracts',
     ],
-    cta: 'Subscribe →',
-    ctaHref: '/api-docs#signup',
-    ctaStyle: 'outline' as const,
-    ctaNote: 'Sign up for a free key, then upgrade to Pro in your dashboard.',
+    cta: 'Subscribe — £19/mo',
+    ctaStyle: 'outline',
+    formVariant: 'pro',
   },
 ];
 
@@ -186,24 +200,9 @@ export default function PricingPage() {
                 ))}
               </ul>
 
-              {tier.ctaHref.startsWith('mailto:') ? (
-                <a href={tier.ctaHref} className="pricing-card__cta" style={{
-                  display: 'block',
-                  textAlign: 'center',
-                  padding: '12px 20px',
-                  borderRadius: 8,
-                  fontSize: 14,
-                  fontWeight: 700,
-                  fontFamily: "'Outfit', sans-serif",
-                  textDecoration: 'none',
-                  transition: 'opacity 0.15s',
-                  ...(tier.ctaStyle === 'filled'
-                    ? { background: 'var(--accent)', color: 'var(--text-on-orange)', border: 'none' }
-                    : { background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }),
-                }}>
-                  {tier.cta}
-                </a>
-              ) : (
+              {tier.formVariant ? (
+                <PricingSignupForm variant={tier.formVariant} />
+              ) : tier.ctaHref ? (
                 <Link href={tier.ctaHref} className="pricing-card__cta" style={{
                   display: 'block',
                   textAlign: 'center',
@@ -220,13 +219,7 @@ export default function PricingPage() {
                 }}>
                   {tier.cta}
                 </Link>
-              )}
-
-              {'ctaNote' in tier && tier.ctaNote && (
-                <div style={{ fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', marginTop: 8 }}>
-                  {tier.ctaNote}
-                </div>
-              )}
+              ) : null}
             </div>
           ))}
         </div>

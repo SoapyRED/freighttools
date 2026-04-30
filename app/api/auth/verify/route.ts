@@ -8,17 +8,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(new URL('/login?error=missing_token', req.url));
   }
 
-  const email = await verifyMagicToken(token);
-  if (!email) {
+  const payload = await verifyMagicToken(token);
+  if (!payload) {
     return NextResponse.redirect(new URL('/login?error=invalid_token', req.url));
   }
 
   // Create user if first login, or get existing
-  await createUser(email);
+  await createUser(payload.email);
 
   // Create session
-  const sessionToken = await createSession(email);
+  const sessionToken = await createSession(payload.email);
   await setSessionCookie(sessionToken);
 
-  return NextResponse.redirect(new URL('/dashboard', req.url));
+  const dest = payload.intent === 'upgrade' ? '/api/stripe/checkout' : '/dashboard';
+  return NextResponse.redirect(new URL(dest, req.url));
 }

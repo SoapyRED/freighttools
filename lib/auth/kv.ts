@@ -105,17 +105,25 @@ export async function getUsageMonth(apiKey: string): Promise<number> {
 //  Magic Link Tokens
 // ─────────────────────────────────────────────────────────────
 
-export async function createMagicToken(email: string): Promise<string> {
+export type MagicIntent = 'upgrade';
+
+export interface MagicPayload {
+  email: string;
+  intent?: MagicIntent;
+}
+
+export async function createMagicToken(email: string, intent?: MagicIntent): Promise<string> {
   const token = nanoid(32);
-  await kv.set(`magic:${token}`, { email }, { ex: 900 }); // 15 min TTL
+  const payload: MagicPayload = intent ? { email, intent } : { email };
+  await kv.set(`magic:${token}`, payload, { ex: 900 }); // 15 min TTL
   return token;
 }
 
-export async function verifyMagicToken(token: string): Promise<string | null> {
-  const data = await kv.get<{ email: string }>(`magic:${token}`);
+export async function verifyMagicToken(token: string): Promise<MagicPayload | null> {
+  const data = await kv.get<MagicPayload>(`magic:${token}`);
   if (!data) return null;
   await kv.del(`magic:${token}`); // one-time use
-  return data.email;
+  return data;
 }
 
 // ─────────────────────────────────────────────────────────────
