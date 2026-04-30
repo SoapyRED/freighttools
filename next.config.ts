@@ -49,6 +49,15 @@ const nextConfig: NextConfig = {
       },
       { source: '/api', destination: '/api-docs', permanent: true },
       { source: '/mcp', destination: '/api-docs#mcp', permanent: true },
+
+      // Common URL variants for legal/policy pages — redirect to canonicals
+      { source: '/privacy-policy', destination: '/privacy', permanent: true },
+      { source: '/terms-of-service', destination: '/terms', permanent: true },
+      { source: '/tos', destination: '/terms', permanent: true },
+      { source: '/cookie-policy', destination: '/privacy#cookies', permanent: true },
+      { source: '/cookies', destination: '/privacy#cookies', permanent: true },
+      { source: '/data-processing-agreement', destination: '/dpa', permanent: true },
+
       { source: '/adr-exemption', destination: '/adr-calculator', permanent: true },
       { source: '/guides/adr-changes-2025', destination: '/adr/changes-2025', permanent: true },
       { source: '/guides/adr-tunnel-codes', destination: '/adr/tunnel-codes', permanent: true },

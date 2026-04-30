@@ -1,13 +1,57 @@
+## FreightUtils robots.txt
+## Site-wide policy: open for legitimate search and AI crawlers,
+## blocked for SEO-scraper bots that don't add value back to operators.
+
 User-agent: *
 Allow: /
-Allow: /api/adr
-Allow: /api/adr-calculator
-Allow: /api/ldm
-Allow: /api/cbm
-Allow: /api/chargeable-weight
-Allow: /api/pallet
-Allow: /api/airlines
-Allow: /api/incoterms
-Allow: /openapi.json
+Crawl-delay: 5
+
+## SEO scrapers — blocked. They consume bandwidth and feed paid
+## competitor-intelligence products without contributing to indexing.
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+## AI crawlers — explicitly allowed. We *want* FreightUtils to be
+## reachable from LLM training and inference (e.g. ChatGPT browsing,
+## Claude search) so users can find freight reference data through
+## those surfaces.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
 
 Sitemap: https://www.freightutils.com/sitemap.xml

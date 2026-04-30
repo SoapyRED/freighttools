@@ -6,7 +6,6 @@ import NavLinks from './components/NavLinks';
 import SiteSearch from './components/SiteSearch';
 import AnnounceBanner from './components/AnnounceBanner';
 import BrandLogo from './components/BrandLogo';
-import CookieConsent from './components/CookieConsent';
 import FeedbackWidget from './components/FeedbackWidget';
 import ScrollToTop from './components/ScrollToTop';
 import HydrationCheck from './components/HydrationCheck';
@@ -78,6 +77,7 @@ const footerColumns = {
     { href: '/roadmap', label: 'Roadmap' },
     { href: '/docs/versioning', label: 'Versioning Policy' },
     { href: '/docs/deprecation', label: 'Deprecation Policy' },
+    { href: '/contact', label: 'Contact' },
   ],
 };
 
@@ -238,10 +238,10 @@ export default function RootLayout({
               borderTop: '1px solid var(--navy-border)', paddingTop: 16,
               marginBottom: 8, fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6,
             }}>
-              Built by{' '}
+              FreightUtils is operated by{' '}
               <a href="https://www.linkedin.com/in/marius-cristoiu-a853812a2/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
                 Marius Cristoiu
-              </a>, ADR-certified freight transport planner.{' '}
+              </a>, a sole trader based in the United Kingdom and ADR-certified freight transport planner.{' '}
               <a href="mailto:contact@freightutils.com" style={{ color: '#EF9F27', textDecoration: 'underline' }}>
                 contact@freightutils.com
               </a>
@@ -271,15 +271,17 @@ export default function RootLayout({
               <Link href="/terms" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Terms</Link>
               {' · '}
               <Link href="/refund-policy" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Refund Policy</Link>
+              {' · '}
+              <Link href="/dpa" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>DPA</Link>
+              {' · '}
+              <Link href="/contact" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Contact</Link>
             </div>
           </div>
         </footer>
 
-        {/* Vercel Analytics */}
+        {/* Vercel Analytics — cookieless; no PECR consent banner required */}
         <Analytics />
 
-        {/* Cookie consent — GDPR compliance */}
-        <CookieConsent />
         <FeedbackWidget />
       </body>
     </html>

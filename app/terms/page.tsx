@@ -35,6 +35,11 @@ export default function TermsPage() {
           Calculations, conversion results, and reference data should be <strong>independently verified</strong> before use in any commercial, regulatory, or operational context. Do not rely solely on FreightUtils output for business decisions, customs declarations, or compliance purposes.
         </p>
 
+        <h2 style={h2}>Data Accuracy &mdash; Safety-Critical Domains</h2>
+        <p style={p}>
+          FreightUtils data is best-effort and provided as a reference only. It is not legal, regulatory, or compliance advice. Users are responsible for verifying outputs against authoritative sources before acting on them. We accept no liability for decisions made based on FreightUtils data, particularly for safety-critical domains including <strong>ADR dangerous goods</strong>, <strong>HS code classification</strong>, <strong>customs duty calculation</strong>, and <strong>VAT determination</strong>.
+        </p>
+
         <h2 style={h2}>Data Sources</h2>
         <p style={p}>
           FreightUtils sources data from official standards bodies and public domain datasets including UNECE (ADR 2025 dangerous goods), ISO (container and pallet standards), ICC (INCOTERMS 2020), IATA (air freight standards), and UN Comtrade (Harmonized System HS 2022). While these sources are authoritative, FreightUtils is not affiliated with or endorsed by any of these organisations.
@@ -62,13 +67,33 @@ export default function TermsPage() {
         <p style={p}>
           To the fullest extent permitted by law, FreightUtils and its operators shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in connection with the use of, or inability to use, this site or its tools. This includes, without limitation, damages arising from incorrect calculations, misclassification of goods, customs delays, duty miscalculations, or any other decisions made based on information provided by FreightUtils.
         </p>
+        <p style={p}>
+          Where liability cannot be excluded under applicable law, our total aggregate liability to you in connection with FreightUtils &mdash; whether in contract, tort, or otherwise &mdash; is capped at the total fees you have paid us in the twelve months preceding the event giving rise to the claim. For users on the Free tier this cap is <strong>&pound;0</strong>. For Pro subscribers this cap will not exceed <strong>&pound;228</strong> (twelve monthly subscriptions at &pound;19/month).
+        </p>
+
+        <h2 style={h2}>UK Consumer Law &mdash; Cooling-Off and Cancellation</h2>
+        <p style={p}>
+          Pro subscriptions are digital services that begin delivery immediately on payment. By starting to use the API after subscribing (sending any request with your Pro-tier API key), you waive the 14-day cooling-off period normally provided under UK consumer law for digital services. This is standard practice for instantly-delivered digital services and is disclosed both at checkout (via the Stripe payment page) and on our{' '}
+          <a href="/refund-policy" style={{ color: '#e87722' }}>refund policy</a> page.
+        </p>
+        <p style={p}>
+          You can cancel your Pro subscription at any time. Full cancellation, refund, and pro-rata terms are at{' '}
+          <a href="/refund-policy" style={{ color: '#e87722' }}>/refund-policy</a>.
+        </p>
 
         <h2 style={h2}>API Terms</h2>
         <p style={p}>
-          The FreightUtils REST API is provided free of charge with no authentication required. There is <strong>no service level agreement (SLA)</strong> and no guarantee of uptime or availability. We reserve the right to introduce rate limiting, modify API response formats, or discontinue API endpoints at any time without prior notice.
+          The FreightUtils REST API is available on three tiers: <strong>Anonymous</strong> (25 requests/day, no signup), <strong>Free with API key</strong> (100 requests/day, email signup), and <strong>Pro</strong> (50,000 requests/month, &pound;19/month). Free tiers have <strong>no service level agreement (SLA)</strong> and no guarantee of uptime or availability. Pro subscriptions include best-effort priority support but no contractual SLA.
         </p>
         <p style={p}>
-          As a courtesy, please keep API requests under 100 per day per IP address. Excessive usage may result in temporary or permanent blocking.
+          We reserve the right to modify rate limits, response formats, or endpoint availability. Material changes affecting Pro subscribers will be notified by email at least 30 days before they take effect. Excessive or abusive usage on any tier may result in temporary or permanent blocking.
+        </p>
+
+        <h2 style={h2}>Data Processing</h2>
+        <p style={p}>
+          For data processing relating to API key signups and Pro subscriptions, see our{' '}
+          <a href="/privacy" style={{ color: '#e87722' }}>privacy policy</a> and{' '}
+          <a href="/dpa" style={{ color: '#e87722' }}>data processing agreement</a>.
         </p>
 
         <h2 style={h2}>Intellectual Property</h2>
