@@ -95,5 +95,16 @@ export default withSentryConfig(nextConfig, {
   org: process.env.SENTRY_ORG,
   project: process.env.SENTRY_PROJECT,
   silent: !process.env.CI,
-  widenClientFileUpload: true,
+  // Source maps are uploaded to Sentry for symbolication, then deleted from
+  // the public .next bundle so stack traces remain visible only inside
+  // Sentry — protects internal code structure from public scraping. This
+  // is the @sentry/nextjs v10 replacement for the deprecated v8
+  // `hideSourceMaps: true` flag; the default is already true, set
+  // explicitly here so the privacy posture is visible at review time.
+  sourcemaps: { deleteSourcemapsAfterUpload: true },
+  // Off by default — only flip on if Sentry shows "missing source" warnings
+  // for client traces. The wider upload roughly doubles deploy time and
+  // costs storage on Sentry without buying anything when Next.js's normal
+  // chunking already covers the client trees.
+  widenClientFileUpload: false,
 });

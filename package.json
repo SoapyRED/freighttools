@@ -6,11 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "npm run lint:eslint && npm run lint:api-casing && npm run lint:audit && npm run lint:seo-titles",
+    "lint": "npm run lint:eslint && npm run lint:api-casing && npm run lint:audit && npm run lint:seo-titles && npm run lint:sentry-redact",
     "lint:eslint": "eslint",
     "lint:api-casing": "node scripts/lint-api-casing.mjs",
     "lint:audit": "node scripts/lint-audit.mjs",
-    "lint:seo-titles": "node --experimental-strip-types --no-warnings scripts/lint-seo-titles.mjs"
+    "lint:seo-titles": "node --experimental-strip-types --no-warnings scripts/lint-seo-titles.mjs",
+    "lint:sentry-redact": "node --experimental-strip-types --no-warnings scripts/sentry-redact-smoke.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",
