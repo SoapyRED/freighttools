@@ -58,9 +58,9 @@ const tiers = [
       'No contracts',
     ],
     cta: 'Subscribe →',
-    ctaHref: 'mailto:contact@freightutils.com?subject=Pro%20API%20Key%20%E2%80%94%20FreightUtils&body=I%27d%20like%20to%20subscribe%20to%20FreightUtils%20Pro.%20My%20use%20case%3A%20%5Bplease%20describe%20briefly%5D',
+    ctaHref: '/api-docs#signup',
     ctaStyle: 'outline' as const,
-    ctaNote: "We'll set up your Pro key within 24 hours",
+    ctaNote: 'Sign up for a free key, then upgrade to Pro in your dashboard.',
   },
 ];
 
