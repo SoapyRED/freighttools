@@ -151,9 +151,19 @@ export default function PricingSignupForm({ variant }: Props) {
         </div>
       )}
       {copy.trustSignal && state === 'idle' && (
-        <div style={{ fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', marginTop: 8 }}>
-          {copy.trustSignal}
-        </div>
+        <>
+          <div style={{ fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', marginTop: 8 }}>
+            {copy.trustSignal}
+          </div>
+          {variant === 'pro' && (
+            <div style={{ fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', marginTop: 4 }}>
+              Cancel anytime &mdash;{' '}
+              <a href="/refund-policy" style={{ color: 'inherit', textDecoration: 'underline' }}>
+                see refund policy
+              </a>
+            </div>
+          )}
+        </>
       )}
     </form>
   );

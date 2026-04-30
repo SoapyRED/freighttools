@@ -269,6 +269,8 @@ export default function RootLayout({
               <Link href="/privacy" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Privacy</Link>
               {' · '}
               <Link href="/terms" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Terms</Link>
+              {' · '}
+              <Link href="/refund-policy" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Refund Policy</Link>
             </div>
           </div>
         </footer>

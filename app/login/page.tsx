@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { SITE_STATS } from '@/lib/constants/siteStats';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -70,7 +71,7 @@ export default function LoginPage() {
       <div style={s.card}>
         <h1 style={s.h1}>Sign in to FreightUtils</h1>
         <p style={s.sub}>
-          Get your free API key (200 requests/day) or manage your Pro subscription.
+          {`Get your free API key (${SITE_STATS.freeKeyDailyLimit} requests/day) or manage your Pro subscription.`}
         </p>
         <form onSubmit={handleSubmit}>
           <label style={s.label}>Email address</label>

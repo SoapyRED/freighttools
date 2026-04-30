@@ -61,6 +61,9 @@ export async function POST(req: NextRequest) {
     const intro = intent === 'upgrade'
       ? "You're one step away from upgrading to FreightUtils Pro. Click the button below to verify your email and continue to secure Stripe checkout:"
       : 'Click the button below to sign in to your FreightUtils dashboard:';
+    const postPaymentNote = intent === 'upgrade'
+      ? `<p style="font-size: 14px; color: #5a6478; line-height: 1.6; margin: 20px 0 0;">After payment, your Pro tier (50,000 requests/month) activates immediately on the API key already in your inbox.</p>`
+      : '';
 
     if (resend) {
       await resend.emails.send({
@@ -80,6 +83,7 @@ export async function POST(req: NextRequest) {
                  style="display: inline-block; background: #e87722; color: #ffffff; padding: 14px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 15px;">
                 ${ctaLabel}
               </a>
+              ${postPaymentNote}
               <p style="font-size: 13px; color: #9ca3af; margin: 24px 0 0;">
                 This link expires in 15 minutes. If you didn't request this, you can safely ignore this email.
               </p>

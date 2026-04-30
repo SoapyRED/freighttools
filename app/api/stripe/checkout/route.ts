@@ -15,6 +15,7 @@ async function buildCheckoutUrl(): Promise<{ url?: string; error?: string; statu
   if (user.plan === 'pro') return { error: 'Already on Pro plan', status: 400 };
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.freightutils.com';
+  const refundPolicyUrl = `${baseUrl}/refund-policy`;
   const stripe = getStripe();
   const session = await stripe.checkout.sessions.create({
     mode: 'subscription',
@@ -23,7 +24,12 @@ async function buildCheckoutUrl(): Promise<{ url?: string; error?: string; statu
     line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
     success_url: `${baseUrl}/dashboard?upgraded=true`,
     cancel_url: `${baseUrl}/pricing?cancelled=1`,
-    metadata: { email },
+    metadata: { email, refund_policy_url: refundPolicyUrl },
+    custom_text: {
+      submit: {
+        message: `Cancel anytime. See our [refund policy](${refundPolicyUrl}). UK 14-day cooling-off right is waived once the API is used post-purchase.`,
+      },
+    },
   });
 
   return { url: session.url ?? undefined, status: 200 };

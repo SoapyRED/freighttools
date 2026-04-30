@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { SITE_STATS } from '@/lib/constants/siteStats';
 
 interface Props {
   email: string;
@@ -90,7 +91,7 @@ export default function DashboardClient({ email, plan, apiKey, usageToday, usage
             <div style={s.label}>Current Plan</div>
             <span style={s.badge(plan)}>{plan === 'pro' ? 'Pro' : 'Free'}</span>
             <span style={{ fontSize: 13, color: '#6b7280', marginLeft: 12 }}>
-              {plan === 'pro' ? '10,000 requests/month' : '200 requests/day'}
+              {plan === 'pro' ? '10,000 requests/month' : `${SITE_STATS.freeKeyDailyLimit} requests/day`}
             </span>
           </div>
           {plan === 'free' ? (
