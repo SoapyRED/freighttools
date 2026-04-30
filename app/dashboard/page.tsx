@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getSessionToken } from '@/lib/auth/session';
 import { getSession, getUser, getUsageToday, getUsageMonth } from '@/lib/auth/kv';
+import { SITE_STATS } from '@/lib/constants/siteStats';
 import DashboardClient from './DashboardClient';
 
 export default async function DashboardPage() {
@@ -15,7 +16,7 @@ export default async function DashboardPage() {
 
   const usageToday = await getUsageToday(user.apiKey, 'key');
   const usageMonth = await getUsageMonth(user.apiKey);
-  const limit = user.plan === 'pro' ? 10000 : 200;
+  const limit = user.plan === 'pro' ? SITE_STATS.proMonthlyLimit : SITE_STATS.freeKeyDailyLimit;
 
   return (
     <DashboardClient

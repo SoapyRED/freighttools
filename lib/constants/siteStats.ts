@@ -14,6 +14,7 @@ export const SITE_STATS = {
   cargoAirlines: 390,
   openApiVersion: '3.0.3',
   freeKeyDailyLimit: 100,
+  proMonthlyLimit: 50000,
   lastUpdated: 'May 2026',
   adrEdition: 'UNECE ADR 2025',
   hsEdition: 'WCO HS 2022',

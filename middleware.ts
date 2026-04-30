@@ -365,10 +365,12 @@ interface KeyRecord {
   plan: 'free' | 'pro';
 }
 
+import { SITE_STATS } from '@/lib/constants/siteStats';
+
 const LIMITS = {
   anonymous: { perDay: 25 },
-  free: { perDay: 100 },
-  pro: { perMonth: 50000 },
+  free: { perDay: SITE_STATS.freeKeyDailyLimit },
+  pro: { perMonth: SITE_STATS.proMonthlyLimit },
 } as const;
 
 function todayKey() { return new Date().toISOString().slice(0, 10); }

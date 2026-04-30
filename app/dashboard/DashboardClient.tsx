@@ -91,7 +91,9 @@ export default function DashboardClient({ email, plan, apiKey, usageToday, usage
             <div style={s.label}>Current Plan</div>
             <span style={s.badge(plan)}>{plan === 'pro' ? 'Pro' : 'Free'}</span>
             <span style={{ fontSize: 13, color: '#6b7280', marginLeft: 12 }}>
-              {plan === 'pro' ? '10,000 requests/month' : `${SITE_STATS.freeKeyDailyLimit} requests/day`}
+              {plan === 'pro'
+                ? `${SITE_STATS.proMonthlyLimit.toLocaleString()} requests/month`
+                : `${SITE_STATS.freeKeyDailyLimit} requests/day`}
             </span>
           </div>
           {plan === 'free' ? (
@@ -134,7 +136,7 @@ export default function DashboardClient({ email, plan, apiKey, usageToday, usage
             <div style={s.statLabel}>This Month</div>
           </div>
           <div style={s.stat}>
-            <div style={s.statNum}>{plan === 'pro' ? '10,000' : '200'}</div>
+            <div style={s.statNum}>{plan === 'pro' ? SITE_STATS.proMonthlyLimit.toLocaleString() : SITE_STATS.freeKeyDailyLimit.toLocaleString()}</div>
             <div style={s.statLabel}>{plan === 'pro' ? 'Monthly Limit' : 'Daily Limit'}</div>
           </div>
         </div>
@@ -143,7 +145,7 @@ export default function DashboardClient({ email, plan, apiKey, usageToday, usage
         </div>
         <p style={{ fontSize: 12, color: '#9ca3af', marginTop: 8, textAlign: 'right' }}>
           {plan === 'pro'
-            ? `${usageMonth.toLocaleString()} / 10,000 this month`
+            ? `${usageMonth.toLocaleString()} / ${SITE_STATS.proMonthlyLimit.toLocaleString()} this month`
             : `${usageToday} / ${dailyLimit} today`}
         </p>
       </div>
