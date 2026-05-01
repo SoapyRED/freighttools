@@ -561,5 +561,16 @@ export const config = {
     '/api/uld/:path*',
     '/api/vehicles/:path*',
     '/api/shipment/:path*',
+
+    // MCP transport — Pro-tier attribution must apply on the MCP surface
+    // too. Same handleApiRateLimit path as REST: header parse → KV lookup
+    // → plan → 25/100/50K bucketing. Counts every MCP request including
+    // initialize / tools/list / notifications/* — small overhead vs
+    // method-aware enforcement, but worth the simpler code surface and
+    // avoids re-parsing the JSON-RPC body inside Edge middleware. Pro
+    // users get 50K/mo - ~5% handshake overhead = still ~47K real tool
+    // calls, which is significantly more than the prior bug claimed (10K).
+    '/api/mcp',
+    '/api/mcp/:path*',
   ],
 };

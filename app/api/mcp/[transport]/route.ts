@@ -525,6 +525,26 @@ const handler = createMcpHandler(
       },
     );
 
+    // ── Subscribe Link ──────────────────────────────────────────
+    server.tool(
+      'get_subscribe_link',
+      `Get the URL where the user can subscribe to FreightUtils Pro for higher API limits. Use this when the user asks how to upgrade, hits a rate limit, or asks about pricing. Returns the URL where the user can subscribe via web — agents must NOT attempt to complete the subscription themselves.`,
+      {
+        tier: z.enum(['pro']).optional().describe('Tier to surface (only "pro" supported today)'),
+      },
+      ro('FreightUtils Subscribe Link'),
+      async () => ({
+        content: [{ type: 'text' as const, text: JSON.stringify({
+          url: 'https://www.freightutils.com/pricing',
+          tier: 'pro',
+          monthly_limit: 50000,
+          monthly_price: '£19',
+          currency: 'GBP',
+          note: 'Open the URL in a browser to subscribe. Agents must not attempt to complete checkout themselves.',
+        }, null, 2) }],
+      }),
+    );
+
     // ── ADR LQ/EQ Checker ──────────────────────────────────────
     server.tool(
       'adr_lq_eq_check',
