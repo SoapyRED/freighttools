@@ -10,9 +10,13 @@
 
 const BASE = process.argv[2] || 'https://www.freightutils.com';
 const SMOKE_API_KEY = process.env.SMOKE_API_KEY;
+const SMOKE_FREE_API_KEY = process.env.SMOKE_FREE_API_KEY;
 const AUTH_HEADERS = SMOKE_API_KEY ? { 'X-API-Key': SMOKE_API_KEY } : {};
 if (!SMOKE_API_KEY) {
   console.warn('  \x1b[33m⚠\x1b[0m SMOKE_API_KEY not set — running anonymously (25/day anon cap applies)');
+}
+if (!SMOKE_FREE_API_KEY) {
+  console.warn('  \x1b[33m⚠\x1b[0m SMOKE_FREE_API_KEY not set — free-tier MCP attribution check will be skipped');
 }
 
 const results = [];
@@ -221,6 +225,102 @@ function collectCamelCaseKeys(obj, path = '', acc = []) {
   return acc;
 }
 
+// ─── MCP / JSON-RPC helper ──────────────────────────────────────
+// Exercises /api/mcp/mcp with explicit auth override (anon / free / pro)
+// and asserts both rate-limit attribution headers and JSON-RPC response
+// shape. Pairs with handleApiRateLimit's matcher coverage of /api/mcp +
+// /api/mcp/:path* in middleware.ts — drift between REST and MCP buckets
+// for the same tier is the P0 attribution bug this section guards against.
+async function mcpTest(name, opts = {}) {
+  const { apiKey, jsonrpc, expect: checks = {} } = opts;
+  const start = Date.now();
+  const headers = {
+    'Accept': 'application/json, text/event-stream',
+    'Content-Type': 'application/json',
+  };
+  if (apiKey) headers['X-API-Key'] = apiKey;
+
+  try {
+    const res = await fetch(`${BASE}/api/mcp/mcp`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(jsonrpc),
+    });
+    const ms = Date.now() - start;
+    const text = await res.text();
+    const ct = res.headers.get('content-type') || '';
+
+    let parsed = null;
+    if (ct.includes('event-stream')) {
+      const dataLine = text.split('\n').find((l) => l.startsWith('data:'));
+      if (dataLine) {
+        try { parsed = JSON.parse(dataLine.slice(5).trim()); } catch { /* leave null */ }
+      }
+    } else {
+      try { parsed = JSON.parse(text); } catch { /* leave null */ }
+    }
+
+    const errors = [];
+    const expectedStatus = checks.status ?? 200;
+    if (res.status !== expectedStatus) errors.push(`status ${res.status} !== ${expectedStatus}`);
+
+    // Tier-attribution headers — drift between REST and MCP for the same
+    // tier is a P0 mirror bug per the launch hardening sprint contract.
+    if (checks.rlLimit !== undefined) {
+      const rl = res.headers.get('x-ratelimit-limit');
+      if (rl !== String(checks.rlLimit)) errors.push(`X-RateLimit-Limit ${rl} !== ${checks.rlLimit}`);
+    }
+    if (checks.rlWindow !== undefined) {
+      const w = res.headers.get('x-ratelimit-window');
+      if (w !== String(checks.rlWindow)) errors.push(`X-RateLimit-Window ${w} !== ${checks.rlWindow}`);
+    }
+
+    // JSON-RPC envelope sanity
+    if (parsed?.error && !checks.expectError) {
+      errors.push(`JSON-RPC error: ${parsed.error.message ?? JSON.stringify(parsed.error)}`);
+    }
+    if (checks.rpcResultField) {
+      const r = parsed?.result;
+      if (!r) errors.push('no .result in JSON-RPC response');
+      else if (!(checks.rpcResultField in r)) errors.push(`.result.${checks.rpcResultField} missing`);
+    }
+
+    // tools/list-specific
+    if (checks.toolCount !== undefined) {
+      const tools = parsed?.result?.tools;
+      if (!Array.isArray(tools)) errors.push('.result.tools not an array');
+      else if (tools.length !== checks.toolCount) errors.push(`tool count ${tools.length} !== ${checks.toolCount}`);
+    }
+    if (checks.hasTool) {
+      const tools = parsed?.result?.tools ?? [];
+      if (!tools.some((t) => t.name === checks.hasTool)) errors.push(`tool "${checks.hasTool}" not in tools/list`);
+    }
+
+    // tools/call-specific
+    if (checks.contentTextContains) {
+      const content = parsed?.result?.content;
+      const joined = Array.isArray(content) ? content.map((c) => c.text ?? '').join('') : '';
+      if (!joined.toLowerCase().includes(checks.contentTextContains.toLowerCase())) {
+        errors.push(`content text doesn't contain "${checks.contentTextContains}"`);
+      }
+    }
+
+    if (errors.length === 0) {
+      console.log(`  \x1b[32m✅\x1b[0m ${name} — ${res.status} (${ms}ms)`);
+      passed++;
+    } else {
+      console.log(`  \x1b[31m❌\x1b[0m ${name} — ${errors.join(', ')} (${ms}ms)`);
+      failed++;
+    }
+    results.push({ name, status: res.status, ms, errors, ok: errors.length === 0 });
+  } catch (err) {
+    const ms = Date.now() - start;
+    console.log(`  \x1b[31m❌\x1b[0m ${name} — NETWORK ERROR: ${err.message} (${ms}ms)`);
+    failed++;
+    results.push({ name, status: 0, ms, errors: [err.message], ok: false });
+  }
+}
+
 async function testWhoamiAuthOk() {
   const start = Date.now();
   try {
@@ -424,6 +524,48 @@ async function run() {
     expect: { hasField: ['overall_status', 'items'], preview: 'overall_status' },
   });
 
+  // Multi-item consignment shape — extends the single-item GET coverage
+  // above. Mirrors the surface used by the n8n template's adrLqCheck +
+  // adrExemptionConsignment operations and the MCP server's
+  // adr_exemption_calculator items[] path.
+  await test('POST /api/adr-calculator (2-item consignment)', '/api/adr-calculator', {
+    method: 'POST',
+    body: { items: [
+      { un_number: '1263', quantity: 25 },
+      { un_number: '3082', quantity: 1000 },
+    ] },
+    expect: {
+      hasField: ['items', 'total_points', 'exempt', 'threshold', 'message'],
+      fieldEquals: { 'items.length': 2 },
+      fieldGt: { total_points: 0 },
+      preview: 'total_points',
+    },
+  });
+
+  await test('POST /api/adr/lq-check (2-item)', '/api/adr/lq-check', {
+    method: 'POST',
+    body: { mode: 'lq', items: [
+      { un_number: '1263', quantity: 0.5, unit: 'L' },
+      { un_number: '3082', quantity: 0.5, unit: 'L' },
+    ] },
+    expect: {
+      hasField: ['overall_status', 'items'],
+      fieldEquals: { 'items.length': 2 },
+      preview: 'overall_status',
+    },
+  });
+
+  // Edge case: invalid UN must return descriptive 4xx, not a 5xx crash.
+  await test('POST /api/adr-calculator (invalid UN 9999 → 400)', '/api/adr-calculator', {
+    method: 'POST',
+    body: { items: [{ un_number: '9999', quantity: 100 }] },
+    expect: {
+      status: 400,
+      hasField: 'error',
+      fieldContains: { error: '9999' },
+    },
+  });
+
   await test('/api/hs', '/api/hs?q=coffee', {
     expect: { hasField: 'results', fieldGt: { count: 0 }, preview: 'count' },
   });
@@ -473,6 +615,79 @@ async function run() {
   await testWhoamiAuthOk();
   await testWhoamiAuthRejected();
   await testEmptyApiKeyRejected();
+
+  console.log('\n  MCP Route Coverage');
+  console.log('  ──────────────────');
+
+  // Anonymous → 25/day bucket
+  await mcpTest('/api/mcp/mcp (anon, tools/list)', {
+    apiKey: null,
+    jsonrpc: { jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} },
+    expect: {
+      rlLimit: 25,
+      rlWindow: 86400,
+      toolCount: 19,
+      hasTool: 'get_subscribe_link',
+    },
+  });
+
+  // Free tier → 100/day bucket (skipped if SMOKE_FREE_API_KEY missing)
+  if (SMOKE_FREE_API_KEY) {
+    await mcpTest('/api/mcp/mcp (free, tools/list)', {
+      apiKey: SMOKE_FREE_API_KEY,
+      jsonrpc: { jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} },
+      expect: {
+        rlLimit: 100,
+        rlWindow: 86400,
+        toolCount: 19,
+      },
+    });
+  } else {
+    console.log('  \x1b[33m⏭\x1b[0m /api/mcp/mcp (free, tools/list) — skipped (no SMOKE_FREE_API_KEY)');
+  }
+
+  // Pro tier → 50K/month bucket + initialize handshake + tools/call cycle
+  if (SMOKE_API_KEY) {
+    await mcpTest('/api/mcp/mcp (Pro, tools/list)', {
+      apiKey: SMOKE_API_KEY,
+      jsonrpc: { jsonrpc: '2.0', id: 3, method: 'tools/list', params: {} },
+      expect: {
+        rlLimit: 50000,
+        rlWindow: 2592000,
+        toolCount: 19,
+      },
+    });
+
+    await mcpTest('/api/mcp/mcp (Pro, initialize)', {
+      apiKey: SMOKE_API_KEY,
+      jsonrpc: {
+        jsonrpc: '2.0', id: 4, method: 'initialize',
+        params: {
+          protocolVersion: '2024-11-05',
+          capabilities: {},
+          clientInfo: { name: 'fu-smoke', version: '1.0' },
+        },
+      },
+      expect: {
+        rpcResultField: 'serverInfo',
+      },
+    });
+
+    await mcpTest('/api/mcp/mcp (Pro, tools/call cbm_calculator)', {
+      apiKey: SMOKE_API_KEY,
+      jsonrpc: {
+        jsonrpc: '2.0', id: 5, method: 'tools/call',
+        params: {
+          name: 'cbm_calculator',
+          arguments: { length_cm: 100, width_cm: 80, height_cm: 60, pieces: 1 },
+        },
+      },
+      expect: {
+        rpcResultField: 'content',
+        contentTextContains: 'cbm',
+      },
+    });
+  }
 
   console.log('\n  Platform Pages');
   console.log('  ──────────────');
