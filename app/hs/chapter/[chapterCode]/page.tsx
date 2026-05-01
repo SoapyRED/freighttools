@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getAllChapterCodes, getCodeDetails, getHeadingsByChapter, formatHsCode } from '@/lib/calculations/hs';
 import HsLinkCard from '@/app/hs/HsLinkCard';
 import { getHsDgWarning, HS_DG_DISCLAIMER } from '@/lib/data/hs-dg-warnings';
+import { SITE_STATS } from '@/lib/constants/siteStats';
 
 export function generateStaticParams() {
   return getAllChapterCodes().map(c => ({ chapterCode: c }));
@@ -24,7 +25,7 @@ export async function generateMetadata(
     alternates: { canonical: `https://www.freightutils.com/hs/chapter/${chapterCode}` },
     openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS Chapter ${chapterCode} — FreightUtils` }] },
     twitter: { card: 'summary_large_image', images: [ogUrl] },
-    other: { 'article:modified_time': '2026-04-01T00:00:00Z' },
+    other: { 'article:modified_time': SITE_STATS.dataModifiedIso },
   };
 }
 

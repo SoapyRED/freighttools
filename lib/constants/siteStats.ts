@@ -16,6 +16,10 @@ export const SITE_STATS = {
   freeKeyDailyLimit: 100,
   proMonthlyLimit: 50000,
   lastUpdated: 'May 2026',
+  // ISO version of lastUpdated for schema.org dateModified / OG
+  // article:modified_time tags. Bump on the 1st of each month alongside
+  // lastUpdated so both surfaces stay in sync.
+  dataModifiedIso: '2026-05-01T00:00:00Z',
   adrEdition: 'UNECE ADR 2025',
   hsEdition: 'WCO HS 2022',
   mcpVersion: '1.0.5',

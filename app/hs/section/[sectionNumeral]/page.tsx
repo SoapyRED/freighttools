@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllSectionNumerals, getSectionByNumeral, getChaptersBySection, getAllSections } from '@/lib/calculations/hs';
 import HsLinkCard from '@/app/hs/HsLinkCard';
+import { SITE_STATS } from '@/lib/constants/siteStats';
 
 export function generateStaticParams() {
   return getAllSectionNumerals().map(n => ({ sectionNumeral: n }));
@@ -26,7 +27,7 @@ export async function generateMetadata(
     alternates: { canonical: `https://www.freightutils.com/hs/section/${section.numeral}` },
     openGraph: { images: [{ url: ogUrl, width: 1200, height: 630, alt: `HS Section ${section.numeral.toUpperCase()} — FreightUtils` }] },
     twitter: { card: 'summary_large_image', images: [ogUrl] },
-    other: { 'article:modified_time': '2026-04-01T00:00:00Z' },
+    other: { 'article:modified_time': SITE_STATS.dataModifiedIso },
   };
 }
 
