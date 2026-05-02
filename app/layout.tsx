@@ -274,6 +274,8 @@ export default function RootLayout({
               {' · '}
               <Link href="/dpa" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>DPA</Link>
               {' · '}
+              <Link href="/for-it" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>For IT</Link>
+              {' · '}
               <Link href="/contact" style={{ color: 'var(--navy-border)', textDecoration: 'underline' }}>Contact</Link>
             </div>
           </div>

@@ -1,0 +1,5 @@
+Contact: mailto:contact@freightutils.com
+Expires: 2027-05-02T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.freightutils.com/.well-known/security.txt
+Policy: https://www.freightutils.com/for-it

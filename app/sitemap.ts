@@ -35,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/refund-policy`,           changeFrequency: 'yearly',  priority: 0.3 },
     { url: `${BASE}/dpa`,                     changeFrequency: 'yearly',  priority: 0.3 },
     { url: `${BASE}/contact`,                 changeFrequency: 'yearly',  priority: 0.4 },
+    { url: `${BASE}/for-it`,                  changeFrequency: 'yearly',  priority: 0.3 },
     // Freight calculators
     { url: `${BASE}/ldm`,                     changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/cbm`,                     changeFrequency: 'monthly', priority: 0.8 },
